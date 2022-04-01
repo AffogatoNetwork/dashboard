@@ -1,0 +1,164 @@
+@import "./colors";
+@import "./fonts";
+
+
+html, body, #root {
+  height: 100%;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5 {
+  color: $primary;
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  animation: App-logo-spin infinite 20s linear;
+  height: 40vmin;
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.main-container {
+  height: 100% !important;
+  width: 100%;
+  padding-right: 15px;
+  padding-left: 15px;
+  margin-right: auto;
+  margin-left: auto;
+}
+.wrapper {
+  min-height: 100%;
+  height: 100%;
+}
+
+.card {
+  background-color: #fff;
+  border: none;
+  border-radius: 0.625rem;
+  box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+}
+
+.card-body {
+  padding: 1.875rem;
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 0.625rem 0.625rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  &-label {
+    color: $secondary;
+  }
+  .btn {
+    background-color: $primary;
+    color: $white;
+    padding: 0.5625rem 1rem;
+    font-size: 0.75rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    line-height: 1.125;
+  }
+  .input-group {
+    display: flex;
+    flex-direction: column;
+    margin: 0.5rem 0px;
+  }
+  .form-control {
+    margin: 2px 0px;
+    padding: 0.4375rem 0.75rem;
+    background-color: $white;
+    border-radius: 0.25rem;
+    border: 1px solid #e1e5eb;
+    color: $primary;
+    font-size: 0.8125rem;
+  }
+  .form-control:focus {
+    outline: none !important;
+    border: 1px solid $light;
+    border-radius: 0.25rem;
+  }
+}
+
+span {
+  color: $primary;
+  padding: 5px;
+}
+
+.login {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  .auth-method {
+    color: $light;
+    font-size: 14px;
+  }
+  .auth-method:hover {
+    cursor: pointer;
+  }
+  .btn {
+    border-radius: 50px;
+    width: 45%;
+  }
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0rem;
+  }
+  .card {
+    width: 400px;
+  }
+  .card-body {
+    overflow: hidden;
+    box-shadow: inset 0 4px 0 0 $light;
+    border-radius: 0.625rem;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .logo {
+      height: 45px;
+      width: 40px;
+    }
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+}

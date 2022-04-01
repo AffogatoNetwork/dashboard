@@ -1,0 +1,43 @@
+@font-face {
+  font-family: "Dosis";
+  src: url("../assets/fonts/Dosis-Regular.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dosis-Medium";
+  src: url("../assets/fonts/Dosis-Medium.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Dosis-SemiBold";
+  src: url("../assets/fonts/Dosis-SemiBold.ttf");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+html,
+body {
+  font-family: "Dosis";
+}
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: "Dosis";
+}
+
+label {
+  font-family: "Dosis-Medium";
+  font-size: 14px;
+}
+
+.number {
+  font-family: "Dosis";
+  font-weight: 100;
+}
