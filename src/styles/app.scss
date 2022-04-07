@@ -51,9 +51,14 @@ h5 {
   height: 100% !important;
   width: 100%;
   padding-right: 15px;
-  padding-left: 15px;
+  padding-left: 2px;
   margin-right: auto;
   margin-left: auto;
+}
+.home-container {
+  height: 100% !important;
+  width: 100%;
+  display: flex;
 }
 .wrapper {
   min-height: 100%;
@@ -142,6 +147,7 @@ span {
   }
   .card {
     width: 400px;
+    margin-top: -5rem;
   }
   .card-body {
     overflow: hidden;
@@ -160,5 +166,29 @@ span {
       margin-top: 10px;
       margin-bottom: 10px;
     }
+  }
+}
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  width: 15rem;
+  min-width: 10rem;
+  padding: 2rem 0rem;
+  box-shadow: #a0897285 1px 0px;
+  .user {
+    display: flex;
+    justify-content: center;
+    margin: 5rem 0rem;
+  }
+  .logo {
+    height: 60px;
+    width: 60px;
+  }
+  .nav-link {
+    padding: 1rem;
+    color: $primary;
+    text-decoration: none;
+    border-top: 1px solid $grey;
   }
 }

@@ -4,26 +4,19 @@ import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/esm/Image";
 import Logo from "../assets/logo.png";
-import MagicContext from "../states/MagicContext";
+import { useAuthContext } from "../states/AuthContext";
 
-type props = {
-  changeUpdateMagic: () => void;
-}
-
-const Login = ({ changeUpdateMagic }: props) => {
+const Login = () => {
   const areaCode = "+504";
-  const magic = useContext(MagicContext);
+  const { authContext } = useAuthContext();
   const [emailAuth, setEmailAauth] = useState(false);
   const [userInput, setUserInput] = useState("");
 
   const magicLogin = async () => {
-    if (magic.magic) {
-      if (emailAuth) {
-        await magic.magic.auth.loginWithMagicLink({ email: userInput, showUI: true });
-      } else {
-        await magic.magic.auth.loginWithSMS({ phoneNumber: areaCode.concat(userInput) });
-      }
-      changeUpdateMagic();
+    if (emailAuth) {
+      authContext.signIn({ emailLogin: true, credential: userInput });
+    } else {
+      authContext.signIn({ emailLogin: false, credential: areaCode.concat(userInput) });
     }
   };
 
@@ -60,7 +53,7 @@ const Login = ({ changeUpdateMagic }: props) => {
                 <Form.Label>Número de teléfono</Form.Label>
                   <Form.Control
                     value={userInput}
-                    placeholder="0000-0000"
+                    placeholder="00000000"
                     onChange={handleUserInputChange}
                   />
               </Form.Group>
