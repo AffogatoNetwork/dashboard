@@ -59,6 +59,7 @@ h5 {
   height: 100% !important;
   width: 100%;
   display: flex;
+  flex-direction: column;
 }
 .wrapper {
   min-height: 100%;
@@ -121,6 +122,16 @@ span {
   padding: 5px;
 }
 
+.form-input {
+  display: flex;
+  flex-direction: column;
+  margin: 7px 0rem;
+}
+.error-message {
+  color: $error;
+  font-size: 15px;
+}
+
 .login {
   display: flex;
   height: 100%;
@@ -169,26 +180,94 @@ span {
   }
 }
 
-.sidebar {
+.topbar {
   display: flex;
-  flex-direction: column;
-  width: 15rem;
-  min-width: 10rem;
-  padding: 2rem 0rem;
-  box-shadow: #a0897285 1px 0px;
+  flex-direction: row;
+  height: 5rem;
+  box-shadow: #a0897285 0px 0.5px;
+  .container {
+    display: flex;
+    padding: 0.5rem 1rem;
+    width: 100%;
+    justify-content: space-between;
+    align-items: center;
+  }
   .user {
     display: flex;
     justify-content: center;
     margin: 5rem 0rem;
   }
   .logo {
-    height: 60px;
-    width: 60px;
+    height: 50px;
+    width: 50px;
+  }
+  .navbar-nav {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+  }
+  .nav-caption {
+    display: flex;
+    align-items: center;
+    svg {
+      margin-right: 9px;
+    }
   }
   .nav-link {
     padding: 1rem;
     color: $primary;
+    font-size: 1.2rem;
     text-decoration: none;
-    border-top: 1px solid $grey;
+  }
+}
+
+.dropdown {
+  position: relative;
+  .dropdown-toggle {
+    display: flex;
+    background-color: $white;
+    padding: 0.4375rem 0.75rem;
+    font-size: 0.8125rem;
+    border: 1px solid #e1e5eb;
+    border-radius: 0.25rem;
+    text-align: left;
+    width: 100%;
+  }
+  .dropdown-toggle::after {
+    position: absolute;
+    margin-left: 0.255em;
+    vertical-align: 0.255em;
+    content: "";
+    border-top: 0.5em solid $primary;
+    border-right: 0.4em solid transparent;
+    border-bottom: 0;
+    border-left: 0.4em solid transparent;
+    margin-top: 5px;
+    margin-left: 88%;
+  }
+  .dropdown-menu {
+    display: none;
+  }
+  .dropdown-menu.show {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin-top: 3px !important;
+    margin-right: 1rem;
+    background-color: #f1f1f1;
+    border: 1px solid #e1e5eb;
+    border-radius: 0.25rem;
+
+    .dropdown-item {
+      color: $primary;
+      padding: 0.4rem 0.9rem;
+      text-decoration: none;
+    }
+    .dropdown-item.active {
+      background-color: rgba(121, 64, 242, 0.4);
+    }
+    .dropdown-item:hover {
+      background-color: #964b0044;
+    }
   }
 }

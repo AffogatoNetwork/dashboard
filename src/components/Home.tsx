@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
-import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import "../styles/app.scss";
 import Loading from "./Loading";
 import Login from "./Login";
+import Signup from "./Signup";
 import Dashboard from "./Dashboard";
 import { useAuthContext } from "../states/AuthContext";
 
@@ -12,16 +13,16 @@ const Home = () => {
   const { authState } = useAuthContext();
   const [state] = authState;
 
+  const needsAuth = () => {
+    return window.location.pathname !== "/login" && window.location.pathname !== "/signup";
+  };
+
   useEffect(() => {
     const checkAuth = () => {
-      console.log("-- location ----");
-      console.log(window.location.pathname)
-      if (!state.isLoggedIn && window.location.pathname !== "/login") {
-        console.log("-- 111 ----");
+      if (!state.isLoggedIn && needsAuth()) {
         navigate("/login", { replace: true });
       }
-      if (state.isLoggedIn && window.location.pathname === "/login") {
-        console.log("-- 222 ----");
+      if (state.isLoggedIn) {
         navigate("/", { replace: true });
       }
     }
@@ -37,6 +38,7 @@ const Home = () => {
       <Routes>
         <Route index element={<Dashboard />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/signup" element={<Signup />} />
       </Routes>
     </Container>
   );
