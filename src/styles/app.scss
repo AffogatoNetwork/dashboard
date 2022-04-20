@@ -60,6 +60,12 @@ h5 {
   width: 100%;
   display: flex;
   flex-direction: column;
+  .inner-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
 }
 .wrapper {
   min-height: 100%;
@@ -71,6 +77,11 @@ h5 {
   border: none;
   border-radius: 0.625rem;
   box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
+
+  .btn-primary {
+    background-color: $primary;
+    color: $white;
+  }
 }
 
 .card-body {
@@ -178,6 +189,10 @@ span {
       margin-bottom: 10px;
     }
   }
+  .account-created {
+    display: flex;
+    justify-content: center;
+  }
 }
 
 .topbar {
@@ -218,6 +233,13 @@ span {
     color: $primary;
     font-size: 1.2rem;
     text-decoration: none;
+  }
+  .navbar-toggler {
+    background-color: white;
+    border: 0px;
+    color: $primary;
+    font-size: 1.2rem;
+    font-family: "Dosis";
   }
 }
 

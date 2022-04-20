@@ -1,5 +1,10 @@
 import React, { useContext, useEffect, useMemo, useReducer } from "react";
 import { Magic } from "magic-sdk";
+import { ethers } from "ethers";
+import emailjs from "@emailjs/browser";
+import { CooperativeType } from "../utils/constants";
+import CoffeeBatch from "../contracts/CoffeBatch.json";
+import { useContracts } from "../hooks/useContracts";
 
 type AuthType = {
   authContext: any;
@@ -11,17 +16,22 @@ type props = {
 type ContextDataType = {
   emailLogin: boolean;
   credential: string;
+  cooperative: CooperativeType | null;
+  farmerId: string | null;
 };
 
 const AuthContext = React.createContext<AuthType>({ authContext: null, authState: null });
 
 export default function AuthProvider({ children }: props) {
+  const contracts = useContracts();
   const magicSDK = new Magic(process.env.REACT_APP_MAGIC_API_KEY || "", {
     network: {
       rpcUrl: "https://xdai.poanetwork.dev/",
       chainId: 10
     }
   });
+  emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "");
+
   const [state, dispatch] = useReducer(
       (prevState: any, action: any) => {
         switch (action.type) {
@@ -36,6 +46,7 @@ export default function AuthProvider({ children }: props) {
               isLoading: false,
               isSigningIn: false,
               isLoggedIn: action.isLoggedIn,
+              provider: action.provider,
             }; 
           case "SIGN_IN_ERROR":
             return {
@@ -43,7 +54,8 @@ export default function AuthProvider({ children }: props) {
               isLoading: false,
               isSignInError: true,
               isSigningIn: false,
-              isLoggedIn: false
+              isLoggedIn: false,
+              provider: null,
             };  
           case "SIGN_OUT":
             return {
@@ -51,7 +63,27 @@ export default function AuthProvider({ children }: props) {
               isLoading: false,
               isSigningIn: false,
               isSignInError: false,
-              isLoggedIn: false
+              isLoggedIn: false,
+              provider: null,
+            };
+          case "CREATING_ACCOUNT":
+            return {
+              ...prevState,
+              creatingAccount: true,
+            };
+          case "ACCOUNT_CREATED":
+            return {
+              ...prevState,
+              creatingAccount: false,
+              accountCreated: true,
+              accountCreatedError: false,
+            };
+          case "CREATING_ACCOUNT_ERROR":
+            return {
+              ...prevState,
+              creatingAccount: false,
+              accountCreated: false,
+              creatingAccountError: true,
             };
         }
       },
@@ -60,25 +92,72 @@ export default function AuthProvider({ children }: props) {
         isSigningIn: false,
         isSignInError: false,
         isLoggedIn: false,
+        creatingAccount: false,
+        creatingAccountError: false,
+        accountCreated: false,
+        provider: null,
       }
   );
 
   useEffect(() => {
       // check if user is logged in
     const load = async () => {
-      console.log("entra");
       const loggedIn = await magicSDK.user.isLoggedIn();
-      console.log("pasa ---");
       if (loggedIn) {
-        console.log("in ---");
-        dispatch({ type: "SIGN_IN", isLoading: false, isLoggedIn: true });
+        const provider = new ethers.providers.Web3Provider((magicSDK.rpcProvider as any));
+        dispatch({ type: "SIGN_IN", isLoading: false, isLoggedIn: true, provider: provider });
       } else {
-        console.log("out ---");
         dispatch({ type: "SIGN_OUT", isLoading: false });
       }
     };
     load();
+    // eslint-disable-next-line
   }, [state.isLoggedIn]);    
+
+  const verifyAccount = async () => {
+    const provider = new ethers.providers.Web3Provider((magicSDK.rpcProvider as any));
+    const signer = provider.getSigner();
+    const userAddress = await signer.getAddress();
+
+    // Set CoffeBatch contracts
+    const currentCoffeeBatch = new ethers.Contract(
+      CoffeeBatch.address,
+      CoffeeBatch.abi,
+      signer
+    );
+    contracts.setCurrentCoffeeBatch(currentCoffeeBatch);
+    const exists = await currentCoffeeBatch.minters(userAddress);
+    if (!exists) {
+      dispatch({ type: "SIGN_IN", isLoading: false, isLoggedIn: true });
+    } else {
+      await magicSDK.user.logout();
+      dispatch({ type: "SIGN_IN_ERROR" });
+    }
+  };
+
+  const sendAccountEmail = async (data: ContextDataType) => {
+    const provider = new ethers.providers.Web3Provider((magicSDK.rpcProvider as any));
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    
+    const template_params = {
+      "to_name": "Jorge",
+      "address": address,
+      "id_productor": data.farmerId,
+      "to_email": "jdestephen07@gmail.com"
+    };
+    emailjs.send(
+      process.env.REACT_APP_EMAILJS_SERVICE_ID || "",
+      process.env.REACT_APP_EMAILJS_COOP_TEMPLATE_ID || "",
+      template_params
+    ).then(async function(response) {
+      await magicSDK.user.logout();
+      dispatch({ type: "ACCOUNT_CREATED" });
+    }, function(error) {
+      console.log("FAILED...", error);
+      dispatch({ type: "CREATING_ACCOUNT_ERROR" });
+    });
+  };
 
   const authContext = useMemo(
     () => ({
@@ -90,16 +169,30 @@ export default function AuthProvider({ children }: props) {
           await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
         }
         if (await magicSDK.user.isLoggedIn()) {
-          dispatch({ type: "SIGN_IN", isLoading: false, isLoggedIn: true });
+          verifyAccount();
         } else {
           dispatch({ type: "SIGN_IN_ERROR" });
         }
       },
-      signOut: async (data: ContextDataType) => {
+      createAccount: async (data: ContextDataType) => {
+        dispatch({ type: "CREATING_ACCOUNT" });
+        if (data.emailLogin) {
+          await magicSDK.auth.loginWithMagicLink({ email: data.credential, showUI: true });
+        } else {
+          await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
+        }
+        if (await magicSDK.user.isLoggedIn()) {
+          sendAccountEmail(data);
+        } else {
+          dispatch({ type: "CREATING_ACCOUNT_ERROR" });
+        }
+      },
+      signOut: async () => {
         await magicSDK.user.logout();
         dispatch({ type: "SIGN_OUT" });
-      },         
+      },
     }),
+    // eslint-disable-next-line
     []
   );
 

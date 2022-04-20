@@ -1,0 +1,93 @@
+@import "./colors";
+@import "./fonts";
+
+.Toastify {
+  position: absolute;
+  right: 10px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+
+  .Toastify__toast {
+    padding: 0;
+    padding-bottom: 2px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+    display: flex;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+  }
+
+  .Toastify__toast-container {
+    width: 22.25rem;
+    margin-top: 0rem;
+    margin-right: 0rem;
+
+    @media (max-width: 480px) {
+      width: 22.25rem;
+    }
+  }
+
+  .body {
+    display: flex;
+    background-color: $white;
+    border: none;
+    color: $primary;
+    border-bottom-right-radius: 4px;
+    border-bottom-left-radius: 4px;
+    padding: 0.5rem;
+  }
+
+  .Toastify__toast {
+    border: 1px solid $light;
+    border-top: none;
+    box-sizing: border-box;
+    box-shadow: 0px 0px 4px #f124ff, 0px 0px 10px rgba(241, 36, 255, 0.24);
+    border-radius: 4px;
+    border-top-left-radius: 0;
+    background: linear-gradient($light, $primary);
+    border-top-right-radius: 0;
+    color: $white;
+
+    &.error {
+      border: 1px solid $error;
+      background: linear-gradient($error, $primary);
+      box-shadow: 0px 0px 4px $error, 0px 0px 10px rgba(242, 128, 64, 0.24);
+    }
+
+    &.success {
+      border: 1px solid $green;
+      background: linear-gradient($green, $primary);
+      box-shadow: 0px 0px 4px $green, 0px 0px 10px rgba(112, 235, 183, 0.24);
+    }
+
+    .Toastify__close-button {
+      color: $white;
+      opacity: 1;
+    }
+
+    h5 {
+      font-size: 1rem;
+    }
+
+    p {
+      padding-bottom: 0;
+      margin-bottom: 0;
+    }
+
+    button {
+      align-self: flex-end;
+      margin-right: 0.5rem;
+      margin-bottom: 0.2rem;
+      &:focus {
+        outline: 0;
+        box-shadow: 0 0 0 0 rgba(164, 64, 242, 0);
+      }
+    }
+
+    img.toasty {
+      width: 3.3rem;
+      float: left;
+      margin-right: 1rem;
+    }
+  }
+}

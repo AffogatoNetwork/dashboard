@@ -4,16 +4,31 @@ import Image from "react-bootstrap/esm/Image";
 import Logo from "../assets/logo.png";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
-import { FaHome, FaPencilAlt, FaPowerOff } from "react-icons/fa";
+import { FaHome, FaPencilAlt, FaPowerOff, FaUserAlt } from "react-icons/fa";
 import { useAuthContext } from "../states/AuthContext";
+import { makeShortAddress } from "../utils/utils";
 
 type props = {
   accountType: string;
 };
 
 const Sidebar = ({ accountType }: props) => {
-  const { authContext } = useAuthContext();
+  const { authContext, authState } = useAuthContext();
+  const [state] = authState;
+  const [ownerAddress, setOwnerAddress] = useState("");
   
+  useEffect(() => {
+    const loadProvider = async () => {
+      if (state.provider != null) {
+        const signer = state.provider.getSigner();
+        const address = await signer.getAddress();
+        console.log(address);
+        setOwnerAddress(address);
+      }
+    }
+    loadProvider();
+  });
+
   const logout = () => {
     authContext.signOut();
   };
@@ -27,21 +42,26 @@ const Sidebar = ({ accountType }: props) => {
           </Navbar.Brand>
         </Nav>  
         <Nav className="buttons">
-          <Nav.Link href="#home">
+          <Navbar.Toggle>
+            <div className="nav-caption">
+              <FaUserAlt /> {makeShortAddress(ownerAddress)}
+            </div>  
+          </Navbar.Toggle>
+          <Nav.Link href="list">
             <div className="nav-caption">
               <FaHome /> Hogar
             </div>
           </Nav.Link>
-          <Nav.Link href="#features">
+          <Nav.Link href="create">
             <div className="nav-caption">
               <FaPencilAlt /> Crear Lotes
             </div>
           </Nav.Link>
-          <Nav.Link href="#pricing">
+          <Navbar.Toggle onClick={() => logout()}>
             <div className="nav-caption">
               <FaPowerOff /> Cerrar Sesión
             </div>  
-          </Nav.Link>
+          </Navbar.Toggle>
         </Nav>
       </Container>
     </Navbar>
