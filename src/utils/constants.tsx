@@ -1,5 +1,3 @@
-import React from "react";
-
 export type CooperativeType = {
   key: string;
   name: string;
@@ -7,9 +5,9 @@ export type CooperativeType = {
 }
 
 export const CooperativeList = [
-  { key: "0", name: "No Aplica", email: "" },
-  { key: "1", name: "Comsa", email: "jdestephen711@yahoo.com" },
-  { key: "2", name: "Proexo", email: "jdestephen711@yahoo.com" },
-  { key: "3", name: "Otra", email: "jdestephen711@yahoo.com" },
-  { key: "4", name: "Primera", email: "jdestephen07@gmail.com" },
+  { key: "0", name: "Elija la cooperativa", email: "" },
+  { key: "1", name: "COMSA", email: "jdestephen711@yahoo.com" },
+  { key: "2", name: "COPRANIL", email: "jdestephen711@yahoo.com" },
+  { key: "3", name: "COMMOVEL", email: "jdestephen711@yahoo.com" },
+  { key: "4", name: "PROEXO", email: "jdestephen07@gmail.com" },
 ];

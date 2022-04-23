@@ -5,33 +5,54 @@
   display: flex;
   justify-content: center;
   width: 100%;
-  padding: 3rem;
+  margin-top: -2rem;
+  padding: 0rem 3rem 3rem 3rem;
   .card {
     width: 60%;
     
     &-header {
-      padding: 0.5rem 2rem;
+      padding: 1rem 2rem;
       border-bottom: 1px solid $grey;
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       box-shadow: inset 0 4px 0 0 $light;
     }
     &-body {
-      padding: 0.5rem 2rem;
+      padding: 1.8rem 2rem;
     }
     &-footer {
       padding: 1.2rem 2rem;
       border-top: 1px solid $grey;
     }
   }
+  .btn-primary {
+    border-radius: 5px;
+    height: 2.5rem;
+    width: 12rem;
+    font-size: 1rem;
+  }
 
   .dnd-container {
+    margin-top: 1rem;
+    .excel-container {
+      max-height: 17rem;
+      padding: 1px;
+      overflow: scroll;
+      border: 1px solid $secondary;
+      border-radius: 5px;
+    }
+    .excel {
+      tr {
+        border-top: 0.5px solid $secondary;
+        border-bottom: 0.5px solid $secondary;
+      }
+    }
     .dropzone {
       display: flex;
       flex-direction: column;
       justify-content: center;
       align-items: center;  
-      height: 15rem;
+      height: 17rem;
       border: 1px dashed $light;
       border-radius: 5px;
 
@@ -54,15 +75,20 @@
   }
   .file-accepted {
     display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 0.3rem 0rem;
     span {
       color: $light;
     }
-  }
-  .btn-primary {
-    border-radius: 5px;
-    height: 2.5rem;
-    width: 12rem;
-    font-size: 1rem;
+    .remove {
+      width: auto;
+      background-color: $white;
+      color: $primary;
+      border: 0px;
+      svg {
+        margin-right: 2px;
+      }
+    }
   }
 }

@@ -16,8 +16,9 @@ type props = {
 type ContextDataType = {
   emailLogin: boolean;
   credential: string;
-  cooperative: CooperativeType | null;
+  cooperative: CooperativeType;
   farmerId: string | null;
+  isFarmer: boolean;
 };
 
 const AuthContext = React.createContext<AuthType>({ authContext: null, authState: null });
@@ -60,6 +61,7 @@ export default function AuthProvider({ children }: props) {
           case "SIGN_OUT":
             return {
               ...prevState,
+              accountCreated: false,
               isLoading: false,
               isSigningIn: false,
               isSignInError: false,
@@ -139,16 +141,20 @@ export default function AuthProvider({ children }: props) {
     const provider = new ethers.providers.Web3Provider((magicSDK.rpcProvider as any));
     const signer = provider.getSigner();
     const address = await signer.getAddress();
-    
+    let templateId = process.env.REACT_APP_EMAILJS_COOP_TEMPLATE_ID || "";
+    if (!data.isFarmer) {
+      templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "";
+    }
     const template_params = {
       "to_name": "Jorge",
       "address": address,
       "id_productor": data.farmerId,
-      "to_email": "jdestephen07@gmail.com"
+      "to_email": data.isFarmer ? data.cooperative.email : "jdestephen07@gmail.com"
     };
+    
     emailjs.send(
       process.env.REACT_APP_EMAILJS_SERVICE_ID || "",
-      process.env.REACT_APP_EMAILJS_COOP_TEMPLATE_ID || "",
+      templateId,
       template_params
     ).then(async function(response) {
       await magicSDK.user.logout();
@@ -189,6 +195,9 @@ export default function AuthProvider({ children }: props) {
       },
       signOut: async () => {
         await magicSDK.user.logout();
+        dispatch({ type: "SIGN_OUT" });
+      },
+      fakeSignOut: async () => {
         dispatch({ type: "SIGN_OUT" });
       },
     }),

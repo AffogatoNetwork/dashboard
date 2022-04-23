@@ -1,3 +1,4 @@
+@import "~bootstrap/scss/bootstrap";
 @import "./colors";
 @import "./fonts";
 
@@ -12,6 +13,7 @@ h3,
 h4,
 h5 {
   color: $primary;
+  margin-bottom: 0rem;
 }
 
 .App {
@@ -72,14 +74,33 @@ h5 {
   height: 100%;
 }
 
+.nav-tabs {
+  .nav-link { 
+    color: $primary;
+  }
+  .nav-link.active {
+    color: $light;
+  }
+}
+.navbar-toggler:focus {
+  box-shadow: 0 0 0 0;
+}
+
 .card {
   background-color: #fff;
   border: none;
   border-radius: 0.625rem;
   box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
 
+  &-header {
+    background-color: $white;
+  }
+  &-footer {
+    background-color: $white;
+  }
   .btn-primary {
     background-color: $primary;
+    border-color: $primary;
     color: $white;
   }
 }
@@ -90,6 +111,10 @@ h5 {
 
 .card-footer:last-child {
   border-radius: 0 0 0.625rem 0.625rem;
+}
+
+.tab-content  {
+  padding: 0px 3px;
 }
 
 .form {
@@ -113,6 +138,7 @@ h5 {
     margin: 0.5rem 0px;
   }
   .form-control {
+    width: 100%;
     margin: 2px 0px;
     padding: 0.4375rem 0.75rem;
     background-color: $white;
@@ -120,11 +146,13 @@ h5 {
     border: 1px solid #e1e5eb;
     color: $primary;
     font-size: 0.8125rem;
+    font-family: "Dosis";
   }
   .form-control:focus {
     outline: none !important;
     border: 1px solid $light;
     border-radius: 0.25rem;
+    box-shadow: 0 0 0 0.18rem #964b004d;
   }
 }
 
@@ -138,6 +166,7 @@ span {
   flex-direction: column;
   margin: 7px 0rem;
 }
+
 .error-message {
   color: $error;
   font-size: 15px;
@@ -149,6 +178,7 @@ span {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  
   .auth-method {
     color: $light;
     font-size: 14px;
@@ -191,7 +221,13 @@ span {
   }
   .account-created {
     display: flex;
+    flex-direction: column;
     justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+  }
+  .tabs-container {
+    margin-top: 2.2rem;
   }
 }
 
@@ -199,10 +235,12 @@ span {
   display: flex;
   flex-direction: row;
   height: 5rem;
+  background-color: $white !important;
   box-shadow: #a0897285 0px 0.5px;
+
   .container {
     display: flex;
-    padding: 0.5rem 1rem;
+    padding: 0.5rem 0rem;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -224,6 +262,7 @@ span {
   .nav-caption {
     display: flex;
     align-items: center;
+    color: $primary;
     svg {
       margin-right: 9px;
     }
@@ -235,6 +274,7 @@ span {
     text-decoration: none;
   }
   .navbar-toggler {
+    display: inline;
     background-color: white;
     border: 0px;
     color: $primary;
@@ -291,5 +331,37 @@ span {
     .dropdown-item:hover {
       background-color: #964b0044;
     }
+  }
+  .btn-secondary.dropdown-toggle {
+    background-color: $white;
+  }
+  .btn-secondary.dropdown-toggle:focus {
+    box-shadow: 0 0 0 0.18rem #964b004d;
+  }
+}
+
+.pagination {
+  margin-top: 1rem;
+  .page-item {
+    .page-link {
+      color: $primary;
+    }
+    .page-link:focus {
+      background-color: #e9ecef;
+      box-shadow: 0 0 0 0.18rem #964b0062;
+    }
+    .page-link:hover {
+      background-color: #bba996d8;
+    }
+  }
+  .page-item.active{
+    .page-link {
+      background-color: $light;
+      border-color: $light;
+      color: $white;
+    }
+  }
+  span {
+    font-size: 16px;
   }
 }

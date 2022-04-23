@@ -4,6 +4,8 @@ import Card from "react-bootstrap/esm/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/esm/Image";
+import Tabs from "react-bootstrap/esm/Tabs";
+import Tab from "react-bootstrap/esm/Tab";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useAuthContext } from "../states/AuthContext";
@@ -18,16 +20,25 @@ const Signup = () => {
   const navigate = useNavigate();
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
+  const [activeTab, setActiveTab] = useState("farmer");
   const [userName, setUserName] = useState("");
   const [farmerId, setFarmerId] = useState("");
   const [userNameError, setUserNameError] = useState("");
   const [farmerIdError, setFarmerIdError] = useState("");
+  const [coopError, setCoopError] = useState("");
   const [currentCoop, setCurrentCoop] = useState<CooperativeType>(CooperativeList[0]);
+
+  const cleanFields = () => {
+    setUserName("");
+    setFarmerId("");
+    setCurrentCoop(CooperativeList[0]);
+  }
 
   useEffect(() => {
     const checkAccount = () => {
       if (state.accountCreated) {
         notifyUser("La cuenta ha sido creada!");
+        cleanFields();
       } else {
         errorNotification("No se pudo crear la cuenta!");
       }
@@ -45,11 +56,41 @@ const Signup = () => {
     // eslint-disable-next-line
   }, [state.isLoggedIn, state.creatingAccountError, state.accountCreated]);
 
+  const isValid = (): boolean => {
+    let valid = true;
+    if (!isValidCellphone(userName) && !isValidEmail(userName)) {
+      setUserNameError("El valor no es valido.");
+      valid = false;
+    }
+    if (farmerId.trim().length > 25) {
+      setFarmerIdError("Valor debe de tener menos de 25 carácteres.");
+      valid = false;
+    }
+    if (currentCoop.key === "0") {
+      setCoopError("Seleccione una cooperativa.");
+      valid = false;
+    }
+    return valid;
+  }
+
   const magicLogin = async () => {
-    if (isValidEmail(userName)) {
-      authContext.createAccount({ emailLogin: true, credential: userName, cooperative: currentCoop, farmerId: farmerId });
-    } else if (isValidCellphone(userName)) {
-      authContext.createAccount({ emailLogin: false, credential: areaCode.concat(userName),  cooperative: currentCoop, farmerId: farmerId });
+    if (isValid()) {
+      const data = {
+        emailLogin: true,
+        credential: userName.trim(),
+        cooperative: currentCoop,
+        farmerId: farmerId,
+        isFarmer: activeTab === "farmer",
+      };
+      if (isValidEmail(userName.trim())) {
+        authContext.createAccount(data);
+      } else if (isValidCellphone(userName.trim())) {
+        data.credential = areaCode.concat(userName.trim());
+        data.emailLogin = false;
+        authContext.createAccount(data);
+      }
+    } else {
+      errorNotification("Los datos no son validos");
     }
   };
 
@@ -77,9 +118,64 @@ const Signup = () => {
     for (let i = 0; i < CooperativeList.length; i++) {
       if (CooperativeList[i].key === key) {
         setCurrentCoop(CooperativeList[i]);
+        if (key === "0") {
+          setCoopError("Seleccione una cooperativa.");
+        } else {
+          setCoopError("");
+        }
       }  
     }
   };
+
+  const RenderForm = () => (
+    <Form className="form">
+      <Form.Group className="mb-3 input-group">
+        <FormInput
+          label="Correo electrónico o No. Celular"
+          value={userName}
+          placeholder="usuario@gmail.com"
+          handleOnChange={handleUserInputChange}
+          errorMsg={userNameError}
+        />
+        {activeTab === "farmer" && (
+          <FormInput
+            label="Id de productor"
+            value={farmerId}
+            placeholder="id"
+            handleOnChange={handleIdProductorChange}
+            errorMsg={farmerIdError}
+          />
+        )}
+        <div className="form-input">
+          <Form.Label>Selecciona tu Cooperativa</Form.Label>
+          <Dropdown onSelect={(eventKey) => handleCooperativeChange(eventKey || "0")}>
+            <Dropdown.Toggle
+              variant="secondary"
+              id="dropdown-cooperative"
+              className="text-left"
+            >
+              <div className="cooperative-toggle">
+                <span>{currentCoop.name}</span>
+              </div>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {CooperativeList.map((item) => (
+                <Dropdown.Item key={item.key} eventKey={item.key}>
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+          {coopError !== "" && <span className="error-message">{coopError}</span> }
+        </div>
+      </Form.Group>
+      {state.creatingAccountError && (
+        <div className="account-created">
+          <h3>Error creando cuenta</h3>
+        </div>
+      )}      
+    </Form>
+  );
 
   if (state.creatingAccount) {
     return <Loading />;
@@ -91,52 +187,26 @@ const Signup = () => {
         <Card.Body>
           <div className="header">
             <Image className="logo" src={Logo} />
-            <h3>Nueva Cuenta</h3>
+            <h3>
+              {state.accountCreated ? "Cuenta Creada" : "Nueva Cuenta"}
+            </h3>
           </div>
           {!state.accountCreated ? (
-            <Form className="form">
-              <Form.Group className="mb-3 input-group">
-                <FormInput
-                  label="Correo electrónico o No. Celular"
-                  value={userName}
-                  placeholder="usuario@gmail.com"
-                  handleOnChange={handleUserInputChange}
-                  errorMsg={userNameError}
-                />
-                <FormInput
-                  label="Id de productor"
-                  value={farmerId}
-                  placeholder="id"
-                  handleOnChange={handleIdProductorChange}
-                  errorMsg={farmerIdError}
-                />
-                <div className="form-input">
-                  <Form.Label>Selecciona tu Cooperativa</Form.Label>
-                  <Dropdown onSelect={(eventKey) => handleCooperativeChange(eventKey || "0")}>
-                    <Dropdown.Toggle
-                      variant="secondary"
-                      id="dropdown-cooperative"
-                      className="text-left"
-                    >
-                      <div className="cooperative-toggle">
-                        <span>{currentCoop.name}</span>
-                      </div>
-                    </Dropdown.Toggle>
-                    <Dropdown.Menu>
-                      {CooperativeList.map((item) => (
-                        <Dropdown.Item key={item.key} eventKey={item.key}>
-                          {item.name}
-                        </Dropdown.Item>
-                      ))}
-                    </Dropdown.Menu>
-                  </Dropdown>
-                </div>
-              </Form.Group>
-              {state.creatingAccountError && (
-                <div className="account-created">
-                  <h3>Error creando cuenta</h3>
-                </div>
-              )}
+            <div className="tabs-container">
+              <Tabs
+                id="signup-tabs"
+                defaultActiveKey="farmer"
+                activeKey={activeTab}
+                onSelect={(k) => setActiveTab(k || "farmer")}
+                className="mb-3"
+              >
+                <Tab eventKey="farmer" title="Productor">
+                  {RenderForm()}
+                </Tab>
+                <Tab eventKey="cooperative" title="Cooperativa">
+                  {RenderForm()}
+                </Tab>
+              </Tabs>
               <div className="btn-container">
                 <Button variant="primary" type="button" onClick={() => magicLogin()}>
                   Crear cuenta
@@ -145,14 +215,28 @@ const Signup = () => {
                   Regresar
                 </span>
               </div>
-            </Form>
+            </div>
           ) : (
             <div className="account-created">
-              <h2>Cuenta creada</h2>    
+              {activeTab === "farmer" ? (
+                <h6>Sus datos han sido enviados a la cooperativa</h6>
+              ): (
+                <h6>Sus datos han sido enviados al equipo de affogato</h6>
+              )}
+              <span
+                className="auth-method"
+                onClick={
+                  () => {
+                    authContext.fakeSignOut();
+                    navigate("/login", { replace: true });
+                  }
+                }
+              >
+                Inicio de Sesión
+              </span>  
             </div>  
           )}
         </Card.Body>
-        <Card.Footer />
       </Card>
     </div>
   );

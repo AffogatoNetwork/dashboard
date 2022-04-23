@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
+import { useNavigate } from "react-router-dom";
 import Image from "react-bootstrap/esm/Image";
 import Logo from "../assets/logo.png";
 import Navbar from "react-bootstrap/Navbar";
@@ -15,6 +16,7 @@ type props = {
 const Sidebar = ({ accountType }: props) => {
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
+  const navigate = useNavigate();
   const [ownerAddress, setOwnerAddress] = useState("");
   
   useEffect(() => {
@@ -22,7 +24,6 @@ const Sidebar = ({ accountType }: props) => {
       if (state.provider != null) {
         const signer = state.provider.getSigner();
         const address = await signer.getAddress();
-        console.log(address);
         setOwnerAddress(address);
       }
     }
@@ -47,12 +48,12 @@ const Sidebar = ({ accountType }: props) => {
               <FaUserAlt /> {makeShortAddress(ownerAddress)}
             </div>  
           </Navbar.Toggle>
-          <Nav.Link href="list">
+          <Nav.Link onClick={() => navigate("/list")}>
             <div className="nav-caption">
               <FaHome /> Hogar
             </div>
           </Nav.Link>
-          <Nav.Link href="create">
+          <Nav.Link onClick={() => navigate("/create")}>
             <div className="nav-caption">
               <FaPencilAlt /> Crear Lotes
             </div>

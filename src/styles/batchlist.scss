@@ -1,0 +1,23 @@
+@import "./colors";
+@import "./fonts";
+
+.batch-list {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  padding: 3rem; 
+  .card {
+    width: 90%;
+    &-header {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid $grey;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+      box-shadow: inset 0 4px 0 0 $light;
+    }
+    &-footer {
+      display: flex;
+      justify-content: center;
+    }
+  }
+}

@@ -6,6 +6,7 @@ import Image from "react-bootstrap/esm/Image";
 import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useAuthContext } from "../states/AuthContext";
+import FormInput from "./common/FormInput";
 import { isValidCellphone, isValidEmail, errorNotification } from "../utils/utils";
 
 const Login = () => {
@@ -14,6 +15,7 @@ const Login = () => {
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
   const [userInput, setUserInput] = useState("");
+  const [userInputError, setUserInputError] = useState("");
 
   useEffect(() => {
     function check() {
@@ -37,7 +39,13 @@ const Login = () => {
   };
 
   const handleUserInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setUserInput(event.target.value);
+    const input = event.target.value;
+    setUserInput(input);
+    if (isValidCellphone(input) || isValidEmail(input)) {
+      setUserInputError("");
+    } else {
+      setUserInputError("El valor no es valido.");
+    }
   };
 
   return (
@@ -50,11 +58,12 @@ const Login = () => {
           </div>
           <Form className="form">
             <Form.Group className="mb-3 input-group">
-              <Form.Label>Correo o No. Celular</Form.Label>
-              <Form.Control
+              <FormInput
+                label="Correo electrónico o No. Celular"
                 value={userInput}
-                placeholder="00000000"
-                onChange={handleUserInputChange}
+                placeholder="ejemplo@gmail.com"
+                handleOnChange={handleUserInputChange}
+                errorMsg={userInputError}
               />
             </Form.Group>
             <div className="btn-container">
@@ -67,9 +76,6 @@ const Login = () => {
             </div>
           </Form>          
         </Card.Body>
-        <Card.Footer>
-
-        </Card.Footer>
       </Card>
     </div>
   );
