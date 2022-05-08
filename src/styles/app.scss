@@ -65,7 +65,6 @@ h5 {
   .inner-container {
     display: flex;
     justify-content: center;
-    align-items: center;
     height: 100%;
   }
 }
@@ -84,6 +83,20 @@ h5 {
 }
 .navbar-toggler:focus {
   box-shadow: 0 0 0 0;
+}
+
+.table {
+  thead {
+    height: 3rem;
+    vertical-align: middle;
+  }
+  tr {
+    vertical-align: middle;
+  }
+  th {
+    color: $primary;
+    font-size: 1.1rem;
+  }
 }
 
 .card {
@@ -161,6 +174,10 @@ span {
   padding: 5px;
 }
 
+.shaking-icon {
+  margin-bottom: 1rem;
+}
+
 .form-input {
   display: flex;
   flex-direction: column;
@@ -182,6 +199,9 @@ span {
   .auth-method {
     color: $light;
     font-size: 14px;
+    background-color: transparent;
+    border-color: transparent;
+    width: 70% !important;
   }
   .auth-method:hover {
     cursor: pointer;

@@ -1,0 +1,52 @@
+@import "./colors";
+@import "./fonts";
+
+.coffeebatch {
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  padding: 3rem 0rem;
+  h6 {
+    font-size: 1rem;
+  }
+  .nft {
+    height: 6rem;
+    width: 6rem;
+  }
+  .card {
+    width: 35%;
+
+    &-header {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding: 1rem;
+    }
+  }
+  .batch-detail {
+    margin-bottom: 1.3rem;
+  }
+  .info {
+    display: flex;
+    width: 100%;
+    margin: 0.5rem 0rem;
+  }
+  .location {
+    margin: 0.5rem 0rem;
+  }
+  .detail {
+    margin: 1.5rem 0rem;
+  }
+  .cupprofile {
+    margin: 1.5rem 0rem;
+  }
+  .items {
+    display: grid;
+    grid-template-columns: auto auto;
+    margin-top: 1rem;
+  }
+  .scitem {
+    display: flex;
+    align-items: center;
+  }
+}

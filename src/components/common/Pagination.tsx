@@ -23,7 +23,9 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
     return (
       <>
         <Pagination.Item active={pagination.current === 1}>{1}</Pagination.Item>
-        {pagination.current >= 3 && pagination.current < midPages[0] && <Pagination.Ellipsis />}
+        {pagination.current >= 3 && pagination.current < midPages[0] && (
+          <Pagination.Ellipsis />
+        )}
         {pagination.current > 1 && pagination.current < midPages[0] && (
           <Pagination.Item active>{pagination.current}</Pagination.Item>
         )}
@@ -38,12 +40,12 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
           </Pagination.Item>
         ))}
         <Pagination.Ellipsis />
-        {pagination.current < pagination.pages && pagination.current > midPages[4] && (
-          <Pagination.Item active>{pagination.current}</Pagination.Item>
-        )}
-        {pagination.current < pagination.pages - 1 && pagination.current > midPages[4] && (
-          <Pagination.Ellipsis />
-        )}
+        {pagination.current < pagination.pages &&
+          pagination.current > midPages[4] && (
+            <Pagination.Item active>{pagination.current}</Pagination.Item>
+          )}
+        {pagination.current < pagination.pages - 1 &&
+          pagination.current > midPages[4] && <Pagination.Ellipsis />}
         <Pagination.Item
           active={pagination.current === pagination.pages}
           onClick={() => onPageSelected(pagination.pages)}
@@ -57,7 +59,10 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
   return (
     <Pagination>
       {pagination.pages >= 10 && (
-        <Pagination.First onClick={() => onPageSelected(1)} disabled={pagination.previous === 0} />
+        <Pagination.First
+          onClick={() => onPageSelected(1)}
+          disabled={pagination.previous === 0}
+        />
       )}
       <Pagination.Prev
         onClick={() => onPageSelected(pagination.previous)}

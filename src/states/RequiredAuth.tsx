@@ -5,7 +5,7 @@ import { useAuthContext } from "./AuthContext";
 export default function RequireAuth({ children }: { children: JSX.Element }) {
   const { authState } = useAuthContext();
   const [state] = authState;
-  let location = useLocation();
+  const location = useLocation();
 
   if (!state.isLoggedIn) {
     // Redirect them to the /login page, but save the current location they were

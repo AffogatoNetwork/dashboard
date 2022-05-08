@@ -130,7 +130,7 @@ export default function AuthProvider({ children }: props) {
     contracts.setCurrentCoffeeBatch(currentCoffeeBatch);
     const exists = await currentCoffeeBatch.minters(userAddress);
     if (!exists) {
-      dispatch({ type: "SIGN_IN", isLoading: false, isLoggedIn: true });
+      dispatch({ type: "SIGN_IN", isLoading: false, isLoggedIn: true, provider:  provider });
     } else {
       await magicSDK.user.logout();
       dispatch({ type: "SIGN_IN_ERROR" });

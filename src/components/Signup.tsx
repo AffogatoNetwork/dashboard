@@ -11,9 +11,13 @@ import Logo from "../assets/logo.png";
 import { useAuthContext } from "../states/AuthContext";
 import Loading from "./Loading";
 import FormInput from "./common/FormInput";
-import { isValidCellphone, isValidEmail, errorNotification, notifyUser } from "../utils/utils";
+import {
+  isValidCellphone,
+  isValidEmail,
+  errorNotification,
+  notifyUser,
+} from "../utils/utils";
 import { CooperativeList, CooperativeType } from "../utils/constants";
-
 
 const Signup = () => {
   const areaCode = "+504";
@@ -26,13 +30,15 @@ const Signup = () => {
   const [userNameError, setUserNameError] = useState("");
   const [farmerIdError, setFarmerIdError] = useState("");
   const [coopError, setCoopError] = useState("");
-  const [currentCoop, setCurrentCoop] = useState<CooperativeType>(CooperativeList[0]);
+  const [currentCoop, setCurrentCoop] = useState<CooperativeType>(
+    CooperativeList[0]
+  );
 
   const cleanFields = () => {
     setUserName("");
     setFarmerId("");
     setCurrentCoop(CooperativeList[0]);
-  }
+  };
 
   useEffect(() => {
     const checkAccount = () => {
@@ -42,17 +48,17 @@ const Signup = () => {
       } else {
         errorNotification("No se pudo crear la cuenta!");
       }
-    }
+    };
     const checkIsLoggedIn = () => {
       if (state.isLoggedIn) {
         navigate("/", { replace: true });
       }
-    }
+    };
     if (state.accountCreated || state.creatingAccountError) {
       checkAccount();
     } else {
-      checkIsLoggedIn(); 
-    }    
+      checkIsLoggedIn();
+    }
     // eslint-disable-next-line
   }, [state.isLoggedIn, state.creatingAccountError, state.accountCreated]);
 
@@ -71,7 +77,7 @@ const Signup = () => {
       valid = false;
     }
     return valid;
-  }
+  };
 
   const magicLogin = async () => {
     if (isValid()) {
@@ -79,7 +85,7 @@ const Signup = () => {
         emailLogin: true,
         credential: userName.trim(),
         cooperative: currentCoop,
-        farmerId: farmerId,
+        farmerId,
         isFarmer: activeTab === "farmer",
       };
       if (isValidEmail(userName.trim())) {
@@ -94,7 +100,9 @@ const Signup = () => {
     }
   };
 
-  const handleUserInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value;
     setUserName(input);
     if (isValidCellphone(input) || isValidEmail(input)) {
@@ -104,7 +112,9 @@ const Signup = () => {
     }
   };
 
-  const handleIdProductorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleIdProductorChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value;
     setFarmerId(input);
     if (input.trim().length > 25) {
@@ -115,7 +125,7 @@ const Signup = () => {
   };
 
   const handleCooperativeChange = (key: string) => {
-    for (let i = 0; i < CooperativeList.length; i++) {
+    for (let i = 0; i < CooperativeList.length; i += 1) {
       if (CooperativeList[i].key === key) {
         setCurrentCoop(CooperativeList[i]);
         if (key === "0") {
@@ -123,7 +133,7 @@ const Signup = () => {
         } else {
           setCoopError("");
         }
-      }  
+      }
     }
   };
 
@@ -148,7 +158,9 @@ const Signup = () => {
         )}
         <div className="form-input">
           <Form.Label>Selecciona tu Cooperativa</Form.Label>
-          <Dropdown onSelect={(eventKey) => handleCooperativeChange(eventKey || "0")}>
+          <Dropdown
+            onSelect={(eventKey) => handleCooperativeChange(eventKey || "0")}
+          >
             <Dropdown.Toggle
               variant="secondary"
               id="dropdown-cooperative"
@@ -166,20 +178,22 @@ const Signup = () => {
               ))}
             </Dropdown.Menu>
           </Dropdown>
-          {coopError !== "" && <span className="error-message">{coopError}</span> }
+          {coopError !== "" && (
+            <span className="error-message">{coopError}</span>
+          )}
         </div>
       </Form.Group>
       {state.creatingAccountError && (
         <div className="account-created">
           <h3>Error creando cuenta</h3>
         </div>
-      )}      
+      )}
     </Form>
   );
 
   if (state.creatingAccount) {
-    return <Loading />;
-  };
+    return <Loading label="Cargando..." />;
+  }
 
   return (
     <div className="login">
@@ -187,9 +201,7 @@ const Signup = () => {
         <Card.Body>
           <div className="header">
             <Image className="logo" src={Logo} />
-            <h3>
-              {state.accountCreated ? "Cuenta Creada" : "Nueva Cuenta"}
-            </h3>
+            <h3>{state.accountCreated ? "Cuenta Creada" : "Nueva Cuenta"}</h3>
           </div>
           {!state.accountCreated ? (
             <div className="tabs-container">
@@ -208,39 +220,43 @@ const Signup = () => {
                 </Tab>
               </Tabs>
               <div className="btn-container">
-                <Button variant="primary" type="button" onClick={() => magicLogin()}>
+                <Button
+                  variant="primary"
+                  type="button"
+                  onClick={() => magicLogin()}
+                >
                   Crear cuenta
                 </Button>
-                <span className="auth-method" onClick={() => navigate("/login", { replace: true })}>
+                <Button
+                  className="auth-method"
+                  onClick={() => navigate("/login", { replace: true })}
+                >
                   Regresar
-                </span>
+                </Button>
               </div>
             </div>
           ) : (
             <div className="account-created">
               {activeTab === "farmer" ? (
                 <h6>Sus datos han sido enviados a la cooperativa</h6>
-              ): (
+              ) : (
                 <h6>Sus datos han sido enviados al equipo de affogato</h6>
               )}
-              <span
+              <Button
                 className="auth-method"
-                onClick={
-                  () => {
-                    authContext.fakeSignOut();
-                    navigate("/login", { replace: true });
-                  }
-                }
+                onClick={() => {
+                  authContext.fakeSignOut();
+                  navigate("/login", { replace: true });
+                }}
               >
                 Inicio de Sesión
-              </span>  
-            </div>  
+              </Button>
+            </div>
           )}
         </Card.Body>
       </Card>
     </div>
   );
-
 };
 
 export default Signup;

@@ -1,7 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
-import AuthProvider from "./states/AuthContext";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import AuthProvider from "./states/AuthContext";
 import contractsContext from "./states/ContractsContext";
 import { useContracts } from "./hooks/useContracts";
 import Home from "./components/Home";

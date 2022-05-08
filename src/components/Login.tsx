@@ -7,7 +7,11 @@ import { useNavigate } from "react-router-dom";
 import Logo from "../assets/logo.png";
 import { useAuthContext } from "../states/AuthContext";
 import FormInput from "./common/FormInput";
-import { isValidCellphone, isValidEmail, errorNotification } from "../utils/utils";
+import {
+  isValidCellphone,
+  isValidEmail,
+  errorNotification,
+} from "../utils/utils";
 
 const Login = () => {
   const areaCode = "+504";
@@ -34,11 +38,16 @@ const Login = () => {
     if (isValidEmail(userInput)) {
       authContext.signIn({ emailLogin: true, credential: userInput });
     } else if (isValidCellphone(userInput)) {
-      authContext.signIn({ emailLogin: false, credential: areaCode.concat(userInput) });
+      authContext.signIn({
+        emailLogin: false,
+        credential: areaCode.concat(userInput),
+      });
     }
   };
 
-  const handleUserInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleUserInputChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value;
     setUserInput(input);
     if (isValidCellphone(input) || isValidEmail(input)) {
@@ -67,19 +76,25 @@ const Login = () => {
               />
             </Form.Group>
             <div className="btn-container">
-              <Button variant="primary" type="button" onClick={() => magicLogin()}>
+              <Button
+                variant="primary"
+                type="button"
+                onClick={() => magicLogin()}
+              >
                 Acceder
               </Button>
-              <span className="auth-method"  onClick={() => navigate("/signup", { replace: true })}>
+              <Button
+                className="auth-method"
+                onClick={() => navigate("/signup", { replace: true })}
+              >
                 No tienes cuenta? Crea una aquí.
-              </span>
+              </Button>
             </div>
-          </Form>          
+          </Form>
         </Card.Body>
       </Card>
     </div>
   );
-
 };
 
 export default Login;

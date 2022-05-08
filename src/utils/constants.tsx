@@ -1,8 +1,11 @@
+export const ipfsUrl = "https://gateway.pinata.cloud/ipfs/";
+export const apiUrl = "https://mocha-j6pn.onrender.com/api/v1/";
+
 export type CooperativeType = {
   key: string;
   name: string;
   email: string;
-}
+};
 
 export const CooperativeList = [
   { key: "0", name: "Elija la cooperativa", email: "" },

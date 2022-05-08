@@ -10,6 +10,8 @@ export const CONTRACTS_DEFAULT_VALUE = {
   setCurrentCoffeeBatch: () => {},
 };
 
-const contractsContext = React.createContext<ContractsContext>(CONTRACTS_DEFAULT_VALUE);
+const contractsContext = React.createContext<ContractsContext>(
+  CONTRACTS_DEFAULT_VALUE
+);
 
 export default contractsContext;
