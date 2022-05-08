@@ -13,22 +13,22 @@ export const Create = () => {
   const [rows, setRows] = useState(null);
   const [cols, setCols] = useState(null);
   const [saving, setSaving] = useState(false);
-  const { acceptedFiles, fileRejections, getRootProps, getInputProps, open } =
+  const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
       accept: ".xlsx",
       maxFiles: 1,
     });
 
-  const changeFile = () => {
+  const clearFiles = () => {
     setRows(null);
     setCols(null);
-    open();
+    acceptedFiles.pop();
   };
 
   const files = acceptedFiles.map((file, index) => (
     <div key={index} className="file-accepted">
       <span>El archivo {file.name} ha sido cargado exitosamente.</span>
-      <Button className="remove" onClick={() => changeFile()}>
+      <Button className="remove" onClick={() => clearFiles()}>
         (<FaTimes /> Quitar)
       </Button>
     </div>
@@ -91,7 +91,7 @@ export const Create = () => {
           console.log(json);
           notifyUser("Los lotes de café han sido creados.");
           setSaving(false);
-          acceptedFiles.pop();
+          clearFiles();
         })
         .catch((error) => {
           console.log(error);
