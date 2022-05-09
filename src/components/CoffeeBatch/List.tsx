@@ -15,10 +15,10 @@ import BatchItem from "./BatchItem";
 const pagDefault = {
   previous: 0,
   current: 0,
-  next: 1,
-  pages: 5,
+  next: 0,
+  pages: 0,
   itemsPerPage: 10,
-  itemsCount: 30,
+  itemsCount: 0,
   lastId: "0",
 };
 
@@ -68,6 +68,28 @@ export const List = () => {
       }
     }
   `;
+
+  const confPagination = (bData: Array<any>, itemsPerPage: number) => {
+    if (bData.length > 0) {
+      const lastCBId = bData[bData.length - 1].id;
+      const itemsCount = bData.length;
+      const pages = Math.ceil(itemsCount / itemsPerPage);
+      const lastDataPage = Math.ceil(itemsCount / itemsPerPage);
+      const pag = {
+        previous: 0,
+        current: 1,
+        next: 2,
+        pages,
+        lastDataPage,
+        itemsPerPage,
+        itemsCount,
+        lastId: lastCBId,
+      };
+      setPagination(pag);
+    } else {
+      setPagination(pagDefault);
+    }
+  };
 
   const loadBatch = async (batchId: number) => {
     const batchList = new Array<CoffeeBatchType>();
@@ -126,6 +148,7 @@ export const List = () => {
       for (let i = 0; i < cbData.length; i += 1) {
         loadBatch(cbData[i].id);
       }
+      confPagination(cbData, 10);
     }
   };
 

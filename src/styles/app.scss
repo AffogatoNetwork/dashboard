@@ -381,6 +381,12 @@ span {
       color: $white;
     }
   }
+  .page-item:hover {
+    cursor: pointer;
+  }
+  .page-item.disabled {
+    cursor: not-allowed;
+  }
   span {
     font-size: 16px;
   }

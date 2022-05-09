@@ -157,5 +157,13 @@
     "prettier",
     "react-hooks",
     "@typescript-eslint"
+  ],
+  "overrides": [
+    {
+      "files": ["*.ts", "*.tsx"],
+      "rules": {
+        "no-undef": "off"
+      }
+    }
   ]
 }
