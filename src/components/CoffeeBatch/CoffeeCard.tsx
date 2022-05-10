@@ -3,7 +3,7 @@ import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
 import "../../styles/coffeecard.scss";
-import Logo from "../../assets/logo.png";
+import Logo from "../../assets/affogato-horizontal.png";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
 import { AttributesType, CoffeeBatchType } from "../common/types";
@@ -23,10 +23,10 @@ const CoffeeCard = () => {
           .then((data) => {
             const attrs = new Array<AttributesType>();
             const cupProfile = {
-              aroma: 0,
-              notes: 0,
-              body: 0,
-              acidity: 0,
+              aroma: "-",
+              notes: "-",
+              body: "-",
+              acidity: "-",
             };
             for (let i = 0; i < data.attributes.length; i += 1) {
               if (data.attributes[i].trait_type.toLowerCase() !== "profile") {
@@ -104,70 +104,75 @@ const CoffeeCard = () => {
   return (
     <div className="coffeebatch">
       <Card>
-        <Card.Header>
-          <Image src={Logo} className="nft" />
-        </Card.Header>
+        <Card.Header />
         <Card.Body>
           <div className="batch-detail">
             <div className="info">
-              <div className="name">
-                <span>{coffeeBatch.name}</span>
-              </div>
-              <div className="description">
-                <span>{coffeeBatch.description}</span>
-              </div>
+              <h6 className="title">Biografía</h6>
+              <span className="text-light">{coffeeBatch.description}</span>
             </div>
             <div className="location">
-              <h6>Ubicación:</h6>
-              <span>
-                {getAttribute("village")}, {getAttribute("region")},
+              <h6 className="title">Región</h6>
+              <span className="text-light">
+                {getAttribute("village")}, {getAttribute("region")},{" "}
                 {getAttribute("country")}
               </span>
             </div>
           </div>
-          <div className="detail">
-            <h5>Detalle de Lote</h5>
-            <div className="items">
-              <div className="item">
-                <h6>Altitud:</h6>
-                <span>{getAttribute("altitud")}</span>
-              </div>
-              <div className="item">
-                <h6>Variedad:</h6>
-                <span>{getAttribute("variety")}</span>
-              </div>
-              <div className="item">
-                <h6>Proceso:</h6>
-                <span>{getAttribute("process")}</span>
-              </div>
-              <div className="item">
-                <h6>Tamaño:</h6>
-                <span>{getAttribute("size")}</span>
+          <div className="box-container">
+            <div className="box detail">
+              <div className="items">
+                <div className="item">
+                  <h6 className="title">Altitud</h6>
+                  <span className="text-light">{getAttribute("altitud")}</span>
+                </div>
+                <div className="item">
+                  <h6 className="title">Variedad</h6>
+                  <span className="text-light">{getAttribute("variety")}</span>
+                </div>
+                <div className="item">
+                  <h6 className="title">Proceso</h6>
+                  <span className="text-light">{getAttribute("process")}</span>
+                </div>
+                <div className="item">
+                  <h6 className="title">Tamaño</h6>
+                  <span className="text-light">{getAttribute("size")}</span>
+                </div>
               </div>
             </div>
-          </div>
-          <div className="cupprofile">
-            <h5>Perfil de Taza</h5>
-            <div className="items">
-              <div className="item">
-                <h6>Aroma:</h6>
-                <span>{coffeeBatch.cupProfile.aroma}</span>
-              </div>
-              <div className="item">
-                <h6>Cuerpo:</h6>
-                <span>{coffeeBatch.cupProfile.body}</span>
-              </div>
-              <div className="item">
-                <h6>Acidez:</h6>
-                <span>{coffeeBatch.cupProfile.acidity}</span>
-              </div>
-              <div className="item">
-                <h6>Nota:</h6>
-                <span>{coffeeBatch.cupProfile.notes}</span>
+            <div className="box cupprofile">
+              <div className="items">
+                <div className="item">
+                  <h6 className="title">Aroma</h6>
+                  <span className="text-light">
+                    {coffeeBatch.cupProfile.aroma}
+                  </span>
+                </div>
+                <div className="item">
+                  <h6 className="title">Cuerpo</h6>
+                  <span className="text-light">
+                    {coffeeBatch.cupProfile.body}
+                  </span>
+                </div>
+                <div className="item">
+                  <h6 className="title">Acidez</h6>
+                  <span className="text-light">
+                    {coffeeBatch.cupProfile.acidity}
+                  </span>
+                </div>
+                <div className="item">
+                  <h6 className="title">Nota</h6>
+                  <span className="text-light">
+                    {coffeeBatch.cupProfile.notes}
+                  </span>
+                </div>
               </div>
             </div>
           </div>
         </Card.Body>
+        <Card.Footer>
+          <Image src={Logo} className="logo" />
+        </Card.Footer>
       </Card>
     </div>
   );

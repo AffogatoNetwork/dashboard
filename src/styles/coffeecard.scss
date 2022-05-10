@@ -3,24 +3,29 @@
 
 .coffeebatch {
   display: flex;
-  height: 100%;
+  height: 90%;
   justify-content: center;
   padding: 3rem 0rem;
-  h6 {
-    font-size: 1rem;
-  }
-  .nft {
-    height: 6rem;
-    width: 6rem;
+  .logo {
+    height: 2rem;
   }
   .card {
-    width: 35%;
-
+    width: 25rem;
+    border-radius: 10px;
     &-header {
       display: flex;
       flex-direction: column;
       align-items: center;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
       padding: 1rem;
+      height: 4rem;
+      background-image: url("../assets/coffee.jpg");
+    }
+    &-footer {
+      display: flex;
+      justify-content: center;
+      padding: 0.8rem;
     }
   }
   .batch-detail {
@@ -28,22 +33,60 @@
   }
   .info {
     display: flex;
+    flex-direction: column;
     width: 100%;
     margin: 0.5rem 0rem;
   }
   .location {
     margin: 0.5rem 0rem;
   }
-  .detail {
-    margin: 1.5rem 0rem;
+  .box-container {
+    display: flex;
+    flex-direction: column;
+  }
+  .box {
+    padding: 1.5rem;
+    color: #9b9b9d;
+    background: repeating-linear-gradient(45deg,#fff,#fff 20px,#fcfcfc 20px,#fcfcfc 40px);
+    border-radius: 20px/30px;
+    box-shadow: 0 0 15px -2px rgb(0 0 0 / 20%);
+    outline: 3px solid $light;
+    outline-offset: -12px;
+    position: relative;
+    width: 100%;
+  }
+  .box:before {
+    content: "Detalle de Lote";
+    color: $light;
+    background: $white;
+    position: absolute;
+    margin-top: 10px;
+    padding: 0px 15px;
+    top: -10px;
+    left: 10%;
   }
   .cupprofile {
     margin: 1.5rem 0rem;
   }
+  .cupprofile:before { 
+    content: "Perfil de Taza";
+  }
   .items {
     display: grid;
+    gap: 0.7rem;
     grid-template-columns: auto auto;
     margin-top: 1rem;
+  }
+  .item {
+    display: flex;
+    flex-direction: column;
+  }
+  .title {
+    font-size: 0.9rem;
+  }
+  .text-light {
+    padding: 0rem;
+    font-size: 1rem;
   }
   .scitem {
     display: flex;

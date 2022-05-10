@@ -102,10 +102,10 @@ export const List = () => {
       .then((jsonData) => {
         const attrs = new Array<AttributesType>();
         const cupProfile = {
-          aroma: 0,
-          notes: 0,
-          body: 0,
-          acidity: 0,
+          aroma: "-",
+          notes: "-",
+          body: "-",
+          acidity: "-",
         };
         for (let i = 0; i < jsonData.attributes.length; i += 1) {
           if (jsonData.attributes[i].trait_type.toLowerCase() !== "profile") {

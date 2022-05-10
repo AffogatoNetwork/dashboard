@@ -11,13 +11,13 @@ export type PaginationType = {
 export type AttributesType = {
   title: string;
   value: any;
-}
+};
 
 export type CupProfileType = {
-  aroma: number;
-  notes: number;
-  body: number;
-  acidity: number;
+  aroma: string;
+  notes: string;
+  body: string;
+  acidity: string;
 };
 
 export type CoffeeBatchType = {
