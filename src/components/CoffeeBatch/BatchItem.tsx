@@ -64,7 +64,10 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
         </div>
       </td>
       <td className="batch">
-        <span>{getAttribute("altitude")} MSNM</span>
+        <span>
+          {getAttribute("altitude")}{" "}
+          {getAttribute("altitude") === "-" ? "" : "MSNM"}
+        </span>
       </td>
       <td>
         <span>{getAttribute("variety")}</span>

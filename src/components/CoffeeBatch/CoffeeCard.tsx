@@ -127,7 +127,8 @@ const CoffeeCard = () => {
                 <div className="item">
                   <h6 className="title">Altitud</h6>
                   <span className="text-light">
-                    {getAttribute("altitude")} MSNM
+                    {getAttribute("altitude")}{" "}
+                    {getAttribute("altitude") === "-" ? "" : "MSNM"}
                   </span>
                 </div>
                 <div className="item">
