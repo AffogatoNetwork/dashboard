@@ -30,6 +30,7 @@ export const List = () => {
     Array<CoffeeBatchType>
   >([]);
   const [pagination, setPagination] = useState(pagDefault);
+  const [loadingIpfs, setLoadingIpfs] = useState(true);
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -155,6 +156,7 @@ export const List = () => {
         await loadBatch(cbData[i].id);
       }
       confPagination(cbData, 5);
+      setLoadingIpfs(false);
     }
   };
 
@@ -166,6 +168,7 @@ export const List = () => {
       console.log(error);
     },
     onCompleted: () => {
+      setLoadingIpfs(true);
       loadBatchesData(data.coffeeBatches);
     },
   });
@@ -177,7 +180,7 @@ export const List = () => {
           <h2>Lotes de café</h2>
         </Card.Header>
         <Card.Body>
-          {loading ? (
+          {loading || loadingIpfs ? (
             <Loading label="Cargando..." />
           ) : (
             <Table className="coffeebatches">

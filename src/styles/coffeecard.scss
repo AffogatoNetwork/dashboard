@@ -3,9 +3,9 @@
 
 .coffeebatch {
   display: flex;
-  height: 90%;
   justify-content: center;
   padding: 3rem 0rem;
+  overflow-y: scroll;
   .logo {
     height: 2rem;
   }
