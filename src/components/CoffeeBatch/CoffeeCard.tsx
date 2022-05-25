@@ -126,7 +126,9 @@ const CoffeeCard = () => {
               <div className="items">
                 <div className="item">
                   <h6 className="title">Altitud</h6>
-                  <span className="text-light">{getAttribute("altitud")}</span>
+                  <span className="text-light">
+                    {getAttribute("altitude")} MSNM
+                  </span>
                 </div>
                 <div className="item">
                   <h6 className="title">Variedad</h6>
@@ -138,7 +140,7 @@ const CoffeeCard = () => {
                 </div>
                 <div className="item">
                   <h6 className="title">Tamaño</h6>
-                  <span className="text-light">{getAttribute("size")}</span>
+                  <span className="text-light">{getAttribute("size")} Lbs</span>
                 </div>
               </div>
             </div>

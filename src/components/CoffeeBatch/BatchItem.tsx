@@ -64,7 +64,7 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
         </div>
       </td>
       <td className="batch">
-        <span>{getAttribute("altitud")} m</span>
+        <span>{getAttribute("altitude")} MSNM</span>
       </td>
       <td>
         <span>{getAttribute("variety")}</span>
@@ -73,7 +73,7 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
         <span>{getAttribute("process")}</span>
       </td>
       <td>
-        <span>{getAttribute("size")}</span>
+        <span>{getAttribute("size")} Lbs</span>
       </td>
       <td className="cupprofile">
         <span>{coffeeBatch.cupProfile.aroma}</span>
