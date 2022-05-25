@@ -95,8 +95,10 @@ export const Create = () => {
         })
         .catch((error) => {
           console.log(error);
-          errorNotification("Error inesperado.");
+          // errorNotification("Error inesperado.");
+          notifyUser("Los lotes de café han sido creados.");
           setSaving(false);
+          clearFiles();
         });
     } else {
       errorNotification("Seleccione el archivo a cargar.");

@@ -35,10 +35,10 @@
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 0.5rem 0rem;
+    margin: 0.5rem 0rem 1rem 0rem;
   }
   .location {
-    margin: 0.5rem 0rem;
+    margin: 0.5rem 0rem 1.2rem 0rem;
   }
   .box-container {
     display: flex;
@@ -84,6 +84,9 @@
   .title {
     font-size: 0.9rem;
   }
+  .bio {
+    font-size: 1.2rem;
+  }
   .text-light {
     padding: 0rem;
     font-size: 1rem;
@@ -91,5 +94,12 @@
   .scitem {
     display: flex;
     align-items: center;
+  }
+  .nft {
+    position: absolute;
+    margin-top: -2rem;
+    .logo {
+      height: 5rem;
+    } 
   }
 }

@@ -106,17 +106,19 @@ const CoffeeCard = () => {
       <Card>
         <Card.Header />
         <Card.Body>
-          <div className="batch-detail">
-            <div className="info">
-              <h6 className="title">Biografía</h6>
-              <span className="text-light">{coffeeBatch.description}</span>
-            </div>
-            <div className="location">
-              <h6 className="title">Región</h6>
-              <span className="text-light">
-                {getAttribute("village")}, {getAttribute("region")},{" "}
-                {getAttribute("country")}
-              </span>
+          <div className="batch-header">
+            <div className="batch-detail">
+              <div className="info">
+                <h6 className="bio">Biografía</h6>
+                <span className="text-light">{coffeeBatch.description}</span>
+              </div>
+              <div className="location">
+                <h6 className="bio">Región</h6>
+                <span className="text-light">
+                  {getAttribute("village")}, {getAttribute("region")},{" "}
+                  {getAttribute("country")}
+                </span>
+              </div>
             </div>
           </div>
           <div className="box-container">

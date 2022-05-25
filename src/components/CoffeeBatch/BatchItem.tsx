@@ -1,13 +1,15 @@
 import React from "react";
 import QRCode from "react-qr-code";
-import { CoffeeBatchType } from "../common/types";
+import { CoffeeBatchType, PaginationType } from "../common/types";
 
 type props = {
   index: number;
   coffeeBatch: CoffeeBatchType;
+  pagination: PaginationType;
 };
 
-const BatchItem = ({ index, coffeeBatch }: props) => {
+const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
+  const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
   const batchUrl = window.location.origin
     .concat("/batch/")
     .concat(coffeeBatch.ipfsHash);
@@ -32,17 +34,24 @@ const BatchItem = ({ index, coffeeBatch }: props) => {
   };
 
   return (
-    <tr key={coffeeBatch.id} className={index % 2 === 0 ? "even" : "odd"}>
+    <tr
+      key={coffeeBatch.id}
+      className={pagination.current === itemPage ? "show" : "hide"}
+    >
       <td className="main">
         <div className="qrcode">
           <QRCode value={batchUrl} size={60} />
         </div>
         <div className="info">
-          <div className="item">
+          {/* <div className="item">
             <span>{coffeeBatch.name}</span>
-          </div>
+          </div> */}
           <div className="item">
-            <span>{coffeeBatch.description}</span>
+            {coffeeBatch.description.length > 80 ? (
+              <span>{coffeeBatch.description.slice(0, 79)}...</span>
+            ) : (
+              <span>{coffeeBatch.description}</span>
+            )}
           </div>
         </div>
       </td>

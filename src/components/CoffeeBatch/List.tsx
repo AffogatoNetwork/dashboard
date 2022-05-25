@@ -60,7 +60,12 @@ export const List = () => {
 
   const batchesQuery = gql`
     query getCoffeeBatches($owner: String!) {
-      coffeeBatches(where: { owner: $owner }) {
+      coffeeBatches(
+        where: {
+          owner: $owner
+          id_not_in: ["3", "4", "5", "6", "7", "8", "10", "11"]
+        }
+      ) {
         id
       }
       ownerBalance(id: $owner) {
@@ -92,7 +97,7 @@ export const List = () => {
   };
 
   const loadBatch = async (batchId: number) => {
-    const batchList = new Array<CoffeeBatchType>();
+    const batchList = coffeeBatchList;
     // @ts-ignore
     const ipfsHash = await cbContract.tokenURI(BigNumber.from(batchId));
     const url = ipfsUrl.concat(ipfsHash);
@@ -143,17 +148,18 @@ export const List = () => {
       });
   };
 
-  const loadBatchesData = (cbData: any) => {
+  const loadBatchesData = async (cbData: any) => {
     if (cbContract) {
+      setCoffeeBatchList([]);
       for (let i = 0; i < cbData.length; i += 1) {
-        loadBatch(cbData[i].id);
+        await loadBatch(cbData[i].id);
       }
-      confPagination(cbData, 10);
+      confPagination(cbData, 5);
     }
   };
 
   const { loading, data, error } = useQuery(batchesQuery, {
-    variables: { owner: "0x71cea4383f7faddd1f17c960de7b6a32bfdaf139" },
+    variables: { owner: "0x13248b47b0ff1c04d2a054b662c850dc05d47b4d" },
     fetchPolicy: "no-cache",
     notifyOnNetworkStatusChange: true,
     onError: () => {
@@ -189,7 +195,12 @@ export const List = () => {
               </thead>
               <tbody>
                 {coffeeBatchList.map((batch, index) => (
-                  <BatchItem key={index} index={0} coffeeBatch={batch} />
+                  <BatchItem
+                    key={index}
+                    index={index}
+                    coffeeBatch={batch}
+                    pagination={pagination}
+                  />
                 ))}
               </tbody>
             </Table>

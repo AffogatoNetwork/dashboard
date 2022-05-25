@@ -26,8 +26,11 @@
     }
     .th {
       &-1 {
-        width: 20%;
+        width: 25%;
       }
+    }
+    tr.hide {
+      display: none;
     }
     .even {
       background-color: #964a000a;
