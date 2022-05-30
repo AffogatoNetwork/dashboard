@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/esm/Card";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -7,8 +7,9 @@ import Image from "react-bootstrap/esm/Image";
 import Tabs from "react-bootstrap/esm/Tabs";
 import Tab from "react-bootstrap/esm/Tab";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.png";
+import User from "../assets/user.png";
 import { useAuthContext } from "../states/AuthContext";
+import CoopLogo from "./common/CoopLogo";
 import Loading from "./Loading";
 import FormInput from "./common/FormInput";
 import {
@@ -25,6 +26,7 @@ const Signup = () => {
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
   const [activeTab, setActiveTab] = useState("farmer");
+  const [selectedImage, setSelectedImage] = useState("");
   const [userName, setUserName] = useState("");
   const [farmerId, setFarmerId] = useState("");
   const [userNameError, setUserNameError] = useState("");
@@ -33,14 +35,33 @@ const Signup = () => {
   const [currentCoop, setCurrentCoop] = useState<CooperativeType>(
     CooperativeList[0]
   );
+  const hiddenFileInput = useRef(null);
 
   const cleanFields = () => {
     setUserName("");
     setFarmerId("");
+    setSelectedImage("");
     setCurrentCoop(CooperativeList[0]);
   };
 
+  const setCooperative = () => {
+    const location = window.location.host;
+    if (location.match("loca") !== null) {
+      setCurrentCoop(CooperativeList[1]);
+    }
+    if (location.match("copranil") !== null) {
+      setCurrentCoop(CooperativeList[2]);
+    }
+    if (location.match("comsa") !== null) {
+      setCurrentCoop(CooperativeList[3]);
+    }
+    if (location.match("proexo") !== null) {
+      setCurrentCoop(CooperativeList[4]);
+    }
+  };
+
   useEffect(() => {
+    setCooperative();
     const checkAccount = () => {
       if (state.accountCreated) {
         notifyUser("La cuenta ha sido creada!");
@@ -100,6 +121,21 @@ const Signup = () => {
     }
   };
 
+  const handleOnImageChange = (event: any) => {
+    if (event.target.files !== null) {
+      setSelectedImage(URL.createObjectURL(event.target.files[0]));
+    }
+  };
+
+  const handleClick = (event: any) => {
+    if (hiddenFileInput) {
+      // @ts-ignore
+      hiddenFileInput.current.click();
+    } else {
+      console.log(event);
+    }
+  };
+
   const handleUserInputChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
@@ -140,6 +176,23 @@ const Signup = () => {
   const RenderForm = () => (
     <Form className="form">
       <Form.Group className="mb-3 input-group">
+        {activeTab === "farmer" && (
+          <>
+            <Image
+              src={selectedImage !== "" ? selectedImage : User}
+              roundedCircle
+              className="profile-pic"
+              onClick={handleClick}
+            />
+            <Form.Control
+              type="file"
+              placeholder="Seleccione imagen."
+              onChange={handleOnImageChange}
+              ref={hiddenFileInput}
+              style={{ display: "none" }}
+            />
+          </>
+        )}
         <FormInput
           label="Correo electrónico o No. Celular"
           value={userName}
@@ -200,7 +253,7 @@ const Signup = () => {
       <Card className="auth-card">
         <Card.Body>
           <div className="header">
-            <Image className="logo" src={Logo} />
+            <CoopLogo className="logo" />
             <h3>{state.accountCreated ? "Cuenta Creada" : "Nueva Cuenta"}</h3>
           </div>
           {!state.accountCreated ? (

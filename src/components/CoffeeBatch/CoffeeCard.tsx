@@ -37,15 +37,14 @@ const CoffeeCard = () => {
               } else {
                 const cupp = data.attributes[i].value;
                 for (let j = 0; j < cupp.length; j += 1) {
-                  const { key, val } = cupp[j];
-                  if (key === "aroma") {
-                    cupProfile.aroma = val;
-                  } else if (key === "body") {
-                    cupProfile.body = val;
-                  } else if (key === "notes") {
-                    cupProfile.notes = val;
-                  } else if (key === "acidity") {
-                    cupProfile.acidity = val;
+                  if (j === 0) {
+                    cupProfile.aroma = cupp[j].aroma;
+                  } else if (j === 2) {
+                    cupProfile.body = cupp[j].body;
+                  } else if (i === 1) {
+                    cupProfile.notes = cupp[j].notes;
+                  } else if (j === 3) {
+                    cupProfile.acidity = cupp[j].acidity;
                   }
                 }
               }
@@ -69,7 +68,7 @@ const CoffeeCard = () => {
       }
     };
     load();
-  });
+  }, [ipfsHash]);
 
   const sanitaze = (value: string): string => {
     if (typeof value !== "number") {

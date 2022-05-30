@@ -201,6 +201,16 @@ span {
   align-items: center;
   justify-content: center;
   
+  .profile-pic {
+    height: 130px;
+    width: 130px;
+    align-self: center;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+  }
+  .profile-pic:hover {
+    cursor: pointer;
+  }
   .auth-method {
     color: $light;
     font-size: 14px;
@@ -236,8 +246,12 @@ span {
     flex-direction: column;
     align-items: center;
     .logo {
-      height: 45px;
-      width: 40px;
+      height: 7.5rem;
+      width: 7.5rem;
+    }
+    .logo-affogato {
+      height: 5rem;
+      width: 5rem;
     }
     h3 {
       margin-top: 10px;
@@ -276,8 +290,18 @@ span {
     margin: 5rem 0rem;
   }
   .logo {
-    height: 50px;
-    width: 50px;
+    height: 5rem;
+    width: 5rem;
+  }
+  .logo-affogato {
+    height: 4.5rem;
+    width: 4.5rem;
+  }
+  .logo:hover {
+    cursor: pointer;
+  }
+  .logo-affogato:hover {
+    cursor: pointer;
   }
   .navbar-nav {
     display: flex;

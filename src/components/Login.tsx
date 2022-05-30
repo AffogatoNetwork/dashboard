@@ -2,10 +2,9 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/Form";
-import Image from "react-bootstrap/esm/Image";
 import { useNavigate } from "react-router-dom";
-import Logo from "../assets/logo.png";
 import { useAuthContext } from "../states/AuthContext";
+import CoopLogo from "./common/CoopLogo";
 import FormInput from "./common/FormInput";
 import {
   isValidCellphone,
@@ -62,7 +61,7 @@ const Login = () => {
       <Card className="auth-card">
         <Card.Body>
           <div className="header">
-            <Image className="logo" src={Logo} />
+            <CoopLogo className="logo" />
             <h3>Accede a tu Cuenta</h3>
           </div>
           <Form className="form">

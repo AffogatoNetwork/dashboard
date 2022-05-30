@@ -83,11 +83,13 @@ export const Create = () => {
       );
       fetch(url, {
         method: "POST",
+        headers: {
+          "access-control-allow-origin": "*",
+        },
         body: formData,
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log("---- Resp -----");
           console.log(json);
           notifyUser("Los lotes de café han sido creados.");
           setSaving(false);

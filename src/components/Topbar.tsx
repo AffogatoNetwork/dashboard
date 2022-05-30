@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from "react";
 import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
-import Image from "react-bootstrap/esm/Image";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
 import { FaHome, FaPencilAlt, FaPowerOff, FaUserAlt } from "react-icons/fa";
-import Logo from "../assets/logo.png";
+import CoopLogo from "./common/CoopLogo";
 import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
 
@@ -35,8 +34,8 @@ const Sidebar = () => {
     <Navbar bg="primary" variant="dark" className="topbar">
       <Container>
         <Nav className="brand">
-          <Navbar.Brand href="#home">
-            <Image src={Logo} className="logo" />
+          <Navbar.Brand onClick={() => navigate("/list")}>
+            <CoopLogo className="logo" />
           </Navbar.Brand>
         </Nav>
         <Nav className="buttons">
