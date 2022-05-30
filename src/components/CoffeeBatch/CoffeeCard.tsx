@@ -6,7 +6,7 @@ import "../../styles/coffeecard.scss";
 import Logo from "../../assets/affogato-horizontal.png";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
-import { AttributesType, CoffeeBatchType } from "../common/types";
+import { CoffeeBatchType } from "../common/types";
 import { ipfsUrl } from "../../utils/constants";
 
 const CoffeeCard = () => {
@@ -20,42 +20,42 @@ const CoffeeCard = () => {
         const url = ipfsUrl.concat(ipfsHash);
         fetch(url)
           .then((response) => response.json())
-          .then((data) => {
-            const attrs = new Array<AttributesType>();
-            const cupProfile = {
-              aroma: "-",
-              notes: "-",
-              body: "-",
-              acidity: "-",
-            };
-            for (let i = 0; i < data.attributes.length; i += 1) {
-              if (data.attributes[i].trait_type.toLowerCase() !== "profile") {
-                attrs.push({
-                  title: data.attributes[i].trait_type,
-                  value: data.attributes[i].value,
-                });
-              } else {
-                const cupp = data.attributes[i].value;
-                for (let j = 0; j < cupp.length; j += 1) {
-                  if (j === 0) {
-                    cupProfile.aroma = cupp[j].aroma;
-                  } else if (j === 2) {
-                    cupProfile.body = cupp[j].body;
-                  } else if (i === 1) {
-                    cupProfile.notes = cupp[j].notes;
-                  } else if (j === 3) {
-                    cupProfile.acidity = cupp[j].acidity;
-                  }
-                }
+          .then((jsonData) => {
+            let farmer = {};
+            let farm = {};
+            let batch = {};
+            let exportBatch = {};
+            let cupProfile = {};
+            for (let i = 0; i < jsonData.attributes.length; i += 1) {
+              const traitType = jsonData.attributes[i].trait_type.toLowerCase();
+              if (traitType === "farmer") {
+                [farmer] = jsonData.attributes[i].value;
+              }
+              if (traitType === "farm") {
+                [farm] = jsonData.attributes[i].value;
+              }
+              if (traitType === "batch") {
+                [batch] = jsonData.attributes[i].value;
+              }
+              if (traitType === "export") {
+                [exportBatch] = jsonData.attributes[i].value;
+              }
+              if (traitType === "profile") {
+                [cupProfile] = jsonData.attributes[i].value;
               }
             }
             const coffeeB = {
               id: 0,
-              name: data.name,
-              description: data.description,
-              image: data.image,
+              name: jsonData.name,
+              description: jsonData.description,
+              image: "https://gateway.pinata.cloud/ipfs/".concat(
+                jsonData.image
+              ),
               ipfsHash,
-              attributes: attrs,
+              farmer,
+              farm,
+              batch,
+              exportBatch,
               cupProfile,
             };
             setCoffeeBatch(coffeeB);
@@ -70,28 +70,6 @@ const CoffeeCard = () => {
     load();
   }, [ipfsHash]);
 
-  const sanitaze = (value: string): string => {
-    if (typeof value !== "number") {
-      if (value !== "undefined" && value.trim() === "") {
-        return "-";
-      }
-    }
-    return value;
-  };
-
-  const getAttribute = (type: string): string => {
-    let attr = "-";
-    if (coffeeBatch !== null) {
-      for (let i = 0; i < coffeeBatch.attributes.length; i += 1) {
-        const title = coffeeBatch.attributes[i].title.toLowerCase();
-        if (title === type) {
-          attr = sanitaze(coffeeBatch.attributes[i].value);
-        }
-      }
-    }
-    return attr;
-  };
-
   if (loading) {
     return <Loading label="Cargando..." />;
   }
@@ -102,74 +80,37 @@ const CoffeeCard = () => {
 
   return (
     <div className="coffeebatch">
-      <Card>
-        <Card.Header />
+      <Card className="general">
+        <Card.Header>
+          <Image src={coffeeBatch.image} className="nft" />
+        </Card.Header>
         <Card.Body>
           <div className="batch-header">
             <div className="batch-detail">
               <div className="info">
-                <h6 className="bio">Biografía</h6>
-                <span className="text-light">{coffeeBatch.description}</span>
+                <h6 className="bio">Productor</h6>
+                <span className="text-light">Ana Lissett Garcia Mejia</span>
               </div>
-              <div className="location">
-                <h6 className="bio">Región</h6>
+              <div className="info">
+                <h6 className="bio">Biografía</h6>
                 <span className="text-light">
-                  {getAttribute("village")}, {getAttribute("region")},{" "}
-                  {getAttribute("country")}
+                  Te presentamos a Ana Garcia, él es de la finca La Lesquinada
+                  en Corquín, Copan. Él y su familia se han dedicado al rubro
+                  del café por muchos años. Si lo has logrado probar las
+                  variedades Bourbon e Icatu parainema orgullosamente provienen
+                  de su finca.
                 </span>
               </div>
-            </div>
-          </div>
-          <div className="box-container">
-            <div className="box detail">
-              <div className="items">
-                <div className="item">
-                  <h6 className="title">Altitud</h6>
-                  <span className="text-light">
-                    {getAttribute("altitude")}{" "}
-                    {getAttribute("altitude") === "-" ? "" : "MSNM"}
-                  </span>
-                </div>
-                <div className="item">
-                  <h6 className="title">Variedad</h6>
-                  <span className="text-light">{getAttribute("variety")}</span>
-                </div>
-                <div className="item">
-                  <h6 className="title">Proceso</h6>
-                  <span className="text-light">{getAttribute("process")}</span>
-                </div>
-                <div className="item">
-                  <h6 className="title">Tamaño</h6>
-                  <span className="text-light">{getAttribute("size")} Lbs</span>
-                </div>
+              <div className="location">
+                <h6 className="bio">Historia de Finca</h6>
+                <span className="text-light">{coffeeBatch.farm.story}</span>
               </div>
-            </div>
-            <div className="box cupprofile">
-              <div className="items">
-                <div className="item">
-                  <h6 className="title">Aroma</h6>
-                  <span className="text-light">
-                    {coffeeBatch.cupProfile.aroma}
-                  </span>
-                </div>
-                <div className="item">
-                  <h6 className="title">Cuerpo</h6>
-                  <span className="text-light">
-                    {coffeeBatch.cupProfile.body}
-                  </span>
-                </div>
-                <div className="item">
-                  <h6 className="title">Acidez</h6>
-                  <span className="text-light">
-                    {coffeeBatch.cupProfile.acidity}
-                  </span>
-                </div>
-                <div className="item">
-                  <h6 className="title">Nota</h6>
-                  <span className="text-light">
-                    {coffeeBatch.cupProfile.notes}
-                  </span>
-                </div>
+              <div className="location">
+                <h6 className="bio">Ubicación</h6>
+                <span className="text-light">
+                  {coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
+                  {coffeeBatch.farm.country}
+                </span>
               </div>
             </div>
           </div>
@@ -178,6 +119,80 @@ const CoffeeCard = () => {
           <Image src={Logo} className="logo" />
         </Card.Footer>
       </Card>
+      <div className="boxes">
+        <div className="box container">
+          <div className="items">
+            <div className="item">
+              <h6 className="title">Altitud</h6>
+              <span className="text-light">
+                {coffeeBatch.batch.altitude} MSNM
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Variedad</h6>
+              <span className="text-light">{coffeeBatch.batch.variety}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Proceso</h6>
+              <span className="text-light">{coffeeBatch.batch.process}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Tamaño</h6>
+              <span className="text-light">{coffeeBatch.batch.weight} Lbs</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Certificaciones</h6>
+              <span className="text-light">
+                {coffeeBatch.batch.certifications}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Nota</h6>
+              <span className="text-light">{coffeeBatch.batch.note}</span>
+            </div>
+          </div>
+        </div>
+        <div className="box cupprofile">
+          <div className="items">
+            <div className="item">
+              <h6 className="title">Aroma</h6>
+              <span className="text-light">{coffeeBatch.cupProfile.aroma}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Acidez</h6>
+              <span className="text-light">
+                {coffeeBatch.cupProfile.acidity}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Aftertaste</h6>
+              <span className="text-light">
+                {coffeeBatch.cupProfile.aftertaste}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Cuerpo</h6>
+              <span className="text-light">{coffeeBatch.cupProfile.body}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Sabor</h6>
+              <span className="text-light">
+                {coffeeBatch.cupProfile.flavor}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Sweetness</h6>
+              <span className="text-light">
+                {coffeeBatch.cupProfile.sweetness}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Nota</h6>
+              <span className="text-light">{coffeeBatch.cupProfile.note}</span>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   );
 };

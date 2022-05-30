@@ -26,6 +26,9 @@ export type CoffeeBatchType = {
   description: string;
   image: string;
   ipfsHash: string;
-  attributes: Array<AttributesType>;
-  cupProfile: CupProfileType;
+  farmer: any;
+  farm: any;
+  batch: any;
+  exportBatch: any;
+  cupProfile: any;
 };

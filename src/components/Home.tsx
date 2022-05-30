@@ -11,7 +11,7 @@ import Dashboard from "./Dashboard";
 import CoffeeCard from "./CoffeeBatch/CoffeeCard";
 import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
-import { Create, List } from "./CoffeeBatch/index";
+import { Create, List, PublicList } from "./CoffeeBatch/index";
 
 const Home = () => {
   const { authState } = useAuthContext();
@@ -58,6 +58,7 @@ const Home = () => {
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/batch/:ipfsHash" element={<CoffeeCard />} />
+        <Route path="/coffeebatches" element={<PublicList />} />
       </Routes>
     </Container>
   );

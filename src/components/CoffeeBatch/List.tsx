@@ -8,7 +8,7 @@ import Loading from "../Loading";
 import { useAuthContext } from "../../states/AuthContext";
 import { ipfsUrl } from "../../utils/constants";
 import { CustomPagination } from "../common/Pagination";
-import { AttributesType, CoffeeBatchType } from "../common/types";
+import { CoffeeBatchType } from "../common/types";
 import CoffeeBatch from "../../contracts/CoffeBatch.json";
 import BatchItem from "./BatchItem";
 
@@ -64,7 +64,8 @@ export const List = () => {
       coffeeBatches(
         where: {
           owner: $owner
-          id_not_in: ["3", "4", "5", "6", "7", "8", "10", "11"]
+          id_not_in: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
+          id_gte: "75"
         }
       ) {
         id
@@ -106,32 +107,27 @@ export const List = () => {
     fetch(url)
       .then((response) => response.json())
       .then((jsonData) => {
-        const attrs = new Array<AttributesType>();
-        const cupProfile = {
-          aroma: "-",
-          notes: "-",
-          body: "-",
-          acidity: "-",
-        };
+        let farmer = {};
+        let farm = {};
+        let batch = {};
+        let exportBatch = {};
+        let cupProfile = {};
         for (let i = 0; i < jsonData.attributes.length; i += 1) {
-          if (jsonData.attributes[i].trait_type.toLowerCase() !== "profile") {
-            attrs.push({
-              title: jsonData.attributes[i].trait_type,
-              value: jsonData.attributes[i].value,
-            });
-          } else {
-            const cupp = jsonData.attributes[i].value;
-            for (let j = 0; j < cupp.length; j += 1) {
-              if (j === 0) {
-                cupProfile.aroma = cupp[j].aroma;
-              } else if (j === 2) {
-                cupProfile.body = cupp[j].body;
-              } else if (i === 1) {
-                cupProfile.notes = cupp[j].notes;
-              } else if (j === 3) {
-                cupProfile.acidity = cupp[j].acidity;
-              }
-            }
+          const traitType = jsonData.attributes[i].trait_type.toLowerCase();
+          if (traitType === "farmer") {
+            [farmer] = jsonData.attributes[i].value;
+          }
+          if (traitType === "farm") {
+            [farm] = jsonData.attributes[i].value;
+          }
+          if (traitType === "batch") {
+            [batch] = jsonData.attributes[i].value;
+          }
+          if (traitType === "export") {
+            [exportBatch] = jsonData.attributes[i].value;
+          }
+          if (traitType === "profile") {
+            [cupProfile] = jsonData.attributes[i].value;
           }
         }
         const cooffeeB = {
@@ -140,7 +136,10 @@ export const List = () => {
           description: jsonData.description,
           image: jsonData.image,
           ipfsHash,
-          attributes: attrs,
+          farmer,
+          farm,
+          batch,
+          exportBatch,
           cupProfile,
         };
         batchList.push(cooffeeB);
@@ -186,13 +185,18 @@ export const List = () => {
               <thead>
                 <th className="th-1" />
                 <th className="th-2">Ubicación</th>
+                <th className="th-2">Finca</th>
+                <th className="th-2">Certificados</th>
                 <th className="th-3">Altitud</th>
                 <th className="th-3">Variedad</th>
                 <th className="th-3">Proceso</th>
                 <th className="th-4">Tamaño</th>
                 <th className="th-3">Aroma</th>
                 <th className="th-3">Acidez</th>
+                <th className="th-3">Aftertaste</th>
                 <th className="th-3">Cuerpo</th>
+                <th className="th-3">Sabor</th>
+                <th className="th-3">Sweetness</th>
                 <th className="th-4">Nota</th>
               </thead>
               <tbody>

@@ -13,25 +13,6 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
   const batchUrl = window.location.origin
     .concat("/batch/")
     .concat(coffeeBatch.ipfsHash);
-  const sanitaze = (value: string): string => {
-    if (typeof value !== "number") {
-      if (value !== "undefined" && value.trim() === "") {
-        return "-";
-      }
-    }
-    return value;
-  };
-
-  const getAttribute = (type: string): string => {
-    let attr = "-";
-    for (let i = 0; i < coffeeBatch.attributes.length; i += 1) {
-      const title = coffeeBatch.attributes[i].title.toLowerCase();
-      if (title === type) {
-        attr = sanitaze(coffeeBatch.attributes[i].value);
-      }
-    }
-    return attr;
-  };
 
   return (
     <tr
@@ -57,26 +38,28 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
       </td>
       <td>
         <div className="location">
-          <span className="village">{getAttribute("village")}</span>
+          <span className="village">{coffeeBatch.farm.village}</span>
           <span>
-            {getAttribute("region")}, {getAttribute("country")}
+            {coffeeBatch.farm.region}, {coffeeBatch.farm.country}
           </span>
         </div>
       </td>
+      <td>{coffeeBatch.farm.name}</td>
+      <td>{coffeeBatch.farm.certifications}</td>
       <td className="batch">
         <span>
-          {getAttribute("altitude")}{" "}
-          {getAttribute("altitude") === "-" ? "" : "MSNM"}
+          {coffeeBatch.farm.altitude}{" "}
+          {coffeeBatch.farm.altitude === "-" ? "" : "MSNM"}
         </span>
       </td>
       <td>
-        <span>{getAttribute("variety")}</span>
+        <span>{coffeeBatch.batch.variety}</span>
       </td>
       <td>
-        <span>{getAttribute("process")}</span>
+        <span>{coffeeBatch.batch.process}</span>
       </td>
       <td>
-        <span>{getAttribute("size")} Lbs</span>
+        <span>{coffeeBatch.batch.weight} Lbs</span>
       </td>
       <td className="cupprofile">
         <span>{coffeeBatch.cupProfile.aroma}</span>
@@ -85,10 +68,19 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
         <span>{coffeeBatch.cupProfile.acidity}</span>
       </td>
       <td>
+        <span>{coffeeBatch.cupProfile.aftertaste}</span>
+      </td>
+      <td>
         <span>{coffeeBatch.cupProfile.body}</span>
       </td>
       <td>
-        <span>{coffeeBatch.cupProfile.notes}</span>
+        <span>{coffeeBatch.cupProfile.flavor}</span>
+      </td>
+      <td>
+        <span>{coffeeBatch.cupProfile.sweetness}</span>
+      </td>
+      <td>
+        <span>{coffeeBatch.cupProfile.note}</span>
       </td>
     </tr>
   );

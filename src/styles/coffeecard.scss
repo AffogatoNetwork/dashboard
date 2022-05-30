@@ -3,15 +3,26 @@
 
 .coffeebatch {
   display: flex;
-  justify-content: center;
-  padding: 3rem 0rem;
+  padding: 3rem 2rem;
   overflow-y: scroll;
+  @media (max-width: 600px) {
+    flex-direction: column;
+    padding: 3rem 0.5rem;
+  }
   .logo {
     height: 2rem;
+  }
+  .nft {
+    position: absolute;
+    margin-top: 1rem;
+    height: 15rem;
   }
   .card {
     width: 25rem;
     border-radius: 10px;
+    @media (max-width: 600px) {
+      width: auto;
+    }
     &-header {
       display: flex;
       flex-direction: column;
@@ -19,7 +30,7 @@
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       padding: 1rem;
-      height: 4rem;
+      height: 7rem;
       background-image: url("../assets/coffee.jpg");
     }
     &-footer {
@@ -28,8 +39,11 @@
       padding: 0.8rem;
     }
   }
+  .cupprofile {
+    margin-left: 2rem;
+  }
   .batch-detail {
-    margin-bottom: 1.3rem;
+    margin-top: 9rem;
   }
   .info {
     display: flex;
@@ -40,12 +54,24 @@
   .location {
     margin: 0.5rem 0rem 1.2rem 0rem;
   }
+  .boxes {
+    margin-left: 1rem;
+    width: 80%;
+    @media (max-width: 600px) {
+      width: 100%;
+      margin-top: 2rem;
+      margin-left: 0rem;
+    }
+  }
   .box-container {
     display: flex;
     flex-direction: column;
+    height: 100%
   }
   .box {
-    padding: 1.5rem;
+    padding-left: 1.5rem;
+    margin-left: 2rem;
+    margin-bottom: 2rem;
     color: #9b9b9d;
     background: repeating-linear-gradient(45deg,#fff,#fff 20px,#fcfcfc 20px,#fcfcfc 40px);
     border-radius: 20px/30px;
@@ -54,19 +80,26 @@
     outline-offset: -12px;
     position: relative;
     width: 100%;
+    height: 20%;
+    @media (max-width: 600px) {
+      margin-left: 0rem;
+      min-height: 10rem;
+      min-height: 17rem;
+    }
   }
   .box:before {
     content: "Detalle de Lote";
     color: $light;
     background: $white;
     position: absolute;
+    font-size: 18px;
     margin-top: 10px;
     padding: 0px 15px;
     top: -10px;
     left: 10%;
   }
-  .cupprofile {
-    margin: 1.5rem 0rem;
+  .export:before { 
+    content: "Trillado de Café";
   }
   .cupprofile:before { 
     content: "Perfil de Taza";
@@ -74,8 +107,13 @@
   .items {
     display: grid;
     gap: 0.7rem;
-    grid-template-columns: auto auto;
-    margin-top: 1rem;
+    grid-template-columns: auto auto auto auto;
+    padding-top: 3rem;
+    padding-left: 1rem;
+    @media (max-width: 600px) {
+      grid-template-columns: auto auto;
+      padding-left: 0rem;
+    }
   }
   .item {
     display: flex;
@@ -94,12 +132,5 @@
   .scitem {
     display: flex;
     align-items: center;
-  }
-  .nft {
-    position: absolute;
-    margin-top: -2rem;
-    .logo {
-      height: 5rem;
-    } 
   }
 }
