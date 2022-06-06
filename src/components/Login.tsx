@@ -64,7 +64,7 @@ const Login = () => {
             <CoopLogo className="logo" />
             <h3>Accede a tu Cuenta</h3>
           </div>
-          <Form className="form">
+          <Form className="form" onSubmit={() => magicLogin()}>
             <Form.Group className="mb-3 input-group">
               <FormInput
                 label="Correo electrónico o No. Celular"

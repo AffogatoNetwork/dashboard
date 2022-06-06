@@ -61,7 +61,7 @@ export const PublicList = () => {
               la empresa para solicitarla.
             </span>
           </div>
-          <Form className="form">
+          <Form className="form" onSubmit={() => handleOnClick()}>
             <Form.Group className="mb-3 input-group">
               <div className="form-input">
                 <Form.Label>Contraseña de Comprador</Form.Label>
