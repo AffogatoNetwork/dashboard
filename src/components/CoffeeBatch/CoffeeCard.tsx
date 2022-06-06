@@ -170,7 +170,7 @@ const CoffeeCard = () => {
               </span>
             </div>
             <div className="item">
-              <h6 className="title">Aftertaste</h6>
+              <h6 className="title">Post Gusto</h6>
               <span className="text-light">
                 {coffeeBatch.cupProfile.aftertaste}
               </span>
@@ -186,7 +186,7 @@ const CoffeeCard = () => {
               </span>
             </div>
             <div className="item">
-              <h6 className="title">Sweetness</h6>
+              <h6 className="title">Dulzura</h6>
               <span className="text-light">
                 {coffeeBatch.cupProfile.sweetness}
               </span>

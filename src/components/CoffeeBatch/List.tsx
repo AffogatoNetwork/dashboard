@@ -193,10 +193,10 @@ export const List = () => {
                 <th className="th-4">Tamaño</th>
                 <th className="th-3">Aroma</th>
                 <th className="th-3">Acidez</th>
-                <th className="th-3">Aftertaste</th>
+                <th className="th-3">Post Gusto</th>
                 <th className="th-3">Cuerpo</th>
                 <th className="th-3">Sabor</th>
-                <th className="th-3">Sweetness</th>
+                <th className="th-3">Dulzura</th>
                 <th className="th-4">Nota</th>
               </thead>
               <tbody>
