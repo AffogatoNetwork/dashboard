@@ -8,11 +8,13 @@ import Loading from "../Loading";
 import NotFound from "../NotFound";
 import { CoffeeBatchType } from "../common/types";
 import { ipfsUrl } from "../../utils/constants";
+import { getFarmer } from "../../db/firebase";
 
 const CoffeeCard = () => {
   const { ipfsHash } = useParams();
   const [loading, setLoading] = useState(true);
   const [coffeeBatch, setCoffeeBatch] = useState<CoffeeBatchType | null>(null);
+  const [farmerData, setFarmerData] = useState<any>();
 
   useEffect(() => {
     const load = () => {
@@ -30,6 +32,11 @@ const CoffeeCard = () => {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
               if (traitType === "farmer") {
                 [farmer] = jsonData.attributes[i].value;
+                getFarmer("0xbE810D5F37C63B0aD71ac5537c832ac7bf938612").then(
+                  (result) => {
+                    setFarmerData(result);
+                  }
+                );
               }
               if (traitType === "farm") {
                 [farm] = jsonData.attributes[i].value;
@@ -89,16 +96,14 @@ const CoffeeCard = () => {
             <div className="batch-detail">
               <div className="info">
                 <h6 className="bio">Productor</h6>
-                <span className="text-light">Ana Lissett Garcia Mejia</span>
+                <span className="text-light">
+                  {farmerData && farmerData.fullname}
+                </span>
               </div>
               <div className="info">
                 <h6 className="bio">Biografía</h6>
                 <span className="text-light">
-                  Te presentamos a Ana Garcia, él es de la finca La Lesquinada
-                  en Corquín, Copan. Él y su familia se han dedicado al rubro
-                  del café por muchos años. Si lo has logrado probar las
-                  variedades Bourbon e Icatu parainema orgullosamente provienen
-                  de su finca.
+                  {farmerData && farmerData.bio}
                 </span>
               </div>
               <div className="location">

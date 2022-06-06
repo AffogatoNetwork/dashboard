@@ -88,6 +88,13 @@ const Login = () => {
               >
                 No tienes cuenta? Crea una aquí.
               </Button>
+              <span className="primary">o</span>
+              <Button
+                className="auth-method"
+                onClick={() => navigate("/coffeebatches", { replace: true })}
+              >
+                Accede como comprador.
+              </Button>
             </div>
           </Form>
         </Card.Body>

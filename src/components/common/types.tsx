@@ -32,3 +32,15 @@ export type CoffeeBatchType = {
   exportBatch: any;
   cupProfile: any;
 };
+
+export type FarmerType = {
+  address: string;
+  farmerId: string;
+  fullname: string;
+  bio: string;
+  gender: string;
+  country: string;
+  region: string;
+  village: string;
+  village2: string;
+};

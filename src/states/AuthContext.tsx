@@ -3,8 +3,10 @@ import { Magic } from "magic-sdk";
 import { ethers } from "ethers";
 import emailjs from "@emailjs/browser";
 import { CooperativeType } from "../utils/constants";
+import { FarmerType } from "../components/common/types";
 import CoffeeBatch from "../contracts/CoffeBatch.json";
 import { useContracts } from "../hooks/useContracts";
+import { saveFarmer } from "../db/firebase";
 
 type AuthType = {
   authContext: any;
@@ -19,6 +21,8 @@ type ContextDataType = {
   cooperative: CooperativeType;
   farmerId: string | null;
   isFarmer: boolean;
+  farmerData: FarmerType | null;
+  imageFile: any | null;
 };
 
 const AuthContext = React.createContext<AuthType>({
@@ -156,11 +160,7 @@ export default function AuthProvider({ children }: props) {
     }
   };
 
-  const sendAccountEmail = async (data: ContextDataType) => {
-    // @ts-ignore
-    const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
-    const signer = provider.getSigner();
-    const address = await signer.getAddress();
+  const sendAccountEmail = async (address: string, data: ContextDataType) => {
     let templateId = process.env.REACT_APP_EMAILJS_COOP_TEMPLATE_ID || "";
     if (!data.isFarmer) {
       templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "";
@@ -193,6 +193,17 @@ export default function AuthProvider({ children }: props) {
       );
   };
 
+  const afterSignupAction = async (data: ContextDataType) => {
+    // @ts-ignore
+    const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
+    const signer = provider.getSigner();
+    const address = await signer.getAddress();
+    sendAccountEmail(address, data);
+    if (data.farmerData !== null) {
+      saveFarmer({ ...data.farmerData, address }, data.imageFile);
+    }
+  };
+
   const authContext = useMemo(
     () => ({
       signIn: async (data: ContextDataType) => {
@@ -222,7 +233,7 @@ export default function AuthProvider({ children }: props) {
           await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
         }
         if (await magicSDK.user.isLoggedIn()) {
-          sendAccountEmail(data);
+          afterSignupAction(data);
         } else {
           dispatch({ type: "CREATING_ACCOUNT_ERROR" });
         }

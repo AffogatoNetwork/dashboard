@@ -1,0 +1,108 @@
+@import "./colors";
+@import "./fonts";
+
+.signup {
+  display: flex;
+  height: 100%;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  
+  .img-container {
+    display: flex;
+    justify-content: center;
+  }
+  .profile-pic {
+    height: 115px;
+    width: 115px;
+    align-self: center;
+    margin-top: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .profile-pic:hover {
+    cursor: pointer;
+  }
+  .auth-method {
+    color: $light;
+    font-size: 14px;
+    background-color: transparent;
+    border-color: transparent;
+    width: 70% !important;
+  }
+  .auth-method:hover {
+    cursor: pointer;
+  }
+  .btn {
+    border-radius: 50px;
+    width: 45%;
+  }
+  .btn-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem 0rem;
+  }
+  .cooperative-card {
+    width: 400px;
+  }
+  .farmer-card {
+    width: 900px;
+    .inputs {
+       display: flex;
+       .col-sm-6, .col-md-6, .col-lg-6 {
+         padding-left: 1rem;
+         padding-right: 1rem;
+       }
+    }
+  }
+  .card-body {
+    overflow: hidden;
+    box-shadow: inset 0 4px 0 0 $light;
+    border-radius: 0.625rem;
+  }
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    .logo {
+      height: 7.5rem;
+      width: 7.5rem;
+    }
+    .logo-affogato {
+      height: 5rem;
+      width: 5rem;
+    }
+    h3 {
+      margin-top: 10px;
+      margin-bottom: 10px;
+    }
+  }
+  .account-created {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding-top: 1rem;
+  }
+  .tabs-container {
+    margin-top: 2.2rem;
+  }
+  .dropdown {
+    margin-top: 0.1rem;
+    .btn {
+      border-radius: 3px;
+      height: 2.1rem;
+      width: 100%;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .farmer-card {
+      width: 400px;  
+      .inputs {
+        flex-direction: column;
+      }
+    }
+  }
+}

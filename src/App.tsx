@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter } from "react-router-dom";
 import { ApolloProvider, ApolloClient, InMemoryCache } from "@apollo/client";
+import { CookiesProvider } from "react-cookie";
 import AuthProvider from "./states/AuthContext";
 import contractsContext from "./states/ContractsContext";
 import { useContracts } from "./hooks/useContracts";
@@ -19,11 +20,13 @@ const App = () => {
   return (
     <AuthProvider>
       <contractsContext.Provider value={contracts}>
-        <BrowserRouter>
-          <ApolloProvider client={apolloClient}>
-            <Home />
-          </ApolloProvider>
-        </BrowserRouter>
+        <CookiesProvider>
+          <BrowserRouter>
+            <ApolloProvider client={apolloClient}>
+              <Home />
+            </ApolloProvider>
+          </BrowserRouter>
+        </CookiesProvider>
       </contractsContext.Provider>
     </AuthProvider>
   );
