@@ -526,6 +526,7 @@ const Signup = () => {
                   Crear cuenta
                 </Button>
                 <Button
+                  variant="secondary"
                   className="auth-method"
                   onClick={() => navigate("/login", { replace: true })}
                 >

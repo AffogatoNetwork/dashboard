@@ -30,7 +30,10 @@
     width: 70% !important;
   }
   .auth-method:hover {
+    color: $light;
     cursor: pointer;
+    background-color: white;
+    border-color: white;
   }
   .btn {
     border-radius: 50px;
