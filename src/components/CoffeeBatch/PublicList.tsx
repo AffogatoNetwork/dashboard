@@ -38,7 +38,7 @@ export const PublicList = () => {
   const handleOnClick = () => {
     if (checkPassword()) {
       setPasswordError("");
-      setAuthCookie("is_buyer_auth", 1, { maxAge: 1600 });
+      setAuthCookie("is_buyer_auth", 1, { maxAge: 6900 });
       setAuth(true);
     } else {
       setPasswordError("La constraseña no es correcta");

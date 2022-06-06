@@ -1,0 +1,33 @@
+@import "~bootstrap/scss/bootstrap";
+@import "./app";
+
+.btn-primary {
+  background-color: $primary;
+  border-color: $primary;
+  color: $white;
+}
+.qr-modal {
+  .modal-content {
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .modal-body {
+    display: flex;
+    padding: 0rem;
+    justify-content: center;
+    background-color: transparent;
+  }
+  .modal-footer {
+    display: flex;
+    padding: 0rem;
+    justify-content: center;
+    background-color: transparent;
+    border-color: transparent;
+  }
+  .btn-primary {
+    font-size: 17px;
+    color: white;
+    background-color: transparent;
+    border-color: transparent;    
+  }
+}

@@ -1,4 +1,5 @@
 import React from "react";
+import Button from "react-bootstrap/esm/Button";
 import QRCode from "react-qr-code";
 import { CoffeeBatchType, PaginationType } from "../common/types";
 
@@ -6,9 +7,10 @@ type props = {
   index: number;
   coffeeBatch: CoffeeBatchType;
   pagination: PaginationType;
+  showQrModal: (url: string) => void;
 };
 
-const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
+const BatchItem = ({ index, coffeeBatch, pagination, showQrModal }: props) => {
   const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
   const batchUrl = window.location.origin
     .concat("/batch/")
@@ -21,7 +23,9 @@ const BatchItem = ({ index, coffeeBatch, pagination }: props) => {
     >
       <td className="main">
         <div className="qrcode">
-          <QRCode value={batchUrl} size={60} />
+          <Button className="qrcode-btn" onClick={() => showQrModal(batchUrl)}>
+            <QRCode value={batchUrl} size={60} />
+          </Button>
         </div>
         <div className="info">
           {/* <div className="item">

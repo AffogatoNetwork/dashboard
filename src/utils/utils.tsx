@@ -1,4 +1,11 @@
 import { toast } from "react-toastify";
+import { ethers } from "ethers";
+
+export const getDefaultProvider = () => {
+  const url = "https://rpc.gnosischain.com";
+  const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
+  return customHttpProvider;
+};
 
 export const errorNotification = async (body: string) => {
   toast.error(body, {

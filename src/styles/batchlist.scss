@@ -41,6 +41,11 @@
     }
     .main {
       display: flex;
+      .qrcode-btn {
+        cursor: pointer;
+        background-color: transparent;
+        border-color: transparent;
+      }
       .qrcode {
         width: 4rem;
         height: 4rem;

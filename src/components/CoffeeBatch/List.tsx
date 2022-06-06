@@ -1,9 +1,13 @@
 import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
+import Modal from "react-bootstrap/esm/Modal";
 import Table from "react-bootstrap/esm/Table";
 import { BigNumber, ethers } from "ethers";
 import { useQuery, gql } from "@apollo/client";
 import "../../styles/batchlist.scss";
+import "../../styles/modals.scss";
+import QRCode from "react-qr-code";
 import Loading from "../Loading";
 import { useAuthContext } from "../../states/AuthContext";
 import { ipfsUrl } from "../../utils/constants";
@@ -11,6 +15,9 @@ import { CustomPagination } from "../common/Pagination";
 import { CoffeeBatchType } from "../common/types";
 import CoffeeBatch from "../../contracts/CoffeBatch.json";
 import BatchItem from "./BatchItem";
+import { getDefaultProvider } from "../../utils/utils";
+
+const saveSvgAsPng = require("save-svg-as-png");
 
 const pagDefault = {
   previous: 0,
@@ -31,6 +38,8 @@ export const List = () => {
   >([]);
   const [pagination, setPagination] = useState(pagDefault);
   const [loadingIpfs, setLoadingIpfs] = useState(true);
+  const [showModal, setShowModal] = useState(false);
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -41,6 +50,15 @@ export const List = () => {
           CoffeeBatch.address,
           CoffeeBatch.abi,
           signer
+        );
+        setCbContract(currentCoffeeBatch);
+      } else {
+        const provider = getDefaultProvider();
+        const randomSigner = ethers.Wallet.createRandom().connect(provider);
+        const currentCoffeeBatch = new ethers.Contract(
+          CoffeeBatch.address,
+          CoffeeBatch.abi,
+          randomSigner
         );
         setCbContract(currentCoffeeBatch);
       }
@@ -171,6 +189,41 @@ export const List = () => {
     },
   });
 
+  const showQrModal = (url: string) => {
+    setQrCodeUrl(url);
+    setShowModal(true);
+  };
+
+  const handleOnDownloadClick = () => {
+    saveSvgAsPng.saveSvgAsPng(
+      document.getElementById("current-qr"),
+      "qr-coffeebatch",
+      {
+        scale: 0.5,
+      }
+    );
+  };
+
+  const RenderModal = () => (
+    <Modal
+      show={showModal}
+      size="lg"
+      className="qr-modal"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      onHide={() => setShowModal(false)}
+    >
+      <Modal.Body className="">
+        <QRCode id="current-qr" value={qrCodeUrl} size={600} />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={handleOnDownloadClick}>
+          Descargar
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
+
   return (
     <div className="batch-list">
       <Card className="create-card">
@@ -206,6 +259,7 @@ export const List = () => {
                     index={index}
                     coffeeBatch={batch}
                     pagination={pagination}
+                    showQrModal={showQrModal}
                   />
                 ))}
               </tbody>
@@ -219,6 +273,7 @@ export const List = () => {
           />
         </Card.Footer>
       </Card>
+      {RenderModal()}
     </div>
   );
 };
