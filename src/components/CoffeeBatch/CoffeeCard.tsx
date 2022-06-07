@@ -116,6 +116,10 @@ const CoffeeCard = () => {
                   {coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
                   {coffeeBatch.farm.country}
                 </span>
+                <h6 className="bio mt-2">Altitud</h6>
+                <span className="text-light">
+                  {coffeeBatch.farm.altitude} MSNM
+                </span>
               </div>
             </div>
           </div>
@@ -127,12 +131,6 @@ const CoffeeCard = () => {
       <div className="boxes">
         <div className="box container">
           <div className="items">
-            <div className="item">
-              <h6 className="title">Altitud</h6>
-              <span className="text-light">
-                {coffeeBatch.batch.altitude} MSNM
-              </span>
-            </div>
             <div className="item">
               <h6 className="title">Variedad</h6>
               <span className="text-light">{coffeeBatch.batch.variety}</span>
