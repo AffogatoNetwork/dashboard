@@ -44,8 +44,7 @@ export const List = () => {
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
 
-  // Address need to be change to gnosis chain multicall contract
-  setMulticallAddress(10, "0xD0E99f15B24F265074747B2A1444eB02b9E30422");
+  setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
   useEffect(() => {
     const loadProvider = async () => {
