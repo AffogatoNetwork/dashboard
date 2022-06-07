@@ -235,6 +235,9 @@ export const List = () => {
         <Button variant="primary" onClick={handleOnDownloadClick}>
           Descargar
         </Button>
+        <Button variant="primary" target="_blank" href={qrCodeUrl}>
+          Abrir Enlace
+        </Button>
       </Modal.Footer>
     </Modal>
   );

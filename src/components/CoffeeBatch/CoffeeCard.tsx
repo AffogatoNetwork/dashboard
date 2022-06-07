@@ -22,7 +22,7 @@ const CoffeeCard = () => {
         const url = ipfsUrl.concat(ipfsHash);
         fetch(url)
           .then((response) => response.json())
-          .then((jsonData) => {
+          .then(async (jsonData) => {
             let farmer = {};
             let farm = {};
             let batch = {};
@@ -31,12 +31,12 @@ const CoffeeCard = () => {
             for (let i = 0; i < jsonData.attributes.length; i += 1) {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
               if (traitType === "farmer") {
-                [farmer] = jsonData.attributes[i].value;
-                getFarmer("0xbE810D5F37C63B0aD71ac5537c832ac7bf938612").then(
-                  (result) => {
-                    setFarmerData(result);
-                  }
-                );
+                farmer = await jsonData.attributes[i].value;
+                console.log(farmer);
+                getFarmer(await jsonData.attributes[i].value).then((result) => {
+                  console.log(result);
+                  setFarmerData(result);
+                });
               }
               if (traitType === "farm") {
                 [farm] = jsonData.attributes[i].value;
