@@ -4,6 +4,7 @@ import Card from "react-bootstrap/esm/Card";
 import Modal from "react-bootstrap/esm/Modal";
 import Table from "react-bootstrap/esm/Table";
 import { BigNumber, ethers } from "ethers";
+import { Provider, Contract, setMulticallAddress } from "ethers-multicall";
 import { useQuery, gql } from "@apollo/client";
 import "../../styles/batchlist.scss";
 import "../../styles/modals.scss";
@@ -32,7 +33,9 @@ const pagDefault = {
 export const List = () => {
   const { authState } = useAuthContext();
   const [state] = authState;
-  const [cbContract, setCbContract] = useState<ethers.Contract>();
+  const [currentEthCallProvider, setCurrentEthCallProvider] =
+    useState<Provider | null>(null);
+  const [cbContract, setCbContract] = useState<Contract>();
   const [coffeeBatchList, setCoffeeBatchList] = useState<
     Array<CoffeeBatchType>
   >([]);
@@ -41,26 +44,29 @@ export const List = () => {
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
 
+  // Address need to be change to gnosis chain multicall contract
+  setMulticallAddress(10, "0xD0E99f15B24F265074747B2A1444eB02b9E30422");
+
   useEffect(() => {
     const loadProvider = async () => {
+      let ethcallProvider = null;
+
       if (state.provider !== null) {
-        const signer = state.provider.getSigner();
-        // Set CoffeBatch contracts
-        const currentCoffeeBatch = new ethers.Contract(
-          CoffeeBatch.address,
-          CoffeeBatch.abi,
-          signer
-        );
-        setCbContract(currentCoffeeBatch);
+        ethcallProvider = new Provider(state.provider);
       } else {
         const provider = getDefaultProvider();
         const randomSigner = ethers.Wallet.createRandom().connect(provider);
-        const currentCoffeeBatch = new ethers.Contract(
+        ethcallProvider = new Provider(randomSigner.provider);
+      }
+      if (ethcallProvider !== null) {
+        await ethcallProvider.init();
+        // Set CoffeBatch contracts
+        const currentCoffeeBatch = new Contract(
           CoffeeBatch.address,
-          CoffeeBatch.abi,
-          randomSigner
+          CoffeeBatch.abi
         );
         setCbContract(currentCoffeeBatch);
+        setCurrentEthCallProvider(ethcallProvider);
       }
     };
     loadProvider();
@@ -116,10 +122,8 @@ export const List = () => {
     }
   };
 
-  const loadBatch = async (batchId: number) => {
+  const loadBatch = async (batchId: number, ipfsHash: any) => {
     const batchList = coffeeBatchList;
-    // @ts-ignore
-    const ipfsHash = await cbContract.tokenURI(BigNumber.from(batchId));
     const url = ipfsUrl.concat(ipfsHash);
 
     fetch(url)
@@ -168,8 +172,20 @@ export const List = () => {
   const loadBatchesData = async (cbData: any) => {
     if (cbContract) {
       setCoffeeBatchList([]);
+      const ethcalls = [];
       for (let i = 0; i < cbData.length; i += 1) {
-        await loadBatch(cbData[i].id);
+        const batchCall = await cbContract?.tokenURI(
+          BigNumber.from(cbData[i].id)
+        );
+        ethcalls.push(batchCall);
+      }
+      if (ethcalls.length > 0) {
+        const allCalls = await currentEthCallProvider?.all(ethcalls);
+        if (allCalls) {
+          for (let i = 0; i < allCalls?.length; i += 1) {
+            await loadBatch(cbData[i].id, allCalls[i]);
+          }
+        }
       }
       confPagination(cbData, 5);
       setLoadingIpfs(false);
