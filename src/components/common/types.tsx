@@ -28,6 +28,9 @@ export type CoffeeBatchType = {
   ipfsHash: string;
   farmer: any;
   farm: any;
+  wetMill:any;
+  dryMill:any;
+  certification:any;
   batch: any;
   exportBatch: any;
   cupProfile: any;

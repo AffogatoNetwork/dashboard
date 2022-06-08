@@ -132,6 +132,9 @@ export const List = () => {
         let farm = {};
         let batch = {};
         let exportBatch = {};
+        const wetMill = {};
+        const dryMill = {};
+        const certification = {};
         let cupProfile = {};
         for (let i = 0; i < jsonData.attributes.length; i += 1) {
           const traitType = jsonData.attributes[i].trait_type.toLowerCase();
@@ -159,6 +162,9 @@ export const List = () => {
           ipfsHash,
           farmer,
           farm,
+          wetMill,
+          dryMill,
+          certification,
           batch,
           exportBatch,
           cupProfile,

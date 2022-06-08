@@ -28,6 +28,9 @@ const CoffeeCard = () => {
             let batch = {};
             let exportBatch = {};
             let cupProfile = {};
+            let wetMill = {};
+            let dryMill = {};
+            let certification = {};
             for (let i = 0; i < jsonData.attributes.length; i += 1) {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
               if (traitType === "farmer") {
@@ -50,6 +53,15 @@ const CoffeeCard = () => {
               if (traitType === "profile") {
                 [cupProfile] = jsonData.attributes[i].value;
               }
+              if (traitType === "wet mill") {
+                [wetMill] = jsonData.attributes[i].value;
+              }
+              if (traitType === "dry mill") {
+                [dryMill] = jsonData.attributes[i].value;
+              }
+              if (traitType === "certification") {
+                [certification] = jsonData.attributes[i].value;
+              }
             }
             const coffeeB = {
               id: 0,
@@ -62,6 +74,9 @@ const CoffeeCard = () => {
               farmer,
               farm,
               batch,
+              wetMill,
+              dryMill,
+              certification,
               exportBatch,
               cupProfile,
             };
@@ -129,34 +144,28 @@ const CoffeeCard = () => {
         </Card.Footer>
       </Card>
       <div className="boxes">
-        <div className="box container">
+        <div className="box cupprofile">
           <div className="items">
             <div className="item">
               <h6 className="title">Variedad</h6>
-              <span className="text-light">{coffeeBatch.batch.variety}</span>
+              <span className="text-light">{coffeeBatch.wetMill.variety}</span>
             </div>
             <div className="item">
               <h6 className="title">Proceso</h6>
-              <span className="text-light">{coffeeBatch.batch.process}</span>
+              <span className="text-light">{coffeeBatch.wetMill.process}</span>
             </div>
             <div className="item">
               <h6 className="title">Tamaño</h6>
-              <span className="text-light">{coffeeBatch.batch.weight} Lbs</span>
+              <span className="text-light">
+                {coffeeBatch.dryMill.weight} QQ
+              </span>
             </div>
             <div className="item">
               <h6 className="title">Certificaciones</h6>
               <span className="text-light">
-                {coffeeBatch.batch.certifications}
+                {coffeeBatch.certification.type}
               </span>
             </div>
-            <div className="item">
-              <h6 className="title">Nota</h6>
-              <span className="text-light">{coffeeBatch.batch.note}</span>
-            </div>
-          </div>
-        </div>
-        <div className="box cupprofile">
-          <div className="items">
             <div className="item">
               <h6 className="title">Aroma</h6>
               <span className="text-light">{coffeeBatch.cupProfile.aroma}</span>
@@ -192,6 +201,62 @@ const CoffeeCard = () => {
             <div className="item">
               <h6 className="title">Nota</h6>
               <span className="text-light">{coffeeBatch.cupProfile.note}</span>
+            </div>
+          </div>
+        </div>
+        <div className="box wetMill">
+          <div className="items">
+            <div className="item">
+              <h6 className="title">Instalación</h6>
+              <span className="text-light">{coffeeBatch.wetMill.facility}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Fecha</h6>
+              <span className="text-light">{coffeeBatch.wetMill.date}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Proceso</h6>
+              <span className="text-light">{coffeeBatch.wetMill.process}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Peso</h6>
+              <span className="text-light">{coffeeBatch.wetMill.weight}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Nota</h6>
+              <span className="text-light">{coffeeBatch.wetMill.note}</span>
+            </div>
+          </div>
+        </div>
+        <div className="box dryMill">
+          <div className="items">
+            <div className="item">
+              <h6 className="title">Instalación</h6>
+              <span className="text-light">{coffeeBatch.dryMill.facility}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Fecha</h6>
+              <span className="text-light">{coffeeBatch.dryMill.date}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Porcentaje de Daño</h6>
+              <span className="text-light">
+                {coffeeBatch.dryMill.damage_percent}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Rendimiento de Trilla</h6>
+              <span className="text-light">
+                {coffeeBatch.dryMill.threshing_yield}
+              </span>
+            </div>
+            <div className="item">
+              <h6 className="title">Peso</h6>
+              <span className="text-light">{coffeeBatch.dryMill.weight}</span>
+            </div>
+            <div className="item">
+              <h6 className="title">Nota</h6>
+              <span className="text-light">{coffeeBatch.dryMill.note}</span>
             </div>
           </div>
         </div>

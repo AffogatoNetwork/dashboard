@@ -39,7 +39,7 @@
       padding: 0.8rem;
     }
   }
-  .cupprofile {
+  .cupprofile,.wetMill,.dryMill,.certification {
     margin-left: 2rem;
   }
   .batch-detail {
@@ -98,11 +98,20 @@
     top: -10px;
     left: 10%;
   }
-  .export:before { 
+  .export:before {
     content: "Trillado de Café";
   }
-  .cupprofile:before { 
+  .cupprofile,.wetMill,.dryMill,.certification:before {
     content: "Perfil de Taza";
+  }
+  .wetMill:before {
+    content: "Beneficio Húmedo";
+  }
+  .dryMill:before {
+    content: "Beneficio Seco";
+  }
+  .certifications:before {
+    content: "Certificados";
   }
   .items {
     display: grid;
