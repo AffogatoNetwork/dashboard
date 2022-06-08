@@ -147,6 +147,10 @@ const CoffeeCard = () => {
         <div className="box cupprofile">
           <div className="items">
             <div className="item">
+              <h6 className="title">Id de Lote</h6>
+              <span className="text-light">{coffeeBatch.dryMill.batch_id}</span>
+            </div>
+            <div className="item">
               <h6 className="title">Variedad</h6>
               <span className="text-light">{coffeeBatch.wetMill.variety}</span>
             </div>
