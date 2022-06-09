@@ -31,7 +31,7 @@ const BatchItem = ({ index, coffeeBatch, pagination, showQrModal }: props) => {
           {/* <div className="item">
             <span>{coffeeBatch.name}</span>
           </div> */}
-          <div className="item">
+          <div className="info mt-3">
             {coffeeBatch.description.length > 80 ? (
               <span>{coffeeBatch.description.slice(0, 79)}...</span>
             ) : (
