@@ -79,7 +79,7 @@ h6 {
 }
 
 .nav-tabs {
-  .nav-link { 
+  .nav-link {
     color: $primary;
   }
   .nav-link.active {
@@ -200,7 +200,7 @@ span {
   flex-direction: row;
   align-items: center;
   justify-content: center;
-  
+
   .profile-pic {
     height: 115px;
     width: 115px;
@@ -254,7 +254,7 @@ span {
     }
     .logo-affogato {
       height: 5rem;
-      width: 5rem;
+    //   width: 5rem;
     }
     h3 {
       margin-top: 10px;
@@ -298,7 +298,7 @@ span {
   }
   .logo-affogato {
     height: 4.5rem;
-    width: 4.5rem;
+    // width: 4.5rem;
   }
   .logo:hover {
     cursor: pointer;

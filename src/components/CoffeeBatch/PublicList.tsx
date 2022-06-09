@@ -2,12 +2,14 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import "../../styles/app.scss";
 import { List } from "./index";
 import CoopLogo from "../common/CoopLogo";
 
 export const PublicList = () => {
+  const navigate = useNavigate();
   const [authCookie, setAuthCookie] = useCookies(["is_buyer_auth"]);
   const [isAuth, setAuth] = useState(authCookie.is_buyer_auth === "1");
   const [password, setPassword] = useState("");
@@ -83,6 +85,13 @@ export const PublicList = () => {
                 onClick={() => handleOnClick()}
               >
                 Acceder
+              </Button>
+              <Button
+                variant="secondary"
+                className="auth-method"
+                onClick={() => navigate("/login", { replace: true })}
+              >
+                <u>Regresar</u>
               </Button>
             </div>
           </Form>

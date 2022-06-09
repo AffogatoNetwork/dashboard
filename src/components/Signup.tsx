@@ -530,7 +530,7 @@ const Signup = () => {
                   className="auth-method"
                   onClick={() => navigate("/login", { replace: true })}
                 >
-                  Regresar
+                  <u>Regresar</u>
                 </Button>
               </div>
             </div>
