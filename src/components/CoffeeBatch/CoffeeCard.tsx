@@ -30,7 +30,6 @@ const CoffeeCard = () => {
             let cupProfile = {};
             let wetMill = {};
             let dryMill = {};
-            let certification = {};
             for (let i = 0; i < jsonData.attributes.length; i += 1) {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
               if (traitType === "farmer") {
@@ -59,9 +58,6 @@ const CoffeeCard = () => {
               if (traitType === "dry mill") {
                 [dryMill] = jsonData.attributes[i].value;
               }
-              if (traitType === "certification") {
-                [certification] = jsonData.attributes[i].value;
-              }
 
               console.log(coffeeBatch?.wetMill);
             }
@@ -78,7 +74,6 @@ const CoffeeCard = () => {
               batch,
               wetMill,
               dryMill,
-              certification,
               exportBatch,
               cupProfile,
             };

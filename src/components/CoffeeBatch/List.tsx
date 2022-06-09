@@ -132,9 +132,8 @@ export const List = () => {
         let farm = {};
         let batch = {};
         let exportBatch = {};
-        const wetMill = {};
-        const dryMill = {};
-        const certification = {};
+        let wetMill = {};
+        let dryMill = {};
         let cupProfile = {};
         for (let i = 0; i < jsonData.attributes.length; i += 1) {
           const traitType = jsonData.attributes[i].trait_type.toLowerCase();
@@ -153,6 +152,12 @@ export const List = () => {
           if (traitType === "profile") {
             [cupProfile] = jsonData.attributes[i].value;
           }
+          if (traitType === "wet mill") {
+            [wetMill] = jsonData.attributes[i].value;
+          }
+          if (traitType === "dry mill") {
+            [dryMill] = jsonData.attributes[i].value;
+          }
         }
         const cooffeeB = {
           id: batchId,
@@ -164,7 +169,6 @@ export const List = () => {
           farm,
           wetMill,
           dryMill,
-          certification,
           batch,
           exportBatch,
           cupProfile,
@@ -267,7 +271,7 @@ export const List = () => {
                 <th className="th-3">Altitud</th>
                 <th className="th-3">Variedad</th>
                 <th className="th-3">Proceso</th>
-                <th className="th-4">Tamaño</th>
+                <th className="th-4">Peso</th>
                 <th className="th-3">Aroma</th>
                 <th className="th-3">Acidez</th>
                 <th className="th-3">Post Gusto</th>

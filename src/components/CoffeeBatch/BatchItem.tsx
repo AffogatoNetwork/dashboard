@@ -57,13 +57,13 @@ const BatchItem = ({ index, coffeeBatch, pagination, showQrModal }: props) => {
         </span>
       </td>
       <td>
-        <span>{coffeeBatch.batch.variety}</span>
+        <span>{coffeeBatch.wetMill.variety}</span>
       </td>
       <td>
-        <span>{coffeeBatch.batch.process}</span>
+        <span>{coffeeBatch.wetMill.process}</span>
       </td>
       <td>
-        <span>{coffeeBatch.batch.weight} Lbs</span>
+        <span>{coffeeBatch.dryMill.weight} QQ</span>
       </td>
       <td className="cupprofile">
         <span>{coffeeBatch.cupProfile.aroma}</span>
