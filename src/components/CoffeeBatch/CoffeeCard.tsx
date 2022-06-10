@@ -87,6 +87,7 @@ const CoffeeCard = () => {
       }
     };
     load();
+    // eslint-disable-next-line
   }, [ipfsHash]);
 
   if (loading) {

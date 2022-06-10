@@ -23,7 +23,6 @@ export const saveFarmer = async (farmer: FarmerType, image: any) => {
     if (image !== null) {
       const storageRef = ref(storage, farmer.address);
       uploadBytes(storageRef, image).then((snapshot) => {
-        console.log("Uploaded a blob or file");
         console.log(snapshot);
       });
     }

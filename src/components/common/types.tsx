@@ -46,3 +46,22 @@ export type FarmerType = {
   village: string;
   village2: string;
 };
+
+export type CompanyType = {
+  address: string;
+  name: string;
+  cellphone: string;
+  email: string;
+  socialReason: string;
+  latitude: string;
+  longitude: string;
+  review: string;
+  avgCupProfile: string;
+  website: string;
+  socialNetworks: string;
+  productiveAreas: string;
+  products: string;
+  managerName: string;
+  malePartners: number;
+  femalePartners: number;
+};

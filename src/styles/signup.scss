@@ -60,6 +60,7 @@
     }
   }
   .card-body {
+    padding: 1rem;
     overflow: hidden;
     box-shadow: inset 0 4px 0 0 $light;
     border-radius: 0.625rem;
@@ -89,7 +90,7 @@
     padding-top: 1rem;
   }
   .tabs-container {
-    margin-top: 2.2rem;
+    margin-top: 1.7rem;
   }
   .dropdown {
     margin-top: 0.1rem;

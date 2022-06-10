@@ -174,7 +174,7 @@ export const List = () => {
           cupProfile,
         };
         batchList.push(cooffeeB);
-        setCoffeeBatchList(batchList);
+        setCoffeeBatchList(batchList.slice());
       });
   };
 
