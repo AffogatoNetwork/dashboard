@@ -3,10 +3,10 @@ import { Magic } from "magic-sdk";
 import { ethers } from "ethers";
 import emailjs from "@emailjs/browser";
 import { CooperativeType } from "../utils/constants";
-import { FarmerType } from "../components/common/types";
+import { CompanyType, FarmerType } from "../components/common/types";
 import CoffeeBatch from "../contracts/CoffeBatch.json";
 import { useContracts } from "../hooks/useContracts";
-import { saveFarmer } from "../db/firebase";
+import { saveCompany, saveFarmer } from "../db/firebase";
 
 type AuthType = {
   authContext: any;
@@ -23,6 +23,7 @@ type ContextDataType = {
   isFarmer: boolean;
   farmerData: FarmerType | null;
   imageFile: any | null;
+  companyData: CompanyType | null;
 };
 
 const AuthContext = React.createContext<AuthType>({
@@ -201,6 +202,9 @@ export default function AuthProvider({ children }: props) {
     sendAccountEmail(address, data);
     if (data.farmerData !== null) {
       saveFarmer({ ...data.farmerData, address }, data.imageFile);
+    }
+    if (data.companyData !== null) {
+      saveCompany({ ...data.companyData, address });
     }
   };
 

@@ -5,6 +5,7 @@ import Col from "react-bootstrap/esm/Col";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
 import Image from "react-bootstrap/esm/Image";
+import MultipleValueTextInput from "react-multivalue-text-input";
 import Tabs from "react-bootstrap/esm/Tabs";
 import Tab from "react-bootstrap/esm/Tab";
 import { useNavigate } from "react-router-dom";
@@ -56,6 +57,34 @@ const Signup = () => {
   const [bio, setBio] = useState("");
   const [bioError, setBioError] = useState("");
   const hiddenFileInput = useRef(null);
+  // Cooperative fields
+  const [isEmailUser, setEmailUser] = useState(true);
+  const [cellphone, setCellphone] = useState("");
+  const [cellphoneError, setCellphoneError] = useState("");
+  const [addressLine, setAddressLine] = useState("");
+  const [addressLineError, setAddressLineError] = useState("");
+  const [socialReason, setSocialReason] = useState("");
+  const [socialReasonError, setSocialReasonError] = useState("");
+  const [cupProfile, setCupProfile] = useState("");
+  const [cupProfileError, setCupProfileError] = useState("");
+  const [longitude, setLongitude] = useState("");
+  const [longitudeError, setLongitudeError] = useState("");
+  const [latitude, setLatitude] = useState("");
+  const [latitudeError, setLatitudeError] = useState("");
+  const [review, setReview] = useState("");
+  const [reviewError, setReviewError] = useState("");
+  const [productiveAreas, setProductiveAreas] = useState("");
+  const [productiveAreasError, setProductiveAreasError] = useState("");
+  const [products, setProducts] = useState<Array<string>>([]);
+  const [socialNetworks, setSocialNetworks] = useState<Array<string>>([]);
+  const [website, setWebsite] = useState("");
+  const [websiteError, setWebsiteError] = useState("");
+  const [managerName, setManagerName] = useState("");
+  const [managerNameError, setManagerNameError] = useState("");
+  const [noPartnersM, setNoPartnersM] = useState("");
+  const [noPartnersMError, setNoPartnersMError] = useState("");
+  const [noPartnersF, setNoPartnersF] = useState("");
+  const [noPartnersFError, setNoPartnersFError] = useState("");
 
   const cleanFields = () => {
     setUserName("");
@@ -132,6 +161,26 @@ const Signup = () => {
     village2,
   };
 
+  const companyData = {
+    address: "",
+    name: currentCoop.name,
+    cellphone: isEmailUser ? cellphone : userName,
+    email: isEmailUser ? userName : cellphone,
+    addressLine,
+    socialReason,
+    latitude,
+    longitude,
+    review,
+    avgCupProfile: cupProfile,
+    website,
+    socialNetworks,
+    productiveAreas,
+    products,
+    managerName,
+    malePartners: noPartnersM,
+    femalePartners: noPartnersF,
+  };
+
   const magicLogin = async () => {
     if (isValid()) {
       const data = {
@@ -142,6 +191,7 @@ const Signup = () => {
         isFarmer: activeTab === "farmer",
         farmerData,
         imageFile,
+        companyData,
       };
       if (isValidEmail(userName.trim())) {
         authContext.createAccount(data);
@@ -177,6 +227,7 @@ const Signup = () => {
     const input = event.target.value;
     setUserName(input);
     if (isValidCellphone(input) || isValidEmail(input)) {
+      setEmailUser(isValidEmail(input));
       setUserNameError("");
     } else {
       setUserNameError("El valor no es valido.");
@@ -269,42 +320,312 @@ const Signup = () => {
     }
   };
 
+  // Cooperative handlers
+  const handleCellphoneChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setCellphone(input);
+    const valid = isEmailUser ? isValidCellphone(input) : isValidEmail(input);
+    if (!valid) {
+      setCellphoneError("El valor es invalido");
+    } else {
+      setCellphoneError("");
+    }
+  };
+
+  const handleAddressLineChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setAddressLine(input);
+    if (input.trim().length > 150) {
+      setAddressLineError("Valor debe de tener menos de 150 carácteres");
+    } else {
+      setAddressLineError("");
+    }
+  };
+
+  const handleSocialReasonChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setSocialReason(input);
+    if (input.trim().length > 70) {
+      setSocialReasonError("Valor debe de tener menos de 70 carácteres");
+    } else {
+      setSocialReasonError("");
+    }
+  };
+
+  const handleCupProfileChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setCupProfile(input);
+    if (Number.isNaN(input)) {
+      setCupProfileError("El valor no es valido");
+    } else {
+      setCupProfileError("");
+    }
+  };
+
+  const handleLongitudeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setLongitude(input);
+    if (Number.isNaN(input)) {
+      setLongitudeError("El valor no es valido");
+    } else {
+      setLongitudeError("");
+    }
+  };
+
+  const handleLatitudeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setLatitude(input);
+    if (Number.isNaN(input)) {
+      setLatitudeError("El valor no es valido");
+    } else {
+      setLatitudeError("");
+    }
+  };
+
+  const handleReviewChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setReview(input);
+    if (input.trim().length > 700) {
+      setReviewError("Valor debe de tener menos de 700 carácteres");
+    } else {
+      setReviewError("");
+    }
+  };
+
+  const handleProductivesAreasChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setProductiveAreas(input);
+    if (input.trim().length > 300) {
+      setProductiveAreasError("Valor debe de tener menos de 300 carácteres");
+    } else {
+      setProductiveAreasError("");
+    }
+  };
+
+  const handleManagerNameChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setManagerName(input);
+    if (input.trim().length > 80) {
+      setManagerNameError("Valor debe de tener menos de 80 carácteres");
+    } else {
+      setManagerNameError("");
+    }
+  };
+
+  const handleWebsiteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setWebsite(input);
+    if (Number.isNaN(input)) {
+      setWebsiteError("El valor no es valido");
+    } else {
+      setWebsiteError("");
+    }
+  };
+
+  const handleNoPartnersMChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setNoPartnersM(input);
+    if (Number.isNaN(input)) {
+      setNoPartnersMError("El valor no es valido");
+    } else {
+      setNoPartnersMError("");
+    }
+  };
+
+  const handleNoPartnersFChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value;
+    setNoPartnersF(input);
+    if (input.trim().length > 120) {
+      setNoPartnersFError("Valor debe de tener menos de 120 carácteres");
+    } else {
+      setNoPartnersFError("");
+    }
+  };
+
   const RenderForm = () => (
     <Form className="form">
       <Form.Group className="mb-3 input-group">
-        <FormInput
-          label="Correo electrónico o No. Celular"
-          value={userName}
-          placeholder="usuario@gmail.com"
-          handleOnChange={handleUserInputChange}
-          errorMsg={userNameError}
-        />
-        <div className="form-input">
-          <Form.Label>Selecciona tu Cooperativa</Form.Label>
-          <Dropdown
-            onSelect={(eventKey) => handleCooperativeChange(eventKey || "0")}
-          >
-            <Dropdown.Toggle
-              variant="secondary"
-              id="dropdown-cooperative"
-              className="text-left"
-            >
-              <div className="cooperative-toggle">
-                <span>{currentCoop.name}</span>
-              </div>
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {CooperativeList.map((item) => (
-                <Dropdown.Item key={item.key} eventKey={item.key}>
-                  {item.name}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-          {coopError !== "" && (
-            <span className="error-message">{coopError}</span>
-          )}
-        </div>
+        <Col className="inputs" sm={12} md={12} lg={12}>
+          <Col sm={12} md={4} lg={4}>
+            <FormInput
+              label="Correo electrónico o No. Celular"
+              value={userName}
+              placeholder="usuario@gmail.com"
+              handleOnChange={handleUserInputChange}
+              errorMsg={userNameError}
+            />
+            <div className="form-input">
+              <Form.Label>Selecciona tu Cooperativa</Form.Label>
+              <Dropdown
+                onSelect={(eventKey) =>
+                  handleCooperativeChange(eventKey || "0")
+                }
+              >
+                <Dropdown.Toggle
+                  variant="secondary"
+                  id="dropdown-cooperative"
+                  className="text-left"
+                >
+                  <div className="cooperative-toggle">
+                    <span>{currentCoop.name}</span>
+                  </div>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {CooperativeList.map((item) => (
+                    <Dropdown.Item key={item.key} eventKey={item.key}>
+                      {item.name}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              {coopError !== "" && (
+                <span className="error-message">{coopError}</span>
+              )}
+            </div>
+            <FormInput
+              label={isEmailUser ? "No. Celular" : "Correo Electrónico"}
+              value={cellphone}
+              placeholder={isEmailUser ? "99990000" : "usuario@gmail.com"}
+              handleOnChange={handleCellphoneChange}
+              errorMsg={cellphoneError}
+            />
+            <FormInput
+              label="Dirección"
+              value={addressLine}
+              placeholder="razón"
+              handleOnChange={handleAddressLineChange}
+              errorMsg={addressLineError}
+            />
+            <FormInput
+              label="Nombre del gerente"
+              value={managerName}
+              placeholder="Ingrese el nombre"
+              handleOnChange={handleManagerNameChange}
+              errorMsg={managerNameError}
+            />
+          </Col>
+          <Col sm={12} md={4} lg={4}>
+            <FormInput
+              label="Promedio Perfil de taza"
+              value={cupProfile}
+              placeholder="Perfil de taza"
+              handleOnChange={handleCupProfileChange}
+              errorMsg={cupProfileError}
+            />
+            <div className="input-row">
+              <FormInput
+                label="Longitud"
+                value={longitude}
+                placeholder="Longitud"
+                handleOnChange={handleLongitudeChange}
+                errorMsg={longitudeError}
+              />
+              <FormInput
+                label="Latitud"
+                value={latitude}
+                placeholder="Latitud"
+                handleOnChange={handleLatitudeChange}
+                errorMsg={latitudeError}
+              />
+            </div>
+            <FormInput
+              label="Razón Social"
+              value={socialReason}
+              placeholder="razón"
+              handleOnChange={handleSocialReasonChange}
+              errorMsg={socialReasonError}
+            />
+            <div className="form-input">
+              <Form.Label>Reseña</Form.Label>
+              <Form.Control
+                value={review}
+                as="textarea"
+                rows={4}
+                placeholder="Ingrese la reseña"
+                onChange={handleReviewChange}
+              />
+              {bioError !== "" && (
+                <span className="error-message">{reviewError}</span>
+              )}
+            </div>
+          </Col>
+          <Col sm={12} md={4} lg={4}>
+            <FormInput
+              label="Áreas Productivas"
+              value={productiveAreas}
+              placeholder="areas"
+              handleOnChange={handleProductivesAreasChange}
+              errorMsg={productiveAreasError}
+            />
+            <MultipleValueTextInput
+              onItemAdded={(item: any, allItems: Array<string>) => {
+                console.log(item);
+                setProducts(allItems);
+              }}
+              onItemDeleted={(item: any, allItems: Array<string>) => {
+                console.log(item);
+                setProducts(allItems);
+              }}
+              label="Productos o Servicios"
+              name="social-networks"
+              placeholder="Ingrese los productos"
+            />
+            <div className="input-row">
+              <FormInput
+                label="No. Socios Hombres"
+                value={noPartnersM}
+                placeholder="No. Socios  Hombres"
+                handleOnChange={handleNoPartnersMChange}
+                errorMsg={noPartnersMError}
+              />
+              <FormInput
+                label="No. Socios H"
+                value={noPartnersF}
+                placeholder="No. Socios Mujeres"
+                handleOnChange={handleNoPartnersFChange}
+                errorMsg={noPartnersFError}
+              />
+            </div>
+            <FormInput
+              label="Sitio Web"
+              value={website}
+              placeholder="www.misitio.com"
+              handleOnChange={handleWebsiteChange}
+              errorMsg={websiteError}
+            />
+            <MultipleValueTextInput
+              onItemAdded={(item: any, allItems: Array<string>) => {
+                console.log(item);
+                setSocialNetworks(allItems);
+              }}
+              onItemDeleted={(item: any, allItems: Array<string>) => {
+                console.log(item);
+                setSocialNetworks(allItems);
+              }}
+              label="Redes Sociales"
+              name="social-networks"
+              placeholder="Ingrese las redes sociales"
+            />
+          </Col>
+        </Col>
       </Form.Group>
       {state.creatingAccountError && (
         <div className="account-created">
@@ -487,15 +808,22 @@ const Signup = () => {
     return "Nueva Empresa";
   };
 
+  const cardClassName = (): string => {
+    if (activeTab === "farmer") {
+      return !state.accountCreated ? "farmer-card" : "farmer-card-small";
+    }
+    return !state.accountCreated
+      ? "cooperative-card"
+      : "cooperative-card-small";
+  };
+
   if (state.creatingAccount) {
     return <Loading label="Cargando..." />;
   }
 
   return (
     <div className="signup">
-      <Card
-        className={activeTab === "farmer" ? "farmer-card" : "cooperative-card"}
-      >
+      <Card className={cardClassName()}>
         <Card.Body>
           <div className="header">
             <CoopLogo className="logo" />

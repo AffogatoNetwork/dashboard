@@ -1,7 +1,7 @@
 import { initializeApp } from "firebase/app";
 import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
 import { getStorage, ref, uploadBytes } from "firebase/storage";
-import { FarmerType } from "../components/common/types";
+import { CompanyType, FarmerType } from "../components/common/types";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -40,4 +40,13 @@ export const getFarmer = async (address: string) => {
     return docData.data();
   }
   return null;
+};
+
+export const saveCompany = async (company: CompanyType) => {
+  try {
+    const companyDoc = doc(db, "companies", company.address);
+    await setDoc(companyDoc, company);
+  } catch (error) {
+    console.log(error);
+  }
 };

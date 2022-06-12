@@ -47,7 +47,22 @@
     margin: 1rem 0rem;
   }
   .cooperative-card {
-    width: 400px;
+    width: 80%;
+    .inputs {
+       display: flex;
+      .col-sm-4, .col-md-4, .col-lg-4 {
+        padding-left: 1rem;
+        padding-right: 1rem;
+      }
+    }
+    .input-row {
+      display: flex;
+      justify-content: space-between;
+      .form-input {
+        width: 100%;
+        padding-right: 5px;
+      }
+    }
   }
   .farmer-card {
     width: 900px;
@@ -59,6 +74,10 @@
        }
     }
   }
+  .cooperative-card-small,
+  .farmer-card-small {
+    width: 500px;
+  } 
   .card-body {
     padding: 1rem;
     overflow: hidden;
@@ -88,6 +107,9 @@
     justify-content: center;
     align-items: center;
     padding-top: 1rem;
+    h6 {
+      margin-bottom: 2rem;
+    }
   }
   .tabs-container {
     margin-top: 1.7rem;
@@ -102,11 +124,12 @@
   }
 
   @media (max-width: 600px) {
-    .farmer-card {
+    .farmer-card, .cooperative-card {
       width: 400px;
       .inputs {
         flex-direction: column;
       }
     }
+
   }
 }

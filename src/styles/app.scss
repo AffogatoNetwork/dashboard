@@ -172,6 +172,30 @@ h6 {
     border-radius: 0.25rem;
     box-shadow: 0 0 0 0.18rem #964b004d;
   }
+  .multiple-value-text-input {
+    color: $secondary;
+    margin-bottom: 0.5rem;
+    input {
+      border-radius: 0.25rem;
+      border: 1px solid #e1e5eb;
+      color: $primary;
+      font-size: 0.8125rem;
+      font-family: "Dosis";
+    }
+    input:focus {
+      border: 1px solid $light;
+      box-shadow: 0 0 0 0.18rem #964b004d;
+    }
+    .multiple-value-text-input-item-container {
+      margin-top: 5px;
+      p {
+        margin-bottom: 0.5rem;
+      }
+      span {
+        border-radius: 5px;
+      }
+    }
+  }
 }
 
 span {
