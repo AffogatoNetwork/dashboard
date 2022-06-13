@@ -43,6 +43,7 @@ export const List = () => {
   const [loadingIpfs, setLoadingIpfs] = useState(true);
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
+  const [isAuth, setAuth] = useState(true);
 
   setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -52,10 +53,12 @@ export const List = () => {
 
       if (state.provider !== null) {
         ethcallProvider = new Provider(state.provider);
+        setAuth(true);
       } else {
         const provider = getDefaultProvider();
         const randomSigner = ethers.Wallet.createRandom().connect(provider);
         ethcallProvider = new Provider(randomSigner.provider);
+        setAuth(false);
       }
       if (ethcallProvider !== null) {
         await ethcallProvider.init();
@@ -88,7 +91,7 @@ export const List = () => {
         where: {
           owner: $owner
           id_not_in: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-          id_gte: "75"
+          id_gte: "90"
         }
       ) {
         id
@@ -196,7 +199,7 @@ export const List = () => {
           }
         }
       }
-      confPagination(cbData, 5);
+      confPagination(cbData, isAuth ? 6 : 8);
       setLoadingIpfs(false);
     }
   };
