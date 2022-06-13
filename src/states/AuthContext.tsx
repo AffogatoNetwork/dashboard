@@ -35,7 +35,7 @@ export default function AuthProvider({ children }: props) {
   const contracts = useContracts();
   const magicSDK = new Magic(process.env.REACT_APP_MAGIC_API_KEY || "", {
     network: {
-      rpcUrl: "https://xdai.poanetwork.dev/",
+      rpcUrl: "https://dai.poa.network",
       chainId: 10,
     },
   });

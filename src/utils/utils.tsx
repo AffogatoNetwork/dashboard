@@ -2,7 +2,7 @@ import { toast } from "react-toastify";
 import { ethers } from "ethers";
 
 export const getDefaultProvider = () => {
-  const url = "https://rpc.gnosischain.com";
+  const url = "https://rpc.ankr.com/gnosis";
   const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
   return customHttpProvider;
 };
