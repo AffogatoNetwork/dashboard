@@ -25,13 +25,12 @@ const CoffeeCard = () => {
           .then(async (jsonData) => {
             let farmer = {};
             let farm = {};
-            let batch = {};
-            let exportBatch = {};
             let cupProfile = {};
             let wetMill = {};
             let dryMill = {};
             for (let i = 0; i < jsonData.attributes.length; i += 1) {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
+              console.log(traitType);
               if (traitType === "farmer") {
                 farmer = await jsonData.attributes[i].value;
                 console.log(farmer);
@@ -43,23 +42,16 @@ const CoffeeCard = () => {
               if (traitType === "farm") {
                 [farm] = jsonData.attributes[i].value;
               }
-              if (traitType === "batch") {
-                [batch] = jsonData.attributes[i].value;
-              }
-              if (traitType === "export") {
-                [exportBatch] = jsonData.attributes[i].value;
-              }
               if (traitType === "profile") {
                 [cupProfile] = jsonData.attributes[i].value;
               }
               if (traitType === "wet mill") {
                 [wetMill] = jsonData.attributes[i].value;
+                console.log(wetMill);
               }
               if (traitType === "dry mill") {
                 [dryMill] = jsonData.attributes[i].value;
               }
-
-              console.log(coffeeBatch?.wetMill);
             }
             const coffeeB = {
               id: 0,
@@ -71,10 +63,8 @@ const CoffeeCard = () => {
               ipfsHash,
               farmer,
               farm,
-              batch,
               wetMill,
               dryMill,
-              exportBatch,
               cupProfile,
             };
             setCoffeeBatch(coffeeB);
@@ -86,6 +76,7 @@ const CoffeeCard = () => {
           });
       }
     };
+
     load();
     // eslint-disable-next-line
   }, [ipfsHash]);
@@ -98,6 +89,18 @@ const CoffeeCard = () => {
     return <NotFound msg="No se encontró el lote de café." />;
   }
 
+  console.log(coffeeBatch.wetMill);
+  console.log(
+    coffeeBatch.wetMill.drying_id !== "" ||
+      coffeeBatch.wetMill.quality !== "" ||
+      coffeeBatch.wetMill.process !== "" ||
+      coffeeBatch.wetMill.drying_type !== "" ||
+      coffeeBatch.wetMill.drying_hours !== "" ||
+      coffeeBatch.wetMill.date !== "" ||
+      coffeeBatch.wetMill.facility !== "" ||
+      coffeeBatch.wetMill.weight !== "" ||
+      coffeeBatch.wetMill.note !== ""
+  );
   return (
     <div className="coffeebatch">
       <Card className="general">
@@ -237,16 +240,15 @@ const CoffeeCard = () => {
             )}
           </div>
         </div>
-
-        {(coffeeBatch.wetMill.drying_id === "" ||
-          coffeeBatch.wetMill.quality === "" ||
-          coffeeBatch.wetMill.process === "" ||
-          coffeeBatch.wetMill.drying_type === "" ||
-          coffeeBatch.wetMill.drying_hours === "" ||
-          coffeeBatch.wetMill.date === "" ||
-          coffeeBatch.wetMill.facility === "" ||
-          coffeeBatch.wetMill.weight === "" ||
-          coffeeBatch.wetMill.note === "") && (
+        {(coffeeBatch.wetMill.drying_id !== "" ||
+          coffeeBatch.wetMill.quality !== "" ||
+          coffeeBatch.wetMill.process !== "" ||
+          coffeeBatch.wetMill.drying_type !== "" ||
+          coffeeBatch.wetMill.drying_hours !== "" ||
+          coffeeBatch.wetMill.date !== "" ||
+          coffeeBatch.wetMill.facility !== "" ||
+          coffeeBatch.wetMill.weight !== "" ||
+          coffeeBatch.wetMill.note !== "") && (
           <div className="box wetMill">
             <div className="items">
               {coffeeBatch.wetMill.drying_id && (
@@ -321,14 +323,14 @@ const CoffeeCard = () => {
             </div>
           </div>
         )}
-        {(coffeeBatch.dryMill.export_id === "" ||
-          coffeeBatch.dryMill.date === "" ||
-          coffeeBatch.dryMill.facility === "" ||
-          coffeeBatch.dryMill.drying_type === "" ||
-          coffeeBatch.dryMill.damage_percent === "" ||
-          coffeeBatch.dryMill.threshing_yield === "" ||
-          coffeeBatch.dryMill.weight === "" ||
-          coffeeBatch.dryMill.note === "") && (
+        {(coffeeBatch.dryMill.export_id !== "" ||
+          coffeeBatch.dryMill.date !== "" ||
+          coffeeBatch.dryMill.facility !== "" ||
+          coffeeBatch.dryMill.drying_type !== "" ||
+          coffeeBatch.dryMill.damage_percent !== "" ||
+          coffeeBatch.dryMill.threshing_yield !== "" ||
+          coffeeBatch.dryMill.weight !== "" ||
+          coffeeBatch.dryMill.note !== "") && (
           <div className="box dryMill">
             <div className="items">
               {coffeeBatch.dryMill.export_id && (
