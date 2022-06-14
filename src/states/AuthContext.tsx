@@ -35,7 +35,7 @@ export default function AuthProvider({ children }: props) {
   const contracts = useContracts();
   const magicSDK = new Magic(process.env.REACT_APP_MAGIC_API_KEY || "", {
     network: {
-      rpcUrl: "https://dai.poa.network",
+      rpcUrl: "https://rpc.gnosischain.com/",
       chainId: 10,
     },
   });
@@ -132,7 +132,7 @@ export default function AuthProvider({ children }: props) {
     };
     load();
     // eslint-disable-next-line
-  }, [state.isLoggedIn]);    
+  }, [state.isLoggedIn]);
 
   const verifyAccount = async () => {
     // @ts-ignore

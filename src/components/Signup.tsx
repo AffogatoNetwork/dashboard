@@ -143,7 +143,7 @@ const Signup = () => {
       valid = false;
     }
     if (currentCoop.key === "0") {
-      setCoopError("Seleccione una cooperativa.");
+      setCoopError("Seleccione una empresa.");
       valid = false;
     }
     return valid;
@@ -291,7 +291,7 @@ const Signup = () => {
       if (CooperativeList[i].key === key) {
         setCurrentCoop(CooperativeList[i]);
         if (key === "0") {
-          setCoopError("Seleccione una cooperativa.");
+          setCoopError("Seleccione una empersa.");
         } else {
           setCoopError("");
         }
@@ -473,7 +473,7 @@ const Signup = () => {
               errorMsg={userNameError}
             />
             <div className="form-input">
-              <Form.Label>Selecciona tu Cooperativa</Form.Label>
+              <Form.Label>Selecciona tu Empresa</Form.Label>
               <Dropdown
                 onSelect={(eventKey) =>
                   handleCooperativeChange(eventKey || "0")
@@ -510,7 +510,7 @@ const Signup = () => {
             <FormInput
               label="Dirección"
               value={addressLine}
-              placeholder="razón"
+              placeholder="Dirección"
               handleOnChange={handleAddressLineChange}
               errorMsg={addressLineError}
             />
@@ -524,9 +524,9 @@ const Signup = () => {
           </Col>
           <Col sm={12} md={4} lg={4}>
             <FormInput
-              label="Promedio Perfil de taza"
+              label="Promedio Perfil de Taza"
               value={cupProfile}
-              placeholder="Perfil de taza"
+              placeholder="Promedio"
               handleOnChange={handleCupProfileChange}
               errorMsg={cupProfileError}
             />
@@ -547,9 +547,9 @@ const Signup = () => {
               />
             </div>
             <FormInput
-              label="Razón Social"
+              label="Nombre de la Empresa"
               value={socialReason}
-              placeholder="razón"
+              placeholder="Nombre"
               handleOnChange={handleSocialReasonChange}
               errorMsg={socialReasonError}
             />

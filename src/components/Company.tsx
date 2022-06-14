@@ -55,7 +55,7 @@ const Company = () => {
                 companyData.productiveAreas && (
                   <div className="info-row">
                     <div className="info">
-                      <h6 className="bio">Razón Social</h6>
+                      <h6 className="bio">Nombre Empresa</h6>
                       <span className="text-light">
                         {companyData.socialReason}
                       </span>

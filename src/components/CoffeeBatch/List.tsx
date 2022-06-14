@@ -44,6 +44,7 @@ export const List = () => {
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [isAuth, setAuth] = useState(true);
+  const [ownerAddress, setOwnerAddress] = useState("");
 
   setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -53,6 +54,9 @@ export const List = () => {
 
       if (state.provider !== null) {
         ethcallProvider = new Provider(state.provider);
+        const signer = state.provider.getSigner();
+        const address = await signer.getAddress();
+        setOwnerAddress(address);
         setAuth(true);
       } else {
         const provider = getDefaultProvider();
@@ -133,8 +137,6 @@ export const List = () => {
       .then((jsonData) => {
         let farmer = {};
         let farm = {};
-        let batch = {};
-        let exportBatch = {};
         let wetMill = {};
         let dryMill = {};
         let cupProfile = {};
@@ -145,12 +147,6 @@ export const List = () => {
           }
           if (traitType === "farm") {
             [farm] = jsonData.attributes[i].value;
-          }
-          if (traitType === "batch") {
-            [batch] = jsonData.attributes[i].value;
-          }
-          if (traitType === "export") {
-            [exportBatch] = jsonData.attributes[i].value;
           }
           if (traitType === "profile") {
             [cupProfile] = jsonData.attributes[i].value;
@@ -172,8 +168,6 @@ export const List = () => {
           farm,
           wetMill,
           dryMill,
-          batch,
-          exportBatch,
           cupProfile,
         };
         batchList.push(cooffeeB);
@@ -205,13 +199,14 @@ export const List = () => {
   };
 
   const { loading, data, error } = useQuery(batchesQuery, {
-    variables: { owner: "0x13248b47b0ff1c04d2a054b662c850dc05d47b4d" },
+    variables: { owner: ownerAddress },
     fetchPolicy: "no-cache",
     notifyOnNetworkStatusChange: true,
     onError: () => {
       console.log(error);
     },
     onCompleted: () => {
+      console.log(data);
       setLoadingIpfs(true);
       loadBatchesData(data.coffeeBatches);
     },
@@ -267,21 +262,17 @@ export const List = () => {
           ) : (
             <Table className="coffeebatches">
               <thead>
-                <th className="th-1" />
-                <th className="th-2">Ubicación</th>
+                <th className="th-2">QR</th>
                 <th className="th-2">Finca</th>
-                <th className="th-2">Certificados</th>
-                <th className="th-3">Altitud</th>
+                <th className="th-2">Altura</th>
+                <th className="th-2">Ubicación</th>
                 <th className="th-3">Variedad</th>
-                <th className="th-3">Proceso</th>
-                <th className="th-4">Peso</th>
-                <th className="th-3">Aroma</th>
-                <th className="th-3">Acidez</th>
-                <th className="th-3">Post Gusto</th>
-                <th className="th-3">Cuerpo</th>
-                <th className="th-3">Sabor</th>
-                <th className="th-3">Dulzura</th>
-                <th className="th-4">Nota</th>
+                <th className="th-2">Proceso</th>
+                <th className="th-4">Id de Secado</th>
+                <th className="th-2">Tipo de Secado</th>
+                <th className="th-4">Id de Exportación</th>
+                <th className="th-3">Peso</th>
+                <th className="th-3">Nota</th>
               </thead>
               <tbody>
                 {coffeeBatchList.map((batch, index) => (

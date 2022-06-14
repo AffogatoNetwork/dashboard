@@ -31,13 +31,12 @@ const CoffeeCard = () => {
           .then(async (jsonData) => {
             let farmer = {};
             let farm = {};
-            let batch = {};
-            let exportBatch = {};
             let cupProfile = {};
             let wetMill = {};
             let dryMill = {};
             for (let i = 0; i < jsonData.attributes.length; i += 1) {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
+              console.log(traitType);
               if (traitType === "farmer") {
                 farmer = await jsonData.attributes[i].value;
                 getFarmer(await jsonData.attributes[i].value).then((result) => {
@@ -47,23 +46,16 @@ const CoffeeCard = () => {
               if (traitType === "farm") {
                 [farm] = jsonData.attributes[i].value;
               }
-              if (traitType === "batch") {
-                [batch] = jsonData.attributes[i].value;
-              }
-              if (traitType === "export") {
-                [exportBatch] = jsonData.attributes[i].value;
-              }
               if (traitType === "profile") {
                 [cupProfile] = jsonData.attributes[i].value;
               }
               if (traitType === "wet mill") {
                 [wetMill] = jsonData.attributes[i].value;
+                console.log(wetMill);
               }
               if (traitType === "dry mill") {
                 [dryMill] = jsonData.attributes[i].value;
               }
-
-              console.log(coffeeBatch?.wetMill);
             }
             const coffeeB = {
               id: 0,
@@ -75,10 +67,8 @@ const CoffeeCard = () => {
               ipfsHash,
               farmer,
               farm,
-              batch,
               wetMill,
               dryMill,
-              exportBatch,
               cupProfile,
             };
             setCoffeeBatch(coffeeB);
@@ -90,6 +80,7 @@ const CoffeeCard = () => {
           });
       }
     };
+
     load();
     // eslint-disable-next-line
   }, [ipfsHash]);
@@ -113,15 +104,7 @@ const CoffeeCard = () => {
     <div className="coffeebatch">
       <Card className="general">
         <Card.Header>
-          <a
-            target="_blank"
-            rel="noreferrer"
-            href={window.location.origin
-              .concat("/company/")
-              .concat(farmerData && farmerData.address)}
-          >
-            <Image src={coffeeBatch.image} className="nft" />
-          </a>
+          <Image src={coffeeBatch.image} className="nft" />
         </Card.Header>
         <Card.Body>
           <div className="batch-header">
@@ -183,7 +166,7 @@ const CoffeeCard = () => {
                               onMapBtnClick(
                                 coffeeBatch.farm.latitude,
                                 coffeeBatch.farm.longitude,
-                                ""
+                                coffeeBatch.farm.name
                               )
                             }
                           >
@@ -287,16 +270,15 @@ const CoffeeCard = () => {
             )}
           </div>
         </div>
-
-        {(coffeeBatch.wetMill.drying_id === "" ||
-          coffeeBatch.wetMill.quality === "" ||
-          coffeeBatch.wetMill.process === "" ||
-          coffeeBatch.wetMill.drying_type === "" ||
-          coffeeBatch.wetMill.drying_hours === "" ||
-          coffeeBatch.wetMill.date === "" ||
-          coffeeBatch.wetMill.facility === "" ||
-          coffeeBatch.wetMill.weight === "" ||
-          coffeeBatch.wetMill.note === "") && (
+        {(coffeeBatch.wetMill.drying_id !== "" ||
+          coffeeBatch.wetMill.quality !== "" ||
+          coffeeBatch.wetMill.process !== "" ||
+          coffeeBatch.wetMill.drying_type !== "" ||
+          coffeeBatch.wetMill.drying_hours !== "" ||
+          coffeeBatch.wetMill.date !== "" ||
+          coffeeBatch.wetMill.facility !== "" ||
+          coffeeBatch.wetMill.weight !== "" ||
+          coffeeBatch.wetMill.note !== "") && (
           <div className="box wetMill">
             <div className="items">
               {coffeeBatch.wetMill.drying_id && (
@@ -357,7 +339,17 @@ const CoffeeCard = () => {
                 coffeeBatch.wetMill.longitude !== "" && (
                   <div className="item">
                     <h6 className="title">Ubicación</h6>
-                    <Button variant="secondary" className="text-light">
+                    <Button
+                      variant="secondary"
+                      className="text-light"
+                      onClick={() =>
+                        onMapBtnClick(
+                          coffeeBatch.wetMill.latitude,
+                          coffeeBatch.wetMill.longitude,
+                          ""
+                        )
+                      }
+                    >
                       {coffeeBatch.wetMill.latitude},{" "}
                       {coffeeBatch.wetMill.longitude}
                     </Button>
@@ -380,14 +372,14 @@ const CoffeeCard = () => {
             </div>
           </div>
         )}
-        {(coffeeBatch.dryMill.export_id === "" ||
-          coffeeBatch.dryMill.date === "" ||
-          coffeeBatch.dryMill.facility === "" ||
-          coffeeBatch.dryMill.drying_type === "" ||
-          coffeeBatch.dryMill.damage_percent === "" ||
-          coffeeBatch.dryMill.threshing_yield === "" ||
-          coffeeBatch.dryMill.weight === "" ||
-          coffeeBatch.dryMill.note === "") && (
+        {(coffeeBatch.dryMill.export_id !== "" ||
+          coffeeBatch.dryMill.date !== "" ||
+          coffeeBatch.dryMill.facility !== "" ||
+          coffeeBatch.dryMill.drying_type !== "" ||
+          coffeeBatch.dryMill.damage_percent !== "" ||
+          coffeeBatch.dryMill.threshing_yield !== "" ||
+          coffeeBatch.dryMill.weight !== "" ||
+          coffeeBatch.dryMill.note !== "") && (
           <div className="box dryMill">
             <div className="items">
               {coffeeBatch.dryMill.export_id && (
@@ -418,7 +410,17 @@ const CoffeeCard = () => {
                 coffeeBatch.dryMill.longitude !== "" && (
                   <div className="item">
                     <h6 className="title">Ubicación</h6>
-                    <Button variant="secondary" className="text-light">
+                    <Button
+                      variant="secondary"
+                      className="text-light"
+                      onClick={() =>
+                        onMapBtnClick(
+                          coffeeBatch.dryMill.latitude,
+                          coffeeBatch.dryMill.longitude,
+                          ""
+                        )
+                      }
+                    >
                       {coffeeBatch.dryMill.latitude},{" "}
                       {coffeeBatch.dryMill.longitude}
                     </Button>

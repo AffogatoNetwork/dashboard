@@ -8,11 +8,15 @@ import "../../styles/create.scss";
 import { apiUrl } from "../../utils/constants";
 import { errorNotification, notifyUser } from "../../utils/utils";
 import Loading from "../Loading";
+import { useAuthContext } from "../../states/AuthContext";
 
 export const Create = () => {
+  const { authState } = useAuthContext();
+  const [state] = authState;
   const [rows, setRows] = useState(null);
   const [cols, setCols] = useState(null);
   const [saving, setSaving] = useState(false);
+  const [ownerAddress, setOwnerAddress] = useState("");
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
       accept: ".xlsx",
@@ -35,6 +39,15 @@ export const Create = () => {
   ));
 
   useEffect(() => {
+    const loadProvider = async () => {
+      if (state.provider !== null) {
+        const signer = state.provider.getSigner();
+        const address = await signer.getAddress();
+        setOwnerAddress(address);
+      }
+    };
+    loadProvider();
+
     if (acceptedFiles.length > 0) {
       ExcelRenderer(acceptedFiles[0], (err: any, resp: any) => {
         if (err) {
@@ -45,7 +58,7 @@ export const Create = () => {
         }
       });
     }
-  }, [acceptedFiles]);
+  }, [acceptedFiles, state.provider]);
 
   const fileError = (file: File, errors: any) => {
     if (errors.code === "file-invalid-type") {
@@ -78,9 +91,7 @@ export const Create = () => {
       setSaving(true);
       const formData = new FormData();
       formData.append("file", acceptedFiles[0]);
-      const url = apiUrl.concat(
-        "submit?coop_address=0x13248B47b0fF1c04D2A054B662C850dc05d47B4d"
-      );
+      const url = apiUrl.concat(`submit?coop_address=${ownerAddress}`);
       fetch(url, {
         method: "POST",
         headers: {

@@ -5,7 +5,7 @@
   display: flex;
   height: 100%;
   flex-direction: row;
-  align-items: center;
+  margin-top: 1rem;
   justify-content: center;
 
   .img-container {
@@ -83,6 +83,7 @@
     overflow: hidden;
     box-shadow: inset 0 4px 0 0 $light;
     border-radius: 0.625rem;
+    overflow-y: scroll;
   }
   .header {
     display: flex;
@@ -113,6 +114,9 @@
   }
   .tabs-container {
     margin-top: 1.7rem;
+    @media (max-height: 850px) {
+      margin-top: 1rem;
+    }
   }
   .dropdown {
     margin-top: 0.1rem;

@@ -86,7 +86,7 @@ const Login = () => {
                 className="auth-method"
                 onClick={() => navigate("/signup", { replace: true })}
               >
-                <u> No tienes cuenta? Crea una aquí.</u>
+                <u>¿No tienes cuenta? Crea una aquí.</u>
               </Button>
               <span className="primary">o</span>
               <Button
