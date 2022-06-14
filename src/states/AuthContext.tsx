@@ -35,7 +35,7 @@ export default function AuthProvider({ children }: props) {
   const contracts = useContracts();
   const magicSDK = new Magic(process.env.REACT_APP_MAGIC_API_KEY || "", {
     network: {
-      rpcUrl: "http://rpc.gnosischain.com/",
+      rpcUrl: "https://rpc.gnosischain.com/",
       chainId: 10,
     },
   });
