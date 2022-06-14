@@ -132,7 +132,7 @@ export default function AuthProvider({ children }: props) {
     };
     load();
     // eslint-disable-next-line
-  }, [state.isLoggedIn]);    
+  }, [state.isLoggedIn]);
 
   const verifyAccount = async () => {
     // @ts-ignore

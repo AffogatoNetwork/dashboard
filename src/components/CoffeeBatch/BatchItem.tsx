@@ -27,64 +27,39 @@ const BatchItem = ({ index, coffeeBatch, pagination, showQrModal }: props) => {
             <QRCode value={batchUrl} size={60} />
           </Button>
         </div>
-        <div className="info">
-          {/* <div className="item">
-            <span>{coffeeBatch.name}</span>
-          </div> */}
-          <div className="info mt-3">
-            {coffeeBatch.description.length > 80 ? (
-              <span>{coffeeBatch.description.slice(0, 79)}...</span>
-            ) : (
-              <span>{coffeeBatch.description}</span>
-            )}
-          </div>
-        </div>
-      </td>
-      <td>
-        <div className="location">
-          <span className="village">{coffeeBatch.farm.village}</span>
-          <span>
-            {coffeeBatch.farm.region}, {coffeeBatch.farm.country}
-          </span>
-        </div>
       </td>
       <td>{coffeeBatch.farm.name}</td>
-      <td>{coffeeBatch.farm.certifications}</td>
-      <td className="batch">
+      <td className="">
         <span>
           {coffeeBatch.farm.altitude}{" "}
           {coffeeBatch.farm.altitude === "-" ? "" : "MSNM"}
         </span>
       </td>
       <td>
+        <div className="">
+          <span>
+            {coffeeBatch.farm.village}, {coffeeBatch.farm.region}
+          </span>
+        </div>
+      </td>
+      <td className="">
         <span>{coffeeBatch.wetMill.variety}</span>
       </td>
       <td>
         <span>{coffeeBatch.wetMill.process}</span>
       </td>
+      <td className="">{coffeeBatch.wetMill.drying_id}</td>
       <td>
-        <span>{coffeeBatch.dryMill.weight} QQ</span>
+        <span>{coffeeBatch.wetMill.drying_type}</span>
       </td>
-      <td className="cupprofile">
-        <span>{coffeeBatch.cupProfile.aroma}</span>
-      </td>
-      <td>
-        <span>{coffeeBatch.cupProfile.acidity}</span>
+      <td className="">
+        <span>{coffeeBatch.dryMill.export_id}</span>
       </td>
       <td>
-        <span>{coffeeBatch.cupProfile.aftertaste}</span>
+        <span>{coffeeBatch.dryMill.weight}</span>
       </td>
       <td>
-        <span>{coffeeBatch.cupProfile.body}</span>
-      </td>
-      <td>
-        <span>{coffeeBatch.cupProfile.flavor}</span>
-      </td>
-      <td>
-        <span>{coffeeBatch.cupProfile.sweetness}</span>
-      </td>
-      <td>
-        <span>{coffeeBatch.cupProfile.note}</span>
+        <span>{coffeeBatch.dryMill.note}</span>
       </td>
     </tr>
   );
