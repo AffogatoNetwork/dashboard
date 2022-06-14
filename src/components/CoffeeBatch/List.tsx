@@ -200,12 +200,13 @@ export const List = () => {
 
   const { loading, data, error } = useQuery(batchesQuery, {
     variables: { owner: ownerAddress },
-    // fetchPolicy: "no-cache",
+    fetchPolicy: "no-cache",
     notifyOnNetworkStatusChange: true,
     onError: () => {
       console.log(error);
     },
     onCompleted: () => {
+      console.log(data);
       setLoadingIpfs(true);
       loadBatchesData(data.coffeeBatches);
     },
