@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
@@ -6,6 +7,7 @@ import "../../styles/coffeecard.scss";
 import Logo from "../../assets/affogato-horizontal.png";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
+import MapModal from "../common/MapModal";
 import { CoffeeBatchType } from "../common/types";
 import { ipfsUrl } from "../../utils/constants";
 import { getFarmer } from "../../db/firebase";
@@ -15,6 +17,10 @@ const CoffeeCard = () => {
   const [loading, setLoading] = useState(true);
   const [coffeeBatch, setCoffeeBatch] = useState<CoffeeBatchType | null>(null);
   const [farmerData, setFarmerData] = useState<any>();
+  const [showMap, setShowMap] = useState(false);
+  const [currentLat, setCurrentLat] = useState("0");
+  const [currentLng, setCurrentLng] = useState("0");
+  const [currentAddressL, setCurrentAddressL] = useState("");
 
   useEffect(() => {
     const load = () => {
@@ -34,9 +40,7 @@ const CoffeeCard = () => {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
               if (traitType === "farmer") {
                 farmer = await jsonData.attributes[i].value;
-                console.log(farmer);
                 getFarmer(await jsonData.attributes[i].value).then((result) => {
-                  console.log(result);
                   setFarmerData(result);
                 });
               }
@@ -98,11 +102,26 @@ const CoffeeCard = () => {
     return <NotFound msg="No se encontró el lote de café." />;
   }
 
+  const onMapBtnClick = (lat: string, lng: string, adressL: string) => {
+    setCurrentLat(lat);
+    setCurrentLng(lng);
+    setCurrentAddressL(adressL);
+    setShowMap(true);
+  };
+
   return (
     <div className="coffeebatch">
       <Card className="general">
         <Card.Header>
-          <Image src={coffeeBatch.image} className="nft" />
+          <a
+            target="_blank"
+            rel="noreferrer"
+            href={window.location.origin
+              .concat("/company/")
+              .concat(farmerData && farmerData.address)}
+          >
+            <Image src={coffeeBatch.image} className="nft" />
+          </a>
         </Card.Header>
         <Card.Body>
           <div className="batch-header">
@@ -110,7 +129,17 @@ const CoffeeCard = () => {
               {farmerData && farmerData.fullname && (
                 <div className="info">
                   <h6 className="bio">Productor</h6>
-                  <span className="text-light">{farmerData.fullname}</span>
+                  <span className="text-light">
+                    <a
+                      target="_blank"
+                      rel="noreferrer"
+                      href={window.location.origin
+                        .concat("/farmer/")
+                        .concat(farmerData.address)}
+                    >
+                      {farmerData.fullname}{" "}
+                    </a>
+                  </span>
                 </div>
               )}
               {farmerData && farmerData.bio && (
@@ -125,7 +154,6 @@ const CoffeeCard = () => {
                   <span className="text-light">{coffeeBatch.farm.story}</span>
                 </div>
               )}
-
               <div className="location">
                 {coffeeBatch.farm.village && (
                   <>
@@ -137,12 +165,34 @@ const CoffeeCard = () => {
                   </>
                 )}
                 {coffeeBatch.farm.altitude && (
-                  <>
-                    <h6 className="bio mt-2">Altitud</h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.altitude} MSNM
-                    </span>
-                  </>
+                  <div className="info-row">
+                    <div className="item">
+                      <h6 className="bio mt-2">Altitud</h6>
+                      <span className="text-light">
+                        {coffeeBatch.farm.altitude} MSNM
+                      </span>
+                    </div>
+                    {coffeeBatch.farm.latitude !== "" &&
+                      coffeeBatch.farm.longitude !== "" && (
+                        <div className="item">
+                          <h6 className="bio mt-2">Coordenadas</h6>
+                          <Button
+                            variant="secondary"
+                            className="text-light"
+                            onClick={() =>
+                              onMapBtnClick(
+                                coffeeBatch.farm.latitude,
+                                coffeeBatch.farm.longitude,
+                                ""
+                              )
+                            }
+                          >
+                            {coffeeBatch.farm.latitude},{" "}
+                            {coffeeBatch.farm.longitude}
+                          </Button>
+                        </div>
+                      )}
+                  </div>
                 )}
               </div>
             </div>
@@ -303,7 +353,16 @@ const CoffeeCard = () => {
                   </span>
                 </div>
               )}
-              {/* TODO: add map with lat and lon */}
+              {coffeeBatch.wetMill.latitude !== "" &&
+                coffeeBatch.wetMill.longitude !== "" && (
+                  <div className="item">
+                    <h6 className="title">Ubicación</h6>
+                    <Button variant="secondary" className="text-light">
+                      {coffeeBatch.wetMill.latitude},{" "}
+                      {coffeeBatch.wetMill.longitude}
+                    </Button>
+                  </div>
+                )}
               {coffeeBatch.wetMill.weight && (
                 <div className="item">
                   <h6 className="title">Peso</h6>
@@ -355,7 +414,16 @@ const CoffeeCard = () => {
                   </span>
                 </div>
               )}
-              {/* TODO: map with lat and lon */}
+              {coffeeBatch.dryMill.latitude !== "" &&
+                coffeeBatch.dryMill.longitude !== "" && (
+                  <div className="item">
+                    <h6 className="title">Ubicación</h6>
+                    <Button variant="secondary" className="text-light">
+                      {coffeeBatch.dryMill.latitude},{" "}
+                      {coffeeBatch.dryMill.longitude}
+                    </Button>
+                  </div>
+                )}
               {coffeeBatch.dryMill.damage_percent && (
                 <div className="item">
                   <h6 className="title">Porcentaje de Daño</h6>
@@ -372,7 +440,6 @@ const CoffeeCard = () => {
                   </span>
                 </div>
               )}
-
               {coffeeBatch.dryMill.weight && (
                 <div className="item">
                   <h6 className="title">Peso</h6>
@@ -391,6 +458,13 @@ const CoffeeCard = () => {
           </div>
         )}
       </div>
+      <MapModal
+        latitude={currentLat}
+        longitude={currentLng}
+        addressLine={currentAddressL}
+        show={showMap}
+        onHide={() => setShowMap(false)}
+      />
     </div>
   );
 };

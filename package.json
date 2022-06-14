@@ -5,6 +5,7 @@
   "dependencies": {
     "@apollo/client": "^3.5.10",
     "@emailjs/browser": "^3.6.2",
+    "@iconify/react": "^3.2.2",
     "@testing-library/jest-dom": "^5.16.3",
     "@testing-library/react": "^13.0.0",
     "@testing-library/user-event": "^14.0.3",
@@ -14,6 +15,7 @@
     "ethers": "^5.5.2",
     "ethers-multicall": "^0.2.3",
     "firebase": "^9.8.2",
+    "google-map-react": "^2.1.10",
     "graphql": "^16.3.0",
     "magic-sdk": "^8.1.0",
     "node-sass": "^7.0.1",

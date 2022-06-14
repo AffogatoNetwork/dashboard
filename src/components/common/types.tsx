@@ -66,3 +66,8 @@ export type CompanyType = {
   malePartners: string;
   femalePartners: string;
 };
+
+export type CoordinatesType = {
+  lat: number;
+  lng: number;
+};

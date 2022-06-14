@@ -1,7 +1,7 @@
 @import "./colors";
 @import "./fonts";
 
-.coffeebatch {
+.company {
   display: flex;
   padding: 3rem 2rem;
   overflow-y: scroll;
@@ -12,25 +12,12 @@
   .logo {
     height: 2rem;
   }
-  .nft {
+  .pic {
     position: absolute;
     margin-top: 1rem;
-    height: 15rem;
-    margin-left: 5.5rem;
-  }
-  .btn-secondary {
-    background-color: $white;
-    border: 0rem solid;
-    color: $light !important;
-    text-decoration: underline;
-  }
-  .btn-secondary:hover {
-    background-color: transparent;
-    border: 0rem solid;
-  }
-  .btn-secondary:focus {
-    background-color: transparent;
-    border: 0rem solid;
+    height: 9rem;
+    width: 9rem;
+    border-radius: 50%;
   }
   .card {
     width: 25rem;
@@ -41,10 +28,12 @@
     &-header {
       display: flex;
       flex-direction: column;
+      align-items: center;
       border-top-left-radius: 10px;
       border-top-right-radius: 10px;
       padding: 1rem;
-      height: 7rem;
+      height: 5rem;
+      margin-bottom: 1rem;
       background-image: url("../assets/coffee.jpg");
     }
     &-footer {
@@ -53,11 +42,9 @@
       padding: 0.8rem;
     }
   }
-  .cupprofile,.wetMill,.dryMill,.certification {
-    margin-left: 2rem;
-  }
-  .batch-detail {
-    margin-top: 9rem;
+  .info-row {
+    display: flex;
+    justify-content: space-between;
   }
   .info {
     display: flex;
@@ -65,12 +52,22 @@
     width: 100%;
     margin: 0.5rem 0rem 1rem 0rem;
   }
-  .info-row { 
-    display: flex;
-    justify-content: space-between;
-  }
   .location {
     margin: 0.5rem 0rem 1.2rem 0rem;
+  }s
+  .title {
+    font-size: 0.9rem;
+  }
+  .bio {
+    font-size: 1.2rem;
+  }
+  .text-light {
+    padding: 0rem;
+    font-size: 1rem;
+  }
+  .scitem {
+    display: flex;
+    align-items: center;
   }
   .boxes {
     margin-left: 1rem;
@@ -85,6 +82,12 @@
     display: flex;
     flex-direction: column;
     height: 100%
+  }
+  .map-container {
+    margin-left: 2rem; 
+    @media (max-width: 600px) {
+      margin-left: 0rem;
+    }  
   }
   .box {
     padding-left: 1.5rem;
@@ -106,7 +109,7 @@
     }
   }
   .box:before {
-    content: "Detalle de Lote";
+    content: "Información de Contacto";
     color: $light;
     background: $white;
     position: absolute;
@@ -116,25 +119,10 @@
     top: -10px;
     left: 10%;
   }
-  .export:before {
-    content: "Trillado de Café";
-  }
-  .cupprofile,.wetMill,.dryMill,.certification:before {
-    content: "Perfil de Taza";
-  }
-  .wetMill:before {
-    content: "Beneficio Húmedo";
-  }
-  .dryMill:before {
-    content: "Beneficio Seco";
-  }
-  .certifications:before {
-    content: "Certificados";
-  }
   .items {
     display: grid;
     gap: 0.7rem;
-    grid-template-columns: auto auto auto auto;
+    grid-template-columns: auto auto auto;
     padding-top: 3rem;
     padding-left: 1rem;
     @media (max-width: 600px) {
@@ -145,19 +133,5 @@
   .item {
     display: flex;
     flex-direction: column;
-  }
-  .title {
-    font-size: 0.9rem;
-  }
-  .bio {
-    font-size: 1.2rem;
-  }
-  .text-light {
-    padding: 0rem;
-    font-size: 1rem;
-  }
-  .scitem {
-    display: flex;
-    align-items: center;
   }
 }

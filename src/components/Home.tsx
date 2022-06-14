@@ -4,11 +4,13 @@ import Container from "react-bootstrap/esm/Container";
 import { ToastContainer } from "react-toastify";
 import "../styles/app.scss";
 import "react-toastify/dist/ReactToastify.css";
+import CoffeeCard from "./CoffeeBatch/CoffeeCard";
+import Company from "./Company";
+import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import Login from "./Login";
+import Farmer from "./Farmer";
 import Signup from "./Signup";
-import Dashboard from "./Dashboard";
-import CoffeeCard from "./CoffeeBatch/CoffeeCard";
 import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
 import { Create, List, PublicList } from "./CoffeeBatch/index";
@@ -59,6 +61,8 @@ const Home = () => {
         <Route path="/signup" element={<Signup />} />
         <Route path="/batch/:ipfsHash" element={<CoffeeCard />} />
         <Route path="/coffeebatches" element={<PublicList />} />
+        <Route path="/farmer/:farmerId" element={<Farmer />} />
+        <Route path="/company/:companyId" element={<Company />} />
       </Routes>
     </Container>
   );
