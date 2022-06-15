@@ -157,6 +157,7 @@ const Signup = () => {
     gender: currentGender.key,
     country: "Honduras",
     region: currentRegion.key,
+    company: currentCoop.name,
     village,
     village2,
   };

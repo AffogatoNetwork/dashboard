@@ -67,6 +67,12 @@ const Farmer = () => {
                   <span className="text-light">{farmerData.bio}</span>
                 </div>
               )}
+              {farmerData && farmerData.company && (
+                <div className="info">
+                  <h6 className="bio">Empresa</h6>
+                  <span className="text-light">{farmerData.company}</span>
+                </div>
+              )}
               <div className="location">
                 {farmerData && farmerData.region && (
                   <>
