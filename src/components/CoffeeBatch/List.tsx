@@ -198,7 +198,7 @@ export const List = () => {
   };
 
   const { loading, data, error } = useQuery(batchesQuery, {
-    variables: { owner: ownerAddress },
+    variables: { owner: ownerAddress.toLowerCase() },
     fetchPolicy: "no-cache",
     notifyOnNetworkStatusChange: true,
     onError: () => {
