@@ -66,7 +66,7 @@
     width: 100%;
     margin: 0.5rem 0rem 1rem 0rem;
   }
-  .info-row { 
+  .info-row {
     display: flex;
     justify-content: space-between;
   }
@@ -89,12 +89,13 @@
   }
   .box {
     padding-left: 1.5rem;
+    padding-bottom: 6rem;
     margin-left: 2rem;
     margin-bottom: 2rem;
     color: #9b9b9d;
     background: repeating-linear-gradient(45deg,#fff,#fff 20px,#fcfcfc 20px,#fcfcfc 40px);
     border-radius: 20px/30px;
-    box-shadow: 0 0 15px -2px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 15px -2px  rgb(0 0 0 / 20%);
     outline: 3px solid $light;
     outline-offset: -12px;
     position: relative;
@@ -156,6 +157,7 @@
   .text-light {
     padding: 0rem;
     font-size: 1rem;
+    background: none;
   }
   .scitem {
     display: flex;
