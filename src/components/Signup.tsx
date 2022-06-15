@@ -592,12 +592,12 @@ const Signup = () => {
               <FormInput
                 label="No. Socios Hombres"
                 value={noPartnersM}
-                placeholder="No. Socios  Hombres"
+                placeholder="No. Socios Hombres"
                 handleOnChange={handleNoPartnersMChange}
                 errorMsg={noPartnersMError}
               />
               <FormInput
-                label="No. Socios H"
+                label="No. Socios Mujeres"
                 value={noPartnersF}
                 placeholder="No. Socios Mujeres"
                 handleOnChange={handleNoPartnersFChange}

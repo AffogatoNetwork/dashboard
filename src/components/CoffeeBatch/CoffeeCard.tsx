@@ -446,7 +446,7 @@ const CoffeeCard = () => {
                 <div className="item">
                   <h6 className="title">Peso</h6>
                   <span className="text-light">
-                    {coffeeBatch.dryMill.weight}
+                    {coffeeBatch.dryMill.weight} QQ
                   </span>
                 </div>
               )}
