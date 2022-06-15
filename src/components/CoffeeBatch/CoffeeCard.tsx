@@ -170,8 +170,7 @@ const CoffeeCard = () => {
                               )
                             }
                           >
-                            {coffeeBatch.farm.latitude},{" "}
-                            {coffeeBatch.farm.longitude}
+                            Ver Mapa
                           </Button>
                         </div>
                       )}
@@ -350,8 +349,7 @@ const CoffeeCard = () => {
                         )
                       }
                     >
-                      {coffeeBatch.wetMill.latitude},{" "}
-                      {coffeeBatch.wetMill.longitude}
+                      Ver Mapa
                     </Button>
                   </div>
                 )}
@@ -421,8 +419,7 @@ const CoffeeCard = () => {
                         )
                       }
                     >
-                      {coffeeBatch.dryMill.latitude},{" "}
-                      {coffeeBatch.dryMill.longitude}
+                      Ver Mapa
                     </Button>
                   </div>
                 )}
