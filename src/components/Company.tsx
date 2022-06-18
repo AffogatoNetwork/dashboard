@@ -3,7 +3,6 @@ import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
 import "../styles/company.scss";
-import Logo from "../assets/affogato-horizontal.png";
 import Loading from "./Loading";
 import Map from "./common/Map";
 import NotFound from "./NotFound";
@@ -111,9 +110,6 @@ const Company = () => {
             </div>
           </div>
         </Card.Body>
-        <Card.Footer>
-          <Image src={Logo} className="logo" />
-        </Card.Footer>
       </Card>
       <div className="boxes">
         <div className="box cupprofile">

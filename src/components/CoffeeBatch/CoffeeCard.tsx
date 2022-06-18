@@ -4,7 +4,6 @@ import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
 import "../../styles/coffeecard.scss";
-import Logo from "../../assets/affogato-horizontal.png";
 import Loading from "../Loading";
 import NotFound from "../NotFound";
 import MapModal from "../common/MapModal";
@@ -131,33 +130,87 @@ const CoffeeCard = () => {
                   <span className="text-light">{farmerData.bio}</span>
                 </div>
               )}
+              {coffeeBatch.farm.name && (
+                <div className="location">
+                  <h6 className="bio">Nombre de Finca</h6>
+                  <span className="text-light">{coffeeBatch.farm.name}</span>
+                </div>
+              )}
+              {(coffeeBatch.farm.etnic_group ||
+                coffeeBatch.farm.family_members) && (
+                <div className="info-row">
+                  <div className="item">
+                    <h6 className="bio mt-2">Grupo étnico</h6>
+                    <span className="text-light">
+                      {coffeeBatch.farm.etnic_group}
+                    </span>
+                  </div>
+                  <div className="item">
+                    <h6 className="bio mt-2">Miembros de Familia</h6>
+                    <span className="text-light">
+                      {coffeeBatch.farm.family_members}
+                    </span>
+                  </div>
+                  <div className="item">
+                    <h6 className="bio mt-2">Sombra</h6>
+                    <span className="text-light">
+                      {coffeeBatch.farm.shadow}
+                    </span>
+                  </div>
+                </div>
+              )}
               {coffeeBatch.farm.story && (
                 <div className="location">
                   <h6 className="bio">Historia de Finca</h6>
                   <span className="text-light">{coffeeBatch.farm.story}</span>
                 </div>
               )}
+              {(coffeeBatch.farm.certifications ||
+                coffeeBatch.farm.varieties) && (
+                <div className="info-row">
+                  <div className="item">
+                    <h6 className="bio mt-2">Certificados</h6>
+                    <span className="text-light">
+                      {coffeeBatch.farm.certifications}
+                    </span>
+                  </div>
+                  <div className="item right">
+                    <h6 className="bio mt-2">Variedades</h6>
+                    <span className="text-light">
+                      {coffeeBatch.farm.varieties}
+                    </span>
+                  </div>
+                </div>
+              )}
               <div className="location">
                 {coffeeBatch.farm.village && (
-                  <>
-                    <h6 className="bio">Ubicación</h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
-                      {coffeeBatch.farm.country}
-                    </span>
-                  </>
-                )}
-                {coffeeBatch.farm.altitude && (
                   <div className="info-row">
                     <div className="item">
+                      <h6 className="bio">Ubicación</h6>
+                      <span className="text-light">
+                        {coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
+                        {coffeeBatch.farm.country}
+                      </span>
+                    </div>
+                    <div className="item right">
                       <h6 className="bio mt-2">Altitud</h6>
                       <span className="text-light">
                         {coffeeBatch.farm.altitude} MSNM
                       </span>
                     </div>
+                  </div>
+                )}
+                {coffeeBatch.farm.altitude && (
+                  <div className="info-row">
+                    <div className="item">
+                      <h6 className="bio mt-2">Área</h6>
+                      <span className="text-light">
+                        {coffeeBatch.farm.area}
+                      </span>
+                    </div>
                     {coffeeBatch.farm.latitude !== "" &&
                       coffeeBatch.farm.longitude !== "" && (
-                        <div className="item">
+                        <div className="item right">
                           <h6 className="bio mt-2">Coordenadas</h6>
                           <Button
                             variant="secondary"
@@ -180,9 +233,6 @@ const CoffeeCard = () => {
             </div>
           </div>
         </Card.Body>
-        <Card.Footer>
-          <Image src={Logo} className="logo" />
-        </Card.Footer>
       </Card>
       <div className="boxes">
         <div className="box cupprofile">

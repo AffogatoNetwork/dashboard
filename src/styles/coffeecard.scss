@@ -30,10 +30,15 @@
   }
   .btn-secondary:focus {
     background-color: transparent;
+    border-color: transparent;
+    box-shadow: none;
+  }
+  .btn-secondary:active {
     border: 0rem solid;
+    box-shadow: none;
   }
   .card {
-    width: 25rem;
+    width: 40rem;
     border-radius: 10px;
     @media (max-width: 600px) {
       width: auto;
@@ -147,6 +152,12 @@
   .item {
     display: flex;
     flex-direction: column;
+    &.right {
+      text-align: right;
+      .btn {
+        text-align: right;
+      }
+    }
   }
   .title {
     font-size: 0.9rem;
