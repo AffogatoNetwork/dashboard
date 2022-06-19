@@ -91,7 +91,7 @@ export const List = () => {
 
   const batchesQuery = gql`
     query getCoffeeBatches($owner: String!) {
-      coffeeBatches(where: { owner: $owner, block_gte: 22693767 }) {
+      coffeeBatches(where: { owner: $owner, block_gt: 22693767 }) {
         id
       }
       ownerBalance(id: $owner) {
@@ -200,7 +200,6 @@ export const List = () => {
       console.log(error);
     },
     onCompleted: () => {
-      console.log(data);
       setLoadingIpfs(true);
       loadBatchesData(data.coffeeBatches);
     },
@@ -256,17 +255,19 @@ export const List = () => {
           ) : (
             <Table className="coffeebatches">
               <thead>
-                <th className="th-2">QR</th>
-                <th className="th-2">Finca</th>
-                <th className="th-2">Altura</th>
-                <th className="th-2">Ubicación</th>
-                <th className="th-3">Variedad</th>
-                <th className="th-2">Proceso</th>
-                <th className="th-4">Id de Secado</th>
-                <th className="th-2">Tipo de Secado</th>
-                <th className="th-4">Id de Exportación</th>
-                <th className="th-3">Peso</th>
-                <th className="th-3">Nota</th>
+                <tr>
+                  <th className="th-2">QR</th>
+                  <th className="th-2">Finca</th>
+                  <th className="th-2">Altura</th>
+                  <th className="th-2">Ubicación</th>
+                  <th className="th-3">Variedad</th>
+                  <th className="th-2">Proceso</th>
+                  <th className="th-4">Id de Secado</th>
+                  <th className="th-2">Tipo de Secado</th>
+                  <th className="th-4">Id de Exportación</th>
+                  <th className="th-3">Peso</th>
+                  <th className="th-3">Nota</th>
+                </tr>
               </thead>
               <tbody>
                 {coffeeBatchList.map((batch, index) => (
