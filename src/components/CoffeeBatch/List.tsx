@@ -91,12 +91,7 @@ export const List = () => {
 
   const batchesQuery = gql`
     query getCoffeeBatches($owner: String!) {
-      coffeeBatches(
-        where: {
-          owner: $owner
-          id_not_in: ["1", "2", "3", "4", "5", "6", "7", "8", "9"]
-        }
-      ) {
+      coffeeBatches(where: { owner: $owner, block_gte: 22693767 }) {
         id
       }
       ownerBalance(id: $owner) {
