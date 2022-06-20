@@ -250,7 +250,7 @@ const Signup = () => {
   const handleFullnameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const input = event.target.value;
     setFullname(input);
-    if (input.trim().length > 25) {
+    if (input.trim().length > 70) {
       setFullnameError("Valor debe de tener menos de 70 carácteres");
     } else {
       setFullnameError("");
