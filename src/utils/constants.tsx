@@ -17,7 +17,7 @@ export const CooperativeList = [
   { key: "1", name: "COMMOVEL", email: "robert@affogato.co" },
   { key: "2", name: "COPRANIL", email: "jdestephen07@gmail.com" },
   { key: "3", name: "COMSA", email: "robert@affogato.co" },
-  { key: "4", name: "PROEXO", email: "ceegarner@gmail.com" },
+  { key: "4", name: "PROEXO", email: "cristian@affogato.co" },
 ];
 
 export const RegionList = [
