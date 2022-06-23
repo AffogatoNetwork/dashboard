@@ -1,5 +1,6 @@
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
+import { CooperativeList } from "./constants";
 
 export const getDefaultProvider = () => {
   const url = "https://rpc.ankr.com/gnosis";
@@ -47,4 +48,14 @@ export const isValidEmail = (email: string) => {
   const pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
 
   return pattern.test(email);
+};
+
+export const getCompanyName = (address: string): string => {
+  let name = "";
+  for (let i = 0; i < CooperativeList.length; i += 1) {
+    if (CooperativeList[i].addresses?.includes(address)) {
+      name = CooperativeList[i].name;
+    }
+  }
+  return name;
 };

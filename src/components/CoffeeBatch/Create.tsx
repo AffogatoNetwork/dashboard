@@ -126,7 +126,7 @@ export const Create = () => {
         </Card.Header>
         <Card.Body>
           {saving ? (
-            <Loading label="Creando Lotes.." />
+            <Loading label="Creando Lotes.." className="loading-wrapper" />
           ) : (
             <>
               <h4>

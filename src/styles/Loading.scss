@@ -1,14 +1,18 @@
 .loading-wrapper{
-    margin: auto;
-    width: 50%;
-    padding: 10px;
-    top:35%;
-    position: relative;
+  margin: auto;
+  width: 50%;
+  padding: 10px;
+  top:35%;
+  position: relative;
 }
 
-.loading-wrapper h4, .loading-wrapper h6 {
+.loading-wrapper.two{
+  top: 0%;
+}
 
-    text-align: center;
+
+.loading-wrapper h4, .loading-wrapper h6 {
+  text-align: center;
 }
 
 .breathing-icon {

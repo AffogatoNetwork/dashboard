@@ -1,7 +1,7 @@
 @import "./colors";
 @import "./fonts";
 
-.batch-list {
+.farmers {
   display: flex;
   justify-content: center;
   width: 100%;
@@ -17,21 +17,24 @@
       border-top-left-radius: 8px;
       border-top-right-radius: 8px;
       box-shadow: inset 0 4px 0 0 $light;
+
     }
     &-body {
       overflow-x: scroll;
+      padding-bottom: 0rem;
     }
     &-footer {
       display: flex;
       justify-content: center;
     }
   }
-  .coffeebatches {
+  .farmers-list {
+    margin-bottom: 0rem;
     th {
       padding: 0rem 0.5rem;
     }
     .th {
-      &-1 {
+      &-bio {
         width: 20%;
       }
     }
@@ -46,16 +49,6 @@
     }
     .main {
       display: flex;
-      .qrcode-btn {
-        padding: 0;
-        cursor: pointer;
-        background-color: transparent;
-        border-color: transparent;
-      }
-      .qrcode {
-        width: 4rem;
-        height: 4rem;
-      }
       .info {
         display: flex;
         flex-direction: column;
@@ -75,5 +68,17 @@
     .cupprofile {
       border-left: 0.5px dashed $secondary;
     }
+  }
+  .totals {
+    display: flex;
+    align-items: center;
+  }
+  .download-xls-button {
+    cursor: pointer;
+    background-color: transparent;
+    border-color: transparent;
+    color: $primary;
+    text-decoration: underline;
+    font-size: 20px;
   }
 }

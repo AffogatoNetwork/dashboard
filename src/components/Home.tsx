@@ -9,7 +9,7 @@ import Company from "./Company";
 import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import Login from "./Login";
-import Farmer from "./Farmer";
+import { Profile, List as FarmerList } from "./Farmer/index";
 import Signup from "./Signup";
 import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
@@ -20,7 +20,7 @@ const Home = () => {
   const [state] = authState;
 
   if (state.isLoading || state.isSigningIn) {
-    return <Loading label="Cargando..." />;
+    return <Loading label="Cargando..." className="loading-wrapper" />;
   }
 
   return (
@@ -57,11 +57,21 @@ const Home = () => {
             </RequiredAuth>
           }
         />
+        <Route
+          path="/farmers"
+          element={
+            <RequiredAuth>
+              <Dashboard>
+                <FarmerList />
+              </Dashboard>
+            </RequiredAuth>
+          }
+        />
         <Route path="/login" element={<Login />} />
         <Route path="/signup" element={<Signup />} />
         <Route path="/batch/:ipfsHash" element={<CoffeeCard />} />
         <Route path="/coffeebatches" element={<PublicList />} />
-        <Route path="/farmer/:farmerId" element={<Farmer />} />
+        <Route path="/farmer/:farmerId" element={<Profile />} />
         <Route path="/company/:companyId" element={<Company />} />
       </Routes>
     </Container>

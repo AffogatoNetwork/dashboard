@@ -819,7 +819,7 @@ const Signup = () => {
   };
 
   if (state.creatingAccount) {
-    return <Loading label="Cargando..." />;
+    return <Loading label="Cargando..." className="loading-wrapper" />;
   }
 
   return (

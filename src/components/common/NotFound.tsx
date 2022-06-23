@@ -1,6 +1,6 @@
 import React from "react";
-import empty from "../assets/coffee-glass-empty.png";
-import "../styles/Loading.scss";
+import empty from "../../assets/coffee-glass-empty.png";
+import "../../styles/Loading.scss";
 
 type props = {
   msg: string;

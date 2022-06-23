@@ -3,7 +3,13 @@ import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
-import { FaHome, FaPencilAlt, FaPowerOff, FaUserAlt } from "react-icons/fa";
+import {
+  FaHome,
+  FaMugHot,
+  FaPencilAlt,
+  FaPowerOff,
+  FaUserAlt,
+} from "react-icons/fa";
 import CoopLogo from "./common/CoopLogo";
 import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
@@ -52,6 +58,11 @@ const Sidebar = () => {
           <Nav.Link onClick={() => navigate("/create")}>
             <div className="nav-caption">
               <FaPencilAlt /> Crear Lotes
+            </div>
+          </Nav.Link>
+          <Nav.Link onClick={() => navigate("/farmers")}>
+            <div className="nav-caption">
+              <FaMugHot /> Productores
             </div>
           </Nav.Link>
           <Navbar.Toggle onClick={() => logout()}>

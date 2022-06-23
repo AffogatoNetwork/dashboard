@@ -5,7 +5,7 @@ import { useParams } from "react-router";
 import "../styles/company.scss";
 import Loading from "./Loading";
 import Map from "./common/Map";
-import NotFound from "./NotFound";
+import NotFound from "./common/NotFound";
 import { getCompany } from "../db/firebase";
 
 const Company = () => {
@@ -27,7 +27,7 @@ const Company = () => {
   }, [companyId]);
 
   if (loading) {
-    return <Loading label="Cargando..." />;
+    return <Loading label="Cargando..." className="loading-wrapper" />;
   }
 
   if (companyData === null) {

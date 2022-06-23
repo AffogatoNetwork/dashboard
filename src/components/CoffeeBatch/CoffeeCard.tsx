@@ -5,7 +5,7 @@ import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
 import "../../styles/coffeecard.scss";
 import Loading from "../Loading";
-import NotFound from "../NotFound";
+import NotFound from "../common/NotFound";
 import MapModal from "../common/MapModal";
 import { CoffeeBatchType } from "../common/types";
 import { ipfsUrl } from "../../utils/constants";
@@ -85,7 +85,7 @@ const CoffeeCard = () => {
   }, [ipfsHash]);
 
   if (loading) {
-    return <Loading label="Cargando..." />;
+    return <Loading label="Cargando..." className="loading-wrapper" />;
   }
 
   if (coffeeBatch === null) {

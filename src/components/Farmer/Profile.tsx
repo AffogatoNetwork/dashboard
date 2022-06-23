@@ -2,12 +2,12 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
-import "../styles/farmer.scss";
-import Loading from "./Loading";
-import NotFound from "./NotFound";
-import { getFarmer, getImageUrl } from "../db/firebase";
+import "../../styles/farmer.scss";
+import Loading from "../Loading";
+import NotFound from "../common/NotFound";
+import { getFarmer, getImageUrl } from "../../db/firebase";
 
-const Farmer = () => {
+export const Profile = () => {
   const { farmerId } = useParams();
   const [loading, setLoading] = useState(true);
   const [farmerData, setFarmerData] = useState<any>();
@@ -30,7 +30,7 @@ const Farmer = () => {
   }, [farmerId]);
 
   if (loading) {
-    return <Loading label="Cargando..." />;
+    return <Loading label="Cargando..." className="loading-wrapper" />;
   }
 
   if (farmerData === null) {
@@ -95,5 +95,3 @@ const Farmer = () => {
     </div>
   );
 };
-
-export default Farmer;

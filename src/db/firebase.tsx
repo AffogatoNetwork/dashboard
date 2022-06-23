@@ -1,5 +1,14 @@
 import { initializeApp } from "firebase/app";
-import { doc, getDoc, getFirestore, setDoc } from "firebase/firestore";
+import {
+  collection,
+  doc,
+  getDoc,
+  getDocs,
+  getFirestore,
+  query,
+  where,
+  setDoc,
+} from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, uploadBytes } from "firebase/storage";
 import { CompanyType, FarmerType } from "../components/common/types";
 
@@ -40,6 +49,12 @@ export const getFarmer = async (address: string) => {
     return docData.data();
   }
   return null;
+};
+
+export const getAllFarmers = async (company: string) => {
+  const q = query(collection(db, "farmers"), where("company", "==", company));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
 };
 
 export const saveCompany = async (company: CompanyType) => {

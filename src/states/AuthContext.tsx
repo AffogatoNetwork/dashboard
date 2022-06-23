@@ -148,6 +148,8 @@ export default function AuthProvider({ children }: props) {
     );
     contracts.setCurrentCoffeeBatch(currentCoffeeBatch);
     const exists = await currentCoffeeBatch.minters(userAddress);
+    console.log("--- Existe ---");
+    console.log(exists);
     if (!exists) {
       dispatch({
         type: "SIGN_IN",

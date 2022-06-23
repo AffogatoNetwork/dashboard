@@ -39,6 +39,7 @@ export const List = () => {
   const [coffeeBatchList, setCoffeeBatchList] = useState<
     Array<CoffeeBatchType>
   >([]);
+  const [batchesCount, setBatchesCount] = useState(0);
   const [pagination, setPagination] = useState(pagDefault);
   const [loadingIpfs, setLoadingIpfs] = useState(true);
   const [showModal, setShowModal] = useState(false);
@@ -117,6 +118,7 @@ export const List = () => {
         lastId: lastCBId,
       };
       setPagination(pag);
+      setBatchesCount(itemsCount);
     } else {
       setPagination(pagDefault);
     }
@@ -247,11 +249,16 @@ export const List = () => {
     <div className="batch-list">
       <Card className="create-card">
         <Card.Header>
-          <h2>Lotes de café</h2>
+          <div>
+            <h2>Lotes de café</h2>
+          </div>
+          <div>
+            <h3>Total: {batchesCount}</h3>
+          </div>
         </Card.Header>
         <Card.Body>
           {loading || loadingIpfs ? (
-            <Loading label="Cargando..." />
+            <Loading label="Cargando..." className="loading-wrapper" />
           ) : (
             <Table className="coffeebatches">
               <thead>
