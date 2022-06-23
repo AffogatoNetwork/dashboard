@@ -59,3 +59,27 @@ export const getCompanyName = (address: string): string => {
   }
   return name;
 };
+
+export const getCompanyAddresses = (address: string): Array<string> => {
+  let addresses = new Array<string>();
+  for (let i = 0; i < CooperativeList.length; i += 1) {
+    if (CooperativeList[i].addresses?.includes(address)) {
+      addresses = CooperativeList[i].addresses;
+    }
+  }
+  if (addresses.length === 0) {
+    addresses = CooperativeList[4].addresses;
+  }
+  return addresses;
+};
+
+export const getCompanyAddressesByHost = (location: string) => {
+  let { addresses } = CooperativeList[4];
+  for (let i = 0; i < CooperativeList.length; i += 1) {
+    const name = CooperativeList[i].name.toLowerCase();
+    if (location.toLowerCase().match(name) !== null) {
+      addresses = CooperativeList[i].addresses;
+    }
+  }
+  return addresses;
+};

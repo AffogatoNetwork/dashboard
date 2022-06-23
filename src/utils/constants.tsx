@@ -20,8 +20,8 @@ export const CooperativeList = [
     name: "COMMOVEL",
     email: "robert@affogato.co",
     addresses: [
-      "0x7e02EFc22e3351A020cD3bfA1FCA540afb2C6F8c",
-      "0x27825E62C42E23364efC8e967cC6E69ef70A4813",
+      "0x7e02efc22e3351a020cd3bfa1fca540afb2c6f8c",
+      "0x27825e62c42e23364efc8e967cc6e69ef70a4813",
     ],
   },
   {
@@ -29,10 +29,10 @@ export const CooperativeList = [
     name: "COPRANIL",
     email: "jdestephen07@gmail.com",
     addresses: [
-      "0x6Db51e8Cc765Df7f007956C00B1AC83990149Ab6",
-      "0x2b97B5692A5C2C9221fDacBbA30f7fD4d56B6293",
-      "0xbA2Ae96649d04BFF55bE93bb2b0B8993F81F4cc2",
-      "0xccdF342558d6D41a0e282B586dA463443E61eE4f",
+      "0x6db51e8cc765df7f007956c00b1ac83990149ab6",
+      "0x2b97b5692a5c2c9221fdacbba30f7fd4d56b6293",
+      "0xba2ae96649d04bff55be93bb2b0b8993f81f4cc2",
+      "0xccdf342558d6d41a0e282b586da463443e61ee4f",
     ],
   },
   {
@@ -40,9 +40,9 @@ export const CooperativeList = [
     name: "COMSA",
     email: "robert@affogato.co",
     addresses: [
-      "0xceFe349B2c94910CA16be79598BC15eAEE7c5E81",
-      "0xADC801905c98e4EF00a9392eDAe72CBbEEF402F4",
-      "0x902f6E040D3018C53953F4BEa4146Fba72b0fAA1",
+      "0xcefe349b2c94910ca16be79598bc15eaee7c5e81",
+      "0xadc801905c98e4ef00a9392edae72cbbeef402f4",
+      "0x902f6e040d3018c53953f4bea4146fba72b0faa1",
     ],
   },
   {
@@ -50,10 +50,10 @@ export const CooperativeList = [
     name: "PROEXO",
     email: "cristian@affogato.co",
     addresses: [
-      "0xD109a56c1C3Fa6A31E3CB2E09188EC2401e2E405",
-      "0x370c3Da4428C0E366098e8Fe8068C3D480d880Ae",
-      "0x0a97BF177b0Ad4067D51540456631eCbbD881f4e",
-      "0xfa474D1E6d83C6bA0591117981D56dbF08C774AF",
+      "0xd109a56c1c3fa6a31e3cb2e09188ec2401e2e405",
+      "0x370c3da4428c0e366098e8fe8068c3d480d880ae",
+      "0x0a97bf177b0ad4067d51540456631ecbbd881f4e",
+      "0xfa474d1e6d83c6ba0591117981d56dbf08c774af",
     ],
   },
 ];

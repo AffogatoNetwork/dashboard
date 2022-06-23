@@ -16,7 +16,11 @@ import { CustomPagination } from "../common/Pagination";
 import { CoffeeBatchType } from "../common/types";
 import CoffeeBatch from "../../contracts/CoffeBatch.json";
 import BatchItem from "./BatchItem";
-import { getDefaultProvider } from "../../utils/utils";
+import {
+  getCompanyAddresses,
+  getCompanyAddressesByHost,
+  getDefaultProvider,
+} from "../../utils/utils";
 
 const saveSvgAsPng = require("save-svg-as-png");
 
@@ -45,7 +49,8 @@ export const List = () => {
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [isAuth, setAuth] = useState(true);
-  const [ownerAddress, setOwnerAddress] = useState("");
+  // const [ownerAddress, setOwnerAddress] = useState("");
+  const [companyAddresses, setCompanyAddresses] = useState<Array<string>>([]);
 
   setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -57,12 +62,14 @@ export const List = () => {
         ethcallProvider = new Provider(state.provider);
         const signer = state.provider.getSigner();
         const address = await signer.getAddress();
-        setOwnerAddress(address);
+        // setOwnerAddress(address);
+        setCompanyAddresses(getCompanyAddresses(address));
         setAuth(true);
       } else {
         const provider = getDefaultProvider();
         const randomSigner = ethers.Wallet.createRandom().connect(provider);
         ethcallProvider = new Provider(randomSigner.provider);
+        setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
         setAuth(false);
       }
       if (ethcallProvider !== null) {
@@ -89,14 +96,11 @@ export const List = () => {
     };
     setPagination(newPagination);
   };
-
+  // block_gt: 22693767
   const batchesQuery = gql`
-    query getCoffeeBatches($owner: String!) {
-      coffeeBatches(where: { owner: $owner, block_gt: 22693767 }) {
+    query getCoffeeBatches($owners: [String!]!) {
+      coffeeBatches(where: { owner_in: $owners }) {
         id
-      }
-      ownerBalance(id: $owner) {
-        balance
       }
     }
   `;
@@ -173,6 +177,7 @@ export const List = () => {
 
   const loadBatchesData = async (cbData: any) => {
     if (cbContract) {
+      console.log("entra");
       setCoffeeBatchList([]);
       const ethcalls = [];
       for (let i = 0; i < cbData.length; i += 1) {
@@ -191,11 +196,15 @@ export const List = () => {
       }
       confPagination(cbData, isAuth ? 6 : 8);
       setLoadingIpfs(false);
+    } else {
+      setLoadingIpfs(false);
     }
   };
 
   const { loading, data, error } = useQuery(batchesQuery, {
-    variables: { owner: ownerAddress.toLowerCase() },
+    variables: {
+      owners: companyAddresses,
+    },
     fetchPolicy: "no-cache",
     notifyOnNetworkStatusChange: true,
     onError: () => {
