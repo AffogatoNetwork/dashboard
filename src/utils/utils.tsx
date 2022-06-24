@@ -53,7 +53,7 @@ export const isValidEmail = (email: string) => {
 export const getCompanyName = (address: string): string => {
   let name = "";
   for (let i = 0; i < CooperativeList.length; i += 1) {
-    if (CooperativeList[i].addresses?.includes(address)) {
+    if (CooperativeList[i].addresses?.includes(address.toLowerCase())) {
       name = CooperativeList[i].name;
     }
   }

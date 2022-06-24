@@ -96,10 +96,10 @@ export const List = () => {
     };
     setPagination(newPagination);
   };
-  // block_gt: 22693767
+
   const batchesQuery = gql`
     query getCoffeeBatches($owners: [String!]!) {
-      coffeeBatches(where: { owner_in: $owners }) {
+      coffeeBatches(where: { owner_in: $owners, block_gt: 22693767 }) {
         id
       }
     }
@@ -177,7 +177,6 @@ export const List = () => {
 
   const loadBatchesData = async (cbData: any) => {
     if (cbContract) {
-      console.log("entra");
       setCoffeeBatchList([]);
       const ethcalls = [];
       for (let i = 0; i < cbData.length; i += 1) {
