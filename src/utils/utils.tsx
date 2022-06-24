@@ -63,7 +63,7 @@ export const getCompanyName = (address: string): string => {
 export const getCompanyAddresses = (address: string): Array<string> => {
   let addresses = new Array<string>();
   for (let i = 0; i < CooperativeList.length; i += 1) {
-    if (CooperativeList[i].addresses?.includes(address)) {
+    if (CooperativeList[i].addresses?.includes(address.toLowerCase())) {
       addresses = CooperativeList[i].addresses;
     }
   }
