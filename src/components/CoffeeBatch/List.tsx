@@ -59,6 +59,8 @@ export const List = () => {
     query getCoffeeBatches($owners: [String!]!) {
       coffeeBatches(
         first: 1000
+        orderBy: block
+        orderDirection: desc
         where: { owner_in: $owners, block_gt: 22693767 }
       ) {
         id
