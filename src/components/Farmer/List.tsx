@@ -143,7 +143,7 @@ export const List = () => {
       <Card>
         <Card.Header>
           <div>
-            <h2>Produtores</h2>
+            <h2>Productores</h2>
           </div>
           <div className="totals">
             <h4>Total: {farmersCount}</h4>

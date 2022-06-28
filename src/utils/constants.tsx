@@ -1,4 +1,4 @@
-export const ipfsUrl = "https://gateway.pinata.cloud/ipfs/";
+export const ipfsUrl = "https://affogato.mypinata.cloud/ipfs/";
 export const apiUrl = "https://mocha-j6pn.onrender.com/api/v1/";
 
 export type CooperativeType = {

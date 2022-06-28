@@ -95,7 +95,7 @@ export const Create = () => {
       fetch(url, {
         method: "POST",
         headers: {
-          "access-control-allow-origin": "*",
+          "Access-Control-Allow-Origin": "*",
         },
         body: formData,
       })

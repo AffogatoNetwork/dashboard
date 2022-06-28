@@ -56,6 +56,7 @@ export default function AuthProvider({ children }: props) {
             isSigningIn: false,
             isLoggedIn: action.isLoggedIn,
             provider: action.provider,
+            userAddress: action.userAddress,
           };
         case "SIGN_IN_ERROR":
           return {
@@ -65,6 +66,7 @@ export default function AuthProvider({ children }: props) {
             isSigningIn: false,
             isLoggedIn: false,
             provider: null,
+            userAddress: "",
           };
         case "SIGN_OUT":
           return {
@@ -75,6 +77,7 @@ export default function AuthProvider({ children }: props) {
             isSignInError: false,
             isLoggedIn: false,
             provider: null,
+            userAddress: "",
           };
         case "CREATING_ACCOUNT":
           return {
@@ -108,6 +111,7 @@ export default function AuthProvider({ children }: props) {
       creatingAccountError: false,
       accountCreated: false,
       provider: null,
+      userAddress: "",
     }
   );
 
@@ -148,14 +152,13 @@ export default function AuthProvider({ children }: props) {
     );
     contracts.setCurrentCoffeeBatch(currentCoffeeBatch);
     const exists = await currentCoffeeBatch.minters(userAddress);
-    console.log("--- Existe ---");
-    console.log(exists);
     if (!exists) {
       dispatch({
         type: "SIGN_IN",
         isLoading: false,
         isLoggedIn: true,
         provider,
+        userAddress,
       });
     } else {
       await magicSDK.user.logout();

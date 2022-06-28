@@ -46,6 +46,7 @@ export const List = () => {
   const [batchesCount, setBatchesCount] = useState(0);
   const [pagination, setPagination] = useState(pagDefault);
   const [loadingIpfs, setLoadingIpfs] = useState(true);
+  const [dataLoaded, setDataLoaded] = useState(false);
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [isAuth, setAuth] = useState(true);
@@ -53,49 +54,6 @@ export const List = () => {
   const [companyAddresses, setCompanyAddresses] = useState<Array<string>>([]);
 
   setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
-
-  useEffect(() => {
-    const loadProvider = async () => {
-      let ethcallProvider = null;
-
-      if (state.provider !== null) {
-        ethcallProvider = new Provider(state.provider);
-        const signer = state.provider.getSigner();
-        const address = await signer.getAddress();
-        // setOwnerAddress(address);
-        setCompanyAddresses(getCompanyAddresses(address));
-        setAuth(true);
-      } else {
-        const provider = getDefaultProvider();
-        const randomSigner = ethers.Wallet.createRandom().connect(provider);
-        ethcallProvider = new Provider(randomSigner.provider);
-        setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
-        setAuth(false);
-      }
-      if (ethcallProvider !== null) {
-        await ethcallProvider.init();
-        // Set CoffeBatch contracts
-        const currentCoffeeBatch = new Contract(
-          CoffeeBatch.address,
-          CoffeeBatch.abi
-        );
-        setCbContract(currentCoffeeBatch);
-        setCurrentEthCallProvider(ethcallProvider);
-      }
-    };
-    loadProvider();
-  }, [state.provider]);
-
-  const onPageSelected = (pageNumber: number) => {
-    const nextPage = pageNumber === pagination.pages ? 0 : pageNumber + 1;
-    const newPagination = {
-      ...pagination,
-      previous: pageNumber === 1 ? 0 : pageNumber - 1,
-      current: pageNumber,
-      next: nextPage,
-    };
-    setPagination(newPagination);
-  };
 
   const batchesQuery = gql`
     query getCoffeeBatches($owners: [String!]!) {
@@ -194,13 +152,14 @@ export const List = () => {
         }
       }
       confPagination(cbData, isAuth ? 6 : 8);
+      setDataLoaded(true);
       setLoadingIpfs(false);
     } else {
       setLoadingIpfs(false);
     }
   };
 
-  const { loading, data, error } = useQuery(batchesQuery, {
+  const { loading, data, refetch, error } = useQuery(batchesQuery, {
     variables: {
       owners: companyAddresses,
     },
@@ -210,10 +169,62 @@ export const List = () => {
       console.log(error);
     },
     onCompleted: () => {
-      setLoadingIpfs(true);
-      loadBatchesData(data.coffeeBatches);
+      if (data.coffeeBatches.length > 0) {
+        setLoadingIpfs(true);
+        loadBatchesData(data.coffeeBatches);
+      }
     },
   });
+
+  useEffect(
+    () => {
+      const loadProvider = async () => {
+        let ethcallProvider = null;
+
+        if (state.provider !== null) {
+          ethcallProvider = new Provider(state.provider);
+          const signer = state.provider.getSigner();
+          const address = await signer.getAddress();
+          // setOwnerAddress(address);
+          setCompanyAddresses(getCompanyAddresses(address));
+          setAuth(true);
+        } else {
+          const provider = getDefaultProvider();
+          const randomSigner = ethers.Wallet.createRandom().connect(provider);
+          ethcallProvider = new Provider(randomSigner.provider);
+          setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
+          setAuth(false);
+        }
+        if (ethcallProvider !== null) {
+          await ethcallProvider.init();
+          // Set CoffeBatch contracts
+          const currentCoffeeBatch = new Contract(
+            CoffeeBatch.address,
+            CoffeeBatch.abi
+          );
+          setCbContract(currentCoffeeBatch);
+          setCurrentEthCallProvider(ethcallProvider);
+          if (!dataLoaded) {
+            refetch();
+          }
+        }
+      };
+      loadProvider();
+    },
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    [state.provider]
+  );
+
+  const onPageSelected = (pageNumber: number) => {
+    const nextPage = pageNumber === pagination.pages ? 0 : pageNumber + 1;
+    const newPagination = {
+      ...pagination,
+      previous: pageNumber === 1 ? 0 : pageNumber - 1,
+      current: pageNumber,
+      next: nextPage,
+    };
+    setPagination(newPagination);
+  };
 
   const showQrModal = (url: string) => {
     setQrCodeUrl(url);
@@ -258,7 +269,7 @@ export const List = () => {
       <Card className="create-card">
         <Card.Header>
           <div>
-            <h2>Lotes de café</h2>
+            <h2>Fincas y Lotes de café</h2>
           </div>
           <div>
             <h3>Total: {batchesCount}</h3>
