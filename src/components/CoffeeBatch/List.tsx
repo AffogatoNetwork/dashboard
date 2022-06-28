@@ -57,7 +57,10 @@ export const List = () => {
 
   const batchesQuery = gql`
     query getCoffeeBatches($owners: [String!]!) {
-      coffeeBatches(where: { owner_in: $owners, block_gt: 22693767 }) {
+      coffeeBatches(
+        first: 1000
+        where: { owner_in: $owners, block_gt: 22693767 }
+      ) {
         id
       }
     }
@@ -151,7 +154,7 @@ export const List = () => {
           }
         }
       }
-      confPagination(cbData, isAuth ? 6 : 8);
+      confPagination(cbData, isAuth ? 10 : 12);
       setDataLoaded(true);
       setLoadingIpfs(false);
     } else {
