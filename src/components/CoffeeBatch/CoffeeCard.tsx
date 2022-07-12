@@ -336,7 +336,8 @@ const CoffeeCard = () => {
           !!coffeeBatch.wetMill.process ||
           !!coffeeBatch.wetMill.drying_type ||
           !!coffeeBatch.wetMill.drying_hours ||
-          !!coffeeBatch.wetMill.date ||
+          (!!coffeeBatch.wetMill.date &&
+            coffeeBatch.wetMill.date !== "1970-01-01") ||
           !!coffeeBatch.wetMill.facility ||
           !!coffeeBatch.wetMill.weight ||
           !!coffeeBatch.wetMill.note) && (
@@ -382,12 +383,15 @@ const CoffeeCard = () => {
                   </span>
                 </div>
               )}
-              {!!coffeeBatch.wetMill.date && (
-                <div className="item">
-                  <h6 className="title">Fecha de Ingreso</h6>
-                  <span className="text-light">{coffeeBatch.wetMill.date}</span>
-                </div>
-              )}
+              {!!coffeeBatch.wetMill.date &&
+                coffeeBatch.wetMill.date !== "1970-01-01" && (
+                  <div className="item">
+                    <h6 className="title">Fecha de Ingreso</h6>
+                    <span className="text-light">
+                      {coffeeBatch.wetMill.date}
+                    </span>
+                  </div>
+                )}
               {!!coffeeBatch.wetMill.facility && (
                 <div className="item">
                   <h6 className="title">Instalación</h6>
@@ -433,7 +437,8 @@ const CoffeeCard = () => {
           </div>
         )}
         {(!!coffeeBatch.dryMill.export_id ||
-          !!coffeeBatch.dryMill.date ||
+          (!!coffeeBatch.dryMill.date &&
+            coffeeBatch.dryMill.date !== "1970-01-01") ||
           !!coffeeBatch.dryMill.facility ||
           !!coffeeBatch.dryMill.drying_type ||
           !!coffeeBatch.dryMill.damage_percent ||
@@ -451,12 +456,15 @@ const CoffeeCard = () => {
                 </div>
               )}
 
-              {!!coffeeBatch.dryMill.date && (
-                <div className="item">
-                  <h6 className="title">Fecha</h6>
-                  <span className="text-light">{coffeeBatch.dryMill.date}</span>
-                </div>
-              )}
+              {!!coffeeBatch.dryMill.date &&
+                coffeeBatch.dryMill.date !== "1970-01-01" && (
+                  <div className="item">
+                    <h6 className="title">Fecha</h6>
+                    <span className="text-light">
+                      {coffeeBatch.dryMill.date}
+                    </span>
+                  </div>
+                )}
 
               {!!coffeeBatch.dryMill.facility && (
                 <div className="item">
