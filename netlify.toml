@@ -1,0 +1,6 @@
+# A basic redirect rule
+[[redirects]]
+  from = "/edu"
+  to = "https://gilded-clafoutis-bbe603.netlify.app/"
+  status = 200
+  force = true
