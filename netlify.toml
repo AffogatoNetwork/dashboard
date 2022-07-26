@@ -1,6 +1,0 @@
-# A basic redirect rule
-[[redirects]]
-  from = "/edu"
-  to = "https://test.cryptex.finance/"
-  status = 200
-  force = true
