@@ -570,7 +570,7 @@ const Signup = () => {
           </Col>
           <Col sm={12} md={4} lg={4}>
             <FormInput
-              label="Áreas Productivas"
+              label="Áreas Productivas (en hectáreas)"
               value={productiveAreas}
               placeholder="areas"
               handleOnChange={handleProductivesAreasChange}
@@ -671,7 +671,7 @@ const Signup = () => {
               errorMsg={fullnameError}
             />
             <FormInput
-              label="Id de productor"
+              label="Código de empresa"
               value={farmerId}
               placeholder="id"
               handleOnChange={handleIdProductorChange}

@@ -12,6 +12,7 @@ import QRCode from "react-qr-code";
 import Loading from "../Loading";
 import { useAuthContext } from "../../states/AuthContext";
 import { ipfsUrl } from "../../utils/constants";
+import FormInput from "../common/FormInput";
 import { CustomPagination } from "../common/Pagination";
 import { CoffeeBatchType } from "../common/types";
 import CoffeeBatch from "../../contracts/CoffeBatch.json";
@@ -43,6 +44,9 @@ export const List = () => {
   const [coffeeBatchList, setCoffeeBatchList] = useState<
     Array<CoffeeBatchType>
   >([]);
+  const [coffeeBatchList2, setCoffeeBatchList2] = useState<
+    Array<CoffeeBatchType>
+  >([]);
   const [batchesCount, setBatchesCount] = useState(0);
   const [pagination, setPagination] = useState(pagDefault);
   const [loadingIpfs, setLoadingIpfs] = useState(true);
@@ -50,8 +54,15 @@ export const List = () => {
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [isAuth, setAuth] = useState(true);
-  // const [ownerAddress, setOwnerAddress] = useState("");
   const [companyAddresses, setCompanyAddresses] = useState<Array<string>>([]);
+  const [farmName, setFarmName] = useState("");
+  const [height, setHeight] = useState("");
+  const [location, setLocation] = useState("");
+  const [variety, setVariety] = useState("");
+  const [process, setProcess] = useState("");
+  const [dryingType, setDryingType] = useState("");
+  const [weight, setWeight] = useState("");
+  const [note, setNote] = useState("");
 
   setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -135,12 +146,14 @@ export const List = () => {
         };
         batchList.push(cooffeeB);
         setCoffeeBatchList(batchList.slice());
+        setCoffeeBatchList2(batchList.slice());
       });
   };
 
   const loadBatchesData = async (cbData: any) => {
     if (cbContract) {
       setCoffeeBatchList([]);
+      setCoffeeBatchList2([]);
       const ethcalls = [];
       for (let i = 0; i < cbData.length; i += 1) {
         const batchCall = await cbContract?.tokenURI(
@@ -246,6 +259,139 @@ export const List = () => {
     );
   };
 
+  const filterByFarm = (c: CoffeeBatchType) => {
+    const n = c.farm.name.toLowerCase();
+    return n.includes(farmName.toLowerCase());
+  };
+
+  const filterByHeight = (c: CoffeeBatchType) => {
+    const n = c.farm.altitude ? c.farm.altitude : "";
+    return height.includes(n);
+  };
+
+  const filterByLocation = (c: CoffeeBatchType) => {
+    const n = c.farm.altitude.toLowerCase();
+    return n.includes(location.toLowerCase());
+  };
+
+  const filterByVariety = (c: CoffeeBatchType) => {
+    const n = c.wetMill.variety.toLowerCase();
+    return n.includes(variety.toLowerCase());
+  };
+
+  const filterByProcess = (c: CoffeeBatchType) => {
+    const n = c.wetMill.process.toLowerCase();
+    return n.includes(process.toLowerCase());
+  };
+
+  const filterByDryingType = (c: CoffeeBatchType) => {
+    const n = c.wetMill.drying_type.toLowerCase();
+    return n.includes(dryingType.toLowerCase());
+  };
+
+  const filterByWeight = (c: CoffeeBatchType) => {
+    const n = c.dryMill.weight;
+    return n.includes(weight.toLowerCase());
+  };
+
+  const filterByNote = (c: CoffeeBatchType) => {
+    const n = c.dryMill.note;
+    return n.includes(note.toLowerCase());
+  };
+
+  const filterBatches = () => {
+    let cbList = coffeeBatchList2.slice();
+    if (farmName.length > 0) {
+      cbList = cbList.filter(filterByFarm);
+    }
+    if (height.length > 0) {
+      cbList = cbList.filter(filterByHeight);
+    }
+    if (location.length > 0) {
+      cbList = cbList.filter(filterByLocation);
+    }
+    if (variety.length > 0) {
+      cbList = cbList.filter(filterByVariety);
+    }
+    if (process.length > 0) {
+      cbList = cbList.filter(filterByProcess);
+    }
+    if (process.length > 0) {
+      cbList = cbList.filter(filterByProcess);
+    }
+    if (dryingType.length > 0) {
+      cbList = cbList.filter(filterByDryingType);
+    }
+    if (weight.length > 0) {
+      cbList = cbList.filter(filterByWeight);
+    }
+    if (note.length > 0) {
+      cbList = cbList.filter(filterByNote);
+    }
+
+    setCoffeeBatchList(cbList);
+    confPagination(cbList, isAuth ? 10 : 12);
+  };
+
+  const handleFarmChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setFarmName(input);
+  };
+
+  const handleHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setHeight(input);
+  };
+
+  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setLocation(input);
+  };
+
+  const handleVarietyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setVariety(input);
+  };
+
+  const handleProcessChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setProcess(input);
+  };
+
+  const handleDryingTypeChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value.trim();
+    setDryingType(input);
+  };
+
+  const handleWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setWeight(input);
+  };
+
+  const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setNote(input);
+  };
+
+  const onSearchClick = () => {
+    filterBatches();
+  };
+
+  const onClearClick = () => {
+    setFarmName("");
+    setHeight("");
+    setLocation("");
+    setVariety("");
+    setProcess("");
+    setDryingType("");
+    setWeight("");
+    setNote("");
+    setCoffeeBatchList(coffeeBatchList2.slice());
+    confPagination(coffeeBatchList2, isAuth ? 10 : 12);
+  };
+
   const RenderModal = () => (
     <Modal
       show={showModal}
@@ -269,8 +415,78 @@ export const List = () => {
     </Modal>
   );
 
+  const RenderFilters = () => (
+    <Card className="filters">
+      <Card.Body>
+        <FormInput
+          label=""
+          value={farmName}
+          placeholder="Finca"
+          handleOnChange={handleFarmChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={height}
+          placeholder="Altura"
+          handleOnChange={handleHeightChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={location}
+          placeholder="Ubicación"
+          handleOnChange={handleLocationChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={variety}
+          placeholder="Variedad"
+          handleOnChange={handleVarietyChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={process}
+          placeholder="Proceso"
+          handleOnChange={handleProcessChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={dryingType}
+          placeholder="Tipo de Secado"
+          handleOnChange={handleDryingTypeChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={weight}
+          placeholder="Peso"
+          handleOnChange={handleWeightChange}
+          errorMsg=""
+        />
+        <FormInput
+          label=""
+          value={note}
+          placeholder="Nota"
+          handleOnChange={handleNoteChange}
+          errorMsg=""
+        />
+      </Card.Body>
+      <Card.Footer>
+        <Button onClick={() => onSearchClick()}>Buscar</Button>
+        <Button variant="secondary" onClick={() => onClearClick()}>
+          Limpiar
+        </Button>
+      </Card.Footer>
+    </Card>
+  );
+
   return (
     <div className="batch-list">
+      {RenderFilters()}
       <Card className="create-card">
         <Card.Header>
           <div>

@@ -149,7 +149,7 @@ h6 {
     border: 1px solid transparent;
     border-radius: 0.25rem;
     line-height: 1.125;
-  }
+  }  
   .input-group {
     display: flex;
     flex-direction: column;
@@ -196,6 +196,20 @@ h6 {
       }
     }
   }
+}
+
+.btn-secondary {
+  background-color: white;
+  color: $primary;
+  border: 1px solid $secondary;
+}
+.btn-secondary:hover {
+  background-color: #964a0024;
+  color: $primary;
+}
+.btn-secondary:focus {
+  background-color: white;
+  color: $primary;
 }
 
 span {

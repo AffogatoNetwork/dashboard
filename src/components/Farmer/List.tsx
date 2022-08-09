@@ -1,14 +1,18 @@
 import React, { useEffect, useState } from "react";
+import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
+import Dropdown from "react-bootstrap/Dropdown";
 import Table from "react-bootstrap/esm/Table";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import "../../styles/farmers.scss";
 import Loading from "../Loading";
 import { getAllFarmers } from "../../db/firebase";
 import { useAuthContext } from "../../states/AuthContext";
+import FormInput from "../common/FormInput";
 import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import { getCompanyName } from "../../utils/utils";
+import { GenderFilterList } from "../../utils/constants";
 
 const pagDefault = {
   previous: 0,
@@ -20,13 +24,27 @@ const pagDefault = {
   lastId: "0",
 };
 
+type FarmerType = {
+  farmerId: string;
+  address: string;
+  fullname: string;
+  bio: string;
+  gender: string;
+  location: string;
+};
+
 export const List = () => {
   const { authState } = useAuthContext();
   const [state] = authState;
   const [loading, setLoading] = useState(true);
-  const [farmers, setFarmers] = useState<any>(null);
+  const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
+  const [farmers2, setFarmers2] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
   const [pagination, setPagination] = useState(pagDefault);
+  const [code, setCode] = useState("");
+  const [name, setName] = useState("");
+  const [location, setLocation] = useState("");
+  const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
 
   const confPagination = (fData: Array<any>, itemsPerPage: number) => {
     if (fData.length > 0) {
@@ -64,14 +82,42 @@ export const List = () => {
   useEffect(() => {
     const load = async () => {
       if (state.provider !== null) {
+        const farmerList = new Array<FarmerType>();
         const signer = state.provider.getSigner();
-        const address = await signer.getAddress();
-        let companyName = getCompanyName(address);
+        const sAddress = await signer.getAddress();
+        let companyName = getCompanyName(sAddress);
         if (companyName === "") {
           companyName = "PROEXO";
         }
         await getAllFarmers(companyName).then((result) => {
-          setFarmers(result);
+          for (let i = 0; i < result.length; i += 1) {
+            const farmerData = result[i].data();
+            const {
+              farmerId,
+              address,
+              fullname,
+              bio,
+              gender,
+              village,
+              region,
+              country,
+            } = farmerData;
+            const l = village
+              .concat(", ")
+              .concat(region)
+              .concat(", ")
+              .concat(country);
+            farmerList.push({
+              farmerId,
+              address,
+              fullname,
+              bio,
+              gender,
+              location: l,
+            });
+          }
+          setFarmers(farmerList);
+          setFarmers2(farmerList);
           confPagination(result, 15);
           // calculateFarmersCount(result);
         });
@@ -93,43 +139,157 @@ export const List = () => {
     setPagination(newPagination);
   };
 
-  const RenderItem = (farmer: any, index: number) => {
-    const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
-    // eslint-disable-next-line react/destructuring-assignment
-    const farmerData = farmer.data();
-    const {
-      farmerId,
-      address,
-      fullname,
-      bio,
-      gender,
-      village,
-      region,
-      country,
-    } = farmerData;
+  const filterByCode = (f: FarmerType) => {
+    const fId = f.farmerId.toLowerCase();
+    return fId.includes(code.toLowerCase());
+  };
 
-    if (fullname === "" && farmerId === "") {
+  const filterByName = (f: FarmerType) => {
+    const fname = f.fullname.toLowerCase();
+    return fname.includes(name.toLowerCase());
+  };
+
+  const filterByLocation = (f: FarmerType) => {
+    const fLocation = f.location.toLowerCase();
+    return fLocation.includes(location.toLowerCase());
+  };
+
+  const filterByGender = (f: FarmerType) => {
+    const fgender = f.gender.toLowerCase();
+    return fgender === currentGender.key;
+  };
+
+  const filterFarmers = () => {
+    let farmerList = farmers2.slice();
+    if (code.trim().length > 0) {
+      farmerList = farmerList.filter(filterByCode);
+    }
+    if (name.trim().length > 0) {
+      farmerList = farmerList.filter(filterByName);
+    }
+    if (location.trim().length > 0) {
+      farmerList = farmerList.filter(filterByLocation);
+    }
+    if (currentGender.key !== "all") {
+      farmerList = farmerList.filter(filterByGender);
+    }
+
+    setFarmers(farmerList);
+    confPagination(farmerList, 15);
+  };
+
+  const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setCode(input);
+  };
+
+  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setName(input);
+  };
+
+  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value;
+    setLocation(input);
+  };
+
+  const handleGenderChange = (key: string) => {
+    for (let i = 0; i < GenderFilterList.length; i += 1) {
+      if (GenderFilterList[i].key === key) {
+        setCurrentGender(GenderFilterList[i]);
+      }
+    }
+  };
+
+  const onSearchClick = () => {
+    filterFarmers();
+  };
+
+  const onClearClick = () => {
+    setCode("");
+    setName("");
+    setLocation("");
+    setFarmers(farmers2.slice());
+    confPagination(farmers2, 15);
+  };
+
+  const RenderFilters = () => (
+    <div className="filters">
+      <FormInput
+        label=""
+        value={code}
+        placeholder="Código"
+        handleOnChange={handleCodeChange}
+        errorMsg=""
+      />
+      <FormInput
+        label=""
+        value={name}
+        placeholder="Nombre"
+        handleOnChange={handleNameChange}
+        errorMsg=""
+      />
+      <FormInput
+        label=""
+        value={location}
+        placeholder="Ubicación"
+        handleOnChange={handleLocationChange}
+        errorMsg=""
+      />
+      <Dropdown onSelect={(eventKey) => handleGenderChange(eventKey || "all")}>
+        <Dropdown.Toggle
+          variant="secondary"
+          id="dropdown-cooperative"
+          className="text-left"
+        >
+          <div className="cooperative-toggle">
+            <span>{currentGender.name}</span>
+          </div>
+        </Dropdown.Toggle>
+        <Dropdown.Menu>
+          {GenderFilterList.map((item) => (
+            <Dropdown.Item key={item.key} eventKey={item.key}>
+              {item.name}
+            </Dropdown.Item>
+          ))}
+        </Dropdown.Menu>
+      </Dropdown>
+      <Button onClick={() => onSearchClick()}>Buscar</Button>
+      <Button variant="secondary" onClick={() => onClearClick()}>
+        Limpiar
+      </Button>
+    </div>
+  );
+
+  const RenderItem = (farmer: FarmerType, index: number) => {
+    const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
+
+    if (farmer.fullname === "" && farmer.farmerId === "") {
       return <></>;
     }
-    const farmerUrl = window.location.origin.concat("/farmer/").concat(address);
+    const farmerUrl = window.location.origin
+      .concat("/farmer/")
+      .concat(farmer.address);
 
     return (
       <tr
         key={index}
         className={pagination.current === itemPage ? "show" : "hide"}
       >
-        <td>{farmerId}</td>
+        <td>{farmer.farmerId}</td>
         <td>
           <a href={farmerUrl} target="_blank" rel="noreferrer">
-            {fullname}
+            {farmer.fullname}
           </a>
         </td>
-        <td>{bio.length > 70 ? bio.slice(0, 70).concat("...") : bio}</td>
-        <td>{gender === "male" ? "Masculino" : "Femenino"}</td>
+        <td>{farmer.gender === "male" ? "Masculino" : "Femenino"}</td>
+        <td>{farmer.location}</td>
+        <td>{farmer.address}</td>
         <td>
-          {village}, {region}, {country}
+          {farmer.bio.length > 70
+            ? farmer.bio.slice(0, 70).concat("...")
+            : farmer.bio}
         </td>
-        <td>{address}</td>
       </tr>
     );
   };
@@ -142,9 +302,7 @@ export const List = () => {
     <div className="farmers">
       <Card>
         <Card.Header>
-          <div>
-            <h2>Productores</h2>
-          </div>
+          {RenderFilters()}
           <div className="totals">
             <h4>Total: {farmersCount}</h4>
             <ReactHTMLTableToExcel
@@ -165,12 +323,12 @@ export const List = () => {
               <Table id="farmers-list" className="farmers-list">
                 <thead>
                   <tr>
-                    <th>Id</th>
+                    <th>Código</th>
                     <th>Nombre</th>
-                    <th className="th-bio">Biografía</th>
                     <th>Genero</th>
                     <th>Ubicación</th>
                     <th>Dirección de Cuenta</th>
+                    <th className="th-bio">Biografía</th>
                   </tr>
                 </thead>
                 <tbody>

@@ -84,3 +84,9 @@ export const GenderList = [
   { key: "female", name: "Femenino" },
   { key: "male", name: "Masculino" },
 ];
+
+export const GenderFilterList = [
+  { key: "all", name: "Todos" },
+  { key: "female", name: "Femenino" },
+  { key: "male", name: "Masculino" },
+];
