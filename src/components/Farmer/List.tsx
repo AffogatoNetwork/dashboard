@@ -214,51 +214,59 @@ export const List = () => {
   };
 
   const RenderFilters = () => (
-    <div className="filters">
-      <FormInput
-        label=""
-        value={code}
-        placeholder="Código"
-        handleOnChange={handleCodeChange}
-        errorMsg=""
-      />
-      <FormInput
-        label=""
-        value={name}
-        placeholder="Nombre"
-        handleOnChange={handleNameChange}
-        errorMsg=""
-      />
-      <FormInput
-        label=""
-        value={location}
-        placeholder="Ubicación"
-        handleOnChange={handleLocationChange}
-        errorMsg=""
-      />
-      <Dropdown onSelect={(eventKey) => handleGenderChange(eventKey || "all")}>
-        <Dropdown.Toggle
-          variant="secondary"
-          id="dropdown-cooperative"
-          className="text-left"
-        >
-          <div className="cooperative-toggle">
-            <span>{currentGender.name}</span>
-          </div>
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          {GenderFilterList.map((item) => (
-            <Dropdown.Item key={item.key} eventKey={item.key}>
-              {item.name}
-            </Dropdown.Item>
-          ))}
-        </Dropdown.Menu>
-      </Dropdown>
-      <Button onClick={() => onSearchClick()}>Buscar</Button>
-      <Button variant="secondary" onClick={() => onClearClick()}>
-        Limpiar
-      </Button>
-    </div>
+    <Card className="filters">
+      <Card.Body>
+        <div className="filters-inputs">
+          <FormInput
+            label=""
+            value={code}
+            placeholder="Código"
+            handleOnChange={handleCodeChange}
+            errorMsg=""
+          />
+          <FormInput
+            label=""
+            value={name}
+            placeholder="Nombre"
+            handleOnChange={handleNameChange}
+            errorMsg=""
+          />
+          <FormInput
+            label=""
+            value={location}
+            placeholder="Ubicación"
+            handleOnChange={handleLocationChange}
+            errorMsg=""
+          />
+          <Dropdown
+            onSelect={(eventKey) => handleGenderChange(eventKey || "all")}
+          >
+            <Dropdown.Toggle
+              variant="secondary"
+              id="dropdown-cooperative"
+              className="text-left"
+            >
+              <div className="cooperative-toggle">
+                <span>{currentGender.name}</span>
+              </div>
+            </Dropdown.Toggle>
+            <Dropdown.Menu>
+              {GenderFilterList.map((item) => (
+                <Dropdown.Item key={item.key} eventKey={item.key}>
+                  {item.name}
+                </Dropdown.Item>
+              ))}
+            </Dropdown.Menu>
+          </Dropdown>
+        </div>
+        <div className="filters-buttons">
+          <Button onClick={() => onSearchClick()}>Buscar</Button>
+          <Button variant="secondary" onClick={() => onClearClick()}>
+            Limpiar
+          </Button>
+        </div>
+      </Card.Body>
+    </Card>
   );
 
   const RenderItem = (farmer: FarmerType, index: number) => {
@@ -300,9 +308,10 @@ export const List = () => {
 
   return (
     <div className="farmers">
+      {RenderFilters()}
       <Card>
         <Card.Header>
-          {RenderFilters()}
+          <h4>Productores</h4>
           <div className="totals">
             <h4>Total: {farmersCount}</h4>
             <ReactHTMLTableToExcel

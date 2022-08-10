@@ -21,6 +21,7 @@ import {
   getCompanyAddresses,
   getCompanyAddressesByHost,
   getDefaultProvider,
+  isNumber,
 } from "../../utils/utils";
 
 const saveSvgAsPng = require("save-svg-as-png");
@@ -56,13 +57,20 @@ export const List = () => {
   const [isAuth, setAuth] = useState(true);
   const [companyAddresses, setCompanyAddresses] = useState<Array<string>>([]);
   const [farmName, setFarmName] = useState("");
-  const [height, setHeight] = useState("");
+  const [minHeight, setMinHeight] = useState("0");
   const [location, setLocation] = useState("");
   const [variety, setVariety] = useState("");
   const [process, setProcess] = useState("");
   const [dryingType, setDryingType] = useState("");
-  const [weight, setWeight] = useState("");
-  const [note, setNote] = useState("");
+  const [minWeight, setMinWeight] = useState("0");
+  const [maxWeight, setMaxWeight] = useState("");
+  const [minNote, setMinNote] = useState("0");
+  const [maxNote, setMaxNote] = useState("100");
+  const [minHeightError, setMinHeightError] = useState("");
+  const [minWeightError, setMinWeightError] = useState("");
+  const [maxWeightError, setMaxWeightError] = useState("");
+  const [minNoteError, setMinNoteError] = useState("");
+  const [maxNoteError, setMaxNoteError] = useState("");
 
   setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -266,11 +274,15 @@ export const List = () => {
 
   const filterByHeight = (c: CoffeeBatchType) => {
     const n = c.farm.altitude ? c.farm.altitude : "";
-    return height.includes(n);
+    let include = true;
+    if (isNumber(minHeight)) {
+      include = n >= parseInt(minHeight);
+    }
+    return include;
   };
 
   const filterByLocation = (c: CoffeeBatchType) => {
-    const n = c.farm.altitude.toLowerCase();
+    const n = c.farm.village.concat(", ").concat(c.farm.region).toLowerCase();
     return n.includes(location.toLowerCase());
   };
 
@@ -291,12 +303,26 @@ export const List = () => {
 
   const filterByWeight = (c: CoffeeBatchType) => {
     const n = c.dryMill.weight;
-    return n.includes(weight.toLowerCase());
+    let include = true;
+    if (isNumber(minWeight)) {
+      include = n >= parseInt(minWeight);
+    }
+    if (isNumber(maxWeight)) {
+      include = n <= parseInt(maxWeight);
+    }
+    return include;
   };
 
   const filterByNote = (c: CoffeeBatchType) => {
     const n = c.dryMill.note;
-    return n.includes(note.toLowerCase());
+    let include = true;
+    if (isNumber(minNote)) {
+      include = n >= parseInt(minNote);
+    }
+    if (isNumber(maxNote)) {
+      include = n <= parseInt(maxNote);
+    }
+    return include;
   };
 
   const filterBatches = () => {
@@ -304,9 +330,7 @@ export const List = () => {
     if (farmName.length > 0) {
       cbList = cbList.filter(filterByFarm);
     }
-    if (height.length > 0) {
-      cbList = cbList.filter(filterByHeight);
-    }
+    cbList = cbList.filter(filterByHeight);
     if (location.length > 0) {
       cbList = cbList.filter(filterByLocation);
     }
@@ -322,12 +346,8 @@ export const List = () => {
     if (dryingType.length > 0) {
       cbList = cbList.filter(filterByDryingType);
     }
-    if (weight.length > 0) {
-      cbList = cbList.filter(filterByWeight);
-    }
-    if (note.length > 0) {
-      cbList = cbList.filter(filterByNote);
-    }
+    cbList = cbList.filter(filterByWeight);
+    cbList = cbList.filter(filterByNote);
 
     setCoffeeBatchList(cbList);
     confPagination(cbList, isAuth ? 10 : 12);
@@ -338,9 +358,16 @@ export const List = () => {
     setFarmName(input);
   };
 
-  const handleHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMinHeightChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value.trim();
-    setHeight(input);
+    setMinHeight(input);
+    if (!isNumber(input)) {
+      setMinHeightError("Valor no valido");
+    } else {
+      setMinHeightError("");
+    }
   };
 
   const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -365,14 +392,48 @@ export const List = () => {
     setDryingType(input);
   };
 
-  const handleWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMinWeightChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value.trim();
-    setWeight(input);
+    setMinWeight(input);
+    if (!isNumber(input)) {
+      setMinWeightError("Valor no valido");
+    } else {
+      setMinWeightError("");
+    }
   };
 
-  const handleNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleMaxWeightChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value.trim();
-    setNote(input);
+    setMaxWeight(input);
+    if (!isNumber(input)) {
+      setMaxWeightError("Valor no valido");
+    } else {
+      setMaxWeightError("");
+    }
+  };
+
+  const handleMinNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setMinNote(input);
+    if (!isNumber(input)) {
+      setMinNoteError("Valor no valido");
+    } else {
+      setMinNoteError("");
+    }
+  };
+
+  const handleMaxNoteChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const input = event.target.value.trim();
+    setMaxNote(input);
+    if (!isNumber(input)) {
+      setMaxNoteError("Valor no valido");
+    } else {
+      setMaxNoteError("");
+    }
   };
 
   const onSearchClick = () => {
@@ -381,13 +442,20 @@ export const List = () => {
 
   const onClearClick = () => {
     setFarmName("");
-    setHeight("");
+    setMinHeight("0");
     setLocation("");
     setVariety("");
     setProcess("");
     setDryingType("");
-    setWeight("");
-    setNote("");
+    setMinWeight("0");
+    setMaxWeight("");
+    setMinNote("0");
+    setMaxNote("100");
+    setMinHeightError("");
+    setMinWeightError("");
+    setMaxWeightError("");
+    setMinNoteError("");
+    setMaxNoteError("");
     setCoffeeBatchList(coffeeBatchList2.slice());
     confPagination(coffeeBatchList2, isAuth ? 10 : 12);
   };
@@ -419,60 +487,74 @@ export const List = () => {
     <Card className="filters">
       <Card.Body>
         <FormInput
-          label=""
+          label="Finca"
           value={farmName}
           placeholder="Finca"
           handleOnChange={handleFarmChange}
           errorMsg=""
         />
         <FormInput
-          label=""
-          value={height}
-          placeholder="Altura"
-          handleOnChange={handleHeightChange}
-          errorMsg=""
+          label="Altura Mínima"
+          value={minHeight}
+          placeholder="Altura Mínima"
+          handleOnChange={handleMinHeightChange}
+          errorMsg={minHeightError}
         />
         <FormInput
-          label=""
+          label="Ubicación"
           value={location}
           placeholder="Ubicación"
           handleOnChange={handleLocationChange}
           errorMsg=""
         />
         <FormInput
-          label=""
+          label="Variedad"
           value={variety}
           placeholder="Variedad"
           handleOnChange={handleVarietyChange}
           errorMsg=""
         />
         <FormInput
-          label=""
+          label="Proceso"
           value={process}
           placeholder="Proceso"
           handleOnChange={handleProcessChange}
           errorMsg=""
         />
         <FormInput
-          label=""
+          label="Tipo de Secado"
           value={dryingType}
           placeholder="Tipo de Secado"
           handleOnChange={handleDryingTypeChange}
           errorMsg=""
         />
         <FormInput
-          label=""
-          value={weight}
-          placeholder="Peso"
-          handleOnChange={handleWeightChange}
-          errorMsg=""
+          label="Peso Mínimo"
+          value={minWeight}
+          placeholder="Peso Mínimo"
+          handleOnChange={handleMinWeightChange}
+          errorMsg={minWeightError}
         />
         <FormInput
-          label=""
-          value={note}
-          placeholder="Nota"
-          handleOnChange={handleNoteChange}
-          errorMsg=""
+          label="Peso Máximo"
+          value={maxWeight}
+          placeholder="Peso Máximo"
+          handleOnChange={handleMaxWeightChange}
+          errorMsg={maxWeightError}
+        />
+        <FormInput
+          label="Nota Minima"
+          value={minNote}
+          placeholder="Nota Minima"
+          handleOnChange={handleMinNoteChange}
+          errorMsg={minNoteError}
+        />
+        <FormInput
+          label="Nota Máxima"
+          value={maxNote}
+          placeholder="Nota Máxima"
+          handleOnChange={handleMaxNoteChange}
+          errorMsg={maxNoteError}
         />
       </Card.Body>
       <Card.Footer>

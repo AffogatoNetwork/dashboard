@@ -28,12 +28,24 @@
     }
   }
   .filters {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    margin-bottom: 2rem;
+    .card-body {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 1.5rem;
+      overflow: visible;
+    }
+    .filters-inputs {
+      display: flex;
+      align-items: center;
+    }
+    .filters-buttons {
+      display: flex;
+      align-items: center;
+    }
     .form-input {
       display: flex;
-      flex-direction: row;
+      flex-direction: column;
       margin-left: 10px;
       margin-right: 2px;
     }
@@ -52,9 +64,9 @@
     }
   }
   .dropdown {
+    margin-top: 0.6rem;
     .btn {
-      width: 7rem;
-      height: 2.3rem;
+      width: 8rem;
       border-width: 0.7px;
       border-color: $lighter;
       padding-left: 0.2rem;
@@ -63,9 +75,8 @@
         font-size: 1rem;
       }
     }
-
     .dropdown-toggle::after {
-      margin-left: 70%;
+      margin-left: 75%;
       margin-top: 9px
     }
   }

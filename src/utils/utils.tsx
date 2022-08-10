@@ -37,6 +37,11 @@ export const makeShortAddress = (address: string) => {
   return shortAddress;
 };
 
+export const isNumber = (value: string) => {
+  const v = parseFloat(value);
+  return !Number.isNaN(v);
+};
+
 export const isValidCellphone = (cellphone: string) => {
   const pattern = /^[0-9]{8}$/;
 
