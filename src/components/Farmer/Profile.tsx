@@ -5,12 +5,13 @@ import { useParams } from "react-router";
 import "../../styles/farmer.scss";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
-import { getFarmer, getImageUrl } from "../../db/firebase";
+import { getFarmer, getFarmerFarms, getImageUrl } from "../../db/firebase";
 
 export const Profile = () => {
   const { farmerId } = useParams();
   const [loading, setLoading] = useState(true);
   const [farmerData, setFarmerData] = useState<any>();
+  const [farms, setFarms] = useState<any>();
   const [imageUrl, setImageUrl] = useState("");
 
   useEffect(() => {
@@ -21,6 +22,11 @@ export const Profile = () => {
         });
         await getImageUrl(farmerId).then((result) => {
           setImageUrl(result);
+        });
+        await getFarmerFarms(farmerId).then((result) => {
+          console.log(farms);
+          // console.log(result[0].data());
+          setFarms(result);
         });
         setLoading(false);
       }

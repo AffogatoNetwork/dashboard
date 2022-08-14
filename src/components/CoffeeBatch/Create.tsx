@@ -5,10 +5,12 @@ import { OutTable, ExcelRenderer } from "react-excel-renderer";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { useDropzone } from "react-dropzone";
 import "../../styles/create.scss";
-import { apiUrl } from "../../utils/constants";
-import { errorNotification, notifyUser } from "../../utils/utils";
-import Loading from "../Loading";
 import { useAuthContext } from "../../states/AuthContext";
+import { saveFarms } from "../../db/firebase";
+import { apiUrl } from "../../utils/constants";
+import { errorNotification, notifyUser, isNumber } from "../../utils/utils";
+import { FarmType } from "../common/types";
+import Loading from "../Loading";
 
 export const Create = () => {
   const { authState } = useAuthContext();
@@ -86,6 +88,64 @@ export const Create = () => {
     </div>
   ));
 
+  const saveFarmsToDB = async () => {
+    const farms = new Array<FarmType>();
+
+    if (rows !== null) {
+      // @ts-ignore
+      for (let i = 2; i < rows.length; i += 1) {
+        try {
+          // @ts-ignore
+          if (rows[i] !== null && rows[i].length > 0) {
+            // @ts-ignore
+            if (rows[i][0] !== "" && rows[i][12] !== "") {
+              // @ts-ignore
+              const gpoint = rows[i][18].trim();
+              const gpoint2 = [0, 0];
+
+              // @ts-ignore
+              if (gpoint !== "") {
+                const gp = gpoint.split(",");
+                if (gp.length === 2) {
+                  if (isNumber(gp[0]) && isNumber(gp[1])) {
+                    gpoint2[0] = parseInt(gp[0]);
+                    gpoint2[1] = parseInt(gp[1]);
+                  }
+                }
+              }
+
+              farms.push({
+                // @ts-ignore
+                farmerAddress: rows[i][0],
+                // @ts-ignore
+                name: rows[i][11] || "",
+                // @ts-ignore
+                country: rows[i][12] || "",
+                // @ts-ignore
+                region: rows[i][13] || "",
+                // @ts-ignore
+                village: rows[i][14] || "",
+                // @ts-ignore
+                altitud: rows[i][15] || "",
+                // @ts-ignore
+                story: rows[i][16] || "",
+                // @ts-ignore
+                certifications: rows[i][17] || "",
+                geopoint: gpoint2,
+              });
+            }
+          }
+        } catch (error) {
+          console.log(error);
+        }
+      }
+
+      if (farms.length > 0) {
+        await saveFarms(farms);
+      }
+    }
+  };
+
   const createBatches = () => {
     if (acceptedFiles.length === 1) {
       setSaving(true);
@@ -105,11 +165,12 @@ export const Create = () => {
           notifyUser("Los lotes de café han sido creados.");
           setSaving(false);
           clearFiles();
+          saveFarmsToDB();
         })
         .catch((error) => {
           console.log(error);
           // errorNotification("Error inesperado.");
-          notifyUser("Los lotes de café han sido creados.");
+          notifyUser("Error creando los lotes.");
           setSaving(false);
           clearFiles();
         });

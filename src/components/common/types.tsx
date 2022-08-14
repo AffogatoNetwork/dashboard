@@ -65,6 +65,18 @@ export type CompanyType = {
   femalePartners: string;
 };
 
+export type FarmType = {
+  farmerAddress: string;
+  name: string;
+  country: string;
+  region: string;
+  village: string;
+  altitud: number;
+  story: string;
+  certifications: string;
+  geopoint: Array<number>;
+};
+
 export type CoordinatesType = {
   lat: number;
   lng: number;

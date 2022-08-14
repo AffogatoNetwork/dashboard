@@ -6,11 +6,12 @@ import {
   getDocs,
   getFirestore,
   query,
-  where,
   setDoc,
+  where,
+  writeBatch,
 } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { CompanyType, FarmerType } from "../components/common/types";
+import { CompanyType, FarmType, FarmerType } from "../components/common/types";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -57,6 +58,15 @@ export const getAllFarmers = async (company: string) => {
   return querySnapshot.docs;
 };
 
+export const getFarmerFarms = async (farmerAddress: string) => {
+  const q = query(
+    collection(db, "farms"),
+    where("farmerAddress", "==", farmerAddress)
+  );
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
+};
+
 export const saveCompany = async (company: CompanyType) => {
   try {
     const companyDoc = doc(db, "companies", company.address);
@@ -78,4 +88,50 @@ export const getCompany = async (address: string) => {
 export const getImageUrl = async (id: string) => {
   const url = await getDownloadURL(ref(storage, id));
   return url;
+};
+
+export const saveFarm = async (farm: FarmType) => {
+  try {
+    const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
+    const farmDoc = doc(db, "farms", docId);
+    await setDoc(farmDoc, farm);
+  } catch (error) {
+    console.log(error);
+  }
+};
+
+export const saveFarms = async (farms: Array<FarmType>) => {
+  try {
+    const batchLimit = 500;
+    let currentInit = 0;
+    let currentLast = farms.length;
+    if (farms.length > batchLimit) {
+      currentLast = batchLimit;
+    }
+
+    while (currentInit < farms.length) {
+      const batch = writeBatch(db);
+      const farmsBatch = farms.slice(currentInit, currentLast);
+
+      for (let i = 0; i < farmsBatch.length; i += 1) {
+        const nameArray = farmsBatch[i].name.toLocaleLowerCase().split(" ");
+        const docId = farmsBatch[i].farmerAddress
+          .concat("#")
+          .concat(nameArray.join("-"));
+        const farmDoc = doc(db, "farms", docId);
+        batch.set(farmDoc, farmsBatch[i]);
+      }
+      await batch.commit();
+
+      currentInit = currentLast;
+      const remaining = farms.length - currentLast;
+      if (remaining > batchLimit) {
+        currentLast += batchLimit;
+      } else {
+        currentLast = farms.length;
+      }
+    }
+  } catch (error) {
+    console.log(error);
+  }
 };
