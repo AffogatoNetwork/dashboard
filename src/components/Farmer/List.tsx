@@ -4,6 +4,7 @@ import Card from "react-bootstrap/esm/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import Table from "react-bootstrap/esm/Table";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import { useTranslation } from "react-i18next";
 import "../../styles/farmers.scss";
 import Loading from "../Loading";
 import { getAllFarmers } from "../../db/firebase";
@@ -34,6 +35,7 @@ type FarmerType = {
 };
 
 export const List = () => {
+  const { t } = useTranslation();
   const { authState } = useAuthContext();
   const [state] = authState;
   const [loading, setLoading] = useState(true);
@@ -220,21 +222,21 @@ export const List = () => {
           <FormInput
             label=""
             value={code}
-            placeholder="Código"
+            placeholder={t("code")}
             handleOnChange={handleCodeChange}
             errorMsg=""
           />
           <FormInput
             label=""
             value={name}
-            placeholder="Nombre"
+            placeholder={t("name")}
             handleOnChange={handleNameChange}
             errorMsg=""
           />
           <FormInput
             label=""
             value={location}
-            placeholder="Ubicación"
+            placeholder={t("location")}
             handleOnChange={handleLocationChange}
             errorMsg=""
           />
@@ -260,9 +262,11 @@ export const List = () => {
           </Dropdown>
         </div>
         <div className="filters-buttons">
-          <Button onClick={() => onSearchClick()}>Buscar</Button>
+          <Button onClick={() => onSearchClick()}>
+            <>{t("search")}</>
+          </Button>
           <Button variant="secondary" onClick={() => onClearClick()}>
-            Limpiar
+            <>{t("clear")}</>
           </Button>
         </div>
       </Card.Body>
@@ -290,7 +294,9 @@ export const List = () => {
             {farmer.fullname}
           </a>
         </td>
-        <td>{farmer.gender === "male" ? "Masculino" : "Femenino"}</td>
+        <td>
+          <>{t(farmer.gender)}</>
+        </td>
         <td>{farmer.location}</td>
         <td>{farmer.address}</td>
         <td>
@@ -303,7 +309,12 @@ export const List = () => {
   };
 
   if (loading) {
-    return <Loading label="Cargando..." className="loading-wrapper two" />;
+    return (
+      <Loading
+        label={t("loading").concat("...")}
+        className="loading-wrapper two"
+      />
+    );
   }
 
   return (
@@ -311,16 +322,22 @@ export const List = () => {
       {RenderFilters()}
       <Card>
         <Card.Header>
-          <h4>Productores</h4>
+          <h4>
+            <>{t("farmers")}</>
+          </h4>
           <div className="totals">
-            <h4>Total: {farmersCount}</h4>
+            <h4>
+              <>
+                {t("total")}: {farmersCount}
+              </>
+            </h4>
             <ReactHTMLTableToExcel
               id="table-xls-button"
               className="download-xls-button"
               table="farmers-list"
               filename="Productores"
               sheet="Productores"
-              buttonText="(Descargar)"
+              buttonText={"(".concat(t("download")).concat(")")}
             />
           </div>
         </Card.Header>
@@ -332,12 +349,24 @@ export const List = () => {
               <Table id="farmers-list" className="farmers-list">
                 <thead>
                   <tr>
-                    <th>Código</th>
-                    <th>Nombre</th>
-                    <th>Genero</th>
-                    <th>Ubicación</th>
-                    <th>Dirección de Cuenta</th>
-                    <th className="th-bio">Biografía</th>
+                    <th>
+                      <>{t("code")}</>
+                    </th>
+                    <th>
+                      <>{t("name")}</>
+                    </th>
+                    <th>
+                      <>{t("gender")}</>
+                    </th>
+                    <th>
+                      <>{t("location")}</>
+                    </th>
+                    <th>
+                      <>{t("account-address")}</>
+                    </th>
+                    <th className="th-bio">
+                      <>{t("bio")}</>
+                    </th>
                   </tr>
                 </thead>
                 <tbody>

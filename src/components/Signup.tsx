@@ -9,6 +9,7 @@ import MultipleValueTextInput from "react-multivalue-text-input";
 import Tabs from "react-bootstrap/esm/Tabs";
 import Tab from "react-bootstrap/esm/Tab";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import User from "../assets/user.png";
 import { useAuthContext } from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
@@ -30,6 +31,7 @@ import {
 } from "../utils/constants";
 
 const Signup = () => {
+  const { t } = useTranslation();
   const areaCode = "+504";
   const navigate = useNavigate();
   const { authContext, authState } = useAuthContext();
@@ -231,7 +233,7 @@ const Signup = () => {
       setEmailUser(isValidEmail(input));
       setUserNameError("");
     } else {
-      setUserNameError("El valor no es valido.");
+      setUserNameError(t("errors.no-valid"));
     }
   };
 
@@ -241,7 +243,7 @@ const Signup = () => {
     const input = event.target.value;
     setFarmerId(input);
     if (input.trim().length > 25) {
-      setFarmerIdError("Valor debe de tener menos de 25 carácteres");
+      setFarmerIdError(t("errors.max-length", { length: 25 }));
     } else {
       setFarmerIdError("");
     }
@@ -251,7 +253,7 @@ const Signup = () => {
     const input = event.target.value;
     setFullname(input);
     if (input.trim().length > 70) {
-      setFullnameError("Valor debe de tener menos de 70 carácteres");
+      setFullnameError(t("errors.max-length", { length: 70 }));
     } else {
       setFullnameError("");
     }
@@ -261,7 +263,7 @@ const Signup = () => {
     const input = event.target.value;
     setVillage(input);
     if (input.trim().length > 70) {
-      setVillageError("Valor debe de tener menos de 25 carácteres");
+      setVillageError(t("errors.max-length", { length: 25 }));
     } else {
       setVillageError("");
     }
@@ -271,7 +273,7 @@ const Signup = () => {
     const input = event.target.value;
     setVillage2(input);
     if (input.trim().length > 70) {
-      setVillage2Error("Valor debe de tener menos de 25 carácteres");
+      setVillage2Error(t("errors.max-length", { length: 25 }));
     } else {
       setVillage2Error("");
     }
@@ -281,7 +283,7 @@ const Signup = () => {
     const input = event.target.value;
     setBio(input);
     if (input.trim().length > 700) {
-      setBioError("Valor debe de tener menos de 700 carácteres");
+      setBioError(t("errors.max-length", { length: 700 }));
     } else {
       setBioError("");
     }
@@ -292,7 +294,7 @@ const Signup = () => {
       if (CooperativeList[i].key === key) {
         setCurrentCoop(CooperativeList[i]);
         if (key === "0") {
-          setCoopError("Seleccione una empersa.");
+          setCoopError(t("signup.choose-company"));
         } else {
           setCoopError("");
         }
@@ -305,7 +307,7 @@ const Signup = () => {
       if (RegionList[i].key === key) {
         setCurrentRegion(RegionList[i]);
         if (key === "0") {
-          setRegionError("Seleccione un departamento.");
+          setRegionError(t("signup.choose-county"));
         } else {
           setRegionError("");
         }
@@ -329,7 +331,7 @@ const Signup = () => {
     setCellphone(input);
     const valid = isEmailUser ? isValidCellphone(input) : isValidEmail(input);
     if (!valid) {
-      setCellphoneError("El valor es invalido");
+      setCellphoneError(t("errors.no-valid"));
     } else {
       setCellphoneError("");
     }
@@ -341,7 +343,7 @@ const Signup = () => {
     const input = event.target.value;
     setAddressLine(input);
     if (input.trim().length > 150) {
-      setAddressLineError("Valor debe de tener menos de 150 carácteres");
+      setAddressLineError(t("errors.max-length", { length: 150 }));
     } else {
       setAddressLineError("");
     }
@@ -353,7 +355,7 @@ const Signup = () => {
     const input = event.target.value;
     setSocialReason(input);
     if (input.trim().length > 70) {
-      setSocialReasonError("Valor debe de tener menos de 70 carácteres");
+      setSocialReasonError(t("errors.max-length", { length: 70 }));
     } else {
       setSocialReasonError("");
     }
@@ -365,7 +367,7 @@ const Signup = () => {
     const input = event.target.value;
     setCupProfile(input);
     if (Number.isNaN(input)) {
-      setCupProfileError("El valor no es valido");
+      setCupProfileError(t("errors.no-valid"));
     } else {
       setCupProfileError("");
     }
@@ -377,7 +379,7 @@ const Signup = () => {
     const input = event.target.value;
     setLongitude(input);
     if (Number.isNaN(input)) {
-      setLongitudeError("El valor no es valido");
+      setLongitudeError(t("errors.no-valid"));
     } else {
       setLongitudeError("");
     }
@@ -387,7 +389,7 @@ const Signup = () => {
     const input = event.target.value;
     setLatitude(input);
     if (Number.isNaN(input)) {
-      setLatitudeError("El valor no es valido");
+      setLatitudeError(t("errors.no-valid"));
     } else {
       setLatitudeError("");
     }
@@ -397,7 +399,7 @@ const Signup = () => {
     const input = event.target.value;
     setReview(input);
     if (input.trim().length > 700) {
-      setReviewError("Valor debe de tener menos de 700 carácteres");
+      setReviewError(t("errors.max-length", { length: 700 }));
     } else {
       setReviewError("");
     }
@@ -409,7 +411,7 @@ const Signup = () => {
     const input = event.target.value;
     setProductiveAreas(input);
     if (input.trim().length > 300) {
-      setProductiveAreasError("Valor debe de tener menos de 300 carácteres");
+      setProductiveAreasError(t("errors.max-length", { length: 300 }));
     } else {
       setProductiveAreasError("");
     }
@@ -421,7 +423,7 @@ const Signup = () => {
     const input = event.target.value;
     setManagerName(input);
     if (input.trim().length > 80) {
-      setManagerNameError("Valor debe de tener menos de 80 carácteres");
+      setManagerNameError(t("errors.max-length", { length: 80 }));
     } else {
       setManagerNameError("");
     }
@@ -431,7 +433,7 @@ const Signup = () => {
     const input = event.target.value;
     setWebsite(input);
     if (Number.isNaN(input)) {
-      setWebsiteError("El valor no es valido");
+      setWebsiteError(t("errors.no-valid"));
     } else {
       setWebsiteError("");
     }
@@ -443,7 +445,7 @@ const Signup = () => {
     const input = event.target.value;
     setNoPartnersM(input);
     if (Number.isNaN(input)) {
-      setNoPartnersMError("El valor no es valido");
+      setNoPartnersMError(t("errors.no-valid"));
     } else {
       setNoPartnersMError("");
     }
@@ -455,11 +457,17 @@ const Signup = () => {
     const input = event.target.value;
     setNoPartnersF(input);
     if (input.trim().length > 120) {
-      setNoPartnersFError("Valor debe de tener menos de 120 carácteres");
+      setNoPartnersFError(t("errors.max-length", { length: 120 }));
     } else {
       setNoPartnersFError("");
     }
   };
+
+  const emailCellphoneLabel = () =>
+    t("email").concat(" ").concat(t("or")).concat(" ").concat(t("cellphone"));
+
+  const avgCupProfileLabel = () =>
+    t("cup-profile").concat(" ").concat(t("average"));
 
   const RenderForm = () => (
     <Form className="form">
@@ -467,14 +475,16 @@ const Signup = () => {
         <Col className="inputs" sm={12} md={12} lg={12}>
           <Col sm={12} md={4} lg={4}>
             <FormInput
-              label="Correo electrónico o No. Celular"
+              label={emailCellphoneLabel()}
               value={userName}
-              placeholder="usuario@gmail.com"
+              placeholder={t("placeholders.email")}
               handleOnChange={handleUserInputChange}
               errorMsg={userNameError}
             />
             <div className="form-input">
-              <Form.Label>Selecciona tu Empresa</Form.Label>
+              <Form.Label>
+                <>{t("signup.choose-company")}</>
+              </Form.Label>
               <Dropdown
                 onSelect={(eventKey) =>
                   handleCooperativeChange(eventKey || "0")
@@ -502,65 +512,71 @@ const Signup = () => {
               )}
             </div>
             <FormInput
-              label={isEmailUser ? "No. Celular" : "Correo Electrónico"}
+              label={isEmailUser ? t("cellphone") : t("email")}
               value={cellphone}
-              placeholder={isEmailUser ? "99990000" : "usuario@gmail.com"}
+              placeholder={
+                isEmailUser
+                  ? t("placeholders.cellphone")
+                  : t("placeholders.email")
+              }
               handleOnChange={handleCellphoneChange}
               errorMsg={cellphoneError}
             />
             <FormInput
-              label="Dirección"
+              label={t("address")}
               value={addressLine}
-              placeholder="Dirección"
+              placeholder={t("address")}
               handleOnChange={handleAddressLineChange}
               errorMsg={addressLineError}
             />
             <FormInput
-              label="Nombre del gerente"
+              label={t("signup.manager-name")}
               value={managerName}
-              placeholder="Ingrese el nombre"
+              placeholder={t("placeholders.fullname")}
               handleOnChange={handleManagerNameChange}
               errorMsg={managerNameError}
             />
           </Col>
           <Col sm={12} md={4} lg={4}>
             <FormInput
-              label="Promedio Perfil de Taza"
+              label={avgCupProfileLabel()}
               value={cupProfile}
-              placeholder="Promedio"
+              placeholder={t("average")}
               handleOnChange={handleCupProfileChange}
               errorMsg={cupProfileError}
             />
             <div className="input-row">
               <FormInput
-                label="Longitud"
+                label={t("longitude")}
                 value={longitude}
-                placeholder="Longitud"
+                placeholder={t("longitude")}
                 handleOnChange={handleLongitudeChange}
                 errorMsg={longitudeError}
               />
               <FormInput
-                label="Latitud"
+                label={t("latitude")}
                 value={latitude}
-                placeholder="Latitud"
+                placeholder={t("latitude")}
                 handleOnChange={handleLatitudeChange}
                 errorMsg={latitudeError}
               />
             </div>
             <FormInput
-              label="Nombre de la Empresa"
+              label={t("signup.company-name")}
               value={socialReason}
-              placeholder="Nombre"
+              placeholder={t("name")}
               handleOnChange={handleSocialReasonChange}
               errorMsg={socialReasonError}
             />
             <div className="form-input">
-              <Form.Label>Reseña</Form.Label>
+              <Form.Label>
+                <>{t("review")}</>
+              </Form.Label>
               <Form.Control
                 value={review}
                 as="textarea"
                 rows={4}
-                placeholder="Ingrese la reseña"
+                placeholder={t("review")}
                 onChange={handleReviewChange}
               />
               {bioError !== "" && (
@@ -570,9 +586,9 @@ const Signup = () => {
           </Col>
           <Col sm={12} md={4} lg={4}>
             <FormInput
-              label="Áreas Productivas (en hectáreas)"
+              label={t("signup.productive-areas")}
               value={productiveAreas}
-              placeholder="areas"
+              placeholder={t("areas")}
               handleOnChange={handleProductivesAreasChange}
               errorMsg={productiveAreasError}
             />
@@ -587,28 +603,28 @@ const Signup = () => {
               }}
               label="Productos o Servicios"
               name="social-networks"
-              placeholder="Ingrese los productos"
+              placeholder={t("placeholders.enter-products")}
             />
             <div className="input-row">
               <FormInput
-                label="No. Socios Hombres"
+                label={t("male-partners")}
                 value={noPartnersM}
-                placeholder="No. Socios Hombres"
+                placeholder={t("male-partners")}
                 handleOnChange={handleNoPartnersMChange}
                 errorMsg={noPartnersMError}
               />
               <FormInput
-                label="No. Socios Mujeres"
+                label={t("female-partners")}
                 value={noPartnersF}
-                placeholder="No. Socios Mujeres"
+                placeholder={t("female-partners")}
                 handleOnChange={handleNoPartnersFChange}
                 errorMsg={noPartnersFError}
               />
             </div>
             <FormInput
-              label="Sitio Web"
+              label={t("website")}
               value={website}
-              placeholder="www.misitio.com"
+              placeholder={t("placeholders.email")}
               handleOnChange={handleWebsiteChange}
               errorMsg={websiteError}
             />
@@ -621,16 +637,18 @@ const Signup = () => {
                 console.log(item);
                 setSocialNetworks(allItems);
               }}
-              label="Redes Sociales"
+              label={t("social-networks")}
               name="social-networks"
-              placeholder="Ingrese las redes sociales"
+              placeholder={t("placeholders.social-networks")}
             />
           </Col>
         </Col>
       </Form.Group>
       {state.creatingAccountError && (
         <div className="account-created">
-          <h3>Error creando cuenta</h3>
+          <h3>
+            <>{t("errors.creating-account")}</>
+          </h3>
         </div>
       )}
     </Form>
@@ -657,28 +675,30 @@ const Signup = () => {
               />
             </div>
             <FormInput
-              label="Correo electrónico o No. Celular"
+              label={emailCellphoneLabel()}
               value={userName}
-              placeholder="usuario@gmail.com"
+              placeholder={t("placeholders.email")}
               handleOnChange={handleUserInputChange}
               errorMsg={userNameError}
             />
             <FormInput
-              label="Nombre Completo"
+              label={t("fullname")}
               value={fullname}
-              placeholder="Nombre y Apellido"
+              placeholder={t("placeholders.fullname")}
               handleOnChange={handleFullnameChange}
               errorMsg={fullnameError}
             />
             <FormInput
-              label="Código de empresa"
+              label={t("company-code")}
               value={farmerId}
-              placeholder="id"
+              placeholder={t("company-code")}
               handleOnChange={handleIdProductorChange}
               errorMsg={farmerIdError}
             />
             <div className="form-input">
-              <Form.Label>Sexo</Form.Label>
+              <Form.Label>
+                <>{t("gender")}</>
+              </Form.Label>
               <Dropdown
                 onSelect={(eventKey) =>
                   handleGenderChange(eventKey || "female")
@@ -705,7 +725,9 @@ const Signup = () => {
           </Col>
           <Col sm={12} md={6} lg={6}>
             <div className="form-input">
-              <Form.Label>Selecciona tu Empresa</Form.Label>
+              <Form.Label>
+                <>{t("signup.choose-company")}</>
+              </Form.Label>
               <Dropdown
                 onSelect={(eventKey) =>
                   handleCooperativeChange(eventKey || "0")
@@ -733,7 +755,9 @@ const Signup = () => {
               )}
             </div>
             <div className="form-input">
-              <Form.Label>Departamento</Form.Label>
+              <Form.Label>
+                <>{t("region")}</>
+              </Form.Label>
               <Dropdown
                 onSelect={(eventKey) => handleRegionChange(eventKey || "0")}
               >
@@ -759,26 +783,28 @@ const Signup = () => {
               )}
             </div>
             <FormInput
-              label="Municipio"
+              label={t("village")}
               value={village}
-              placeholder="Municipio"
+              placeholder={t("village")}
               handleOnChange={handleVillageChange}
               errorMsg={villageError}
             />
             <FormInput
-              label="Aldea"
+              label={t("village2")}
               value={village2}
-              placeholder="Aldea"
+              placeholder={t("village2")}
               handleOnChange={handleVillage2Change}
               errorMsg={village2Error}
             />
             <div className="form-input">
-              <Form.Label>Biografía</Form.Label>
+              <Form.Label>
+                <>{t("bio")}</>
+              </Form.Label>
               <Form.Control
                 value={bio}
                 as="textarea"
                 rows={5}
-                placeholder="Ingrese su biografía"
+                placeholder={t("placeholders.bio")}
                 onChange={handleBioChange}
               />
               {bioError !== "" && (
@@ -790,7 +816,9 @@ const Signup = () => {
       </Form.Group>
       {state.creatingAccountError && (
         <div className="account-created">
-          <h3>Error creando cuenta</h3>
+          <h3>
+            <>{t("errors.creating-account")}</>
+          </h3>
         </div>
       )}
     </Form>
@@ -799,14 +827,14 @@ const Signup = () => {
   const CardTitle = (): string => {
     if (state.accountCreated) {
       if (activeTab === "farmer") {
-        return "Productor creado";
+        return t("signup.farmer-added");
       }
-      return "Cuenta Creada";
+      return t("signup.account-created");
     }
     if (activeTab === "farmer") {
-      return "Agregar Productor";
+      return t("signup.add-farmer");
     }
-    return "Nueva Empresa";
+    return t("signup.new-company");
   };
 
   const cardClassName = (): string => {
@@ -819,7 +847,9 @@ const Signup = () => {
   };
 
   if (state.creatingAccount) {
-    return <Loading label="Cargando..." className="loading-wrapper" />;
+    return (
+      <Loading label={t("loading").concat("...")} className="loading-wrapper" />
+    );
   }
 
   return (
@@ -839,10 +869,10 @@ const Signup = () => {
                 onSelect={(k) => setActiveTab(k || "farmer")}
                 className="mb-3"
               >
-                <Tab eventKey="farmer" title="Productor">
+                <Tab eventKey="farmer" title={<>{t("farmer")}</>}>
                   {RenderFarmerForm()}
                 </Tab>
-                <Tab eventKey="cooperative" title="Empresa">
+                <Tab eventKey="cooperative" title={<>{t("company")}</>}>
                   {RenderForm()}
                 </Tab>
               </Tabs>
@@ -852,23 +882,29 @@ const Signup = () => {
                   type="button"
                   onClick={() => magicLogin()}
                 >
-                  Crear cuenta
+                  <>{t("signup.create-account")}</>
                 </Button>
                 <Button
                   variant="secondary"
                   className="auth-method"
                   onClick={() => navigate("/login", { replace: true })}
                 >
-                  <u>Regresar</u>
+                  <u>
+                    <>{t("signup.back")}</>
+                  </u>
                 </Button>
               </div>
             </div>
           ) : (
             <div className="account-created">
               {activeTab === "farmer" ? (
-                <h6>Sus datos han sido enviados a la empresa</h6>
+                <h6>
+                  <>{t("signup.success")}</>
+                </h6>
               ) : (
-                <h6>Sus datos han sido enviados al equipo de affogato</h6>
+                <h6>
+                  <>{t("signup.success2")}</>
+                </h6>
               )}
               <Button
                 className="auth-method"
@@ -877,7 +913,7 @@ const Signup = () => {
                   navigate("/login", { replace: true });
                 }}
               >
-                Inicio de Sesión
+                <>{t("login.access")}</>
               </Button>
             </div>
           )}

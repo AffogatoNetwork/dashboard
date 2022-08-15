@@ -6,6 +6,7 @@ import Table from "react-bootstrap/esm/Table";
 import { BigNumber, ethers } from "ethers";
 import { Provider, Contract, setMulticallAddress } from "ethers-multicall";
 import { useQuery, gql } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 import "../../styles/batchlist.scss";
 import "../../styles/modals.scss";
 import QRCode from "react-qr-code";
@@ -37,6 +38,7 @@ const pagDefault = {
 };
 
 export const List = () => {
+  const { t } = useTranslation();
   const { authState } = useAuthContext();
   const [state] = authState;
   const [currentEthCallProvider, setCurrentEthCallProvider] =
@@ -474,10 +476,10 @@ export const List = () => {
       </Modal.Body>
       <Modal.Footer>
         <Button variant="primary" onClick={handleOnDownloadClick}>
-          Descargar
+          <>{t("download")}</>
         </Button>
         <Button variant="primary" target="_blank" href={qrCodeUrl}>
-          Abrir Enlace
+          <>{t("open-link")}</>
         </Button>
       </Modal.Footer>
     </Modal>
@@ -487,80 +489,82 @@ export const List = () => {
     <Card className="filters">
       <Card.Body>
         <FormInput
-          label="Finca"
+          label={t("farm")}
           value={farmName}
-          placeholder="Finca"
+          placeholder={t("farm")}
           handleOnChange={handleFarmChange}
           errorMsg=""
         />
         <FormInput
-          label="Altura Mínima"
+          label={t("min-height")}
           value={minHeight}
-          placeholder="Altura Mínima"
+          placeholder={t("min-height")}
           handleOnChange={handleMinHeightChange}
           errorMsg={minHeightError}
         />
         <FormInput
-          label="Ubicación"
+          label={t("location")}
           value={location}
-          placeholder="Ubicación"
+          placeholder={t("location")}
           handleOnChange={handleLocationChange}
           errorMsg=""
         />
         <FormInput
-          label="Variedad"
+          label={t("variety")}
           value={variety}
-          placeholder="Variedad"
+          placeholder={t("variety")}
           handleOnChange={handleVarietyChange}
           errorMsg=""
         />
         <FormInput
-          label="Proceso"
+          label={t("process")}
           value={process}
-          placeholder="Proceso"
+          placeholder={t("process")}
           handleOnChange={handleProcessChange}
           errorMsg=""
         />
         <FormInput
-          label="Tipo de Secado"
+          label={t("drying-type")}
           value={dryingType}
-          placeholder="Tipo de Secado"
+          placeholder={t("drying-type")}
           handleOnChange={handleDryingTypeChange}
           errorMsg=""
         />
         <FormInput
-          label="Peso Mínimo"
+          label={t("min-weight")}
           value={minWeight}
-          placeholder="Peso Mínimo"
+          placeholder={t("min-weight")}
           handleOnChange={handleMinWeightChange}
           errorMsg={minWeightError}
         />
         <FormInput
-          label="Peso Máximo"
+          label={t("max-weight")}
           value={maxWeight}
-          placeholder="Peso Máximo"
+          placeholder={t("max-weight")}
           handleOnChange={handleMaxWeightChange}
           errorMsg={maxWeightError}
         />
         <FormInput
-          label="Nota Minima"
+          label={t("min-note")}
           value={minNote}
-          placeholder="Nota Minima"
+          placeholder={t("min-note")}
           handleOnChange={handleMinNoteChange}
           errorMsg={minNoteError}
         />
         <FormInput
-          label="Nota Máxima"
+          label={t("max-weight")}
           value={maxNote}
-          placeholder="Nota Máxima"
+          placeholder={t("max-weight")}
           handleOnChange={handleMaxNoteChange}
           errorMsg={maxNoteError}
         />
       </Card.Body>
       <Card.Footer>
-        <Button onClick={() => onSearchClick()}>Buscar</Button>
+        <Button onClick={() => onSearchClick()}>
+          <>{t("search")}</>
+        </Button>
         <Button variant="secondary" onClick={() => onClearClick()}>
-          Limpiar
+          <>{t("clear")}</>
         </Button>
       </Card.Footer>
     </Card>
@@ -572,30 +576,59 @@ export const List = () => {
       <Card className="create-card">
         <Card.Header>
           <div>
-            <h2>Fincas y Lotes de café</h2>
+            <h2>
+              <>{t("farm-and-batches")}</>
+            </h2>
           </div>
           <div>
-            <h3>Total: {batchesCount}</h3>
+            <h3>
+              <>
+                {t("total")}: {batchesCount}
+              </>
+            </h3>
           </div>
         </Card.Header>
         <Card.Body>
           {loading || loadingIpfs ? (
-            <Loading label="Cargando..." className="loading-wrapper" />
+            <Loading
+              label={t("loading").concat("...")}
+              className="loading-wrapper"
+            />
           ) : (
             <Table className="coffeebatches">
               <thead>
                 <tr>
                   <th className="th-2">QR</th>
-                  <th className="th-2">Finca</th>
-                  <th className="th-2">Altura</th>
-                  <th className="th-2">Ubicación</th>
-                  <th className="th-3">Variedad</th>
-                  <th className="th-2">Proceso</th>
-                  <th className="th-4">Id de Secado</th>
-                  <th className="th-2">Tipo de Secado</th>
-                  <th className="th-4">Id de Exportación</th>
-                  <th className="th-3">Peso</th>
-                  <th className="th-3">Nota</th>
+                  <th className="th-2">
+                    <>{t("farm")}</>
+                  </th>
+                  <th className="th-2">
+                    <>{t("height")}</>
+                  </th>
+                  <th className="th-2">
+                    <>{t("location")}</>
+                  </th>
+                  <th className="th-3">
+                    <>{t("variety")}</>
+                  </th>
+                  <th className="th-2">
+                    <>{t("process")}</>
+                  </th>
+                  <th className="th-4">
+                    <>{t("drying-code")}</>
+                  </th>
+                  <th className="th-2">
+                    <>{t("drying-type")}</>
+                  </th>
+                  <th className="th-4">
+                    <>{t("exporting-code")}</>
+                  </th>
+                  <th className="th-3">
+                    <>{t("weight")}</>
+                  </th>
+                  <th className="th-3">
+                    <>{t("note")}</>
+                  </th>
                 </tr>
               </thead>
               <tbody>

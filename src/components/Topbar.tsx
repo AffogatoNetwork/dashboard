@@ -3,6 +3,7 @@ import Container from "react-bootstrap/esm/Container";
 import { useNavigate } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
+import { useTranslation } from "react-i18next";
 import {
   FaHome,
   FaMugHot,
@@ -15,6 +16,7 @@ import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
 
 const Sidebar = () => {
+  const { t } = useTranslation();
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
   const navigate = useNavigate();
@@ -52,22 +54,30 @@ const Sidebar = () => {
           </Navbar.Toggle>
           <Nav.Link onClick={() => navigate("/list")}>
             <div className="nav-caption">
-              <FaHome /> Hogar
+              <>
+                <FaHome /> {t("home")}
+              </>
             </div>
           </Nav.Link>
           <Nav.Link onClick={() => navigate("/create")}>
             <div className="nav-caption">
-              <FaPencilAlt /> Crear Lotes
+              <>
+                <FaPencilAlt /> {t("create-batches.menu")}
+              </>
             </div>
           </Nav.Link>
           <Nav.Link onClick={() => navigate("/farmers")}>
             <div className="nav-caption">
-              <FaMugHot /> Productores
+              <>
+                <FaMugHot /> {t("farmers")}
+              </>
             </div>
           </Nav.Link>
           <Navbar.Toggle onClick={() => logout()}>
             <div className="nav-caption">
-              <FaPowerOff /> Cerrar Sesión
+              <>
+                <FaPowerOff /> {t("logout")}
+              </>
             </div>
           </Navbar.Toggle>
         </Nav>

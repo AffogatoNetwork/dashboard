@@ -4,6 +4,7 @@ import Card from "react-bootstrap/esm/Card";
 import { OutTable, ExcelRenderer } from "react-excel-renderer";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { useDropzone } from "react-dropzone";
+import { useTranslation } from "react-i18next";
 import "../../styles/create.scss";
 import { useAuthContext } from "../../states/AuthContext";
 import { saveFarms } from "../../db/firebase";
@@ -13,6 +14,7 @@ import { FarmType } from "../common/types";
 import Loading from "../Loading";
 
 export const Create = () => {
+  const { t } = useTranslation();
   const { authState } = useAuthContext();
   const [state] = authState;
   const [rows, setRows] = useState(null);
@@ -33,9 +35,13 @@ export const Create = () => {
 
   const files = acceptedFiles.map((file, index) => (
     <div key={index} className="file-accepted">
-      <span>El archivo {file.name} ha sido cargado exitosamente.</span>
+      <span>
+        <>{t("remove", { "file-name": file.name })}</>
+      </span>
       <Button className="remove" onClick={() => clearFiles()}>
-        (<FaTimes /> Quitar)
+        <>
+          <FaTimes /> {t("remove")}
+        </>
       </Button>
     </div>
   ));
@@ -162,7 +168,7 @@ export const Create = () => {
         .then((res) => res.json())
         .then((json) => {
           console.log(json);
-          notifyUser("Los lotes de café han sido creados.");
+          notifyUser(t("create-batches.success"));
           setSaving(false);
           clearFiles();
           saveFarmsToDB();
@@ -170,12 +176,12 @@ export const Create = () => {
         .catch((error) => {
           console.log(error);
           // errorNotification("Error inesperado.");
-          notifyUser("Error creando los lotes.");
+          notifyUser(t("errors.creating-batch"));
           setSaving(false);
           clearFiles();
         });
     } else {
-      errorNotification("Seleccione el archivo a cargar.");
+      errorNotification(t("errors.no-file"));
     }
   };
 
@@ -183,15 +189,20 @@ export const Create = () => {
     <div className="new-batch">
       <Card className="create-card">
         <Card.Header>
-          <h2>Crear Lotes de café</h2>
+          <h2>
+            <>{t("create-batches.title")}</>
+          </h2>
         </Card.Header>
         <Card.Body>
           {saving ? (
-            <Loading label="Creando Lotes.." className="loading-wrapper" />
+            <Loading
+              label={t("create-batches.creating")}
+              className="loading-wrapper"
+            />
           ) : (
             <>
               <h4>
-                Explicación de como subir el archivo y el formato para hacerlo.
+                <>{t("create-batches.explanation")}</>
               </h4>
               <div className="dnd-container">
                 {acceptedFiles.length === 0 ||
@@ -201,7 +212,7 @@ export const Create = () => {
                     <input {...getInputProps()} />
                     <FaSearchPlus className="icon" />
                     <p>
-                      Arrastre y suelte el archivo aquí, o presione para elegir
+                      <>{t("create-batches.drag-drop")}</>
                     </p>
                   </div>
                 ) : (
@@ -222,7 +233,7 @@ export const Create = () => {
         </Card.Body>
         <Card.Footer>
           <Button onClick={() => createBatches()} disabled={saving}>
-            Crear Lotes
+            <>{t("create-batches.menu")}</>
           </Button>
         </Card.Footer>
       </Card>

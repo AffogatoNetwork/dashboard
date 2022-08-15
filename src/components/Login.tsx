@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/Form";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
@@ -13,6 +14,7 @@ import {
 } from "../utils/utils";
 
 const Login = () => {
+  const { t } = useTranslation();
   const areaCode = "+504";
   const navigate = useNavigate();
   const { authContext, authState } = useAuthContext();
@@ -62,14 +64,16 @@ const Login = () => {
         <Card.Body>
           <div className="header">
             <CoopLogo className="logo" />
-            <h3>Accede a tu Cuenta</h3>
+            <h3>
+              <>{t("login.title")}</>
+            </h3>
           </div>
           <Form className="form" onSubmit={() => magicLogin()}>
             <Form.Group className="mb-3 input-group">
               <FormInput
-                label="Correo electrónico o No. Celular"
+                label={t("login.subtitle")}
                 value={userInput}
-                placeholder="ejemplo@gmail.com"
+                placeholder={t("placeholders.email")}
                 handleOnChange={handleUserInputChange}
                 errorMsg={userInputError}
               />
@@ -80,20 +84,26 @@ const Login = () => {
                 type="button"
                 onClick={() => magicLogin()}
               >
-                Acceder
+                <>{t("login.access")}</>
               </Button>
               <Button
                 className="auth-method"
                 onClick={() => navigate("/signup", { replace: true })}
               >
-                <u>¿No tienes cuenta? Crea una aquí.</u>
+                <u>
+                  <>{t("login.create-account")}</>
+                </u>
               </Button>
-              <span className="primary">o</span>
+              <span className="primary">
+                <>{t("or")}</>
+              </span>
               <Button
                 className="auth-method"
                 onClick={() => navigate("/coffeebatches", { replace: true })}
               >
-                <u> Accede como comprador.</u>
+                <u>
+                  <>{t("login.buyer-access")}</>
+                </u>
               </Button>
             </div>
           </Form>

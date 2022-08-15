@@ -3,6 +3,7 @@ import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import "../../styles/coffeecard.scss";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
@@ -12,6 +13,7 @@ import { ipfsUrl } from "../../utils/constants";
 import { getFarmer } from "../../db/firebase";
 
 const CoffeeCard = () => {
+  const { t } = useTranslation();
   const { ipfsHash } = useParams();
   const [loading, setLoading] = useState(true);
   const [coffeeBatch, setCoffeeBatch] = useState<CoffeeBatchType | null>(null);
@@ -110,7 +112,9 @@ const CoffeeCard = () => {
             <div className="batch-detail">
               {!!farmerData && !!farmerData.fullname && (
                 <div className="info">
-                  <h6 className="bio">Productor</h6>
+                  <h6 className="bio">
+                    <>{t("farmer")}</>
+                  </h6>
                   <span className="text-light">
                     <a
                       target="_blank"
@@ -126,13 +130,17 @@ const CoffeeCard = () => {
               )}
               {!!farmerData && !!farmerData.bio && (
                 <div className="info">
-                  <h6 className="bio">Biografía</h6>
+                  <h6 className="bio">
+                    <>{t("bio")}</>
+                  </h6>
                   <span className="text-light">{farmerData.bio}</span>
                 </div>
               )}
               {!!coffeeBatch.farm.name && (
                 <div className="location">
-                  <h6 className="bio">Nombre de Finca</h6>
+                  <h6 className="bio">
+                    <>{t("farm-name")}</>
+                  </h6>
                   <span className="text-light">{coffeeBatch.farm.name}</span>
                 </div>
               )}
@@ -140,19 +148,25 @@ const CoffeeCard = () => {
                 !!coffeeBatch.farm.family_members) && (
                 <div className="info-row">
                   <div className="item">
-                    <h6 className="bio mt-2">Grupo étnico</h6>
+                    <h6 className="bio mt-2">
+                      <>{t("ethnic-group")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.farm.etnic_group}
                     </span>
                   </div>
                   <div className="item">
-                    <h6 className="bio mt-2">Miembros de Familia</h6>
+                    <h6 className="bio mt-2">
+                      <>{t("family-members")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.farm.family_members}
                     </span>
                   </div>
                   <div className="item">
-                    <h6 className="bio mt-2">Sombra</h6>
+                    <h6 className="bio mt-2">
+                      <>{t("shadow")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.farm.shadow}
                     </span>
@@ -161,7 +175,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.farm.story && (
                 <div className="location">
-                  <h6 className="bio">Historia de Finca</h6>
+                  <h6 className="bio">
+                    <>{t("farm-history")}</>
+                  </h6>
                   <span className="text-light">{coffeeBatch.farm.story}</span>
                 </div>
               )}
@@ -169,13 +185,17 @@ const CoffeeCard = () => {
                 !!coffeeBatch.farm.varieties) && (
                 <div className="info-row">
                   <div className="item">
-                    <h6 className="bio mt-2">Certificados</h6>
+                    <h6 className="bio mt-2">
+                      <>{t("certificates")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.farm.certifications}
                     </span>
                   </div>
                   <div className="item right">
-                    <h6 className="bio mt-2">Variedades</h6>
+                    <h6 className="bio mt-2">
+                      <>{t("varieties")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.farm.varieties}
                     </span>
@@ -186,14 +206,18 @@ const CoffeeCard = () => {
                 {!!coffeeBatch.farm.village && (
                   <div className="info-row">
                     <div className="item">
-                      <h6 className="bio">Ubicación</h6>
+                      <h6 className="bio">
+                        <>{t("location")}</>
+                      </h6>
                       <span className="text-light">
                         {coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
                         {coffeeBatch.farm.country}
                       </span>
                     </div>
                     <div className="item right">
-                      <h6 className="bio mt-2">Altitud</h6>
+                      <h6 className="bio mt-2">
+                        <>{t("altitude")}</>
+                      </h6>
                       <span className="text-light">
                         {coffeeBatch.farm.altitude} MSNM
                       </span>
@@ -203,7 +227,9 @@ const CoffeeCard = () => {
                 {!!coffeeBatch.farm.area && (
                   <div className="info-row">
                     <div className="item">
-                      <h6 className="bio mt-2">Área</h6>
+                      <h6 className="bio mt-2">
+                        <>{t("area")}</>
+                      </h6>
                       <span className="text-light">
                         {coffeeBatch.farm.area}
                       </span>
@@ -211,7 +237,9 @@ const CoffeeCard = () => {
                     {!!coffeeBatch.farm.latitude &&
                       !!coffeeBatch.farm.longitude && (
                         <div className="item right">
-                          <h6 className="bio mt-2">Coordenadas</h6>
+                          <h6 className="bio mt-2">
+                            <>{t("coordinates")}</>
+                          </h6>
                           <Button
                             variant="secondary"
                             className="text-light"
@@ -223,7 +251,7 @@ const CoffeeCard = () => {
                               )
                             }
                           >
-                            Ver Mapa
+                            <>{t("show-map")}</>
                           </Button>
                         </div>
                       )}
@@ -249,7 +277,9 @@ const CoffeeCard = () => {
             <div className="items">
               {!!coffeeBatch.wetMill.variety && (
                 <div className="item">
-                  <h6 className="title">Variedad</h6>
+                  <h6 className="title">
+                    <>{t("vavriety")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.variety}
                   </span>
@@ -257,7 +287,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.process && (
                 <div className="item">
-                  <h6 className="title">Proceso</h6>
+                  <h6 className="title">
+                    <>{t("process")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.process}
                   </span>
@@ -265,7 +297,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.certifications && (
                 <div className="item">
-                  <h6 className="title">Certificaciones</h6>
+                  <h6 className="title">
+                    <>{t("certificates")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.certifications}
                   </span>
@@ -273,7 +307,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.aroma && (
                 <div className="item">
-                  <h6 className="title">Aroma</h6>
+                  <h6 className="title">
+                    <>{t("aroma")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.aroma}
                   </span>
@@ -281,7 +317,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.acidity && (
                 <div className="item">
-                  <h6 className="title">Acidez</h6>
+                  <h6 className="title">
+                    <>{t("acidity")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.acidity}
                   </span>
@@ -289,7 +327,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.aftertaste && (
                 <div className="item">
-                  <h6 className="title">Post Gusto</h6>
+                  <h6 className="title">
+                    <>{t("aftertaste")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.aftertaste}
                   </span>
@@ -297,7 +337,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.body && (
                 <div className="item">
-                  <h6 className="title">Cuerpo</h6>
+                  <h6 className="title">
+                    <>{t("body")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.body}
                   </span>
@@ -305,7 +347,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.flavor && (
                 <div className="item">
-                  <h6 className="title">Sabor</h6>
+                  <h6 className="title">
+                    <>{t("flavor")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.flavor}
                   </span>
@@ -313,7 +357,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.sweetness && (
                 <div className="item">
-                  <h6 className="title">Dulzura</h6>
+                  <h6 className="title">
+                    <>{t("sweetness")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.sweetness}
                   </span>
@@ -321,7 +367,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.cupProfile.note && (
                 <div className="item">
-                  <h6 className="title">Nota</h6>
+                  <h6 className="title">
+                    <>{t("note")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.cupProfile.note}
                   </span>
@@ -345,7 +393,9 @@ const CoffeeCard = () => {
             <div className="items">
               {!!coffeeBatch.wetMill.drying_id && (
                 <div className="item">
-                  <h6 className="title">Id de Lote</h6>
+                  <h6 className="title">
+                    <>{t("batch-id")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.drying_id}
                   </span>
@@ -353,7 +403,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.quality && (
                 <div className="item">
-                  <h6 className="title">Calidad</h6>
+                  <h6 className="title">
+                    <>{t("quality")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.quality}
                   </span>
@@ -361,7 +413,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.process && (
                 <div className="item">
-                  <h6 className="title">Proceso</h6>
+                  <h6 className="title">
+                    <>{t("process")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.process}
                   </span>
@@ -369,7 +423,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.drying_type && (
                 <div className="item">
-                  <h6 className="title">Tipo de Secado</h6>
+                  <h6 className="title">
+                    <>{t("drying-type")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.drying_type}
                   </span>
@@ -377,7 +433,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.drying_hours && (
                 <div className="item">
-                  <h6 className="title">Horas de Secado</h6>
+                  <h6 className="title">
+                    <>{t("drying-hours")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.drying_hours}
                   </span>
@@ -386,7 +444,9 @@ const CoffeeCard = () => {
               {!!coffeeBatch.wetMill.date &&
                 coffeeBatch.wetMill.date !== "1970-01-01" && (
                   <div className="item">
-                    <h6 className="title">Fecha de Ingreso</h6>
+                    <h6 className="title">
+                      <>{t("entry-date")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.wetMill.date}
                     </span>
@@ -394,7 +454,9 @@ const CoffeeCard = () => {
                 )}
               {!!coffeeBatch.wetMill.facility && (
                 <div className="item">
-                  <h6 className="title">Instalación</h6>
+                  <h6 className="title">
+                    <>{t("facility")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.wetMill.facility}
                   </span>
@@ -403,7 +465,9 @@ const CoffeeCard = () => {
               {!!coffeeBatch.wetMill.latitude &&
                 !!coffeeBatch.wetMill.longitude && (
                   <div className="item">
-                    <h6 className="title">Ubicación</h6>
+                    <h6 className="title">
+                      <>{t("location")}</>
+                    </h6>
                     <Button
                       variant="secondary"
                       className="text-light"
@@ -415,7 +479,7 @@ const CoffeeCard = () => {
                         )
                       }
                     >
-                      Ver Mapa
+                      <>{t("show-map")}</>
                     </Button>
                   </div>
                 )}
@@ -429,7 +493,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.wetMill.note && (
                 <div className="item">
-                  <h6 className="title">Nota</h6>
+                  <h6 className="title">
+                    <>{t("note")}</>
+                  </h6>
                   <span className="text-light">{coffeeBatch.wetMill.note}</span>
                 </div>
               )}
@@ -449,7 +515,9 @@ const CoffeeCard = () => {
             <div className="items">
               {!!coffeeBatch.dryMill.export_id && (
                 <div className="item">
-                  <h6 className="title">Id de Exportación</h6>
+                  <h6 className="title">
+                    <>{t("exporting-code")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.export_id}
                   </span>
@@ -459,7 +527,9 @@ const CoffeeCard = () => {
               {!!coffeeBatch.dryMill.date &&
                 coffeeBatch.dryMill.date !== "1970-01-01" && (
                   <div className="item">
-                    <h6 className="title">Fecha</h6>
+                    <h6 className="title">
+                      <>{t("date")}</>
+                    </h6>
                     <span className="text-light">
                       {coffeeBatch.dryMill.date}
                     </span>
@@ -468,7 +538,9 @@ const CoffeeCard = () => {
 
               {!!coffeeBatch.dryMill.facility && (
                 <div className="item">
-                  <h6 className="title">Instalación</h6>
+                  <h6 className="title">
+                    <>{t("facility")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.facility}
                   </span>
@@ -477,7 +549,9 @@ const CoffeeCard = () => {
               {!!coffeeBatch.dryMill.latitude &&
                 !!coffeeBatch.dryMill.longitude && (
                   <div className="item">
-                    <h6 className="title">Ubicación</h6>
+                    <h6 className="title">
+                      <>{t("location")}</>
+                    </h6>
                     <Button
                       variant="secondary"
                       className="text-light"
@@ -489,13 +563,15 @@ const CoffeeCard = () => {
                         )
                       }
                     >
-                      Ver Mapa
+                      <>{t("show-map")}</>
                     </Button>
                   </div>
                 )}
               {!!coffeeBatch.dryMill.damage_percent && (
                 <div className="item">
-                  <h6 className="title">Porcentaje de Daño</h6>
+                  <h6 className="title">
+                    <>{t("damage-percent")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.damage_percent}
                   </span>
@@ -503,7 +579,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.dryMill.threshing_yield && (
                 <div className="item">
-                  <h6 className="title">Rendimiento de Trilla</h6>
+                  <h6 className="title">
+                    <>{t("threshing-yield")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.threshing_yield}
                   </span>
@@ -511,7 +589,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.dryMill.weight && (
                 <div className="item">
-                  <h6 className="title">Peso</h6>
+                  <h6 className="title">
+                    <>{t("weight")}</>
+                  </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.weight} QQ
                   </span>
@@ -519,7 +599,9 @@ const CoffeeCard = () => {
               )}
               {!!coffeeBatch.dryMill.note && (
                 <div className="item">
-                  <h6 className="title">Nota</h6>
+                  <h6 className="title">
+                    <>{t("note")}</>
+                  </h6>
                   <span className="text-light">{coffeeBatch.dryMill.note}</span>
                 </div>
               )}

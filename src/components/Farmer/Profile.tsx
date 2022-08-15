@@ -2,12 +2,14 @@ import React, { useState, useEffect } from "react";
 import Card from "react-bootstrap/esm/Card";
 import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import "../../styles/farmer.scss";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
 import { getFarmer, getFarmerFarms, getImageUrl } from "../../db/firebase";
 
 export const Profile = () => {
+  const { t } = useTranslation();
   const { farmerId } = useParams();
   const [loading, setLoading] = useState(true);
   const [farmerData, setFarmerData] = useState<any>();
@@ -36,11 +38,13 @@ export const Profile = () => {
   }, [farmerId]);
 
   if (loading) {
-    return <Loading label="Cargando..." className="loading-wrapper" />;
+    return (
+      <Loading label={t("loading").concat("...")} className="loading-wrapper" />
+    );
   }
 
   if (farmerData === null) {
-    return <NotFound msg="No se encontró el Productor." />;
+    return <NotFound msg={t("errors.farmer-not-found")} />;
   }
 
   return (
@@ -54,27 +58,35 @@ export const Profile = () => {
             <div className="farmer-detail">
               {farmerData && farmerData.fullname && (
                 <div className="info">
-                  <h6 className="bio">Productor</h6>
+                  <h6 className="bio">
+                    <>{t("farmer")}</>
+                  </h6>
                   <span className="text-light">{farmerData.fullname}</span>
                 </div>
               )}
               {farmerData && farmerData.gender && (
                 <div className="info">
-                  <h6 className="bio">Genero</h6>
+                  <h6 className="bio">
+                    <>{t("gender")}</>
+                  </h6>
                   <span className="text-light">
-                    {farmerData.gender === "male" ? "Masculino" : "Femenino"}
+                    <>{t(farmerData.gender)}</>
                   </span>
                 </div>
               )}
               {farmerData && farmerData.bio && (
                 <div className="info">
-                  <h6 className="bio">Biografía</h6>
+                  <h6 className="bio">
+                    <>{t("bio")}</>
+                  </h6>
                   <span className="text-light">{farmerData.bio}</span>
                 </div>
               )}
               {farmerData && farmerData.company && (
                 <div className="info">
-                  <h6 className="bio">Empresa</h6>
+                  <h6 className="bio">
+                    <>{t("company")}</>
+                  </h6>
                   <span className="text-light">{farmerData.company}</span>
                 </div>
               )}
@@ -82,13 +94,17 @@ export const Profile = () => {
                 {farmerData && farmerData.region && (
                   <>
                     <div>
-                      <h6 className="bio mt-2">Ubicación</h6>
+                      <h6 className="bio mt-2">
+                        <>{t("location")}</>
+                      </h6>
                       <span className="text-light">
                         {farmerData.village}, {farmerData.region}
                       </span>
                     </div>
                     <div>
-                      <h6 className="bio mt-2">País</h6>
+                      <h6 className="bio mt-2">
+                        <>{t("country")}</>
+                      </h6>
                       <span className="text-light">{farmerData.country}</span>
                     </div>
                   </>

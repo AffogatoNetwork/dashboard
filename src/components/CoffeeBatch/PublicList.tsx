@@ -4,11 +4,13 @@ import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
+import { useTranslation } from "react-i18next";
 import "../../styles/app.scss";
 import { List } from "./index";
 import CoopLogo from "../common/CoopLogo";
 
 export const PublicList = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [authCookie, setAuthCookie] = useCookies(["is_buyer_auth"]);
   const [isAuth, setAuth] = useState(authCookie.is_buyer_auth === "1");
@@ -57,16 +59,19 @@ export const PublicList = () => {
         <Card.Body>
           <div className="header">
             <CoopLogo className="logo" />
-            <h3>Ver Lotés de Café</h3>
+            <h3>
+              <>{t("login.buyer-title")}</>
+            </h3>
             <span className="primary">
-              Si todavía no tiene contraseña de comprador debe comunicarse con
-              la empresa para solicitarla.
+              <>{t("login.buyer-subtitle")}</>
             </span>
           </div>
           <Form className="form" onSubmit={() => handleOnClick()}>
             <Form.Group className="mb-3 input-group">
               <div className="form-input">
-                <Form.Label>Contraseña de Comprador</Form.Label>
+                <Form.Label>
+                  <>{t("login.buyer-password")}</>
+                </Form.Label>
                 <Form.Control
                   value={password}
                   placeholder="*******"
@@ -84,14 +89,16 @@ export const PublicList = () => {
                 type="button"
                 onClick={() => handleOnClick()}
               >
-                Acceder
+                <>{t("login.access")}</>
               </Button>
               <Button
                 variant="secondary"
                 className="auth-method"
                 onClick={() => navigate("/login", { replace: true })}
               >
-                <u>Regresar</u>
+                <u>
+                  <>{t("signup.back")}</>
+                </u>
               </Button>
             </div>
           </Form>
