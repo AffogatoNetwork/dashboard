@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Dropdown from "react-bootstrap/Dropdown";
+import Modal from "react-bootstrap/esm/Modal";
+import QRCode from "react-qr-code";
 import Table from "react-bootstrap/esm/Table";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { useTranslation } from "react-i18next";
@@ -14,6 +16,8 @@ import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import { getCompanyName } from "../../utils/utils";
 import { GenderFilterList } from "../../utils/constants";
+
+const saveSvgAsPng = require("save-svg-as-png");
 
 const pagDefault = {
   previous: 0,
@@ -43,6 +47,8 @@ export const List = () => {
   const [farmers2, setFarmers2] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
   const [pagination, setPagination] = useState(pagDefault);
+  const [showModal, setShowModal] = useState(false);
+  const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [code, setCode] = useState("");
   const [name, setName] = useState("");
   const [location, setLocation] = useState("");
@@ -215,6 +221,16 @@ export const List = () => {
     confPagination(farmers2, 15);
   };
 
+  const handleOnDownloadClick = () => {
+    saveSvgAsPng.saveSvgAsPng(
+      document.getElementById("current-qr"),
+      "qr-farmer",
+      {
+        scale: 0.5,
+      }
+    );
+  };
+
   const RenderFilters = () => (
     <Card className="filters">
       <Card.Body>
@@ -288,6 +304,19 @@ export const List = () => {
         key={index}
         className={pagination.current === itemPage ? "show" : "hide"}
       >
+        <td className="main">
+          <div className="qrcode">
+            <Button
+              className="qrcode-btn"
+              onClick={() => {
+                setQrCodeUrl(farmerUrl);
+                setShowModal(true);
+              }}
+            >
+              <QRCode value={farmerUrl} size={60} />
+            </Button>
+          </div>
+        </td>
         <td>{farmer.farmerId}</td>
         <td>
           <a href={farmerUrl} target="_blank" rel="noreferrer">
@@ -307,6 +336,29 @@ export const List = () => {
       </tr>
     );
   };
+
+  const RenderModal = () => (
+    <Modal
+      show={showModal}
+      size="lg"
+      className="qr-modal"
+      aria-labelledby="contained-modal-title-vcenter"
+      centered
+      onHide={() => setShowModal(false)}
+    >
+      <Modal.Body className="">
+        <QRCode id="current-qr" value={qrCodeUrl} size={600} />
+      </Modal.Body>
+      <Modal.Footer>
+        <Button variant="primary" onClick={handleOnDownloadClick}>
+          <>{t("download")}</>
+        </Button>
+        <Button variant="primary" target="_blank" href={qrCodeUrl}>
+          <>{t("open-link")}</>
+        </Button>
+      </Modal.Footer>
+    </Modal>
+  );
 
   if (loading) {
     return (
@@ -349,6 +401,7 @@ export const List = () => {
               <Table id="farmers-list" className="farmers-list">
                 <thead>
                   <tr>
+                    <th />
                     <th>
                       <>{t("code")}</>
                     </th>
@@ -385,6 +438,7 @@ export const List = () => {
           />
         </Card.Footer>
       </Card>
+      {RenderModal()}
     </div>
   );
 };

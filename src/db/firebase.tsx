@@ -94,7 +94,26 @@ export const saveFarm = async (farm: FarmType) => {
   try {
     const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
     const farmDoc = doc(db, "farms", docId);
-    await setDoc(farmDoc, farm);
+    const farmData = {
+      farmerAddress: farm.farmerAddress,
+      company: farm.company,
+      name: farm.name,
+      height: farm.height,
+      area: farm.area,
+      certifications: farm.certifications,
+      latitude: farm.latitude,
+      longitude: farm.longitude,
+      bio: farm.bio,
+      country: farm.country,
+      region: farm.region,
+      village: farm.village,
+      village2: farm.village2,
+      varieties: farm.varieties,
+      shadow: farm.shadow,
+      familyMembers: farm.familyMembers,
+      ethnicGroup: farm.ethnicGroup,
+    };
+    await setDoc(farmDoc, farmData);
   } catch (error) {
     console.log(error);
   }
@@ -134,4 +153,10 @@ export const saveFarms = async (farms: Array<FarmType>) => {
   } catch (error) {
     console.log(error);
   }
+};
+
+export const getFarms = async (company: string) => {
+  const q = query(collection(db, "farms"), where("company", "==", company));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
 };

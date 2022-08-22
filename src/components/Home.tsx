@@ -11,6 +11,7 @@ import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import Login from "./Login";
 import { Profile, List as FarmerList } from "./Farmer/index";
+import { List as FarmList } from "./Farm/index";
 import Signup from "./Signup";
 import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
@@ -65,6 +66,16 @@ const Home = () => {
             <RequiredAuth>
               <Dashboard>
                 <FarmerList />
+              </Dashboard>
+            </RequiredAuth>
+          }
+        />
+        <Route
+          path="/farms"
+          element={
+            <RequiredAuth>
+              <Dashboard>
+                <FarmList />
               </Dashboard>
             </RequiredAuth>
           }

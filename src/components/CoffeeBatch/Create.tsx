@@ -9,7 +9,11 @@ import "../../styles/create.scss";
 import { useAuthContext } from "../../states/AuthContext";
 import { saveFarms } from "../../db/firebase";
 import { apiUrl } from "../../utils/constants";
-import { errorNotification, notifyUser, isNumber } from "../../utils/utils";
+import {
+  getCompanyName,
+  errorNotification,
+  notifyUser,
+} from "../../utils/utils";
 import { FarmType } from "../common/types";
 import Loading from "../Loading";
 
@@ -96,6 +100,7 @@ export const Create = () => {
 
   const saveFarmsToDB = async () => {
     const farms = new Array<FarmType>();
+    const companyName = getCompanyName(ownerAddress);
 
     if (rows !== null) {
       // @ts-ignore
@@ -104,40 +109,43 @@ export const Create = () => {
           // @ts-ignore
           if (rows[i] !== null && rows[i].length > 0) {
             // @ts-ignore
-            if (rows[i][0] !== "" && rows[i][12] !== "") {
-              // @ts-ignore
-              const gpoint = rows[i][18].trim();
-              const gpoint2 = [0, 0];
-
-              // @ts-ignore
-              if (gpoint !== "") {
-                const gp = gpoint.split(",");
-                if (gp.length === 2) {
-                  if (isNumber(gp[0]) && isNumber(gp[1])) {
-                    gpoint2[0] = parseInt(gp[0]);
-                    gpoint2[1] = parseInt(gp[1]);
-                  }
-                }
-              }
-
+            if (rows[i][1] !== "" && rows[i][2] !== "") {
               farms.push({
                 // @ts-ignore
-                farmerAddress: rows[i][0],
+                farmerAddress: rows[i][1],
+                company: companyName,
                 // @ts-ignore
-                name: rows[i][11] || "",
+                name: rows[i][2] || "",
                 // @ts-ignore
-                country: rows[i][12] || "",
+                height: rows[i][3] || 0,
                 // @ts-ignore
-                region: rows[i][13] || "",
+                area: rows[i][4] || 0,
                 // @ts-ignore
-                village: rows[i][14] || "",
+                certifications: rows[i][5] || "",
                 // @ts-ignore
-                altitud: rows[i][15] || "",
+                latitude: rows[i][6] || "",
                 // @ts-ignore
-                story: rows[i][16] || "",
+                longitude: rows[i][7] || "",
                 // @ts-ignore
-                certifications: rows[i][17] || "",
-                geopoint: gpoint2,
+                bio: rows[i][8] || "",
+                // @ts-ignore
+                country: rows[i][9] || "",
+                // @ts-ignore
+                region: rows[i][10] || "",
+                // @ts-ignore
+                village: rows[i][11] || "",
+                // @ts-ignore
+                village2: rows[i][12] || "",
+                // @ts-ignore
+                varieties: rows[i][13] || "",
+                // @ts-ignore
+                shadow: rows[i][14] || "",
+                // @ts-ignore
+                familyMembers: rows[i][15] || 1,
+                // @ts-ignore
+                ethnicGroup: rows[i][16] || "",
+                location: "",
+                search: "",
               });
             }
           }

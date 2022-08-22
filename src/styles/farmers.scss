@@ -100,6 +100,7 @@
     td span {
         padding:0;
     }
+
     .even {
       background-color: #964a000a;
     }
@@ -118,8 +119,9 @@
         padding: 0rem;
       }
     }
-    .batch {
-      border-left: 0.5px dashed $secondary;
+    .qrcode-btn {
+      background-color: transparent;
+      border: none;
     }
     .cupprofile {
       border-left: 0.5px dashed $secondary;

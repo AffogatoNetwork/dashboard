@@ -6,6 +6,7 @@ import Nav from "react-bootstrap/esm/Nav";
 import { useTranslation } from "react-i18next";
 import {
   FaHome,
+  FaUserFriends,
   FaMugHot,
   FaPencilAlt,
   FaPowerOff,
@@ -69,7 +70,14 @@ const Sidebar = () => {
           <Nav.Link onClick={() => navigate("/farmers")}>
             <div className="nav-caption">
               <>
-                <FaMugHot /> {t("farmers")}
+                <FaUserFriends /> {t("farmers")}
+              </>
+            </div>
+          </Nav.Link>
+          <Nav.Link onClick={() => navigate("/farms")}>
+            <div className="nav-caption">
+              <>
+                <FaMugHot /> {t("farms")}
               </>
             </div>
           </Nav.Link>

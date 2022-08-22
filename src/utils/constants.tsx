@@ -1,6 +1,8 @@
 export const ipfsUrl = "https://affogato.mypinata.cloud/ipfs/";
 export const apiUrl = "https://mocha-j6pn.onrender.com/api/v1/";
 
+export const SEARCH_DIVIDER = "##";
+
 export type CooperativeType = {
   key: string;
   name: string;

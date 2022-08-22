@@ -37,7 +37,6 @@ const CoffeeCard = () => {
             let dryMill = {};
             for (let i = 0; i < jsonData.attributes.length; i += 1) {
               const traitType = jsonData.attributes[i].trait_type.toLowerCase();
-              console.log(traitType);
               if (traitType === "farmer") {
                 farmer = await jsonData.attributes[i].value;
                 getFarmer(await jsonData.attributes[i].value).then((result) => {
@@ -219,7 +218,7 @@ const CoffeeCard = () => {
                         <>{t("altitude")}</>
                       </h6>
                       <span className="text-light">
-                        {coffeeBatch.farm.altitude} MSNM
+                        {coffeeBatch.farm.altitude} <>{t("masl")}</>
                       </span>
                     </div>
                   </div>
