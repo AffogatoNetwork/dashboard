@@ -6,6 +6,7 @@ import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
 import { useTranslation } from "react-i18next";
 import "../../styles/app.scss";
+import LangChooser from "../common/LangChooser";
 import { List } from "./index";
 import CoopLogo from "../common/CoopLogo";
 
@@ -104,6 +105,7 @@ export const PublicList = () => {
           </Form>
         </Card.Body>
       </Card>
+      <LangChooser type="bar" />
     </div>
   );
 };

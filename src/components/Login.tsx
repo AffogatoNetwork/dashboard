@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
 import FormInput from "./common/FormInput";
+import LangChooser from "./common/LangChooser";
 import {
   isValidCellphone,
   isValidEmail,
@@ -109,6 +110,7 @@ const Login = () => {
           </Form>
         </Card.Body>
       </Card>
+      <LangChooser type="bar" />
     </div>
   );
 };

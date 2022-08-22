@@ -2,7 +2,6 @@ import React from "react";
 import { Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
 import { ToastContainer } from "react-toastify";
-// import { useTranslation } from "react-i18next";
 import "../styles/app.scss";
 import "react-toastify/dist/ReactToastify.css";
 import CoffeeCard from "./CoffeeBatch/CoffeeCard";
@@ -19,7 +18,6 @@ import { Create, List, PublicList } from "./CoffeeBatch/index";
 import { Landing } from "./CoffeeBatch/Landing";
 
 const Home = () => {
-  //  const { t } = useTranslation();
   const { authState } = useAuthContext();
   const [state] = authState;
 

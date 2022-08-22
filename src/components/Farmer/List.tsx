@@ -387,8 +387,8 @@ export const List = () => {
               id="table-xls-button"
               className="download-xls-button"
               table="farmers-list"
-              filename="Productores"
-              sheet="Productores"
+              filename={t("farmers")}
+              sheet={t("farmers")}
               buttonText={"(".concat(t("download")).concat(")")}
             />
           </div>

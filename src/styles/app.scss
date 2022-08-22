@@ -238,8 +238,8 @@ a {
 
 .login {
   display: flex;
+  flex-direction: column;
   height: 100%;
-  flex-direction: row;
   align-items: center;
   justify-content: center;
 
@@ -279,7 +279,7 @@ a {
     margin: 1rem 0rem;
   }
   .card {
-    width: 400px;
+    width: 450px;
   }
   .card-body {
     overflow: hidden;
@@ -336,7 +336,8 @@ a {
 
   .container {
     display: flex;
-    padding: 0.5rem 0rem;
+    padding: 0.5rem 1.2rem;
+    max-width: 1700px;
     width: 100%;
     justify-content: space-between;
     align-items: center;
@@ -386,6 +387,14 @@ a {
     color: $primary;
     font-size: 1.2rem;
     font-family: "Dosis";
+  }
+  .lang-dropdown {
+    display: none;
+    .dropdown-toggle {
+      .lang-flag {
+        width: 10px;
+      }
+    }
   }
 }
 
@@ -475,5 +484,23 @@ a {
   }
   span {
     font-size: 16px;
+  }
+}
+
+.lang-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 10px;
+  width: 450px;
+  .btn-flag {
+    background-color: transparent;
+    border: none;
+    width: 50px;
+  }
+  .btn-flag:hover {
+    border: none;
+  }
+  .btn-flag:focus {
+    box-shadow: none;
   }
 }

@@ -12,6 +12,7 @@ import {
   FaPowerOff,
   FaUserAlt,
 } from "react-icons/fa";
+import LangChooser from "./common/LangChooser";
 import CoopLogo from "./common/CoopLogo";
 import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
@@ -88,6 +89,9 @@ const Sidebar = () => {
               </>
             </div>
           </Navbar.Toggle>
+          <Nav className="flag-navitem">
+            <LangChooser type="dropdown" />
+          </Nav>
         </Nav>
       </Container>
     </Navbar>
