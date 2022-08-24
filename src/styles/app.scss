@@ -198,6 +198,16 @@ h6 {
   }
 }
 
+.accordion {
+  &-button:not(.collapsed) {
+    background-color: #964b000d;
+  }
+    &-button:focus {
+      box-shadow: 0 0 0 0.25rem #cc772213;
+    }
+}
+
+
 .btn-secondary {
   background-color: white;
   color: $primary;

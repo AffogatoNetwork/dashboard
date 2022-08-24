@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Modal from "react-bootstrap/esm/Modal";
@@ -12,7 +13,7 @@ import "../../styles/modals.scss";
 import QRCode from "react-qr-code";
 import Loading from "../Loading";
 import { useAuthContext } from "../../states/AuthContext";
-import { ipfsUrl } from "../../utils/constants";
+import { ipfsUrl, SEARCH_DIVIDER } from "../../utils/constants";
 import FormInput from "../common/FormInput";
 import { CustomPagination } from "../common/Pagination";
 import { CoffeeBatchType } from "../common/types";
@@ -58,12 +59,8 @@ export const List = () => {
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [isAuth, setAuth] = useState(true);
   const [companyAddresses, setCompanyAddresses] = useState<Array<string>>([]);
-  const [farmName, setFarmName] = useState("");
+  const [searchCriteria, setSearchCriteria] = useState("");
   const [minHeight, setMinHeight] = useState("0");
-  const [location, setLocation] = useState("");
-  const [variety, setVariety] = useState("");
-  const [process, setProcess] = useState("");
-  const [dryingType, setDryingType] = useState("");
   const [minWeight, setMinWeight] = useState("0");
   const [maxWeight, setMaxWeight] = useState("");
   const [minNote, setMinNote] = useState("0");
@@ -269,9 +266,21 @@ export const List = () => {
     );
   };
 
-  const filterByFarm = (c: CoffeeBatchType) => {
-    const n = c.farm.name.toLowerCase();
-    return n.includes(farmName.toLowerCase());
+  const filterByCriteria = (c: CoffeeBatchType) => {
+    const s = c.farm.name
+      .concat(SEARCH_DIVIDER)
+      .concat(c.wetMill.variety)
+      .concat(SEARCH_DIVIDER)
+      .concat(c.wetMill.process)
+      .concat(SEARCH_DIVIDER)
+      .concat(c.wetMill.drying_type)
+      .concat(SEARCH_DIVIDER)
+      .concat(c.farm.village)
+      .concat(SEARCH_DIVIDER)
+      .concat(c.farm.region)
+      .toLowerCase();
+
+    return s.includes(searchCriteria.toLowerCase());
   };
 
   const filterByHeight = (c: CoffeeBatchType) => {
@@ -281,26 +290,6 @@ export const List = () => {
       include = n >= parseInt(minHeight);
     }
     return include;
-  };
-
-  const filterByLocation = (c: CoffeeBatchType) => {
-    const n = c.farm.village.concat(", ").concat(c.farm.region).toLowerCase();
-    return n.includes(location.toLowerCase());
-  };
-
-  const filterByVariety = (c: CoffeeBatchType) => {
-    const n = c.wetMill.variety.toLowerCase();
-    return n.includes(variety.toLowerCase());
-  };
-
-  const filterByProcess = (c: CoffeeBatchType) => {
-    const n = c.wetMill.process.toLowerCase();
-    return n.includes(process.toLowerCase());
-  };
-
-  const filterByDryingType = (c: CoffeeBatchType) => {
-    const n = c.wetMill.drying_type.toLowerCase();
-    return n.includes(dryingType.toLowerCase());
   };
 
   const filterByWeight = (c: CoffeeBatchType) => {
@@ -329,25 +318,10 @@ export const List = () => {
 
   const filterBatches = () => {
     let cbList = coffeeBatchList2.slice();
-    if (farmName.length > 0) {
-      cbList = cbList.filter(filterByFarm);
+    if (searchCriteria.length > 0) {
+      cbList = cbList.filter(filterByCriteria);
     }
     cbList = cbList.filter(filterByHeight);
-    if (location.length > 0) {
-      cbList = cbList.filter(filterByLocation);
-    }
-    if (variety.length > 0) {
-      cbList = cbList.filter(filterByVariety);
-    }
-    if (process.length > 0) {
-      cbList = cbList.filter(filterByProcess);
-    }
-    if (process.length > 0) {
-      cbList = cbList.filter(filterByProcess);
-    }
-    if (dryingType.length > 0) {
-      cbList = cbList.filter(filterByDryingType);
-    }
     cbList = cbList.filter(filterByWeight);
     cbList = cbList.filter(filterByNote);
 
@@ -355,9 +329,20 @@ export const List = () => {
     confPagination(cbList, isAuth ? 10 : 12);
   };
 
-  const handleFarmChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchCriteriaChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value.trim();
-    setFarmName(input);
+    setSearchCriteria(input);
+  };
+
+  const handleSearchCriteriaKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value.trim();
+    if (event.key === "Enter" && input.length > 1) {
+      filterBatches();
+    }
   };
 
   const handleMinHeightChange = (
@@ -370,28 +355,6 @@ export const List = () => {
     } else {
       setMinHeightError("");
     }
-  };
-
-  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value.trim();
-    setLocation(input);
-  };
-
-  const handleVarietyChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value.trim();
-    setVariety(input);
-  };
-
-  const handleProcessChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value.trim();
-    setProcess(input);
-  };
-
-  const handleDryingTypeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
-  ) => {
-    const input = event.target.value.trim();
-    setDryingType(input);
   };
 
   const handleMinWeightChange = (
@@ -443,12 +406,8 @@ export const List = () => {
   };
 
   const onClearClick = () => {
-    setFarmName("");
+    setSearchCriteria("");
     setMinHeight("0");
-    setLocation("");
-    setVariety("");
-    setProcess("");
-    setDryingType("");
     setMinWeight("0");
     setMaxWeight("");
     setMinNote("0");
@@ -486,88 +445,71 @@ export const List = () => {
   );
 
   const RenderFilters = () => (
-    <Card className="filters">
-      <Card.Body>
-        <FormInput
-          label={t("farm")}
-          value={farmName}
-          placeholder={t("farm")}
-          handleOnChange={handleFarmChange}
-          errorMsg=""
-        />
-        <FormInput
-          label={t("min-height")}
-          value={minHeight}
-          placeholder={t("min-height")}
-          handleOnChange={handleMinHeightChange}
-          errorMsg={minHeightError}
-        />
-        <FormInput
-          label={t("location")}
-          value={location}
-          placeholder={t("location")}
-          handleOnChange={handleLocationChange}
-          errorMsg=""
-        />
-        <FormInput
-          label={t("variety")}
-          value={variety}
-          placeholder={t("variety")}
-          handleOnChange={handleVarietyChange}
-          errorMsg=""
-        />
-        <FormInput
-          label={t("process")}
-          value={process}
-          placeholder={t("process")}
-          handleOnChange={handleProcessChange}
-          errorMsg=""
-        />
-        <FormInput
-          label={t("drying-type")}
-          value={dryingType}
-          placeholder={t("drying-type")}
-          handleOnChange={handleDryingTypeChange}
-          errorMsg=""
-        />
-        <FormInput
-          label={t("min-weight")}
-          value={minWeight}
-          placeholder={t("min-weight")}
-          handleOnChange={handleMinWeightChange}
-          errorMsg={minWeightError}
-        />
-        <FormInput
-          label={t("max-weight")}
-          value={maxWeight}
-          placeholder={t("max-weight")}
-          handleOnChange={handleMaxWeightChange}
-          errorMsg={maxWeightError}
-        />
-        <FormInput
-          label={t("min-note")}
-          value={minNote}
-          placeholder={t("min-note")}
-          handleOnChange={handleMinNoteChange}
-          errorMsg={minNoteError}
-        />
-        <FormInput
-          label={t("max-weight")}
-          value={maxNote}
-          placeholder={t("max-weight")}
-          handleOnChange={handleMaxNoteChange}
-          errorMsg={maxNoteError}
-        />
-      </Card.Body>
-      <Card.Footer>
-        <Button onClick={() => onSearchClick()}>
-          <>{t("search")}</>
-        </Button>
-        <Button variant="secondary" onClick={() => onClearClick()}>
-          <>{t("clear")}</>
-        </Button>
-      </Card.Footer>
-    </Card>
+    <Accordion className="filters" defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>
+          <h4>
+            <>{t("search-batches")}</>
+          </h4>
+        </Accordion.Header>
+        <Accordion.Body>
+          <div className="filters-inputs">
+            <FormInput
+              label={t("search")}
+              value={searchCriteria}
+              placeholder={t("search")}
+              handleOnChange={handleSearchCriteriaChange}
+              handleOnKeyDown={handleSearchCriteriaKeyDown}
+              className="search-input"
+              errorMsg=""
+            />
+            <FormInput
+              label={t("min-height")}
+              value={minHeight}
+              placeholder={t("min-height")}
+              handleOnChange={handleMinHeightChange}
+              errorMsg={minHeightError}
+            />
+            <FormInput
+              label={t("min-weight")}
+              value={minWeight}
+              placeholder={t("min-weight")}
+              handleOnChange={handleMinWeightChange}
+              errorMsg={minWeightError}
+            />
+            <FormInput
+              label={t("max-weight")}
+              value={maxWeight}
+              placeholder={t("max-weight")}
+              handleOnChange={handleMaxWeightChange}
+              errorMsg={maxWeightError}
+            />
+            <FormInput
+              label={t("min-note")}
+              value={minNote}
+              placeholder={t("min-note")}
+              handleOnChange={handleMinNoteChange}
+              errorMsg={minNoteError}
+            />
+            <FormInput
+              label={t("max-note")}
+              value={maxNote}
+              placeholder={t("max-note")}
+              handleOnChange={handleMaxNoteChange}
+              errorMsg={maxNoteError}
+            />
+          </div>
+          <div className="filters-buttons">
+            <Button onClick={() => onSearchClick()}>
+              <>{t("search")}</>
+            </Button>
+            <Button variant="secondary" onClick={() => onClearClick()}>
+              <>{t("clear")}</>
+            </Button>
+          </div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   );
 
   return (

@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
+import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Dropdown from "react-bootstrap/Dropdown";
+import Form from "react-bootstrap/Form";
 import Modal from "react-bootstrap/esm/Modal";
 import QRCode from "react-qr-code";
 import Table from "react-bootstrap/esm/Table";
@@ -15,7 +17,7 @@ import FormInput from "../common/FormInput";
 import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import { getCompanyName } from "../../utils/utils";
-import { GenderFilterList } from "../../utils/constants";
+import { GenderFilterList, SEARCH_DIVIDER } from "../../utils/constants";
 
 const saveSvgAsPng = require("save-svg-as-png");
 
@@ -36,6 +38,7 @@ type FarmerType = {
   bio: string;
   gender: string;
   location: string;
+  search: string;
 };
 
 export const List = () => {
@@ -49,9 +52,7 @@ export const List = () => {
   const [pagination, setPagination] = useState(pagDefault);
   const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
-  const [code, setCode] = useState("");
-  const [name, setName] = useState("");
-  const [location, setLocation] = useState("");
+  const [searchCriteria, setSearchCriteria] = useState("");
   const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
 
   const confPagination = (fData: Array<any>, itemsPerPage: number) => {
@@ -115,6 +116,13 @@ export const List = () => {
               .concat(region)
               .concat(", ")
               .concat(country);
+            const s = farmerId
+              .concat(SEARCH_DIVIDER)
+              .concat(fullname)
+              .concat(SEARCH_DIVIDER)
+              .concat(bio)
+              .concat(SEARCH_DIVIDER)
+              .concat(l);
             farmerList.push({
               farmerId,
               address,
@@ -122,6 +130,7 @@ export const List = () => {
               bio,
               gender,
               location: l,
+              search: s.toLowerCase(),
             });
           }
           setFarmers(farmerList);
@@ -147,20 +156,8 @@ export const List = () => {
     setPagination(newPagination);
   };
 
-  const filterByCode = (f: FarmerType) => {
-    const fId = f.farmerId.toLowerCase();
-    return fId.includes(code.toLowerCase());
-  };
-
-  const filterByName = (f: FarmerType) => {
-    const fname = f.fullname.toLowerCase();
-    return fname.includes(name.toLowerCase());
-  };
-
-  const filterByLocation = (f: FarmerType) => {
-    const fLocation = f.location.toLowerCase();
-    return fLocation.includes(location.toLowerCase());
-  };
+  const filterByCriteria = (f: FarmerType) =>
+    f.search.includes(searchCriteria.toLowerCase());
 
   const filterByGender = (f: FarmerType) => {
     const fgender = f.gender.toLowerCase();
@@ -169,14 +166,8 @@ export const List = () => {
 
   const filterFarmers = () => {
     let farmerList = farmers2.slice();
-    if (code.trim().length > 0) {
-      farmerList = farmerList.filter(filterByCode);
-    }
-    if (name.trim().length > 0) {
-      farmerList = farmerList.filter(filterByName);
-    }
-    if (location.trim().length > 0) {
-      farmerList = farmerList.filter(filterByLocation);
+    if (searchCriteria.trim().length > 0) {
+      farmerList = farmerList.filter(filterByCriteria);
     }
     if (currentGender.key !== "all") {
       farmerList = farmerList.filter(filterByGender);
@@ -186,19 +177,20 @@ export const List = () => {
     confPagination(farmerList, 15);
   };
 
-  const handleCodeChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleSearchCriteriaChange = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const input = event.target.value;
-    setCode(input);
+    setSearchCriteria(input);
   };
 
-  const handleNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-    setName(input);
-  };
-
-  const handleLocationChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const input = event.target.value;
-    setLocation(input);
+  const handleSearchCriteriaKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value.trim();
+    if (event.key === "Enter" && input.length > 1) {
+      filterFarmers();
+    }
   };
 
   const handleGenderChange = (key: string) => {
@@ -214,9 +206,7 @@ export const List = () => {
   };
 
   const onClearClick = () => {
-    setCode("");
-    setName("");
-    setLocation("");
+    setSearchCriteria("");
     setFarmers(farmers2.slice());
     confPagination(farmers2, 15);
   };
@@ -232,61 +222,60 @@ export const List = () => {
   };
 
   const RenderFilters = () => (
-    <Card className="filters">
-      <Card.Body>
-        <div className="filters-inputs">
-          <FormInput
-            label=""
-            value={code}
-            placeholder={t("code")}
-            handleOnChange={handleCodeChange}
-            errorMsg=""
-          />
-          <FormInput
-            label=""
-            value={name}
-            placeholder={t("name")}
-            handleOnChange={handleNameChange}
-            errorMsg=""
-          />
-          <FormInput
-            label=""
-            value={location}
-            placeholder={t("location")}
-            handleOnChange={handleLocationChange}
-            errorMsg=""
-          />
-          <Dropdown
-            onSelect={(eventKey) => handleGenderChange(eventKey || "all")}
-          >
-            <Dropdown.Toggle
-              variant="secondary"
-              id="dropdown-cooperative"
-              className="text-left"
-            >
-              <div className="cooperative-toggle">
-                <span>{currentGender.name}</span>
-              </div>
-            </Dropdown.Toggle>
-            <Dropdown.Menu>
-              {GenderFilterList.map((item) => (
-                <Dropdown.Item key={item.key} eventKey={item.key}>
-                  {item.name}
-                </Dropdown.Item>
-              ))}
-            </Dropdown.Menu>
-          </Dropdown>
-        </div>
-        <div className="filters-buttons">
-          <Button onClick={() => onSearchClick()}>
-            <>{t("search")}</>
-          </Button>
-          <Button variant="secondary" onClick={() => onClearClick()}>
-            <>{t("clear")}</>
-          </Button>
-        </div>
-      </Card.Body>
-    </Card>
+    <Accordion className="filters" defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>
+          <h4>
+            <>{t("search-farmers")}</>
+          </h4>
+        </Accordion.Header>
+        <Accordion.Body>
+          <div className="filters-inputs">
+            <FormInput
+              label={t("search")}
+              value={searchCriteria}
+              placeholder={t("search")}
+              handleOnChange={handleSearchCriteriaChange}
+              handleOnKeyDown={handleSearchCriteriaKeyDown}
+              errorMsg=""
+            />
+            <div>
+              <Form.Label>
+                <>{t("gender")}</>
+              </Form.Label>
+              <Dropdown
+                onSelect={(eventKey) => handleGenderChange(eventKey || "all")}
+              >
+                <Dropdown.Toggle
+                  variant="secondary"
+                  id="dropdown-cooperative"
+                  className="text-left"
+                >
+                  <div className="cooperative-toggle">
+                    <span>{currentGender.name}</span>
+                  </div>
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {GenderFilterList.map((item) => (
+                    <Dropdown.Item key={item.key} eventKey={item.key}>
+                      {item.name}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+            </div>
+          </div>
+          <div className="filters-buttons">
+            <Button onClick={() => onSearchClick()}>
+              <>{t("search")}</>
+            </Button>
+            <Button variant="secondary" onClick={() => onClearClick()}>
+              <>{t("clear")}</>
+            </Button>
+          </div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   );
 
   const RenderItem = (farmer: FarmerType, index: number) => {

@@ -6,7 +6,9 @@ type props = {
   value: string;
   placeholder: string;
   handleOnChange: (event: React.ChangeEvent<HTMLInputElement>) => void;
-  errorMsg: string;
+  handleOnKeyDown?: (event: React.KeyboardEvent<HTMLInputElement>) => void;
+  errorMsg?: string;
+  className?: string;
 };
 
 const FormInput = ({
@@ -14,7 +16,9 @@ const FormInput = ({
   value,
   placeholder,
   handleOnChange,
-  errorMsg,
+  handleOnKeyDown,
+  className = "",
+  errorMsg = "",
 }: props) => (
   <div className="form-input">
     <Form.Label>{label}</Form.Label>
@@ -22,6 +26,8 @@ const FormInput = ({
       value={value}
       placeholder={placeholder}
       onChange={handleOnChange}
+      onKeyDown={handleOnKeyDown}
+      className={className}
     />
     {errorMsg !== "" && <span className="error-message">{errorMsg}</span>}
   </div>

@@ -29,7 +29,7 @@
   }
   .filters {
     margin-bottom: 2rem;
-    .card-body {
+    .accordion-body {
       display: flex;
       justify-content: space-between;
       margin-bottom: 1.5rem;
@@ -41,13 +41,15 @@
     }
     .filters-buttons {
       display: flex;
-      align-items: center;
+      align-items: flex-end;
+      margin-bottom: 7px;
     }
     .form-input {
       display: flex;
       flex-direction: column;
       margin-left: 10px;
-      margin-right: 2px;
+      margin-right: 15px;
+      width: 35rem;
     }
     input {
       border-width: 0.7px;
@@ -58,13 +60,10 @@
     }
     .btn-primary {
       margin-left: 15px;
-    }
-    .btn-secondary {
-      margin-left: 5px;
+      margin-right: 7px;
     }
   }
   .dropdown {
-    margin-top: 0.6rem;
     .btn {
       width: 8rem;
       border-width: 0.7px;

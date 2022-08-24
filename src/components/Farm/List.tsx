@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Table from "react-bootstrap/esm/Table";
@@ -166,6 +167,15 @@ export const List = () => {
     setSearchCriteria(input);
   };
 
+  const handleSearchCriteriaKeyDown = (
+    event: React.KeyboardEvent<HTMLInputElement>
+  ) => {
+    const input = event.target.value.trim();
+    if (event.key === "Enter" && input.length > 1) {
+      searchFarms();
+    }
+  };
+
   const onSearchClick = () => {
     searchFarms();
   };
@@ -184,27 +194,35 @@ export const List = () => {
   };
 
   const RenderFilters = () => (
-    <Card className="filters">
-      <Card.Body>
-        <div className="filters-inputs">
-          <FormInput
-            label=""
-            value={searchCriteria}
-            placeholder={t("search")}
-            handleOnChange={handleSearchCriteriaChange}
-            errorMsg=""
-          />
-        </div>
-        <div className="filters-buttons">
-          <Button onClick={() => onSearchClick()}>
-            <>{t("search")}</>
-          </Button>
-          <Button variant="secondary" onClick={() => onClearClick()}>
-            <>{t("clear")}</>
-          </Button>
-        </div>
-      </Card.Body>
-    </Card>
+    <Accordion className="filters" defaultActiveKey="0">
+      <Accordion.Item eventKey="0">
+        <Accordion.Header>
+          <h4>
+            <>{t("search-farms")}</>
+          </h4>
+        </Accordion.Header>
+        <Accordion.Body>
+          <div className="filters-inputs">
+            <FormInput
+              label=""
+              value={searchCriteria}
+              placeholder={t("search")}
+              handleOnChange={handleSearchCriteriaChange}
+              handleOnKeyDown={handleSearchCriteriaKeyDown}
+              errorMsg=""
+            />
+          </div>
+          <div className="filters-buttons">
+            <Button onClick={() => onSearchClick()}>
+              <>{t("search")}</>
+            </Button>
+            <Button variant="secondary" onClick={() => onClearClick()}>
+              <>{t("clear")}</>
+            </Button>
+          </div>
+        </Accordion.Body>
+      </Accordion.Item>
+    </Accordion>
   );
 
   const RenderItem = (farm: FarmType, index: number) => {

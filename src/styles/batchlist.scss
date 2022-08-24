@@ -28,19 +28,28 @@
   }
   .filters {
     margin-bottom: 2rem;
-    .card-body {
+    .accordion-body {
       display: flex;
       flex-direction: row;
+      justify-content: space-between;
     }
-    .card-body {
+    .filters-inputs {
       display: flex;
+      align-items: center;
     }
-    .card-footer {
+    .filters-buttons {
       display: flex;
-      justify-content: right;
+      align-items: flex-end;
+      margin-bottom: 7px;
     }
     .form-input {
       margin-right: 15px;
+      input {
+        width: 7rem;
+      }
+      .search-input {
+        width: 20rem;
+      }
     }
     input {
       border-width: 0.7px;
