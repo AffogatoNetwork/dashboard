@@ -11,6 +11,7 @@ import {
   FaPencilAlt,
   FaPowerOff,
   FaUserAlt,
+  FaList,
 } from "react-icons/fa";
 import LangChooser from "./common/LangChooser";
 import CoopLogo from "./common/CoopLogo";
@@ -54,10 +55,17 @@ const Sidebar = () => {
               <FaUserAlt /> {makeShortAddress(ownerAddress)}
             </div>
           </Navbar.Toggle>
-          <Nav.Link onClick={() => navigate("/list")}>
+          <Nav.Link onClick={() => navigate("/")}>
             <div className="nav-caption">
               <>
                 <FaHome /> {t("home")}
+              </>
+            </div>
+          </Nav.Link>
+          <Nav.Link onClick={() => navigate("/list")}>
+            <div className="nav-caption">
+              <>
+                <FaList /> {t("all-batches")}
               </>
             </div>
           </Nav.Link>
