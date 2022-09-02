@@ -598,7 +598,7 @@ const CoffeeCard = () => {
               {!!coffeeBatch.dryMill.threshing_process && (
                 <div className="item">
                   <h6 className="title">
-                    <>{t("threshing-yield")}</>
+                    <>{t("threshing_process")}</>
                   </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.threshing_process}
