@@ -332,7 +332,7 @@ export const List = () => {
   const handleSearchCriteriaChange = (
     event: React.ChangeEvent<HTMLInputElement>
   ) => {
-    const input = event.target.value.trim();
+    const input = event.target.value;
     setSearchCriteria(input);
   };
 

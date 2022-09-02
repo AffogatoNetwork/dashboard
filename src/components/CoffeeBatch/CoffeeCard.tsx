@@ -400,6 +400,16 @@ const CoffeeCard = () => {
                   </span>
                 </div>
               )}
+              {!!coffeeBatch.wetMill.entry_id && (
+                <div className="item">
+                  <h6 className="title">
+                    <>{t("entry-batch-id")}</>
+                  </h6>
+                  <span className="text-light">
+                    {coffeeBatch.wetMill.entry_id}
+                  </span>
+                </div>
+              )}
               {!!coffeeBatch.wetMill.quality && (
                 <div className="item">
                   <h6 className="title">
@@ -522,7 +532,16 @@ const CoffeeCard = () => {
                   </span>
                 </div>
               )}
-
+              {!!coffeeBatch.dryMill.export_drying_id && (
+                <div className="item">
+                  <h6 className="title">
+                    <>{t("drying-batch-id")}</>
+                  </h6>
+                  <span className="text-light">
+                    {coffeeBatch.dryMill.export_drying_id}
+                  </span>
+                </div>
+              )}
               {!!coffeeBatch.dryMill.date &&
                 coffeeBatch.dryMill.date !== "1970-01-01" && (
                   <div className="item">
@@ -573,6 +592,16 @@ const CoffeeCard = () => {
                   </h6>
                   <span className="text-light">
                     {coffeeBatch.dryMill.damage_percent}
+                  </span>
+                </div>
+              )}
+              {!!coffeeBatch.dryMill.threshing_process && (
+                <div className="item">
+                  <h6 className="title">
+                    <>{t("threshing-yield")}</>
+                  </h6>
+                  <span className="text-light">
+                    {coffeeBatch.dryMill.threshing_process}
                   </span>
                 </div>
               )}
