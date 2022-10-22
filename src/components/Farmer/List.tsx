@@ -187,7 +187,7 @@ export const List = () => {
   const handleSearchCriteriaKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    const input = event.target.value.trim();
+    const input = event.currentTarget.value.trim();
     if (event.key === "Enter" && input.length > 1) {
       filterFarmers();
     }

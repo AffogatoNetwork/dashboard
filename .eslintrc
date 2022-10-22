@@ -4,9 +4,9 @@
     "plugin:react/recommended",
     "plugin:jsx-a11y/strict",
     "plugin:prettier/recommended",
-    "prettier/react"
+    "prettier"
   ],
-  "parser": "babel-eslint",
+  "parser": "",
   "settings": {
     "import/resolver": {
       "node": {

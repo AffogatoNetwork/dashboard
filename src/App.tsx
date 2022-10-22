@@ -7,6 +7,11 @@ import AuthProvider from "./states/AuthContext";
 import contractsContext from "./states/ContractsContext";
 import { useContracts } from "./hooks/useContracts";
 import Home from "./components/Home";
+import '../src/assets/css/scrollbar.css';
+import '../src/assets/css/globals.css';
+import '../src/assets/css/range-slider.css';
+
+import { QueryClient, QueryClientProvider } from 'react-query';
 
 const clientOracle = () =>
   new ApolloClient({
