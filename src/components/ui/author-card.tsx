@@ -1,9 +1,8 @@
 import Avatar from '../../components/ui/avatar';
-import { StaticImageData } from 'next/image';
 import React from 'react';
 
 type AuthorCardProps = {
-  image: StaticImageData;
+  image: string;
   name?: string;
   role?: string;
 };
