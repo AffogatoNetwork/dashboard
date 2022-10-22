@@ -359,75 +359,83 @@ export const List = () => {
   }
 
   return (
-    <div className="farmers">
-      {RenderFilters()}
-      <Card>
-        <Card.Header>
-          <h4>
-            <>{t("farmers")}</>
-          </h4>
-          <div className="totals">
-            <h4>
-              <>
-                {t("total")}: {farmersCount}
-              </>
-            </h4>
-            <ReactHTMLTableToExcel
-              id="table-xls-button"
-              className="download-xls-button"
-              table="farmers-list"
-              filename={t("farmers")}
-              sheet={t("farmers")}
-              buttonText={"(".concat(t("download")).concat(")")}
-            />
+    <div className="container mx-auto px-4 sm:px-32 sm:mx-4 md:ml-32 md:mr-4   xl:ml-48 xl:mr-6">
+      <div className="py-8">
+        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+          <div className="farmers">
+            {RenderFilters()}
+            <Card>
+              <Card.Header>
+                <h4>
+                  <>{t("farmers")}</>
+                </h4>
+                <div className="totals">
+                  <h4>
+                    <>
+                      {t("total")}: {farmersCount}
+                    </>
+                  </h4>
+                  <ReactHTMLTableToExcel
+                    id="table-xls-button"
+                    className="download-xls-button"
+                    table="farmers-list"
+                    filename={t("farmers")}
+                    sheet={t("farmers")}
+                    buttonText={"(".concat(t("download")).concat(")")}
+                  />
+                </div>
+              </Card.Header>
+              <Card.Body>
+                {farmers === null ? (
+                  <NotFound msg="No se encontraron productores" />
+                ) : (
+                  <>
+                    <Table id="farmers-list" className="farmers-list">
+                      <thead>
+                      <tr>
+                        <th />
+                        <th>
+                          <>{t("code")}</>
+                        </th>
+                        <th>
+                          <>{t("name")}</>
+                        </th>
+                        <th>
+                          <>{t("gender")}</>
+                        </th>
+                        <th>
+                          <>{t("location")}</>
+                        </th>
+                        <th>
+                          <>{t("account-address")}</>
+                        </th>
+                        <th className="th-bio">
+                          <>{t("bio")}</>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {farmers.map((farmer: any, index: number) =>
+                        RenderItem(farmer, index)
+                      )}
+                      </tbody>
+                    </Table>
+                  </>
+                )}
+              </Card.Body>
+              <Card.Footer>
+                <CustomPagination
+                  pagination={pagination}
+                  onPageSelected={onPageSelected}
+                />
+              </Card.Footer>
+            </Card>
+            {RenderModal()}
           </div>
-        </Card.Header>
-        <Card.Body>
-          {farmers === null ? (
-            <NotFound msg="No se encontraron productores" />
-          ) : (
-            <>
-              <Table id="farmers-list" className="farmers-list">
-                <thead>
-                  <tr>
-                    <th />
-                    <th>
-                      <>{t("code")}</>
-                    </th>
-                    <th>
-                      <>{t("name")}</>
-                    </th>
-                    <th>
-                      <>{t("gender")}</>
-                    </th>
-                    <th>
-                      <>{t("location")}</>
-                    </th>
-                    <th>
-                      <>{t("account-address")}</>
-                    </th>
-                    <th className="th-bio">
-                      <>{t("bio")}</>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {farmers.map((farmer: any, index: number) =>
-                    RenderItem(farmer, index)
-                  )}
-                </tbody>
-              </Table>
-            </>
-          )}
-        </Card.Body>
-        <Card.Footer>
-          <CustomPagination
-            pagination={pagination}
-            onPageSelected={onPageSelected}
-          />
-        </Card.Footer>
-      </Card>
-      {RenderModal()}
+        </div>
+      </div>
     </div>
+
+
   );
 };

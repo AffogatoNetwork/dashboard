@@ -18,7 +18,7 @@ import CoopLogo from "./common/CoopLogo";
 import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
 
-const Sidebar = () => {
+const Topbar = () => {
   const { t } = useTranslation();
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
@@ -44,7 +44,7 @@ const Sidebar = () => {
   return (
     <Navbar bg="primary" variant="dark" className="topbar">
       <Container>
-        <Nav className="brand">
+        <Nav className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 3xl:px-12">
           <Navbar.Brand onClick={() => navigate("/list")}>
             <CoopLogo className="logo" />
           </Navbar.Brand>
@@ -106,4 +106,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Topbar;
