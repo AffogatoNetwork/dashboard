@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from "react";
 import Accordion from "react-bootstrap/Accordion";
-import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
-import Modal from "react-bootstrap/esm/Modal";
+import Modal from 'react-modal';
 import QRCode from "react-qr-code";
 import Table from "react-bootstrap/esm/Table";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
@@ -18,6 +17,8 @@ import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import { getCompanyName } from "../../utils/utils";
 import { GenderFilterList, SEARCH_DIVIDER } from "../../utils/constants";
+import { SearchIcon } from "../icons/search";
+import { ClearIcon } from "../icons/clear";
 
 const saveSvgAsPng = require("save-svg-as-png");
 
@@ -50,10 +51,26 @@ export const List = () => {
   const [farmers2, setFarmers2] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
   const [pagination, setPagination] = useState(pagDefault);
-  const [showModal, setShowModal] = useState(false);
   const [qrCodeUrl, setQrCodeUrl] = useState("");
   const [searchCriteria, setSearchCriteria] = useState("");
   const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
+
+
+  let subtitle: { style: { color: string; }; };
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
 
   const confPagination = (fData: Array<any>, itemsPerPage: number) => {
     if (fData.length > 0) {
@@ -222,34 +239,36 @@ export const List = () => {
   };
 
   const RenderFilters = () => (
-    <Accordion className="filters" defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>
-          <h4>
-            <>{t("search-farmers")}</>
-          </h4>
-        </Accordion.Header>
-        <Accordion.Body>
-          <div className="filters-inputs">
-            <FormInput
-              label={t("search")}
-              value={searchCriteria}
-              placeholder={t("search")}
-              handleOnChange={handleSearchCriteriaChange}
-              handleOnKeyDown={handleSearchCriteriaKeyDown}
-              errorMsg=""
-            />
+      <>
+          <p className="text-lg"> <>{t("search-farmers")}</> </p>
+
+          <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full pb-4">
+            <div>
+              <FormInput
+                  label={t("search")}
+                  value={searchCriteria}
+                  placeholder={t("search name")}
+                  handleOnChange={handleSearchCriteriaChange}
+                  handleOnKeyDown={handleSearchCriteriaKeyDown}
+                  errorMsg=""
+                  className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+        focus:ring-2 focus:ring-sky-300 focus:outline-none
+        invalid:ring-2 invalid:ring-red-400"
+              />
+            </div>
             <div>
               <Form.Label>
                 <>{t("gender")}</>
               </Form.Label>
               <Dropdown
-                onSelect={(eventKey) => handleGenderChange(eventKey || "all")}
+                  onSelect={(eventKey) => handleGenderChange(eventKey || "all")}
               >
                 <Dropdown.Toggle
-                  variant="secondary"
-                  id="dropdown-cooperative"
-                  className="text-left"
+                    variant="secondary"
+                    id="dropdown-cooperative"
+                    className="text-left block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+        focus:ring-2 focus:ring-sky-300 focus:outline-none
+        invalid:ring-2 invalid:ring-red-400"
                 >
                   <div className="cooperative-toggle">
                     <span>{currentGender.name}</span>
@@ -257,25 +276,33 @@ export const List = () => {
                 </Dropdown.Toggle>
                 <Dropdown.Menu>
                   {GenderFilterList.map((item) => (
-                    <Dropdown.Item key={item.key} eventKey={item.key}>
-                      {item.name}
-                    </Dropdown.Item>
+                      <Dropdown.Item key={item.key} eventKey={item.key}>
+                        {item.name}
+                      </Dropdown.Item>
                   ))}
                 </Dropdown.Menu>
               </Dropdown>
             </div>
+
+
+<div>
+  <div className="filters-buttons space-y-4">
+    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+                                        focus:bg-amber-800 active:bg-amber-800">
+      <SearchIcon className="w-4 h-4 mr-2"/>
+      <>{t("search")}</>
+    </button>
+    <br/>
+    <button  onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                                        focus:bg-red-500 active:bg-red-700">
+      <ClearIcon className="w-4 h-4 mr-2"/>
+      <>{t("clear")}</>
+    </button>
+  </div>
+</div>
           </div>
-          <div className="filters-buttons">
-            <Button onClick={() => onSearchClick()}>
-              <>{t("search")}</>
-            </Button>
-            <Button variant="secondary" onClick={() => onClearClick()}>
-              <>{t("clear")}</>
-            </Button>
-          </div>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+
+            </>
   );
 
   const RenderItem = (farmer: FarmerType, index: number) => {
@@ -295,15 +322,15 @@ export const List = () => {
       >
         <td className="main">
           <div className="qrcode">
-            <Button
+            <button
               className="qrcode-btn"
               onClick={() => {
                 setQrCodeUrl(farmerUrl);
-                setShowModal(true);
+                openModal()
               }}
             >
               <QRCode value={farmerUrl} size={60} />
-            </Button>
+            </button>
           </div>
         </td>
         <td>{farmer.farmerId}</td>
@@ -326,28 +353,7 @@ export const List = () => {
     );
   };
 
-  const RenderModal = () => (
-    <Modal
-      show={showModal}
-      size="lg"
-      className="qr-modal"
-      aria-labelledby="contained-modal-title-vcenter"
-      centered
-      onHide={() => setShowModal(false)}
-    >
-      <Modal.Body className="">
-        <QRCode id="current-qr" value={qrCodeUrl} size={600} />
-      </Modal.Body>
-      <Modal.Footer>
-        <Button variant="primary" onClick={handleOnDownloadClick}>
-          <>{t("download")}</>
-        </Button>
-        <Button variant="primary" target="_blank" href={qrCodeUrl}>
-          <>{t("open-link")}</>
-        </Button>
-      </Modal.Footer>
-    </Modal>
-  );
+
 
   if (loading) {
     return (
@@ -359,6 +365,32 @@ export const List = () => {
   }
 
   return (
+<>
+      <Modal
+          isOpen={modalIsOpen}
+          onAfterOpen={afterOpenModal}
+          onRequestClose={closeModal}
+          contentLabel="Example Modal"
+      >
+        <button onClick={closeModal}> close</button>
+        <br/>
+        <div className="flex  justify-center">
+          <div>
+            <QRCode id="current-qr" value={qrCodeUrl} size={500}/>
+
+        <button  onClick={handleOnDownloadClick}>
+          <>{t("download")}</>
+        </button>
+        <a href={qrCodeUrl}>
+          <button  >
+            <>{t("open-link")}</>
+          </button>
+        </a>
+        </div>
+        </div>
+      </Modal>
+
+
       <div className="py-8">
         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
           <div className="farmers">
@@ -429,9 +461,9 @@ export const List = () => {
                 />
               </Card.Footer>
             </Card>
-            {RenderModal()}
           </div>
         </div>
       </div>
+</>
   );
 };

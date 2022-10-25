@@ -11,7 +11,7 @@ function Dashboard({ children }: { children: JSX.Element }) {
         <SideNav/>
         <main className="w-full relative overflow-y-scroll"  >
           <Topbar />
-          <section className=" ">
+          <section>
             <div className="mx-auto w-full max-w-[2460px] text-sm md:pt-14 4xl:pt-24">
               <div className="inner-container ">{children}</div>
             </div>
