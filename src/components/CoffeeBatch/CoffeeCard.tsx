@@ -102,165 +102,116 @@ const CoffeeCard = () => {
 
   return (
     <div className="coffeebatch">
-      <Card className="general">
-        <Card.Header>
-          <Image src={coffeeBatch.image} className="nft" />
-        </Card.Header>
-        <Card.Body>
-          <div className="batch-header">
-            <div className="batch-detail">
-              {!!farmerData && !!farmerData.fullname && (
-                <div className="info">
-                  <h6 className="bio">
-                    <>{t("farmer")}</>
-                  </h6>
-                  <span className="text-light">
-                    <a
-                      target="_blank"
-                      rel="noreferrer"
-                      href={window.location.origin
-                        .concat("/farmer/")
-                        .concat(farmerData.address)}
-                    >
-                      {farmerData.fullname}{" "}
-                    </a>
-                  </span>
+      <div className="mx-auto w-full max-w-[1160px] text-sm md:pt-14 4xl:pt-24">
+
+        <div className="px-4 py-2  text-gray-800">
+          <div className="flex justify-between shadow-md border rounded-md px-4">
+            <div
+                className="flex flex-col items-center justify-between w-1/4 px-4 py-2 bg-white border-r-2 border-gray-500 border-dashed rounded-l-md"
+            >
+              <div className="flex-col">
+                <img src={coffeeBatch.image} className="" />
+                <br/>
+                <div className="text-xl mb-2 text-gray-600 text-center">
+                  <span className="text-black text-6xl text-bold"> % </span>
+                  <br/>
+                  Perfil de taza
+                  <br/>
+
+                  Peso KG:<p className="font-black b-t"> </p>
                 </div>
-              )}
-              {!!farmerData && !!farmerData.bio && (
-                <div className="info">
-                  <h6 className="bio">
-                    <>{t("bio")}</>
-                  </h6>
-                  <span className="text-light">{farmerData.bio}</span>
+
+              </div>
+            </div>
+            <div className="relative flex flex-col">
+              <div className="w-full ml-2 lg:pl-5 lg:py-6 mt-6 lg:mt-0">
+                <div className="flex mb-4 border-b-2 border-gray-100 mb-5 justify-center">
+          <span className="flex text-2xl">
+          Lote <p className="font-black">#</p>
+          </span>
+
                 </div>
-              )}
-              {!!coffeeBatch.farm.name && (
-                <div className="location">
-                  <h6 className="bio">
-                    <>{t("farm-name")}</>
-                  </h6>
-                  <span className="text-light">{coffeeBatch.farm.name}</span>
+
+
+                <p className=" font-black">Productores: </p>
+                <p className="">{farmerData?.fullname}</p>
+               
+
+                <br/>
+              </div>
+            </div>
+            <div className="relative flex flex-col">
+              <div className="w-full ml-2 lg:pl-5 lg:py-6 mt-6 lg:mt-0">
+                <br/>
+                <br/>
+                <br/>
+
+                <p className=" font-black"><>{t("farm-name")}</>
+                </p>
+                <p className="">{coffeeBatch.farm.name}</p>
+                <br/>
+                <p className="font-black"><>{t("ethnic-group")}</>
+                </p>
+                <p className="">{coffeeBatch.farm.etnic_group}
+                </p>
+                <br/>
+                <p className="font-black"><>{t("family-members")}</>
+                </p>
+                <p className="">{coffeeBatch.farm.family_members}</p>
+                <br/>
+                <p className="font-black"><>{t("shadow")}</>
+                </p>
+                <p className="">{coffeeBatch.farm.shadow}</p>
+                <br/>
+
+                <p className="font-black"><>{t("certificates")}</>
+                </p>
+                <p className="">{coffeeBatch.farm.certifications}
+                </p>
+                <br/>
+              </div>
+            </div>
+
+            <div className="relative flex flex-col">
+              <div className="relative flex flex-col">
+                <div className="w-full  ml-2 lg:py-6 mt-6 lg:mt-0">
+                  <br/>
+                  <br/>
+                  <br/>
+
+                  <p className=" font-black"><>{t("variates")}</></p>
+                  <p className="">{coffeeBatch.farm.varieties}
+                  </p>
+                  <br/>
+                  <p className="font-black"><>{t("location")}</></p>
+                  <p className="">{coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
+                    {coffeeBatch.farm.country} </p>
+                  <br/>
+
+                  <p className="font-black"><>{t("altitude")}</></p>
+                  <p className="">{coffeeBatch.farm.altitude} <>{t("masl")}</>
+                  </p>
+                  <br/>
+
+                  <p className="font-black"><>{t("area")}</></p>
+                  <p className="">{coffeeBatch.farm.area}
+                  </p>
+                  <br/>
+
+                  <p className="font-black"><>{t("coordinates")}</>:</p>
+                  <p className="">Fam locavore kickstarter </p>
+                  <br/>
+
                 </div>
-              )}
-              {(!!coffeeBatch.farm.etnic_group ||
-                !!coffeeBatch.farm.family_members) && (
-                <div className="info-row">
-                  <div className="item">
-                    <h6 className="bio mt-2">
-                      <>{t("ethnic-group")}</>
-                    </h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.etnic_group}
-                    </span>
-                  </div>
-                  <div className="item">
-                    <h6 className="bio mt-2">
-                      <>{t("family-members")}</>
-                    </h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.family_members}
-                    </span>
-                  </div>
-                  <div className="item">
-                    <h6 className="bio mt-2">
-                      <>{t("shadow")}</>
-                    </h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.shadow}
-                    </span>
-                  </div>
-                </div>
-              )}
-              {!!coffeeBatch.farm.story && (
-                <div className="location">
-                  <h6 className="bio">
-                    <>{t("farm-history")}</>
-                  </h6>
-                  <span className="text-light">{coffeeBatch.farm.story}</span>
-                </div>
-              )}
-              {(!!coffeeBatch.farm.certifications ||
-                !!coffeeBatch.farm.varieties) && (
-                <div className="info-row">
-                  <div className="item">
-                    <h6 className="bio mt-2">
-                      <>{t("certificates")}</>
-                    </h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.certifications}
-                    </span>
-                  </div>
-                  <div className="item right">
-                    <h6 className="bio mt-2">
-                      <>{t("varieties")}</>
-                    </h6>
-                    <span className="text-light">
-                      {coffeeBatch.farm.varieties}
-                    </span>
-                  </div>
-                </div>
-              )}
-              <div className="location">
-                {!!coffeeBatch.farm.village && (
-                  <div className="info-row">
-                    <div className="item">
-                      <h6 className="bio">
-                        <>{t("location")}</>
-                      </h6>
-                      <span className="text-light">
-                        {coffeeBatch.farm.village}, {coffeeBatch.farm.region},{" "}
-                        {coffeeBatch.farm.country}
-                      </span>
-                    </div>
-                    <div className="item right">
-                      <h6 className="bio mt-2">
-                        <>{t("altitude")}</>
-                      </h6>
-                      <span className="text-light">
-                        {coffeeBatch.farm.altitude} <>{t("masl")}</>
-                      </span>
-                    </div>
-                  </div>
-                )}
-                {!!coffeeBatch.farm.area && (
-                  <div className="info-row">
-                    <div className="item">
-                      <h6 className="bio mt-2">
-                        <>{t("area")}</>
-                      </h6>
-                      <span className="text-light">
-                        {coffeeBatch.farm.area}
-                      </span>
-                    </div>
-                    {!!coffeeBatch.farm.latitude &&
-                      !!coffeeBatch.farm.longitude && (
-                        <div className="item right">
-                          <h6 className="bio mt-2">
-                            <>{t("coordinates")}</>
-                          </h6>
-                          <Button
-                            variant="secondary"
-                            className="text-light"
-                            onClick={() =>
-                              onMapBtnClick(
-                                coffeeBatch.farm.latitude,
-                                coffeeBatch.farm.longitude,
-                                coffeeBatch.farm.name
-                              )
-                            }
-                          >
-                            <>{t("show-map")}</>
-                          </Button>
-                        </div>
-                      )}
-                  </div>
-                )}
               </div>
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
+
+
+
+
       <div className="boxes">
         {(!!coffeeBatch.wetMill.variety ||
           !!coffeeBatch.wetMill.process ||

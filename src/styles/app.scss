@@ -1,21 +1,14 @@
-@import "~bootstrap/scss/bootstrap";
 @import "./colors";
 @import "./fonts";
-
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 html, body, #root {
   height: 100%;
 }
 
-h1,
-h2,
-h3,
-h4,
-h5,
-h6 {
-  color: $primary;
-  margin-bottom: 0rem;
-}
+
 
 .App {
   text-align: center;
@@ -149,7 +142,7 @@ h6 {
     border: 1px solid transparent;
     border-radius: 0.25rem;
     line-height: 1.125;
-  }  
+  }
   .input-group {
     display: flex;
     flex-direction: column;
@@ -235,11 +228,7 @@ a {
   margin-bottom: 1rem;
 }
 
-.form-input {
-  display: flex;
-  flex-direction: column;
-  margin: 7px 0rem;
-}
+
 
 .error-message {
   color: $error;
@@ -513,4 +502,23 @@ a {
   .btn-flag:focus {
     box-shadow: none;
   }
+}
+
+.cxRqFw {
+  background-color: #332211 !important;  /* put any color you want */
+  font-weight: 500;
+  span{
+    color: white !important;
+  }
+}
+
+
+.dyLfuo {
+  background-color: #e3e3e3 !important;  /* put any color you want */
+  font-weight: 500;
+}
+
+.mini-lang{
+  padding: 10px;
+  width: 100% !important;
 }

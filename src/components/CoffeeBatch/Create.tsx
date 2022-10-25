@@ -27,7 +27,9 @@ export const Create = () => {
   const [ownerAddress, setOwnerAddress] = useState("");
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
-      accept: ".xlsx",
+      accept: {
+        "file" : [".xlsx"],
+      },
       maxFiles: 1,
     });
 

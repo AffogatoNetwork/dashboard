@@ -7,7 +7,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { useTranslation } from "react-i18next";
 import "../../styles/farms.scss";
 import Loading from "../Loading";
-import MapModal from "../common/MapModal";
+import Map from "../common/Map";
 import { FarmType } from "../common/types";
 import { getFarms } from "../../db/firebase";
 import { useAuthContext } from "../../states/AuthContext";
@@ -16,6 +16,9 @@ import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import { SEARCH_DIVIDER } from "../../utils/constants";
 import { getCompanyName } from "../../utils/utils";
+import { SearchIcon } from "../icons/search";
+import { ClearIcon } from "../icons/clear";
+import Modal from "react-modal";
 
 const pagDefault = {
   previous: 0,
@@ -42,6 +45,21 @@ export const List = () => {
   const [pagination, setPagination] = useState(pagDefault);
   const [searchCriteria, setSearchCriteria] = useState("");
 
+  let subtitle: { style: { color: string; }; };
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+
+  function openModal() {
+    setIsOpen(true);
+  }
+
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+
+  function closeModal() {
+    setIsOpen(false);
+  }
   const confPagination = (fData: Array<any>, itemsPerPage: number) => {
     if (fData.length > 0) {
       const itemsCount = fData.length;
@@ -170,7 +188,7 @@ export const List = () => {
   const handleSearchCriteriaKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    const input = event.target.value.trim();
+    const input = event.currentTarget.value.trim();
     if (event.key === "Enter" && input.length > 1) {
       searchFarms();
     }
@@ -194,35 +212,40 @@ export const List = () => {
   };
 
   const RenderFilters = () => (
-    <Accordion className="filters" defaultActiveKey="0">
-      <Accordion.Item eventKey="0">
-        <Accordion.Header>
-          <h4>
-            <>{t("search-farms")}</>
-          </h4>
-        </Accordion.Header>
-        <Accordion.Body>
-          <div className="filters-inputs">
-            <FormInput
+      <>
+        <p className="text-lg"> <><>{t("search-farms")}</></> </p>
+
+        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full pb-4">
+                     <FormInput
               label=""
               value={searchCriteria}
               placeholder={t("search")}
               handleOnChange={handleSearchCriteriaChange}
               handleOnKeyDown={handleSearchCriteriaKeyDown}
               errorMsg=""
+              className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+        focus:ring-2 focus:ring-sky-300 focus:outline-none
+        invalid:ring-2 invalid:ring-red-400"
             />
+                   <div>
+            <div className="filters-buttons space-y-4">
+              <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+                                        focus:bg-amber-800 active:bg-amber-800">
+                <SearchIcon className="w-4 h-4 mr-2"/>
+                <>{t("search")}</>
+              </button>
+              <br/>
+              <button  onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                                        focus:bg-red-500 active:bg-red-700">
+                <ClearIcon className="w-4 h-4 mr-2"/>
+                <>{t("clear")}</>
+              </button>
+            </div>
           </div>
-          <div className="filters-buttons">
-            <Button onClick={() => onSearchClick()}>
-              <>{t("search")}</>
-            </Button>
-            <Button variant="secondary" onClick={() => onClearClick()}>
-              <>{t("clear")}</>
-            </Button>
-          </div>
-        </Accordion.Body>
-      </Accordion.Item>
-    </Accordion>
+          
+        </div>
+</>
+
   );
 
   const RenderItem = (farm: FarmType, index: number) => {
@@ -257,9 +280,10 @@ export const List = () => {
           <Button
             variant="secondary"
             className="text-light"
-            onClick={() =>
+            onClick={() => {
               onMapBtnClick(farm.latitude, farm.longitude, farm.name)
-            }
+              openModal()
+            }}
           >
             <>{t("show-map")}</>
           </Button>
@@ -278,95 +302,116 @@ export const List = () => {
   }
 
   return (
-    <div className="farms">
-      {RenderFilters()}
-      <Card>
-        <Card.Header>
-          <h4>
-            <>{t("farms")}</>
-          </h4>
-          <div className="totals">
-            <h4>
-              <>
-                {t("total")}: {farmsCount}
-              </>
-            </h4>
-            <ReactHTMLTableToExcel
-              id="table-xls-button"
-              className="download-xls-button"
-              table="farms-list"
-              filename={t("farms")}
-              sheet={t("farms")}
-              buttonText={"(".concat(t("download")).concat(")")}
-            />
+      <>
+        <Modal
+            isOpen={modalIsOpen}
+            onAfterOpen={afterOpenModal}
+            onRequestClose={closeModal}
+            contentLabel="Example Modal"
+            className="map-modal"
+            aria-labelledby="contained-modal-title-vcenter"
+        >
+          <button onClick={closeModal}> close</button>
+          <br/>
+          <div className="flex justify-center">
+            <div>
+              <Map
+                  latitude={currentLat}
+                  longitude={currentLng}
+                  zoomLevel={10}
+                  addressLine={currentAddressL}
+                  className="google-map large"
+              />
+            </div>
           </div>
-        </Card.Header>
-        <Card.Body>
-          {farms === null ? (
-            <NotFound msg="No se encontraron fincas" />
-          ) : (
-            <>
-              <Table id="farms-list" className="farms-list">
-                <thead>
-                  <tr>
-                    <th>
-                      <>{t("name")}</>
-                    </th>
-                    <th>
-                      <>{t("height")}</>
-                    </th>
-                    <th>
-                      <>{t("certificates")}</>
-                    </th>
-                    <th>
-                      <>{t("certificates")}</>
-                    </th>
-                    <th className="th-bio">
-                      <>{t("bio")}</>
-                    </th>
-                    <th>
-                      <>{t("varieties")}</>
-                    </th>
-                    <th>
-                      <>{t("location")}</>
-                    </th>
-                    <th>
-                      <>{t("shadow")}</>
-                    </th>
-                    <th>
-                      <>{t("family-members")}</>
-                    </th>
-                    <th>
-                      <>{t("ethnic-group")}</>
-                    </th>
-                    <th>
-                      <>{t("coordinates")}</>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {farms.map((farmer: any, index: number) =>
-                    RenderItem(farmer, index)
-                  )}
-                </tbody>
-              </Table>
-            </>
-          )}
-        </Card.Body>
-        <Card.Footer>
-          <CustomPagination
-            pagination={pagination}
-            onPageSelected={onPageSelected}
-          />
-        </Card.Footer>
-      </Card>
-      <MapModal
-        latitude={currentLat}
-        longitude={currentLng}
-        addressLine={currentAddressL}
-        show={showMap}
-        onHide={() => setShowMap(false)}
-      />
-    </div>
+        </Modal>
+      <div className="py-8">
+        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+          <div className="farms">
+            {RenderFilters()}
+            <Card>
+              <Card.Header>
+                <h4>
+                  <>{t("farms")}</>
+                </h4>
+                <div className="totals">
+                  <h4>
+                    <>
+                      {t("total")}: {farmsCount}
+                    </>
+                  </h4>
+                  <ReactHTMLTableToExcel
+                    id="table-xls-button"
+                    className="download-xls-button"
+                    table="farms-list"
+                    filename={t("farms")}
+                    sheet={t("farms")}
+                    buttonText={"(".concat(t("download")).concat(")")}
+                  />
+                </div>
+              </Card.Header>
+              <Card.Body>
+                {farms === null ? (
+                  <NotFound msg="No se encontraron fincas" />
+                ) : (
+                  <>
+                    <Table id="farms-list" className="farms-list">
+                      <thead>
+                      <tr>
+                        <th>
+                          <>{t("name")}</>
+                        </th>
+                        <th>
+                          <>{t("height")}</>
+                        </th>
+                        <th>
+                          <>{t("certificates")}</>
+                        </th>
+                        <th>
+                          <>{t("certificates")}</>
+                        </th>
+                        <th className="th-bio">
+                          <>{t("bio")}</>
+                        </th>
+                        <th>
+                          <>{t("varieties")}</>
+                        </th>
+                        <th>
+                          <>{t("location")}</>
+                        </th>
+                        <th>
+                          <>{t("shadow")}</>
+                        </th>
+                        <th>
+                          <>{t("family-members")}</>
+                        </th>
+                        <th>
+                          <>{t("ethnic-group")}</>
+                        </th>
+                        <th>
+                          <>{t("coordinates")}</>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {farms.map((farmer: any, index: number) =>
+                        RenderItem(farmer, index)
+                      )}
+                      </tbody>
+                    </Table>
+                  </>
+                )}
+              </Card.Body>
+              <Card.Footer>
+                <CustomPagination
+                  pagination={pagination}
+                  onPageSelected={onPageSelected}
+                />
+              </Card.Footer>
+            </Card>
+                      </div>
+        </div>
+      </div>
+      </>
   );
 };
