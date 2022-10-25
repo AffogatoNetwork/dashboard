@@ -65,6 +65,7 @@ export const Create = () => {
         if (err) {
           console.log(err);
         } else {
+          // console.log(resp.rows.flat());
           setRows(resp.rows);
           setCols(resp.cols);
         }
