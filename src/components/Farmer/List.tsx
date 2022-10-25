@@ -359,7 +359,6 @@ export const List = () => {
   }
 
   return (
-    <div className="container mx-auto px-4 sm:px-32 sm:mx-4 md:ml-32 md:mr-4   xl:ml-48 xl:mr-6">
       <div className="py-8">
         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
           <div className="farmers">
@@ -434,8 +433,5 @@ export const List = () => {
           </div>
         </div>
       </div>
-    </div>
-
-
   );
 };

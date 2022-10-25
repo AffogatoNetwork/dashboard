@@ -43,7 +43,7 @@ const LangChooser = ({ type }: props) => {
         <FlagComponent type={currentLang} />
       </Dropdown.Toggle>
 
-      <Dropdown.Menu>
+      <Dropdown.Menu >
         <Dropdown.Item eventKey="es">Español</Dropdown.Item>
         <Dropdown.Item eventKey="en">English</Dropdown.Item>
         <Dropdown.Item eventKey="de">Deutsch</Dropdown.Item>

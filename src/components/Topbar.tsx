@@ -17,6 +17,9 @@ import LangChooser from "./common/LangChooser";
 import CoopLogo from "./common/CoopLogo";
 import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
+import { useProSidebar } from "react-pro-sidebar";
+
+
 
 const Topbar = () => {
   const { t } = useTranslation();
@@ -24,6 +27,7 @@ const Topbar = () => {
   const [state] = authState;
   const navigate = useNavigate();
   const [ownerAddress, setOwnerAddress] = useState("");
+  const { collapseSidebar } = useProSidebar();
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -44,8 +48,11 @@ const Topbar = () => {
   return (
     <Navbar bg="primary" variant="dark" className="topbar">
       <Container>
-        <Nav className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 3xl:px-12">
 
+        <Nav className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 3xl:px-12">
+          <main className="md:hidden">
+            <button onClick={() => collapseSidebar()}>X</button>
+          </main>
         </Nav>
         <Nav className="buttons">
           <Navbar.Toggle>

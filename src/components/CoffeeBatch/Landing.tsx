@@ -12,7 +12,8 @@ export const Landing = () => {
 
     return (
         <>
-            <section className="">
+            <section >
+                <div className="relative overflow-y-scroll w-full h-auto">
                 <div
                     className="relative flex flex-col-reverse px-4 py-16 mx-auto lg:block lg:flex-col lg:py-32 xl:py-48 md:px-8 sm:max-w-xl md:max-w-full">
                     <div
@@ -152,7 +153,7 @@ export const Landing = () => {
                         </div>
                     </div>
                 </div>
-
+                </div>
             </section>
         </>
     );
