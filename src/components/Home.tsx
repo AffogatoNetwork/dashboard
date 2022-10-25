@@ -26,67 +26,68 @@ const Home = () => {
   }
 
   return (
-    <Container fluid className="main-container">
-      <ToastContainer limit={4} />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <RequiredAuth>
-              <Dashboard>
-                <Landing />
-              </Dashboard>
-            </RequiredAuth>
-          }
-        />
-        <Route
-          path="/list"
-          element={
-            <RequiredAuth>
-              <Dashboard>
-                <List />
-              </Dashboard>
-            </RequiredAuth>
-          }
-        />
-        <Route
-          path="/create"
-          element={
-            <RequiredAuth>
-              <Dashboard>
-                <Create />
-              </Dashboard>
-            </RequiredAuth>
-          }
-        />
-        <Route
-          path="/farmers"
-          element={
-            <RequiredAuth>
-              <Dashboard>
-                <FarmerList />
-              </Dashboard>
-            </RequiredAuth>
-          }
-        />
-        <Route
-          path="/farms"
-          element={
-            <RequiredAuth>
-              <Dashboard>
-                <FarmList />
-              </Dashboard>
-            </RequiredAuth>
-          }
-        />
-        <Route path="/login" element={<Login />} />
-        <Route path="/signup" element={<Signup />} />
-        <Route path="/batch/:ipfsHash" element={<CoffeeCard />} />
-        <Route path="/coffeebatches" element={<PublicList />} />
-        <Route path="/farmer/:farmerId" element={<Profile />} />
-        <Route path="/company/:companyId" element={<Company />} />
-      </Routes>
-    </Container>
+       <Container fluid className="main-container overflow-y-scroll">
+        <ToastContainer limit={4} />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <RequiredAuth>
+                <Dashboard>
+                  <Landing />
+                </Dashboard>
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="/list"
+            element={
+              <RequiredAuth>
+                <Dashboard>
+                  <List />
+                </Dashboard>
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="/create"
+            element={
+              <RequiredAuth>
+                <Dashboard>
+                  <Create />
+                </Dashboard>
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="/farmers"
+            element={
+              <RequiredAuth>
+                <Dashboard>
+                  <FarmerList />
+                </Dashboard>
+              </RequiredAuth>
+            }
+          />
+          <Route
+            path="/farms"
+            element={
+              <RequiredAuth>
+                <Dashboard>
+                  <FarmList />
+                </Dashboard>
+              </RequiredAuth>
+            }
+          />
+
+          <Route path="/login" element={<Login />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/batch/:ipfsHash" element={<CoffeeCard />} />
+          <Route path="/coffeebatches" element={<PublicList />} />
+          <Route path="/farmer/:farmerId" element={<Profile />} />
+          <Route path="/company/:companyId" element={<Company />} />
+        </Routes>
+      </Container>
   );
 };
 

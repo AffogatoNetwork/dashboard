@@ -236,7 +236,7 @@ export const List = () => {
       };
       loadProvider();
     },
-    // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line
     [state.provider]
   );
 
@@ -339,7 +339,7 @@ export const List = () => {
   const handleSearchCriteriaKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    const input = event.target.value.trim();
+    const input = event.currentTarget.value.trim();
     if (event.key === "Enter" && input.length > 1) {
       filterBatches();
     }
@@ -513,88 +513,94 @@ export const List = () => {
   );
 
   return (
-    <div className="batch-list">
-      {RenderFilters()}
-      <Card className="create-card">
-        <Card.Header>
-          <div>
-            <h2>
-              <>{t("farm-and-batches")}</>
-            </h2>
-          </div>
-          <div>
-            <h3>
-              <>
-                {t("total")}: {batchesCount}
-              </>
-            </h3>
-          </div>
-        </Card.Header>
-        <Card.Body>
-          {loading || loadingIpfs ? (
-            <Loading
-              label={t("loading").concat("...")}
-              className="loading-wrapper"
-            />
-          ) : (
-            <Table className="coffeebatches">
-              <thead>
-                <tr>
-                  <th className="th-2">QR</th>
-                  <th className="th-2">
-                    <>{t("farm")}</>
-                  </th>
-                  <th className="th-2">
-                    <>{t("height")}</>
-                  </th>
-                  <th className="th-2">
-                    <>{t("location")}</>
-                  </th>
-                  <th className="th-3">
-                    <>{t("variety")}</>
-                  </th>
-                  <th className="th-2">
-                    <>{t("process")}</>
-                  </th>
-                  <th className="th-4">
-                    <>{t("drying-code")}</>
-                  </th>
-                  <th className="th-2">
-                    <>{t("drying-type")}</>
-                  </th>
-                  <th className="th-4">
-                    <>{t("exporting-code")}</>
-                  </th>
-                  <th className="th-3">
-                    <>{t("weight")}</>
-                  </th>
-                  <th className="th-3">
-                    <>{t("note")}</>
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                {coffeeBatchList.map((batch, index) => (
-                  <BatchItem
-                    key={index}
-                    index={index}
-                    coffeeBatch={batch}
-                    pagination={pagination}
-                    showQrModal={showQrModal}
+      <div className="py-8">
+        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+
+          <div className="batch-list">
+            {RenderFilters()}
+            <Card className="create-card">
+              <Card.Header>
+                <div>
+                  <h2>
+                    <>{t("farm-and-batches")}</>
+                  </h2>
+                </div>
+                <div>
+                  <h3>
+                    <>
+                      {t("total")}: {batchesCount}
+                    </>
+                  </h3>
+                </div>
+              </Card.Header>
+              <Card.Body>
+                {loading || loadingIpfs ? (
+                  <Loading
+                    label={t("loading").concat("...")}
+                    className="loading-wrapper"
                   />
-                ))}
-              </tbody>
-            </Table>
-          )}
-        </Card.Body>
-        <Card.Footer>
-          <CustomPagination
-            pagination={pagination}
-            onPageSelected={onPageSelected}
-          />
-        </Card.Footer>
-      </Card>
-      {RenderModal()}
-    </div>
+                ) : (
+                  <Table className="coffeebatches">
+                    <thead>
+                    <tr>
+                      <th className="th-2">QR</th>
+                      <th className="th-2">
+                        <>{t("farm")}</>
+                      </th>
+                      <th className="th-2">
+                        <>{t("height")}</>
+                      </th>
+                      <th className="th-2">
+                        <>{t("location")}</>
+                      </th>
+                      <th className="th-3">
+                        <>{t("variety")}</>
+                      </th>
+                      <th className="th-2">
+                        <>{t("process")}</>
+                      </th>
+                      <th className="th-4">
+                        <>{t("drying-code")}</>
+                      </th>
+                      <th className="th-2">
+                        <>{t("drying-type")}</>
+                      </th>
+                      <th className="th-4">
+                        <>{t("exporting-code")}</>
+                      </th>
+                      <th className="th-3">
+                        <>{t("weight")}</>
+                      </th>
+                      <th className="th-3">
+                        <>{t("note")}</>
+                      </th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    {coffeeBatchList.map((batch, index) => (
+                      <BatchItem
+                        key={index}
+                        index={index}
+                        coffeeBatch={batch}
+                        pagination={pagination}
+                        showQrModal={showQrModal}
+                      />
+                    ))}
+                    </tbody>
+                  </Table>
+                )}
+              </Card.Body>
+              <Card.Footer>
+                <CustomPagination
+                  pagination={pagination}
+                  onPageSelected={onPageSelected}
+                />
+              </Card.Footer>
+            </Card>
+            {RenderModal()}
+          </div>
+        </div>
+      </div>
+
   );
 };

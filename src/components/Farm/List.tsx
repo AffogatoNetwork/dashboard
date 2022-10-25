@@ -170,7 +170,7 @@ export const List = () => {
   const handleSearchCriteriaKeyDown = (
     event: React.KeyboardEvent<HTMLInputElement>
   ) => {
-    const input = event.target.value.trim();
+    const input = event.currentTarget.value.trim();
     if (event.key === "Enter" && input.length > 1) {
       searchFarms();
     }
@@ -278,95 +278,99 @@ export const List = () => {
   }
 
   return (
-    <div className="farms">
-      {RenderFilters()}
-      <Card>
-        <Card.Header>
-          <h4>
-            <>{t("farms")}</>
-          </h4>
-          <div className="totals">
-            <h4>
-              <>
-                {t("total")}: {farmsCount}
-              </>
-            </h4>
-            <ReactHTMLTableToExcel
-              id="table-xls-button"
-              className="download-xls-button"
-              table="farms-list"
-              filename={t("farms")}
-              sheet={t("farms")}
-              buttonText={"(".concat(t("download")).concat(")")}
+      <div className="py-8">
+        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+          <div className="farms">
+            {RenderFilters()}
+            <Card>
+              <Card.Header>
+                <h4>
+                  <>{t("farms")}</>
+                </h4>
+                <div className="totals">
+                  <h4>
+                    <>
+                      {t("total")}: {farmsCount}
+                    </>
+                  </h4>
+                  <ReactHTMLTableToExcel
+                    id="table-xls-button"
+                    className="download-xls-button"
+                    table="farms-list"
+                    filename={t("farms")}
+                    sheet={t("farms")}
+                    buttonText={"(".concat(t("download")).concat(")")}
+                  />
+                </div>
+              </Card.Header>
+              <Card.Body>
+                {farms === null ? (
+                  <NotFound msg="No se encontraron fincas" />
+                ) : (
+                  <>
+                    <Table id="farms-list" className="farms-list">
+                      <thead>
+                      <tr>
+                        <th>
+                          <>{t("name")}</>
+                        </th>
+                        <th>
+                          <>{t("height")}</>
+                        </th>
+                        <th>
+                          <>{t("certificates")}</>
+                        </th>
+                        <th>
+                          <>{t("certificates")}</>
+                        </th>
+                        <th className="th-bio">
+                          <>{t("bio")}</>
+                        </th>
+                        <th>
+                          <>{t("varieties")}</>
+                        </th>
+                        <th>
+                          <>{t("location")}</>
+                        </th>
+                        <th>
+                          <>{t("shadow")}</>
+                        </th>
+                        <th>
+                          <>{t("family-members")}</>
+                        </th>
+                        <th>
+                          <>{t("ethnic-group")}</>
+                        </th>
+                        <th>
+                          <>{t("coordinates")}</>
+                        </th>
+                      </tr>
+                      </thead>
+                      <tbody>
+                      {farms.map((farmer: any, index: number) =>
+                        RenderItem(farmer, index)
+                      )}
+                      </tbody>
+                    </Table>
+                  </>
+                )}
+              </Card.Body>
+              <Card.Footer>
+                <CustomPagination
+                  pagination={pagination}
+                  onPageSelected={onPageSelected}
+                />
+              </Card.Footer>
+            </Card>
+            <MapModal
+              latitude={currentLat}
+              longitude={currentLng}
+              addressLine={currentAddressL}
+              show={showMap}
+              onHide={() => setShowMap(false)}
             />
           </div>
-        </Card.Header>
-        <Card.Body>
-          {farms === null ? (
-            <NotFound msg="No se encontraron fincas" />
-          ) : (
-            <>
-              <Table id="farms-list" className="farms-list">
-                <thead>
-                  <tr>
-                    <th>
-                      <>{t("name")}</>
-                    </th>
-                    <th>
-                      <>{t("height")}</>
-                    </th>
-                    <th>
-                      <>{t("certificates")}</>
-                    </th>
-                    <th>
-                      <>{t("certificates")}</>
-                    </th>
-                    <th className="th-bio">
-                      <>{t("bio")}</>
-                    </th>
-                    <th>
-                      <>{t("varieties")}</>
-                    </th>
-                    <th>
-                      <>{t("location")}</>
-                    </th>
-                    <th>
-                      <>{t("shadow")}</>
-                    </th>
-                    <th>
-                      <>{t("family-members")}</>
-                    </th>
-                    <th>
-                      <>{t("ethnic-group")}</>
-                    </th>
-                    <th>
-                      <>{t("coordinates")}</>
-                    </th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {farms.map((farmer: any, index: number) =>
-                    RenderItem(farmer, index)
-                  )}
-                </tbody>
-              </Table>
-            </>
-          )}
-        </Card.Body>
-        <Card.Footer>
-          <CustomPagination
-            pagination={pagination}
-            onPageSelected={onPageSelected}
-          />
-        </Card.Footer>
-      </Card>
-      <MapModal
-        latitude={currentLat}
-        longitude={currentLng}
-        addressLine={currentAddressL}
-        show={showMap}
-        onHide={() => setShowMap(false)}
-      />
-    </div>
+        </div>
+      </div>
   );
 };

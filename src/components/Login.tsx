@@ -32,6 +32,7 @@ const Login = () => {
         setUserInput("");
       }
     }
+
     check();
     // eslint-disable-next-line
   }, [state.isLoggedIn, state.isSignInError]);
@@ -48,7 +49,7 @@ const Login = () => {
   };
 
   const handleUserInputChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const input = event.target.value;
     setUserInput(input);
@@ -69,9 +70,12 @@ const Login = () => {
               <>{t("login.title")}</>
             </h3>
           </div>
-          <Form className="form" onSubmit={() => magicLogin()}>
-            <Form.Group className="mb-3 input-group">
+          <Form className="" onSubmit={() => magicLogin()}>
+            <Form.Group className="mb-3 border-0">
               <FormInput
+                className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+        focus:ring-2 focus:ring-sky-300 focus:outline-none
+        invalid:ring-2 invalid:ring-red-400"
                 label={t("login.subtitle")}
                 value={userInput}
                 placeholder={t("placeholders.email")}
@@ -81,6 +85,7 @@ const Login = () => {
             </Form.Group>
             <div className="btn-container">
               <Button
+                className="w-full py-3 px-6 rounded-md bg-sky-600 focus:bg-sky-700 active:bg-sky-500"
                 variant="primary"
                 type="button"
                 onClick={() => magicLogin()}
@@ -88,7 +93,8 @@ const Login = () => {
                 <>{t("login.access")}</>
               </Button>
               <Button
-                className="auth-method"
+                className="auth-method w-full py-3 px-6 rounded-md bg-sky-600
+                                        focus:bg-sky-700 active:bg-sky-500"
                 onClick={() => navigate("/signup", { replace: true })}
               >
                 <u>
@@ -99,7 +105,8 @@ const Login = () => {
                 <>{t("or")}</>
               </span>
               <Button
-                className="auth-method"
+                className="auth-method w-full py-3 px-6 rounded-md bg-sky-600
+                                        focus:bg-sky-700 active:bg-sky-500"
                 onClick={() => navigate("/coffeebatches", { replace: true })}
               >
                 <u>

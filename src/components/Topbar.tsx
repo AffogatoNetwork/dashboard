@@ -17,13 +17,17 @@ import LangChooser from "./common/LangChooser";
 import CoopLogo from "./common/CoopLogo";
 import { useAuthContext } from "../states/AuthContext";
 import { makeShortAddress } from "../utils/utils";
+import { useProSidebar } from "react-pro-sidebar";
 
-const Sidebar = () => {
+
+
+const Topbar = () => {
   const { t } = useTranslation();
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
   const navigate = useNavigate();
   const [ownerAddress, setOwnerAddress] = useState("");
+  const { collapseSidebar } = useProSidebar();
 
   useEffect(() => {
     const loadProvider = async () => {
@@ -44,10 +48,11 @@ const Sidebar = () => {
   return (
     <Navbar bg="primary" variant="dark" className="topbar">
       <Container>
-        <Nav className="brand">
-          <Navbar.Brand onClick={() => navigate("/list")}>
-            <CoopLogo className="logo" />
-          </Navbar.Brand>
+
+        <Nav className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 3xl:px-12">
+          <main className="md:hidden">
+            <button onClick={() => collapseSidebar()}>X</button>
+          </main>
         </Nav>
         <Nav className="buttons">
           <Navbar.Toggle>
@@ -106,4 +111,4 @@ const Sidebar = () => {
   );
 };
 
-export default Sidebar;
+export default Topbar;
