@@ -6,18 +6,20 @@
   color: $white;
 }
 .qr-modal {
+  justify-content: center;
+
   .modal-content {
-    background-color: transparent;
-    border-color: transparent;
+    background-color: red;
+    border-color: red;
   }
   .modal-body {
-    display: flex;
+    display: block;
     padding: 0rem;
     justify-content: center;
-    background-color: transparent;
+    background-color: red;
   }
   .modal-footer {
-    display: flex;
+    display: block ;
     padding: 0rem;
     justify-content: center;
     background-color: transparent;
@@ -27,6 +29,6 @@
     font-size: 17px;
     color: white;
     background-color: transparent;
-    border-color: transparent;    
+    border-color: transparent;
   }
 }
