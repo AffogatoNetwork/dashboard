@@ -106,57 +106,58 @@ export const List = () => {
   }; */
 
   useEffect(() => {
-    const load = async () => {
-      if (state.provider !== null) {
-        const farmerList = new Array<FarmerType>();
-        const signer = state.provider.getSigner();
-        const sAddress = await signer.getAddress();
-        let companyName = getCompanyName(sAddress);
-        if (companyName === "") {
-          companyName = "PROEXO";
+    const load = async () => {      
+      const farmerList = new Array<FarmerType>();
+      let companyName = "PROEXO";
+      const hostname = window.location.hostname;
+      if (hostname.includes("copranil")) {
+        companyName = "COPRANIL";
+      } else if (hostname.includes("commovel")) {
+        companyName = "COMMOVEL";
+      } else if (hostname.includes("comsa")) {
+        companyName = "COMSA";
+      } 
+      await getAllFarmers(companyName).then((result) => {
+        for (let i = 0; i < result.length; i += 1) {
+          const farmerData = result[i].data();
+          const {
+            farmerId,
+            address,
+            fullname,
+            bio,
+            gender,
+            village,
+            region,
+            country,
+          } = farmerData;
+          const l = village
+            .concat(", ")
+            .concat(region)
+            .concat(", ")
+            .concat(country);
+          const s = farmerId
+            .concat(SEARCH_DIVIDER)
+            .concat(fullname)
+            .concat(SEARCH_DIVIDER)
+            .concat(bio)
+            .concat(SEARCH_DIVIDER)
+            .concat(l);
+          farmerList.push({
+            farmerId,
+            address,
+            fullname,
+            bio,
+            gender,
+            location: l,
+            search: s.toLowerCase(),
+          });
         }
-        await getAllFarmers(companyName).then((result) => {
-          for (let i = 0; i < result.length; i += 1) {
-            const farmerData = result[i].data();
-            const {
-              farmerId,
-              address,
-              fullname,
-              bio,
-              gender,
-              village,
-              region,
-              country,
-            } = farmerData;
-            const l = village
-              .concat(", ")
-              .concat(region)
-              .concat(", ")
-              .concat(country);
-            const s = farmerId
-              .concat(SEARCH_DIVIDER)
-              .concat(fullname)
-              .concat(SEARCH_DIVIDER)
-              .concat(bio)
-              .concat(SEARCH_DIVIDER)
-              .concat(l);
-            farmerList.push({
-              farmerId,
-              address,
-              fullname,
-              bio,
-              gender,
-              location: l,
-              search: s.toLowerCase(),
-            });
-          }
-          setFarmers(farmerList);
-          setFarmers2(farmerList);
-          confPagination(result, 15);
-          // calculateFarmersCount(result);
-        });
-        setLoading(false);
-      }
+        setFarmers(farmerList);
+        setFarmers2(farmerList);
+        confPagination(result, 15);
+        // calculateFarmersCount(result);
+      });
+      setLoading(false);
     };
     load();
     // eslint-disable-next-line
