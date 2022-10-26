@@ -92,3 +92,29 @@ export const GenderFilterList = [
   { key: "female", name: "Femenino" },
   { key: "male", name: "Masculino" },
 ];
+
+export const FarmList = [
+  {
+    key: "1",
+    id:" COMMOVEL",
+    nombre: "Cooperativa Mixta Montaña Verde Limitada",
+    Msocios: 142,
+    Fsocios: 21,
+    email:  "contacto@montanaverdehn.com",
+    telefono: "(+504) 9952-3415",
+    direccion: "Aldea San Luis, Planes, Sta. Bárbara",
+    lat: "14.9752",
+    long: "-88.12331",
+    perfiltaza: "83%",
+    bio: "Incrementar los ingresos familiares de las familias productoras de café ubicadas en el sector de San Luís Planes, Santa Bárbara en la zona de amortiguamiento del parque nacional Santa Bárbara, mediante la organización comunitaria.",
+    area: "940 hectáreas",
+    productos: ["- Beneficio Húmedo "," ", " - Beneficio Seco" ," ", " - Laboratorio de Catación"],
+    gerente: "Milton Rivera",
+    website: "Milton Rivera",
+    social: "https://www.facebook.com/www.commovel.org",
+    certificados: ["Orgánico 100% ", " ", " Comercio Justo 70%" ],
+    fotos: [{1: "", 2: ""}],
+    map: "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Commovel%20Aldea%20San%20Luis,%20Planes,%20Sta.%20B%C3%A1rbara+(COMMOVEL)&amp;t=k&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
+  },
+];
+
