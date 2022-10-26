@@ -12,41 +12,13 @@ export const Landing = () => {
     let FarmData: any;
     useEffect(() => {
         const location = window.location.host;
-    switch(location){
-        case "comsa": {
-            let data = FarmList[0];
-            FarmData = data
-            console.log(FarmData)
-            break;
-        }
-        case "commovel": {
-            let data = FarmList[0];
-            FarmData = data
-            break;
-        }
-        case "copranil": {
-            let data = FarmList[0];
-            FarmData = data
-            break;
-        }
-        case "copranil": {
-            let data = FarmList[0];
-            FarmData = data
-            break;
-        }
-        default: {
-            let data = FarmList[0];
-            FarmData = data
-            console.log(FarmData)
-            break;
-        }
-}
     }, []);
 
 
 
     return (
         <>
+            {FarmList.map((item: any) => (
             <section >
                 <div className="relative overflow-y-scroll w-full h-auto">
                 <div
@@ -62,14 +34,12 @@ export const Landing = () => {
                     <div className="relative flex justify-end max-w-xl mx-auto xl:pr-32 lg:max-w-screen-xl">
                         <div className="mb-16 lg:pr-5 lg:max-w-lg lg:mb-0">
                             <div className="max-w-xl mb-6">
-                                    <br/>{FarmList.map((item: any) => (
-                                        console.log(item),
+                                    <br/>
                                             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-
                                             Plataforma de trazabilidad de
                                        {item.id}
                                    </h1>
-                                ))}
+
 <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
     Nuestro café trazado con la seguridad de la tecnología de blockchain.
 
@@ -130,40 +100,33 @@ export const Landing = () => {
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección</h2>
-                                            {FarmList.map((item: any) => (
-                                                console.log(item),
-                                                    <p className="mt-1">
-                                                        {item.direccion}
-                                                    </p>
-                                            ))}
+                                            {item.direccion}
+
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">EMAIL</h2>
-                                            {FarmList.map((item: any) => (
-                                                console.log(item),
+
                                                     <p className="text-indigo-500 mt-1 m-3">
                                                         {item.email}
                                                     </p>
-                                            ))}
+
                                         </div>
                                         <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
 
 
-                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>{FarmList.map((item: any) => (
+                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
+
                                             console.log(item),
                                                 <p className="text-indigo-500 leading-relaxed">
                                                     {item.telefono}
                                                 </p>
-                                        ))}
+
                                         </div>
                                     </div>
                                 </div>
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 
-                                    {FarmList.map((item: any) => (
-                                        console.log(item),
                                             <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
                                                 {item.perfiltaza}
                                             </p>
-                                    ))}
 
 
                                     <div className="flex mb-4 border-b-2 justify-center">
@@ -179,12 +142,10 @@ export const Landing = () => {
                                         </div>
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
-                                            {FarmList.map((item: any) => (
-                                                console.log(item),
+
                                                     <span className="mr-3 text-2xl font-black">
                                                         {item.Fsocios}
                                                     </span>
-                                            ))}
                                         </div>
                                             </span>
                                     </div>
@@ -194,12 +155,9 @@ export const Landing = () => {
                                         </div>
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
-                                            {FarmList.map((item: any) => (
-                                                console.log(item),
                                                     <span className="mr-3 text-2xl font-black">
                                                         {item.Msocios}
                                                     </span>
-                                            ))}
                                         </div>
                                             </span>
                                     </div>
@@ -210,45 +168,38 @@ export const Landing = () => {
                                         </div>
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
-                                            {FarmList.map((item: any) => (
-                                                console.log(item),
+
                                                     <span className="mr-3 text-2xl font-black">
                                                         {item.area}
                                                     </span>
-                                            ))}
                                         </div>
                                             </span>
                                     </div>
                                     <p className="leading-relaxed">Productos / Servicios</p>
-                                    {FarmList.map((item: any) => (
-                                        console.log(item),
+
                                             <p className="leading-relaxed">
                                                         {item.productos}
                                                     </p>
-                                    ))}
 
                                     <div className="flex mt-6 items-center justify-center pb-5">
 
 
                                     </div>
                                     <p className="leading-relaxed">Certificados</p>
-                                    {FarmList.map((item: any) => (
-                                        console.log(item),
+
                                             <p className="leading-relaxed">
                                                 {item.certificados}
                                             </p>
-                                    ))}
                                     <br/>
 
                                     <div className=" items-center">
                                         <p className="leading-relaxed">Reseña</p>
 
-                                        <span className="leading-relaxed font-black">{FarmList.map((item: any) => (
-                                            console.log(item),
+                                        <span className="leading-relaxed font-black">
                                                 <p className="leading-relaxed">
                                                     {item.bio}
                                                 </p>
-                                        ))}</span>
+                                        </span>
                                     </div>
                                 </div>
                             </div>
@@ -257,6 +208,7 @@ export const Landing = () => {
                 </div>
                 </div>
             </section>
+                ))}
         </>
     );
 };
