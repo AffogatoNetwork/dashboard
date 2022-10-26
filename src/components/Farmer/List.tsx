@@ -108,12 +108,12 @@ export const List = () => {
   useEffect(() => {
     const load = async () => {      
       const farmerList = new Array<FarmerType>();
-      let companyName = "PROEXO";
+      let companyName = "COMMOVEL";
       const hostname = window.location.hostname;
       if (hostname.includes("copranil")) {
         companyName = "COPRANIL";
-      } else if (hostname.includes("commovel")) {
-        companyName = "COMMOVEL";
+      } else if (hostname.includes("proexo")) {
+        companyName = "PROEXO";
       } else if (hostname.includes("comsa")) {
         companyName = "COMSA";
       } 

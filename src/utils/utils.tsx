@@ -73,13 +73,13 @@ export const getCompanyAddresses = (address: string): Array<string> => {
     }
   }
   if (addresses.length === 0) {
-    addresses = CooperativeList[4].addresses;
+    addresses = CooperativeList[1].addresses;
   }
   return addresses;
 };
 
 export const getCompanyAddressesByHost = (location: string) => {
-  let { addresses } = CooperativeList[4];
+  let { addresses } = CooperativeList[1];
   for (let i = 0; i < CooperativeList.length; i += 1) {
     const name = CooperativeList[i].name.toLowerCase();
     if (location.toLowerCase().match(name) !== null) {

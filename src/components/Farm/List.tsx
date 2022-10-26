@@ -103,12 +103,12 @@ export const List = () => {
       const farmList = new Array<FarmType>();
       // const signer = state.provider.getSigner();
       // const sAddress = await signer.getAddress();
-      let companyName = "PROEXO";
+      let companyName = "COMMOVEL";
       const hostname = window.location.hostname;
       if (hostname.includes("copranil")) {
         companyName = "COPRANIL";
-      } else if (hostname.includes("commovel")) {
-        companyName = "COMMOVEL";
+      } else if (hostname.includes("proexo")) {
+        companyName = "PROEXO";
       } else if (hostname.includes("comsa")) {
         companyName = "COMSA";
       } 
