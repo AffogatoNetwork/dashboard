@@ -7,6 +7,7 @@ import { CompanyType, FarmerType } from "../components/common/types";
 import CoffeeBatch from "../contracts/CoffeBatch.json";
 import { useContracts } from "../hooks/useContracts";
 import { saveCompany, saveFarmer } from "../db/firebase";
+import { getDefaultProvider } from "../utils/utils";
 
 type AuthType = {
   authContext: any;
@@ -118,21 +119,25 @@ export default function AuthProvider({ children }: props) {
   useEffect(() => {
     // check if user is logged in
     const load = async () => {
-      const loggedIn = await magicSDK.user.isLoggedIn();
-      if (loggedIn) {
-        const provider = new ethers.providers.Web3Provider(
-          // @ts-ignore
-          magicSDK.rpcProvider
-        );
-        dispatch({
-          type: "SIGN_IN",
-          isLoading: false,
-          isLoggedIn: true,
-          provider,
-        });
-      } else {
+      // const loggedIn = await magicSDK.user.isLoggedIn();
+      //  if (loggedIn) {
+      const provider = getDefaultProvider();
+      const randomSigner = ethers.Wallet.createRandom().connect(provider);
+      // ethcallProvider = new Provider(randomSigner.provider);
+      /* const provider = new ethers.providers.Web3Provider(
+        // @ts-ignore
+        magicSDK.rpcProvider
+      ); */
+      dispatch({
+        type: "SIGN_IN",
+        isLoading: false,
+        isLoggedIn: true,
+        provider: null,
+      });
+
+      /* } else {
         dispatch({ type: "SIGN_OUT", isLoading: false });
-      }
+      } */
     };
     load();
     // eslint-disable-next-line

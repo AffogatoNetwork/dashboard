@@ -100,53 +100,58 @@ export const List = () => {
 
   useEffect(() => {
     const load = async () => {
-      if (state.provider !== null) {
-        const farmList = new Array<FarmType>();
-        const signer = state.provider.getSigner();
-        const sAddress = await signer.getAddress();
-        let companyName = getCompanyName(sAddress);
-        if (companyName === "") {
-          companyName = "PROEXO";
+      const farmList = new Array<FarmType>();
+      // const signer = state.provider.getSigner();
+      // const sAddress = await signer.getAddress();
+      let companyName = "PROEXO";
+      const hostname = window.location.hostname;
+      if (hostname.includes("copranil")) {
+        companyName = "COPRANIL";
+      } else if (hostname.includes("commovel")) {
+        companyName = "COMMOVEL";
+      } else if (hostname.includes("comsa")) {
+        companyName = "COMSA";
+      } 
+
+
+      await getFarms(companyName).then((result) => {
+        for (let i = 0; i < result.length; i += 1) {
+          const farmData = result[i].data();
+          const l = farmData.village
+            .concat(", ")
+            .concat(farmData.region)
+            .concat(", ")
+            .concat(farmData.country);
+          const farm = {
+            farmerAddress: farmData.farmerAddress,
+            company: farmData.company,
+            name: farmData.name,
+            height: farmData.height,
+            area: farmData.area,
+            certifications: farmData.certifications,
+            latitude: farmData.latitude,
+            longitude: farmData.longitude,
+            bio: farmData.bio,
+            country: farmData.country,
+            region: farmData.region,
+            village: farmData.village,
+            village2: farmData.village2,
+            varieties: farmData.varieties,
+            shadow: farmData.shadow,
+            familyMembers: farmData.familyMembers,
+            ethnicGroup: farmData.ethnicGroup,
+            location: l,
+            search: "",
+          };
+          farm.search = buildSearchField(farm, l);
+          farmList.push(farm);
         }
-        await getFarms(companyName).then((result) => {
-          for (let i = 0; i < result.length; i += 1) {
-            const farmData = result[i].data();
-            const l = farmData.village
-              .concat(", ")
-              .concat(farmData.region)
-              .concat(", ")
-              .concat(farmData.country);
-            const farm = {
-              farmerAddress: farmData.farmerAddress,
-              company: farmData.company,
-              name: farmData.name,
-              height: farmData.height,
-              area: farmData.area,
-              certifications: farmData.certifications,
-              latitude: farmData.latitude,
-              longitude: farmData.longitude,
-              bio: farmData.bio,
-              country: farmData.country,
-              region: farmData.region,
-              village: farmData.village,
-              village2: farmData.village2,
-              varieties: farmData.varieties,
-              shadow: farmData.shadow,
-              familyMembers: farmData.familyMembers,
-              ethnicGroup: farmData.ethnicGroup,
-              location: l,
-              search: "",
-            };
-            farm.search = buildSearchField(farm, l);
-            farmList.push(farm);
-          }
-          setFarms(farmList);
-          setFarms2(farmList);
-          confPagination(result, 15);
-          // calculateFarmersCount(result);
-        });
-        setLoading(false);
-      }
+        setFarms(farmList);
+        setFarms2(farmList);
+        confPagination(result, 15);
+        // calculateFarmersCount(result);
+      });
+      setLoading(false);
     };
     load();
     // eslint-disable-next-line

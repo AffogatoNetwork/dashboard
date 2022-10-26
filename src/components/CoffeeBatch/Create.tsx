@@ -11,6 +11,7 @@ import { saveFarms } from "../../db/firebase";
 import { apiUrl } from "../../utils/constants";
 import {
   getCompanyName,
+  getCompanyAddressesByHost,
   errorNotification,
   notifyUser,
 } from "../../utils/utils";
@@ -53,12 +54,9 @@ export const Create = () => {
   ));
 
   useEffect(() => {
-    const loadProvider = async () => {
-      if (state.provider !== null) {
-        const signer = state.provider.getSigner();
-        const address = await signer.getAddress();
-        setOwnerAddress(address);
-      }
+    const loadProvider = async () => {        
+      const address = getCompanyAddressesByHost(window.location.host)[0];
+      setOwnerAddress(address);
     };
     loadProvider();
 
