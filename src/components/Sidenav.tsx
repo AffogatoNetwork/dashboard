@@ -76,7 +76,7 @@ const SideNav = () => {
           </MenuItem>
           <MenuItem  active={window.location.pathname === "/create"} icon={<VoteIcon name="Agregar Lote" />} onClick={() => navigate("/create")}>
             <>
-              {t("add-batch")}
+              Crear Lotes
             </>
           </MenuItem>
           <MenuItem active={window.location.pathname === "/list"} icon={<AgricultureIcon name="Lotes" />} onClick={() => navigate("/list")}>
@@ -91,20 +91,16 @@ const SideNav = () => {
             </>
           </MenuItem>
                    <MenuItem disabled icon={<LocalCafeIcon name="Catación" />}>
-            <>
-              {t("cupping")}
-            </>
+            Catación
           </MenuItem>
           <MenuItem disabled icon={<VerifiedIcon name="Certificación" />}>
             <>
-              {t("certification")}
+              Certificación
             </>
           </MenuItem>
 
           <MenuItem disabled icon={<LinkIcon name="Trazabilidad" />}>
-            <>
-              {t("traceability")}
-            </>
+            Trazabilidad
           </MenuItem>
 
           <MenuItem className="border-t" icon={<LogOutIcon name="logout" />} onClick={() => logout()}>
