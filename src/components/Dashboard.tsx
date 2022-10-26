@@ -16,11 +16,8 @@ function Dashboard({ children }: { children: JSX.Element }) {
               <div className="inner-container ">{children}</div>
             </div>
           </section>
-
         </main>
-
       </div>
-
     </>
   );
 }
