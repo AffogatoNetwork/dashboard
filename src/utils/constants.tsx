@@ -113,7 +113,10 @@ export const FarmList = [
     website: "Milton Rivera",
     social: "https://www.facebook.com/www.commovel.org",
     certificados: ["Orgánico 100% ", " ", " Comercio Justo 70%" ],
-    fotos: [{1: "", 2: ""}],
+    imagen1: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_002.jpeg?alt=media&token=35922570-39a6-41a3-8cf6-48317458b2e1",
+    imagen2: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_003.jpeg?alt=media&token=81ad26d9-6e23-424f-b79d-f0df9bf05a0f",
+    imagen3: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_004.jpeg?alt=media&token=d30a999c-e58c-460d-9479-ca8bf59c32c0",
+    imagen4: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_005.jpeg?alt=media&token=5c271053-c167-473d-a8cc-b7afd98f93bb",
     map: "https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Commovel%20Aldea%20San%20Luis,%20Planes,%20Sta.%20B%C3%A1rbara+(COMMOVEL)&amp;t=k&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
   },
 ];
