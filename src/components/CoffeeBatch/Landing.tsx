@@ -8,25 +8,36 @@ import { Blockchain } from "../icons/blockchain";
 import {FarmList} from "../../utils/constants"
 export const Landing = () => {
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
+
+
     const location = window.location.host;
+    let FarmData: { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; imagen1: string; imagen2: string; imagen3: string; imagen4: string; mapa: string; } | { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; mapa: string; imagen1?: undefined; imagen2?: undefined; imagen3?: undefined; imagen4?: undefined; };
 
+    
+    FarmGet();
 
-    let FarmData;
-    if (location.match("commovel") !== null) {
-        FarmData = FarmList[1]
-    }
-    if (location.match("copranil") !== null) {
-        FarmData = FarmList[2]
-    }
-    if (location.match("comsa") !== null) {
-        FarmData = FarmList[3]
-    }
+    useEffect(() => {
+         FarmGet()
+    });
 
-    if (location.match("proexo") !== null) {
-        FarmData = FarmList[4]
-    }
-    else {
-        FarmData = FarmList[0]
+    function FarmGet(){
+        if (location.match("localhost:3000") !== null) {
+            FarmData = FarmList[0]
+        }
+        if (location.match("copranil") !== null) {
+            FarmData = FarmList[2]
+
+        }
+        if (location.match("comsa") !== null) {
+            FarmData = FarmList[3]
+        }
+
+        if (location.match("proexo") !== null) {
+            FarmData = FarmList[4]
+
+        } if (location.match("affogato") !== null) {
+            FarmData = FarmList[0]
+        }
     }
 
 
@@ -55,7 +66,7 @@ export const Landing = () => {
                                     <br/>
                                             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
                                             Plataforma de trazabilidad de
-                                       {" " + FarmData.nombre}
+                                       {" " + FarmData!.nombre}
                                    </h1>
 
 <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
@@ -118,12 +129,12 @@ export const Landing = () => {
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección</h2>
-                                            {FarmData.direccion}
+                                            {FarmData!.direccion}
 
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">EMAIL</h2>
 
                                                     <p className="text-indigo-500 mt-1 m-3">
-                                                        {FarmData.email}
+                                                        {FarmData!.email}
                                                     </p>
 
                                         </div>
@@ -133,7 +144,7 @@ export const Landing = () => {
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
 
                                                 <p className="text-indigo-500 leading-relaxed">
-                                                    {FarmData.telefono}
+                                                    {FarmData!.telefono}
                                                 </p>
 
                                         </div>
@@ -142,7 +153,7 @@ export const Landing = () => {
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 
                                             <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
-                                                {FarmData.perfiltaza}
+                                                {FarmData!.perfiltaza}
                                             </p>
 
 
@@ -161,7 +172,7 @@ export const Landing = () => {
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        {FarmData.Fsocios}
+                                                        {FarmData!.Fsocios}
                                                     </span>
                                         </div>
                                             </span>
@@ -173,7 +184,7 @@ export const Landing = () => {
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
                                                     <span className="mr-3 text-2xl font-black">
-                                                        {FarmData.Msocios}
+                                                        {FarmData!.Msocios}
                                                     </span>
                                         </div>
                                             </span>
@@ -187,7 +198,7 @@ export const Landing = () => {
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        {FarmData.area}
+                                                        {FarmData!.area}
                                                     </span>
                                         </div>
                                             </span>
@@ -195,7 +206,7 @@ export const Landing = () => {
                                     <p className="leading-relaxed">Productos / Servicios</p>
 
                                             <p className="leading-relaxed">
-                                                        {FarmData.productos}
+                                                        {FarmData!.productos}
                                                     </p>
 
                                     <div className="flex mt-6 items-center justify-center pb-5">
@@ -205,7 +216,7 @@ export const Landing = () => {
                                     <p className="leading-relaxed">Certificados</p>
 
                                             <p className="leading-relaxed">
-                                                {FarmData.certificados}
+                                                {FarmData!.certificados}
                                             </p>
                                     <br/>
 
@@ -214,7 +225,7 @@ export const Landing = () => {
 
                                         <span className="leading-relaxed font-black">
                                                 <p className="leading-relaxed">
-                                                    {FarmData.bio}
+                                                    {FarmData!.bio}
                                                 </p>
                                         </span>
                                     </div>
@@ -228,27 +239,27 @@ export const Landing = () => {
                 <div id="fotos" className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                     <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                            {FarmData.nombre}
+                            {FarmData!.nombre}
                         </h2>
 
                     </div>
                     <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
-                        <img src={ FarmData.imagen1}
+                        <img src={ FarmData!.imagen1}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
                         <img
-                            src={ FarmData.imagen2}
+                            src={ FarmData!.imagen2}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
                         <img
-                            src={ FarmData.imagen3}
+                            src={ FarmData!.imagen3}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
                         <img
-                            src={ FarmData.imagen4}
+                            src={ FarmData!.imagen4}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
