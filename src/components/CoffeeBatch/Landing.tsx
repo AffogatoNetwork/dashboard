@@ -6,22 +6,37 @@ import { LinkIcon } from "../icons/link";
 import { FarmIcon } from "../icons/farm";
 import { Blockchain } from "../icons/blockchain";
 import {FarmList} from "../../utils/constants"
-
 export const Landing = () => {
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
-    let FarmData: any;
-    useEffect(() => {
-        const location = window.location.host;
+    const location = window.location.host;
 
 
+    let FarmData;
+    if (location.match("commovel") !== null) {
+        FarmData = FarmList[1]
+    }
+    if (location.match("copranil") !== null) {
+        FarmData = FarmList[2]
+    }
+    if (location.match("comsa") !== null) {
+        FarmData = FarmList[3]
+    }
 
-    }, []);
+    if (location.match("proexo") !== null) {
+        FarmData = FarmList[4]
+    }
+    else {
+        FarmData = FarmList[0]
+    }
+
+
 
 
 
     return (
+
         <>
-            {FarmList.map((item: any) => (
+            
             <section >
                 <div className="relative overflow-y-scroll w-full h-auto">
                 <div
@@ -40,7 +55,7 @@ export const Landing = () => {
                                     <br/>
                                             <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
                                             Plataforma de trazabilidad de
-                                       {item.id}
+                                       {" " + FarmData.nombre}
                                    </h1>
 
 <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
@@ -103,12 +118,12 @@ export const Landing = () => {
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección</h2>
-                                            {item.direccion}
+                                            {FarmData.direccion}
 
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">EMAIL</h2>
 
                                                     <p className="text-indigo-500 mt-1 m-3">
-                                                        {item.email}
+                                                        {FarmData.email}
                                                     </p>
 
                                         </div>
@@ -117,9 +132,8 @@ export const Landing = () => {
 
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
 
-                                            console.log(item),
                                                 <p className="text-indigo-500 leading-relaxed">
-                                                    {item.telefono}
+                                                    {FarmData.telefono}
                                                 </p>
 
                                         </div>
@@ -128,7 +142,7 @@ export const Landing = () => {
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 
                                             <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
-                                                {item.perfiltaza}
+                                                {FarmData.perfiltaza}
                                             </p>
 
 
@@ -147,7 +161,7 @@ export const Landing = () => {
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        {item.Fsocios}
+                                                        {FarmData.Fsocios}
                                                     </span>
                                         </div>
                                             </span>
@@ -159,7 +173,7 @@ export const Landing = () => {
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
                                                     <span className="mr-3 text-2xl font-black">
-                                                        {item.Msocios}
+                                                        {FarmData.Msocios}
                                                     </span>
                                         </div>
                                             </span>
@@ -173,7 +187,7 @@ export const Landing = () => {
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        {item.area}
+                                                        {FarmData.area}
                                                     </span>
                                         </div>
                                             </span>
@@ -181,7 +195,7 @@ export const Landing = () => {
                                     <p className="leading-relaxed">Productos / Servicios</p>
 
                                             <p className="leading-relaxed">
-                                                        {item.productos}
+                                                        {FarmData.productos}
                                                     </p>
 
                                     <div className="flex mt-6 items-center justify-center pb-5">
@@ -191,7 +205,7 @@ export const Landing = () => {
                                     <p className="leading-relaxed">Certificados</p>
 
                                             <p className="leading-relaxed">
-                                                {item.certificados}
+                                                {FarmData.certificados}
                                             </p>
                                     <br/>
 
@@ -200,7 +214,7 @@ export const Landing = () => {
 
                                         <span className="leading-relaxed font-black">
                                                 <p className="leading-relaxed">
-                                                    {item.bio}
+                                                    {FarmData.bio}
                                                 </p>
                                         </span>
                                     </div>
@@ -214,27 +228,27 @@ export const Landing = () => {
                 <div id="fotos" className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                     <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                            {item.nombre}
+                            {FarmData.nombre}
                         </h2>
 
                     </div>
                     <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
-                        <img src={ item.imagen1}
+                        <img src={ FarmData.imagen1}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
                         <img
-                            src={ item.imagen2}
+                            src={ FarmData.imagen2}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
                         <img
-                            src={ item.imagen3}
+                            src={ FarmData.imagen3}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
                         <img
-                            src={ item.imagen4}
+                            src={ FarmData.imagen4}
                             className="object-cover w-full h-56 rounded shadow-lg"
                             alt=""
                         />
@@ -244,7 +258,7 @@ export const Landing = () => {
 
 
             </section>
-                ))}
+              
         </>
     );
 };

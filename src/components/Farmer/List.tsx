@@ -289,13 +289,13 @@ export const List = () => {
 <div>
   <div className="filters-buttons space-y-4">
     <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
-                                        focus:bg-amber-800 active:bg-amber-800">
+                                        focus:bg-amber-400 active:bg-amber-600">
       <SearchIcon className="w-4 h-4 mr-2"/>
       <>{t("search")}</>
     </button>
     <br/>
     <button  onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
-                                        focus:bg-red-500 active:bg-red-700">
+                                        focus:bg-red-400 active:bg-red-700">
       <ClearIcon className="w-4 h-4 mr-2"/>
       <>{t("clear")}</>
     </button>

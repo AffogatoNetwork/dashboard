@@ -23,6 +23,8 @@ import {
     getDefaultProvider,
     isNumber,
 } from "../../utils/utils";
+import {SearchIcon} from "../icons/search";
+import {ClearIcon} from "../icons/clear";
 
 const saveSvgAsPng = require("save-svg-as-png");
 
@@ -121,7 +123,6 @@ export const List = () => {
     const loadBatch = async (batchId: number, ipfsHash: any) => {
         const batchList = coffeeBatchList;
         const url = ipfsUrl.concat(ipfsHash);
-
         fetch(url)
             .then((response) => response.json())
             .then((jsonData) => {
@@ -148,7 +149,7 @@ export const List = () => {
                         [dryMill] = jsonData.attributes[i].value;
                     }
                 }
-                const cooffeeB = {
+                const cooffeeBatch = {
                     id: batchId,
                     name: jsonData.name,
                     description: jsonData.description,
@@ -160,7 +161,7 @@ export const List = () => {
                     dryMill,
                     cupProfile,
                 };
-                batchList.push(cooffeeB);
+                batchList.push(cooffeeBatch);
                 setCoffeeBatchList(batchList.slice());
                 setCoffeeBatchList2(batchList.slice());
             });
@@ -430,98 +431,102 @@ export const List = () => {
         confPagination(coffeeBatchList2, isAuth ? 10 : 12);
     };
 
-       const RenderFilters = () => (
-<>
-<p className="text-lg"> Buscar Lotes </p>
+    const RenderFilters = () => (
+        <>
+            <p className="text-lg"> Buscar Lotes </p>
 
-    <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full pb-4">
-                    <div>
-                        <FormInput
-                            label={t("search")}
-                            value={searchCriteria}
-                            placeholder={t("search")}
-                            handleOnChange={handleSearchCriteriaChange}
-                            handleOnKeyDown={handleSearchCriteriaKeyDown}
-                            errorMsg=""
-                            className="search-input block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+            <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full pb-4">
+                <div>
+                    <FormInput
+                        label={t("search")}
+                        value={searchCriteria}
+                        placeholder={t("search")}
+                        handleOnChange={handleSearchCriteriaChange}
+                        handleOnKeyDown={handleSearchCriteriaKeyDown}
+                        errorMsg=""
+                        className="search-input block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                        />
-                    </div>
-        <div>
-                        <FormInput
-                            label={t("min-height")}
-                            value={minHeight}
-                            placeholder={t("min-height")}
-                            handleOnChange={handleMinHeightChange}
-                            errorMsg={minHeightError}
-                            className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+                    />
+                </div>
+                <div>
+                    <FormInput
+                        label={t("min-height")}
+                        value={minHeight}
+                        placeholder={t("min-height")}
+                        handleOnChange={handleMinHeightChange}
+                        errorMsg={minHeightError}
+                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                        />
-        </div>
-        <div>
-                        <FormInput
-                            label={t("min-weight")}
-                            value={minWeight}
-                            placeholder={t("min-weight")}
-                            handleOnChange={handleMinWeightChange}
-                            errorMsg={minWeightError}
-                            className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+                    />
+                </div>
+                <div>
+                    <FormInput
+                        label={t("min-weight")}
+                        value={minWeight}
+                        placeholder={t("min-weight")}
+                        handleOnChange={handleMinWeightChange}
+                        errorMsg={minWeightError}
+                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                        />
-        </div>
-        <div>
-                        <FormInput
-                            label={t("max-weight")}
-                            value={maxWeight}
-                            placeholder={t("max-weight")}
-                            handleOnChange={handleMaxWeightChange}
-                            errorMsg={maxWeightError}
-                            className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+                    />
+                </div>
+                <div>
+                    <FormInput
+                        label={t("max-weight")}
+                        value={maxWeight}
+                        placeholder={t("max-weight")}
+                        handleOnChange={handleMaxWeightChange}
+                        errorMsg={maxWeightError}
+                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                        />
-        </div>
-        <div>
-                        <FormInput
-                            label={t("min-note")}
-                            value={minNote}
-                            placeholder={t("min-note")}
-                            handleOnChange={handleMinNoteChange}
-                            errorMsg={minNoteError}
-                            className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+                    />
+                </div>
+                <div>
+                    <FormInput
+                        label={t("min-note")}
+                        value={minNote}
+                        placeholder={t("min-note")}
+                        handleOnChange={handleMinNoteChange}
+                        errorMsg={minNoteError}
+                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                        />
-        </div>
-        <div>
-                        <FormInput
-                            label={t("max-note")}
-                            value={maxNote}
-                            placeholder={t("max-note")}
-                            handleOnChange={handleMaxNoteChange}
-                            errorMsg={maxNoteError}
-                            className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
+                    />
+                </div>
+                <div>
+                    <FormInput
+                        label={t("max-note")}
+                        value={maxNote}
+                        placeholder={t("max-note")}
+                        handleOnChange={handleMaxNoteChange}
+                        errorMsg={maxNoteError}
+                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                        />
-                    </div>
+                    />
+                </div>
+                <div className="filters-buttons space-y-4">
                     <div className="filters-buttons space-y-4">
-                        <button  onClick={() => onSearchClick()} className="btn w-full py-3 px-6 rounded-md bg-amber-200
-                                        focus:bg-amber-800 active:bg-amber-800">
+                        <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+                                        focus:bg-amber-400 active:bg-amber-600">
+                            <SearchIcon className="w-4 h-4 mr-2"/>
                             <>{t("search")}</>
                         </button>
                         <br/>
-                        <button  className="btn w-full py-3 px-6 rounded-md bg-amber-200
-                                        focus:bg-amber-800 active:bg-amber-800" onClick={() => onClearClick()}>
+                        <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                                        focus:bg-red-400 active:bg-red-700">
+                            <ClearIcon className="w-4 h-4 mr-2"/>
                             <>{t("clear")}</>
                         </button>
                     </div>
-    </div>
-    </>
-            );
+                </div>
+            </div>
+        </>
+    );
 
     return (
         <>
@@ -537,11 +542,11 @@ export const List = () => {
                     <div>
                         <QRCode id="current-qr" value={qrCodeUrl} size={500}/>
 
-                        <button  onClick={handleOnDownloadClick}>
+                        <button onClick={handleOnDownloadClick}>
                             <>{t("download")}</>
                         </button>
                         <a href={qrCodeUrl}>
-                            <button  >
+                            <button>
                                 <>{t("open-link")}</>
                             </button>
                         </a>
@@ -549,94 +554,94 @@ export const List = () => {
                 </div>
             </Modal>
 
-        <div className="py-8">
+            <div className="py-8">
 
-            <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
 
-                <div className="batch-list">
-                    {RenderFilters()}
-                    <Card className="create-card">
-                        <Card.Header>
-                            <div>
-                                <h2 className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3">
-                                <>{t("farm-and-batches")}</>
-                                </h2>
-                            </div>
-                            <div>
-                                <h3>
-                                    <>
-                                        {t("total")}: {batchesCount}
-                                    </>
-                                </h3>
-                            </div>
-                        </Card.Header>
-                        <Card.Body>
-                            {loading || loadingIpfs ? (
-                                <Loading
-                                    label={t("loading").concat("...")}
-                                    className="loading-wrapper"
+                    <div className="batch-list">
+                        {RenderFilters()}
+                        <Card className="create-card">
+                            <Card.Header>
+                                <div>
+                                    <h2 className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3">
+                                        <>{t("farm-and-batches")}</>
+                                    </h2>
+                                </div>
+                                <div>
+                                    <h3>
+                                        <>
+                                            {t("total")}: {batchesCount}
+                                        </>
+                                    </h3>
+                                </div>
+                            </Card.Header>
+                            <Card.Body>
+                                {loading || loadingIpfs ? (
+                                    <Loading
+                                        label={t("loading").concat("...")}
+                                        className="loading-wrapper"
+                                    />
+                                ) : (
+                                    <Table className="coffeebatches">
+                                        <thead>
+                                        <tr>
+                                            <th className="th-2">QR</th>
+                                            <th className="th-2">
+                                                <>{t("farm")}</>
+                                            </th>
+                                            <th className="th-2">
+                                                <>{t("height")}</>
+                                            </th>
+                                            <th className="th-2">
+                                                <>{t("location")}</>
+                                            </th>
+                                            <th className="th-3">
+                                                <>{t("variety")}</>
+                                            </th>
+                                            <th className="th-2">
+                                                <>{t("process")}</>
+                                            </th>
+                                            <th className="th-4">
+                                                <>{t("drying-code")}</>
+                                            </th>
+                                            <th className="th-2">
+                                                <>{t("drying-type")}</>
+                                            </th>
+                                            <th className="th-4">
+                                                <>{t("exporting-code")}</>
+                                            </th>
+                                            <th className="th-3">
+                                                <>{t("weight")}</>
+                                            </th>
+                                            <th className="th-3">
+                                                <>{t("note")}</>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        {coffeeBatchList.map((batch, index) => (
+                                            <BatchItem
+                                                key={index}
+                                                index={index}
+                                                coffeeBatch={batch}
+                                                pagination={pagination}
+                                                showQrModal={showQrModal}
+                                            />
+                                        ))}
+                                        </tbody>
+                                    </Table>
+                                )}
+                            </Card.Body>
+                            <Card.Footer>
+                                <CustomPagination
+                                    pagination={pagination}
+                                    onPageSelected={onPageSelected}
                                 />
-                            ) : (
-                                <Table className="coffeebatches">
-                                    <thead>
-                                    <tr>
-                                        <th className="th-2">QR</th>
-                                        <th className="th-2">
-                                            <>{t("farm")}</>
-                                        </th>
-                                        <th className="th-2">
-                                            <>{t("height")}</>
-                                        </th>
-                                        <th className="th-2">
-                                            <>{t("location")}</>
-                                        </th>
-                                        <th className="th-3">
-                                            <>{t("variety")}</>
-                                        </th>
-                                        <th className="th-2">
-                                            <>{t("process")}</>
-                                        </th>
-                                        <th className="th-4">
-                                            <>{t("drying-code")}</>
-                                        </th>
-                                        <th className="th-2">
-                                            <>{t("drying-type")}</>
-                                        </th>
-                                        <th className="th-4">
-                                            <>{t("exporting-code")}</>
-                                        </th>
-                                        <th className="th-3">
-                                            <>{t("weight")}</>
-                                        </th>
-                                        <th className="th-3">
-                                            <>{t("note")}</>
-                                        </th>
-                                    </tr>
-                                    </thead>
-                                    <tbody>
-                                    {coffeeBatchList.map((batch, index) => (
-                                        <BatchItem
-                                            key={index}
-                                            index={index}
-                                            coffeeBatch={batch}
-                                            pagination={pagination}
-                                            showQrModal={showQrModal}
-                                        />
-                                    ))}
-                                    </tbody>
-                                </Table>
-                            )}
-                        </Card.Body>
-                        <Card.Footer>
-                            <CustomPagination
-                                pagination={pagination}
-                                onPageSelected={onPageSelected}
-                            />
-                        </Card.Footer>
-                    </Card>
+                            </Card.Footer>
+                        </Card>
+                    </div>
                 </div>
             </div>
-        </div>
-</>
+        </>
     );
 };
