@@ -6,24 +6,30 @@ import { LinkIcon } from "../icons/link";
 import { FarmIcon } from "../icons/farm";
 import { Blockchain } from "../icons/blockchain";
 import {FarmList} from "../../utils/constants"
+import CoopLocation from "../common/CoopLocation";
 export const Landing = () => {
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
 
     const location = window.location.host;
-    let FarmData: { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; imagen1: string; imagen2: string; imagen3: string; imagen4: string; mapa: string; } | { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; mapa: string; imagen1?: undefined; imagen2?: undefined; imagen3?: undefined; imagen4?: undefined; };
+    let FarmData: { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; imagen1: string; imagen2: string; imagen3: string; imagen4: string;  } | { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; imagen1?: undefined; imagen2?: undefined; imagen3?: undefined; imagen4?: undefined; };
 
     
     FarmGet();
 
     useEffect(() => {
          FarmGet()
+         let location = window.location.host;
     });
 
     function FarmGet(){
         if (location.match("localhost:3000") !== null) {
             FarmData = FarmList[0]
         }
+        if (location.match("commovel") !== null) {
+            FarmData = FarmList[1]
+        }
+
         if (location.match("copranil") !== null) {
             FarmData = FarmList[2]
 
@@ -47,7 +53,7 @@ export const Landing = () => {
     return (
 
         <>
-            
+
             <section >
                 <div className="relative overflow-y-scroll w-full h-auto">
                 <div
@@ -123,9 +129,8 @@ export const Landing = () => {
                                 className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap bg-zinc-100 rounded-lg">
                                 <div
                                     className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative ">
-                                    <iframe width="100%" height="100%" className="absolute inset-0 opacity-75" title="map"
-                                            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Commovel%20Aldea%20San%20Luis,%20Planes,%20Sta.%20B%C3%A1rbara+(COMMOVEL)&amp;t=k&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
-                                    ></iframe>
+                                    <CoopLocation className=""/>
+
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección</h2>

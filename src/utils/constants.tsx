@@ -117,8 +117,7 @@ export const FarmList = [
     imagen2: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_003.jpeg?alt=media&token=81ad26d9-6e23-424f-b79d-f0df9bf05a0f",
     imagen3: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_004.jpeg?alt=media&token=d30a999c-e58c-460d-9479-ca8bf59c32c0",
     imagen4: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_005.jpeg?alt=media&token=5c271053-c167-473d-a8cc-b7afd98f93bb",
-    mapa: "<iframe width=\"100%\" height=\"100%\" className=\"absolute inset-0 opacity-75\" title=\"map\"\n" + "src=\"https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Commovel%20Aldea%20San%20Luis,%20Planes,%20Sta.%20B%C3%A1rbara+(COMMOVEL)&amp;t=k&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed\"\n" + ">" +
-        "</iframe>" },
+},
   {
     key: "1",
     id:" COMMOVEL",
@@ -142,8 +141,7 @@ export const FarmList = [
     imagen2: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_003.jpeg?alt=media&token=81ad26d9-6e23-424f-b79d-f0df9bf05a0f",
     imagen3: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_004.jpeg?alt=media&token=d30a999c-e58c-460d-9479-ca8bf59c32c0",
     imagen4: "https://firebasestorage.googleapis.com/v0/b/yeoudev.appspot.com/o/signal-2022-10-26-071821_005.jpeg?alt=media&token=5c271053-c167-473d-a8cc-b7afd98f93bb",
-    mapa: "<iframe width=\"100%\" height=\"100%\" className=\"absolute inset-0 opacity-75\" title=\"map\"\n" + "src=\"https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Commovel%20Aldea%20San%20Luis,%20Planes,%20Sta.%20B%C3%A1rbara+(COMMOVEL)&amp;t=k&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed\"\n" + ">" +
-        "</iframe>" },
+  },
   {
     key: "2",
     id:" COPRANIL",
@@ -163,8 +161,7 @@ export const FarmList = [
     website: "https://www.copranil.hn",
     social: "https://www.facebook.com/Copranil-153316678376593",
     certificados: ["Orgánico", " ", " Comercio Justo" ],
-   mapa: "<iframe width=\"100%\" height=\"100%\" className=\"absolute inset-0 opacity-75\" title=\"map\"\n" + "src=\"https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=COPRANIL,%20Corqu%C3%ADn+(COPRANIL,%20Corqu%C3%ADn)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed\"\n" + ">" +
-        "</iframe>" },
+  },
   {
     key: "3",
     id:" COMSA",
@@ -194,8 +191,7 @@ export const FarmList = [
         "Orgánico", " ",
         "Comercio Justo", " ",
         "Rainforest Alliance" , " ",],
- mapa: "<iframe width=\"100%\" height=\"100%\" className=\"absolute inset-0 opacity-75\" title=\"map\"\n" + "src=\"https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=COMSA%20-%20Caf%C3%A9%20Org%C3%A1nico%20Marcala,%20Marcala+(COMSA%20-%20Caf%C3%A9%20Org%C3%A1nico%20Marcala,%20Marcala)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed\"\n" + ">" +
-        "</iframe>" },
+  },
   {
     key: "4",
     id:" PROEXO",
@@ -225,9 +221,7 @@ export const FarmList = [
     certificados: ["Orgánico", " ",
                    "Comercio Justo", " ",
                    "Rainforest Alliance" , " ",],
-
-    mapa: "<iframe width=\"100%\" height=\"100%\" className=\"absolute inset-0 opacity-75\" title=\"map\"\n" + "src=\"https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=PROEXO,%20Corqu%C3%ADn+(PROEXO,%20Corqu%C3%ADn)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed\"\n" + ">" +
-        "</iframe>" },
+  },
 
 ];
 
