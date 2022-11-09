@@ -23,9 +23,6 @@ export const Landing = () => {
     });
 
     function FarmGet(){
-        if (location.match("localhost:3000") !== null) {
-            FarmData = FarmList[0]
-        }
         if (location.match("commovel") !== null) {
             FarmData = FarmList[1]
         }
@@ -42,6 +39,8 @@ export const Landing = () => {
             FarmData = FarmList[4]
 
         } if (location.match("affogato") !== null) {
+            FarmData = FarmList[0]
+        } else {
             FarmData = FarmList[0]
         }
     }
