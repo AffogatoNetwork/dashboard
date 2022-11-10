@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Accordion from "react-bootstrap/Accordion";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
 import Table from "react-bootstrap/esm/Table";
@@ -15,7 +14,6 @@ import FormInput from "../common/FormInput";
 import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import { SEARCH_DIVIDER } from "../../utils/constants";
-import { getCompanyName } from "../../utils/utils";
 import { SearchIcon } from "../icons/search";
 import { ClearIcon } from "../icons/clear";
 import Modal from "react-modal";

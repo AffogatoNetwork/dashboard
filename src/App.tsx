@@ -10,7 +10,6 @@ import Home from "./components/Home";
 import '../src/assets/css/scrollbar.css';
 import '../src/assets/css/globals.css';
 import '../src/assets/css/range-slider.css';
-import { ProSidebarProvider } from 'react-pro-sidebar';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
@@ -28,13 +27,11 @@ const App = () => {
     <AuthProvider>
       <contractsContext.Provider value={contracts}>
         <CookiesProvider>
-          <ProSidebarProvider>
           <BrowserRouter>
             <ApolloProvider client={apolloClient}>
               <Home />
             </ApolloProvider>
           </BrowserRouter>
-          </ProSidebarProvider>
         </CookiesProvider>
       </contractsContext.Provider>
     </AuthProvider>
