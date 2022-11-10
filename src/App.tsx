@@ -27,13 +27,11 @@ const App = () => {
     <AuthProvider>
       <contractsContext.Provider value={contracts}>
         <CookiesProvider>
-          <ProSidebarProvider>
           <BrowserRouter>
             <ApolloProvider client={apolloClient}>
               <Home />
             </ApolloProvider>
           </BrowserRouter>
-          </ProSidebarProvider>
         </CookiesProvider>
       </contractsContext.Provider>
     </AuthProvider>
