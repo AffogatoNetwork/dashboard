@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/esm/Button";
-import Card from "react-bootstrap/esm/Card";
-import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import "../../styles/coffeecard.scss";
