@@ -10,7 +10,6 @@ import Home from "./components/Home";
 import '../src/assets/css/scrollbar.css';
 import '../src/assets/css/globals.css';
 import '../src/assets/css/range-slider.css';
-import { ProSidebarProvider } from 'react-pro-sidebar';
 
 import { QueryClient, QueryClientProvider } from 'react-query';
 
