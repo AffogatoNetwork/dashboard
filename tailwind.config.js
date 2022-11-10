@@ -121,6 +121,19 @@ module.exports = {
           '100%': { transform: 'scale(1)' },
         },
       },
+      variants: {
+        extend: {
+          opacity: [
+            "disabled"
+          ],
+          backgroundColor: [
+            "disabled"
+          ],
+          cursor: [
+            "disabled"
+          ]
+        }
+      },
     },
   },
   plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],

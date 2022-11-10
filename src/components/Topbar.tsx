@@ -4,8 +4,6 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/esm/Nav";
 
 
-
-
 const Topbar = () => {
 
 
@@ -16,8 +14,6 @@ const Topbar = () => {
       <Container>
 
         <Nav className="flex h-full items-center justify-between px-4 sm:px-6 lg:px-8 xl:px-10 3xl:px-12">
-          <main className="">
-          </main>
         </Nav>
                 </Container>
     </Navbar>
