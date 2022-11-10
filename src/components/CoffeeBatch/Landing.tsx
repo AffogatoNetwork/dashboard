@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect} from "react";
 import {setMulticallAddress} from "ethers-multicall";
 import "../../styles/batchlist.scss";
 import "../../styles/modals.scss";

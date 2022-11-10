@@ -1,5 +1,4 @@
 import React from "react";
-import Topbar from "./Topbar";
 import SideBar from "./SideBar";
 
 function Dashboard({ children }: { children: JSX.Element }) {
