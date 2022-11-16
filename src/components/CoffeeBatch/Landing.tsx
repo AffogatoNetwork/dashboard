@@ -15,36 +15,40 @@ export const Landing = () => {
     let FarmData: { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; imagen1: string; imagen2: string; imagen3: string; imagen4: string;  } | { key: string; id: string; nombre: string; Msocios: number; Fsocios: number; email: string; telefono: string; direccion: string; lat: string; long: string; perfiltaza: string; bio: string; area: string; productos: string[]; gerente: string; website: string; social: string; certificados: string[]; imagen1?: undefined; imagen2?: undefined; imagen3?: undefined; imagen4?: undefined; };
 
     
-    FarmGet();
+    FarmGet(location);
 
     useEffect(() => {
-         FarmGet()
-         let location = window.location.host;
+        let location = window.location.host;
+        FarmGet(location)
     });
 
-    function FarmGet(){
+    function FarmGet(location: string){
         if (location.match("commovel") !== null) {
             FarmData = FarmList[1]
+            console.log("commovel")
         }
 
         if (location.match("copranil") !== null) {
             FarmData = FarmList[2]
-
+            console.log("copranil")
         }
         if (location.match("comsa") !== null) {
             FarmData = FarmList[3]
+            console.log("comsa")
         }
 
         if (location.match("proexo") !== null) {
             FarmData = FarmList[4]
-
+            console.log("proexo")
         } if (location.match("affogato") !== null) {
+            console.log("affogato")
             FarmData = FarmList[0]
         } else {
             FarmData = FarmList[0]
+            console.log(location)
+
         }
     }
-
 
 
 
