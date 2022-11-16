@@ -19,15 +19,18 @@ export const Profile = () => {
         const load = async () => {
             if (farmerId) {
                 await getFarmer(farmerId).then((result) => {
+                    console.log(result);
                     setFarmerData(result);
+                    console.log(farmerData);
                 });
                 await getImageUrl(farmerId).then((result) => {
                     setImageUrl(result);
                 });
                 await getFarmerFarms(farmerId).then((result) => {
-                    console.log(farms);
+                    console.log(result);
                     // console.log(result[0].data());
                     setFarms(result);
+                    console.log(farms)
                 });
                 setLoading(false);
             }
@@ -48,65 +51,82 @@ export const Profile = () => {
 
     return (
         <>
-            <div className="flex justify-center pt-6">
-
-                <div className="shadow-lg rounded-2xl w-120 bg-white dark:bg-gray-800">
-                    <img alt="profil" src={require('../../assets/coffee.jpg')}
-                         className="rounded-t-lg h-32 w-full mb-4"/>
-                    <div className="flex flex-col items-center justify-center p-4 -mt-16">
-                        <a href="#" className="block relative">
-                            <img alt="profil" src={imageUrl}
-                                 className="mx-auto object-cover rounded-full h-24 w-24  border-2 border-white dark:border-gray-800"/>
-                        </a>
-                        <p className="text-gray-800 dark:text-white text-xl font-medium mt-2 text-center ">
-                            {farmerData.fullname}
-                        </p>
-                        <p className="text-gray-400 text-xs mb-4">
-                            {farmerData.bio}
-                        </p>
-                        <p className="text-xs p-2 bg-amber-800 text-white px-4 rounded-full">
-                            {farmerData.company}
-                        </p>
-                        <div className="rounded-lg p-2 w-full mt-4">
-                            <div className="flex items-center justify-between text-sm text-gray-600 dark:text-gray-200">
-                                <p className="flex flex-col">
-                                    <>{t("gender")}</>
-                                    <span className="text-black dark:text-white font-bold">
+            <section className="text-gray-600 body-font">
+                <div className="container px-5 py-24 mx-auto flex flex-col">
+                    <div className="lg:w-4/6 mx-auto">
+                        <div className="rounded-lg h-64 overflow-hidden">
+                            <img alt="profilebanner" src={require('../../assets/coffee.jpg')}
+                                 className="object-cover object-center h-full w-full"/>
+                        </div>
+                        <div className="flex flex-col sm:flex-row mt-10">
+                            <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
+                                <div
+                                    className="object-cover rounded-full h-24 w-24  border-2 border-amber-900 dark:border-gray-800 w-20 h-20  inline-flex items-center justify-center bg-gray-200 text-gray-400">
+                                    <img alt="profile photo" src={imageUrl} className="rounded-full"/>
+                                </div>
+                                <div className="flex flex-col items-center text-center justify-center">
+                                    <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">{farmerData.fullname}</h2>
+                                    <div className="w-12 h-1 bg-amber-800 rounded mt-2 mb-4">
+                                    </div>
+                                    <p className="text-xs p-2 bg-amber-800 text-white px-4 rounded-full">
+                                        {farmerData.company}
+                                    </p>
+                                    <p className="text-base">
+                                        {farmerData.bio}
+                                    </p>
+                                    <br className="pt-4"/>
+                                    <p className="flex flex-col">
+                                        <>{t("gender")} :</>
+                                        <span className="text-black dark:text-white font-bold">
                     <>{t(farmerData.gender)}</>
                     </span>
-                                </p>
-                                <p className="flex flex-col text-center">
-                                    <>{t("location")}</>
-                                    <span className="text-black dark:text-white font-bold">
-                                                {farmerData.village}, {farmerData.region}
+                                    </p>
 
+                                    <br className="pt-4"/>
+                                    <p className="flex flex-col">
+                                        <>{t("location")} :</>
+                                        <span className="text-black dark:text-white font-bold">
+                          {farmerData.village}, {farmerData.region}
                     </span>
-                                </p>
-                                <p className="flex flex-col">
-                                    <>{t("country")}</>
-                                    <span className="text-black dark:text-white font-bold">
-                        {farmerData.country}
+                                    </p>
+
+                                    <br className="pt-4"/>
+                                    <p className="flex flex-col">
+                                        <>{t("country")} :</>
+                                        <span className="text-black dark:text-white font-bold">
+                          {farmerData.country},
                     </span>
+                                    </p>
+
+                                </div>
+                            </div>
+                            <div
+                                className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
+                                <p className="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+                                    <div className="w-full sm:p-4 px-4 mb-6">
+                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.varieties}</h2>
+                                            <p className="leading-relaxed">Variedades</p>
+                                        </div>
+                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.certifications}</h2>
+                                            <p className="leading-relaxed">Certificados</p>
+                                        </div>
+                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.familyMembers}</h2>
+                                            <p className="leading-relaxed">Miembros de Familia</p>
+                                        </div>
+                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
+                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.shadow}</h2>
+                                            <p className="leading-relaxed">Estado</p>
+                                        </div>
+                                    </div>
                                 </p>
                             </div>
                         </div>
-
                     </div>
-
                 </div>
-
-
-            </div>
-            <div className="flex justify-center container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap">
-                <div
-                    className="lg:w-2/3 md:w-full h-full rounded-lg overflow-hidden sm:mr-10 p-48 flex items-end justify-start relative ">
-                    <iframe width="100%" height="100%" className="absolute inset-0 opacity-75"  title="map"
-                            src="https://maps.google.com/maps?width=100%&amp;height=600&amp;hl=en&amp;q=%honduras+(My%20Business%20Name)&amp;ie=UTF8&amp;t=&amp;z=14&amp;iwloc=B&amp;output=embed"
-                    ></iframe>
-
-                </div>
-
-            </div>
+            </section>
         </>
     );
 };
