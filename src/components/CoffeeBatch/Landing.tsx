@@ -46,7 +46,6 @@ export const Landing = () => {
         } else {
             FarmData = FarmList[0]
             console.log(location)
-
         }
     }
 

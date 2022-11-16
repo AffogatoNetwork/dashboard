@@ -59,12 +59,14 @@ export const getAllFarmers = async (company: string) => {
 };
 
 export const getFarmerFarms = async (farmerAddress: string) => {
-  const q = query(
-    collection(db, "farms"),
-    where("farmerAddress", "==", farmerAddress)
-  );
-  const querySnapshot = await getDocs(q);
-  return querySnapshot.docs;
+  console.log(farmerAddress)
+  const docRef = doc(db, "farms", farmerAddress + "#los-pinos");
+  console.log(docRef)
+  const docData = await getDoc(docRef);
+  if (docData.exists()) {
+    return docData.data();
+  }
+  return null;
 };
 
 export const saveCompany = async (company: CompanyType) => {
