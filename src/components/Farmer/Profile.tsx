@@ -19,18 +19,16 @@ export const Profile = () => {
         const load = async () => {
             if (farmerId) {
                 await getFarmer(farmerId).then((result) => {
-                    console.log(result);
                     setFarmerData(result);
-                    console.log(farmerData);
                 });
                 await getImageUrl(farmerId).then((result) => {
                     setImageUrl(result);
                 });
                 await getFarmerFarms(farmerId).then((result) => {
-                    console.log(result);
-                    // console.log(result[0].data());
-                    setFarms(result);
-                    console.log(farms)
+                    if (result !== null) {
+                        setFarms(result[0]);
+                    }
+                    setLoading(false);
                 });
                 setLoading(false);
             }

@@ -22,30 +22,23 @@ export const Landing = () => {
         FarmGet(location)
     });
 
+
     function FarmGet(location: string){
         if (location.match("commovel") !== null) {
             FarmData = FarmList[1]
-            console.log("commovel")
         }
 
         if (location.match("copranil") !== null) {
             FarmData = FarmList[2]
-            console.log("copranil")
         }
         if (location.match("comsa") !== null) {
             FarmData = FarmList[3]
-            console.log("comsa")
         }
 
         if (location.match("proexo") !== null) {
             FarmData = FarmList[4]
-            console.log("proexo")
-        } if (location.match("affogato") !== null) {
-            console.log("affogato")
-            FarmData = FarmList[0]
         } else {
             FarmData = FarmList[0]
-            console.log(location)
         }
     }
 
