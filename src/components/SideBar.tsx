@@ -128,10 +128,6 @@ export default function Home() {
     const getColor = () => {
         let location = window.location.host;
         switch (location) {
-            case 'affogato': {
-                let Farm = 'Empresa/Cooperativa';
-                break;
-            }
             case 'comsa': {
                 let Farm = 'Comsa';
                 break;

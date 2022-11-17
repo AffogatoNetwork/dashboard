@@ -56,15 +56,18 @@ export const getAllFarmers = async (company: string) => {
   const q = query(collection(db, "farmers"), where("company", "==", company));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
+
 };
 
 export const getFarmerFarms = async (farmerAddress: string) => {
-  console.log(farmerAddress)
-  const docRef = doc(db, "farms", farmerAddress + "#los-pinos");
-  console.log(docRef)
-  const docData = await getDoc(docRef);
-  if (docData.exists()) {
-    return docData.data();
+  const q = query(
+      collection(db, "farms"),
+      where("farmerAddress", "==", farmerAddress)
+  );
+  const querySnapshot = await getDocs(q);
+  const docData = querySnapshot.docs.map(doc => doc.data());
+  if (docData !== null) {
+    return docData;
   }
   return null;
 };
