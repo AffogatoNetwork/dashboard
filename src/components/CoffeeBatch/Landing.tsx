@@ -25,7 +25,8 @@ export const Landing = () => {
 
     function FarmGet(location: string){
         if (location.match("commovel") !== null) {
-            FarmData = FarmList[1]
+            FarmData = FarmList[1];
+            console.log(FarmList[1]);
         }
 
         if (location.match("copranil") !== null) {
@@ -38,6 +39,7 @@ export const Landing = () => {
         if (location.match("proexo") !== null) {
             FarmData = FarmList[4]
         } else {
+console.log(FarmData)
             FarmData = FarmList[0]
         }
     }
