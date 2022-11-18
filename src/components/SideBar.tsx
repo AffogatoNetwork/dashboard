@@ -20,6 +20,13 @@ import {AiOutlineMenuFold, AiOutlineMenuUnfold} from "react-icons/ai";
 
 import CoopLogo from "./common/CoopLogo";
 import {useAuthContext} from "../states/AuthContext";
+import Image from "react-bootstrap/Image";
+import Comsa from "../assets/comsa.png";
+import Commovel from "../assets/commovel.png";
+import Copranil from "../assets/copranil.png";
+import Proexo from "../assets/proexo.png";
+import Logo from "../assets/logo.png";
+
 
 
 const data = [
@@ -119,35 +126,35 @@ export default function Home() {
 
     const navigate = useNavigate();
     const [active, setActive] = useState(false)
+    const [primary, SetBackgroundColor] = useState('bg-red-500')
+    const [farm, setFarmName] = useState('Empresa/Cooperativa')
     const controls = useAnimation()
     const controlText = useAnimation()
     const controlTitleText = useAnimation()
-    let Farm = 'Empresa/Cooperativa'
-
 
     const getColor = () => {
         let location = window.location.host;
-        switch (location) {
-            case 'comsa': {
-                let Farm = 'Comsa';
-                break;
-            }
-            case 'commovel': {
-                let Farm = 'Commovel';
-                break;
-            }
-            case 'copranil': {
-                let Farm = 'Copranil';
-                break;
-            }
-            case 'proexo': {
-                let Farm = 'Proexo';
-                break;
-            }
-            default: {
-                let Farm = 'Empresa/Cooperativa';
-            }
+        console.log(location);
+        if (location.match("comsa") !== null) {
+            SetBackgroundColor("bg-red-900\t");
+            setFarmName("Comsa")
         }
+        if (location.match("commovel") !== null) {
+            SetBackgroundColor("bg-yellow-500");
+            setFarmName("Commovel")
+        }
+        if (location.match("copranil") !== null) {
+            SetBackgroundColor("bg-lime-600");
+            setFarmName("Copranil")
+
+        }
+        if (location.match("proexo") !== null) {
+            SetBackgroundColor("bg-stone-800");
+            setFarmName("Proexo")
+
+        }
+        SetBackgroundColor("bg-amber-900");
+        setFarmName("Empresa/Cooperativa")
     }
 
 
@@ -211,7 +218,7 @@ export default function Home() {
 
                         </div>
                     </div>
-                    <h3 className="text-sm font-medium uppercase tracking-wide overflow-hidden">{Farm}</h3>
+                    <h3 className="text-sm font-medium uppercase tracking-wide overflow-hidden">{farm}</h3>
                     <span className="mt-1 block text-xs text-gray-600 dark:text-gray-400 overflow-hidden"> {makeShortAddress(ownerAddress)}</span>
 
                 </div>
@@ -222,7 +229,7 @@ export default function Home() {
                         <div key={index} className='my-2'>
                             {group.items.map((item, index2) => (
                                 <div key={index2} onClick={() => navigate(`${item.href}`)}
-                                     className={`${item.href === window.location.pathname && 'bg-red-500 text-white hover:text-gray-50'}  ${item.disabled && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600'} inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:text-red-500  font-medium rounded-md cursor-pointer `}>
+                                     className={`${item.href === window.location.pathname && `${primary} text-white hover:text-gray-50`}  ${item.disabled && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600'} inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300  font-medium rounded-md cursor-pointer `}>
                                     <item.icon className=''/>
                                     <motion.p animate={controlText} className='ml-4 text-sm'><>
                                         {t(item.title)}

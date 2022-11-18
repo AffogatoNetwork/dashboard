@@ -15,7 +15,7 @@ import Signup from "./Signup";
 import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
 import { Create, List, PublicList } from "./CoffeeBatch/index";
-import { Landing } from "./CoffeeBatch/Landing";
+import Landing from "./CoffeeBatch/Landing";
 
 const Home = () => {
   const { authState } = useAuthContext();
@@ -34,7 +34,7 @@ const Home = () => {
             element={
               <RequiredAuth>
                 <Dashboard>
-                  <Landing />
+                    <Landing/>
                 </Dashboard>
               </RequiredAuth>
             }
