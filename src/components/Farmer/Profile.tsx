@@ -50,8 +50,8 @@ export const Profile = () => {
     return (
         <>
             <section className="text-gray-600 body-font">
-                <div className="container px-5 py-24 mx-auto flex flex-col">
-                    <div className="lg:w-4/6 mx-auto">
+                <div className="container px-5 py-2 mx-auto flex flex-col ">
+                    <div className="lg:w-4/6 mx-auto bg-stone-100">
                         <div className="rounded-lg h-64 overflow-hidden">
                             <img alt="profilebanner" src={require('../../assets/coffee.jpg')}
                                  className="object-cover object-center h-full w-full"/>
@@ -74,7 +74,7 @@ export const Profile = () => {
                                     </p>
                                     <br className="pt-4"/>
                                     <p className="flex flex-col">
-                                        <>{t("gender")} :</>
+                                        <>{t("gender")}:</>
                                         <span className="text-black dark:text-white font-bold">
                     <>{t(farmerData.gender)}</>
                     </span>
@@ -82,7 +82,7 @@ export const Profile = () => {
 
                                     <br className="pt-4"/>
                                     <p className="flex flex-col">
-                                        <>{t("location")} :</>
+                                        <>{t("location")}:</>
                                         <span className="text-black dark:text-white font-bold">
                           {farmerData.village}, {farmerData.region}
                     </span>
@@ -90,7 +90,7 @@ export const Profile = () => {
 
                                     <br className="pt-4"/>
                                     <p className="flex flex-col">
-                                        <>{t("country")} :</>
+                                        <>{t("country")}:</>
                                         <span className="text-black dark:text-white font-bold">
                           {farmerData.country},
                     </span>
@@ -99,28 +99,45 @@ export const Profile = () => {
                                 </div>
                             </div>
                             <div
-                                className="sm:w-2/3 sm:pl-8 sm:py-8 sm:border-l border-gray-200 sm:border-t-0 border-t mt-4 pt-4 sm:mt-0 text-center sm:text-left">
-                                <p className="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
-                                    <div className="w-full sm:p-4 px-4 mb-6">
-                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.varieties}</h2>
-                                            <p className="leading-relaxed">Variedades</p>
+                                className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
+                                <div className="flex flex-col m-2">
+                                    <h2 className="text-2xl font-bold mb-4">
+                                        Datos de Productor
+                                    </h2>
+
+                                    <div
+                                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 gap-4">
+                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
+
+
+                                            <div className="ml-4">
+                                                <h2 className="font-semibold">Certificados:</h2>
+                                                <p className="mt-2 text-sm text-gray-500">{farms.certifications}</p>
+                                            </div>
                                         </div>
-                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.certifications}</h2>
-                                            <p className="leading-relaxed">Certificados</p>
+
+                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
+                                            <div className="ml-4">
+                                                <h2 className="font-semibold">Miembros de Familia:</h2>
+                                                <p className="mt-2 text-sm text-gray-500">{farms.familyMembers}</p>
+                                            </div>
                                         </div>
-                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.familyMembers}</h2>
-                                            <p className="leading-relaxed">Miembros de Familia</p>
+                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
+                                            <div className="ml-4">
+                                                <h2 className="font-semibold">Variedades:</h2>
+                                                <p className="mt-2 text-sm text-gray-500">{farms.varieties}</p>
+                                            </div>
                                         </div>
-                                        <div className="p-4 sm:w-1/2 lg:w-1/4 w-1/2">
-                                            <h2 className="title-font font-medium text-3xl text-gray-900">{farms.shadow}</h2>
-                                            <p className="leading-relaxed">Estado</p>
+                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
+                                            <div className="ml-4">
+                                                <h2 className="font-semibold">Tiene Sombra:</h2>
+                                                <p className="mt-2 text-sm text-gray-500">{farms.shadow}</p>
+                                            </div>
                                         </div>
                                     </div>
-                                </p>
+                                </div>
                             </div>
+
                         </div>
                     </div>
                 </div>
