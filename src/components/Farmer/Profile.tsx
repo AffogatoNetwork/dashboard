@@ -112,26 +112,26 @@ export const Profile = () => {
 
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Certificados:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.certifications}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.certifications}</p>
                                             </div>
                                         </div>
 
                                         <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Miembros de Familia:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.familyMembers}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.familyMembers}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Variedades:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.varieties}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.varieties}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Tiene Sombra:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.shadow}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.shadow}</p>
                                             </div>
                                         </div>
                                     </div>
