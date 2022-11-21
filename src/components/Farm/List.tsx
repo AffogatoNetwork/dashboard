@@ -6,17 +6,20 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { useTranslation } from "react-i18next";
 import "../../styles/farms.scss";
 import Loading from "../Loading";
-import Map from "../common/Map";
 import { FarmType } from "../common/types";
 import { getFarms } from "../../db/firebase";
 import { useAuthContext } from "../../states/AuthContext";
 import FormInput from "../common/FormInput";
 import { CustomPagination } from "../common/Pagination";
 import NotFound from "../common/NotFound";
-import { SEARCH_DIVIDER } from "../../utils/constants";
+import {GenderFilterList, SEARCH_DIVIDER} from "../../utils/constants";
 import { SearchIcon } from "../icons/search";
 import { ClearIcon } from "../icons/clear";
 import Modal from "react-modal";
+import {Close} from "../icons/close";
+import NewMap from "../common/NewMap";
+import Form from "react-bootstrap/Form";
+import Dropdown from "react-bootstrap/Dropdown";
 
 const pagDefault = {
   previous: 0,
@@ -216,38 +219,43 @@ export const List = () => {
 
   const RenderFilters = () => (
       <>
-        <p className="text-lg"> <><>{t("search-farms")}</></> </p>
-
-        <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full pb-4">
-                     <FormInput
-              label=""
-              value={searchCriteria}
-              placeholder={t("search")}
-              handleOnChange={handleSearchCriteriaChange}
-              handleOnKeyDown={handleSearchCriteriaKeyDown}
-              errorMsg=""
-              className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-            />
-                   <div>
-            <div className="filters-buttons space-y-4">
-              <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
-                                        focus:bg-amber-400 active:bg-amber-600">
-                <SearchIcon className="w-4 h-4 mr-2"/>
-                <>{t("search")}</>
-              </button>
-              <br/>
-              <button  onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
-                                        focus:bg-red-400 active:bg-red-700">
-                <ClearIcon className="w-4 h-4 mr-2"/>
-                <>{t("clear")}</>
-              </button>
-            </div>
+        <div className="w-full  shadow p-5 rounded-lg bg-white">
+          <div className="text-center text-lg text-black">
+            <>{t("search-farms")}</>
           </div>
-          
+          <div className="relative">
+            <div className="absolute flex items-center ml-2 h-full">
+              <SearchIcon className="m-4 w-4 h-4 fill-current"/>
+            </div>
+
+            <FormInput
+                label={t("")}
+                value={searchCriteria}
+                placeholder={t("search-farms")}
+                handleOnChange={handleSearchCriteriaChange}
+                handleOnKeyDown={handleSearchCriteriaKeyDown}
+                errorMsg=""
+                className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+          </div>
+
+          <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
+
+
+
+            <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+                                        focus:bg-amber-400 active:bg-amber-600">
+              <SearchIcon className="w-4 h-4 mr-2"/>
+              <>{t("search")}</>
+            </button>
+            <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                                        focus:bg-red-400 active:bg-red-700">
+              <ClearIcon className="w-4 h-4 mr-2"/>
+              <>{t("clear")}</>
+            </button>
+          </div>
+
         </div>
-</>
+      </>
 
   );
 
@@ -311,14 +319,15 @@ export const List = () => {
             onAfterOpen={afterOpenModal}
             onRequestClose={closeModal}
             contentLabel="Example Modal"
-            className="map-modal"
             aria-labelledby="contained-modal-title-vcenter"
         >
-          <button onClick={closeModal}> close</button>
+          <button onClick={closeModal}>
+            <Close className="w-12 text-red-500 hover:text-red-900"/>
+          </button>
           <br/>
           <div className="flex justify-center">
             <div>
-              <Map
+              <NewMap
                   latitude={currentLat}
                   longitude={currentLng}
                   zoomLevel={10}

@@ -23,13 +23,13 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
     return (
       <>
         <Pagination.Item active={pagination.current === 1}
-                         className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100">{1}</Pagination.Item>
+                         className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600 bg-white hover:bg-gray-100">{1}</Pagination.Item>
         {pagination.current >= 3 && pagination.current < midPages[0] && (
           <Pagination.Ellipsis />
         )}
         {pagination.current > 1 && pagination.current < midPages[0] && (
           <Pagination.Item active
-                           className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100">{pagination.current}</Pagination.Item>
+                           className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600 bg-white hover:bg-gray-100">{pagination.current}</Pagination.Item>
         )}
         <Pagination.Ellipsis
             className="w-full text-center  border text-base text-gray-600 bg-white hover:bg-gray-100"
@@ -39,7 +39,7 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
             key={item}
             active={pagination.current === item}
             onClick={() => onPageSelected(item)}
-            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+            className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600  hover:bg-gray-100"
           >
             {item}
           </Pagination.Item>
@@ -49,8 +49,8 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
         />
         {pagination.current < pagination.pages &&
           pagination.current > midPages[4] && (
-            <Pagination.Item active
-                             className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+            <Pagination.Item
+                             className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600 bg-white  hover:bg-gray-100"
             >{pagination.current}</Pagination.Item>
           )}
         {pagination.current < pagination.pages - 1 &&

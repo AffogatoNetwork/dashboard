@@ -1,6 +1,7 @@
 import React from "react";
 import Modal from "react-bootstrap/esm/Modal";
 import Map from "./Map";
+import NewMap from "./NewMap";
 
 type props = {
   latitude: string;
@@ -26,7 +27,7 @@ const MapModal = ({
     onHide={onHide}
   >
     <Modal.Body className="">
-      <Map
+      <NewMap
         latitude={latitude}
         longitude={longitude}
         zoomLevel={10}

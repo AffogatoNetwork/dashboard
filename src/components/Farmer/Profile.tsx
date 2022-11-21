@@ -58,9 +58,10 @@ export const Profile = () => {
                         </div>
                         <div className="flex flex-col sm:flex-row mt-10">
                             <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
-                                <div
-                                    className="object-cover rounded-full h-24 w-24  border-2 border-amber-900 dark:border-gray-800 w-20 h-20  inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                                    <img alt="profile photo" src={imageUrl} className="rounded-full"/>
+                                <div className="avatar">
+                                    <div className="w-24 rounded-full border-2 border-amber-900">
+                                        <img alt="profile photo" src={imageUrl}/>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col items-center text-center justify-center">
                                     <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">{farmerData.fullname}</h2>

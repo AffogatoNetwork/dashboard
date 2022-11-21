@@ -13,6 +13,7 @@ import {
   isValidEmail,
   errorNotification,
 } from "../utils/utils";
+import NewSignup from "./NewLogin";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -61,6 +62,10 @@ const Login = () => {
   };
 
   return (
+      <>
+
+
+
     <div className="login">
       <Card className="auth-card">
         <Card.Body>
@@ -119,6 +124,7 @@ const Login = () => {
       </Card>
       <LangChooser type="bar" />
     </div>
+      </>
   );
 };
 

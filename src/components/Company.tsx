@@ -7,6 +7,7 @@ import Loading from "./Loading";
 import Map from "./common/Map";
 import NotFound from "./common/NotFound";
 import { getCompany } from "../db/firebase";
+import NewMap from "./common/NewMap";
 
 const Company = () => {
   const { companyId } = useParams();
@@ -158,7 +159,7 @@ const Company = () => {
           companyData.latitude !== "" &&
           companyData.longitude !== "" && (
             <div className="map-container">
-              <Map
+              <NewMap
                 latitude={companyData.latitude}
                 longitude={companyData.longitude}
                 zoomLevel={9}

@@ -25,6 +25,8 @@ import {
 } from "../../utils/utils";
 import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
+import {LinkIcon} from "../icons/link";
+import {Close} from "../icons/close";
 
 const saveSvgAsPng = require("save-svg-as-png");
 
@@ -433,97 +435,82 @@ export const List = () => {
 
     const RenderFilters = () => (
         <>
-            <p className="text-lg"> Buscar Lotes </p>
+            <div className="w-full shadow p-5 rounded-lg bg-white">
+                <div className="text-center text-lg text-black">
+                    <>{t("search-batches")}</>
+                </div>
+                <div className="relative">
+                    <div className="absolute flex items-center ml-2 h-full">
+                        <SearchIcon className="m-4 w-4 h-4 fill-current"/>
+                    </div>
 
-            <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full pb-4">
-                <div>
                     <FormInput
-                        label={t("search")}
+                        label={t("")}
                         value={searchCriteria}
                         placeholder={t("search")}
                         handleOnChange={handleSearchCriteriaChange}
                         handleOnKeyDown={handleSearchCriteriaKeyDown}
                         errorMsg=""
-                        className="search-input block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                    />
+                        className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
                 </div>
-                <div>
+                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-4">
                     <FormInput
                         label={t("min-height")}
                         value={minHeight}
                         placeholder={t("min-height")}
                         handleOnChange={handleMinHeightChange}
                         errorMsg={minHeightError}
-                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                    />
-                </div>
-                <div>
+                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
                     <FormInput
                         label={t("min-weight")}
                         value={minWeight}
                         placeholder={t("min-weight")}
                         handleOnChange={handleMinWeightChange}
                         errorMsg={minWeightError}
-                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                    />
-                </div>
-                <div>
+                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
                     <FormInput
                         label={t("max-weight")}
                         value={maxWeight}
                         placeholder={t("max-weight")}
                         handleOnChange={handleMaxWeightChange}
                         errorMsg={maxWeightError}
-                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                    />
-                </div>
-                <div>
+                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
                     <FormInput
                         label={t("min-note")}
                         value={minNote}
                         placeholder={t("min-note")}
                         handleOnChange={handleMinNoteChange}
                         errorMsg={minNoteError}
-                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                    />
-                </div>
-                <div>
+                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
                     <FormInput
                         label={t("max-note")}
                         value={maxNote}
                         placeholder={t("max-note")}
                         handleOnChange={handleMaxNoteChange}
                         errorMsg={maxNoteError}
-                        className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                    />
+                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
                 </div>
-                <div className="filters-buttons space-y-4">
-                    <div className="filters-buttons space-y-4">
-                        <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+
+                <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
+
+
+                    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
                                         focus:bg-amber-400 active:bg-amber-600">
-                            <SearchIcon className="w-4 h-4 mr-2"/>
-                            <>{t("search")}</>
-                        </button>
-                        <br/>
-                        <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                        <SearchIcon className="w-4 h-4 mr-2"/>
+                        <>{t("search")}</>
+                    </button>
+                    <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
                                         focus:bg-red-400 active:bg-red-700">
-                            <ClearIcon className="w-4 h-4 mr-2"/>
-                            <>{t("clear")}</>
-                        </button>
-                    </div>
+                        <ClearIcon className="w-4 h-4 mr-2"/>
+                        <>{t("clear")}</>
+                    </button>
                 </div>
+
             </div>
         </>
     );
@@ -536,22 +523,40 @@ export const List = () => {
                 onRequestClose={closeModal}
                 contentLabel="Example Modal"
             >
-                <button onClick={closeModal}> close</button>
+                <button onClick={closeModal}>
+                    <Close className="w-12 text-red-500 hover:text-red-900"/>
+                </button>
                 <br/>
                 <div className="flex  justify-center">
                     <div>
                         <QRCode id="current-qr" value={qrCodeUrl} size={500}/>
 
-                        <button onClick={handleOnDownloadClick}>
-                            <>{t("download")}</>
-                        </button>
-                        <a href={qrCodeUrl}>
-                            <button>
-                                <>{t("open-link")}</>
-                            </button>
-                        </a>
+                        <div className="flex pt-8 space-x-4 place-content-center">
+                            <div>
+                                <button
+                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                                    onClick={handleOnDownloadClick}>
+                                    <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20">
+                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
+                                    </svg>
+                                    <>{t("download")}</>
+                                </button>
+                            </div>
+                            <div>
+                                <a href={qrCodeUrl}>
+                                    <button
+                                        className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                        <LinkIcon></LinkIcon>
+                                        <>{t("open-link")}</>
+                                    </button>
+                                </a></div>
+
+                        </div>
+
                     </div>
                 </div>
+
             </Modal>
 
             <div className="py-8">

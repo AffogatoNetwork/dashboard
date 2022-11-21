@@ -39,6 +39,7 @@ const CoffeeCard = () => {
                 farmer = await jsonData.attributes[i].value;
                 getFarmer(await jsonData.attributes[i].value).then((result) => {
                   setFarmerData(result);
+                  console.log(result)
                 });
               }
               if (traitType === "farm") {
@@ -132,7 +133,11 @@ const CoffeeCard = () => {
 
 
                 <p className=" font-black">Productores: </p>
-                <p className="">{farmerData?.fullname}</p>
+                <p className="">
+                  <a className="link link-info" href={'/farmer' + '/' + farmerData?.address}>
+                    {farmerData?.fullname}
+                  </a>
+                </p>
                
 
                 <br/>
