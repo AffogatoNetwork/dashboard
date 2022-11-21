@@ -1,4 +1,21 @@
 module.exports = {
+  daisyui: {
+    themes: [
+      {
+        mytheme: {
+          "primary": "#713f12",
+          "secondary": "#fcd34d",
+          "accent": "#f68a1e",
+          "neutral": "#ffffff",
+          "base-100": "#f8f6f6",
+          "info": "#42B9D1",
+          "success": "#159D8B",
+          "warning": "#EEB353",
+          "error": "#F56E5C",
+        },
+      },
+    ],
+  },
   content: [
     './src/pages/**/*.{js,ts,jsx,tsx}',
     './src/components/**/*.{js,ts,jsx,tsx}',
@@ -136,5 +153,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms')],
+  plugins: [require('@tailwindcss/typography'), require('@tailwindcss/forms'), require("daisyui")],
 };

@@ -8,36 +8,21 @@ import {FarmIcon} from "../icons/farm";
 export const ComsaLanding = () => {
     return (<>
         <section>
-            <div className="relative overflow-y-scroll w-full h-auto">
-                <div
-                    className="relative flex flex-col-reverse px-4 py-16 mx-auto lg:block lg:flex-col lg:py-32 xl:py-48 md:px-8 sm:max-w-xl md:max-w-full">
-                    <div
-                        className="z-0 flex justify-center h-full -mx-4 overflow-hidden lg:pt-24 lg:pb-16 lg:pr-8 xl:pr-0 lg:w-1/2 lg:absolute lg:justify-end lg:bottom-0 lg:left-0 lg:items-center">
-                        <img
-                            src={require('../../assets/coffe.png')}
-                            className="object-cover object-right w-full h-auto lg:w-auto lg:h-full"
-                            alt=""
-                        />
-                    </div>
-                    <div className="relative flex justify-end max-w-xl mx-auto xl:pr-32 lg:max-w-screen-xl">
-                        <div className="mb-16 lg:pr-5 lg:max-w-lg lg:mb-0">
-                            <div className="max-w-xl mb-6">
-                                <br/>
-                                <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl dark:text-white">
-                                    Plataforma de trazabilidad de Café Orgánico Marcala S.A
-                                </h1>
 
-                                <p className="max-w-2xl mb-6 font-light text-gray-500 lg:mb-8 md:text-lg lg:text-xl dark:text-gray-400">
-                                    Nuestro café trazado con la seguridad de la tecnología de blockchain.
+            <div id="header" className="hero min-h-screen opacity-95" style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FCOMSA.jpg?alt=media&token=bc36aa90-dc6f-4bb6-b40d-c17310dbd5f9")` }}>
+                <div className="hero-overlay bg-opacity-60"></div>
+                <div className="hero-content text-center text-neutral-content">
+                    <div className="max-w-md">
+                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">
+                            Plataforma de trazabilidad de Café Orgánico Marcala S.A
+                        </h1>
 
-                                </p>
-
-
-                                <br className="hidden md:block"/>
-                            </div>
-                        </div>
+                        <p className="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-gray-600">
+                            Nuestro café trazado con la seguridad de la tecnología de blockchain.
+                        </p>
                     </div>
                 </div>
+            </div>
 
 
                 <br/>
@@ -49,38 +34,34 @@ export const ComsaLanding = () => {
                                 data-wow-duration="1s"
                             >
                                 <div
-                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-zinc-50 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-stone-100 shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-2">
                                     <div className="inline-block text-black mb-4">
                                         <Blockchain/>
                                     </div>
                                     <h3 className="text-lg leading-normal mb-2 font-semibold text-black">BlockChain</h3>
-                                    <p className="text-gray-500">Tecnología y registro de información en una cadena
-                                        de bloques segura, transparente y descentralizada.</p>
+                                    <p className="text-gray-500">Tecnología y registro de información en una cadena de bloques segura, transparente y descentralizada.</p>
+                                    <br className="w-4"/>
                                 </div>
                             </div>
-                            <div
-                                className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp">
+                            <div className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp">
                                 <div
-                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-zinc-50 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-stone-100 shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-2">
                                     <div className="inline-block text-gray-900 mb-4">
                                         <LinkIcon/>
                                     </div>
                                     <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Trazabilidad</h3>
-                                    <p className="text-gray-500">Los movimientos en la cadena de valor del café,
-                                        almacenados en un blockchain inmutable sin posibilidad de corromper la
-                                        información.</p>
+                                    <p className="text-gray-500">Los movimientos en la cadena de valor del café, almacenados en un blockchain inmutable sin posibilidad de corromper la información.</p>
                                 </div>
                             </div>
-                            <div
-                                className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp">
+                            <div className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp">
                                 <div
-                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-zinc-50 transform transition duration-300 ease-in-out hover:-translate-y-2">
+                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-stone-100  shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-2">
                                     <div className="inline-block text-gray-900 mb-4">
                                         <FarmIcon/>
                                     </div>
                                     <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Lotes</h3>
-                                    <p className="text-gray-500">Cada lote de café, con su productor y finca
-                                        correspondiente, es trazado y visible en el blockchain de Ethereum.</p>
+                                    <p className="text-gray-500">Cada lote de café, con su productor y finca correspondiente, es trazado y visible en el blockchain de Ethereum.</p>
+                                    <br className="w-4"/>
                                 </div>
                             </div>
                             <br/>
@@ -96,7 +77,7 @@ export const ComsaLanding = () => {
                                                 : </h2>
                                             Barrio La Victoria, Marcala, La Paz
 
-                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">EMAIL</h2>
+                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
                                                 info@comsa.hn
                                             </p>
@@ -105,7 +86,7 @@ export const ComsaLanding = () => {
                                         <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
 
 
-                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
+                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Teléfono</h2>
 
                                             <p className="text-indigo-500 leading-relaxed">
                                                 (+504) 2764-4736
@@ -156,7 +137,7 @@ export const ComsaLanding = () => {
 
                                     <div className="flex mt-2 items-center justify-center pb-5">
                                         <div className=" items-center">
-                                            <span className="leading-relaxed font-black">Area Productiva:</span>
+                                            <span className="leading-relaxed font-black">Áreas Productivas:</span>
                                         </div>
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -223,7 +204,6 @@ export const ComsaLanding = () => {
                         </div>
                     </div>
                 </div>
-            </div>
 
             <div id="fotos"
                  className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">

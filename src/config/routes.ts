@@ -6,7 +6,7 @@ const routes = {
   lotes: '/list',
   fincas: '/farms',
   catacion: '/cupping',
-  certificacion: '/certificacion',
+  certificacion: '/certification',
   trazabilidad: '/trazabilidad',
   search: '/search',
   notification: '/notification',

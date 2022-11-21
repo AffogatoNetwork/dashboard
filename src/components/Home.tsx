@@ -16,6 +16,9 @@ import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
 import { Create, List, PublicList } from "./CoffeeBatch/index";
 import Landing from "./CoffeeBatch/Landing";
+import NewLogin from "./NewLogin";
+import Cupping from "./Cupping";
+import Certification from "./Certification";
 
 const Home = () => {
   const { authState } = useAuthContext();
@@ -79,12 +82,32 @@ const Home = () => {
               </RequiredAuth>
             }
           />
+            <Route
+                path="/cupping"
+                element={
+                    <RequiredAuth>
+                        <Dashboard>
+                            <Cupping />
+                        </Dashboard>
+                    </RequiredAuth>
+                }
+            />
+            <Route
+                path="/certification"
+                element={
+                    <RequiredAuth>
+                        <Dashboard>
+                            <Certification />
+                        </Dashboard>
+                    </RequiredAuth>
+                }
+            />
 
           <Route path="/login" element={<Login />} />
-          <Route path="/signup" element={<Signup />} />
+            <Route path="/signup" element={<Signup />} />
           <Route path="/batch/:ipfsHash" element={<CoffeeCard />} />
           <Route path="/coffeebatches" element={<PublicList />} />
-          <Route path="/farmer/:farmerId" element={<Profile />} />
+            <Route path="/farmer/:farmerId" element={<Profile />} />
           <Route path="/company/:companyId" element={<Company />} />
         </Routes>
       </Container>

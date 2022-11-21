@@ -58,9 +58,10 @@ export const Profile = () => {
                         </div>
                         <div className="flex flex-col sm:flex-row mt-10">
                             <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
-                                <div
-                                    className="object-cover rounded-full h-24 w-24  border-2 border-amber-900 dark:border-gray-800 w-20 h-20  inline-flex items-center justify-center bg-gray-200 text-gray-400">
-                                    <img alt="profile photo" src={imageUrl} className="rounded-full"/>
+                                <div className="avatar">
+                                    <div className="w-24 rounded-full border-2 border-amber-900">
+                                        <img alt="profile photo" src={imageUrl}/>
+                                    </div>
                                 </div>
                                 <div className="flex flex-col items-center text-center justify-center">
                                     <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">{farmerData.fullname}</h2>
@@ -112,26 +113,26 @@ export const Profile = () => {
 
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Certificados:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.certifications}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.certifications}</p>
                                             </div>
                                         </div>
 
                                         <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Miembros de Familia:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.familyMembers}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.familyMembers}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Variedades:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.varieties}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.varieties}</p>
                                             </div>
                                         </div>
                                         <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                             <div className="ml-4">
                                                 <h2 className="font-semibold">Tiene Sombra:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms.shadow}</p>
+                                                <p className="mt-2 text-sm text-gray-500">{farms?.shadow}</p>
                                             </div>
                                         </div>
                                     </div>
