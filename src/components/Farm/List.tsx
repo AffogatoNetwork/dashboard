@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import Button from "react-bootstrap/esm/Button";
 import Card from "react-bootstrap/esm/Card";
-import Table from "react-bootstrap/esm/Table";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { useTranslation } from "react-i18next";
 import "../../styles/farms.scss";
@@ -18,8 +17,7 @@ import { ClearIcon } from "../icons/clear";
 import Modal from "react-modal";
 import {Close} from "../icons/close";
 import NewMap from "../common/NewMap";
-import Form from "react-bootstrap/Form";
-import Dropdown from "react-bootstrap/Dropdown";
+import QRCode from "react-qr-code";
 
 const pagDefault = {
   previous: 0,
@@ -46,21 +44,6 @@ export const List = () => {
   const [pagination, setPagination] = useState(pagDefault);
   const [searchCriteria, setSearchCriteria] = useState("");
 
-  let subtitle: { style: { color: string; }; };
-  const [modalIsOpen, setIsOpen] = React.useState(false);
-
-  function openModal() {
-    setIsOpen(true);
-  }
-
-  function afterOpenModal() {
-    // references are now sync'd and can be accessed.
-    subtitle.style.color = '#f00';
-  }
-
-  function closeModal() {
-    setIsOpen(false);
-  }
   const confPagination = (fData: Array<any>, itemsPerPage: number) => {
     if (fData.length > 0) {
       const itemsCount = fData.length;
@@ -288,16 +271,13 @@ export const List = () => {
         <td>{farm.familyMembers}</td>
         <td>{farm.ethnicGroup}</td>
         <td>
-          <Button
-            variant="secondary"
-            className="text-light"
-            onClick={() => {
+          <label htmlFor="map-modal" className="btn btn-ghost h-full"
+                 onClick={() => {
               onMapBtnClick(farm.latitude, farm.longitude, farm.name)
-              openModal()
             }}
           >
             <>{t("show-map")}</>
-          </Button>
+          </label>
         </td>
       </tr>
     );
@@ -314,29 +294,29 @@ export const List = () => {
 
   return (
       <>
-        <Modal
-            isOpen={modalIsOpen}
-            onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            contentLabel="Example Modal"
-            aria-labelledby="contained-modal-title-vcenter"
-        >
-          <button onClick={closeModal}>
-            <Close className="w-12 text-red-500 hover:text-red-900"/>
-          </button>
-          <br/>
-          <div className="flex justify-center">
-            <div>
-              <NewMap
-                  latitude={currentLat}
-                  longitude={currentLng}
-                  zoomLevel={10}
-                  addressLine={currentAddressL}
-                  className="google-map large"
-              />
+        <input type="checkbox" id="map-modal" className="modal-toggle" />
+        <div className="modal modal-bottom sm:modal-middle">
+          <div className="modal-box">
+            <label htmlFor="map-modal" className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+            <div className="flex justify-center m-6">
+              <div>
+                <div className="flex pt-8 space-x-4 place-content-center">
+                  <NewMap
+                      latitude={currentLat}
+                      longitude={currentLng}
+                      zoomLevel={10}
+                      addressLine={currentAddressL}
+                      className="google-map large"
+                  />
+                  <div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
-        </Modal>
+        </div>
+
+
       <div className="py-8">
         <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
           <div className="farms">
@@ -367,10 +347,12 @@ export const List = () => {
                   <NotFound msg="No se encontraron fincas" />
                 ) : (
                   <>
-                    <Table id="farms-list" className="farms-list">
+                    <table id="farms-list" className="farms-list table w-full">
                       <thead>
-                      <tr>
-                        <th>
+
+
+                      <tr className="bg-teal-400 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                      <th>
                           <>{t("name")}</>
                         </th>
                         <th>
@@ -410,7 +392,7 @@ export const List = () => {
                         RenderItem(farmer, index)
                       )}
                       </tbody>
-                    </Table>
+                    </table>
                   </>
                 )}
               </Card.Body>

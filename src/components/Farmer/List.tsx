@@ -53,21 +53,6 @@ export const List = () => {
     const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
 
 
-    let subtitle: { style: { color: string; }; };
-    const [modalIsOpen, setIsOpen] = React.useState(false);
-
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function afterOpenModal() {
-        subtitle.style.color = '#f00';
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
-
     const confPagination = (fData: Array<any>, itemsPerPage: number) => {
         if (fData.length > 0) {
             const itemsCount = fData.length;
@@ -321,15 +306,13 @@ export const List = () => {
             >
                 <td className="main">
                     <div className="qrcode">
-                        <button
-                            className="qrcode-btn"
+                        <label htmlFor="my-modal-6" className="btn btn-ghost h-full"
                             onClick={() => {
                                 setQrCodeUrl(farmerUrl);
-                                openModal()
                             }}
                         >
                             <QRCode value={farmerUrl} size={60}/>
-                        </button>
+                    </label>
                     </div>
                 </td>
                 <td>{farmer.farmerId}</td>
@@ -364,46 +347,41 @@ export const List = () => {
 
     return (
         <>
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                contentLabel="Example Modal"
-            >
-                <button onClick={closeModal}>
-                    <Close className="w-12 text-red-500 hover:text-red-900"/>
-                </button>
-                <br/>
-                <div className="flex  justify-center">
-                    <div>
-                        <QRCode id="current-qr" value={qrCodeUrl} size={500}/>
 
-                        <div className="flex pt-8 space-x-4 place-content-center">
-                            <div>
-                                <button
-                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-                                    onClick={handleOnDownloadClick}>
-                                    <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20">
-                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
-                                    </svg>
-                                    <>{t("download")}</>
-                                </button>
-                            </div>
-                            <div>
-                                <a href={qrCodeUrl}>
+            <input type="checkbox" id="my-modal-6" className="modal-toggle" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <label htmlFor="my-modal-6" className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                    <div className="flex justify-center m-6">
+                        <div>
+                            <QRCode id="current-qr " value={qrCodeUrl} size={300}/>
+                            <div className="flex pt-8 space-x-4 place-content-center">
+                                <div>
                                     <button
-                                        className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <LinkIcon></LinkIcon>
-                                        <>{t("open-link")}</>
+                                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                                        onClick={handleOnDownloadClick}>
+                                        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 20 20">
+                                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
+                                        </svg>
+                                        <>{t("download")}</>
                                     </button>
-                                </a></div>
-
+                                </div>
+                                <div>
+                                    <a href={qrCodeUrl}>
+                                        <button
+                                            className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                            <LinkIcon></LinkIcon>
+                                            <>{t("open-link")}</>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
-            </Modal>
+            </div>
+
 
 
             <div className="py-8">

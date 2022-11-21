@@ -23,9 +23,13 @@ const BatchItem = ({ index, coffeeBatch, pagination, showQrModal }: props) => {
     >
       <td className="main">
         <div className="qrcode">
-          <Button className="qrcode-btn" onClick={() => showQrModal(batchUrl)}>
+          <label htmlFor="coffe-batch" className="btn btn-ghost h-full"
+                 onClick={() => {
+                   showQrModal(batchUrl);
+                 }}
+          >
             <QRCode value={batchUrl} size={60} />
-          </Button>
+          </label>
         </div>
       </td>
       <td>{coffeeBatch.farm.name}</td>
