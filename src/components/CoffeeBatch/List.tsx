@@ -1,13 +1,10 @@
 import React, {useEffect, useState} from "react";
-import Card from "react-bootstrap/esm/Card";
-import Modal from 'react-modal';
 import Table from "react-bootstrap/esm/Table";
 import {BigNumber, ethers} from "ethers";
-import {Provider, Contract, setMulticallAddress} from "ethers-multicall";
-import {useQuery, gql} from "@apollo/client";
+import {Contract, Provider, setMulticallAddress} from "ethers-multicall";
+import {gql, useQuery} from "@apollo/client";
 import {useTranslation} from "react-i18next";
 import "../../styles/batchlist.scss";
-import "../../styles/modals.scss";
 import QRCode from "react-qr-code";
 import Loading from "../Loading";
 import {useAuthContext} from "../../states/AuthContext";
@@ -17,16 +14,10 @@ import {CustomPagination} from "../common/Pagination";
 import {CoffeeBatchType} from "../common/types";
 import CoffeeBatch from "../../contracts/CoffeBatch.json";
 import BatchItem from "./BatchItem";
-import {
-    getCompanyAddresses,
-    getCompanyAddressesByHost,
-    getDefaultProvider,
-    isNumber,
-} from "../../utils/utils";
+import {getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNumber,} from "../../utils/utils";
 import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
-import {Close} from "../icons/close";
 
 const saveSvgAsPng = require("save-svg-as-png");
 
@@ -68,21 +59,6 @@ export const List = () => {
     const [minNoteError, setMinNoteError] = useState("");
     const [maxNoteError, setMaxNoteError] = useState("");
 
-    let subtitle: { style: { color: string; }; };
-    const [modalIsOpen, setIsOpen] = React.useState(false);
-
-    function openModal() {
-        setIsOpen(true);
-    }
-
-    function afterOpenModal() {
-        // references are now sync'd and can be accessed.
-        subtitle.style.color = '#f00';
-    }
-
-    function closeModal() {
-        setIsOpen(false);
-    }
 
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -265,7 +241,6 @@ export const List = () => {
 
     const showQrModal = (url: string) => {
         setQrCodeUrl(url);
-        openModal()
     };
 
     const handleOnDownloadClick = () => {
@@ -435,7 +410,7 @@ export const List = () => {
 
     const RenderFilters = () => (
         <>
-            <div className="w-full shadow p-5 rounded-lg bg-white">
+            <div className="w-full p-5 rounded-lg bg-white">
                 <div className="text-center text-lg text-black">
                     <>{t("search-batches")}</>
                 </div>
@@ -517,133 +492,129 @@ export const List = () => {
 
     return (
         <>
-            <Modal
-                isOpen={modalIsOpen}
-                onAfterOpen={afterOpenModal}
-                onRequestClose={closeModal}
-                contentLabel="Example Modal"
-            >
-                <button onClick={closeModal}>
-                    <Close className="w-12 text-red-500 hover:text-red-900"/>
-                </button>
-                <br/>
-                <div className="flex  justify-center">
-                    <div>
-                        <QRCode id="current-qr" value={qrCodeUrl} size={500}/>
-
-                        <div className="flex pt-8 space-x-4 place-content-center">
-                            <div>
-                                <button
-                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-                                    onClick={handleOnDownloadClick}>
-                                    <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20">
-                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
-                                    </svg>
-                                    <>{t("download")}</>
-                                </button>
-                            </div>
-                            <div>
-                                <a href={qrCodeUrl}>
+            <input type="checkbox" id="coffe-batch" className="modal-toggle"/>
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box relative">
+                    <label htmlFor="coffe-batch"
+                           className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                    <div className="flex justify-center m-6">
+                        <div>
+                            <QRCode id="current-qr " value={qrCodeUrl} size={300}/>
+                            <div className="flex pt-8 space-x-4 place-content-center">
+                                <div>
                                     <button
-                                        className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <LinkIcon></LinkIcon>
-                                        <>{t("open-link")}</>
+                                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                                        onClick={handleOnDownloadClick}>
+                                        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                             viewBox="0 0 20 20">
+                                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
+                                        </svg>
+                                        <>{t("download")}</>
                                     </button>
-                                </a></div>
-
+                                </div>
+                                <div>
+                                    <a href={qrCodeUrl}>
+                                        <button
+                                            className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                            <LinkIcon></LinkIcon>
+                                            <>{t("open-link")}</>
+                                        </button>
+                                    </a>
+                                </div>
+                            </div>
                         </div>
-
                     </div>
                 </div>
+            </div>
 
-            </Modal>
 
             <div className="py-8">
-
                 <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
-
-                    <div className="batch-list">
-                        {RenderFilters()}
-                        <Card className="create-card">
-                            <Card.Header>
-                                <div>
-                                    <h2 className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3">
-                                        <>{t("farm-and-batches")}</>
-                                    </h2>
-                                </div>
-                                <div>
-                                    <h3>
-                                        <>
-                                            {t("total")}: {batchesCount}
-                                        </>
-                                    </h3>
-                                </div>
-                            </Card.Header>
-                            <Card.Body>
-                                {loading || loadingIpfs ? (
-                                    <Loading
-                                        label={t("loading").concat("...")}
-                                        className="loading-wrapper"
-                                    />
-                                ) : (
-                                    <Table className="coffeebatches">
-                                        <thead>
-                                        <tr>
-                                            <th className="th-2">QR</th>
-                                            <th className="th-2">
-                                                <>{t("farm")}</>
-                                            </th>
-                                            <th className="th-2">
-                                                <>{t("height")}</>
-                                            </th>
-                                            <th className="th-2">
-                                                <>{t("location")}</>
-                                            </th>
-                                            <th className="th-3">
-                                                <>{t("variety")}</>
-                                            </th>
-                                            <th className="th-2">
-                                                <>{t("process")}</>
-                                            </th>
-                                            <th className="th-4">
-                                                <>{t("drying-code")}</>
-                                            </th>
-                                            <th className="th-2">
-                                                <>{t("drying-type")}</>
-                                            </th>
-                                            <th className="th-4">
-                                                <>{t("exporting-code")}</>
-                                            </th>
-                                            <th className="th-3">
-                                                <>{t("weight")}</>
-                                            </th>
-                                            <th className="th-3">
-                                                <>{t("note")}</>
-                                            </th>
-                                        </tr>
-                                        </thead>
-                                        <tbody>
-                                        {coffeeBatchList.map((batch, index) => (
-                                            <BatchItem
-                                                key={index}
-                                                index={index}
-                                                coffeeBatch={batch}
-                                                pagination={pagination}
-                                                showQrModal={showQrModal}
+                    <div className="w-full h-full p-1">
+                        <div className="card shadow-xl">
+                                {RenderFilters()}
+                                <div className="card-body">
+                                    <div className="card-title grid justify-items-stretch">
+                                        <div className="justify-self-start">
+                                            <h2 className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3">
+                                                <>{t("farm-and-batches")}</>
+                                            </h2>
+                                        </div>
+                                        <div className="justify-self-end">
+                                            <h3>
+                                                <>
+                                                    {t("total")}: {batchesCount}
+                                                </>
+                                            </h3>
+                                        </div>
+                                    </div>
+                                    <div className="overflow-x-scroll">
+                                        {loading || loadingIpfs ? (
+                                            <Loading
+                                                label={t("loading").concat("...")}
+                                                className="loading-wrapper"
                                             />
-                                        ))}
-                                        </tbody>
-                                    </Table>
-                                )}
-                            </Card.Body>
-                            <Card.Footer>
-                                <CustomPagination
-                                    pagination={pagination}
-                                    onPageSelected={onPageSelected}
-                                />
-                            </Card.Footer>
-                        </Card>
+                                        ) : (
+                                            <div className="text-center">
+                                            <table id="coffeebatches" className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
+                                                <thead>
+                                                <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                                    <th className="p-3 text-left border-white border">QR</th>
+                                                    <th className="p-3 text-left border-white border">
+                                                        <>{t("farm")}</>
+                                                    </th>
+                                                    <th className="p-3 text-left border-white border">
+                                                        <>{t("height")}</>
+                                                    </th>
+                                                    <th className="p-3 text-left border-white border">
+                                                        <>{t("location")}</>
+                                                    </th>
+                                                    <th className="th-3">
+                                                        <>{t("variety")}</>
+                                                    </th>
+                                                    <th className="p-3 text-left border-white border">
+                                                        <>{t("process")}</>
+                                                    </th>
+                                                    <th className="th-4">
+                                                        <>{t("drying-code")}</>
+                                                    </th>
+                                                    <th className="p-3 text-left border-white border">
+                                                        <>{t("drying-type")}</>
+                                                    </th>
+                                                    <th className="th-4">
+                                                        <>{t("exporting-code")}</>
+                                                    </th>
+                                                    <th className="th-3">
+                                                        <>{t("weight")}</>
+                                                    </th>
+                                                    <th className="th-3">
+                                                        <>{t("note")}</>
+                                                    </th>
+                                                </tr>
+                                                </thead>
+                                                <tbody className="flex-1 sm:flex-none">
+                                                {coffeeBatchList.map((batch, index) => (
+                                                    <BatchItem
+                                                        key={index}
+                                                        index={index}
+                                                        coffeeBatch={batch}
+                                                        pagination={pagination}
+                                                        showQrModal={showQrModal}
+                                                    />
+                                                ))}
+                                                </tbody>
+                                            </table>
+                                            </div>
+                                        )}
+                                    </div>
+                                    <div className="card-actions justify-center">
+                                        <CustomPagination
+                                            pagination={pagination}
+                                            onPageSelected={onPageSelected}
+                                        />
+                                    </div>
+                                </div>
+                        </div>
                     </div>
                 </div>
             </div>

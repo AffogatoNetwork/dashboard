@@ -34,18 +34,17 @@ const data = [{
     }, {
         title: 'farmers', icon: ProfileIcon, href: routes.productores, disabled: ''
     }, {
-        title: 'Crear Lotes', icon: VoteIcon, href: routes.create, disabled: ''
+        title: 'farms', icon: LandscapeIcon, href: routes.fincas, disabled: ''
     }, {
         title: 'batches', icon: AgricultureIcon, href: routes.lotes, disabled: ''
-    },
+    }, {
+        title: 'Certificación', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
+    }, {
+        title: 'Catación', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
+    }, {
+        title: 'Crear Lotes', icon: VoteIcon, href: routes.create, disabled: ''
 
-        {
-            title: 'farms', icon: LandscapeIcon, href: routes.fincas, disabled: ''
-        }, {
-            title: 'Catación', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
-        }, {
-            title: 'Certificación', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
-        },
+    },
 
     ]
 },]

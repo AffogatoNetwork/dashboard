@@ -8,15 +8,14 @@ import {FarmIcon} from "../icons/farm";
 export const CommovelLanding = () => {
     return (<>
         <section>
-            <div id="header" className="hero min-h-screen opacity-90" style={{ backgroundImage: `url("https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg")` }}>
-                <div className="hero-overlay bg-opacity-60"></div>
+            <div id="header" className="hero min-h-screen" style={{ backgroundImage: `url("https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg")` }}>
+                        <div className="hero-overlay bg-opacity-60 bg-black"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">
+                        <h1 className="max-w-2xl mb-4 text-9xl font-black tracking-tight leading-none md:text-6xl xl:text-7xl text-white">
                             Plataforma de trazabilidad de Cooperativa Mixta Montaña Verde Limitada
                         </h1>
-
-                        <p className="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-gray-200">
+                        <p className="max-w-2xl text-4xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white">
                             Nuestro café trazado con la seguridad de la tecnología de blockchain.
                         </p>
                     </div>
@@ -197,23 +196,19 @@ export const CommovelLanding = () => {
                 <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                     <img
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                    />
+                        src={`url("https://dummyimage.com/420x260")`} alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                    />
+                        src={`url("https://dummyimage.com/420x260")`} alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                    />
+                        src={`url("https://dummyimage.com/420x260")`} alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                    />
+                        src={`url("https://dummyimage.com/420x260")`} alt="" />
                 </div>
             </div>
         </section>

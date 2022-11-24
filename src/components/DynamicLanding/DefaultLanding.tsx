@@ -10,14 +10,14 @@ export const DefaultLanding = () => {
     return (
         <>
             <section>
-                <div id="header" className="hero min-h-screen opacity-95" style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FCOMSA.jpg?alt=media&token=bc36aa90-dc6f-4bb6-b40d-c17310dbd5f9")` }}>
-                        <div className="hero-overlay bg-opacity-60"></div>
+                <div id="header" className="hero min-h-screen" style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FCOMSA.jpg?alt=media&token=bc36aa90-dc6f-4bb6-b40d-c17310dbd5f9")` }}>
+                        <div className="hero-overlay bg-opacity-40 bg-black"></div>
                         <div className="hero-content text-center text-neutral-content">
                             <div className="max-w-md">
-                                <h1 className="max-w-2xl mb-4 text-4xl font-extrabold tracking-tight leading-none md:text-5xl xl:text-6xl text-white">
+                                <h1 className="max-w-2xl mb-4 text-9xl font-black tracking-tight leading-none md:text-6xl xl:text-7xl text-white">
                                     Plataforma de trazabilidad de PlaceHolder de Cooperativa
                                 </h1>
-                                <p className="max-w-2xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-gray-600">
+                                <p className="max-w-2xl text-4xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white">
                                     Nuestro café trazado con la seguridad de la tecnología de blockchain.
                                 </p>
 
@@ -187,23 +187,19 @@ export const DefaultLanding = () => {
                     <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                         <img
                              className="object-cover w-full h-56 rounded shadow-lg"
-                             alt=""
-                        />
+                             src={`url("https://dummyimage.com/420x260")`} alt="" />
                         <img
                             
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            alt=""
-                        />
+                            src={`url("https://dummyimage.com/420x260")`} alt="" />
                         <img
                             
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            alt=""
-                        />
+                            src={`url("https://dummyimage.com/420x260")`} alt="" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            alt=""
-                        />
+                            src={`url("https://dummyimage.com/420x260")`} alt="" />
                     </div>
 
                 </div>
