@@ -21,91 +21,95 @@ export const CustomPagination = ({ pagination, onPageSelected }: props) => {
     midPages[4] = midPage + 2;
 
     return (
-      <>
-        <Pagination.Item active={pagination.current === 1}
-                         className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600 bg-white hover:bg-gray-100">{1}</Pagination.Item>
+      <div className="btn-group">
+        <button
+            onClick={() => onPageSelected(1)}
+            className={`${pagination.current === 1 && "btn-active" } btn btn-outline `}
+        >{1}</button>
         {pagination.current >= 3 && pagination.current < midPages[0] && (
-          <Pagination.Ellipsis />
+            <button className="btn btn-disabled border border-black">...</button>
         )}
         {pagination.current > 1 && pagination.current < midPages[0] && (
-          <Pagination.Item active
-                           className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600 bg-white hover:bg-gray-100">{pagination.current}</Pagination.Item>
+          <button
+              onClick={() => onPageSelected(pagination.current)}
+              className={`${pagination.current && "btn-active" } btn btn-outline`}
+          >{pagination.current}</button>
         )}
-        <Pagination.Ellipsis
-            className="w-full text-center  border text-base text-gray-600 bg-white hover:bg-gray-100"
-        />
-        {midPages.map((item) => (
-          <Pagination.Item
+          <button className="btn btn-disabled border border-black">...</button>
+
+          {midPages.map((item) => (
+          <button
             key={item}
-            active={pagination.current === item}
             onClick={() => onPageSelected(item)}
-            className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600  hover:bg-gray-100"
+            className={`${pagination.current === item && "btn-active" } btn btn-outline`}
           >
             {item}
-          </Pagination.Item>
+          </button>
         ))}
-        <Pagination.Ellipsis
-            className="w-full text-center  border text-base text-gray-600 bg-white hover:bg-gray-100"
-        />
-        {pagination.current < pagination.pages &&
+          <button className="btn btn-disabled border border-black">...</button>
+
+          {pagination.current < pagination.pages &&
           pagination.current > midPages[4] && (
-            <Pagination.Item
-                             className="w-full px-4 py-2 border active:bg-amber-900 active:text-white text-base text-gray-600 bg-white  hover:bg-gray-100"
-            >{pagination.current}</Pagination.Item>
+            <button
+                className={`${pagination.current && "btn-active" } btn btn-outline`}
+            >{pagination.current}</button>
           )}
         {pagination.current < pagination.pages - 1 &&
-          pagination.current > midPages[4] && <Pagination.Ellipsis />}
-        <Pagination.Item
-          active={pagination.current === pagination.pages}
+          pagination.current > midPages[4] &&  <button className="btn btn-disabled border border-black">...</button>
+        }
+        <button
           onClick={() => onPageSelected(pagination.pages)}
-          className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+          className={`${pagination.current === pagination.pages && "btn-active" } btn btn-outline `}
         >
           {pagination.pages}
-        </Pagination.Item>
-      </>
+        </button>
+      </div>
     );
   };
 
   return (
-        <Pagination className="px-5 bg-white py-5 flex flex-row xs:flex-row items-center xs:justify-between" >
+        <div className="btn-group">
           {pagination.pages >= 10 && (
-            <Pagination.First
+            <button
               onClick={() => onPageSelected(1)}
               disabled={pagination.previous === 0}
-              className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
-            />
+              className="btn btn-outline"
+            >«
+            </button>
           )}
-          <Pagination.Prev
+          <button
             onClick={() => onPageSelected(pagination.previous)}
             disabled={pagination.previous === 0}
-            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
-          />
+            className="btn btn-outline"
+          > Previous
+          </button>
           {pagination.pages >= 10 ? (
             <VaultPages />
           ) : (
             pag.map((item) => (
-              <Pagination.Item
+              <button
                 key={item}
-                active={activePag === item + 1}
                 onClick={() => onPageSelected(item + 1)}
-                className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
+                className="btn btn-outline"
               >
                 {item + 1}
-              </Pagination.Item>
+              </button>
             ))
           )}
-          <Pagination.Next
+          <button
             onClick={() => onPageSelected(pagination.next)}
             disabled={pagination.current === pagination.pages}
-            className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
-          />
+            className="btn btn-outline"
+          > Next
+          </button>
           {pagination.pages >= 10 && (
-            <Pagination.Last
+            <button
               onClick={() => onPageSelected(pagination.pages)}
               disabled={pagination.next === 0}
-              className="w-full px-4 py-2 border text-base text-gray-600 bg-white hover:bg-gray-100"
-            />
+              className="btn btn-outline"
+            >»
+              </button>
           )}
-        </Pagination>
+      </div>
   );
 };
