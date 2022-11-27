@@ -4,7 +4,6 @@ import "../../styles/modals.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
-import * as url from "url";
 
 export const ComsaLanding = () => {
     return (<>
@@ -15,10 +14,10 @@ export const ComsaLanding = () => {
                 <div className="hero-overlay bg-opacity-60 bg-black"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1 className="max-w-2xl mb-4 text-9xl font-black tracking-tight leading-none md:text-6xl xl:text-7xl text-white">
+                        <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                             Plataforma de trazabilidad de Café Orgánico Marcala S.A
                         </h1>
-                        <p className="max-w-2xl text-4xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white">
+                        <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                             Nuestro café trazado con la seguridad de la tecnología de blockchain.
                         </p>
                     </div>
