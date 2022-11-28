@@ -82,13 +82,16 @@ export const CustomPagination = ({pagination, onPageSelected}: props) => {
                 >«
                 </button>
             )}
-            <button
-                onClick={() => onPageSelected(pagination.previous)}
-                disabled={pagination.previous === 0}
-                className="btn btn-outline"
-            ><>{t("previous")}</>
+            {pagination.pages > 1 && (
+                <button
+                    onClick={() => onPageSelected(pagination.previous)}
+                    disabled={pagination.previous === 0}
+                    className="btn btn-outline"
+                ><>{t("previous")}</>
+                </button>
+            )}
 
-            </button>
+
             {pagination.pages >= 10 ? (
                 <VaultPages/>
             ) : (
@@ -103,13 +106,20 @@ export const CustomPagination = ({pagination, onPageSelected}: props) => {
                     </button>
                 ))
             )}
-            <button
+
+            {pagination.pages > 1 && (
+
+
+                <button
                 onClick={() => onPageSelected(pagination.next)}
                 disabled={pagination.current === pagination.pages}
                 className="btn btn-outline"
             >
                 <>{t("next")}</>
             </button>
+            )}
+
+
             {pagination.pages >= 10 && (
                 <button
                     onClick={() => onPageSelected(pagination.pages)}

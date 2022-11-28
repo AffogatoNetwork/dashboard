@@ -174,7 +174,7 @@ export const List = () => {
     };
 
     const RenderFilters = () => (<>
-            <div className="w-full p-5 bg-white">
+            <div className="w-full p-5 ">
                 <div className="text-center text-lg text-black">
                     <>{t("search-farms")}</>
                 </div>
@@ -196,12 +196,12 @@ export const List = () => {
                 <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
 
 
-                    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+                    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
                                         focus:bg-amber-400 active:bg-amber-600">
                         <SearchIcon className="w-4 h-4 mr-2"/>
                         <>{t("search")}</>
                     </button>
-                    <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                    <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
                                         focus:bg-red-400 active:bg-red-700">
                         <ClearIcon className="w-4 h-4 mr-2"/>
                         <>{t("clear")}</>
@@ -281,10 +281,10 @@ export const List = () => {
         </div>
 
 
-        <div className="py-8">
+        <div className="py-8 ">
             <div className="flex flex-col mb-1 sm:mb-0 justify-between w-full">
                 <div className="w-full h-full p-1">
-                    <div className="card shadow-xl">
+                    <div className="card shadow-xl bg-white">
                         {RenderFilters()}
                         <div className="card-body">
                             <div className="card-title grid justify-items-stretch">
