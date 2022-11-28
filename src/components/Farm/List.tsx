@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from "react";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {useTranslation} from "react-i18next";
+import "../../styles/farms.scss";
 import Loading from "../Loading";
 import {FarmType} from "../common/types";
 import {getFarms} from "../../db/firebase";
@@ -250,125 +251,125 @@ export const List = () => {
 
     if (loading) {
         return (<Loading
-                label={t("loading").concat("...")}
-                className="loading-wrapper mx-auto pt-24 two"
-            />);
+            label={t("loading").concat("...")}
+            className="loading-wrapper mx-auto pt-24 two"
+        />);
     }
 
-    return (
-        <>
-            <input type="checkbox" id="map-modal" className="modal-toggle"/>
-            <div className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box">
-                    <label htmlFor="map-modal"
-                           className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
-                    <div className="flex justify-center m-6">
-                        <div>
-                            <div className="flex pt-8 space-x-4 place-content-center">
-                                <NewMap
-                                    latitude={currentLat}
-                                    longitude={currentLng}
-                                    zoomLevel={10}
-                                    addressLine={currentAddressL}
-                                    className="google-map large"
+    return (<>
+        <input type="checkbox" id="map-modal" className="modal-toggle"/>
+        <div className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box">
+                <label htmlFor="map-modal"
+                       className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                <div className="flex justify-center m-6">
+                    <div>
+                        <div className="flex pt-8 space-x-4 place-content-center">
+                            <NewMap
+                                latitude={currentLat}
+                                longitude={currentLng}
+                                zoomLevel={10}
+                                addressLine={currentAddressL}
+                                className="google-map large"
+                            />
+                            <div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div className="py-8">
+            <div className="flex flex-col mb-1 sm:mb-0 justify-between w-full">
+                <div className="w-full h-full p-1">
+                    <div className="card shadow-xl">
+                        {RenderFilters()}
+                        <div className="card-body">
+                            <div className="card-title grid justify-items-stretch">
+                                <div className="justify-self-start">
+                                    <h4>
+                                        <>{t("farms")}</>
+                                    </h4>
+                                </div>
+
+                                <div className="justify-self-end">
+                                    <h4>
+                                        <>
+                                            {t("total")}: {farmsCount}
+                                        </>
+                                    </h4>
+                                    <a className="link link-info">
+                                        <ReactHTMLTableToExcel
+                                            id="table-xls-button"
+                                            className="download-xls-button"
+                                            table="farms-list"
+                                            filename={t("farms")}
+                                            sheet={t("farms")}
+                                            buttonText={"(".concat(t("download")).concat(")")}
+                                        />
+                                    </a>
+                                </div>
+                            </div>
+                            <div className="overflow-x-scroll">
+                                {farms === null ? (<NotFound msg="No se encontraron fincas"/>) : (<>
+                                    <div className="text-center">
+                                        <table
+                                            className="farms-list w-full sm:bg-white rounded-lg overflow-hidden  my-5">
+                                            <thead>
+                                            <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("name")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("height")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("area")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("certificates")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("varieties")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("location")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("shadow")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("family-members")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("ethnic-group")}</>
+                                                </th>
+                                                <th className="p-3 text-left border-white border">
+                                                    <>{t("coordinates")}</>
+                                                </th>
+                                            </tr>
+                                            </thead>
+                                            <tbody className="flex-1 sm:flex-none">
+                                            {farms.map((farmer: any, index: number) => RenderItem(farmer, index))}
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </>)}
+                            </div>
+                            <div className="card-actions justify-center">
+
+                                <CustomPagination
+                                    pagination={pagination}
+                                    onPageSelected={onPageSelected}
                                 />
-                                <div>
-                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
-
-
-            <div className="py-8">
-                <div className="flex flex-col mb-1 sm:mb-0 justify-between w-full">
-                    <div className="w-full h-full p-1">
-                        <div className="card shadow-xl">
-                            {RenderFilters()}
-                            <div className="card-body">
-                                <div className="card-title grid justify-items-stretch">
-                                    <div className="justify-self-start">
-                                        <h4>
-                                            <>{t("farms")}</>
-                                        </h4>
-                                    </div>
-
-                                    <div className="justify-self-end">
-                                        <h4>
-                                            <>
-                                                {t("total")}: {farmsCount}
-                                            </>
-                                        </h4>
-                                        <a className="link link-info">
-                                            <ReactHTMLTableToExcel
-                                                id="table-xls-button"
-                                                className="download-xls-button"
-                                                table="farms-list"
-                                                filename={t("farms")}
-                                                sheet={t("farms")}
-                                                buttonText={"(".concat(t("download")).concat(")")}
-                                            />
-                                        </a>
-                                    </div>
-                                </div>
-                                <div className="overflow-x-scroll">
-                                    {farms === null ? (<NotFound msg="No se encontraron fincas"/>) : (<>
-                                                <div className="text-center">
-                                                    <table id="farms-list"
-                                                           className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
-                                                        <thead>
-                                                        <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("name")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("height")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("area")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("certificates")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("varieties")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("location")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("shadow")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("family-members")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("ethnic-group")}</>
-                                                            </th>
-                                                            <th className="p-3 text-left border-white border">
-                                                                <>{t("coordinates")}</>
-                                                            </th>
-                                                        </tr>
-                                                        </thead>
-                                                        <tbody className="flex-1 sm:flex-none">
-                                                        {farms.map((farmer: any, index: number) => RenderItem(farmer, index))}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                        </>)}
-                                </div>
-                                <div className="card-actions justify-center">
-                                    <CustomPagination
-                                        pagination={pagination}
-                                        onPageSelected={onPageSelected}
-                                    />
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </>);
+        </div>
+    </>);
 };

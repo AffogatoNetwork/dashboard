@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/batchlist.scss";
-import "../../styles/modals.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
@@ -220,16 +219,19 @@ PROEXO es una empresa de economía social que busca y sostiene la primacía del 
                 <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                     <img
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt=""/>
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F1.jpeg?alt=media&token=6dbdbc05-a684-4834-9c2e-fd5aaccefdd6" alt="" />
                     <img
+
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt=""/>
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F2.jpeg?alt=media&token=5366f295-e214-4466-b998-a15b98ac2a0e" alt="" />
                     <img
+
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt=""/>
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F3.jpeg?alt=media&token=f3eccac9-6178-41a5-af1a-a5244d254420" alt="" />
                     <img
+
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt=""/>
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F4.jpeg?alt=media&token=376da7da-4bbe-4d43-945e-d8d1574cc222" alt="" />
                 </div>
             </div>
         </section>

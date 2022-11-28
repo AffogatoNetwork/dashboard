@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/batchlist.scss";
-import "../../styles/modals.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
@@ -220,28 +219,19 @@ export const ComsaLanding = () => {
                 <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                     <img
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                        src={`url("https://dummyimage.com/420x260")`}
-                    />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf" alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                        src={`url("https://dummyimage.com/420x260")`}
-                    />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F2.jpeg?alt=media&token=69704de8-9e96-487d-9035-89146bcc26e0" alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                        src={`url("https://dummyimage.com/420x260")`}
-                    />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F3.jpeg?alt=media&token=87c75678-4122-400a-b72d-0346a9fbaa34" alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        alt=""
-                        src={`url("https://dummyimage.com/420x260")`}
-
-                    />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F4.jpeg?alt=media&token=aed26485-1202-4332-827c-7ea077c3012c" alt="" />
                 </div>
             </div>
         </section>

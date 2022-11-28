@@ -7,60 +7,7 @@
   width: 100%;
   padding: 1rem;
   height: 100%;
-  .card {
-    width: 100%;
-    &-header {
-      display: flex;
-      justify-content: space-between;
-      padding: 1rem 2rem;
-      border-bottom: 1px solid $grey;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-      box-shadow: inset 0 4px 0 0 $light;
-    }
-    &-body {
-      overflow-x: scroll;
-    }
-    &-footer {
-      display: flex;
-      justify-content: center;
-    }
-  }
-  .filters {
-    margin-bottom: 2rem;
-    .accordion-body {
-      display: flex;
-      flex-direction: row;
-      justify-content: space-between;
-    }
-    .filters-inputs {
-      display: flex;
-      align-items: center;
-    }
-    .filters-buttons {
-      display: flex;
-      align-items: flex-end;
-      margin-bottom: 7px;
-    }
-    .form-input {
-      margin-right: 15px;
-      input {
-        width: 7rem;
-      }
-      .search-input {
-        width: 20rem;
-      }
-    }
-    input {
-      border-width: 0.7px;
-      border-color: $lighter;
-    }
-    .btn {
-      width: 7rem;
-      margin-left: 7px;
-    }
 
-  }
   .coffeebatches {
     th {
       padding: 0rem 0.5rem;
@@ -76,39 +23,6 @@
     td span {
         padding:0;
     }
-    .even {
-      background-color: #964a000a;
-    }
-    .main {
-      display: flex;
-      .qrcode-btn {
-        padding: 0;
-        cursor: pointer;
-        background-color: transparent;
-        border-color: transparent;
-      }
-      .qrcode {
-        width: 4rem;
-        height: 4rem;
-      }
-      .info {
-        display: flex;
-        flex-direction: column;
-        padding-left: 20px;
-      }
-    }
-    .location {
-      display: flex;
-      flex-direction: column;
-      span {
-        padding: 0rem;
-      }
-    }
-    .batch {
-      border-left: 0.5px dashed $secondary;
-    }
-    .cupprofile {
-      border-left: 0.5px dashed $secondary;
-    }
+
   }
 }

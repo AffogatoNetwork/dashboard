@@ -1,14 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {useParams} from "react-router";
 import {useTranslation} from "react-i18next";
-import "../../styles/farmer.scss";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
 import {getFarmer, getFarmerFarms, getImageUrl} from "../../db/firebase";
-import QRCode from "react-qr-code";
-import {LinkIcon} from "../icons/link";
 import NewMap from "../common/NewMap";
-import * as fs from "fs";
 
 
 export const Profile = () => {

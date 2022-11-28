@@ -499,7 +499,7 @@ export const List = () => {
                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                     <div className="flex justify-center m-6">
                         <div>
-                            <QRCode id="current-qr " value={qrCodeUrl} size={300}/>
+                            <QRCode id="coffe-batch" value={qrCodeUrl} size={300}/>
                             <div className="flex pt-8 space-x-4 place-content-center">
                                 <div>
                                     <button
@@ -529,7 +529,7 @@ export const List = () => {
 
 
             <div className="py-8">
-                <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                <div className="batch-list flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className="w-full h-full p-1">
                         <div className="card shadow-xl">
                                 {RenderFilters()}
@@ -556,7 +556,7 @@ export const List = () => {
                                             />
                                         ) : (
                                             <div className="text-center">
-                                            <table id="coffeebatches" className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
+                                                <table className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden  my-5">
                                                 <thead>
                                                 <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                                                     <th className="p-3 text-left border-white border">QR</th>
@@ -569,25 +569,25 @@ export const List = () => {
                                                     <th className="p-3 text-left border-white border">
                                                         <>{t("location")}</>
                                                     </th>
-                                                    <th className="th-3">
+                                                    <th className="p-3 text-left border-white border">
                                                         <>{t("variety")}</>
                                                     </th>
                                                     <th className="p-3 text-left border-white border">
                                                         <>{t("process")}</>
                                                     </th>
-                                                    <th className="th-4">
+                                                    <th className="p-3 text-left border-white border">
                                                         <>{t("drying-code")}</>
                                                     </th>
                                                     <th className="p-3 text-left border-white border">
                                                         <>{t("drying-type")}</>
                                                     </th>
-                                                    <th className="th-4">
+                                                    <th className="p-3 text-left border-white border">
                                                         <>{t("exporting-code")}</>
                                                     </th>
-                                                    <th className="th-3">
+                                                    <th className="p-3 text-left border-white border">
                                                         <>{t("weight")}</>
                                                     </th>
-                                                    <th className="th-3">
+                                                    <th className="p-3 text-left border-white border">
                                                         <>{t("note")}</>
                                                     </th>
                                                 </tr>
