@@ -314,7 +314,7 @@ export const List = () => {
             key={index}
             className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}>
 
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <div className="qrcode">
                     <label htmlFor="farmerlist" className="btn btn-ghost h-full"
                            onClick={() => {
@@ -325,21 +325,21 @@ export const List = () => {
                     </label>
                 </div>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                    {farmer.farmerId}
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                       <a className="link link-info" href={farmerUrl} target="_blank" rel="noreferrer">
                     {farmer.fullname}
                 </a>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                      <>{t(farmer.gender)}</>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                     {farmer.location}
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                      {farmer.address}
             </td>
         </tr>);
@@ -430,22 +430,22 @@ export const List = () => {
                                                         className="farmers-list w-full sm:bg-white rounded-lg overflow-hidden  my-5">
                                                         <thead>
                                                         <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                                            <th className="p-3 text-left border-white border">
+                                                            <th className="p-3 text-center border-white border ">
                                                                 QR
                                                             </th>
-                                                            <th className="p-3 text-left border-white border">
+                                                            <th className="p-3 text-center border-white border">
                                                                 <>{t("code")}</>
                                                             </th>
-                                                            <th className="p-3 text-left border-white border">
+                                                            <th className="p-3 text-center border-white border">
                                                                 <>{t("name")}</>
                                                             </th>
-                                                            <th className="p-3 text-left border-white border">
+                                                            <th className="p-3 text-center border-white border">
                                                                 <>{t("gender")}</>
                                                             </th>
-                                                            <th className="p-3 text-left border-white border">
+                                                            <th className="p-3 text-center border-white border">
                                                                 <>{t("location")}</>
                                                             </th>
-                                                            <th className="p-3 text-left border-white border">
+                                                            <th className="p-3 text-center border-white border">
                                                                 <>{t("account-address")}</>
                                                             </th>
                                                         </tr>

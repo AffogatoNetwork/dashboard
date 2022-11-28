@@ -226,18 +226,18 @@ export const List = () => {
                 className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}>
 
 
-                <td className="p-3">{farm.name}</td>
-                <td className="p-3">
+                <td className="p-3 text-base font-light">{farm.name}</td>
+                <td className="p-3 text-base font-light">
                     {farm.height} <>{t("masl")}</>
                 </td>
-                <td className="p-3">{farm.area}</td>
-                <td className="p-3">{farm.certifications}</td>
-                <td className="p-3">{farm.varieties}</td>
-                <td className="p-3">{farm.location}</td>
-                <td className="p-3">{farm.shadow}</td>
-                <td className="p-3">{farm.familyMembers}</td>
-                <td className="p-3">{farm.ethnicGroup}</td>
-                <td className="p-3">
+                <td className="p-3 text-base font-light">{farm.area}</td>
+                <td className="p-3 text-base font-light">{farm.certifications}</td>
+                <td className="p-3 text-base font-light">{farm.varieties}</td>
+                <td className="p-3 text-base font-light">{farm.location}</td>
+                <td className="p-3 text-base font-light">{farm.shadow}</td>
+                <td className="p-3 text-base font-light">{farm.familyMembers}</td>
+                <td className="p-3 text-base font-light">{farm.ethnicGroup}</td>
+                <td className="p-3 text-base font-light">
                     <label htmlFor="map-modal" className="btn btn-ghost h-full"
                            onClick={() => {
                                onMapBtnClick(farm.latitude, farm.longitude, farm.name)
@@ -320,34 +320,34 @@ export const List = () => {
                                             <thead>
                                             <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
 
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("name")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("height")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("area")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("certificates")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("varieties")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("location")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("shadow")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("family-members")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("ethnic-group")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border">
+                                                <th className="p-3 text-left border-white border text-light">
                                                     <>{t("coordinates")}</>
                                                 </th>
                                             </tr>
