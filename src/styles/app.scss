@@ -1,5 +1,4 @@
 @import "./colors";
-@import "./fonts";
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -8,6 +7,9 @@ html, body, #root {
   height: 100%;
 }
 
+  #button0 {
+    display: none;
+  }
 
 
 .App {
@@ -43,177 +45,15 @@ html, body, #root {
   }
 }
 
-.text-light {
-  color: $lighter !important;
-}
-
-.main-container {
-  height: 100% !important;
-  width: 100%;
-  padding-right: 15px;
-  padding-left: 2px;
-  margin-right: auto;
-  margin-left: auto;
-}
-.home-container {
-  height: 100% !important;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  .inner-container {
-    display: flex;
-    justify-content: center;
-    height: 100%;
-  }
-}
-.wrapper {
-  min-height: 100%;
-  height: 100%;
-}
-
-.nav-tabs {
-  .nav-link {
-    color: $primary;
-  }
-  .nav-link.active {
-    color: $light;
-  }
-}
-.navbar-toggler:focus {
-  box-shadow: 0 0 0 0;
-}
-
-.table {
-  thead {
-    height: 3rem;
-    vertical-align: middle;
-  }
-  tr {
-    vertical-align: middle;
-  }
-  th {
-    color: $primary;
-    font-size: 1.1rem;
-  }
-}
-
-.card {
-  background-color: #fff;
-  border: none;
-  border-radius: 0.625rem;
-  box-shadow: 0 0.46875rem 2.1875rem rgba(90, 97, 105, 0.1), 0 0.9375rem 1.40625rem rgba(90, 97, 105, 0.1), 0 0.25rem 0.53125rem rgba(90, 97, 105, 0.12), 0 0.125rem 0.1875rem rgba(90, 97, 105, 0.1);
-
-  &-header {
-    background-color: $white;
-  }
-  &-footer {
-    background-color: $white;
-  }
-  .btn-primary {
-    background-color: $primary;
-    border-color: $primary;
-    color: $white;
-  }
-}
-
-.card-body {
-  padding: 1.875rem;
-}
-
-.card-footer:last-child {
-  border-radius: 0 0 0.625rem 0.625rem;
-}
-
-.tab-content  {
-  padding: 0px 3px;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  &-label {
-    color: $secondary;
-  }
-  .btn {
-    background-color: $primary;
-    color: $white;
-    padding: 0.5625rem 1rem;
-    font-size: 0.75rem;
-    border: 1px solid transparent;
-    border-radius: 0.25rem;
-    line-height: 1.125;
-  }
-  .input-group {
-    display: flex;
-    flex-direction: column;
-    margin: 0.5rem 0px;
-  }
-  .form-control {
-    width: 100%;
-    margin: 2px 0px;
-    padding: 0.4375rem 0.75rem;
-    background-color: $white;
-    border-radius: 0.25rem;
-    border: 1px solid #e1e5eb;
-    color: $primary;
-    font-size: 0.8125rem;
-    font-family: "Dosis";
-  }
-  .form-control:focus {
-    outline: none !important;
-    border: 1px solid $light;
-    border-radius: 0.25rem;
-    box-shadow: 0 0 0 0.18rem #964b004d;
-  }
-  .multiple-value-text-input {
-    color: $secondary;
-    margin-bottom: 0.5rem;
-    input {
-      border-radius: 0.25rem;
-      border: 1px solid #e1e5eb;
-      color: $primary;
-      font-size: 0.8125rem;
-      font-family: "Dosis";
-    }
-    input:focus {
-      border: 1px solid $light;
-      box-shadow: 0 0 0 0.18rem #964b004d;
-    }
-    .multiple-value-text-input-item-container {
-      margin-top: 5px;
-      p {
-        margin-bottom: 0.5rem;
-      }
-      span {
-        border-radius: 5px;
-      }
-    }
-  }
-}
-
-.accordion {
-  &-button:not(.collapsed) {
-    background-color: #964b000d;
-  }
-    &-button:focus {
-      box-shadow: 0 0 0 0.25rem #cc772213;
-    }
-}
 
 
-.btn-secondary {
-  background-color: white;
-  color: $primary;
-  border: 1px solid $secondary;
-}
-.btn-secondary:hover {
-  background-color: #964a0024;
-  color: $primary;
-}
-.btn-secondary:focus {
-  background-color: white;
-  color: $primary;
-}
+
+
+
+
+
+
+
 
 span {
   color: $primary;
@@ -235,84 +75,6 @@ a {
   font-size: 15px;
 }
 
-.login {
-  display: flex;
-  flex-direction: column;
-  height: 100%;
-  align-items: center;
-  justify-content: center;
-
-  .profile-pic {
-    height: 115px;
-    width: 115px;
-    align-self: center;
-    margin-top: 0.7rem;
-    margin-bottom: 1rem;
-  }
-  .profile-pic:hover {
-    cursor: pointer;
-  }
-  .auth-method {
-    color: $light;
-    font-size: 16px;
-    background-color: transparent;
-    border-color: transparent;
-    width: 70% !important;
-  }
-  span.primary {
-    color: $light;
-    padding: 0rem;
-  }
-  .auth-method:hover {
-    cursor: pointer;
-  }
-  .btn {
-    border-radius: 50px;
-    width: 45%;
-  }
-  .btn-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: 1rem 0rem;
-  }
-  .card {
-    width: 450px;
-  }
-  .card-body {
-    overflow: hidden;
-    box-shadow: inset 0 4px 0 0 $light;
-    border-radius: 0.625rem;
-  }
-  .header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    .logo {
-      height: 7.5rem;
-      width: 7.5rem;
-    }
-    .logo-affogato {
-      height: 5rem;
-    //   width: 5rem;
-    }
-    h3 {
-      margin-top: 10px;
-      margin-bottom: 10px;
-    }
-  }
-  .account-created {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding-top: 1rem;
-  }
-  .tabs-container {
-    margin-top: 2.2rem;
-  }
-}
 
 .google-map{
   width: 100%;
@@ -326,165 +88,9 @@ a {
   }
 }
 
-.topbar {
-  display: flex;
-  flex-direction: row;
-  height: 5rem;
-  background-color: $white !important;
-  box-shadow: #a0897285 0px 0.5px;
 
-  .container {
-    display: flex;
-    padding: 0.5rem 1.2rem;
-    max-width: 1700px;
-    width: 100%;
-    justify-content: space-between;
-    align-items: center;
-  }
-  .user {
-    display: flex;
-    justify-content: center;
-    margin: 5rem 0rem;
-  }
-  .logo {
-    height: 5rem;
-    width: 5rem;
-  }
-  .logo-affogato {
-    height: 4.5rem;
-    // width: 4.5rem;
-  }
-  .logo:hover {
-    cursor: pointer;
-  }
-  .logo-affogato:hover {
-    cursor: pointer;
-  }
-  .navbar-nav {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-  }
-  .nav-caption {
-    display: flex;
-    align-items: center;
-    color: $primary;
-    svg {
-      margin-right: 9px;
-    }
-  }
-  .nav-link {
-    padding: 1rem;
-    color: $primary;
-    font-size: 1.2rem;
-    text-decoration: none;
-  }
-  .navbar-toggler {
-    display: inline;
-    background-color: white;
-    border: 0px;
-    color: $primary;
-    font-size: 1.2rem;
-    font-family: "Dosis";
-  }
-  .lang-dropdown {
-    display: none;
-    .dropdown-toggle {
-      .lang-flag {
-        width: 10px;
-      }
-    }
-  }
-}
 
-.dropdown {
-  position: relative;
-  .dropdown-toggle {
-    display: flex;
-    background-color: $white;
-    padding: 0.4375rem 0.75rem;
-    font-size: 0.8125rem;
-    border: 1px solid #e1e5eb;
-    border-radius: 0.25rem;
-    text-align: left;
-    width: 100%;
-  }
-  .dropdown-toggle::after {
-    position: absolute;
-    margin-left: 0.255em;
-    vertical-align: 0.255em;
-    content: "";
-    border-top: 0.5em solid $primary;
-    border-right: 0.4em solid transparent;
-    border-bottom: 0;
-    border-left: 0.4em solid transparent;
-    margin-top: 5px;
-    margin-left: 88%;
-  }
-  .dropdown-menu {
-    display: none;
-  }
-  .dropdown-menu.show {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    margin-top: 3px !important;
-    margin-right: 1rem;
-    background-color: #f1f1f1;
-    border: 1px solid #e1e5eb;
-    border-radius: 0.25rem;
 
-    .dropdown-item {
-      color: $primary;
-      padding: 0.4rem 0.9rem;
-      text-decoration: none;
-    }
-    .dropdown-item.active {
-      background-color: rgba(121, 64, 242, 0.4);
-    }
-    .dropdown-item:hover {
-      background-color: #964b0044;
-    }
-  }
-  .btn-secondary.dropdown-toggle {
-    background-color: $white;
-  }
-  .btn-secondary.dropdown-toggle:focus {
-    box-shadow: 0 0 0 0.18rem #964b004d;
-  }
-}
-
-.pagination {
-  margin-top: 1rem;
-  .page-item {
-    .page-link {
-      color: $primary;
-    }
-    .page-link:focus {
-      background-color: #e9ecef;
-      box-shadow: 0 0 0 0.18rem #964b0062;
-    }
-    .page-link:hover {
-      background-color: #bba996d8;
-    }
-  }
-  .page-item.active{
-    .page-link {
-      background-color: $light;
-      border-color: $light;
-      color: $white;
-    }
-  }
-  .page-item:hover {
-    cursor: pointer;
-  }
-  .page-item.disabled {
-    cursor: not-allowed;
-  }
-  span {
-    font-size: 16px;
-  }
-}
 
 .lang-container {
   display: flex;

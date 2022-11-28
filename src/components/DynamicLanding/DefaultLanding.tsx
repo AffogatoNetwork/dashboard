@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/batchlist.scss";
-import "../../styles/modals.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
@@ -14,10 +13,10 @@ export const DefaultLanding = () => {
                         <div className="hero-overlay bg-opacity-40 bg-black"></div>
                         <div className="hero-content text-center text-neutral-content">
                             <div className="max-w-md">
-                                <h1 className="max-w-2xl mb-4 text-9xl font-black tracking-tight leading-none md:text-6xl xl:text-7xl text-white">
+                                <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                                     Plataforma de trazabilidad de PlaceHolder de Cooperativa
                                 </h1>
-                                <p className="max-w-2xl text-4xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white">
+                                <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                     Nuestro café trazado con la seguridad de la tecnología de blockchain.
                                 </p>
 
@@ -187,19 +186,19 @@ export const DefaultLanding = () => {
                     <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                         <img
                              className="object-cover w-full h-56 rounded shadow-lg"
-                             src={`url("https://dummyimage.com/420x260")`} alt="" />
+                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F1.jpeg?alt=media&token=c35a5e80-0288-4d3b-a6b1-d857093d66a5" alt="" />
                         <img
                             
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src={`url("https://dummyimage.com/420x260")`} alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F2.jpeg?alt=media&token=715f446b-7b08-466d-b0c8-35b400c9ce1b" alt="" />
                         <img
                             
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src={`url("https://dummyimage.com/420x260")`} alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F3.jpeg?alt=media&token=74bb19fb-0eeb-42db-a271-c8cf832f376e" alt="" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src={`url("https://dummyimage.com/420x260")`} alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F4.jpeg?alt=media&token=b74b40fe-80df-4611-b116-9cb851a5bacf" alt="" />
                     </div>
 
                 </div>

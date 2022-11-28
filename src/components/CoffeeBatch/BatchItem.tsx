@@ -20,7 +20,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
             key={coffeeBatch.id}
             className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}
         >
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <div className="qrcode">
                     <label htmlFor="coffe-batch" className="btn btn-ghost h-full"
                            onClick={() => {
@@ -31,9 +31,9 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
                     </label>
                 </div>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 {coffeeBatch.farm.name}</td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
 
 
         <span>
@@ -41,31 +41,31 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
             {coffeeBatch.farm.altitude === "-" ? "" : "MSNM"}
         </span>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <div className="">
           <span>
             {coffeeBatch.farm.village}, {coffeeBatch.farm.region}
           </span>
                 </div>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.wetMill.variety}</span>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.wetMill.process}</span>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 {coffeeBatch.wetMill.drying_id}</td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.wetMill.drying_type}</span>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.dryMill.export_id}</span>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.dryMill.weight}</span>
             </td>
-            <td className="p-3">
+            <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.dryMill.note}</span>
             </td>
         </tr>

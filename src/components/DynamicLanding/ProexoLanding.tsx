@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/batchlist.scss";
-import "../../styles/modals.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
@@ -13,10 +12,10 @@ export const ProexoLanding = () => {
                 <div className="hero-overlay bg-opacity-60 bg-black"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1 className="max-w-2xl mb-4 text-9xl font-black tracking-tight leading-none md:text-6xl xl:text-7xl text-white">
-                            Plataforma de trazabilidad de Empresa de Servicios Múltiples PROEXO Limitada
+                        <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
+                            de trazabilidad de Empresa de Servicios Múltiples PROEXO Limitada
                         </h1>
-                        <p className="max-w-2xl text-4xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white">
+                        <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                             Nuestro café trazado con la seguridad de la tecnología de blockchain.
                         </p>
                     </div>
@@ -220,16 +219,19 @@ PROEXO es una empresa de economía social que busca y sostiene la primacía del 
                 <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                     <img
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F1.jpeg?alt=media&token=6dbdbc05-a684-4834-9c2e-fd5aaccefdd6" alt="" />
                     <img
+
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F2.jpeg?alt=media&token=5366f295-e214-4466-b998-a15b98ac2a0e" alt="" />
                     <img
+
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F3.jpeg?alt=media&token=f3eccac9-6178-41a5-af1a-a5244d254420" alt="" />
                     <img
+
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F4.jpeg?alt=media&token=376da7da-4bbe-4d43-945e-d8d1574cc222" alt="" />
                 </div>
             </div>
         </section>

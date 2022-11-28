@@ -1,6 +1,5 @@
 import React from "react";
 import "../../styles/batchlist.scss";
-import "../../styles/modals.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
@@ -13,10 +12,10 @@ export const CopranilLanding = () => {
                 <div className="hero-overlay bg-opacity-60 bg-black"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
-                        <h1 className="max-w-2xl mb-4 text-9xl font-black tracking-tight leading-none md:text-6xl xl:text-7xl text-white">
+                        <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                             Plataforma de trazabilidad de Cooperativas Nuevas Ideas Limitada
                         </h1>
-                        <p className="max-w-2xl text-4xl mb-6 font-light lg:mb-8 md:text-lg lg:text-xl text-white">
+                        <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                             Nuestro café trazado con la seguridad de la tecnología de blockchain.
                         </p>
                     </div>
@@ -218,19 +217,19 @@ export const CopranilLanding = () => {
                 <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                     <img
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F1.jpeg?alt=media&token=ad7484f0-43fb-4438-a067-8658e7573e92" alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2.jpeg?alt=media&token=ef95faf4-00ba-4bf4-95ba-42a85f754296" alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F3.jpeg?alt=media&token=45a94c40-4cc9-40ee-aa4c-2b722d694144" alt="" />
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src={`url("https://dummyimage.com/420x260")`} alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F4.jpeg?alt=media&token=d88b0442-82ec-452e-8dfa-053135ca4779" alt="" />
                 </div>
             </div>
         </section>

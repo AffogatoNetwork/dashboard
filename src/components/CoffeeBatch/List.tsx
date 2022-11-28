@@ -410,8 +410,8 @@ export const List = () => {
 
     const RenderFilters = () => (
         <>
-            <div className="w-full p-5 rounded-lg bg-white">
-                <div className="text-center text-lg text-black">
+            <div className="w-full p-5 rounded-lg">
+                <div className="text-center text-lg text-black ">
                     <>{t("search-batches")}</>
                 </div>
                 <div className="relative">
@@ -474,12 +474,12 @@ export const List = () => {
                 <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
 
 
-                    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white focus:text-white
+                    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
                                         focus:bg-amber-400 active:bg-amber-600">
                         <SearchIcon className="w-4 h-4 mr-2"/>
                         <>{t("search")}</>
                     </button>
-                    <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white focus:text-white
+                    <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
                                         focus:bg-red-400 active:bg-red-700">
                         <ClearIcon className="w-4 h-4 mr-2"/>
                         <>{t("clear")}</>
@@ -499,7 +499,7 @@ export const List = () => {
                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                     <div className="flex justify-center m-6">
                         <div>
-                            <QRCode id="current-qr " value={qrCodeUrl} size={300}/>
+                            <QRCode id="coffe-batch" value={qrCodeUrl} size={300}/>
                             <div className="flex pt-8 space-x-4 place-content-center">
                                 <div>
                                     <button
@@ -529,9 +529,9 @@ export const List = () => {
 
 
             <div className="py-8">
-                <div className="flex flex-row mb-1 sm:mb-0 justify-between w-full">
+                <div className="batch-list flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className="w-full h-full p-1">
-                        <div className="card shadow-xl">
+                        <div className="card shadow-xl bg-white">
                                 {RenderFilters()}
                                 <div className="card-body">
                                     <div className="card-title grid justify-items-stretch">
@@ -556,38 +556,38 @@ export const List = () => {
                                             />
                                         ) : (
                                             <div className="text-center">
-                                            <table id="coffeebatches" className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
+                                                <table className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden  my-5">
                                                 <thead>
                                                 <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                                    <th className="p-3 text-left border-white border">QR</th>
-                                                    <th className="p-3 text-left border-white border">
+                                                    <th className="p-3 text-center border-white border">QR</th>
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("farm")}</>
                                                     </th>
-                                                    <th className="p-3 text-left border-white border">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("height")}</>
                                                     </th>
-                                                    <th className="p-3 text-left border-white border">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("location")}</>
                                                     </th>
-                                                    <th className="th-3">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("variety")}</>
                                                     </th>
-                                                    <th className="p-3 text-left border-white border">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("process")}</>
                                                     </th>
-                                                    <th className="th-4">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("drying-code")}</>
                                                     </th>
-                                                    <th className="p-3 text-left border-white border">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("drying-type")}</>
                                                     </th>
-                                                    <th className="th-4">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("exporting-code")}</>
                                                     </th>
-                                                    <th className="th-3">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("weight")}</>
                                                     </th>
-                                                    <th className="th-3">
+                                                    <th className="p-3 text-center border-white border">
                                                         <>{t("note")}</>
                                                     </th>
                                                 </tr>
