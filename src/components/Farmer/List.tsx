@@ -206,7 +206,9 @@ export const List = () => {
         }
     };
 
-    const handleGenderChange = (key: string) => {
+
+    const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+        const key = event.target.value;
         for (let i = 0; i < GenderFilterList.length; i += 1) {
             if (GenderFilterList[i].key === key) {
                 setCurrentGender(GenderFilterList[i]);
@@ -268,31 +270,13 @@ export const List = () => {
                     <ClearIcon className="w-4 h-4 mr-2"/>
                     <>{t("clear")}</>
                 </button>
-                <div className=" dropdown dropdown-hover">
-                    <Form.Label className="px-4">
-                        <>{t("gender")}</>
-                    </Form.Label>
-                    <Dropdown
-                        onSelect={(eventKey) => handleGenderChange(eventKey || "all")}
-                    >
-                        <Dropdown.Toggle
-                            variant="secondary"
-                            id="dropdown-cooperative"
-                            className="text-left block w-full  rounded-md border border-gray-300 text-gray-600 transition duration-300
-        focus:ring-2 focus:ring-sky-300 focus:outline-none
-        invalid:ring-2 invalid:ring-red-400"
-                        >
-                            <div className="cooperative-toggle">
-                                <span>{currentGender.name}</span>
-                            </div>
-                        </Dropdown.Toggle>
-                        <Dropdown.Menu>
-                            {GenderFilterList.map((item) => (<Dropdown.Item key={item.key} eventKey={item.key}>
-                                {item.name}
-                            </Dropdown.Item>))}
-                        </Dropdown.Menu>
-                    </Dropdown>
-                </div>
+                <select id="dropdown-cooperative" className="select w-full max-w-xs" onChange={handleGenderChange}>
+                    <option disabled selected><> {t("gender")}</>:</option>
+                    {currentGender.name}
+                    {GenderFilterList.map((item) => (<option value={item.key}>
+                        {item.name}
+                    </option>))}
+                </select>
             </div>
 
         </div>
@@ -460,10 +444,11 @@ export const List = () => {
                                             </>
                                         )}
                                     </div>
-                                    <div className="card-actions justify-center">
+                                    <div className="card-actions flex justify-center pt-4">
                                         <CustomPagination
                                             pagination={pagination}
                                             onPageSelected={onPageSelected}
+                                            className={''}
                                         />
                                     </div>
                                 </div>

@@ -122,7 +122,7 @@ const Login = () => {
           </Form>
         </Card.Body>
       </Card>
-      <LangChooser type="bar" />
+      <LangChooser/>
     </div>
       </>
   );
