@@ -1,10 +1,7 @@
 import React, { useState, useEffect } from "react";
-import Card from "react-bootstrap/esm/Card";
-import Image from "react-bootstrap/esm/Image";
 import { useParams } from "react-router";
 import "../styles/company.scss";
 import Loading from "./Loading";
-import Map from "./common/Map";
 import NotFound from "./common/NotFound";
 import { getCompany } from "../db/firebase";
 import NewMap from "./common/NewMap";
@@ -37,11 +34,11 @@ const Company = () => {
 
   return (
     <div className="company">
-      <Card className="general">
-        <Card.Header>
-          <Image className="pic" />
-        </Card.Header>
-        <Card.Body>
+      <div className="card general">
+        <div className="card-header">
+          <img className="pic" />
+        </div>
+        <div className="card-body">
           <div className="info-container">
             <div className="farmer-detail">
               {companyData && companyData.name && (
@@ -110,8 +107,8 @@ const Company = () => {
               )}
             </div>
           </div>
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
       <div className="boxes">
         <div className="box cupprofile">
           <div className="items">

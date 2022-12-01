@@ -1,5 +1,4 @@
 import React, { useEffect, useRef, useState } from "react";
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/esm/Card";
 import Col from "react-bootstrap/esm/Col";
 import Dropdown from "react-bootstrap/Dropdown";
@@ -877,22 +876,20 @@ const Signup = () => {
                 </Tab>
               </Tabs>
               <div className="btn-container">
-                <Button
-                  variant="primary"
-                  type="button"
+                <button
+                  className="btn btn-secondary"
                   onClick={() => magicLogin()}
                 >
                   <>{t("signup.create-account")}</>
-                </Button>
-                <Button
-                  variant="secondary"
-                  className="auth-method"
-                  onClick={() => navigate("/login", { replace: true })}
+                </button>
+                <button
+                    className="btn btn-secondary"
+                    onClick={() => navigate("/login", { replace: true })}
                 >
                   <u>
                     <>{t("signup.back")}</>
                   </u>
-                </Button>
+                </button>
               </div>
             </div>
           ) : (
@@ -906,7 +903,7 @@ const Signup = () => {
                   <>{t("signup.success2")}</>
                 </h6>
               )}
-              <Button
+              <button
                 className="auth-method"
                 onClick={() => {
                   authContext.fakeSignOut();
@@ -914,7 +911,7 @@ const Signup = () => {
                 }}
               >
                 <>{t("login.access")}</>
-              </Button>
+              </button>
             </div>
           )}
         </Card.Body>

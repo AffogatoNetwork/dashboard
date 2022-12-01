@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/esm/Card";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import { useCookies } from "react-cookie";
@@ -56,8 +54,8 @@ export const PublicList = () => {
 
   return (
     <div className="login">
-      <Card className="auth-card">
-        <Card.Body>
+      <div className="card auth-card">
+        <div className="card-body">
           <div className="header">
             <CoopLogo className="logo" />
             <h3>
@@ -85,27 +83,24 @@ export const PublicList = () => {
               </div>
             </Form.Group>
             <div className="btn-container">
-              <Button
-                variant="primary"
-                type="button"
-                onClick={() => handleOnClick()}
+              <button
+                  className="btn btn-primary"
+                  onClick={() => handleOnClick()}
               >
                 <>{t("login.access")}</>
-              </Button>
-              <Button
-                variant="secondary"
-                className="auth-method"
+              </button>
+              <button className="btn btn-primary"
                 onClick={() => navigate("/login", { replace: true })}
               >
                 <u>
                   <>{t("signup.back")}</>
                 </u>
-              </Button>
+              </button>
             </div>
           </Form>
-        </Card.Body>
-      </Card>
-      <LangChooser type="bar" />
+        </div>
+      </div>
+      <LangChooser/>
     </div>
   );
 };

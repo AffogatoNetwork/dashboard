@@ -121,6 +121,6 @@ Styles for Swiper slider
 }
 
 /* React Share button custom styles */
-.product-share .react-share__ShareButton {
+.product-share .react-share__Sharebutton {
   @apply flex flex-col items-center justify-center;
 }

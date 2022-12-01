@@ -270,7 +270,7 @@ export const List = () => {
                                 longitude={currentLng}
                                 zoomLevel={10}
                                 addressLine={currentAddressL}
-                                className="google-map large"
+                                className="google-map"
                             />
                             <div>
                             </div>
@@ -347,7 +347,7 @@ export const List = () => {
                                                 <th className="p-3 text-center border-white border">
                                                     <>{t("ethnic-group")}</>
                                                 </th>
-                                                <th className="p-3 text-left border-white border text-light">
+                                                <th className="p-3 text-center border-white border">
                                                     <>{t("coordinates")}</>
                                                 </th>
                                             </tr>
@@ -359,11 +359,12 @@ export const List = () => {
                                     </div>
                                 </>)}
                             </div>
-                            <div className="card-actions justify-center">
+                            <div className="card-actions flex justify-center pt-4">
 
                                 <CustomPagination
                                     pagination={pagination}
                                     onPageSelected={onPageSelected}
+                                    className={''}
                                 />
                             </div>
                         </div>

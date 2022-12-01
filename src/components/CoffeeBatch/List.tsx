@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from "react";
-import Table from "react-bootstrap/esm/Table";
 import {BigNumber, ethers} from "ethers";
 import {Contract, Provider, setMulticallAddress} from "ethers-multicall";
 import {gql, useQuery} from "@apollo/client";
@@ -532,31 +531,32 @@ export const List = () => {
                 <div className="batch-list flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className="w-full h-full p-1">
                         <div className="card shadow-xl bg-white">
-                                {RenderFilters()}
-                                <div className="card-body">
-                                    <div className="card-title grid justify-items-stretch">
-                                        <div className="justify-self-start">
-                                            <h2 className="grid grid-cols-1 gap-6 xs:grid-cols-2 lg:grid-cols-3">
-                                                <>{t("farm-and-batches")}</>
-                                            </h2>
-                                        </div>
-                                        <div className="justify-self-end">
-                                            <h3>
-                                                <>
-                                                    {t("total")}: {batchesCount}
-                                                </>
-                                            </h3>
-                                        </div>
+                            {RenderFilters()}
+                            <div className="card-body">
+                                <div className="card-title grid justify-items-stretch">
+                                    <div className="justify-self-start">
+                                        <h4>
+                                            <>{t("farm-and-batches")}</>
+                                        </h4>
                                     </div>
-                                    <div className="overflow-x-scroll">
-                                        {loading || loadingIpfs ? (
-                                            <Loading
-                                                label={t("loading").concat("...")}
-                                                className="loading-wrapper"
-                                            />
-                                        ) : (
-                                            <div className="text-center">
-                                                <table className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden  my-5">
+                                    <div className="justify-self-end">
+                                        <h4>
+                                            <>
+                                                {t("total")}: {batchesCount}
+                                            </>
+                                        </h4>
+                                    </div>
+                                </div>
+                                <div className="overflow-x-scroll">
+                                    {loading || loadingIpfs ? (
+                                        <Loading
+                                            label={t("loading").concat("...")}
+                                            className="loading-wrapper"
+                                        />
+                                    ) : (
+                                        <div className="text-center">
+                                            <table
+                                                className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
                                                 <thead>
                                                 <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                                                     <th className="p-3 text-center border-white border">QR</th>
@@ -604,16 +604,17 @@ export const List = () => {
                                                 ))}
                                                 </tbody>
                                             </table>
-                                            </div>
-                                        )}
-                                    </div>
-                                    <div className="card-actions justify-center">
-                                        <CustomPagination
-                                            pagination={pagination}
-                                            onPageSelected={onPageSelected}
-                                        />
-                                    </div>
+                                        </div>
+                                    )}
                                 </div>
+                                <div className="card-actions flex justify-center pt-4">
+                                    <CustomPagination
+                                        pagination={pagination}
+                                        onPageSelected={onPageSelected}
+                                        className={'btn-group-vertical'}
+                                    />
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>

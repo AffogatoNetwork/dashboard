@@ -92,39 +92,3 @@ a {
 
 
 
-.lang-container {
-  display: flex;
-  justify-content: center;
-  margin-top: 10px;
-  width: 450px;
-  .btn-flag {
-    background-color: transparent;
-    border: none;
-    width: 50px;
-  }
-  .btn-flag:hover {
-    border: none;
-  }
-  .btn-flag:focus {
-    box-shadow: none;
-  }
-}
-
-.cxRqFw {
-  background-color: #332211 !important;  /* put any color you want */
-  font-weight: 500;
-  span{
-    color: white !important;
-  }
-}
-
-
-.dyLfuo {
-  background-color: #e3e3e3 !important;  /* put any color you want */
-  font-weight: 500;
-}
-
-.mini-lang{
-  padding: 10px;
-  width: 100% !important;
-}

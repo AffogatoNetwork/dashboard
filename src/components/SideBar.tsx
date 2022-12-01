@@ -8,7 +8,6 @@ import {makeShortAddress} from "../utils/utils";
 // Icons
 import {HomeIcon} from "./icons/home";
 import {ProfileIcon} from "./icons/profile";
-import {LinkIcon} from "./icons/link";
 import {VerifiedIcon} from "./icons/verified-icon";
 import {LocalCafeIcon} from "./icons/local_cafe";
 import {LandscapeIcon} from "./icons/landscape";
@@ -20,12 +19,9 @@ import {AiOutlineMenuFold, AiOutlineMenuUnfold} from "react-icons/ai";
 
 import CoopLogo from "./common/CoopLogo";
 import {useAuthContext} from "../states/AuthContext";
-import Comsa from "../assets/comsa.png";
-import Commovel from "../assets/commovel.png";
-import Copranil from "../assets/copranil.png";
-import Proexo from "../assets/proexo.png";
-import {SearchIcon} from "./icons/search";
 import LangChooser from "./common/LangChooser";
+import { WorldIcon} from "./icons/world";
+
 
 
 const data = [{
@@ -38,11 +34,11 @@ const data = [{
     }, {
         title: 'batches', icon: AgricultureIcon, href: routes.lotes, disabled: ''
     }, {
-        title: 'Certificación', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
+        title: 'certificates', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
     }, {
-        title: 'Catación', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
+        title: 'cupping', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
     }, {
-        title: 'Crear Lotes', icon: VoteIcon, href: routes.create, disabled: ''
+        title: 'add-batches', icon: VoteIcon, href: routes.create, disabled: ''
 
     },
 
@@ -74,7 +70,6 @@ export default function Home() {
             }
         };
         loadProvider();
-        let location = window.location.host;
     });
 
 
@@ -153,17 +148,15 @@ export default function Home() {
                         </div>))}
                 </div>))}
 
-                {/* <div tabIndex={0}
-                        className="dropdown dropdown-right inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300 hover:text-white font-medium rounded-md cursor-pointer ">
-                        <SearchIcon className="w-8" />
-                        <motion.p animate={controlText}
-                                  className='ml-2 text-sm font-bold hover:text-white'>
-                            Idioma: Español
+                <div tabIndex={0} className={`dropdown dropdown-right dropdown-end inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300 hover:text-white font-medium rounded-md cursor-pointer `}>
+                        <WorldIcon className="w-8" />
+                        <motion.p animate={controlText} className='ml-4 text-sm'>
+                            <>{t('change-lang')}</>
                         </motion.p>
                         <ul tabIndex={0} className="dropdown-content menu p-2 hover:text-black text-black shadow bg-base-100 rounded-box w-52">
-                            <LangChooser type="bar" />
+                            <LangChooser/>
                         </ul>
-                    </div> */}
+                    </div>
 
 
             </div>
@@ -194,6 +187,7 @@ export default function Home() {
                     ))}
                 </div>))}
             </div>
+            <br/>
 
         </motion.div>
 
