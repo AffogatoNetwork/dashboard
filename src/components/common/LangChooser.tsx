@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Button from "react-bootstrap/esm/Button";
+import button from "react-bootstrap/esm/button";
 import { useTranslation } from "react-i18next";
 import { DE, ES, US, FR } from "country-flag-icons/react/3x2";
 

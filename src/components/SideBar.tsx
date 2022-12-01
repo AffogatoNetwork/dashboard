@@ -34,11 +34,11 @@ const data = [{
     }, {
         title: 'batches', icon: AgricultureIcon, href: routes.lotes, disabled: ''
     }, {
-        title: 'Certificación', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
+        title: 'certificates', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
     }, {
-        title: 'Catación', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
+        title: 'cupping', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
     }, {
-        title: 'Crear Lotes', icon: VoteIcon, href: routes.create, disabled: ''
+        title: 'add-batches', icon: VoteIcon, href: routes.create, disabled: ''
 
     },
 
@@ -151,7 +151,7 @@ export default function Home() {
                 <div tabIndex={0} className={`dropdown dropdown-right dropdown-end inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300 hover:text-white font-medium rounded-md cursor-pointer `}>
                         <WorldIcon className="w-8" />
                         <motion.p animate={controlText} className='ml-4 text-sm'>
-                            Cambiar idioma
+                            <>{t('change-lang')}</>
                         </motion.p>
                         <ul tabIndex={0} className="dropdown-content menu p-2 hover:text-black text-black shadow bg-base-100 rounded-box w-52">
                             <LangChooser/>

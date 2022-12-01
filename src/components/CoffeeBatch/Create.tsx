@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/esm/Card";
 import { OutTable, ExcelRenderer } from "react-excel-renderer";
 import { FaSearchPlus, FaTimes } from "react-icons/fa";
 import { useDropzone } from "react-dropzone";
@@ -45,11 +43,11 @@ export const Create = () => {
       <span>
         <>{t("remove", { "file-name": file.name })}</>
       </span>
-      <Button className="remove" onClick={() => clearFiles()}>
+      <button className="remove" onClick={() => clearFiles()}>
         <>
           <FaTimes /> {t("remove")}
         </>
-      </Button>
+      </button>
     </div>
   ));
 
@@ -196,13 +194,11 @@ export const Create = () => {
 
   return (
     <div className="new-batch">
-      <Card className="create-card">
-        <Card.Header>
-          <h2>
+      <div className="card create-card shadow-xl">
+        <div className="card-body">
+          <h2 className="py-4">
             <>{t("create-batches.title")}</>
           </h2>
-        </Card.Header>
-        <Card.Body>
           {saving ? (
             <Loading
               label={t("create-batches.creating")}
@@ -210,14 +206,14 @@ export const Create = () => {
             />
           ) : (
             <>
-              <h4>
+              <h4 className="text-light text-stone-400">
                 <>{t("create-batches.explanation")}</>
               </h4>
               <div className="dnd-container">
                 {acceptedFiles.length === 0 ||
                 rows === null ||
                 cols === null ? (
-                  <div {...getRootProps({ className: "dropzone" })}>
+                  <div {...getRootProps({ className: "dropzone p-6" })}>
                     <input {...getInputProps()} />
                     <FaSearchPlus className="icon" />
                     <p>
@@ -239,13 +235,13 @@ export const Create = () => {
               </div>
             </>
           )}
-        </Card.Body>
-        <Card.Footer>
-          <Button onClick={() => createBatches()} disabled={saving}>
+        </div>
+        <div className="card-footer">
+          <button className="btn btn-secondary" onClick={() => createBatches()} disabled={saving}>
             <>{t("create-batches.menu")}</>
-          </Button>
-        </Card.Footer>
-      </Card>
+          </button>
+        </div>
+      </div>
     </div>
   );
 };

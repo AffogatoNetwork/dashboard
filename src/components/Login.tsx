@@ -1,19 +1,14 @@
 import React, { useEffect, useState } from "react";
-import Button from "react-bootstrap/Button";
-import Card from "react-bootstrap/esm/Card";
-import Form from "react-bootstrap/Form";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAuthContext } from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
-import FormInput from "./common/FormInput";
 import LangChooser from "./common/LangChooser";
 import {
   isValidCellphone,
   isValidEmail,
   errorNotification,
 } from "../utils/utils";
-import NewSignup from "./NewLogin";
 
 const Login = () => {
   const { t } = useTranslation();
@@ -67,37 +62,34 @@ const Login = () => {
 
 
     <div className="login">
-      <Card className="auth-card">
-        <Card.Body>
+      <div className="card auth-card">
+        <div className="card-body">
           <div className="header">
             <CoopLogo className="logo" />
             <h3>
               <>{t("login.title")}</>
             </h3>
           </div>
-          <Form className="" onSubmit={() => magicLogin()}>
-            <Form.Group className="mb-3 border-0">
-              <FormInput
+          <div className="form-control" onSubmit={() => magicLogin()}>
+            <label className="input-group mb-3 border-0">
+
+              <input
                 className="block w-full px-4 py-3 rounded-md border border-gray-300 text-gray-600 transition duration-300
         focus:ring-2 focus:ring-sky-300 focus:outline-none
         invalid:ring-2 invalid:ring-red-400"
-                label={t("login.subtitle")}
                 value={userInput}
                 placeholder={t("placeholders.email")}
-                handleOnChange={handleUserInputChange}
-                errorMsg={userInputError}
+                onChange={handleUserInputChange}
               />
-            </Form.Group>
+            </label>
             <div className="btn-container">
-              <Button
-                className="w-full py-3 px-6 rounded-md bg-sky-600 focus:bg-sky-700 active:bg-sky-500"
-                variant="primary"
-                type="button"
+              <button
+                className="btn btn-primary w-full py-3 px-6 rounded-md bg-sky-600 focus:bg-sky-700 active:bg-sky-500"
                 onClick={() => magicLogin()}
               >
                 <>{t("login.access")}</>
-              </Button>
-              <Button
+              </button>
+              <button
                 className="auth-method w-full py-3 px-6 rounded-md bg-sky-600
                                         focus:bg-sky-700 active:bg-sky-500"
                 onClick={() => navigate("/signup", { replace: true })}
@@ -105,11 +97,11 @@ const Login = () => {
                 <u>
                   <>{t("login.create-account")}</>
                 </u>
-              </Button>
+              </button>
               <span className="primary">
                 <>{t("or")}</>
               </span>
-              <Button
+              <button
                 className="auth-method w-full py-3 px-6 rounded-md bg-sky-600
                                         focus:bg-sky-700 active:bg-sky-500"
                 onClick={() => navigate("/coffeebatches", { replace: true })}
@@ -117,11 +109,11 @@ const Login = () => {
                 <u>
                   <>{t("login.buyer-access")}</>
                 </u>
-              </Button>
+              </button>
             </div>
-          </Form>
-        </Card.Body>
-      </Card>
+          </div>
+        </div>
+      </div>
       <LangChooser/>
     </div>
       </>
