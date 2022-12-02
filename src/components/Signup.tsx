@@ -122,7 +122,6 @@ const Signup = () => {
     };
     const checkIsLoggedIn = () => {
       if (state.isLoggedIn) {
-        navigate("/", { replace: true });
       }
     };
     if (state.accountCreated || state.creatingAccountError) {
@@ -288,7 +287,8 @@ const Signup = () => {
     }
   };
 
-  const handleCooperativeChange = (key: string) => {
+  const handleCooperativeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const key = event.target.value;
     for (let i = 0; i < CooperativeList.length; i += 1) {
       if (CooperativeList[i].key === key) {
         setCurrentCoop(CooperativeList[i]);
@@ -301,7 +301,8 @@ const Signup = () => {
     }
   };
 
-  const handleRegionChange = (key: string) => {
+  const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const key = event.target.value;
     for (let i = 0; i < RegionList.length; i += 1) {
       if (RegionList[i].key === key) {
         setCurrentRegion(RegionList[i]);
@@ -314,7 +315,8 @@ const Signup = () => {
     }
   };
 
-  const handleGenderChange = (key: string) => {
+  const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
+    const key = event.target.value;
     for (let i = 0; i < GenderList.length; i += 1) {
       if (GenderList[i].key === key) {
         setCurrentGender(GenderList[i]);
@@ -480,32 +482,16 @@ const Signup = () => {
               handleOnChange={handleUserInputChange}
               errorMsg={userNameError}
             />
-            <div className="form-input">
-              <Form.Label>
-                <>{t("signup.choose-company")}</>
-              </Form.Label>
-              <Dropdown
-                onSelect={(eventKey) =>
-                  handleCooperativeChange(eventKey || "0")
-                }
-              >
-                <Dropdown.Toggle
-                  variant="secondary"
-                  id="dropdown-cooperative"
-                  className="text-left"
-                >
-                  <div className="cooperative-toggle">
-                    <span>{currentCoop.name}</span>
-                  </div>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {CooperativeList.map((item) => (
-                    <Dropdown.Item key={item.key} eventKey={item.key}>
+            <div className="">
+              <select id="dropdown-cooperative" onChange={handleCooperativeChange} >
+                <option disabled selected><> {t("signup.choose-company")}</>:</option>
+                {currentCoop.name}
+                {CooperativeList.map((item) => (
+                    <option key={item.key} value={item.key}>
                       {item.name}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+                    </option>
+                ))}
+              </select>
               {coopError !== "" && (
                 <span className="error-message">{coopError}</span>
               )}
@@ -520,6 +506,7 @@ const Signup = () => {
               }
               handleOnChange={handleCellphoneChange}
               errorMsg={cellphoneError}
+              className="input input-bordered"
             />
             <FormInput
               label={t("address")}
@@ -527,6 +514,7 @@ const Signup = () => {
               placeholder={t("address")}
               handleOnChange={handleAddressLineChange}
               errorMsg={addressLineError}
+              className="input input-bordered"
             />
             <FormInput
               label={t("signup.manager-name")}
@@ -534,6 +522,7 @@ const Signup = () => {
               placeholder={t("placeholders.fullname")}
               handleOnChange={handleManagerNameChange}
               errorMsg={managerNameError}
+              className="input input-bordered"
             />
           </Col>
           <Col sm={12} md={4} lg={4}>
@@ -543,6 +532,7 @@ const Signup = () => {
               placeholder={t("average")}
               handleOnChange={handleCupProfileChange}
               errorMsg={cupProfileError}
+              className="input input-bordered"
             />
             <div className="input-row">
               <FormInput
@@ -551,6 +541,7 @@ const Signup = () => {
                 placeholder={t("longitude")}
                 handleOnChange={handleLongitudeChange}
                 errorMsg={longitudeError}
+                className="input input-bordered"
               />
               <FormInput
                 label={t("latitude")}
@@ -558,6 +549,7 @@ const Signup = () => {
                 placeholder={t("latitude")}
                 handleOnChange={handleLatitudeChange}
                 errorMsg={latitudeError}
+                className="input input-bordered"
               />
             </div>
             <FormInput
@@ -566,8 +558,9 @@ const Signup = () => {
               placeholder={t("name")}
               handleOnChange={handleSocialReasonChange}
               errorMsg={socialReasonError}
+              className="input input-bordered"
             />
-            <div className="form-input">
+            <div className="">
               <Form.Label>
                 <>{t("review")}</>
               </Form.Label>
@@ -577,6 +570,7 @@ const Signup = () => {
                 rows={4}
                 placeholder={t("review")}
                 onChange={handleReviewChange}
+                className="textarea"
               />
               {bioError !== "" && (
                 <span className="error-message">{reviewError}</span>
@@ -590,6 +584,7 @@ const Signup = () => {
               placeholder={t("areas")}
               handleOnChange={handleProductivesAreasChange}
               errorMsg={productiveAreasError}
+              className="input input-bordered"
             />
             <MultipleValueTextInput
               onItemAdded={(item: any, allItems: Array<string>) => {
@@ -603,6 +598,7 @@ const Signup = () => {
               label="Productos o Servicios"
               name="social-networks"
               placeholder={t("placeholders.enter-products")}
+              className="input input-bordered"
             />
             <div className="input-row">
               <FormInput
@@ -611,6 +607,7 @@ const Signup = () => {
                 placeholder={t("male-partners")}
                 handleOnChange={handleNoPartnersMChange}
                 errorMsg={noPartnersMError}
+                className="input input-bordered"
               />
               <FormInput
                 label={t("female-partners")}
@@ -618,6 +615,7 @@ const Signup = () => {
                 placeholder={t("female-partners")}
                 handleOnChange={handleNoPartnersFChange}
                 errorMsg={noPartnersFError}
+                className="input input-bordered"
               />
             </div>
             <FormInput
@@ -626,6 +624,7 @@ const Signup = () => {
               placeholder={t("placeholders.email")}
               handleOnChange={handleWebsiteChange}
               errorMsg={websiteError}
+              className="input input-bordered"
             />
             <MultipleValueTextInput
               onItemAdded={(item: any, allItems: Array<string>) => {
@@ -639,6 +638,7 @@ const Signup = () => {
               label={t("social-networks")}
               name="social-networks"
               placeholder={t("placeholders.social-networks")}
+              className="input input-bordered"
             />
           </Col>
         </Col>
@@ -654,15 +654,14 @@ const Signup = () => {
   );
 
   const RenderFarmerForm = () => (
-    <Form className="form">
+    <div className="form-control">
       <Form.Group className="mb-3 input-group">
         <Col className="inputs" sm={12} md={12} lg={12}>
           <Col sm={12} md={6} lg={6}>
-            <div className="img-container">
-              <Image
+            <div className="avatar w-24">
+              <img
                 src={selectedImage !== "" ? selectedImage : User}
-                roundedCircle
-                className="profile-pic"
+                className="rounded-xl"
                 onClick={handleClick}
               />
               <Form.Control
@@ -671,6 +670,7 @@ const Signup = () => {
                 onChange={handleOnImageChange}
                 ref={hiddenFileInput}
                 style={{ display: "none" }}
+                className="input input-bordered"
               />
             </div>
             <FormInput
@@ -679,6 +679,7 @@ const Signup = () => {
               placeholder={t("placeholders.email")}
               handleOnChange={handleUserInputChange}
               errorMsg={userNameError}
+              className="input input-bordered"
             />
             <FormInput
               label={t("fullname")}
@@ -686,6 +687,7 @@ const Signup = () => {
               placeholder={t("placeholders.fullname")}
               handleOnChange={handleFullnameChange}
               errorMsg={fullnameError}
+              className="input input-bordered"
             />
             <FormInput
               label={t("company-code")}
@@ -693,90 +695,46 @@ const Signup = () => {
               placeholder={t("company-code")}
               handleOnChange={handleIdProductorChange}
               errorMsg={farmerIdError}
+              className="input input-bordered"
             />
-            <div className="form-input">
-              <Form.Label>
-                <>{t("gender")}</>
-              </Form.Label>
-              <Dropdown
-                onSelect={(eventKey) =>
-                  handleGenderChange(eventKey || "female")
-                }
-              >
-                <Dropdown.Toggle
-                  variant="secondary"
-                  id="dropdown-cooperative"
-                  className="text-left"
-                >
-                  <div className="cooperative-toggle">
-                    <span>{currentGender.name}</span>
-                  </div>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
+
+
+              <select id="dropdown-cooperative" onChange={handleGenderChange} >
+                <option disabled selected><> {t("gender")}</>:</option>
+                {currentGender.name}
                   {GenderList.map((item) => (
-                    <Dropdown.Item key={item.key} eventKey={item.key}>
+                    <option key={item.key} value={item.key}>
                       {item.name}
-                    </Dropdown.Item>
+                    </option>
                   ))}
-                </Dropdown.Menu>
-              </Dropdown>
-            </div>
+              </select>
           </Col>
           <Col sm={12} md={6} lg={6}>
-            <div className="form-input">
-              <Form.Label>
-                <>{t("signup.choose-company")}</>
-              </Form.Label>
-              <Dropdown
-                onSelect={(eventKey) =>
-                  handleCooperativeChange(eventKey || "0")
-                }
-              >
-                <Dropdown.Toggle
-                  variant="secondary"
-                  id="dropdown-cooperative"
-                  className="text-left"
-                >
-                  <div className="cooperative-toggle">
-                    <span>{currentCoop.name}</span>
-                  </div>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
+            <div className="">
+              <select id="dropdown-cooperative" onChange={handleCooperativeChange}>
+                <option disabled selected><> {t("signup.choose-company")}</>:</option>
+                {currentCoop.name}
+
                   {CooperativeList.map((item) => (
-                    <Dropdown.Item key={item.key} eventKey={item.key}>
+                    <option key={item.key} value={item.key}>
                       {item.name}
-                    </Dropdown.Item>
+                    </option>
                   ))}
-                </Dropdown.Menu>
-              </Dropdown>
+              </select>
               {coopError !== "" && (
                 <span className="error-message">{coopError}</span>
               )}
             </div>
-            <div className="form-input">
-              <Form.Label>
-                <>{t("region")}</>
-              </Form.Label>
-              <Dropdown
-                onSelect={(eventKey) => handleRegionChange(eventKey || "0")}
-              >
-                <Dropdown.Toggle
-                  variant="secondary"
-                  id="dropdown-cooperative"
-                  className="text-left"
-                >
-                  <div className="cooperative-toggle">
-                    <span>{currentRegion.name}</span>
-                  </div>
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {RegionList.map((item) => (
-                    <Dropdown.Item key={item.key} eventKey={item.key}>
+            <div className="">
+              <select id="dropdown-cooperative" onChange={handleRegionChange} >
+                <option disabled selected><> {t("region")}</>:</option>
+                {currentRegion.name}
+                {RegionList.map((item) => (
+                    <option key={item.key} value={item.key}>
                       {item.name}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+                    </option>
+                ))}
+              </select>
               {coopError !== "" && (
                 <span className="error-message">{regionError}</span>
               )}
@@ -787,6 +745,7 @@ const Signup = () => {
               placeholder={t("village")}
               handleOnChange={handleVillageChange}
               errorMsg={villageError}
+              className="input input-bordered"
             />
             <FormInput
               label={t("village2")}
@@ -794,8 +753,9 @@ const Signup = () => {
               placeholder={t("village2")}
               handleOnChange={handleVillage2Change}
               errorMsg={village2Error}
+              className="input input-bordered"
             />
-            <div className="form-input">
+            <div className="">
               <Form.Label>
                 <>{t("bio")}</>
               </Form.Label>
@@ -805,6 +765,7 @@ const Signup = () => {
                 rows={5}
                 placeholder={t("placeholders.bio")}
                 onChange={handleBioChange}
+                className="textarea"
               />
               {bioError !== "" && (
                 <span className="error-message">{bioError}</span>
@@ -820,7 +781,7 @@ const Signup = () => {
           </h3>
         </div>
       )}
-    </Form>
+    </div>
   );
 
   const CardTitle = (): string => {
@@ -852,9 +813,10 @@ const Signup = () => {
   }
 
   return (
+      <div className="bg-white">
     <div className="signup">
-      <Card className={cardClassName()}>
-        <Card.Body>
+      <div className={cardClassName()}>
+        <div className="card card-body">
           <div className="header">
             <CoopLogo className="logo" />
             <h3>{CardTitle()}</h3>
@@ -877,13 +839,14 @@ const Signup = () => {
               </Tabs>
               <div className="btn-container">
                 <button
-                  className="btn btn-secondary"
+                  className="btn btn-primary"
                   onClick={() => magicLogin()}
                 >
                   <>{t("signup.create-account")}</>
                 </button>
+                <br/>
                 <button
-                    className="btn btn-secondary"
+                    className="btn btn-secondary "
                     onClick={() => navigate("/login", { replace: true })}
                 >
                   <u>
@@ -904,7 +867,7 @@ const Signup = () => {
                 </h6>
               )}
               <button
-                className="auth-method"
+                className="btn auth-method"
                 onClick={() => {
                   authContext.fakeSignOut();
                   navigate("/login", { replace: true });
@@ -914,9 +877,10 @@ const Signup = () => {
               </button>
             </div>
           )}
-        </Card.Body>
-      </Card>
+        </div>
+      </div>
     </div>
+      </div>
   );
 };
 

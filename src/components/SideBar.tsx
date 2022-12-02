@@ -59,7 +59,6 @@ export default function Home() {
     const {t} = useTranslation();
     const {authContext, authState} = useAuthContext();
     const [state] = authState;
-
     const [ownerAddress, setOwnerAddress] = useState("");
     useEffect(() => {
         const loadProvider = async () => {
@@ -79,8 +78,8 @@ export default function Home() {
 
     const navigate = useNavigate();
     const [active, setActive] = useState(false)
-    const [primary, SetBackgroundColor] = useState('bg-amber-900')
-    const [farm, setFarmName] = useState('Empresa/Cooperativa')
+    const [primary,] = useState('bg-amber-900')
+    const [farm,] = useState('Empresa/Cooperativa')
     const controls = useAnimation()
     const controlText = useAnimation()
     const controlTitleText = useAnimation()
@@ -133,6 +132,9 @@ export default function Home() {
                 <CoopLogo className="inline-flex items-center"/>
 
             </div>
+            <motion.p animate={controlText} className='ml-4 text-sm'>
+                {makeShortAddress(ownerAddress)}
+            </motion.p>
 
 
             <div className='grow'>
@@ -187,6 +189,7 @@ export default function Home() {
                     ))}
                 </div>))}
             </div>
+            <br/>
             <br/>
 
         </motion.div>
