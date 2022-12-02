@@ -28,7 +28,7 @@ const Home = () => {
     }
 
     return (
-        <Container fluid className="main-container overflow-y-scroll">
+        <Container fluid className="main-container">
             <ToastContainer limit={4}/>
             <Routes>
                 <Route

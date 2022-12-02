@@ -5,6 +5,7 @@ import {useAuthContext} from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
 import LangChooser from "./common/LangChooser";
 import {isValidCellphone, isValidEmail,} from "../utils/utils";
+import background from "../assets/coffee.jpg";
 
 const Login = () => {
     const {t} = useTranslation();
@@ -14,44 +15,9 @@ const Login = () => {
     const [state] = authState;
     const [userInput, setUserInput] = useState("");
     const [userInputError, setUserInputError] = useState("");
-    let name = 'Empresa cooperativa';
-    let image = 'https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg';
-
-    const location = window.location.host;
-
-    switch (location) {
-        case 'comsa': {
-            name = 'Comsa';
-            image ='https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FCOMSA.jpg?alt=media&token=bc36aa90-dc6f-4bb6-b40d-c17310dbd5f9';
-            break;
-        }
-        case "commovel": {
-            name = 'Commovel';
-            image = 'https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg';
-            break;
-
-        }
-        case "copranil": {
-            name = 'Copranil';
-            image = 'https://www.copranil.hn/wp-content/uploads/2021/03/LA-PARTICIPACION-DE-LA-MUJER-ENFOQUE-FUNDAMENTAL.jpeg';
-            break;
-        }
-        case "proexo": {
-            name = 'Proexo';
-            image = 'https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FPROEXO.jpg?alt=media&token=ec371948-d535-4994-aa54-7e6a7fb2dda3';
-            break;
-        }
-        default: {
-            name = 'Empresa/Cooperativa';
-            image = 'https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg';
-            break;
-        }
-    }
 
     useEffect(() => {
-        function check() {
-        }
-        check();
+
         // eslint-disable-next-line
     }, [state.isLoggedIn, state.isSignInError]);
 
@@ -76,19 +42,22 @@ const Login = () => {
     };
 
     return (<>
-        <div className="bg-no-repeat bg-cover bg-center relative bg-[#71ac44]"
-             style={{backgroundImage: `url(${image})`}}>
-            <div className="bg-opacity-60 bg-black">
+        <div className="bg-no-repeat bg-cover bg-center relative bg-black"
+             style={{backgroundImage: `url(${background})`}}>
+            <div className="bg-opacity-80 bg-black">
                 <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
                     <div className="flex-col flex self-center p-10 sm:max-w-5xl md:pl-2 xl:max-w-2xl z-10">
                         <div className="hidden lg:flex flex-col text-white">
-                            <h1 className="mb-3 font-bold text-5xl "><>{t("welcome")}</>: {name}
+                            <h1 className="mb-3 font-bold text-5xl "><>{t("welcome")}</>
+                                : a la Plataforma de trazabilidad
                             </h1>
-                            <p className="pr-3 md:text-light">Nuestro café trazado con la seguridad de la tecnología de blockchain. </p>
+                            <p className="pr-3 md:text-light">Nuestro café trazado con la seguridad de la tecnología de
+                                blockchain. </p>
                         </div>
                     </div>
                     <div className="flex justify-center self-center  z-10">
-                        <div className="p-12 bg-white mx-auto rounded-2xl w-100 flex flex-col justify-center items-center ">
+                        <div
+                            className="p-12 bg-white mx-auto rounded-2xl w-100 flex flex-col justify-center items-center ">
                             <div className="w-14 pb-4">
                                 <CoopLogo className=""/>
                             </div>
