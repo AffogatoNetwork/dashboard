@@ -56,6 +56,7 @@ const CoffeeCard = () => {
                             if (traitType === "dry mill") {
                                 [dryMill] = jsonData.attributes[i].value;
                             }
+
                         }
                         const coffeeB = {
                             id: 0,
@@ -76,21 +77,7 @@ const CoffeeCard = () => {
                         console.log(coffeeB.farmer);
                         console.log(coffeeB.ipfsHash);
                         const location = window.location.host;
-                        let currenLocation = '';
-                        console.log(location);
-                        if (location.match("comsa") !== null) {
-                            currenLocation = 'comsa';
-                        }
-                        if (location.match("commovel") !== null) {
-                            currenLocation = "commovel"
-                        }
-                        if (location.match("copranil") !== null) {
-                            currenLocation = "copranil"
-                        }
-                        if (location.match("proexo") !== null) {
-                            currenLocation = "proexo"
-                        }
-
+                        var currenLocation = location.replace('.affogato.co','');
                         const farmData = {
                             farmerAddress: coffeeB.farmer,
                             company: currenLocation,
@@ -107,7 +94,7 @@ const CoffeeCard = () => {
                             ethnicGroup: coffeeB.farm.etnic_group,
                             ipfsHash: coffeeB.ipfsHash
                         };
-
+console.log(farmData);
                         updateFarmer(coffeeB.farmer, coffeeB.ipfsHash);
                         updateFarms(farmData);
                         setLoading(false);

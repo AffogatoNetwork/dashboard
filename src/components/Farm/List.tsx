@@ -71,11 +71,11 @@ export const List = () => {
             let companyName = "proexo";
             const hostname = window.location.hostname;
             if (hostname.includes("copranil")) {
-                companyName = "COPRANIL";
+                companyName = "copranil";
             } else if (hostname.includes("commovel")) {
-                companyName = "COMMOVEL";
+                companyName = "commovel";
             } else if (hostname.includes("comsa")) {
-                companyName = "COMSA";
+                companyName = "commovel";
             }
 
 
