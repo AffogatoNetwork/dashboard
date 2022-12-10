@@ -84,11 +84,8 @@ export const List = () => {
                 console.log(result)
                 for (let i = 0; i < result.length; i += 1) {
                     const farmData = result[i].data();
-                    const l = farmData.village
-                        .concat(", ")
-                        .concat(farmData.region)
-                        .concat(", ")
-                        .concat(farmData.country);
+                    console.log(farmData);
+                    const l = farmData.location;
                     const farm = {
                         farmerAddress: farmData.farmerAddress,
                         company: farmData.company,
