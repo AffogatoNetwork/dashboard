@@ -71,10 +71,8 @@ const CoffeeCard = () => {
 
                         };
                         setCoffeeBatch(coffeeB);
+                        console.log(coffeeB)
                         console.log(coffeeB.farm);
-
-
-
                         console.log(coffeeB.farmer);
                         console.log(coffeeB.ipfsHash);
                         const location = window.location.host;
@@ -91,10 +89,7 @@ const CoffeeCard = () => {
                         }
                         if (location.match("proexo") !== null) {
                             currenLocation = "proexo"
-                        } else {
-                            currenLocation = "proexo"
                         }
-
 
                         const farmData = {
                             farmerAddress: coffeeB.farmer,
