@@ -70,21 +70,20 @@ export const List = () => {
             // const sAddress = await signer.getAddress();
             let companyName = "proexo";
             const hostname = window.location.hostname;
-            if (hostname.includes("copranil")) {
+            if (hostname.includes("proexo")) {
+                companyName = "proexo";
+            }else if (hostname.includes("copranil")) {
                 companyName = "copranil";
             } else if (hostname.includes("commovel")) {
                 companyName = "commovel";
             } else if (hostname.includes("comsa")) {
-                companyName = "commovel";
+                companyName = "comsa";
             }
 
 
             await getFarms(companyName).then((result) => {
-                console.log(companyName)
-                console.log(result)
                 for (let i = 0; i < result.length; i += 1) {
                     const farmData = result[i].data();
-                    console.log(farmData);
                     const l = farmData.location;
                     const farm = {
                         farmerAddress: farmData.farmerAddress,
@@ -225,21 +224,21 @@ export const List = () => {
                 className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}>
 
 
-                <td className="p-3 text-base font-light">{farm.name}</td>
+                <td className="p-3 text-base font-light">{farm!.name}</td>
                 <td className="p-3 text-base font-light">
-                    {farm.height} <>{t("masl")}</>
+                    {farm!.height} <>{t("masl")}</>
                 </td>
-                <td className="p-3 text-base font-light">{farm.area}</td>
-                <td className="p-3 text-base font-light">{farm.certifications}</td>
-                <td className="p-3 text-base font-light">{farm.varieties}</td>
-                <td className="p-3 text-base font-light">{farm.location}</td>
-                <td className="p-3 text-base font-light">{farm.shadow}</td>
-                <td className="p-3 text-base font-light">{farm.familyMembers}</td>
-                <td className="p-3 text-base font-light">{farm.ethnicGroup}</td>
+                <td className="p-3 text-base font-light">{farm!.area}</td>
+                <td className="p-3 text-base font-light">{farm!.certifications}</td>
+                <td className="p-3 text-base font-light">{farm!.varieties}</td>
+                <td className="p-3 text-base font-light">{farm!.location}</td>
+                <td className="p-3 text-base font-light">{farm!.shadow}</td>
+                <td className="p-3 text-base font-light">{farm!.familyMembers}</td>
+                <td className="p-3 text-base font-light">{farm!.ethnicGroup}</td>
                 <td className="p-3 text-base font-light">
                     <label htmlFor="map-modal" className="btn btn-ghost h-full"
                            onClick={() => {
-                               onMapBtnClick(farm.latitude, farm.longitude, farm.name)
+                               onMapBtnClick(farm!.latitude, farm!.longitude, farm!.name)
                            }}
                     >
                         <>{t("show-map")}</>

@@ -5,13 +5,9 @@ import Loading from "../Loading";
 import NotFound from "../common/NotFound";
 import {CoffeeBatchType} from "../common/types";
 import {ipfsUrl} from "../../utils/constants";
-import {getFarmer, updateFarmer, updateFarms} from "../../db/firebase";
+import {getFarmer} from "../../db/firebase";
 import NewMap from "../common/NewMap";
-import Image from "react-bootstrap/Image";
-import Comsa from "../../assets/comsa.png";
-import Commovel from "../../assets/commovel.png";
-import Copranil from "../../assets/copranil.png";
-import Proexo from "../../assets/proexo.png";
+
 
 const CoffeeCard = () => {
     const {t} = useTranslation();
@@ -72,31 +68,6 @@ const CoffeeCard = () => {
 
                         };
                         setCoffeeBatch(coffeeB);
-                        console.log(coffeeB)
-                        console.log(coffeeB.farm);
-                        console.log(coffeeB.farmer);
-                        console.log(coffeeB.ipfsHash);
-                        const location = window.location.host;
-                        var currenLocation = location.replace('.affogato.co','');
-                        const farmData = {
-                            farmerAddress: coffeeB.farmer,
-                            company: currenLocation,
-                            name: coffeeB.farm.name,
-                            height: coffeeB.farm.altitude,
-                            area: coffeeB.farm.area,
-                            certifications: coffeeB.farm.certifications,
-                            latitude: coffeeB.farm.latitude,
-                            longitude: coffeeB.farm.longitude,
-                            location: coffeeB.farm.region,
-                            varieties: coffeeB.farm.varieties,
-                            shadow: coffeeB.farm.shadow,
-                            familyMembers: coffeeB.farm.family_members,
-                            ethnicGroup: coffeeB.farm.etnic_group,
-                            ipfsHash: coffeeB.ipfsHash
-                        };
-console.log(farmData);
-                        updateFarmer(coffeeB.farmer, coffeeB.ipfsHash);
-                        updateFarms(farmData);
                         setLoading(false);
                     })
                     .catch((error) => {

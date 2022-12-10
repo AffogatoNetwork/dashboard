@@ -38,8 +38,7 @@ const data = [{
     }, {
         title: 'cupping', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
     }, {
-        title: 'add-batches', icon: VoteIcon, href: routes.create, disabled: ''
-
+        title: 'add-batches', icon: VoteIcon, href: routes.home, disabled: 'true'
     },
 
     ]
@@ -66,6 +65,7 @@ export default function Home() {
                 const signer = state.provider.getSigner();
                 const address = await signer.getAddress();
                 setOwnerAddress(address);
+
             }
         };
         loadProvider();
@@ -79,7 +79,6 @@ export default function Home() {
     const navigate = useNavigate();
     const [active, setActive] = useState(false)
     const [primary,] = useState('bg-amber-900')
-    const [farm,] = useState('Empresa/Cooperativa')
     const controls = useAnimation()
     const controlText = useAnimation()
     const controlTitleText = useAnimation()
