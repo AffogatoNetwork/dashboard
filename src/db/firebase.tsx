@@ -9,7 +9,6 @@ import {
   setDoc,
   updateDoc,
   where,
-  arrayUnion,
   writeBatch,
 } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -64,22 +63,15 @@ console.log(farmer, farm)
   console.log('gg')
 };
 
-
-
-
-export const updateFarms = async (cooperative: string, farmData: any ) => {
+export const updateFarms = async (Farmdata: any) => {
   try {
-    const docId = cooperative;
+    const docId = Farmdata.farmerAddress.concat(Farmdata.name.replace(/\s/g, "").toLocaleLowerCase());
     const farmDoc = doc(db, "farms", docId);
-    await updateDoc(farmDoc, {
-      farms: arrayUnion(farmData)
-    });
+    await setDoc(farmDoc, Farmdata);
   } catch (error) {
     console.log(error);
   }
 };
-
-
 
 
 export const getAllFarmers = async (company: string) => {

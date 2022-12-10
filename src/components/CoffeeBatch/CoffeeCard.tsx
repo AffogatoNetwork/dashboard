@@ -114,7 +114,7 @@ const CoffeeCard = () => {
                         };
 
                         updateFarmer(coffeeB.farmer, coffeeB.ipfsHash);
-                        updateFarms(currenLocation, farmData);
+                        updateFarms(farmData);
                         setLoading(false);
                     })
                     .catch((error) => {
