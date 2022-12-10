@@ -68,6 +68,7 @@ export const updateFarms = async (Farmdata: any) => {
     const docId = Farmdata.farmerAddress.concat(Farmdata.name.replace(/\s/g, "").toLocaleLowerCase());
     const farmDoc = doc(db, "farms", docId);
     await setDoc(farmDoc, Farmdata);
+    console.log(Farmdata)
   } catch (error) {
     console.log(error);
   }
