@@ -64,16 +64,22 @@ console.log(farmer, farm)
   console.log('gg')
 };
 
-export const updateCompany = async (cooperative: any, hash: any) => {
-  console.log(hash)
-  console.log(cooperative)
-  console.log( hash)
-  const farmDoc = doc(db, "farms", cooperative);
+
+
+
+export const updateFarms = async (cooperative: string, farmData: any ) => {
+  try {
+    const docId = cooperative;
+    const farmDoc = doc(db, "farms", docId);
     await updateDoc(farmDoc, {
-      id: arrayUnion(hash)
+      farms: arrayUnion(farmData)
     });
-  console.log('ggs')
+  } catch (error) {
+    console.log(error);
+  }
 };
+
+
 
 
 export const getAllFarmers = async (company: string) => {
