@@ -7,6 +7,11 @@ import {CoffeeBatchType} from "../common/types";
 import {ipfsUrl} from "../../utils/constants";
 import {getFarmer, updateCompany, updateFarmer} from "../../db/firebase";
 import NewMap from "../common/NewMap";
+import Image from "react-bootstrap/Image";
+import Comsa from "../../assets/comsa.png";
+import Commovel from "../../assets/commovel.png";
+import Copranil from "../../assets/copranil.png";
+import Proexo from "../../assets/proexo.png";
 
 const CoffeeCard = () => {
     const {t} = useTranslation();
@@ -70,9 +75,23 @@ const CoffeeCard = () => {
                         console.log(coffeeB.farmer);
                         console.log(coffeeB.ipfsHash);
                         const location = window.location.host;
+                        let currenLocation = '';
                         console.log(location);
+                        if (location.match("comsa") !== null) {
+                            currenLocation = 'comsa';
+                        }
+                        if (location.match("commovel") !== null) {
+                            currenLocation = "commovel"
+                        }
+                        if (location.match("copranil") !== null) {
+                            currenLocation = "copranil"
+                        }
+                        if (location.match("proexo") !== null) {
+                            currenLocation = "proexo"
+                        }
+
                         updateFarmer(coffeeB.farmer, coffeeB.ipfsHash);
-                        updateCompany(location, coffeeB.ipfsHash);
+                        updateCompany(currenLocation, coffeeB.ipfsHash);
                         setLoading(false);
                     })
                     .catch((error) => {
