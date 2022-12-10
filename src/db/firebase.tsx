@@ -7,7 +7,9 @@ import {
   getFirestore,
   query,
   setDoc,
+  updateDoc,
   where,
+  arrayUnion,
   writeBatch,
 } from "firebase/firestore";
 import { getStorage, getDownloadURL, ref, uploadBytes } from "firebase/storage";
@@ -51,6 +53,28 @@ export const getFarmer = async (address: string) => {
   }
   return null;
 };
+
+export const updateFarmer = async (farmer: any, farm: any) => {
+console.log(farmer, farm)
+  const farmerDoc = doc(db, "farmers", farmer);
+  await updateDoc(farmerDoc,
+      {
+        farm: farm
+      });
+  console.log('gg')
+};
+
+export const updateCompany = async (cooperative: any, hash: any) => {
+  console.log(hash)
+  console.log(cooperative)
+  console.log( hash)
+  const farmDoc = doc(db, "farms", cooperative);
+    await updateDoc(farmDoc, {
+      id: arrayUnion(hash)
+    });
+  console.log('ggs')
+};
+
 
 export const getAllFarmers = async (company: string) => {
   const q = query(collection(db, "farmers"), where("company", "==", company));

@@ -15,6 +15,9 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
         .concat("/batch/")
         .concat(coffeeBatch.ipfsHash);
 
+    const openInNewTab = (url: string | URL | undefined) => {
+        window.open(url, '_blank', 'noopener,noreferrer');
+    };
     return (
         <tr
             key={coffeeBatch.id}
@@ -22,9 +25,9 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
         >
             <td className="p-3 text-base font-light">
                 <div className="qrcode">
-                    <label htmlFor="coffe-batch" className="btn btn-ghost h-full"
+                    <label className="btn btn-ghost h-full"
                            onClick={() => {
-                               showQrModal(batchUrl);
+                               openInNewTab(batchUrl);
                            }}
                     >
                         <QRCode value={batchUrl} size={60}/>
