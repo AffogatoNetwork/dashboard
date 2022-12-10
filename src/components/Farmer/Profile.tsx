@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import NotFound from "../common/NotFound";
 import {getFarmer, getFarmerFarms, getImageUrl} from "../../db/firebase";
 import NewMap from "../common/NewMap";
+import {ipfsUrl} from "../../utils/constants";
 
 
 export const Profile = () => {
@@ -13,6 +14,7 @@ export const Profile = () => {
     const [loading, setLoading] = useState(true);
     const [farmerData, setFarmerData] = useState<any>();
     const [farms, setFarms] = useState<any>();
+    const [farmName, setfarmName] = useState("");
     const [imageUrl, setImageUrl] = useState("");
 
     useEffect(() => {
@@ -20,16 +22,23 @@ export const Profile = () => {
             if (farmerId) {
                 await getFarmer(farmerId).then((result) => {
                     setFarmerData(result);
+                    console.log(result?.farm);
+                    const ipfsHash = result?.farm;
+                    const url = ipfsUrl.concat(ipfsHash);
+                    console.log(url);
+                    fetch(url)
+                        .then((response) => response.json())
+                        .then((jsonData) => {
+                            console.log(jsonData)
+                            setfarmName(jsonData.name)
+                            setFarms(jsonData.attributes[3].value[0]);
+                        });
+                    setLoading(false);
                 });
                 await getImageUrl(farmerId).then((result) => {
                     setImageUrl(result);
                 });
-                await getFarmerFarms(farmerId).then((result) => {
-                    if (result !== null) {
-                        setFarms(result[0]);
-                    }
-                    setLoading(false);
-                });
+
                 setLoading(false);
             }
         };
@@ -121,7 +130,9 @@ export const Profile = () => {
                                     className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
                                     <div className="flex flex-col m-2">
                                         <h2 className="text-2xl font-bold mb-4">
-                                            Datos de Productor
+                                            Finca : <a>
+                                            {farmName}
+                                        </a>
                                         </h2>
 
                                         <div
@@ -138,7 +149,7 @@ export const Profile = () => {
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                                 <div className="ml-4">
                                                     <h2 className="font-semibold">Miembros de Familia:</h2>
-                                                    <p className="mt-2 text-sm text-gray-500">{farms?.familyMembers}</p>
+                                                    <p className="mt-2 text-sm text-gray-500">{farms?.family_members}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
