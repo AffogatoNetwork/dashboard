@@ -5,7 +5,7 @@ import Loading from "../Loading";
 import NotFound from "../common/NotFound";
 import {CoffeeBatchType} from "../common/types";
 import {ipfsUrl} from "../../utils/constants";
-import {getFarmer, updateCompany, updateFarmer} from "../../db/firebase";
+import {getFarmer, updateFarmer, updateFarms} from "../../db/firebase";
 import NewMap from "../common/NewMap";
 import Image from "react-bootstrap/Image";
 import Comsa from "../../assets/comsa.png";
@@ -31,8 +31,7 @@ const CoffeeCard = () => {
                     .then((response) => response.json())
                     .then(async (jsonData) => {
                         let farmer = {};
-                        let farm = {};
-                        let cooperative = {};
+                        let farm: any;
                         let cupProfile = {};
                         let wetMill = {};
                         let dryMill = {};
@@ -72,6 +71,10 @@ const CoffeeCard = () => {
 
                         };
                         setCoffeeBatch(coffeeB);
+                        console.log(coffeeB.farm);
+
+
+
                         console.log(coffeeB.farmer);
                         console.log(coffeeB.ipfsHash);
                         const location = window.location.host;
@@ -88,10 +91,30 @@ const CoffeeCard = () => {
                         }
                         if (location.match("proexo") !== null) {
                             currenLocation = "proexo"
+                        } else {
+                            currenLocation = "proexo"
                         }
 
+
+                        const farmData = {
+                            farmerAddress: coffeeB.farmer,
+                            company: currenLocation,
+                            name: coffeeB.farm.name,
+                            height: coffeeB.farm.altitude,
+                            area: coffeeB.farm.area,
+                            certifications: coffeeB.farm.certifications,
+                            latitude: coffeeB.farm.latitude,
+                            longitude: coffeeB.farm.longitude,
+                            location: coffeeB.farm.region,
+                            varieties: coffeeB.farm.varieties,
+                            shadow: coffeeB.farm.shadow,
+                            familyMembers: coffeeB.farm.family_members,
+                            ethnicGroup: coffeeB.farm.etnic_group,
+                            ipfsHash: coffeeB.ipfsHash
+                        };
+
                         updateFarmer(coffeeB.farmer, coffeeB.ipfsHash);
-                        updateCompany(currenLocation, coffeeB.ipfsHash);
+                        updateFarms(currenLocation, farmData);
                         setLoading(false);
                     })
                     .catch((error) => {
