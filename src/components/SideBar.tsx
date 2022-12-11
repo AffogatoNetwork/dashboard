@@ -38,7 +38,7 @@ const data = [{
     }, {
         title: 'cupping', icon: LocalCafeIcon, href: routes.catacion, disabled: ''
     }, {
-        title: 'add-batches', icon: VoteIcon, href: routes.home, disabled: 'true'
+        title: 'add-batches', icon: VoteIcon, href: routes.home, disabled: ''
     },
 
     ]

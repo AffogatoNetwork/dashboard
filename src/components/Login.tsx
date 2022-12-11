@@ -17,17 +17,27 @@ const Login = () => {
     const [userInputError, setUserInputError] = useState("");
 
     useEffect(() => {
-
+        function check() {
+            if (state.isLoggedIn) {
+                navigate("/", { replace: true });
+            } else if (state.isSignInError) {
+                setUserInput("");
+            }
+        }
+        check();
         // eslint-disable-next-line
     }, [state.isLoggedIn, state.isSignInError]);
 
     const magicLogin = async () => {
+        try{
         if (isValidEmail(userInput)) {
             authContext.signIn({emailLogin: true, credential: userInput});
         } else if (isValidCellphone(userInput)) {
             authContext.signIn({
                 emailLogin: false, credential: areaCode.concat(userInput),
             });
+        } } catch (e) {
+            console.log(e);
         }
     };
 
