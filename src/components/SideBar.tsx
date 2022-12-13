@@ -36,7 +36,7 @@ const data = [{
     }, {
         title: 'certificates', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
     }, {
-        title: 'add-batches', icon: VoteIcon, href: routes.home, disabled: ''
+        title: 'add-batches', icon: VoteIcon, href: routes.create, disabled: ''
     },
     ]
 },]
@@ -166,25 +166,6 @@ export default function Home() {
                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
 
 
-            <div>
-                {datafooter.map((group, index) => (<div key={index} className='my-2'>
-                    <motion.p animate={controlTitleText}
-                              className='mb-2 ml-4 text-sm font-bold text-gray-500'>{group.name}</motion.p>
-
-                    {group.items.map((item, index2) => (<div key={index2} onClick={() => logout()}
-                                                             className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
-                            <item.icon className=' active:text-white'/>
-                            <motion.p animate={controlText}
-                                      className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
-                                <>
-                                    {t(item.title)}
-                                </>
-                            </motion.p>
-                        </div>
-
-                    ))}
-                </div>))}
-            </div>
             <br/>
             <br/>
 
