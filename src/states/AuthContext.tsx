@@ -118,24 +118,7 @@ export default function AuthProvider({ children }: props) {
 
   useEffect(() => {
     // check if user is logged in
-    const load = async () => {
-      const loggedIn = await magicSDK.user.isLoggedIn();
-      if (loggedIn) {
-        const provider = new ethers.providers.Web3Provider(
-            // @ts-ignore
-            magicSDK.rpcProvider
-        );
-        dispatch({
-          type: "SIGN_IN",
-          isLoading: false,
-          isLoggedIn: true,
-          provider,
-        });
-      } else {
-        dispatch({ type: "SIGN_OUT", isLoading: false });
-      }
-    };
-    load();
+
     // eslint-disable-next-line
   }, [state.isLoggedIn]);
 
