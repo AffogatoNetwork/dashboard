@@ -20,8 +20,8 @@ const Login = () => {
         function check() {
             if (state.isLoggedIn) {
                 navigate("/", { replace: true });
-            } else if (state.isSignInError) {
-                setUserInput("");
+            } else {
+               console.log("");
             }
         }
         check();
