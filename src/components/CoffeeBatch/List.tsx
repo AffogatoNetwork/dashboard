@@ -18,6 +18,10 @@ import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
 
+const openInNewTab = (url: string | URL | undefined) => {
+    window.open(url, '_blank', 'noopener,noreferrer');
+};
+
 const saveSvgAsPng = require("save-svg-as-png");
 
 const pagDefault = {
@@ -512,13 +516,12 @@ export const List = () => {
                                     </button>
                                 </div>
                                 <div>
-                                    <a href={qrCodeUrl}>
-                                        <button
+                                        <button onClick={() => {
+                                            openInNewTab(qrCodeUrl);}}
                                             className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
                                             <LinkIcon></LinkIcon>
                                             <>{t("open-link")}</>
                                         </button>
-                                    </a>
                                 </div>
                             </div>
                         </div>
