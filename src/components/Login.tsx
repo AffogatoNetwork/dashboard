@@ -93,17 +93,6 @@ const Login = () => {
                                     </p>
 
                                     <br/>
-                                    <div className="flex items-center space-x-4">
-                                        <hr className="w-full border border-gray-300"/>
-                                        <div className="font-semibold text-gray-400">O</div>
-                                        <hr className="w-full border border-gray-300"/>
-                                    </div>
-                                    <br/>
-                                    <button type="submit"
-                                            className="w-full flex justify-center bg-yellow-700 hover:bg-yellow-900 text-gray-100 p-3 tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
-                                            onClick={() => navigate("/coffeebatches", {replace: true})}>
-                                        <>{t("login.buyer-access")}</>
-                                    </button>
                                 </div>
                             </div>
                             <div className="pt-5 text-center text-gray-400 text-xs">
