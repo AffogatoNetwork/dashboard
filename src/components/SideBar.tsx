@@ -56,7 +56,6 @@ export default function Home() {
     const [ownerAddress, setOwnerAddress] = useState("");
     useEffect(() => {
         const loadProvider = async () => {
-            console.log(state);
             if (state.provider != null) {
                 const signer = state.provider.getSigner();
                 const address = await signer.getAddress();

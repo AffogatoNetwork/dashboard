@@ -18,9 +18,10 @@ const Login = () => {
 
     useEffect(() => {
         function check() {
+            console.log()
             if (state.isLoggedIn) {
                 navigate("/", { replace: true });
-            } else if (state.isSignInError) {
+            } else if (state.isLoggedIn ) {
                 setUserInput("");
             }
         }

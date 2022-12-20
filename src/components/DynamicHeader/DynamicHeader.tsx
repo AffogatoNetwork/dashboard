@@ -6,7 +6,6 @@ function getFaviconEl() {
 
 const DynamicHeader = () => {
     const favicon = getFaviconEl();
-    console.log(favicon);
     const location = window.location.host;
 
     if (location.match("commovel") !== null) {
@@ -14,7 +13,7 @@ const DynamicHeader = () => {
         favicon.href = "../../assets/favicon/commovel.ico";
         return (<>
                 <HelmetProvider>
-                    <title>  Commovel </title>
+                    <title> Commovel </title>
                     <link rel="icon" type="image/png" href="../../assets/favicon/commovel.ico" sizes="16x16" />
                 </HelmetProvider>
             </>
@@ -35,7 +34,7 @@ const DynamicHeader = () => {
         favicon.href = "../../assets/favicon/comsa.ico";
         return (<>
                 <HelmetProvider>
-                    <title>  Comsa </title>
+                    <title> Comsa </title>
                     <link rel="icon" type="image/png" href="../../assets/favicon/comsa.ico" sizes="16x16" />
                 </HelmetProvider>
             </>
@@ -45,7 +44,7 @@ const DynamicHeader = () => {
         favicon.href = "../../assets/favicon/proexo.ico";
         return (<>
                 <HelmetProvider>
-                    <title>  Proexo </title>
+                    <title> Proexo </title>
                     <link rel="icon" type="image/png" href="../../assets/favicon/proexo.ico" sizes="16x16" />
                 </HelmetProvider>
             </>
@@ -55,7 +54,7 @@ const DynamicHeader = () => {
         favicon.href = "../../assets/favicon/default.ico";
         return (<>
                 <HelmetProvider>
-                    <title>  Plataforma de trazabilidad </title>
+                    <title> Plataforma de trazabilidad </title>
                     <link rel="icon" type="image/png" href="../../assets/favicon/default.ico" sizes="16x16" />
                 </HelmetProvider>
             </>
