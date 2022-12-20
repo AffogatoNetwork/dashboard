@@ -1,4 +1,4 @@
-import React, {useEffect} from "react";
+import React from "react";
 import {DefaultLanding} from "../DynamicLanding/DefaultLanding";
 import {CommovelLanding} from "../DynamicLanding/CommovelLanding";
 import {CopranilLanding} from "../DynamicLanding/CopranilLanding";
