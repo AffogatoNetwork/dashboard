@@ -17,7 +17,14 @@ const Login = () => {
     const [userInputError, setUserInputError] = useState("");
 
     useEffect(() => {
-
+        function check() {
+            if (state.isLoggedIn) {
+                navigate("/", { replace: true });
+            } else if (state.isSignInError) {
+                setUserInput("");
+            }
+        }
+        check();
         // eslint-disable-next-line
     }, [state.isLoggedIn, state.isSignInError]);
 

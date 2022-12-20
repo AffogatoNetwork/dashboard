@@ -56,6 +56,7 @@ export default function Home() {
     const [ownerAddress, setOwnerAddress] = useState("");
     useEffect(() => {
         const loadProvider = async () => {
+            console.log(state);
             if (state.provider != null) {
                 const signer = state.provider.getSigner();
                 const address = await signer.getAddress();
@@ -168,7 +169,7 @@ export default function Home() {
 
             <div>
 
-                {state.isSigningIn ? (
+                {state.isLoggedIn ? (
                     <div className='my-2'>
                         <motion.p animate={controlTitleText}
                                   className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
