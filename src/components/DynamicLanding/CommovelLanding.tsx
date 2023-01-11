@@ -3,8 +3,12 @@ import "../../styles/batchlist.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
+import {useTranslation} from "react-i18next";
+
 
 export const CommovelLanding = () => {
+    const {t} = useTranslation();
+
     return (<>
         <section>
             <div id="header" className="hero min-h-screen"
@@ -110,7 +114,9 @@ export const CommovelLanding = () => {
 
                                 <div className="flex mt-4 items-center justify-center pb-2">
                                     <div className=" items-center">
-                                        <span className="leading-relaxed">Mujeres:</span>
+                                        <span className="leading-relaxed">
+                        <>{t('female')}</>
+                                        </span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -123,7 +129,7 @@ export const CommovelLanding = () => {
                                 </div>
                                 <div className="flex  items-center justify-center pb-2">
                                     <div className=" items-center">
-                                        <span className="leading-relaxed">Hombres:</span>
+                                        <span className="leading-relaxed"><>{t('male')}:</></span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -136,7 +142,7 @@ export const CommovelLanding = () => {
 
                                 <div className="flex mt-2 items-center justify-center pb-5">
                                     <div className=" items-center">
-                                        <span className="leading-relaxed font-black">Áreas Productivas:</span>
+                                       <span className="leading-relaxed"><>{t('areas')}:</></span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -163,7 +169,7 @@ export const CommovelLanding = () => {
 
 
                                 </div>
-                                <p className="leading-relaxed">Certificados</p>
+                                <p className="leading-relaxed"><>{t('certificates')}:</></p>
 
                                 <p className="leading-relaxed">
                                     100% Orgánico
@@ -174,7 +180,7 @@ export const CommovelLanding = () => {
                                 <br/>
 
                                 <div className=" items-center">
-                                    <p className="leading-relaxed">Reseña</p>
+                                    <p className="leading-relaxed"><>{t('review')}:</></p>
 
                                     <span className="leading-relaxed font-black">
                                                 <p className="leading-relaxed">
@@ -199,19 +205,23 @@ export const CommovelLanding = () => {
                 <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                     <img
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F1.jpeg?alt=media&token=c35a5e80-0288-4d3b-a6b1-d857093d66a5" alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F1.jpeg?alt=media&token=c35a5e80-0288-4d3b-a6b1-d857093d66a5"
+                        alt=""/>
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F2.jpeg?alt=media&token=715f446b-7b08-466d-b0c8-35b400c9ce1b" alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F2.jpeg?alt=media&token=715f446b-7b08-466d-b0c8-35b400c9ce1b"
+                        alt=""/>
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F3.jpeg?alt=media&token=74bb19fb-0eeb-42db-a271-c8cf832f376e" alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F3.jpeg?alt=media&token=74bb19fb-0eeb-42db-a271-c8cf832f376e"
+                        alt=""/>
                     <img
 
                         className="object-cover w-full h-56 rounded shadow-lg"
-                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F4.jpeg?alt=media&token=b74b40fe-80df-4611-b116-9cb851a5bacf" alt="" />
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F4.jpeg?alt=media&token=b74b40fe-80df-4611-b116-9cb851a5bacf"
+                        alt=""/>
                 </div>
             </div>
         </section>

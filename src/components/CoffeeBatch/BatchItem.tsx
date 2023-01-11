@@ -1,5 +1,5 @@
 import React from "react";
-import QRCode from "react-qr-code";
+import {QRCode} from "antd";
 import {CoffeeBatchType, PaginationType} from "../common/types";
 
 type props = {
@@ -31,7 +31,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
                                showQrModal(batchUrl);
                            }}
                     >
-                        <QRCode value={batchUrl} size={60}/>
+                        <QRCode value={batchUrl} size={90} iconSize={10} icon="https://affogato.co/static/media/logo.973fb819af57a73d1fd2.png"/>
                     </label>
                 </div>
             </td>

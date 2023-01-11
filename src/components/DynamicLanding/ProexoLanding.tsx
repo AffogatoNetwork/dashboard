@@ -3,8 +3,11 @@ import "../../styles/batchlist.scss";
 import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
+import {useTranslation} from "react-i18next";
 
 export const ProexoLanding = () => {
+    const {t} = useTranslation();
+
     return (<>
         <section>
             <div id="header" className="hero min-h-screen opacity-90"
@@ -109,7 +112,9 @@ export const ProexoLanding = () => {
 
                                 <div className="flex mt-4 items-center justify-center pb-2">
                                     <div className=" items-center">
-                                        <span className="leading-relaxed">Mujeres:</span>
+                                        <span className="leading-relaxed">
+                        <>{t('female')}:</>
+                                        </span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -122,7 +127,7 @@ export const ProexoLanding = () => {
                                 </div>
                                 <div className="flex  items-center justify-center pb-2">
                                     <div className=" items-center">
-                                        <span className="leading-relaxed">Hombres:</span>
+                                        <span className="leading-relaxed"><>{t('male')}:</></span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -135,7 +140,7 @@ export const ProexoLanding = () => {
 
                                 <div className="flex mt-2 items-center justify-center pb-5">
                                     <div className=" items-center">
-                                        <span className="leading-relaxed font-black">Áreas Productivas:</span>
+                                        <span className="leading-relaxed"><>{t('areas')}:</></span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
@@ -180,7 +185,7 @@ export const ProexoLanding = () => {
 
 
                                 </div>
-                                <p className="leading-relaxed">Certificados</p>
+                                <p className="leading-relaxed"><>{t('certificates')}:</></p>
 
                                 <p className="leading-relaxed">
                                     Orgánico
@@ -194,7 +199,7 @@ export const ProexoLanding = () => {
                                 <br/>
 
                                 <div className=" items-center">
-                                    <p className="leading-relaxed">Reseña</p>
+                                    <p className="leading-relaxed"><>{t('review')}:</></p>
 
                                     <span className="leading-relaxed font-black">
                                                 <p className="leading-relaxed">

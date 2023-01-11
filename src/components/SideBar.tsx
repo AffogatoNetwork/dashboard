@@ -33,9 +33,7 @@ const data = [{
         title: 'batches', icon: AgricultureIcon, href: routes.lotes, disabled: ''
     }, {
         title: 'certificates', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
-    }, {
-        title: 'add-batches', icon: VoteIcon, href: routes.home, disabled: ''
-    },
+    }
     ]
 },]
 
@@ -121,14 +119,19 @@ export default function Home() {
         <motion.div animate={controls}
                     className='max-w-[250px] animate duration-300 border-r border-gray-700 relative flex flex-col pt-2 min-h-screen group'>
 
-            <div
-                className="mx-2 relative  flex justify-center overflow-hidden rounded-full border-gray-400  h-10 w-10 drop-shadow-main border-3 object-cover">
-                <CoopLogo className="inline-flex items-center"/>
+
+            <div className="flex justify-center md:m-4 m-2 ">
+                <div className="w-14 h-14">
+                    <CoopLogo className="inline-block"/>
+
+                </div>
+            </div>
+            <div className="flex justify-center md:m-4 m-2 ">
+                <div className="text-sm">
+                    {makeShortAddress(ownerAddress)}
+                </div>
 
             </div>
-            <motion.p animate={controlText} className='ml-4 text-sm'>
-                {makeShortAddress(ownerAddress)}
-            </motion.p>
 
 
             <div className='grow'>
@@ -143,7 +146,14 @@ export default function Home() {
                             </motion.p>
                         </div>))}
                 </div>))}
-
+                <div tabIndex={1} onClick={() => navigate(`/create`)}
+                     className={`${state.isLoggedIn && window.location.pathname == '/create' && `${primary} text-white hover:bg-orange-300 hover:text-white`}  ${!state.isLoggedIn && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
+                >
+                    <VoteIcon className="w-8"/>
+                    <motion.p animate={controlText} className='ml-4 text-sm'>
+                        <>{t('add-batches')}</>
+                    </motion.p>
+                </div>
                 <div tabIndex={0}
                      className={`dropdown dropdown-right dropdown-end inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300 hover:text-white font-medium rounded-md cursor-pointer `}>
                     <WorldIcon className="w-8"/>
@@ -156,62 +166,58 @@ export default function Home() {
                     </ul>
                 </div>
 
-
-            </div>
-
-
-            {active && <AiOutlineMenuFold onClick={showLess}
-                                          className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
-            {!active && <AiOutlineMenuUnfold onClick={showMore}
-                                             className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
+                <br/>
+                <br/>
+                {active && <AiOutlineMenuFold onClick={showLess}
+                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
+                {!active && <AiOutlineMenuUnfold onClick={showMore}
+                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
 
 
-            <div>
+                <div>
 
-                {state.isLoggedIn ? (
-                    <div className='my-2'>
-                        <motion.p animate={controlTitleText}
-                                  className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
+                    {state.isLoggedIn ? (
+                        <div className='my-2'>
+                            <motion.p animate={controlTitleText}
+                                      className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
 
-                        <div onClick={() => logout()}
-                             className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
-                            <LogOutIcon className=' active:text-white'/>
+                            <div onClick={() => logout()}
+                                 className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
+                                <LogOutIcon className=' active:text-white'/>
 
-                            <motion.p animate={controlText}
-                                      className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
-                                <>
-                                    <>{t('logout')}</>
-                                </>
-                            </motion.p>
+                                <motion.p animate={controlText}
+                                          className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
+                                    <>
+                                        <>{t('logout')}</>
+                                    </>
+                                </motion.p>
+                            </div>
+
                         </div>
 
-                    </div>
+                    ) : (
+                        <div className='my-2'>
+                            <motion.p animate={controlTitleText}
+                                      className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
 
-                ) : (
-                    <div className='my-2'>
-                        <motion.p animate={controlTitleText}
-                                  className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
+                            <div onClick={() => navigate("/login", {replace: true})}
+                                 className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
+                                <IconLogin className='active:text-white'/>
+                                <motion.p animate={controlText}
+                                          className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
+                                    <>
+                                        <>{t('login.access')}</>
+                                    </>
+                                </motion.p>
+                            </div>
 
-                        <div onClick={() => navigate("/login", {replace: true})}
-                             className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
-                            <IconLogin className='active:text-white'/>
-                            <motion.p animate={controlText}
-                                      className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
-                                <>
-                                    <>{t('login.access')}</>
-                                </>
-                            </motion.p>
                         </div>
+                    )}
 
-                    </div>
-                )}
 
+                </div>
 
             </div>
-
-
-            <br/>
-            <br/>
 
         </motion.div>
 

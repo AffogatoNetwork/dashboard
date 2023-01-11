@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from "react";
 import Dropdown from "react-bootstrap/Dropdown";
 import Form from "react-bootstrap/Form";
-import QRCode from "react-qr-code";
+import {QRCode} from "antd";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {useTranslation} from "react-i18next";
 import "../../styles/farmers.scss";
@@ -293,7 +293,11 @@ export const List = () => {
                                setQrCodeUrl(farmerUrl);
                            }}
                     >
-                        <QRCode value={farmerUrl} size={60}/>
+                        <QRCode value={farmerUrl} size={90}
+                                iconSize={5}
+                                errorLevel="H"
+                                icon="https://affogato.co/static/media/logo.973fb819af57a73d1fd2.png"
+                        />
                     </label>
                 </div>
             </td>
@@ -334,7 +338,7 @@ export const List = () => {
                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                     <div className="flex justify-center m-6">
                         <div>
-                            <QRCode id="farmerlist" value={qrCodeUrl} size={300}/>
+                            <QRCode value={qrCodeUrl} size={300} icon="https://affogato.co/static/media/logo.973fb819af57a73d1fd2.png"/>
                             <div className="flex pt-8 space-x-4 place-content-center">
                                 <div>
                                     <button

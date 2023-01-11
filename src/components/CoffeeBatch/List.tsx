@@ -4,7 +4,7 @@ import {Contract, Provider, setMulticallAddress} from "ethers-multicall";
 import {gql, useQuery} from "@apollo/client";
 import {useTranslation} from "react-i18next";
 import "../../styles/batchlist.scss";
-import QRCode from "react-qr-code";
+import { QRCode } from 'antd';
 import Loading from "../Loading";
 import {useAuthContext} from "../../states/AuthContext";
 import {ipfsUrl, SEARCH_DIVIDER} from "../../utils/constants";
@@ -502,7 +502,12 @@ export const List = () => {
                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                     <div className="flex justify-center m-6">
                         <div>
-                            <QRCode id="coffe-batch" value={qrCodeUrl} size={300}/>
+                            <QRCode
+                                errorLevel="H"
+                                value={qrCodeUrl}
+                                icon="https://affogato.co/static/media/logo.973fb819af57a73d1fd2.png"
+                                size={300}
+                            />
                             <div className="flex pt-8 space-x-4 place-content-center">
                                 <div>
                                     <button

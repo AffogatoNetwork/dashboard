@@ -134,7 +134,18 @@ export const Profile = () => {
                                             {farmName}
                                         </a>
                                         </h2>
+                                        <label htmlFor="my-modal" className="btn"> Donar </label>
 
+                                        <input type="checkbox" id="my-modal" className="modal-toggle"/>
+                                        <div className="modal">
+                                            <div className="modal-box">
+                                                <h3 className="font-bold text-lg">Estamos trabajando en esta sección</h3>
+                                                <p className="py-4">Dentro de poco se podra enviar donaciones en criptomonedas  </p>
+                                                <div className="modal-action">
+                                                    <label htmlFor="my-modal" className="btn">Cerrar</label>
+                                                </div>
+                                            </div>
+                                        </div>
                                         <div
                                             className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 gap-4">
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
