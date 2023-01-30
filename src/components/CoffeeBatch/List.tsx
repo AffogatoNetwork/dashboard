@@ -71,7 +71,7 @@ export const List = () => {
                 first: 1000
                 orderBy: block
                 orderDirection: desc
-                where: { owner_in: $owners, block_gt: 24686109 }
+                where: { owner_in: $owners, block_gt: 22693767 }
             ) {
                 id
             }
