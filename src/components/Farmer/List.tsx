@@ -1,7 +1,5 @@
 import React, {useEffect, useState} from "react";
-import Dropdown from "react-bootstrap/Dropdown";
-import Form from "react-bootstrap/Form";
-import {QRCode} from "antd";
+import QRCode from "react-qr-code";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {useTranslation} from "react-i18next";
 import "../../styles/farmers.scss";
@@ -216,10 +214,11 @@ export const List = () => {
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
-            document.getElementById("current-qr"),
+            document.getElementById("qr-farmer"),
             "qr-farmer",
             {
                 scale: 0.5,
+                backgroundColor: 'white',
             }
         );
     };
@@ -289,15 +288,8 @@ export const List = () => {
             <td className="p-3 text-base font-light">
                 <div className="qrcode">
                     <label htmlFor="farmerlist" className="btn btn-ghost h-full"
-                           onClick={() => {
-                               setQrCodeUrl(farmerUrl);
-                           }}
-                    >
-                        <QRCode value={farmerUrl} size={90}
-                                iconSize={5}
-                                errorLevel="H"
-                                icon="https://affogato.co/static/media/logo.973fb819af57a73d1fd2.png"
-                        />
+                           onClick={() => { setQrCodeUrl(farmerUrl); }}>
+                        <QRCode value={farmerUrl} size={90}/>
                     </label>
                 </div>
             </td>
@@ -338,7 +330,7 @@ export const List = () => {
                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                     <div className="flex justify-center m-6">
                         <div>
-                            <QRCode value={qrCodeUrl} size={300} icon="https://affogato.co/static/media/logo.973fb819af57a73d1fd2.png"/>
+                            <QRCode value={qrCodeUrl} size={300} id="qr-farmer" />
                             <div className="flex pt-8 space-x-4 place-content-center">
                                 <div>
                                     <button
