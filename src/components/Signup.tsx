@@ -429,157 +429,159 @@ const Signup = () => {
     const avgCupProfileLabel = () => t("cup-profile").concat(" ").concat(t("average"));
 
     const RenderForm = () => (
-        <div className="form-control">
-        <div className="mb-3 form-group  place-content-center">
+        <div className="">
+        <div className="p-8 card shadow-xl">
+            <h1><>{t("company")}</>
+            </h1>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-5">
-                    <FormInput
-                        label={emailCellphoneLabel()}
-                        value={userName}
-                        placeholder={t("placeholders.email")}
-                        handleOnChange={handleUserInputChange}
-                        errorMsg={userNameError}
-                        className="input input-bordered"
+                <FormInput
+                    label={emailCellphoneLabel()}
+                    value={userName}
+                    placeholder={t("placeholders.email")}
+                    handleOnChange={handleUserInputChange}
+                    errorMsg={userNameError}
+                    className="input input-bordered"
+                />
+                <select id="dropdown-cooperative" className="select select-bordered" onChange={handleCooperativeChange}>
+                    <option disabled selected><> {t("signup.choose-company")}</>
+                        :
+                    </option>
+                    {currentCoop.name}
+                    {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
+                        {item.name}
+                    </option>))}
+                </select>
+                {coopError !== "" && (<span className="error-message">{coopError}</span>)}
+                <FormInput
+                    label={isEmailUser ? t("cellphone") : t("email")}
+                    value={cellphone}
+                    placeholder={isEmailUser ? t("placeholders.cellphone") : t("placeholders.email")}
+                    handleOnChange={handleCellphoneChange}
+                    errorMsg={cellphoneError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("address")}
+                    value={addressLine}
+                    placeholder={t("address")}
+                    handleOnChange={handleAddressLineChange}
+                    errorMsg={addressLineError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("signup.manager-name")}
+                    value={managerName}
+                    placeholder={t("placeholders.fullname")}
+                    handleOnChange={handleManagerNameChange}
+                    errorMsg={managerNameError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={avgCupProfileLabel()}
+                    value={cupProfile}
+                    placeholder={t("average")}
+                    handleOnChange={handleCupProfileChange}
+                    errorMsg={cupProfileError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("latitude")}
+                    value={latitude}
+                    placeholder={t("latitude")}
+                    handleOnChange={handleLatitudeChange}
+                    errorMsg={latitudeError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("longitude")}
+                    value={longitude}
+                    placeholder={t("longitude")}
+                    handleOnChange={handleLongitudeChange}
+                    errorMsg={longitudeError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("signup.company-name")}
+                    value={socialReason}
+                    placeholder={t("name")}
+                    handleOnChange={handleSocialReasonChange}
+                    errorMsg={socialReasonError}
+                    className="input input-bordered"
+                />
+                <div className="">
+                    <Form.Label>
+                        <>{t("review")}</>
+                    </Form.Label>
+                    <Form.Control
+                        value={review}
+                        as="textarea"
+                        rows={4}
+                        placeholder={t("review")}
+                        onChange={handleReviewChange}
+                        className="textarea textarea-bordered"
                     />
-                    <select id="dropdown-cooperative" className="select select-bordered" onChange={handleCooperativeChange}>
-                        <option disabled selected><> {t("signup.choose-company")}</>
-                            :
-                        </option>
-                        {currentCoop.name}
-                        {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
-                            {item.name}
-                        </option>))}
-                    </select>
-                    {coopError !== "" && (<span className="error-message">{coopError}</span>)}
-                    <FormInput
-                        label={isEmailUser ? t("cellphone") : t("email")}
-                        value={cellphone}
-                        placeholder={isEmailUser ? t("placeholders.cellphone") : t("placeholders.email")}
-                        handleOnChange={handleCellphoneChange}
-                        errorMsg={cellphoneError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("address")}
-                        value={addressLine}
-                        placeholder={t("address")}
-                        handleOnChange={handleAddressLineChange}
-                        errorMsg={addressLineError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("signup.manager-name")}
-                        value={managerName}
-                        placeholder={t("placeholders.fullname")}
-                        handleOnChange={handleManagerNameChange}
-                        errorMsg={managerNameError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={avgCupProfileLabel()}
-                        value={cupProfile}
-                        placeholder={t("average")}
-                        handleOnChange={handleCupProfileChange}
-                        errorMsg={cupProfileError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("latitude")}
-                        value={latitude}
-                        placeholder={t("latitude")}
-                        handleOnChange={handleLatitudeChange}
-                        errorMsg={latitudeError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("longitude")}
-                        value={longitude}
-                        placeholder={t("longitude")}
-                        handleOnChange={handleLongitudeChange}
-                        errorMsg={longitudeError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("signup.company-name")}
-                        value={socialReason}
-                        placeholder={t("name")}
-                        handleOnChange={handleSocialReasonChange}
-                        errorMsg={socialReasonError}
-                        className="input input-bordered"
-                    />
-                    <div className="">
-                        <Form.Label>
-                            <>{t("review")}</>
-                        </Form.Label>
-                        <Form.Control
-                            value={review}
-                            as="textarea"
-                            rows={4}
-                            placeholder={t("review")}
-                            onChange={handleReviewChange}
-                            className="textarea textarea-bordered"
-                        />
-                        {bioError !== "" && (<span className="error-message">{reviewError}</span>)}
-                    </div>
-                    <FormInput
-                        label={t("signup.productive-areas")}
-                        value={productiveAreas}
-                        placeholder={t("areas")}
-                        handleOnChange={handleProductivesAreasChange}
-                        errorMsg={productiveAreasError}
-                        className="input input-bordered"
-                    />
-                    <MultipleValueTextInput
-                        onItemAdded={(item: any, allItems: Array<string>) => {
-                            console.log(item);
-                            setProducts(allItems);
-                        }}
-                        onItemDeleted={(item: any, allItems: Array<string>) => {
-                            console.log(item);
-                            setProducts(allItems);
-                        }}
-                        label="Productos o Servicios"
-                        name="social-networks"
-                        placeholder={t("placeholders.enter-products")}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("male-partners")}
-                        value={noPartnersM}
-                        placeholder={t("male-partners")}
-                        handleOnChange={handleNoPartnersMChange}
-                        errorMsg={noPartnersMError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("female-partners")}
-                        value={noPartnersF}
-                        placeholder={t("female-partners")}
-                        handleOnChange={handleNoPartnersFChange}
-                        errorMsg={noPartnersFError}
-                        className="input input-bordered"
-                    />
-                    <FormInput
-                        label={t("website")}
-                        value={website}
-                        placeholder={t("placeholders.email")}
-                        handleOnChange={handleWebsiteChange}
-                        errorMsg={websiteError}
-                        className="input input-bordered"
-                    />
-                    <MultipleValueTextInput
-                        onItemAdded={(item: any, allItems: Array<string>) => {
-                            console.log(item);
-                            setSocialNetworks(allItems);
-                        }}
-                        onItemDeleted={(item: any, allItems: Array<string>) => {
-                            console.log(item);
-                            setSocialNetworks(allItems);
-                        }}
-                        label={t("social-networks")}
-                        name="social-networks"
-                        placeholder={t("placeholders.social-networks")}
-                        className="input input-bordered"
-                    />
+                    {bioError !== "" && (<span className="error-message">{reviewError}</span>)}
+                </div>
+                <FormInput
+                    label={t("signup.productive-areas")}
+                    value={productiveAreas}
+                    placeholder={t("areas")}
+                    handleOnChange={handleProductivesAreasChange}
+                    errorMsg={productiveAreasError}
+                    className="input input-bordered"
+                />
+                <MultipleValueTextInput
+                    onItemAdded={(item: any, allItems: Array<string>) => {
+                        console.log(item);
+                        setProducts(allItems);
+                    }}
+                    onItemDeleted={(item: any, allItems: Array<string>) => {
+                        console.log(item);
+                        setProducts(allItems);
+                    }}
+                    label="Productos o Servicios"
+                    name="social-networks"
+                    placeholder={t("placeholders.enter-products")}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("male-partners")}
+                    value={noPartnersM}
+                    placeholder={t("male-partners")}
+                    handleOnChange={handleNoPartnersMChange}
+                    errorMsg={noPartnersMError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("female-partners")}
+                    value={noPartnersF}
+                    placeholder={t("female-partners")}
+                    handleOnChange={handleNoPartnersFChange}
+                    errorMsg={noPartnersFError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("website")}
+                    value={website}
+                    placeholder={t("placeholders.email")}
+                    handleOnChange={handleWebsiteChange}
+                    errorMsg={websiteError}
+                    className="input input-bordered"
+                />
+                <MultipleValueTextInput
+                    onItemAdded={(item: any, allItems: Array<string>) => {
+                        console.log(item);
+                        setSocialNetworks(allItems);
+                    }}
+                    onItemDeleted={(item: any, allItems: Array<string>) => {
+                        console.log(item);
+                        setSocialNetworks(allItems);
+                    }}
+                    label={t("social-networks")}
+                    name="social-networks"
+                    placeholder={t("placeholders.social-networks")}
+                    className="input input-bordered"
+                />
             </div>
         </div>
         {state.creatingAccountError && (<div className="account-created">
@@ -589,42 +591,42 @@ const Signup = () => {
         </div>)}
     </div>);
 
-    const RenderFarmerForm = () => (<div className="form-control">
-        <div className="mb-3 form-group  place-content-center ">
+    const RenderFarmerForm = () => (<div className="">
+        <div className="p-8 card shadow-xl">
             <h1><>{t("farmer")}</>
             </h1>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-5">
-                    <div className="avatar w-24">
-                        <img
-                            src={selectedImage !== "" ? selectedImage : User}
-                            className="rounded-xl"
-                            onClick={handleClick}
-                        />
-                        <Form.Control
-                            type="file"
-                            placeholder="Seleccione imagen."
-                            onChange={handleOnImageChange}
-                            ref={hiddenFileInput}
-                            style={{display: "none"}}
-                            className="input input-bordered"
-                        />
-                    </div>
-                    <FormInput
-                        label={emailCellphoneLabel()}
-                        value={userName}
-                        placeholder={t("placeholders.email")}
-                        handleOnChange={handleUserInputChange}
-                        errorMsg={userNameError}
+                <div className="avatar w-24">
+                    <img
+                        src={selectedImage !== "" ? selectedImage : User}
+                        className="rounded-xl"
+                        onClick={handleClick}
+                    />
+                    <Form.Control
+                        type="file"
+                        placeholder="Seleccione imagen."
+                        onChange={handleOnImageChange}
+                        ref={hiddenFileInput}
+                        style={{display: "none"}}
                         className="input input-bordered"
                     />
-                    <FormInput
-                        label={t("id")}
-                        value={farmerId}
-                        placeholder={t("placeholders.fullname")}
-                        handleOnChange={handleFullnameChange}
-                        errorMsg={fullnameError}
-                        className="input input-bordered"
-                    />
+                </div>
+                <FormInput
+                    label={emailCellphoneLabel()}
+                    value={userName}
+                    placeholder={t("placeholders.email")}
+                    handleOnChange={handleUserInputChange}
+                    errorMsg={userNameError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("id")}
+                    value={farmerId}
+                    placeholder={t("placeholders.id")}
+                    handleOnChange={handleFullnameChange}
+                    errorMsg={fullnameError}
+                    className="input input-bordered"
+                />
                 <FormInput
                     label={t("fullname")}
                     value={fullname}
@@ -633,80 +635,81 @@ const Signup = () => {
                     errorMsg={fullnameError}
                     className="input input-bordered"
                 />
-                    <FormInput
-                        label={t("company-code")}
-                        value={farmerId}
-                        placeholder={t("company-code")}
-                        handleOnChange={handleIdProductorChange}
-                        errorMsg={farmerIdError}
-                        className="input input-bordered"
-                    />
+                <FormInput
+                    label={t("company-code")}
+                    value={farmerId}
+                    placeholder={t("company-code")}
+                    handleOnChange={handleIdProductorChange}
+                    errorMsg={farmerIdError}
+                    className="input input-bordered"
+                />
 
 
-                    <select id="dropdown-cooperative" className="select select-bordered" onChange={handleGenderChange}>
-                        <option disabled selected><> {t("gender")}</>
+                <select id="dropdown-cooperative" className="select select-bordered" onChange={handleGenderChange}>
+                    <option disabled selected><> {t("gender")}</>
+                        :
+                    </option>
+                    {currentGender.name}
+                    {GenderList.map((item) => (<option key={item.key} value={item.key}>
+                        {item.name}
+                    </option>))}
+                </select>
+                <div className="">
+                    <select id="dropdown-cooperative" className="select select-bordered"
+                            onChange={handleCooperativeChange}>
+                        <option disabled selected><> {t("signup.choose-company")}</>
                             :
                         </option>
-                        {currentGender.name}
-                        {GenderList.map((item) => (<option key={item.key} value={item.key}>
+                        {currentCoop.name}
+
+                        {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
                             {item.name}
                         </option>))}
                     </select>
-                    <div className="">
-                        <select id="dropdown-cooperative" className="select select-bordered" onChange={handleCooperativeChange}>
-                            <option disabled selected><> {t("signup.choose-company")}</>
-                                :
-                            </option>
-                            {currentCoop.name}
-
-                            {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
-                                {item.name}
-                            </option>))}
-                        </select>
-                        {coopError !== "" && (<span className="error-message">{coopError}</span>)}
-                    </div>
-                    <div className="">
-                        <select id="dropdown-cooperative" className="select select-bordered" onChange={handleRegionChange}>
-                            <option disabled selected><> {t("region")}</>
-                                :
-                            </option>
-                            {currentRegion.name}
-                            {RegionList.map((item) => (<option key={item.key} value={item.key}>
-                                {item.name}
-                            </option>))}
-                        </select>
-                        {coopError !== "" && (<span className="error-message">{regionError}</span>)}
-                    </div>
-                    <FormInput
-                        label={t("village")}
-                        value={village}
-                        placeholder={t("village")}
-                        handleOnChange={handleVillageChange}
-                        errorMsg={villageError}
-                        className="input input-bordered"
+                    {coopError !== "" && (<span className="error-message">{coopError}</span>)}
+                </div>
+                <div className="">
+                    <select id="dropdown-cooperative" className="select select-bordered" onChange={handleRegionChange}>
+                        <option disabled selected><> {t("region")}</>
+                            :
+                        </option>
+                        {currentRegion.name}
+                        {RegionList.map((item) => (<option key={item.key} value={item.key}>
+                            {item.name}
+                        </option>))}
+                    </select>
+                    {coopError !== "" && (<span className="error-message">{regionError}</span>)}
+                </div>
+                <FormInput
+                    label={t("village")}
+                    value={village}
+                    placeholder={t("village")}
+                    handleOnChange={handleVillageChange}
+                    errorMsg={villageError}
+                    className="input input-bordered"
+                />
+                <FormInput
+                    label={t("village2")}
+                    value={village2}
+                    placeholder={t("village2")}
+                    handleOnChange={handleVillage2Change}
+                    errorMsg={village2Error}
+                    className="input input-bordered"
+                />
+                <div className="">
+                    <Form.Label>
+                        <>{t("bio")}</>
+                    </Form.Label>
+                    <Form.Control
+                        value={bio}
+                        as="textarea"
+                        rows={5}
+                        placeholder={t("placeholders.bio")}
+                        onChange={handleBioChange}
+                        className="textarea textarea-bordered"
                     />
-                    <FormInput
-                        label={t("village2")}
-                        value={village2}
-                        placeholder={t("village2")}
-                        handleOnChange={handleVillage2Change}
-                        errorMsg={village2Error}
-                        className="input input-bordered"
-                    />
-                    <div className="">
-                        <Form.Label>
-                            <>{t("bio")}</>
-                        </Form.Label>
-                        <Form.Control
-                            value={bio}
-                            as="textarea"
-                            rows={5}
-                            placeholder={t("placeholders.bio")}
-                            onChange={handleBioChange}
-                            className="textarea textarea-bordered"
-                        />
-                        {bioError !== "" && (<span className="error-message">{bioError}</span>)}
-                    </div>
+                    {bioError !== "" && (<span className="error-message">{bioError}</span>)}
+                </div>
             </div>
         </div>
         {state.creatingAccountError && (<div className="account-created">
@@ -740,51 +743,57 @@ const Signup = () => {
         return (<Loading label={t("loading").concat("...")} className="loading-wrapper"/>);
     }
 
-    return (<div className="signup bg-white">
+    return (<div className=" bg-white">
         <div className=" ">
             <div className={cardClassName()}>
-                <div className=" ">
-                    <div className="header">
-                        <CoopLogo className="logo"/>
-                        <h3>{CardTitle()}</h3>
+                <div>
+                    <div className="grid ">
+                        <div className="h-32 w-32 place-self-center">
+                            <CoopLogo className="logo"/>
+                        </div>
+                        <br/>
+                        <h3 className="flex place-self-center">{CardTitle()}</h3>
                     </div>
-                    {!state.accountCreated ? (<div className="tabs-container">
-                        <button
-                            id="signup-tabs"
-                            onClick={() => setActiveTab("farmer")}
-                            className="btn btn-wide"
-                        ><>{t("farmer")}</>
-                        </button>
-                        <button
-                            id="signup-tabs"
-                            onClick={() => setActiveTab("cooperative")}
-                            className="btn btn-outline  btn-block"
-                        ><>{t("company")}</>
-                        </button>
-                        {activeTab == 'farmer' ? (<div>
-                            {RenderFarmerForm()}
-                        </div>) : (<div>
-                            <>{t("company")}</>
-                            {RenderForm()}
-                        </div>)}
+
+                    {!state.accountCreated ? (<div className=" p-4">
+                        <div>
+                            <div className="flex tabs justify-center">
+                                <a className={`${activeTab == 'farmer' && `tab btn-wide tab-lg tab-lifted tab-active`}  tab btn-wide tab-lg `}
+                                   id="signup-tabs"
+                                   onClick={() => setActiveTab("farmer")}
+                                ><>{t("farmer")}</>
+                                </a>
+                                <a className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`}  tab btn-wide tab-lg `}
+                                   id="signup-tabs"
+                                   onClick={() => setActiveTab("cooperative")}
+                                ><>{t("company")}</>
+                                </a>
+                            </div>
+
+                            {activeTab == 'farmer' ? (<div>
+                                {RenderFarmerForm()}
+                            </div>) : (<div>
+                                {RenderForm()}
+                            </div>)}
 
 
-                        <div className="btn-container">
-                            <button
-                                className="btn btn-primary"
-                                onClick={() => magicLogin()}
-                            >
-                                <>{t("signup.create-account")}</>
-                            </button>
-                            <br/>
-                            <button
-                                className="btn btn-secondary "
-                                onClick={() => navigate("/login", {replace: true})}
-                            >
-                                <u>
-                                    <>{t("signup.back")}</>
-                                </u>
-                            </button>
+                            <div className="flex justify-center">
+                                <button
+                                    className="btn btn-primary"
+                                    onClick={() => magicLogin()}
+                                >
+                                    <>{t("signup.create-account")}</>
+                                </button>
+                                <div className="divider divider-horizontal"></div>
+                                <button
+                                    className="btn btn-secondary "
+                                    onClick={() => navigate("/login", {replace: true})}
+                                >
+                                    <u>
+                                        <>{t("signup.back")}</>
+                                    </u>
+                                </button>
+                            </div>
                         </div>
                     </div>) : (<div className="account-created">
                         {activeTab === "farmer" ? (<h6>
@@ -801,6 +810,7 @@ const Signup = () => {
                         >
                             <>{t("login.access")}</>
                         </button>
+
                     </div>)}
                 </div>
             </div>

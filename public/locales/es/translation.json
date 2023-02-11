@@ -145,6 +145,7 @@
   },
   "placeholders": {
     "bio": "Ingrese su biografía",
+    "id": "0801XXXXX",
     "cellphone": "99990000",
     "email": "usuario@gmail.com",
     "enter-products": "Ingrese los productos",
