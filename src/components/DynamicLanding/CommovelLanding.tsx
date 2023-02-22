@@ -224,6 +224,48 @@ export const CommovelLanding = () => {
                         alt=""/>
                 </div>
             </div>
+            <footer className="text-gray-600 body-font">
+
+                <div className="bg-gray-100">
+                    <br/>
+                    <div className="text-center ">
+                        <h1> "Proyecto patrocinado por BID LAB y ejecutado por HEIFER"
+                        </h1>
+                    </div>
+                    <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                        <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
+                            <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
+                            />
+                        </a>
+
+
+                        <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
+                            <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                            />
+                        </a>
+
+                        <a
+                            className="text-gray-600 ml-1 m-2" >powered by:</a>
+                        <a href="https://affogato.co" rel="noopener noreferrer" target="_blank">
+
+                            <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                            />
+                        </a>
+                        <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
+      <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/www.commovel.org" rel="noopener noreferrer" target="_blank" >
+          <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5"
+               viewBox="0 0 24 24">
+            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
+          </svg>
+        </a>
+
+
+
+      </span>
+                    </div>
+                </div>
+            </footer>
+
         </section>
     </>);
 };

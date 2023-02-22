@@ -14,7 +14,7 @@ const DynamicHeader = () => {
         return (<>
                 <HelmetProvider>
                     <title> Commovel </title>
-                    <link rel="icon" type="image/png" href="../../assets/favicon/commovel.ico" sizes="16x16" />
+                    <link rel="icon" type="image/png" href="https://i0.wp.com/montanaverdehn.com/wp-content/uploads/2022/02/cropped-commovel-logo-icon.png?fit=32%2C32&ssl=1" sizes="16x16" />
                 </HelmetProvider>
             </>
         );
