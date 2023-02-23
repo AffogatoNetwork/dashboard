@@ -25,15 +25,6 @@ const App = () => {
 
     const contracts = useContracts();
     const apolloClient = clientOracle();
-    const CurrentLocalhost: string | null = localStorage.getItem("host");
-    const location = window.location.host;
-    const {authContext, authState} = useAuthContext();
-    if (location.match(  `${CurrentLocalhost}` ) !== null) {
-        console.log("");
-    } else {
-        console.log("login out")
-        authContext.signOut();
-    }
 
     return (<>
             <DynamicHeader/>

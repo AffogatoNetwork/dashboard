@@ -48,15 +48,9 @@ const Login = () => {
 
         setUserInput(input);
         if (isValidCellphone(input) || isValidEmail(input)) {
-            console.log(input);
-
             setUserInputError("");
-
         } else {
-            console.log(input);
-
             setUserInputError("El valor no es valido.");
-
         }
     };
 

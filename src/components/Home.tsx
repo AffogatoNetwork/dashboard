@@ -20,8 +20,18 @@ import Cupping from "./Cupping";
 import Certification from "./Certification";
 
 const Home = () => {
-    const {authState} = useAuthContext();
+    const {authState, authContext} = useAuthContext();
     const [state] = authState;
+    const CurrentLocalhost: string | null = localStorage.getItem("host");
+    const location = window.location.host;
+    if (location.match(  `${CurrentLocalhost}` ) !== null && state.isLoggedIn !== true) {
+    } else {
+        if(state.isLoggedIn !== false){
+            authContext.signOut()
+        } else {
+            console.log("logged out");
+        }
+    }
 
     if (state.isLoading || state.isSigningIn) {
         return <Loading label="" className="loading-wrapper"/>;
