@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {useTranslation} from "react-i18next";
 import {useNavigate} from "react-router-dom";
 import {useAuthContext} from "../states/AuthContext";
@@ -18,7 +18,6 @@ const Login = () => {
 
     useEffect(() => {
         function check() {
-            console.log()
             if (state.isLoggedIn) {
                 navigate("/", { replace: true });
             } else if (state.isLoggedIn ) {
@@ -33,7 +32,9 @@ const Login = () => {
         try{
         if (isValidEmail(userInput)) {
             authContext.signIn({emailLogin: true, credential: userInput});
+            localStorage.setItem('host', window.location.host);
         } else if (isValidCellphone(userInput)) {
+            localStorage.setItem('host', window.location.host);
             authContext.signIn({
                 emailLogin: false, credential: areaCode.concat(userInput),
             });
@@ -44,11 +45,18 @@ const Login = () => {
 
     const handleUserInputChange = (event: React.ChangeEvent<HTMLInputElement>,) => {
         const input = event.target.value;
+
         setUserInput(input);
         if (isValidCellphone(input) || isValidEmail(input)) {
+            console.log(input);
+
             setUserInputError("");
+
         } else {
+            console.log(input);
+
             setUserInputError("El valor no es valido.");
+
         }
     };
 
