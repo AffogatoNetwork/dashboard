@@ -55,11 +55,6 @@ const Login = () => {
     };
 
     return (<>
-        <img className="h-1 w-1" src="../../src/assets/favicon/commovel.ico"/>
-        <img className="h-1 w-1" src="../../src/assets/favicon/comsa.ico"/>
-        <img className="h-1 w-1" src="../../src/assets/favicon/copranil.ico"/>
-        <img className="h-1 w-1" src="../../src/assets/favicon/proexo.ico"/>
-
         <div className="bg-no-repeat bg-cover bg-center relative bg-black m-0 p-0"
              style={{backgroundImage: `url(${background})`}}>
             <div className="bg-opacity-80 bg-black">
