@@ -430,7 +430,7 @@ const Signup = () => {
 
     const RenderForm = () => (
         <div className="">
-        <div className="p-8 card shadow-xl">
+        <div className="p-8 card shadow-xl bg-stone-100	">
             <h1><>{t("company")}</>
             </h1>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-5">
@@ -440,7 +440,7 @@ const Signup = () => {
                     placeholder={t("placeholders.email")}
                     handleOnChange={handleUserInputChange}
                     errorMsg={userNameError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <select id="dropdown-cooperative" className="select select-bordered" onChange={handleCooperativeChange}>
                     <option disabled selected><> {t("signup.choose-company")}</>
@@ -458,7 +458,7 @@ const Signup = () => {
                     placeholder={isEmailUser ? t("placeholders.cellphone") : t("placeholders.email")}
                     handleOnChange={handleCellphoneChange}
                     errorMsg={cellphoneError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("address")}
@@ -466,7 +466,7 @@ const Signup = () => {
                     placeholder={t("address")}
                     handleOnChange={handleAddressLineChange}
                     errorMsg={addressLineError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("signup.manager-name")}
@@ -474,7 +474,7 @@ const Signup = () => {
                     placeholder={t("placeholders.fullname")}
                     handleOnChange={handleManagerNameChange}
                     errorMsg={managerNameError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={avgCupProfileLabel()}
@@ -482,7 +482,7 @@ const Signup = () => {
                     placeholder={t("average")}
                     handleOnChange={handleCupProfileChange}
                     errorMsg={cupProfileError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("latitude")}
@@ -490,7 +490,7 @@ const Signup = () => {
                     placeholder={t("latitude")}
                     handleOnChange={handleLatitudeChange}
                     errorMsg={latitudeError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("longitude")}
@@ -498,7 +498,7 @@ const Signup = () => {
                     placeholder={t("longitude")}
                     handleOnChange={handleLongitudeChange}
                     errorMsg={longitudeError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("signup.company-name")}
@@ -506,7 +506,7 @@ const Signup = () => {
                     placeholder={t("name")}
                     handleOnChange={handleSocialReasonChange}
                     errorMsg={socialReasonError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <div className="">
                     <Form.Label>
@@ -528,7 +528,7 @@ const Signup = () => {
                     placeholder={t("areas")}
                     handleOnChange={handleProductivesAreasChange}
                     errorMsg={productiveAreasError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <MultipleValueTextInput
                     onItemAdded={(item: any, allItems: Array<string>) => {
@@ -542,7 +542,7 @@ const Signup = () => {
                     label="Productos o Servicios"
                     name="social-networks"
                     placeholder={t("placeholders.enter-products")}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("male-partners")}
@@ -550,7 +550,7 @@ const Signup = () => {
                     placeholder={t("male-partners")}
                     handleOnChange={handleNoPartnersMChange}
                     errorMsg={noPartnersMError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("female-partners")}
@@ -558,7 +558,7 @@ const Signup = () => {
                     placeholder={t("female-partners")}
                     handleOnChange={handleNoPartnersFChange}
                     errorMsg={noPartnersFError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("website")}
@@ -566,7 +566,7 @@ const Signup = () => {
                     placeholder={t("placeholders.email")}
                     handleOnChange={handleWebsiteChange}
                     errorMsg={websiteError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <MultipleValueTextInput
                     onItemAdded={(item: any, allItems: Array<string>) => {
@@ -580,7 +580,7 @@ const Signup = () => {
                     label={t("social-networks")}
                     name="social-networks"
                     placeholder={t("placeholders.social-networks")}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
             </div>
         </div>
@@ -592,7 +592,7 @@ const Signup = () => {
     </div>);
 
     const RenderFarmerForm = () => (<div className="">
-        <div className="p-8 card shadow-xl">
+        <div className="p-8 card shadow-xl bg-stone-100">
             <h1><>{t("farmer")}</>
             </h1>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-5">
@@ -608,7 +608,7 @@ const Signup = () => {
                         onChange={handleOnImageChange}
                         ref={hiddenFileInput}
                         style={{display: "none"}}
-                        className="input input-bordered"
+                        className="input input-bordered "
                     />
                 </div>
                 <FormInput
@@ -617,7 +617,7 @@ const Signup = () => {
                     placeholder={t("placeholders.email")}
                     handleOnChange={handleUserInputChange}
                     errorMsg={userNameError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("id")}
@@ -625,7 +625,7 @@ const Signup = () => {
                     placeholder={t("placeholders.id")}
                     handleOnChange={handleFullnameChange}
                     errorMsg={fullnameError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("fullname")}
@@ -633,7 +633,7 @@ const Signup = () => {
                     placeholder={t("placeholders.fullname")}
                     handleOnChange={handleFullnameChange}
                     errorMsg={fullnameError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("company-code")}
@@ -641,7 +641,7 @@ const Signup = () => {
                     placeholder={t("company-code")}
                     handleOnChange={handleIdProductorChange}
                     errorMsg={farmerIdError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
 
 
@@ -686,7 +686,7 @@ const Signup = () => {
                     placeholder={t("village")}
                     handleOnChange={handleVillageChange}
                     errorMsg={villageError}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <FormInput
                     label={t("village2")}
@@ -694,7 +694,7 @@ const Signup = () => {
                     placeholder={t("village2")}
                     handleOnChange={handleVillage2Change}
                     errorMsg={village2Error}
-                    className="input input-bordered"
+                    className="input input-bordered "
                 />
                 <div className="">
                     <Form.Label>

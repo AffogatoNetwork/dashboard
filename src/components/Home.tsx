@@ -38,7 +38,7 @@ const Home = () => {
     }
 
     return (
-        <Container fluid className="main-container">
+        <Container fluid className="-m-2" >
             <ToastContainer limit={4}/>
             <Routes>
                 <Route

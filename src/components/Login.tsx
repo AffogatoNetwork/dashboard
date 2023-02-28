@@ -54,7 +54,7 @@ const Login = () => {
         }
     };
 
-    return (<>
+    return (
         <div className="bg-no-repeat bg-cover bg-center relative bg-black m-0 p-0"
              style={{backgroundImage: `url(${background})`}}>
             <div className="bg-opacity-80 bg-black">
@@ -115,7 +115,7 @@ const Login = () => {
                 </div>
             </div>
         </div>
-    </>);
+    );
 };
 
 export default Login;

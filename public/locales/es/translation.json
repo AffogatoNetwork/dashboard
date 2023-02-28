@@ -59,11 +59,13 @@
   "gender": "Género",
   "height": "Altura",
   "home": "Hogar",
+  "id": "identidad",
   "latitude": "Latitud",
   "loading": "Cargando",
   "location": "Ubicación",
   "logout": "Cerrar Sesión",
   "longitude": "Longitud",
+  "not_tasted": "No Catado",
   "male": "Masculino",
   "male-partners": "No. Socios Hombres",
   "masl": "MSNM",
@@ -119,7 +121,7 @@
     "title": "Crear Lotes de café"
   },
   "login":  {
-    "access": "Enter",
+    "access": "Iniciar Sesión",
     "create-account": "¿No tienes cuenta? Crea una aquí.",
     "subtitle": "Correo electrónico o No. Celular",
     "title": "Accede a tu Cuenta",
@@ -145,7 +147,7 @@
   },
   "placeholders": {
     "bio": "Ingrese su biografía",
-    "id": "0801XXXXX",
+    "id": "Ingrese su Identidad",
     "cellphone": "99990000",
     "email": "usuario@gmail.com",
     "enter-products": "Ingrese los productos",

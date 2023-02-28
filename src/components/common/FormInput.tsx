@@ -20,7 +20,7 @@ const FormInput = ({
   className = "",
   errorMsg = "",
 }: props) => (
-  <div className="form-input border-0">
+  <div className="form-input border-0 bg-transparent">
     <Form.Label>{label}</Form.Label>
     <Form.Control
       value={value}
