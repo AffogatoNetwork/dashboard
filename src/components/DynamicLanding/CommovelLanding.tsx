@@ -122,7 +122,7 @@ export const CommovelLanding = () => {
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        142
+                                                        21
                                                     </span>
                                         </div>
                                             </span>
@@ -134,7 +134,7 @@ export const CommovelLanding = () => {
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
                                                     <span className="mr-3 text-2xl font-black">
-                                                        21
+                                                      142
                                                     </span>
                                         </div>
                                             </span>
