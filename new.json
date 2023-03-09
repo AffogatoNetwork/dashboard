@@ -1,0 +1,112 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Cooperative",
+      "value": "0x27825E62C42E23364efC8e967cC6E69ef70A4813"
+    },
+    {
+      "trait_type": "Farmer",
+      "value": "0x05ee57c65aE248409A08D2BE6Fb3d158dC80FE44"
+    },
+    {
+      "trait_type": "Wet Mill",
+      "value": [
+        {
+          "certifications": "Orgánico, Fairtrade",
+          "date": "10/6/2022",
+          "drying_hours": 36,
+          "drying_id": "",
+          "drying_type": "Solar",
+          "entry_id": "Nota peso 001",
+          "facility": "Beneficio Humedo - COMMOVEL",
+          "latitude": 14.9867885,
+          "longitude":-88.1591179,
+          "note": 84,
+          "process": "Lavado",
+          "variety": "IHACAFE 90, Lempira",
+          "weight": 136
+        }
+      ]
+    },
+    {
+      "trait_type": "Farm",
+      "value": [
+        {
+          "altitude": 1200,
+          "area": 1.5,
+          "certifications": "Orgánico",
+          "country": "Honduras",
+          "etnic_group": "No Indigena ",
+          "family_members": 4,
+          "latitude": 14.9867885,
+          "longitude": -88.1591179,
+          "name": "Finca Los Pinos",
+          "region": "Santa Bárbara",
+          "shadow": "Con Sombra",
+          "story": "",
+          "varieties": "Lempira, IHACAFE 90",
+          "village": "El Zapote",
+          "municipality": "Gualala",
+          "coffe_type": "Organico"
+        }
+      ]
+    },
+    {
+      "trait_type": "Dry Mill",
+      "value": [
+        {
+          "damage_percent": "10%",
+          "date": "10/10/2022",
+          "export_drying_id": "Secada001",
+          "export_id": "Lexp.001",
+          "facility": "Beneficio Seco - COMMOVEL",
+          "latitude": 14.97472222 ,
+          "longitude": -88.12361111,
+          "note": 84,
+          "threshing_process": "Oro",
+          "threshing_yield": 1.25,
+          "weight": 32284.8,
+          "prep_type": "Americana",
+          "variety": "Ihcafé 90, Lempira",
+          "quality": "SHG",
+          "cofee_type": "Certificado",
+          "origin_cert": "",
+          "buyer": "Keurig"
+        }
+      ]
+    },
+    {
+      "trait_type": "Profile",
+      "value": [
+        {
+          "acidity": "",
+          "aftertaste": "",
+          "aroma": "",
+          "body": "",
+          "flavor": "",
+          "note": 84,
+          "sweetness": "",
+          "general_description": "Sabor a citricos, achocolatado, tonos a miel, cuerpo redondo, en fragancia frutal",
+          "cup_profile": "",
+          "scaa_url": ""
+        }
+      ]
+    },
+    {
+      "trait_type": "Roasting",
+      "value": [
+        {
+          "roast_date": "10/19/2022",
+          "roast_type": "Medio",
+          "grind_type": "Fina",
+          "packaging": "Bolsa craft",
+          "bag_size": 16
+        }
+      ]
+    }
+    ],
+      "description": "",
+      "external_url": "https://affogato.co",
+      "image": "Qma5mzG5sFjBAmPyhxfkXaxM78HX6UPihH5hNSyp1Cm6a1",
+      "name": ""
+    }

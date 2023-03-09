@@ -1,0 +1,89 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Cooperative",
+      "value": "0x27825E62C42E23364efC8e967cC6E69ef70A4813"
+    },
+    {
+      "trait_type": "Farmer",
+      "value": "0x05ee57c65aE248409A08D2BE6Fb3d158dC80FE44"
+    },
+    {
+      "trait_type": "Wet Mill",
+      "value": [
+        {
+          "certifications": "Orgánico, Fairtrade",
+          "date": "2022-11-24",
+          "drying_hours": 56,
+          "drying_id": "SEC06-2",
+          "drying_type": "Mecanico",
+          "entry_id": "",
+          "facility": "Finca El Roble",
+          "latitude": 14.9867885,
+          "longitude": -88.1591179,
+          "note": 88.58,
+          "process": "Lavado",
+          "variety": "IHCAFE 90",
+          "weight": 10936
+        }
+      ]
+    },
+    {
+      "trait_type": "Farm",
+      "value": [
+        {
+          "altitude": 1200,
+          "area": 1.5,
+          "certifications": "Orgánico, Fairtrade",
+          "country": "Honduras",
+          "etnic_group": "No indigena",
+          "family_members": 4,
+          "latitude": 14.95,
+          "longitude": -88.53,
+          "name": "Los Pinos",
+          "region": "Santa Bárbara",
+          "shadow": "Con Sombra",
+          "story": "",
+          "varieties": "Lempira, IHCAFE 90",
+          "village": "El Zapote"
+        }
+      ]
+    },
+    {
+      "trait_type": "Dry Mill",
+      "value": [
+        {
+          "damage_percent": "10%",
+          "date": "1970-01-01",
+          "export_drying_id": "Secada001",
+          "export_id": "1",
+          "facility": "",
+          "latitude": -88.1236111111,
+          "longitude": 0,
+          "note": 84,
+          "threshing_process": "Mecanico",
+          "threshing_yield": 1.2102,
+          "weight": 97.92
+        }
+      ]
+    },
+    {
+      "trait_type": "Profile",
+      "value": [
+        {
+          "acidity": "",
+          "aftertaste": "",
+          "aroma": "Frutal",
+          "body": "Redondo",
+          "flavor": "Citrico, Chocolate, Miel",
+          "note": 84,
+          "sweetness": "Citrico"
+        }
+      ]
+    }
+  ],
+  "description": "Café orgánico y comercio justo",
+  "external_url": "https://affogato.co",
+  "image": "Qma5mzG5sFjBAmPyhxfkXaxM78HX6UPihH5hNSyp1Cm6a1",
+  "name": "Lempira, IHCAFE 90 Los Pinos"
+}

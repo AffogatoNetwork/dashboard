@@ -31,6 +31,7 @@ export type CoffeeBatchType = {
   wetMill: any;
   dryMill: any;
   cupProfile: any;
+  roasting: any;
 };
 
 export type FarmerType = {

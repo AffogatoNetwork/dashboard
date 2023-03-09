@@ -113,6 +113,7 @@ export const List = () => {
                 let wetMill = {};
                 let dryMill = {};
                 let cupProfile = {};
+                let roasting = {};
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "farmer") {
@@ -130,6 +131,9 @@ export const List = () => {
                     if (traitType === "dry mill") {
                         [dryMill] = jsonData.attributes[i].value;
                     }
+                    if (traitType === "roasting"){
+                        [roasting] = jsonData.attributes[i].value;
+                    }
                 }
                 const cooffeeBatch = {
                     id: batchId,
@@ -141,6 +145,7 @@ export const List = () => {
                     farm,
                     wetMill,
                     dryMill,
+                    roasting,
                     cupProfile,
                 };
                 batchList.push(cooffeeBatch);

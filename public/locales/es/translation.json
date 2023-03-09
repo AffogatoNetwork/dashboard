@@ -112,6 +112,11 @@
   "village2": "Aldea",
   "website": "Sitio web",
   "weight": "Peso",
+  "bag_size": "Tamaño de Bolsa",
+  "grind_type": "Tipo de molienda",
+  "packaging": "Empaque",
+  "roast_date": "Fecha de Tostado",
+  "roast_type": "Tipo de Tostado",
   "create-batches": {
     "creating": "Creando lotes...",
     "drag-drop": "Arrastre y suelte el archivo aquí, o presione para elegir",

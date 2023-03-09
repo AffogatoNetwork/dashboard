@@ -110,6 +110,11 @@
   "welcome": "Bienvenido",
   "website": "Website",
   "weight": "Weight",
+  "bag_size": "Bag Size",
+  "grind_type": "Grind Type",
+  "packaging": "Packaging",
+  "roast_date": "Roast Date",
+  "roast_type": "Roast Type",
   "create-batches": {
     "creating": "Creating batches...",
     "drag-drop": "Drag and drop the file here, or click to choose",    

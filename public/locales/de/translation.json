@@ -104,6 +104,11 @@
   "village2": "Dorf",
   "website": "Website",
   "weight": "Gewicht",
+  "bag_size": "",
+  "grind_type": "",
+  "packaging": "",
+  "roast_date": "",
+  "roast_type": "",
   "create-batches": {
     "creating": "Creating batches...",
     "drag-drop": "Ziehen Sie die Datei hierher und legen Sie sie dort ab, oder klicken Sie, um sie auszuwählen",
