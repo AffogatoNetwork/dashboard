@@ -53,6 +53,7 @@ export default function Home() {
     const [state] = authState;
     const [ownerAddress, setOwnerAddress] = useState("");
     useEffect(() => {
+        console.log(state);
         const loadProvider = async () => {
             if (state.provider != null) {
                 const signer = state.provider.getSigner();
@@ -147,7 +148,7 @@ export default function Home() {
                         </div>))}
                 </div>))}
                 <div tabIndex={1} onClick={() => navigate(`/create`)}
-                     className={`${state.isLoggedIn && window.location.pathname == '/create' && `${primary} text-white hover:bg-orange-300 hover:text-white`}  ${!state.isLoggedIn && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
+                     className={`${state.isLoggedIn && window.location.pathname == '/create' && `${primary} text-white hover:bg-orange-300 hover:text-white visible`}  ${!state.isLoggedIn && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600 hidden'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
                 >
                     <VoteIcon className="w-8"/>
                     <motion.p animate={controlText} className='ml-4 text-sm'>

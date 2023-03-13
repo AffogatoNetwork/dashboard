@@ -117,13 +117,16 @@ export const List = () => {
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "farmer") {
+                        console.log(jsonData.attributes[i].value);
                         [farmer] = jsonData.attributes[i].value;
                     }
                     if (traitType === "farm") {
                         [farm] = jsonData.attributes[i].value;
                     }
                     if (traitType === "profile") {
-                        [cupProfile] = jsonData.attributes[i].value;
+                        if (cupProfile !== null ){
+                            [cupProfile] = jsonData.attributes[i].value;
+                        }
                     }
                     if (traitType === "wet mill") {
                         [wetMill] = jsonData.attributes[i].value;
@@ -602,7 +605,7 @@ export const List = () => {
                                                 </tr>
                                                 </thead>
                                                 <tbody className="flex-1 sm:flex-none">
-                                                {coffeeBatchList.map((batch, index) => (
+                                                {coffeeBatchList2.map((batch, index) => (
                                                     <BatchItem
                                                         key={index}
                                                         index={index}
