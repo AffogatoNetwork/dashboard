@@ -53,9 +53,9 @@ export default function Home() {
     const [state] = authState;
     const [ownerAddress, setOwnerAddress] = useState("");
     useEffect(() => {
-        console.log(state);
         const loadProvider = async () => {
             if (state.provider != null) {
+                console.log(state);
                 const signer = state.provider.getSigner();
                 const address = await signer.getAddress();
                 setOwnerAddress(address);
@@ -148,7 +148,7 @@ export default function Home() {
                         </div>))}
                 </div>))}
                 <div tabIndex={1} onClick={() => navigate(`/create`)}
-                     className={`${state.isLoggedIn && window.location.pathname == '/create' && `${primary} text-white hover:bg-orange-300 hover:text-white visible`}  ${!state.isLoggedIn && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600 hidden'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
+                     className={`${ownerAddress && window.location.pathname == '/create' && `${primary} text-white hover:bg-orange-300 hover:text-white visible`}  ${!ownerAddress && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600 hidden'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
                 >
                     <VoteIcon className="w-8"/>
                     <motion.p animate={controlText} className='ml-4 text-sm'>
@@ -177,7 +177,7 @@ export default function Home() {
 
                 <div>
 
-                    {state.isLoggedIn ? (
+                    {ownerAddress ? (
                         <div className='my-2'>
                             <motion.p animate={controlTitleText}
                                       className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
