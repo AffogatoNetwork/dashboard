@@ -25,21 +25,14 @@ const openInNewTab = (url: string | URL | undefined) => {
 const saveSvgAsPng = require("save-svg-as-png");
 
 const pagDefault = {
-    previous: 0,
-    current: 0,
-    next: 0,
-    pages: 0,
-    itemsPerPage: 10,
-    itemsCount: 0,
-    lastId: "0",
+    previous: 0, current: 0, next: 0, pages: 0, itemsPerPage: 10, itemsCount: 0, lastId: "0",
 };
 
 export const List = () => {
     const {t} = useTranslation();
     const {authState} = useAuthContext();
     const [state] = authState;
-    const [currentEthCallProvider, setCurrentEthCallProvider] =
-        useState<Provider | null>(null);
+    const [currentEthCallProvider, setCurrentEthCallProvider] = useState<Provider | null>(null);
     const [cbContract, setCbContract] = useState<Contract>();
     const [coffeeBatchList, setCoffeeBatchList] = useState<Array<CoffeeBatchType>>([]);
     const [coffeeBatchList2, setCoffeeBatchList2] = useState<Array<CoffeeBatchType>>([]);
@@ -85,14 +78,7 @@ export const List = () => {
             const pages = Math.ceil(itemsCount / itemsPerPage);
             const lastDataPage = Math.ceil(itemsCount / itemsPerPage);
             const pag = {
-                previous: 0,
-                current: 1,
-                next: 2,
-                pages,
-                lastDataPage,
-                itemsPerPage,
-                itemsCount,
-                lastId: lastCBId,
+                previous: 0, current: 1, next: 2, pages, lastDataPage, itemsPerPage, itemsCount, lastId: lastCBId,
             };
             setPagination(pag);
             setBatchesCount(itemsCount);
@@ -104,37 +90,39 @@ export const List = () => {
     const loadBatch = async (batchId: number, ipfsHash: any) => {
         const batchList = coffeeBatchList;
         const url = ipfsUrl.concat(ipfsHash);
-        console.log(url);
         fetch(url)
             .then((response) => response.json())
             .then((jsonData) => {
                 let farmer = {};
                 let farm = {};
-                let wetMill = {};
+                let wetMill = {
+                    variety: undefined
+                };
                 let dryMill = {};
                 let cupProfile = {};
                 let roasting = {};
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "farmer") {
-                        console.log(jsonData.attributes[i].value);
                         [farmer] = jsonData.attributes[i].value;
                     }
                     if (traitType === "farm") {
                         [farm] = jsonData.attributes[i].value;
                     }
                     if (traitType === "profile") {
-                        if (cupProfile !== null ){
+                        if (cupProfile !== null) {
                             [cupProfile] = jsonData.attributes[i].value;
                         }
                     }
                     if (traitType === "wet mill") {
-                        [wetMill] = jsonData.attributes[i].value;
+                        if (wetMill !== null) {
+                            [wetMill] = jsonData.attributes[i].value;
+                        }
                     }
                     if (traitType === "dry mill") {
                         [dryMill] = jsonData.attributes[i].value;
                     }
-                    if (traitType === "roasting"){
+                    if (traitType === "roasting") {
                         [roasting] = jsonData.attributes[i].value;
                     }
                 }
@@ -151,7 +139,14 @@ export const List = () => {
                     roasting,
                     cupProfile,
                 };
-                batchList.push(cooffeeBatch);
+                const exist = {
+                    variety: cooffeeBatch.wetMill.variety,
+                }
+
+                if (exist.variety !== '') {
+                    batchList.push(cooffeeBatch);
+                }
+
                 setCoffeeBatchList(batchList.slice());
                 setCoffeeBatchList2(batchList.slice());
             });
@@ -163,9 +158,8 @@ export const List = () => {
             setCoffeeBatchList2([]);
             const ethcalls = [];
             for (let i = 0; i < cbData.length; i += 1) {
-                const batchCall = await cbContract?.tokenURI(
-                    BigNumber.from(cbData[i].id)
-                );
+                const batchCall = await cbContract?.tokenURI(BigNumber.from(cbData[i].id));
+                console.log(batchCall);
                 ethcalls.push(batchCall);
             }
             if (ethcalls.length > 0) {
@@ -187,13 +181,9 @@ export const List = () => {
     const {loading, data, refetch, error} = useQuery(batchesQuery, {
         variables: {
             owners: companyAddresses,
-        },
-        fetchPolicy: "no-cache",
-        notifyOnNetworkStatusChange: true,
-        onError: () => {
+        }, fetchPolicy: "no-cache", notifyOnNetworkStatusChange: true, onError: () => {
             console.log(error);
-        },
-        onCompleted: () => {
+        }, onCompleted: () => {
             if (data.coffeeBatches.length > 0) {
                 setLoadingIpfs(true);
                 loadBatchesData(data.coffeeBatches);
@@ -201,8 +191,7 @@ export const List = () => {
         },
     });
 
-    useEffect(
-        () => {
+    useEffect(() => {
             const loadProvider = async () => {
                 let ethcallProvider = null;
 
@@ -223,10 +212,7 @@ export const List = () => {
                 if (ethcallProvider !== null) {
                     await ethcallProvider.init();
                     // Set CoffeBatch contracts
-                    const currentCoffeeBatch = new Contract(
-                        CoffeeBatch.address,
-                        CoffeeBatch.abi
-                    );
+                    const currentCoffeeBatch = new Contract(CoffeeBatch.address, CoffeeBatch.abi);
                     setCbContract(currentCoffeeBatch);
                     setCurrentEthCallProvider(ethcallProvider);
                     if (!dataLoaded) {
@@ -235,18 +221,13 @@ export const List = () => {
                 }
             };
             loadProvider();
-        },
-        // eslint-disable-next-line
-        [state.provider]
-    );
+        }, // eslint-disable-next-line
+        [state.provider]);
 
     const onPageSelected = (pageNumber: number) => {
         const nextPage = pageNumber === pagination.pages ? 0 : pageNumber + 1;
         const newPagination = {
-            ...pagination,
-            previous: pageNumber === 1 ? 0 : pageNumber - 1,
-            current: pageNumber,
-            next: nextPage,
+            ...pagination, previous: pageNumber === 1 ? 0 : pageNumber - 1, current: pageNumber, next: nextPage,
         };
         setPagination(newPagination);
     };
@@ -256,13 +237,9 @@ export const List = () => {
     };
 
     const handleOnDownloadClick = () => {
-        saveSvgAsPng.saveSvgAsPng(
-            document.getElementById("qr-coffe-batch"),
-            "qr-coffe-batch",
-            {
-                scale: 0.5,
-            }
-        );
+        saveSvgAsPng.saveSvgAsPng(document.getElementById("qr-coffe-batch"), "qr-coffe-batch", {
+            scale: 0.5,
+        });
     };
 
     const filterByCriteria = (c: CoffeeBatchType) => {
@@ -328,25 +305,19 @@ export const List = () => {
         confPagination(cbList, isAuth ? 10 : 12);
     };
 
-    const handleSearchCriteriaChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleSearchCriteriaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
         setSearchCriteria(input);
     };
 
-    const handleSearchCriteriaKeyDown = (
-        event: React.KeyboardEvent<HTMLInputElement>
-    ) => {
+    const handleSearchCriteriaKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
         const input = event.currentTarget.value.trim();
         if (event.key === "Enter" && input.length > 1) {
             filterBatches();
         }
     };
 
-    const handleMinHeightChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleMinHeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value.trim();
         setMinHeight(input);
         if (!isNumber(input)) {
@@ -356,9 +327,7 @@ export const List = () => {
         }
     };
 
-    const handleMinWeightChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleMinWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value.trim();
         setMinWeight(input);
         if (!isNumber(input)) {
@@ -368,9 +337,7 @@ export const List = () => {
         }
     };
 
-    const handleMaxWeightChange = (
-        event: React.ChangeEvent<HTMLInputElement>
-    ) => {
+    const handleMaxWeightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value.trim();
         setMaxWeight(input);
         if (!isNumber(input)) {
@@ -420,8 +387,7 @@ export const List = () => {
         confPagination(coffeeBatchList2, isAuth ? 10 : 12);
     };
 
-    const RenderFilters = () => (
-        <>
+    const RenderFilters = () => (<>
             <div className="w-full p-5 rounded-lg">
                 <div className="text-center text-lg text-black ">
                     <>{t("search-batches")}</>
@@ -499,11 +465,9 @@ export const List = () => {
                 </div>
 
             </div>
-        </>
-    );
+        </>);
 
-    return (
-        <>
+    return (<>
             <input type="checkbox" id="coffe-batch" className="modal-toggle"/>
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
@@ -525,12 +489,13 @@ export const List = () => {
                                     </button>
                                 </div>
                                 <div>
-                                        <button onClick={() => {
-                                            openInNewTab(qrCodeUrl);}}
+                                    <button onClick={() => {
+                                        openInNewTab(qrCodeUrl);
+                                    }}
                                             className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                                            <LinkIcon></LinkIcon>
-                                            <>{t("open-link")}</>
-                                        </button>
+                                        <LinkIcon></LinkIcon>
+                                        <>{t("open-link")}</>
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -560,13 +525,10 @@ export const List = () => {
                                     </div>
                                 </div>
                                 <div className="overflow-x-scroll">
-                                    {loading || loadingIpfs ? (
-                                        <Loading
+                                    {loading || loadingIpfs ? (<Loading
                                             label={t("loading").concat("...")}
                                             className="loading-wrapper"
-                                        />
-                                    ) : (
-                                        <div className="text-center">
+                                        />) : (<div className="text-center">
                                             <table
                                                 className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
                                                 <thead>
@@ -605,19 +567,16 @@ export const List = () => {
                                                 </tr>
                                                 </thead>
                                                 <tbody className="flex-1 sm:flex-none">
-                                                {coffeeBatchList2.map((batch, index) => (
-                                                    <BatchItem
+                                                {coffeeBatchList2.map((batch, index) => (<BatchItem
                                                         key={index}
                                                         index={index}
                                                         coffeeBatch={batch}
                                                         pagination={pagination}
                                                         showQrModal={showQrModal}
-                                                    />
-                                                ))}
+                                                    />))}
                                                 </tbody>
                                             </table>
-                                        </div>
-                                    )}
+                                        </div>)}
                                 </div>
                                 <div className="card-actions flex justify-center pt-4">
                                     <CustomPagination
@@ -631,6 +590,5 @@ export const List = () => {
                     </div>
                 </div>
             </div>
-        </>
-    );
+        </>);
 };
