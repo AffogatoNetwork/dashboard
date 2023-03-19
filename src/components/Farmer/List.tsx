@@ -51,8 +51,7 @@ export const List = () => {
     const [qrCodeUrl, setQrCodeUrl] = useState("");
     const [searchCriteria, setSearchCriteria] = useState("");
     const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
-    const [ownerAddress, setOwnerAddress] = useState("");
-
+    const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
 
     const confPagination = (fData: Array<any>, itemsPerPage: number) => {
         if (fData.length > 0) {
@@ -88,18 +87,17 @@ export const List = () => {
     }; */
 
     useEffect(() => {
-        const loadProvider = async () => {
-            if (state.provider != null) {
-                console.log(state);
-                const signer = state.provider.getSigner();
-                const address = await signer.getAddress();
-                setOwnerAddress(address);
-            }
-        };
-        loadProvider();
-
         const load = async () => {
             const farmerList = new Array<FarmerType>();
+            const user = localStorage.getItem("addres")
+            if(user !== ""){
+                setOwnerAddress(user)
+            } else {
+                setOwnerAddress(user)
+
+            }
+
+
             let companyName = "PROEXO";
             const hostname = window.location.hostname;
             if (hostname.includes("copranil")) {

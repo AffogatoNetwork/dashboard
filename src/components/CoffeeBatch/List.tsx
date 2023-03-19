@@ -55,8 +55,7 @@ export const List = () => {
     const [maxWeightError, setMaxWeightError] = useState("");
     const [minNoteError, setMinNoteError] = useState("");
     const [maxNoteError, setMaxNoteError] = useState("");
-    const [ownerAddress, setOwnerAddress] = useState("");
-
+    const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
 
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -77,7 +76,6 @@ export const List = () => {
         if (bData.length > 0) {
             const lastCBId = bData[bData.length - 1].id;
             const itemsCount = batchesCount;
-            console.log(batchesCount)
             const pages = Math.ceil(itemsCount / itemsPerPage);
             const lastDataPage = Math.ceil(itemsCount / itemsPerPage);
             const pag = {
@@ -90,6 +88,17 @@ export const List = () => {
     };
 
     const loadBatch = async (batchId: number, ipfsHash: any) => {
+
+        const user = localStorage.getItem("addres")
+        if(user !== ""){
+            setOwnerAddress(user)
+        } else {
+            setOwnerAddress(user)
+
+        }
+
+
+
         const batchList = coffeeBatchList;
         const url = ipfsUrl.concat(ipfsHash);
         fetch(url)
@@ -187,8 +196,6 @@ export const List = () => {
         }, onCompleted: () => {
             if (data.coffeeBatches.length > 0) {
                 setLoadingIpfs(true);
-                console.log(data);
-                console.log(coffeeBatchList)
                 loadBatchesData(data.coffeeBatches);
             }
         },
@@ -197,14 +204,14 @@ export const List = () => {
     useEffect(() => {
             const loadProvider = async () => {
 
-
                 let ethcallProvider = null;
+
 
                 if (state.provider !== null) {
                     ethcallProvider = new Provider(state.provider);
                     const signer = state.provider.getSigner();
                     const address = await signer.getAddress();
-                    setOwnerAddress(address);
+                    console.log(address);
                     setCompanyAddresses(getCompanyAddresses(address));
                     setAuth(true);
                 } else {
@@ -242,7 +249,6 @@ export const List = () => {
     };
 
     const handleOnDownloadClick = () => {
-        console.log('here');
         saveSvgAsPng.saveSvgAsPng(document.getElementById("qr-coffe-batch"), "qr-coffe-batch", {
             scale: 0.5,
         });
@@ -541,7 +547,8 @@ export const List = () => {
                                             />
                                         </a>
                                         ) : (
-                                            <></>
+                                            <>
+                                            </>
                                         )}
                                     </div>
                                 </div>

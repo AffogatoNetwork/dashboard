@@ -31,7 +31,7 @@ export const List = () => {
     const [currentAddressL, setCurrentAddressL] = useState("");
     const [pagination, setPagination] = useState(pagDefault);
     const [searchCriteria, setSearchCriteria] = useState("");
-    const [ownerAddress, setOwnerAddress] = useState("");
+    const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
 
     const confPagination = (fData: Array<any>, itemsPerPage: number) => {
         if (fData.length > 0) {
@@ -65,16 +65,20 @@ export const List = () => {
     };
 
     useEffect(() => {
-        const loadProvider = async () => {
-            if (state.provider != null) {
-                console.log(state);
-                const signer = state.provider.getSigner();
-                const address = await signer.getAddress();
-                setOwnerAddress(address);
-            }
-        };
-        loadProvider();
+
+
+
+
         const load = async () => {
+
+            const user = localStorage.getItem("addres")
+            if(user !== ""){
+                setOwnerAddress(user)
+            } else {
+                setOwnerAddress(user)
+
+            }
+
             const farmList = new Array<FarmType>();
             // const signer = state.provider.getSigner();
             // const sAddress = await signer.getAddress();

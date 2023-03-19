@@ -145,7 +145,6 @@ export default function AuthProvider({ children }: props) {
     const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
     const signer = provider.getSigner();
     const userAddress = await signer.getAddress();
-
     // Set CoffeBatch contracts
     const currentCoffeeBatch = new ethers.Contract(
       CoffeeBatch.address,

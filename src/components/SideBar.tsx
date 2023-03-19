@@ -38,6 +38,8 @@ const data = [{
 },]
 
 
+
+
 export default function Home() {
     const {t} = useTranslation();
     const {authContext, authState} = useAuthContext();
@@ -50,7 +52,9 @@ export default function Home() {
                 const signer = state.provider.getSigner();
                 const address = await signer.getAddress();
                 setOwnerAddress(address);
+                localStorage.setItem('addres', ownerAddress);
             }
+            localStorage.setItem('addres', ownerAddress);
         };
         loadProvider();
     });

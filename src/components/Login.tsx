@@ -33,6 +33,7 @@ const Login = () => {
         if (isValidEmail(userInput)) {
             authContext.signIn({emailLogin: true, credential: userInput});
             localStorage.setItem('host', window.location.host);
+
         } else if (isValidCellphone(userInput)) {
             localStorage.setItem('host', window.location.host);
             authContext.signIn({
