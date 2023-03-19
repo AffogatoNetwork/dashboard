@@ -38,15 +38,6 @@ const data = [{
 },]
 
 
-const datafooter = [
-
-    {
-        name: '', items: [{
-            title: 'logout', icon: LogOutIcon, disabled: ''
-        }]
-    },]
-
-
 export default function Home() {
     const {t} = useTranslation();
     const {authContext, authState} = useAuthContext();

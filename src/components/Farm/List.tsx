@@ -31,6 +31,7 @@ export const List = () => {
     const [currentAddressL, setCurrentAddressL] = useState("");
     const [pagination, setPagination] = useState(pagDefault);
     const [searchCriteria, setSearchCriteria] = useState("");
+    const [ownerAddress, setOwnerAddress] = useState("");
 
     const confPagination = (fData: Array<any>, itemsPerPage: number) => {
         if (fData.length > 0) {
@@ -64,6 +65,15 @@ export const List = () => {
     };
 
     useEffect(() => {
+        const loadProvider = async () => {
+            if (state.provider != null) {
+                console.log(state);
+                const signer = state.provider.getSigner();
+                const address = await signer.getAddress();
+                setOwnerAddress(address);
+            }
+        };
+        loadProvider();
         const load = async () => {
             const farmList = new Array<FarmType>();
             // const signer = state.provider.getSigner();
@@ -298,6 +308,7 @@ export const List = () => {
                                             {t("total")}: {farmsCount}
                                         </>
                                     </h4>
+                                    {ownerAddress ? (
                                     <a className="link link-info">
                                         <ReactHTMLTableToExcel
                                             id="table-xls-button"
@@ -308,12 +319,16 @@ export const List = () => {
                                             buttonText={"(".concat(t("download")).concat(")")}
                                         />
                                     </a>
+                                        ) : ( <>
+                                    </>)}
+
+
                                 </div>
                             </div>
                             <div className="overflow-x-scroll">
                                 {farms === null ? (<NotFound msg="No se encontraron fincas"/>) : (<>
                                     <div className="text-center">
-                                        <table
+                                        <table id="farms-list"
                                             className="farms-list w-full sm:bg-white rounded-lg overflow-hidden  my-5">
                                             <thead>
                                             <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">

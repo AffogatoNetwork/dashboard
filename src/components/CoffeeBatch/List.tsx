@@ -17,6 +17,7 @@ import {getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNu
 import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
+import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const openInNewTab = (url: string | URL | undefined) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -54,6 +55,7 @@ export const List = () => {
     const [maxWeightError, setMaxWeightError] = useState("");
     const [minNoteError, setMinNoteError] = useState("");
     const [maxNoteError, setMaxNoteError] = useState("");
+    const [ownerAddress, setOwnerAddress] = useState("");
 
 
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
@@ -74,14 +76,14 @@ export const List = () => {
     const confPagination = (bData: Array<any>, itemsPerPage: number) => {
         if (bData.length > 0) {
             const lastCBId = bData[bData.length - 1].id;
-            const itemsCount = bData.length;
+            const itemsCount = batchesCount;
+            console.log(batchesCount)
             const pages = Math.ceil(itemsCount / itemsPerPage);
             const lastDataPage = Math.ceil(itemsCount / itemsPerPage);
             const pag = {
                 previous: 0, current: 1, next: 2, pages, lastDataPage, itemsPerPage, itemsCount, lastId: lastCBId,
             };
             setPagination(pag);
-            setBatchesCount(itemsCount);
         } else {
             setPagination(pagDefault);
         }
@@ -146,7 +148,8 @@ export const List = () => {
                 if (exist.variety !== '') {
                     batchList.push(cooffeeBatch);
                 }
-
+                const total = batchList.length
+                setBatchesCount(total);
                 setCoffeeBatchList(batchList.slice());
                 setCoffeeBatchList2(batchList.slice());
             });
@@ -159,7 +162,6 @@ export const List = () => {
             const ethcalls = [];
             for (let i = 0; i < cbData.length; i += 1) {
                 const batchCall = await cbContract?.tokenURI(BigNumber.from(cbData[i].id));
-                console.log(batchCall);
                 ethcalls.push(batchCall);
             }
             if (ethcalls.length > 0) {
@@ -182,10 +184,11 @@ export const List = () => {
         variables: {
             owners: companyAddresses,
         }, fetchPolicy: "no-cache", notifyOnNetworkStatusChange: true, onError: () => {
-            console.log(error);
         }, onCompleted: () => {
             if (data.coffeeBatches.length > 0) {
                 setLoadingIpfs(true);
+                console.log(data);
+                console.log(coffeeBatchList)
                 loadBatchesData(data.coffeeBatches);
             }
         },
@@ -193,13 +196,15 @@ export const List = () => {
 
     useEffect(() => {
             const loadProvider = async () => {
+
+
                 let ethcallProvider = null;
 
                 if (state.provider !== null) {
                     ethcallProvider = new Provider(state.provider);
                     const signer = state.provider.getSigner();
                     const address = await signer.getAddress();
-                    // setOwnerAddress(address);
+                    setOwnerAddress(address);
                     setCompanyAddresses(getCompanyAddresses(address));
                     setAuth(true);
                 } else {
@@ -237,6 +242,7 @@ export const List = () => {
     };
 
     const handleOnDownloadClick = () => {
+        console.log('here');
         saveSvgAsPng.saveSvgAsPng(document.getElementById("qr-coffe-batch"), "qr-coffe-batch", {
             scale: 0.5,
         });
@@ -513,7 +519,7 @@ export const List = () => {
                                 <div className="card-title grid justify-items-stretch">
                                     <div className="justify-self-start">
                                         <h4>
-                                            <>{t("farms")}</>
+                                            <>{t("batches")}</>
                                         </h4>
                                     </div>
                                     <div className="justify-self-end">
@@ -522,6 +528,21 @@ export const List = () => {
                                                 {t("total")}: {batchesCount}
                                             </>
                                         </h4>
+
+                                        {ownerAddress ? (
+                                        <a className="link link-info" >
+                                            <ReactHTMLTableToExcel
+                                                id="table-xls-button"
+                                                className="download-xls-button"
+                                                table="batches-list"
+                                                filename={t("batches")}
+                                                sheet={t("batches")}
+                                                buttonText={"(".concat(t("download")).concat(")")}
+                                            />
+                                        </a>
+                                        ) : (
+                                            <></>
+                                        )}
                                     </div>
                                 </div>
                                 <div className="overflow-x-scroll">
@@ -529,7 +550,7 @@ export const List = () => {
                                             label={t("loading").concat("...")}
                                             className="loading-wrapper"
                                         />) : (<div className="text-center">
-                                            <table
+                                            <table id="batches-list"
                                                 className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
                                                 <thead>
                                                 <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">

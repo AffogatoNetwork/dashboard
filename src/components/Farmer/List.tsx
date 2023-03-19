@@ -46,12 +46,12 @@ export const List = () => {
     const [state] = authState;
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
-    const [farmers2, setFarmers2] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
     const [pagination, setPagination] = useState(pagDefault);
     const [qrCodeUrl, setQrCodeUrl] = useState("");
     const [searchCriteria, setSearchCriteria] = useState("");
     const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
+    const [ownerAddress, setOwnerAddress] = useState("");
 
 
     const confPagination = (fData: Array<any>, itemsPerPage: number) => {
@@ -88,6 +88,16 @@ export const List = () => {
     }; */
 
     useEffect(() => {
+        const loadProvider = async () => {
+            if (state.provider != null) {
+                console.log(state);
+                const signer = state.provider.getSigner();
+                const address = await signer.getAddress();
+                setOwnerAddress(address);
+            }
+        };
+        loadProvider();
+
         const load = async () => {
             const farmerList = new Array<FarmerType>();
             let companyName = "PROEXO";
@@ -135,7 +145,6 @@ export const List = () => {
                     });
                 }
                 setFarmers(farmerList);
-                setFarmers2(farmerList);
                 confPagination(result, 15);
                 // calculateFarmersCount(result);
             });
@@ -164,7 +173,7 @@ export const List = () => {
     };
 
     const filterFarmers = () => {
-        let farmerList = farmers2.slice();
+        let farmerList = farmers.slice();
         if (searchCriteria.trim().length > 0) {
             farmerList = farmerList.filter(filterByCriteria);
         }
@@ -208,8 +217,8 @@ export const List = () => {
 
     const onClearClick = () => {
         setSearchCriteria("");
-        setFarmers(farmers2.slice());
-        confPagination(farmers2, 15);
+        setFarmers(farmers.slice());
+        confPagination(farmers, 15);
     };
 
     const handleOnDownloadClick = () => {
@@ -375,6 +384,7 @@ export const List = () => {
                                                 {t("total")}: {farmersCount}
                                             </>
                                         </h4>
+                                        {ownerAddress ? (
                                         <a className="link link-info">
                                             <ReactHTMLTableToExcel
                                                 id="table-xls-button"
@@ -385,6 +395,10 @@ export const List = () => {
                                                 buttonText={"(".concat(t("download")).concat(")")}
                                             />
                                         </a>
+                                        ) : (
+                                            <>
+                                        </>
+                                        )}
                                     </div>
 
                                     <div className="overflow-x-scroll">
@@ -393,7 +407,7 @@ export const List = () => {
                                         ) : (
                                             <>
                                                 <div className="text-center">
-                                                    <table
+                                                    <table id="farmers-list"
                                                         className="farmers-list w-full sm:bg-white rounded-lg overflow-hidden  my-5">
                                                         <thead>
                                                         <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
