@@ -224,11 +224,11 @@ export const DefaultLanding = () => {
 
                 <div className="bg-gray-100">
                     <br/>
-                    <div className="text-center ">
-                        <h1> "Proyecto patrocinado por BID LAB y ejecutado por HEIFER"
+                    <div className="ml-8 text-left">
+                        <h1> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
                         </h1>
                     </div>
-                    <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
+                    <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col xs:flex-row">
                         <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
                             <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
                             />

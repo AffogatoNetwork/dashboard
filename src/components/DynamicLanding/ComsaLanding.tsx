@@ -17,7 +17,7 @@ export const ComsaLanding = () => {
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
-                            Plataforma de trazabilidad de Café Orgánico Marcala S.A
+                            Plataforma de trazabilidad de COMSA
                         </h1>
                         <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                             Nuestro café trazado con la seguridad de la tecnología de blockchain.
@@ -244,8 +244,8 @@ export const ComsaLanding = () => {
 
                 <div className="bg-gray-100">
                     <br/>
-                    <div className="text-center ">
-                        <h1> "Proyecto patrocinado por BID LAB y ejecutado por HEIFER"
+                     <div className="ml-8 text-left">
+                        <h1> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
                         </h1>
                     </div>
                     <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">

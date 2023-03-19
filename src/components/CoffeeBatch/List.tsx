@@ -513,7 +513,7 @@ export const List = () => {
                                 <div className="card-title grid justify-items-stretch">
                                     <div className="justify-self-start">
                                         <h4>
-                                            <>{t("farm-and-batches")}</>
+                                            <>{t("farms")}</>
                                         </h4>
                                     </div>
                                     <div className="justify-self-end">

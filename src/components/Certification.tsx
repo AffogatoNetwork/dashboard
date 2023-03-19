@@ -70,7 +70,7 @@ const Certification = () => {
                         </div>
                     </div>
                         )}
-                {(company === 'comsa' || company === "proexo" || company === "commovel") && (
+                {(company === 'comsa' || company === "proexo") && (
 
                     <div
                         className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
