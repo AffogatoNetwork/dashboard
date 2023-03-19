@@ -15,6 +15,7 @@ import {
 } from "../../utils/utils";
 import { FarmType } from "../common/types";
 import Loading from "../Loading";
+import {use} from "i18next";
 
 export const Create = () => {
   const { t } = useTranslation();
@@ -24,6 +25,8 @@ export const Create = () => {
   const [cols, setCols] = useState(null);
   const [saving, setSaving] = useState(false);
   const [ownerAddress, setOwnerAddress] = useState("");
+  const [currentUser, setCurrentUser] = useState<string | null>(null);
+
   const { acceptedFiles, fileRejections, getRootProps, getInputProps } =
     useDropzone({
       accept: {
@@ -52,7 +55,15 @@ export const Create = () => {
   ));
 
   useEffect(() => {
-    const loadProvider = async () => {        
+    const loadProvider = async () => {
+
+      const user = localStorage.getItem("addres")
+      if(user !== ""){
+        setCurrentUser(user)
+      } else {
+        setCurrentUser(user)
+
+      }
       const address = getCompanyAddressesByHost(window.location.host)[0];
       setOwnerAddress(address);
     };
@@ -194,6 +205,7 @@ export const Create = () => {
 
   return (
     <div className="new-batch">
+      {currentUser ? (
       <div className="card create-card shadow-xl">
         <div className="card-body">
           <h2 className="py-4">
@@ -237,11 +249,14 @@ export const Create = () => {
           )}
         </div>
         <div className="card-footer">
-          <button className="btn btn-secondary" onClick={() => createBatches()} disabled={saving}>
-            <>{t("create-batches.menu")}</>
-          </button>
+              <button className="btn btn-secondary" onClick={() => createBatches()} disabled={saving}>
+                <>{t("create-batches.menu")}</>
+              </button>
         </div>
-      </div>
+     </div>
+      ) : (
+          <h1> Not logged in</h1>
+      )}
     </div>
   );
 };
