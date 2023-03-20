@@ -154,8 +154,19 @@ export const List = () => {
                     variety: cooffeeBatch.wetMill.variety,
                 }
 
+             const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9"
+             );
+
+                if (skywalker?.id != null) {
+                    const removeIndex = batchList.map(item => item.id).indexOf(skywalker?.id);
+                    batchList.splice(removeIndex, 1);
+                    console.log(removeIndex);
+                }
+
+
                 if (exist.variety !== '') {
                     batchList.push(cooffeeBatch);
+                    console.log(cooffeeBatch);
                 }
                 const total = batchList.length
                 setBatchesCount(total);
