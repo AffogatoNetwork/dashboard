@@ -48,7 +48,6 @@ export default function Home() {
     useEffect(() => {
         const loadProvider = async () => {
             if (state.provider != null) {
-                console.log(state);
                 const signer = state.provider.getSigner();
                 const address = await signer.getAddress();
                 setOwnerAddress(address);

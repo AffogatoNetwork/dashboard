@@ -39,7 +39,6 @@ export const saveFarmer = async (farmer: FarmerType, image: any) => {
     const farmerDoc = doc(db, "farmers", farmer.address);
     await setDoc(farmerDoc, farmer);
   } catch (error) {
-    console.log(error);
   }
 };
 
@@ -66,7 +65,7 @@ export const updateFarms = async (Farmdata: any) => {
     const farmDoc = doc(db, "farms", docId);
     await setDoc(farmDoc, Farmdata);
   } catch (error) {
-    console.log(error);
+    
   }
 };
 
@@ -96,7 +95,7 @@ export const saveCompany = async (company: CompanyType) => {
     const companyDoc = doc(db, "companies", company.address);
     await setDoc(companyDoc, company);
   } catch (error) {
-    console.log(error);
+    
   }
 };
 
@@ -139,7 +138,7 @@ export const saveFarm = async (farm: FarmType) => {
     };
     await setDoc(farmDoc, farmData);
   } catch (error) {
-    console.log(error);
+    
   }
 };
 
@@ -175,7 +174,7 @@ export const saveFarms = async (farms: Array<FarmType>) => {
       }
     }
   } catch (error) {
-    console.log(error);
+    
   }
 };
 

@@ -30,7 +30,6 @@ const LangChooser = () => {
   };
 
   const handleOnSelect = (eventKey: any, event: Object) => {
-    console.log(event);
     changeLanguage(eventKey);
     setCurrentLang(eventKey);
   };

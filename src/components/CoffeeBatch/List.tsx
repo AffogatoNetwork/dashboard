@@ -160,13 +160,11 @@ export const List = () => {
                 if (skywalker?.id != null) {
                     const removeIndex = batchList.map(item => item.id).indexOf(skywalker?.id);
                     batchList.splice(removeIndex, 1);
-                    console.log(removeIndex);
                 }
 
 
                 if (exist.variety !== '') {
                     batchList.push(cooffeeBatch);
-                    console.log(cooffeeBatch);
                 }
                 const total = batchList.length
                 setBatchesCount(total);

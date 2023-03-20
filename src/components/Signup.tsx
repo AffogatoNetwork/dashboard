@@ -532,11 +532,11 @@ const Signup = () => {
                 />
                 <MultipleValueTextInput
                     onItemAdded={(item: any, allItems: Array<string>) => {
-                        console.log(item);
+                        
                         setProducts(allItems);
                     }}
                     onItemDeleted={(item: any, allItems: Array<string>) => {
-                        console.log(item);
+                        
                         setProducts(allItems);
                     }}
                     label="Productos o Servicios"
@@ -570,11 +570,11 @@ const Signup = () => {
                 />
                 <MultipleValueTextInput
                     onItemAdded={(item: any, allItems: Array<string>) => {
-                        console.log(item);
+                        
                         setSocialNetworks(allItems);
                     }}
                     onItemDeleted={(item: any, allItems: Array<string>) => {
-                        console.log(item);
+                        
                         setSocialNetworks(allItems);
                     }}
                     label={t("social-networks")}

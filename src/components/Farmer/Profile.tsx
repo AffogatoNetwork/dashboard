@@ -22,10 +22,8 @@ export const Profile = () => {
             if (farmerId) {
                 await getFarmer(farmerId).then((result) => {
                     setFarmerData(result);
-                    console.log(result?.farm);
                     const ipfsHash = result?.farm;
                     const url = ipfsUrl.concat(ipfsHash);
-                    console.log(url);
                     fetch(url)
                         .then((response) => response.json())
                         .then((jsonData) => {

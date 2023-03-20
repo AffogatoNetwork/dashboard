@@ -22,12 +22,10 @@ const CoffeeCard = () => {
     useEffect(() => {
         const load = () => {
             if (ipfsHash) {
-                console.log(ipfsHash);
                 const url = ipfsUrl.concat(ipfsHash);
                 fetch(url)
                     .then((response) => response.json())
                     .then(async (jsonData) => {
-                        console.log(jsonData);
                         let farmer = {};
                         let farm: any;
                         let cupProfile = {};

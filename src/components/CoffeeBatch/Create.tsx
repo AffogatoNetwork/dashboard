@@ -72,9 +72,7 @@ export const Create = () => {
     if (acceptedFiles.length > 0) {
       ExcelRenderer(acceptedFiles[0], (err: any, resp: any) => {
         if (err) {
-          console.log(err);
         } else {
-          // console.log(resp.rows.flat());
           setRows(resp.rows);
           setCols(resp.cols);
         }
@@ -160,7 +158,7 @@ export const Create = () => {
             }
           }
         } catch (error) {
-          console.log(error);
+          
         }
       }
 
@@ -192,7 +190,7 @@ export const Create = () => {
           saveFarmsToDB();
         })
         .catch((error) => {
-          console.log(error);
+          
           // errorNotification("Error inesperado.");
           notifyUser(t("errors.creating-batch"));
           setSaving(false);
