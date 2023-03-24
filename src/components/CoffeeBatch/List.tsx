@@ -259,7 +259,7 @@ export const List = () => {
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(document.getElementById("qr-coffe-batch"), "qr-coffe-batch", {
-            scale: 1,
+            width: 300
         });
     };
 
