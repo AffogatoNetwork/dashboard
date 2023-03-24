@@ -224,7 +224,7 @@ export const List = () => {
             document.getElementById("qr-farmer"),
             "qr-farmer",
             {
-                scale: 0.5,
+                scale: 1,
                 backgroundColor: 'white',
             }
         );
