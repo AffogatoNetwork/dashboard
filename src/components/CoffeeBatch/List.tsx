@@ -259,7 +259,8 @@ export const List = () => {
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(document.getElementById("qr-coffe-batch"), "qr-coffe-batch", {
-            width: 300
+            scale: 10,
+            backgroundColor: 'white'
         });
     };
 
