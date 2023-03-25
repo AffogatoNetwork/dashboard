@@ -310,7 +310,7 @@ PROEXO es una empresa de economía social que busca y sostiene la primacía del 
 
                     <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
 
-                       <a className="text-gray-500 hover:text-blue-500" href="https://www.proexo.org/"
+                       <a className="text-gray-500 hover:text-blue-300" href="https://www.proexo.org/"
                           rel="noopener noreferrer" target="_blank">
       <WebSite/>
         </a>

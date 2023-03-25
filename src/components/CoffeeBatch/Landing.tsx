@@ -34,7 +34,7 @@ const Landing = () => {
         }
             return (
                 <>
-                    <DefaultLanding></DefaultLanding>
+                    <ComsaLanding></ComsaLanding>
                 </>
             );
 

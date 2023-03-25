@@ -292,11 +292,11 @@ export const CopracnilLanding = () => {
 
                     <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
 
-                       <a className="text-gray-500 hover:text-blue-500" href="https://copracnil.hn" rel="noopener noreferrer" target="_blank" >
+                       <a className="text-gray-500 hover:text-blue-300" href="https://copracnil.hn" rel="noopener noreferrer" target="_blank" >
       <WebSite/>
         </a>
 
-                 <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/profile.php?id=100064793832709" rel="noopener noreferrer" target="_blank" >
+                 <a className="text-gray-500 hover:text-blue-300" href="https://www.facebook.com/profile.php?id=100064793832709" rel="noopener noreferrer" target="_blank" >
       <Facebook/>
         </a>
 

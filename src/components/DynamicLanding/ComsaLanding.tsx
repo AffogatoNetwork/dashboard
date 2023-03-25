@@ -8,6 +8,7 @@ import {WebSite} from "../icons/WebSite";
 import {Facebook} from "../icons/Facebook";
 import {Instagram} from "../icons/Instagram";
 import {Youtube} from "../icons/Youtube";
+import {Twitter} from "../icons/Twitter";
 
 export const ComsaLanding = () => {
     const {t} = useTranslation();
@@ -293,7 +294,7 @@ export const ComsaLanding = () => {
 
                     <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
 
-                       <a className="text-gray-500 hover:text-blue-500" href="https://www.comsa.hn/quienes-somos/"
+                       <a className="text-gray-500 hover:text-blue-300" href="https://www.comsa.hn/quienes-somos/"
                           rel="noopener noreferrer" target="_blank">
       <WebSite/>
         </a>
@@ -306,6 +307,10 @@ export const ComsaLanding = () => {
   <a className="ml-3 text-gray-500 hover:text-pink-500" href="https://www.instagram.com/comsamarcalaoficial/">
          <Instagram/>
         </a>
+
+                        <a className="ml-3 text-gray-500 hover:text-blue-400" href="https://twitter.com/comsamarcala">
+                            <Twitter/>
+                        </a>
     <a className="ml-3 text-gray-500 hover:text-red-500"
        href="https://www.youtube.com/c/COMSAMarcalaOficial"
        rel="noopener noreferrer"

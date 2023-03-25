@@ -296,11 +296,11 @@ export const CommovelLanding = () => {
 
                     <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
 
-                       <a className="text-gray-500 hover:text-blue-500" href="https://montanaverdehn.com/" rel="noopener noreferrer" target="_blank" >
+                       <a className="text-gray-500 hover:text-blue-300" href="https://montanaverdehn.com/" rel="noopener noreferrer" target="_blank" >
       <WebSite/>
         </a>
 
-                 <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/www.commovel.org" rel="noopener noreferrer" target="_blank" >
+                 <a className="text-gray-500 hover:text-blue-300" href="https://www.facebook.com/www.commovel.org" rel="noopener noreferrer" target="_blank" >
       <Facebook/>
         </a>
 

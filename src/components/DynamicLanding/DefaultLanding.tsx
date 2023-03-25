@@ -281,11 +281,11 @@ export const DefaultLanding = () => {
 
                     <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
 
-                       <a className="text-gray-500 hover:text-blue-500" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
+                       <a className="text-gray-500 hover:text-blue-300" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
       <WebSite/>
         </a>
 
-                 <a className="text-gray-500 hover:text-blue-500" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
+                 <a className="text-gray-500 hover:text-blue-300" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
       <Facebook/>
         </a>
                         <a className="ml-3 text-gray-500 hover:text-pink-500">
