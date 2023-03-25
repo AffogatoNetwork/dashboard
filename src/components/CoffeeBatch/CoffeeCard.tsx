@@ -138,11 +138,9 @@ const CoffeeCard = () => {
                                 <span className="md:text-xl">
                 <span className="font-serif text">
                   <span className="text-black text-6xl text-bold">
-                      {coffeeBatch.cupProfile.note ? (<>
+                      {coffeeBatch.cupProfile.note > 0 &&
                               <span>{coffeeBatch.cupProfile.note}%</span>
-                          </>) : (<>
-                              {t("not_tasted")}
-                          </>)}
+                         }
                 </span>
                   <br/>
                   Perfil de taza

@@ -19,13 +19,13 @@ const DynamicHeader = () => {
             </>
         );
     }
-    if (location.match("copranil") !== null) {
+    if (location.match("copracnil") !== null) {
         // @ts-ignore
-        favicon.href = "https://affogato.co/src/assets/favicon/copranil.ico";
+        favicon.href = "https://affogato.co/src/assets/favicon/copracnil.ico";
         return (<>
                 <HelmetProvider>
                     <title> Copranil </title>
-                    <link rel="icon" type="image/png" href="https://affogato.co/src/assets/favicon/copranil.ico" sizes="16x16" />
+                    <link rel="icon" type="image/png" href="https://affogato.co/src/assets/favicon/copracnil.ico" sizes="16x16" />
                 </HelmetProvider>
             </>
         );    }

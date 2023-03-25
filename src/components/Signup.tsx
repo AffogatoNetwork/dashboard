@@ -81,7 +81,7 @@ const Signup = () => {
         if (location.match("loca") !== null) {
             setCurrentCoop(CooperativeList[1]);
         }
-        if (location.match("copranil") !== null) {
+        if (location.match("copracnil") !== null) {
             setCurrentCoop(CooperativeList[2]);
         }
         if (location.match("comsa") !== null) {

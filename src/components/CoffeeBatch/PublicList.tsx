@@ -28,7 +28,7 @@ export const PublicList = () => {
       isValid = password === process.env.REACT_APP_PASS_COMSA;
     } else if (location.match("commovel") !== null) {
       isValid = password === process.env.REACT_APP_PASS_COMMOVEL;
-    } else if (location.match("copranil") !== null) {
+    } else if (location.match("copracnil") !== null) {
       isValid = password === process.env.REACT_APP_PASS_COPRANIL;
     } else if (location.match("proexo") !== null) {
       isValid = password === process.env.REACT_APP_PASS_PROEXO;

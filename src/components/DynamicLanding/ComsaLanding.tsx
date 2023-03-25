@@ -143,19 +143,6 @@ export const ComsaLanding = () => {
                                             </span>
                                 </div>
 
-                                <div className="flex mt-2 items-center justify-center pb-5">
-                                    <div className=" items-center">
-                                       <span className="leading-relaxed"><>{t('areas')}:</></span>
-                                    </div>
-                                    <span className="flex ml-3 pl-3 py-2 space-x-2s">
-                                        <div className="flex ml-6 items-center">
-
-                                                    <span className="mr-3 text-2xl font-black">
-
-                                                    </span>
-                                        </div>
-                                            </span>
-                                </div>
                                 <p className="leading-relaxed">Productos / Servicios</p>
 
                                 <p className="leading-relaxed">

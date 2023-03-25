@@ -1,7 +1,7 @@
 import React from "react";
 import {DefaultLanding} from "../DynamicLanding/DefaultLanding";
 import {CommovelLanding} from "../DynamicLanding/CommovelLanding";
-import {CopranilLanding} from "../DynamicLanding/CopranilLanding";
+import {CopracnilLanding} from "../DynamicLanding/CopracnilLanding";
 import {ComsaLanding} from "../DynamicLanding/ComsaLanding";
 import {ProexoLanding} from "../DynamicLanding/ProexoLanding";
 
@@ -14,9 +14,9 @@ const Landing = () => {
                 </>
             );
         }
-        if (location.match("copranil") !== null) {
+        if (location.match("copracnil") !== null) {
             return (<>
-                    <CopranilLanding></CopranilLanding>
+                    <CopracnilLanding></CopracnilLanding>
                 </>
             );
         }

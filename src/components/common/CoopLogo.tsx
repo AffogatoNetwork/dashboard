@@ -3,7 +3,7 @@ import Image from "react-bootstrap/esm/Image";
 import Logo from "../../assets/logo.png";
 import Comsa from "../../assets/comsa.png";
 import Commovel from "../../assets/commovel.png";
-import Copranil from "../../assets/copranil.png";
+import Copranil from "../../assets/copracnil.png";
 import Proexo from "../../assets/proexo.png";
 
 type props = {
@@ -18,7 +18,7 @@ const CoopLogo = ({ className }: props) => {
   if (location.match("commovel") !== null) {
     return <Image className={className} src={Commovel} />;
   }
-  if (location.match("copranil") !== null) {
+  if (location.match("copracnil") !== null) {
     return <Image className={className} src={Copranil} />;
   }
   if (location.match("proexo") !== null) {

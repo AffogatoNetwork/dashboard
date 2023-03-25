@@ -6,13 +6,13 @@ import {FarmIcon} from "../icons/farm";
 import {useTranslation} from "react-i18next";
 
 
-export const CopranilLanding = () => {
+export const CopracnilLanding = () => {
     const {t} = useTranslation();
 
     return (<>
         <section>
             <div id="header" className="hero min-h-screen opacity-90"
-                 style={{backgroundImage: `url("https://www.copranil.hn/wp-content/uploads/2021/03/LA-PARTICIPACION-DE-LA-MUJER-ENFOQUE-FUNDAMENTAL.jpeg")`}}>
+                 style={{backgroundImage: `url("https://www.copracnil.hn/wp-content/uploads/2021/03/LA-PARTICIPACION-DE-LA-MUJER-ENFOQUE-FUNDAMENTAL.jpeg")`}}>
                 <div className="hero-overlay bg-opacity-60 bg-black"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
@@ -83,9 +83,11 @@ export const CopranilLanding = () => {
 
                                         <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                         <p className="text-indigo-500 mt-1 m-3">
-                                            info@copranil.hn
+                                            presidencia.copranil@gmail.com
                                         </p>
-
+                                        <p className="text-indigo-500 mt-1 m-3">
+                                            copranil05@hotmail.com,
+                                        </p>
                                     </div>
                                     <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
 
@@ -141,19 +143,6 @@ export const CopranilLanding = () => {
                                             </span>
                                 </div>
 
-                                <div className="flex mt-2 items-center justify-center pb-5">
-                                    <div className=" items-center">
-                                       <span className="leading-relaxed"><>{t('areas')}:</></span>
-                                    </div>
-                                    <span className="flex ml-3 pl-3 py-2 space-x-2s">
-                                        <div className="flex ml-6 items-center">
-
-                                                    <span className="mr-3 text-2xl font-black">
-
-                                                    </span>
-                                        </div>
-                                            </span>
-                                </div>
                                 <p className="leading-relaxed">Productos / Servicios</p>
 
                                 <p className="leading-relaxed">
@@ -270,7 +259,7 @@ export const CopranilLanding = () => {
                             />
                         </a>
                         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-      <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/Copranil-153316678376593" rel="noopener noreferrer" target="_blank" >
+      <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/profile.php?id=100064793832709 " rel="noopener noreferrer" target="_blank" >
           <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5"
                viewBox="0 0 24 24">
             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>

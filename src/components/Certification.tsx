@@ -9,8 +9,8 @@ const Certification = () => {
         if (location.match("commovel") !== null) {
             setCompany('commovel');
         }
-        if (location.match("copranil") !== null) {
-            setCompany('copranil')
+        if (location.match("copracnil") !== null) {
+            setCompany('copracnil')
         }
         if (location.match("comsa") !== null) {
             setCompany('comsa')
@@ -36,7 +36,7 @@ const Certification = () => {
 
             </div>
             <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-                {(company === 'comsa' || company === "proexo" || company === "copranil" || company === "commovel") && (
+                {(company === 'comsa' || company === "proexo" || company === "copracnil" || company === "commovel") && (
                     <div
                         className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
@@ -52,7 +52,7 @@ const Certification = () => {
                     </div>
                 )}
 
-                    {(company === 'comsa' || company === "prexo" || company === "copranil" || company === "commovel") && (
+                    {(company === 'comsa' || company === "prexo" || company === "copracnil" || company === "commovel" || company === "proexo") && (
 
                         <div
                         className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
@@ -124,7 +124,7 @@ const Certification = () => {
                     </div>
                     )}
 
-                {(company === 'comsa' || company === "proexo") && (
+                {(company === 'comsa' ) && (
                     <div
                         className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img

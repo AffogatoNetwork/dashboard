@@ -166,6 +166,7 @@ export const List = () => {
                 if (exist.variety !== '') {
                     batchList.push(cooffeeBatch);
                 }
+
                 const total = batchList.length
                 setBatchesCount(total);
                 setCoffeeBatchList(batchList.slice());
@@ -323,7 +324,7 @@ export const List = () => {
         cbList = cbList.filter(filterByWeight);
         cbList = cbList.filter(filterByNote);
 
-        setCoffeeBatchList(cbList);
+        setCoffeeBatchList2(cbList);
         confPagination(cbList, isAuth ? 10 : 12);
     };
 

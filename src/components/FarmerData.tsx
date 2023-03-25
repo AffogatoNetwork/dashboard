@@ -69,7 +69,7 @@
                const farmerList = new Array<FarmerType>();
                let companyName = "PROEXO";
                const hostname = window.location.hostname;
-               if (hostname.includes("copranil")) {
+               if (hostname.includes("copracnil")) {
                    companyName = "COPRANIL";
                } else if (hostname.includes("commovel")) {
                    companyName = "COMMOVEL";

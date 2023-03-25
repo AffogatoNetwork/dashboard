@@ -72,8 +72,7 @@ export const CommovelLanding = () => {
                             <div
                                 className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative ">
                                 <iframe width="100%" height="100%" className={'absolute inset-0 opacity-75'}
-                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=Commovel%20Aldea%20San%20Luis,%20Planes,%20Sta.%20B%C3%A1rbara+(COMMOVEL)&amp;t=k&amp;z=19&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"/>
-
+                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=en&amp;q=COMMOVEL%20Monta%C3%B1a%20Verde+(COMMOVEL%20Monta%C3%B1a%20Verde)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"/>
                                 <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                     <div className="lg:w-1/2 px-6">
                                         <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección
@@ -84,7 +83,9 @@ export const CommovelLanding = () => {
                                         <p className="text-indigo-500 mt-1 m-3">
                                             contacto@montanaverdehn.com
                                         </p>
-
+                                        <p className="text-indigo-500 mt-1 m-3">
+                                            admin@montanaverdehn.com
+                                        </p>
                                     </div>
                                     <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
 
@@ -92,7 +93,7 @@ export const CommovelLanding = () => {
                                         <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Teléfono</h2>
 
                                         <p className="text-indigo-500 leading-relaxed">
-                                            (+504) 9952-3415
+                                            (+504) 9783-5742
                                         </p>
 
                                     </div>
@@ -122,7 +123,7 @@ export const CommovelLanding = () => {
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        21
+                                                        23
                                                     </span>
                                         </div>
                                             </span>
@@ -134,7 +135,7 @@ export const CommovelLanding = () => {
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
                                                     <span className="mr-3 text-2xl font-black">
-                                                      142
+                                                      134
                                                     </span>
                                         </div>
                                             </span>
@@ -142,13 +143,13 @@ export const CommovelLanding = () => {
 
                                 <div className="flex mt-2 items-center justify-center pb-5">
                                     <div className=" items-center">
-                                       <span className="leading-relaxed"><>{t('areas')}:</></span>
+                                        <span className="leading-relaxed"><>{t('areas')}:</></span>
                                     </div>
                                     <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                         <div className="flex ml-6 items-center">
 
                                                     <span className="mr-3 text-2xl font-black">
-                                                        940 hectáreas
+                                                        977 hectáreas
                                                     </span>
                                         </div>
                                             </span>
@@ -165,11 +166,21 @@ export const CommovelLanding = () => {
                                 <p className="leading-relaxed">
                                     - Laboratorio de Catación
                                 </p>
+                                <p className="leading-relaxed">
+                                    - Tren de Preparación
+                                </p>
+                                <p className="leading-relaxed">
+                                    - Servicio de Financiamiento
+                                </p>
+                                <p className="leading-relaxed">
+                                    - Venta de Productos Orgánicos
+                                </p>
                                 <div className="flex mt-6 items-center justify-center pb-5">
 
 
                                 </div>
-                                <p className="leading-relaxed"><>{t('certificates')}:</></p>
+                                <p className="leading-relaxed"><>{t('certificates')}:</>
+                                </p>
 
                                 <p className="leading-relaxed">
                                     100% Orgánico
@@ -180,7 +191,8 @@ export const CommovelLanding = () => {
                                 <br/>
 
                                 <div className=" items-center">
-                                    <p className="leading-relaxed"><>{t('review')}:</></p>
+                                    <p className="leading-relaxed"><>{t('review')}:</>
+                                    </p>
 
                                     <span className="leading-relaxed font-black">
                                                 <p className="leading-relaxed">
@@ -228,31 +240,35 @@ export const CommovelLanding = () => {
 
                 <div className="bg-gray-100">
                     <br/>
-                     <div className="ml-8 text-left">
+                    <div className="ml-8 text-left">
                         <h1> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
                         </h1>
                     </div>
                     <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
                         <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
-                            <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
+                            <img alt="bid lab" className="w-15 h-10"
+                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
                             />
                         </a>
 
 
                         <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
-                            <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                            <img alt="heifer" className="w-15 h-10"
+                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
                             />
                         </a>
 
                         <a
-                            className="text-gray-600 ml-1 m-2" >powered by:</a>
+                            className="text-gray-600 ml-1 m-2">powered by:</a>
                         <a href="https://affogato.co" rel="noopener noreferrer" target="_blank">
 
-                            <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                            <img alt="affogato" className="w-15 h-10"
+                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
                             />
                         </a>
                         <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-      <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/www.commovel.org" rel="noopener noreferrer" target="_blank" >
+      <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/www.commovel.org"
+         rel="noopener noreferrer" target="_blank">
           <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5"
                viewBox="0 0 24 24">
             <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>

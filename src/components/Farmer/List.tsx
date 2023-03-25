@@ -100,7 +100,7 @@ export const List = () => {
 
             let companyName = "PROEXO";
             const hostname = window.location.hostname;
-            if (hostname.includes("copranil")) {
+            if (hostname.includes("copracnil")) {
                 companyName = "COPRANIL";
             } else if (hostname.includes("commovel")) {
                 companyName = "COMMOVEL";
@@ -224,7 +224,7 @@ export const List = () => {
             document.getElementById("qr-farmer"),
             "qr-farmer",
             {
-                scale: 8,
+                scale: 10,
                 backgroundColor: 'white',
             }
         );
