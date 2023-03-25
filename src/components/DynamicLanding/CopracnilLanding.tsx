@@ -4,6 +4,10 @@ import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
 import {useTranslation} from "react-i18next";
+import {Facebook} from "../icons/Facebook";
+import {Instagram} from "../icons/Instagram";
+import {Youtube} from "../icons/Youtube";
+import {WebSite} from "../icons/WebSite";
 
 
 export const CopracnilLanding = () => {
@@ -12,12 +16,12 @@ export const CopracnilLanding = () => {
     return (<>
         <section>
             <div id="header" className="hero min-h-screen opacity-90"
-                 style={{backgroundImage: `url("https://www.copracnil.hn/wp-content/uploads/2021/03/LA-PARTICIPACION-DE-LA-MUJER-ENFOQUE-FUNDAMENTAL.jpeg")`}}>
+                 style={{backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F3.jpeg?alt=media&token=45a94c40-4cc9-40ee-aa4c-2b722d694144")`}}>
                 <div className="hero-overlay bg-opacity-60 bg-black"></div>
                 <div className="hero-content text-center text-neutral-content">
                     <div className="max-w-md">
                         <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
-                            Plataforma de trazabilidad de COPRANIL
+                            Plataforma de trazabilidad de COPRACNIL
                         </h1>
                         <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                             Nuestro café trazado con la seguridad de la tecnología de blockchain.
@@ -205,7 +209,7 @@ export const CopracnilLanding = () => {
                  className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                 <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
                     <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                        COPRANIL Cooperativas Nuevas Ideas Limitada
+                        COPRACNIL Cooperativas Nuevas Ideas Limitada
                     </h2>
 
                 </div>
@@ -231,45 +235,78 @@ export const CopracnilLanding = () => {
                         alt=""/>
                 </div>
             </div>
-            <footer className="text-gray-600 body-font">
 
-                <div className="bg-gray-100">
-                    <br/>
-                     <div className="ml-8 text-left">
-                        <h1> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
-                        </h1>
+            <div className="bg-gray-100">
+                <footer>
+                    <div className="px-4 py-12 pb-0 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8">
+
+                        <div className="text-center p-2 ">
+                            <h1 className="text-xl font-black"> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
+                            </h1>
+                        </div>
+                        <nav className="flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
+                            <div className="px-5 py-2">
+                                <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
+                                    <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
+                                    />
+                                </a>
+                            </div>
+
+                            <div className="px-5 py-2">
+                                <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
+                                    <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                                    />
+                                </a>
+
+                            </div>
+
+                            <div className="px-5 py-2">
+
+
+                            </div>
+
+                        </nav>
+                        <p className="text-center m-2">
+                            <a
+                                className="text-gray-600 text-lg font-bold" > Powered by:</a>
+
+                        </p>
+
+                        <div className="mx-auto p-4 flex justify-center">
+                            <a href="https://affogato.co" rel="noopener noreferrer" target="_blank" className="self-center">
+
+                                <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                                />
+                            </a>
+                        </div>
                     </div>
-                    <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col sm:flex-row">
-                        <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
-                            <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
-                            />
-                        </a>
+                </footer>
 
+                <div className="bg-gray-100 pb-4 m-0 p-0">
 
-                        <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
-                            <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
-                            />
-                        </a>
-
+                    <p className="text-center ">
                         <a
-                            className="text-gray-600 ml-1 m-2" >powered by:</a>
-                        <a href="https://affogato.co" rel="noopener noreferrer" target="_blank">
+                            className="text-gray-600 text-lg font-medium" > Redes Sociales</a>
+                    </p>
+                    <div className="flex justify-center m-4 space-x-6">
 
-                            <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
-                            />
-                        </a>
-                        <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-      <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/profile.php?id=100064793832709 " rel="noopener noreferrer" target="_blank" >
-          <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5"
-               viewBox="0 0 24 24">
-            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-          </svg>
+                    <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
+
+                       <a className="text-gray-500 hover:text-blue-500" href="https://copracnil.hn" rel="noopener noreferrer" target="_blank" >
+      <WebSite/>
         </a>
 
-      </span>
+                 <a className="text-gray-500 hover:text-blue-500" href="https://www.facebook.com/profile.php?id=100064793832709" rel="noopener noreferrer" target="_blank" >
+      <Facebook/>
+        </a>
+
+
+                    </span>
                     </div>
+
                 </div>
-            </footer>
+            </div>
+
 
         </section>
     </>);

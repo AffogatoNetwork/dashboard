@@ -4,6 +4,10 @@ import {LinkIcon} from "../icons/link";
 import {Blockchain} from "../icons/blockchain";
 import {FarmIcon} from "../icons/farm";
 import {useTranslation} from "react-i18next";
+import {Youtube} from "../icons/Youtube";
+import {Instagram} from "../icons/Instagram";
+import {Facebook} from "../icons/Facebook";
+import {WebSite} from "../icons/WebSite";
 
 export const DefaultLanding = () => {
     const {t} = useTranslation();
@@ -220,59 +224,85 @@ export const DefaultLanding = () => {
                 </div>
 
             </div>
-            <footer className="text-gray-600 body-font">
 
-                <div className="bg-gray-100">
-                    <br/>
-                    <div className="ml-8 text-left">
-                        <h1> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
-                        </h1>
-                    </div>
-                    <div className="container mx-auto py-4 px-5 flex flex-wrap flex-col xs:flex-row">
-                        <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
-                            <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
-                            />
-                        </a>
+<div className="bg-gray-100">
+    <footer>
+        <div className="px-4 py-12 pb-0 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8">
 
-
-                        <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
-                            <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
-                            />
-                        </a>
-
-                        <a
-                           className="text-gray-600 ml-1 m-2" >powered by:</a>
-                        <a href="https://affogato.co" rel="noopener noreferrer" target="_blank">
-
-                        <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+            <div className="text-center p-2 ">
+                <h1 className="text-xl font-black"> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
+                </h1>
+            </div>
+            <nav className="flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
+                <div className="px-5 py-2">
+                    <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
+                        <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
                         />
-                        </a>
-                        <span className="inline-flex sm:ml-auto sm:mt-0 mt-2 justify-center sm:justify-start">
-      <a className="text-gray-500 hover:text-blue-500" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
-          <svg fill="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" className="w-5 h-5"
-               viewBox="0 0 24 24">
-            <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"></path>
-          </svg>
-        </a>
-
-        <a className="ml-3 text-gray-500 hover:text-pink-500">
-          <svg fill="none" stroke="currentColor" strokeLinecap="round" strokeLinejoin="round" strokeWidth="2"
-               className="w-5 h-5" viewBox="0 0 24 24">
-            <rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect>
-            <path d="M16 11.37A4 4 0 1112.63 8 4 4 0 0116 11.37zm1.5-4.87h.01"></path>
-          </svg>
-        </a>
-
-                                       <a className="ml-3 text-gray-500 hover:text-red-500">
-<svg fill="currentColor" className="w-5 h-5" focusable="false" aria-hidden="true"
-     viewBox="0 0 24 24"  aria-label="fontSize large"><path
-    d="M10 15l5.19-3L10 9v6m11.56-7.83c.13.47.22 1.1.28 1.9.07.8.1 1.49.1 2.09L22 12c0 2.19-.16 3.8-.44 4.83-.25.9-.83 1.48-1.73 1.73-.47.13-1.33.22-2.65.28-1.3.07-2.49.1-3.59.1L12 19c-4.19 0-6.8-.16-7.83-.44-.9-.25-1.48-.83-1.73-1.73-.13-.47-.22-1.1-.28-1.9-.07-.8-.1-1.49-.1-2.09L2 12c0-2.19.16-3.8.44-4.83.25-.9.83-1.48 1.73-1.73.47-.13 1.33-.22 2.65-.28 1.3-.07 2.49-.1 3.59-.1L12 5c4.19 0 6.8.16 7.83.44.9.25 1.48.83 1.73 1.73z"></path></svg>
-                                </a>
-
-      </span>
-                    </div>
+                    </a>
                 </div>
-            </footer>
+
+                <div className="px-5 py-2">
+                    <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
+                        <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                        />
+                    </a>
+
+                </div>
+
+                <div className="px-5 py-2">
+
+
+                </div>
+
+            </nav>
+            <p className="text-center m-2">
+                <a
+                    className="text-gray-600 text-lg font-bold" > Powered by:</a>
+
+            </p>
+
+            <div className="mx-auto p-4 flex justify-center">
+                <a href="https://affogato.co" rel="noopener noreferrer" target="_blank" className="self-center">
+
+                    <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                    />
+                </a>
+            </div>
+        </div>
+    </footer>
+
+    <div className="bg-gray-100 pb-4 m-0 p-0">
+
+        <p className="text-center ">
+            <a
+                className="text-gray-600 text-lg font-medium" > Redes Sociales</a>
+        </p>
+        <div className="flex justify-center m-4 space-x-6">
+
+                    <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
+
+                       <a className="text-gray-500 hover:text-blue-500" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
+      <WebSite/>
+        </a>
+
+                 <a className="text-gray-500 hover:text-blue-500" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
+      <Facebook/>
+        </a>
+                        <a className="ml-3 text-gray-500 hover:text-pink-500">
+         <Instagram/>
+        </a>
+                       <a className="ml-3 text-gray-500 hover:text-red-500">
+<Youtube/>
+                               </a>
+
+                    </span>
+        </div>
+
+    </div>
+</div>
+
+
+
         </section>
 
     </>);
