@@ -111,9 +111,7 @@ export const List = () => {
                 };
                 let dryMill = {};
                 let cupProfile = {};
-                let roasting = {
-                    roast_type: undefined
-                };
+                let roasting = {};
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "farmer") {
@@ -136,12 +134,10 @@ export const List = () => {
                         [dryMill] = jsonData.attributes[i].value;
                     }
                     if (traitType === "roasting") {
-                        if (roasting !== null) {
-                            [roasting] = jsonData.attributes[i].value;
-                        }
+                        [roasting] = jsonData.attributes[i].value;
                     }
                 }
-                const cooffeeBatch = {
+                let cooffeeBatch = {
                     id: batchId,
                     name: jsonData.name,
                     description: jsonData.description,
@@ -155,27 +151,24 @@ export const List = () => {
                     cupProfile,
                 };
                 const exist = {
-                    variety: cooffeeBatch.roasting.roast_type,
+                    variety: cooffeeBatch.wetMill.variety,
                 }
 
              const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9"
              );
 
                 if (skywalker?.id != null) {
-                    console.log()
                     const removeIndex = batchList.map(item => item.id).indexOf(skywalker?.id);
                     batchList.splice(removeIndex, 1);
                 }
 
 
-                if (exist.variety !== undefined) {
+                if (exist.variety !== '') {
                     batchList.push(cooffeeBatch);
                 }
 
                 const total = batchList.length
                 setBatchesCount(total);
-                console.log(cooffeeBatch.roasting)
-
                 setCoffeeBatchList(batchList.slice());
                 setCoffeeBatchList2(batchList.slice());
             });
@@ -228,7 +221,6 @@ export const List = () => {
                     ethcallProvider = new Provider(state.provider);
                     const signer = state.provider.getSigner();
                     const address = await signer.getAddress();
-                    console.log(address);
                     setCompanyAddresses(getCompanyAddresses(address));
                     setAuth(true);
                 } else {
@@ -280,7 +272,6 @@ export const List = () => {
             .concat(c.wetMill.process)
             .concat(SEARCH_DIVIDER)
             .concat(c.wetMill.drying_type)
-            .concat(c.roasting.roast_type)
             .concat(SEARCH_DIVIDER)
             .concat(c.farm.village)
             .concat(SEARCH_DIVIDER)
