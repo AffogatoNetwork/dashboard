@@ -42,6 +42,7 @@ export const List = () => {
     const [loadingIpfs, setLoadingIpfs] = useState(true);
     const [dataLoaded, setDataLoaded] = useState(false);
     const [qrCodeUrl, setQrCodeUrl] = useState("");
+    const [blockchainUrl, setBlockchainUrl] = useState("");
     const [isAuth, setAuth] = useState(true);
     const [companyAddresses, setCompanyAddresses] = useState<Array<string>>([]);
     const [searchCriteria, setSearchCriteria] = useState("");
@@ -101,6 +102,7 @@ export const List = () => {
 
         const batchList = coffeeBatchList;
         const url = ipfsUrl.concat(ipfsHash);
+        setBlockchainUrl(url);
         fetch(url)
             .then((response) => response.json())
             .then((jsonData) => {
@@ -519,6 +521,16 @@ export const List = () => {
                                         <>{t("open-link")}</>
                                     </button>
                                 </div>
+
+                            </div>
+                            <div className="text-center items-center">
+                                <br/>
+                                <button onClick={() => {
+                                    openInNewTab(blockchainUrl);}}
+                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                    <LinkIcon></LinkIcon>
+                                    <>Ver en el blockchain</>
+                                </button>
                             </div>
                         </div>
                     </div>
