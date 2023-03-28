@@ -23,6 +23,9 @@ const clientOracle = () => new ApolloClient({
 
 const App = () => {
 
+
+
+
     const contracts = useContracts();
     const apolloClient = clientOracle();
 

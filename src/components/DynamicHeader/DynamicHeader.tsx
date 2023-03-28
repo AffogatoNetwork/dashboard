@@ -10,52 +10,52 @@ const DynamicHeader = () => {
 
     if (location.match("commovel") !== null) {
         // @ts-ignore
-        favicon.href = "https://affogato.co/src/assets/favicon/commovel.ico";
+        favicon.href = 'https://commovel.affogato.co/static/media/commovel.12b48c26dec81fc092c8.png';
         return (<>
                 <HelmetProvider>
                     <title> Commovel </title>
-                    <link rel="icon" type="image/png" href="https://i0.wp.com/montanaverdehn.com/wp-content/uploads/2022/02/cropped-commovel-logo-icon.png?fit=32%2C32&ssl=1" sizes="16x16" />
+                    <link rel="icon" type="image/png" href='https://commovel.affogato.co/static/media/commovel.12b48c26dec81fc092c8.png' sizes="16x16" />
                 </HelmetProvider>
             </>
         );
     }
     if (location.match("copracnil") !== null) {
         // @ts-ignore
-        favicon.href = "https://affogato.co/src/assets/favicon/copracnil.ico";
+        favicon.href = 'https://copracnil.affogato.co/static/media/copracnil.b09051d39f351d475cf6.png';
         return (<>
                 <HelmetProvider>
-                    <title> Copranil </title>
-                    <link rel="icon" type="image/png" href="https://affogato.co/src/assets/favicon/copracnil.ico" sizes="16x16" />
+                    <title> Copracnil </title>
+                    <link rel="icon" type="image/png" href='https://copracnil.affogato.co/static/media/copracnil.b09051d39f351d475cf6.png' sizes="16x16" />
                 </HelmetProvider>
             </>
         );    }
     if (location.match("comsa") !== null) {
         // @ts-ignore
-        favicon.href = "https://affogato.co/src/assets/favicon/proexo.ico";
+        favicon.href = 'https://comsa.affogato.co/static/media/comsa.642c04d408113f3c4fb4.png';
         return (<>
                 <HelmetProvider>
                     <title> Comsa </title>
-                    <link rel="icon" type="image/png" href="https://affogato.co/src/assets/favicon/comsa.ico" sizes="16x16" />
+                    <link rel="icon" type="image/png" href='https://comsa.affogato.co/static/media/comsa.642c04d408113f3c4fb4.png' sizes="16x16" />
                 </HelmetProvider>
             </>
         );    }
     if (location.match("proexo") !== null) {
         // @ts-ignore
-        favicon.href = "https://affogato.co/src/assets/favicon/proexo.ico";
+        favicon.href = 'https://proexo.affogato.co/static/media/proexo.398e15cc1775f3d21f97.png';
         return (<>
                 <HelmetProvider>
                     <title> Proexo </title>
-                    <link rel="icon" type="image/png" href="https://affogato.co/src/assets/favicon/proexo.ico" sizes="16x16" />
+                    <link rel="icon" type="image/png" href='https://proexo.affogato.co/static/media/proexo.398e15cc1775f3d21f97.png' sizes="16x16" />
                 </HelmetProvider>
             </>
         );
     } else {
         // @ts-ignore
-        favicon.href = "https://affogato.co/src/assets/favicon/favicon/default.ico";
+        favicon.href = 'https://affogato.co/logo.png';
         return (<>
                 <HelmetProvider>
                     <title> Plataforma de trazabilidad </title>
-                    <link rel="icon" type="image/png" href="https://affogato.co/src/assets/favicon/favicon/default.ico" sizes="16x16" />
+                    <link rel="icon" type="image/png" href='https://affogato.co/logo.png' sizes="16x16" />
                 </HelmetProvider>
             </>
         );

@@ -80,8 +80,6 @@ export const List = () => {
             }
 
             const farmList = new Array<FarmType>();
-            // const signer = state.provider.getSigner();
-            // const sAddress = await signer.getAddress();
             let companyName = "proexo";
             const hostname = window.location.hostname;
             if (hostname.includes("proexo")) {
