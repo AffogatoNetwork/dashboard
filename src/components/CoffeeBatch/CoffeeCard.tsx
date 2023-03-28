@@ -72,6 +72,8 @@ const CoffeeCard = () => {
                         };
                         setCoffeeBatch(coffeeB);
                         setLoading(false);
+                        console.log(coffeeBatch);
+
                     })
                     .catch((error) => {
                         console.error(error);

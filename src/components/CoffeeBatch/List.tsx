@@ -111,7 +111,9 @@ export const List = () => {
                 };
                 let dryMill = {};
                 let cupProfile = {};
-                let roasting = {};
+                let roasting = {
+                    roast_type: undefined
+                };
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "farmer") {
@@ -134,7 +136,9 @@ export const List = () => {
                         [dryMill] = jsonData.attributes[i].value;
                     }
                     if (traitType === "roasting") {
-                        [roasting] = jsonData.attributes[i].value;
+                        if (roasting !== null) {
+                            [roasting] = jsonData.attributes[i].value;
+                        }
                     }
                 }
                 const cooffeeBatch = {
@@ -151,24 +155,27 @@ export const List = () => {
                     cupProfile,
                 };
                 const exist = {
-                    variety: cooffeeBatch.wetMill.variety,
+                    variety: cooffeeBatch.roasting.roast_type,
                 }
 
              const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9"
              );
 
                 if (skywalker?.id != null) {
+                    console.log()
                     const removeIndex = batchList.map(item => item.id).indexOf(skywalker?.id);
                     batchList.splice(removeIndex, 1);
                 }
 
 
-                if (exist.variety !== '') {
+                if (exist.variety !== undefined) {
                     batchList.push(cooffeeBatch);
                 }
 
                 const total = batchList.length
                 setBatchesCount(total);
+                console.log(cooffeeBatch.roasting)
+
                 setCoffeeBatchList(batchList.slice());
                 setCoffeeBatchList2(batchList.slice());
             });
@@ -273,6 +280,7 @@ export const List = () => {
             .concat(c.wetMill.process)
             .concat(SEARCH_DIVIDER)
             .concat(c.wetMill.drying_type)
+            .concat(c.roasting.roast_type)
             .concat(SEARCH_DIVIDER)
             .concat(c.farm.village)
             .concat(SEARCH_DIVIDER)
