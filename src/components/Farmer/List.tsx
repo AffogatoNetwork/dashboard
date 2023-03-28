@@ -36,6 +36,7 @@ type FarmerType = {
     fullname: string;
     bio: string;
     gender: string;
+    farm: string;
     location: string;
     search: string;
 };
@@ -49,6 +50,7 @@ export const List = () => {
     const [farmersCount, setFarmersCount] = useState(0);
     const [pagination, setPagination] = useState(pagDefault);
     const [qrCodeUrl, setQrCodeUrl] = useState("");
+    const [blockChainLink, setBlockChainLink ] = useState("");
     const [searchCriteria, setSearchCriteria] = useState("");
     const [currentGender, setCurrentGender] = useState(GenderFilterList[0]);
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
@@ -86,10 +88,17 @@ export const List = () => {
       setFarmersCount(total);
     }; */
 
+
+    const setData = (qrUrl: any, ipfsUrl: any ) => {
+        setQrCodeUrl(qrUrl);
+        setBlockChainLink(ipfsUrl);
+    }
+
+
     useEffect(() => {
         const load = async () => {
             const farmerList = new Array<FarmerType>();
-            const user = localStorage.getItem("addres")
+            const user = localStorage.getItem("address")
             if(user !== ""){
                 setOwnerAddress(user)
             } else {
@@ -110,12 +119,14 @@ export const List = () => {
             await getAllFarmers(companyName).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
+                    console.log(farmerData);
                     const {
                         farmerId,
                         address,
                         fullname,
                         bio,
                         gender,
+                        farm,
                         village,
                         region,
                         country,
@@ -138,8 +149,9 @@ export const List = () => {
                         fullname,
                         bio,
                         gender,
+                        farm,
                         location: l,
-                        search: s.toLowerCase(),
+                        search: s.toLowerCase()
                     });
                 }
                 setFarmers(farmerList);
@@ -235,6 +247,7 @@ export const List = () => {
         <div className="w-full p-5 rounded-lg">
             <div className="text-center">
                 <>{t("search-farmers")}</>
+
             </div>
             <div className="relative">
                 <div className="absolute flex items-center ml-2 h-full">
@@ -288,6 +301,8 @@ export const List = () => {
             .concat("/farmer/")
             .concat(farmer.address);
 
+        const ipfsUrl = "https://affogato.mypinata.cloud/ipfs/" + farmer.farm
+
         return (<tr
             key={index}
             className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}>
@@ -295,13 +310,13 @@ export const List = () => {
             <td className="p-3 text-base font-light">
                 <div className="qrcode">
                     <label htmlFor="farmerlist" className="btn btn-ghost h-full"
-                           onClick={() => { setQrCodeUrl(farmerUrl); }}>
+                           onClick={() => { setData(farmerUrl, ipfsUrl ); }}>
                         <QRCode value={farmerUrl} size={90}/>
                     </label>
                 </div>
             </td>
             <td className="p-3 text-base font-light">
-                   {farmer.farmerId}
+                {farmer.farmerId}
             </td>
             <td className="p-3 text-base font-light">
                       <a className="link link-info" href={farmerUrl} target="_blank" rel="noreferrer">
@@ -358,6 +373,15 @@ export const List = () => {
                                             <>{t("open-link")}</>
                                         </button>
                                 </div>
+                            </div>
+                            <div className="text-center items-center">
+                                <br/>
+                                <button onClick={() => {
+                                    openInNewTab(blockChainLink);}}
+                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                    <LinkIcon></LinkIcon>
+                                    <>Ver en el blockchain</>
+                                </button>
                             </div>
                         </div>
                     </div>

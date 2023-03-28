@@ -2,29 +2,29 @@
   "attributes": [
     {
       "trait_type": "Cooperative",
-      "value": "0x27825E62C42E23364efC8e967cC6E69ef70A4813"
+      "value": "0xccdF342558d6D41a0e282B586dA463443E61eE4f"
     },
     {
       "trait_type": "Farmer",
-      "value": "0x05ee57c65aE248409A08D2BE6Fb3d158dC80FE44"
+      "value": "0x03094B22109DAF6282b9221be4ed73273974A3d1"
     },
     {
       "trait_type": "Wet Mill",
       "value": [
         {
           "certifications": "Orgánico, Fairtrade",
-          "date": "2022-11-24",
-          "drying_hours": 56,
-          "drying_id": "SEC06-2",
+          "date": "2023-02-12",
+          "drying_hours": 192,
+          "drying_id": "L1",
           "drying_type": "Mecanico",
-          "entry_id": "",
-          "facility": "Finca El Roble",
-          "latitude": 14.9867885,
-          "longitude": -88.1591179,
-          "note": 88.58,
+          "entry_id": "001",
+          "facility": "Finca Calidonio",
+          "latitude": 14.5927463,
+          "longitude": -88.7694127,
+          "note": 83.5,
           "process": "Lavado",
-          "variety": "IHCAFE 90",
-          "weight": 10936
+          "variety": "Colombiano e Icatu",
+          "weight": 2
         }
       ]
     },
@@ -32,20 +32,20 @@
       "trait_type": "Farm",
       "value": [
         {
-          "altitude": 1200,
-          "area": 1.5,
+          "altitude": 1242,
+          "area": 20,
           "certifications": "Orgánico, Fairtrade",
           "country": "Honduras",
-          "etnic_group": "No indigena",
-          "family_members": 4,
-          "latitude": 14.95,
-          "longitude": -88.53,
-          "name": "Los Pinos",
-          "region": "Santa Bárbara",
+          "etnic_group": "Maya Chorti",
+          "family_members": 5,
+          "latitude": 14.5927463,
+          "longitude": -88.7694127,
+          "name": "Finca Calidonio",
+          "region": "Copan",
           "shadow": "Con Sombra",
-          "story": "",
-          "varieties": "Lempira, IHCAFE 90",
-          "village": "El Zapote"
+          "story": "Finca de 20 años, de muchas generaciones , con variedades como ser Icatu, Parainema, Colombiano, y Lempira, ubicada en la comunidad de la Quebradas.",
+          "varieties": "Colombiano e Icatu",
+          "village": "Las Quebradas "
         }
       ]
     },
@@ -53,17 +53,17 @@
       "trait_type": "Dry Mill",
       "value": [
         {
-          "damage_percent": "10%",
-          "date": "1970-01-01",
+          "damage_percent": "2%",
+          "date": "2023-02-12",
           "export_drying_id": "Secada001",
           "export_id": "1",
-          "facility": "",
-          "latitude": -88.1236111111,
-          "longitude": 0,
-          "note": 84,
+          "facility": "Finca Calidonio",
+          "latitude": 14.5927463,
+          "longitude": -88.7694127,
+          "note": 83.5,
           "threshing_process": "Mecanico",
-          "threshing_yield": 1.2102,
-          "weight": 97.92
+          "threshing_yield": 1.25,
+          "weight": 2
         }
       ]
     },
@@ -71,19 +71,34 @@
       "trait_type": "Profile",
       "value": [
         {
-          "acidity": "",
+          "acidity": "7.75",
           "aftertaste": "",
-          "aroma": "Frutal",
-          "body": "Redondo",
+          "aroma": "",
+          "body": "",
           "flavor": "Citrico, Chocolate, Miel",
-          "note": 84,
-          "sweetness": "Citrico"
+          "note": 83.5,
+          "sweetness": ""
+        }
+      ]
+    },
+    {
+      "trait_type": "Roasting",
+      "value": [
+        {
+          "bag_size": "454g",
+          "grind_type": "Normal",
+          "packaging": "Trilaminar negro mate",
+          "roast_date": "2023-03-24",
+          "roast_type": "Medio"
         }
       ]
     }
   ],
-  "description": "Café orgánico y comercio justo",
+  "description": "Finca Calidonio",
   "external_url": "https://affogato.co",
   "image": "Qma5mzG5sFjBAmPyhxfkXaxM78HX6UPihH5hNSyp1Cm6a1",
-  "name": "Lempira, IHCAFE 90 Los Pinos"
+  "name": "Colombianio e Icatu, Finca Calidonio"
 }
+
+
+

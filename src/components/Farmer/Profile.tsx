@@ -22,21 +22,17 @@ export const Profile = () => {
             if (farmerId) {
                 await getFarmer(farmerId).then((result) => {
                     setFarmerData(result);
-                    const ipfsHash = result?.farm;
-                    const url = ipfsUrl.concat(ipfsHash);
-                    fetch(url)
-                        .then((response) => response.json())
-                        .then((jsonData) => {
-                            console.log(jsonData)
-                            setfarmName(jsonData.name)
-                            setFarms(jsonData.attributes[3].value[0]);
-                        });
+                    console.log(result?.address);
+                    const firebase = getFarmerFarms(result?.address).then((result: any) => {{
+                        console.log(result[0]);
+                        setfarmName(result[0].name);
+                        setFarms(result[0]);
+                    }});
                     setLoading(false);
                 });
                 await getImageUrl(farmerId).then((result) => {
                     setImageUrl(result);
                 });
-
                 setLoading(false);
             }
         };
