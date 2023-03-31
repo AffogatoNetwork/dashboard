@@ -2390,24 +2390,29 @@
   resolved "https://registry.npmjs.org/@leichtgewicht/ip-codec/-/ip-codec-2.0.4.tgz"
   integrity sha512-Hcv+nVC0kZnQ3tD9GVu5xSMR4VVYOteQIr/hwFPVEvPdlXqgGEuRjiheChHgdM+JyqdgNcmzZOX/tnl0JOiI7A==
 
-"@magic-sdk/commons@^6.0.0":
-  version "6.0.0"
-  resolved "https://registry.npmjs.org/@magic-sdk/commons/-/commons-6.0.0.tgz"
-  integrity sha512-Ps58nyWu2BTlrt3pqh8M+9Aqt48WEZE4LZ3ydI37AOcb2VhWUi9a9Qn2iCVh7qf3/prjPCqUZ/O4LPEnYt2pPQ==
+"@magic-sdk/commons@^11.1.0":
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/commons/-/commons-11.1.0.tgz#07aaf849a8e3fd557e706813962117580860276f"
+  integrity sha512-g8S/2bet4kCq0zLa1XO3LsVmAO/iku5j4dEV/g8VXpT4/j0mjvzx4W4KrxwidDZ1hbWORtcDhFMzHbbFdptw4Q==
 
-"@magic-sdk/provider@^10.0.0":
-  version "10.0.0"
-  resolved "https://registry.npmjs.org/@magic-sdk/provider/-/provider-10.0.0.tgz"
-  integrity sha512-h2jvmdzq2pibtd7mHoAfqWwCcTcDFwKle2vhJ0n0yezIsoEAStFr6Y4IOODNFkNfq3QwmX0cHzVLYCJseY228A==
+"@magic-sdk/provider@^15.0.0":
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/provider/-/provider-15.0.0.tgz#267bb6f5cdfba0d35c3d9f421af074afcd266f43"
+  integrity sha512-IM4TG9UM07Fh2XvJ8t3hqMukn7nQHEIEn9yU/P/3GBMDhRZdHNN+wi7ytvoWpvxfuOiKjlTcSxx+Vxx3nip9sA==
   dependencies:
-    "@magic-sdk/types" "^9.0.0"
+    "@magic-sdk/types" "^11.6.2"
     eventemitter3 "^4.0.4"
     web3-core "1.5.2"
 
-"@magic-sdk/types@^9.0.0":
-  version "9.0.0"
-  resolved "https://registry.npmjs.org/@magic-sdk/types/-/types-9.0.0.tgz"
-  integrity sha512-uDQU8uqjAqqGeH02reabPuDVS7Hf7Sk+IaBCsZap1Qzk6MkeXrAx82+sWcYE4J8aD6kVukDoveOiAfjyWASEVA==
+"@magic-sdk/types@^11.6.2":
+  version "11.6.2"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/types/-/types-11.6.2.tgz#1fb6205b516c3f0c5787e82aecd0e667d2de1cd2"
+  integrity sha512-+Emd+9HeeVi2E0bktJ33YleA/ozEuKYCBfmSbGRxlntdyUvaojeC+WPf2jN1WH8FjUEiljAjrEJTTZyRGCL8SQ==
+
+"@magic-sdk/types@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@magic-sdk/types/-/types-13.1.0.tgz#78c7a6ef0649d876fbd35637adbe08060ab1fcd6"
+  integrity sha512-oc4xOL8QDtE9pz/DLfgL40KcHUUIoxA77Y9nmZMHAju/weGjFFy6c/pX2I8ZnFY5AG0aAiU0RuDOEgAlhQbVDQ==
 
 "@mapbox/point-geometry@^0.1.0":
   version "0.1.0"
@@ -9542,14 +9547,14 @@ lz-string@^1.4.4:
   resolved "https://registry.npmjs.org/lz-string/-/lz-string-1.4.4.tgz"
   integrity sha512-0ckx7ZHRPqb0oUm8zNr+90mtf9DQB60H1wMCjBtfi62Kl3a7JbHob6gA2bC+xRvZoOL+1hzUK8jeuEIQE8svEQ==
 
-magic-sdk@^10.0.0:
-  version "10.0.0"
-  resolved "https://registry.npmjs.org/magic-sdk/-/magic-sdk-10.0.0.tgz"
-  integrity sha512-8PIlzHU9hBq8fu32fHwCj6SNdADJEqxxNJOnk2IiPm471qkDPRMK3vUk0pNFGew1h7d0HOlSKYPaDDfFIANXzA==
+magic-sdk@^15.1.0:
+  version "15.1.0"
+  resolved "https://registry.yarnpkg.com/magic-sdk/-/magic-sdk-15.1.0.tgz#075434248aa4e64187cdbbfc6f69af41c6af44ef"
+  integrity sha512-b4Xe2AcoOnuVT/vcDaeT903/lwg++xwPlZvIFzoua9RCsvQPPttJt8o0IfKTdAZ5/Z5rF349oBLHg9Qje5UBJg==
   dependencies:
-    "@magic-sdk/commons" "^6.0.0"
-    "@magic-sdk/provider" "^10.0.0"
-    "@magic-sdk/types" "^9.0.0"
+    "@magic-sdk/commons" "^11.1.0"
+    "@magic-sdk/provider" "^15.0.0"
+    "@magic-sdk/types" "^13.1.0"
     localforage "^1.7.4"
 
 magic-string@^0.25.0, magic-string@^0.25.7:

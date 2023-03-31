@@ -29,7 +29,7 @@
     "i18next-browser-languagedetector": "^6.1.8",
     "i18next-http-backend": "^1.4.4",
     "jotai": "^1.8.4",
-    "magic-sdk": "^10.0.0",
+    "magic-sdk": "^15.1.0",
     "node-sass": "^7.0.3",
     "overlayscrollbars": "^1.13.1",
     "overlayscrollbars-react": "^0.3.0",

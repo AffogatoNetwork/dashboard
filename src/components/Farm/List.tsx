@@ -71,7 +71,7 @@ export const List = () => {
 
         const load = async () => {
 
-            const user = localStorage.getItem("addres")
+            const user = localStorage.getItem("address")
             if(user !== ""){
                 setOwnerAddress(user)
             } else {
@@ -83,13 +83,13 @@ export const List = () => {
             let companyName = "proexo";
             const hostname = window.location.hostname;
             if (hostname.includes("proexo")) {
-                companyName = "proexo";
+                companyName = "PROEXO";
             }else if (hostname.includes("copracnil")) {
-                companyName = "copracnil";
+                companyName = "COPRACNIL";
             } else if (hostname.includes("commovel")) {
-                companyName = "commovel";
+                companyName = "COMMOVEL";
             } else if (hostname.includes("comsa")) {
-                companyName = "comsa";
+                companyName = "COMSA";
             }
 
 

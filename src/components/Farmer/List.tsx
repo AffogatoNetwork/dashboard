@@ -102,24 +102,41 @@ export const List = () => {
             if(user !== ""){
                 setOwnerAddress(user)
             } else {
-                setOwnerAddress(user)
 
             }
 
 
             let companyName = "PROEXO";
-            const hostname = window.location.hostname;
-            if (hostname.includes("copracnil")) {
-                companyName = "COPRANIL";
-            } else if (hostname.includes("commovel")) {
-                companyName = "COMMOVEL";
-            } else if (hostname.includes("comsa")) {
-                companyName = "COMSA";
+            const url = window.location.toString();
+
+            switch (url) {
+                case "copracnil": {
+                    companyName = "COPRACNIL";
+                    break;
+                }
+                case "proexo":{
+                    companyName = "PROEXO";
+                    break;
+                }
+                case "commovel":{
+                    companyName = "COMMOVEL";
+                    break;
+                }
+                case "comsa":{
+                    companyName = "COMSA";
+                    break;
+                }
+                default :{
+                    companyName = "PROEXO"
+                    break;
+                }
+
             }
+
+
             await getAllFarmers(companyName).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
-                    console.log(farmerData);
                     const {
                         farmerId,
                         address,
@@ -247,7 +264,6 @@ export const List = () => {
         <div className="w-full p-5 rounded-lg">
             <div className="text-center">
                 <>{t("search-farmers")}</>
-
             </div>
             <div className="relative">
                 <div className="absolute flex items-center ml-2 h-full">
@@ -278,9 +294,9 @@ export const List = () => {
                     <>{t("clear")}</>
                 </button>
                 <select id="dropdown-cooperative" className="select w-full max-w-xs" onChange={handleGenderChange}>
-                    <option disabled selected><> {t("gender")}</>:</option>
+                    <option disabled defaultValue={""}><> {t("gender")}</>:</option>
                     {currentGender.name}
-                    {GenderFilterList.map((item) => (<option value={item.key}>
+                    {GenderFilterList.map((item) => (<option key={item.key} value={item.key}>
                         {item.name}
                     </option>))}
                 </select>
@@ -315,9 +331,7 @@ export const List = () => {
                     </label>
                 </div>
             </td>
-            <td className="p-3 text-base font-light">
-                {farmer.farmerId}
-            </td>
+
             <td className="p-3 text-base font-light">
                       <a className="link link-info" href={farmerUrl} target="_blank" rel="noreferrer">
                     {farmer.fullname}
@@ -331,6 +345,12 @@ export const List = () => {
             </td>
             <td className="p-3 text-base font-light">
                      {farmer.address}
+            </td>
+            <td className="p-3 text-base font-light">
+                <a className="link link-info" href={"https://affogato.mypinata.cloud/ipfs/" + farmer.farm} target="_blank" rel="noreferrer">
+                    Ver en blockchain
+                </a>
+
             </td>
         </tr>);
     };
@@ -430,15 +450,13 @@ export const List = () => {
                                             <>
                                                 <div className="text-center">
                                                     <table id="farmers-list"
-                                                        className="farmers-list w-full sm:bg-white rounded-lg overflow-hidden  my-5">
+                                                        className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
                                                         <thead>
                                                         <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                                                             <th className="p-3 text-center border-white border ">
                                                                 QR
                                                             </th>
-                                                            <th className="p-3 text-center border-white border">
-                                                                <>{t("code")}</>
-                                                            </th>
+
                                                             <th className="p-3 text-center border-white border">
                                                                 <>{t("name")}</>
                                                             </th>
@@ -450,6 +468,9 @@ export const List = () => {
                                                             </th>
                                                             <th className="p-3 text-center border-white border">
                                                                 <>{t("account-address")}</>
+                                                            </th>
+                                                            <th className="p-3 text-center border-white border">
+                                                                <>{t("Url")}</>
                                                             </th>
                                                         </tr>
                                                         </thead>

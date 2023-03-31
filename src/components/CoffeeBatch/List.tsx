@@ -90,7 +90,7 @@ export const List = () => {
 
     const loadBatch = async (batchId: number, ipfsHash: any) => {
 
-        const user = localStorage.getItem("addres")
+        const user = localStorage.getItem("address")
         if(user !== ""){
             setOwnerAddress(user)
         } else {
