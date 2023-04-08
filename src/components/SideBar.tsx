@@ -164,24 +164,24 @@ export default function Home() {
                 <br/>
                 <br/>
                 {active && <AiOutlineMenuFold onClick={showLess}
-                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
+                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
                 {!active && <AiOutlineMenuUnfold onClick={showMore}
-                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
+                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
 
 
                 <div>
 
                     {ownerAddress ? (
-                        <div className='my-2'>
+                        <div className='m-2'>
                             <motion.p animate={controlTitleText}
                                       className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
 
                             <div onClick={() => logout()}
-                                 className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
-                                <LogOutIcon className=' active:text-white'/>
+                                 className={`inline-flex items-center button justify-center w-full h-16 mt-auto hover:text-amber-900 bg-gray-100  font-medium rounded-md`}>
+                                <LogOutIcon className=' hover:text-white'/>
 
                                 <motion.p animate={controlText}
-                                          className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
+                                          className='ml-4 text-sm font-bold hover:text-amber-900'>
                                     <>
                                         <>{t('logout')}</>
                                     </>
@@ -193,13 +193,13 @@ export default function Home() {
                     ) : (
                         <div className='my-2'>
                             <motion.p animate={controlTitleText}
-                                      className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>
+                                      className='mb-2 ml-4 text-sm font-bold text-red-500'></motion.p>
 
                             <div onClick={() => navigate("/login", {replace: true})}
-                                 className={`inline-flex items-center justify-center w-full h-16 mt-auto hover:text-orange-300 bg-gray-100 active:${primary} active:text-white font-medium rounded-md`}>
-                                <IconLogin className='active:text-white'/>
+                                 className={`inline-flex items-center button justify-center w-full h-16 mt-auto hover:text-amber-900 bg-gray-100  font-medium rounded-md`}>
+                                <IconLogin className='hover:text-white'/>
                                 <motion.p animate={controlText}
-                                          className='ml-4 text-sm font-bold hover:text-orange-300 active:text-white'>
+                                          className='ml-4 text-sm font-bold hover:text-amber-900'>
                                     <>
                                         <>{t('login.access')}</>
                                     </>

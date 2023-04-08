@@ -56,7 +56,7 @@ const Login = () => {
     };
 
     return (
-        <div className="bg-no-repeat bg-cover bg-center relative bg-black m-0 p-0"
+        <div className="bg-no-repeat bg-cover bg-center relative bg-black -m-4"
              style={{backgroundImage: `url(${background})`}}>
             <div className="bg-opacity-80 bg-black">
                 <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">

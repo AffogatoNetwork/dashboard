@@ -1,4 +1,6 @@
 module.exports = {
+  important: true,
+
   daisyui: {
     themes: [
       {
