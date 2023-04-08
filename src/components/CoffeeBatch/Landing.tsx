@@ -10,7 +10,9 @@ const Landing = () => {
 
     if (location.match("commovel") !== null) {
             return (<>
-                    <CommovelLanding></CommovelLanding>
+<div className="rounded">
+    <CommovelLanding></CommovelLanding>
+</div>
                 </>
             );
         }

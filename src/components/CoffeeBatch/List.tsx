@@ -538,10 +538,10 @@ export const List = () => {
             </div>
 
 
-            <div className="py-8">
-                <div className="batch-list flex flex-row mb-1 sm:mb-0 justify-between w-full">
-                    <div className="w-full h-full p-1">
-                        <div className="card shadow-xl bg-white">
+            <div className="">
+                <div className="batch-list flex flex-row mb-1  justify-between w-full">
+                    <div className="w-full h-full ">
+                        <div className="card rounded rounded-lg shadow-xl bg-white">
                             {RenderFilters()}
                             <div className="card-body">
                                 <div className="card-title grid justify-items-stretch">

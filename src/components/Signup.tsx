@@ -430,7 +430,7 @@ const Signup = () => {
 
     const RenderForm = () => (
         <div className="">
-        <div className="p-8 card shadow-xl bg-stone-100	">
+        <div className="p-8 card shadow-xl rounded-lg	">
             <h1><>{t("company")}</>
             </h1>
             <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-5">

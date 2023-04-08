@@ -66,7 +66,7 @@ export default function Home() {
 
     const navigate = useNavigate();
     const [active, setActive] = useState(false)
-    const [primary,] = useState('bg-amber-900')
+    const [primary,] = useState('bg-white')
     const controls = useAnimation()
     const controlText = useAnimation()
     const controlTitleText = useAnimation()
@@ -109,10 +109,10 @@ export default function Home() {
     }, [])
 
 
-    return (<div className='min-h-screen bg-white'>
+    return (<div className='min-h-screen bg-base-100'>
 
         <motion.div animate={controls}
-                    className='max-w-[250px] animate duration-300 border-r border-gray-700 relative flex flex-col pt-2 min-h-screen group'>
+                    className='max-w-[250px] animate duration-300  relative flex flex-col pt-2 min-h-screen group'>
 
 
             <div className="flex justify-center md:m-4 m-2 ">
@@ -130,10 +130,10 @@ export default function Home() {
 
 
             <div className='grow'>
-                {data.map((group, index) => (<div key={index} className='my-2'>
+                {data.map((group, index) => (<div key={index} className='ml-2'>
                     {group.items.map((item, index2) => (
                         <div key={index2} onClick={() => navigate(`${item.href}`)}
-                             className={`${item.href === window.location.pathname && `${primary} text-white hover:text-gray-50`}  ${item.disabled && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600'} inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300 hover:text-white font-medium rounded-md cursor-pointer `}>
+                             className={`${item.href === window.location.pathname && `${primary}  text-amber-900 hover:text-amber-900`}  ${item.disabled && 'cursor-not-allowed bg-gray-100 rounded-l-lg text-gray-500 opacity-50 hover:text-amber-900'} inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-white rounded-l-lg rounded hover:text-amber-900 font-medium  cursor-pointer `}>
                             <item.icon className=''/>
                             <motion.p animate={controlText} className='ml-4 text-sm'><>
                                 {t(item.title)}
@@ -142,7 +142,7 @@ export default function Home() {
                         </div>))}
                 </div>))}
                 <div tabIndex={1} onClick={() => navigate(`/create`)}
-                     className={`${ownerAddress && window.location.pathname == '/create' && `${primary} text-white hover:bg-orange-300 hover:text-white visible`}  ${!ownerAddress && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-gray-600 hidden'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
+                     className={`${ownerAddress && window.location.pathname == '/create' && `${primary} rounded-l-lg text-white hover:bg-white hover:text-amber-900 visible`}  ${!ownerAddress && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-amber-900 hidden'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
                 >
                     <VoteIcon className="w-8"/>
                     <motion.p animate={controlText} className='ml-4 text-sm'>
@@ -150,13 +150,13 @@ export default function Home() {
                     </motion.p>
                 </div>
                 <div tabIndex={0}
-                     className={`dropdown dropdown-right dropdown-end inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-orange-300 hover:text-white font-medium rounded-md cursor-pointer `}>
+                     className={`dropdown dropdown-right dropdown-end inline-flex items-center w-full h-12 rounded-l-lg mt-2 px-4 py-4 hover:bg-white hover:text-amber-900 font-medium rounded-md cursor-pointer ml-2`}>
                     <WorldIcon className="w-8"/>
                     <motion.p animate={controlText} className='ml-4 text-sm'>
                         <>{t('change-lang')}</>
                     </motion.p>
                     <ul tabIndex={0}
-                        className="dropdown-content menu p-2 hover:text-black text-black shadow bg-base-100 rounded-box w-52">
+                        className="dropdown-content menu p-2 hover:text-black text-black shadow bg-base-100 rounded-box  rounded-l-lg w-52">
                         <LangChooser/>
                     </ul>
                 </div>
@@ -164,9 +164,9 @@ export default function Home() {
                 <br/>
                 <br/>
                 {active && <AiOutlineMenuFold onClick={showLess}
-                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
+                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
                 {!active && <AiOutlineMenuUnfold onClick={showMore}
-                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-amber-900 active:text-white font-medium rounded-md cursor-pointer'/>}
+                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-orange-300  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
 
 
                 <div>
