@@ -11,7 +11,7 @@ function Dashboard({ children }: { children: JSX.Element }) {
         <main className="w-full relative overflow-y-scroll bg-base-100">
           <section>
             <div className="mx-auto w-full max-w-[2460px]">
-              <div className="inner-container m-8 -ml-1">{children}</div>
+              <div className="inner-container  m-8 -ml-1">{children}</div>
             </div>
           </section>
         </main>

@@ -356,12 +356,7 @@ export const List = () => {
     };
 
 
-    if (loading) {
-        return (<Loading
-            label={t("loading").concat("...")}
-            className="loading-wrapper two"
-        />);
-    }
+
 
     return (
         <>
@@ -408,12 +403,12 @@ export const List = () => {
                 </div>
             </div>
 
-            <div className="py-8">
-                <div className="farmers flex flex-row mb-1 sm:mb-0 justify-between w-full">
+            <div className="">
+                <div className=" flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className=" w-full h-full p-1">
                         <div className="card shadow-xl bg-white">
                             {RenderFilters()}
-                            <div className="card-body">
+                            <div className="card-body overflow-y-scroll">
                                 <div className="card-title grid justify-items-stretch">
                                     <div className="justify-self-start">
                                         <h4>
@@ -444,10 +439,14 @@ export const List = () => {
                                     </div>
 
                                     <div className="overflow-x-scroll">
+
+
+
                                         {farmers === null ? (
                                             <NotFound msg="No se encontraron productores"/>
                                         ) : (
                                             <>
+
                                                 <div className="text-center">
                                                     <table id="farmers-list"
                                                         className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
@@ -474,7 +473,8 @@ export const List = () => {
                                                             </th>
                                                         </tr>
                                                         </thead>
-                                                        <tbody className="flex-1 sm:flex-none">
+
+                                                        <tbody className="flex-1 sm:flex-none overflow-y-scroll">
                                                         {farmers.map((farmer: any, index: number) =>
                                                             RenderItem(farmer, index)
                                                         )}
@@ -486,6 +486,10 @@ export const List = () => {
 
                                     </div>
                                     <div className="card-actions flex justify-center pt-4">
+                                        {loading && (<Loading
+                                                label={t("loading").concat("...")}
+                                                className="loading-wrapper"/>
+                                        )}
                                         <CustomPagination
                                             pagination={pagination}
                                             onPageSelected={onPageSelected}
@@ -498,6 +502,7 @@ export const List = () => {
                     </div>
                 </div>
             </div>
+
         </>
     );
 };

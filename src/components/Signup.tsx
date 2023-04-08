@@ -1,5 +1,4 @@
 import React, {useEffect, useRef, useState} from "react";
-import Col from "react-bootstrap/esm/Col";
 import Form from "react-bootstrap/Form";
 import MultipleValueTextInput from "react-multivalue-text-input";
 import {useNavigate} from "react-router-dom";
@@ -432,7 +431,7 @@ const Signup = () => {
 
         <>
             <div className="shadow-xl bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
-                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-3">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-3">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
                         <div className="md:col-span-5">
                             <FormInput
@@ -441,102 +440,117 @@ const Signup = () => {
                                 placeholder={t("placeholders.email")}
                                 handleOnChange={handleUserInputChange}
                                 errorMsg={userNameError}
-                                className="input input-bordered "
+                                className="input input-bordered w-full"
                             />
                         </div>
-                    </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={isEmailUser ? t("cellphone") : t("email")}
+                                value={cellphone}
+                                placeholder={isEmailUser ? t("placeholders.cellphone") : t("placeholders.email")}
+                                handleOnChange={handleCellphoneChange}
+                                errorMsg={cellphoneError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("signup.manager-name")}
+                                value={managerName}
+                                placeholder={t("placeholders.fullname")}
+                                handleOnChange={handleManagerNameChange}
+                                errorMsg={managerNameError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("signup.company-name")}
+                                value={socialReason}
+                                placeholder={t("name")}
+                                handleOnChange={handleSocialReasonChange}
+                                errorMsg={socialReasonError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <div className="grid grid-cols-2 gap-2">
+                                <FormInput
+                                    label={t("latitude")}
+                                    value={latitude}
+                                    placeholder={t("latitude")}
+                                    handleOnChange={handleLatitudeChange}
+                                    errorMsg={latitudeError}
+                                    className="input input-bordered w-full"
+                                />
+                                <FormInput
+                                    label={t("longitude")}
+                                    value={longitude}
+                                    placeholder={t("longitude")}
+                                    handleOnChange={handleLongitudeChange}
+                                    errorMsg={longitudeError}
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                        </div>
+                        </div>
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
                         <div className="md:col-span-5">
+                            <div className="grid grid-cols-2 gap-2">
+                                <FormInput
+                                    label={t("male-partners")}
+                                    value={noPartnersM}
+                                    placeholder={t("male-partners")}
+                                    handleOnChange={handleNoPartnersMChange}
+                                    errorMsg={noPartnersMError}
+                                    className="input input-bordered w-full"
+                                />
+                                <FormInput
+                                    label={t("female-partners")}
+                                    value={noPartnersF}
+                                    placeholder={t("female-partners")}
+                                    handleOnChange={handleNoPartnersFChange}
+                                    errorMsg={noPartnersFError}
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
                         </div>
-                    </div>
-                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
+
+
                         <div className="md:col-span-5">
+                            <FormInput
+                                label={t("signup.productive-areas")}
+                                value={productiveAreas}
+                                placeholder={t("areas")}
+                                handleOnChange={handleProductivesAreasChange}
+                                errorMsg={productiveAreasError}
+                                className="input input-bordered w-full"
+                            />
                         </div>
-                    </div>
-                </div>
-            </div>
+                        <div className="md:col-span-5">
 
-            <div className="">
-                <div className="p-8 card shadow-xl rounded-lg">
-
-                    <h1><>{t("company")}</>
-                    </h1>
-                    <div className="grid grid-cols-1 gap-5 md:grid-cols-3 mt-5">
-                        <FormInput
-                            label={emailCellphoneLabel()}
-                            value={userName}
-                            placeholder={t("placeholders.email")}
-                            handleOnChange={handleUserInputChange}
-                            errorMsg={userNameError}
-                            className="input input-bordered "
-                        />
-                        <select id="dropdown-cooperative" className="select select-bordered" onChange={handleCooperativeChange}>
-                            <option disabled selected><> {t("signup.choose-company")}</>
-                                :
-                            </option>
-                            {currentCoop.name}
-                            {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
-                                {item.name}
-                            </option>))}
-                        </select>
-                        {coopError !== "" && (<span className="error-message">{coopError}</span>)}
-                        <FormInput
-                            label={isEmailUser ? t("cellphone") : t("email")}
-                            value={cellphone}
-                            placeholder={isEmailUser ? t("placeholders.cellphone") : t("placeholders.email")}
-                            handleOnChange={handleCellphoneChange}
-                            errorMsg={cellphoneError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("address")}
-                            value={addressLine}
-                            placeholder={t("address")}
-                            handleOnChange={handleAddressLineChange}
-                            errorMsg={addressLineError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("signup.manager-name")}
-                            value={managerName}
-                            placeholder={t("placeholders.fullname")}
-                            handleOnChange={handleManagerNameChange}
-                            errorMsg={managerNameError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={avgCupProfileLabel()}
-                            value={cupProfile}
-                            placeholder={t("average")}
-                            handleOnChange={handleCupProfileChange}
-                            errorMsg={cupProfileError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("latitude")}
-                            value={latitude}
-                            placeholder={t("latitude")}
-                            handleOnChange={handleLatitudeChange}
-                            errorMsg={latitudeError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("longitude")}
-                            value={longitude}
-                            placeholder={t("longitude")}
-                            handleOnChange={handleLongitudeChange}
-                            errorMsg={longitudeError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("signup.company-name")}
-                            value={socialReason}
-                            placeholder={t("name")}
-                            handleOnChange={handleSocialReasonChange}
-                            errorMsg={socialReasonError}
-                            className="input input-bordered "
-                        />
-                        <div className="">
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("address")}
+                                value={addressLine}
+                                placeholder={t("address")}
+                                handleOnChange={handleAddressLineChange}
+                                errorMsg={addressLineError}
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("village")}
+                                value={village}
+                                placeholder={t("village")}
+                                handleOnChange={handleVillageChange}
+                                errorMsg={villageError}
+                                className="input input-bordered w-full "
+                            />
+                        </div>
+                        <div className="md:col-span-5 m-2">
                             <Form.Label>
                                 <>{t("review")}</>
                             </Form.Label>
@@ -546,79 +560,111 @@ const Signup = () => {
                                 rows={4}
                                 placeholder={t("review")}
                                 onChange={handleReviewChange}
-                                className="textarea textarea-bordered"
+                                className="textarea textarea-bordered w-full"
                             />
                             {bioError !== "" && (<span className="error-message">{reviewError}</span>)}
                         </div>
-                        <FormInput
-                            label={t("signup.productive-areas")}
-                            value={productiveAreas}
-                            placeholder={t("areas")}
-                            handleOnChange={handleProductivesAreasChange}
-                            errorMsg={productiveAreasError}
-                            className="input input-bordered "
-                        />
-                        <MultipleValueTextInput
-                            onItemAdded={(item: any, allItems: Array<string>) => {
-
-                                setProducts(allItems);
-                            }}
-                            onItemDeleted={(item: any, allItems: Array<string>) => {
-
-                                setProducts(allItems);
-                            }}
-                            label="Productos o Servicios"
-                            name="social-networks"
-                            placeholder={t("placeholders.enter-products")}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("male-partners")}
-                            value={noPartnersM}
-                            placeholder={t("male-partners")}
-                            handleOnChange={handleNoPartnersMChange}
-                            errorMsg={noPartnersMError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("female-partners")}
-                            value={noPartnersF}
-                            placeholder={t("female-partners")}
-                            handleOnChange={handleNoPartnersFChange}
-                            errorMsg={noPartnersFError}
-                            className="input input-bordered "
-                        />
-                        <FormInput
-                            label={t("website")}
-                            value={website}
-                            placeholder={t("placeholders.email")}
-                            handleOnChange={handleWebsiteChange}
-                            errorMsg={websiteError}
-                            className="input input-bordered "
-                        />
-                        <MultipleValueTextInput
-                            onItemAdded={(item: any, allItems: Array<string>) => {
-
-                                setSocialNetworks(allItems);
-                            }}
-                            onItemDeleted={(item: any, allItems: Array<string>) => {
-
-                                setSocialNetworks(allItems);
-                            }}
-                            label={t("social-networks")}
-                            name="social-networks"
-                            placeholder={t("placeholders.social-networks")}
-                            className="input input-bordered "
-                        />
                     </div>
+                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                        <div className="md:col-span-5 m-2">
+                            <h1 className="text-base font-medium"><>{t("signup.choose-company")}</></h1>
+                            <select id="dropdown-cooperative" className="select select-bordered w-full" onChange={handleCooperativeChange}>
+                                <option disabled selected><> {t("signup.choose-company")}</>
+                                    :
+                                </option>
+                                {currentCoop.name}
+                                {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
+                                    {item.name}
+                                </option>))}
+                            </select>
+                            {coopError !== "" && (<span className="error-message">{coopError}</span>)}
+                        </div>
+
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={avgCupProfileLabel()}
+                                value={cupProfile}
+                                placeholder={t("average")}
+                                handleOnChange={handleCupProfileChange}
+                                errorMsg={cupProfileError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+
+                        <div className="md:col-span-5 m-4">
+                            <MultipleValueTextInput
+                                onItemAdded={(item: any, allItems: Array<string>) => {
+
+                                    setProducts(allItems);
+                                }}
+                                onItemDeleted={(item: any, allItems: Array<string>) => {
+
+                                    setProducts(allItems);
+                                }}
+                                label="Productos o Servicios"
+                                name="social-networks"
+                                placeholder={t("placeholders.enter-products")}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("website")}
+                                value={website}
+                                placeholder={t("placeholders.email")}
+                                handleOnChange={handleWebsiteChange}
+                                errorMsg={websiteError}
+                                className="input input-bordered w-full"
+                            />
+
+
+                        </div>
+
+                        <div className="md:col-span-5 m-2">
+                            <MultipleValueTextInput
+                                onItemAdded={(item: any, allItems: Array<string>) => {
+
+                                    setSocialNetworks(allItems);
+                                }}
+                                onItemDeleted={(item: any, allItems: Array<string>) => {
+
+                                    setSocialNetworks(allItems);
+                                }}
+                                label={t("social-networks")}
+                                name="social-networks"
+                                placeholder={t("placeholders.social-networks")}
+                                className="input input-bordered "
+                            />
+                        </div>
+
+
+                        </div>
                 </div>
                 {state.creatingAccountError && (<div className="account-created">
                     <h3>
                         <>{t("errors.creating-account")}</>
                     </h3>
                 </div>)}
+                <br/>
+                <div className="flex justify-center">
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => magicLogin()}
+                    >
+                        <>{t("signup.create-account")}</>
+                    </button>
+                    <div className="divider divider-horizontal"></div>
+                    <button
+                        className="btn btn-secondary "
+                        onClick={() => navigate("/login", {replace: true})}
+                    >
+                        <u>
+                            <>{t("signup.back")}</>
+                        </u>
+                    </button>
+                </div>
             </div>
-
         </>
         );
 
@@ -687,7 +733,6 @@ const Signup = () => {
                             />
                         </div>
                         <div className="md:col-span-5 m-4">
-
                             <select id="dropdown-cooperative" className="select select-bordered w-full" onChange={handleGenderChange}>
                                 <option disabled selected><> {t("gender")}</>
                                     :
@@ -789,44 +834,27 @@ const Signup = () => {
         </>
         );
 
-    const CardTitle = (): string => {
-        if (state.accountCreated) {
-            if (activeTab === "farmer") {
-                return t("signup.farmer-added");
-            }
-            return t("signup.account-created");
-        }
-        if (activeTab === "farmer") {
-            return t("signup.add-farmer");
-        }
-        return t("signup.new-company");
-    };
 
-    const cardClassName = (): string => {
-        if (activeTab === "farmer") {
-            return !state.accountCreated ? "" : "";
-        }
-        return !state.accountCreated ? "cooperative-card" : "cooperative-card-small";
-    };
+
+
 
     if (state.creatingAccount) {
         return (<Loading label={t("loading").concat("...")} className="loading-wrapper"/>);
     }
 
     return (<div className="">
-        <div className=" ">
-            <div className={cardClassName()}>
+        <div className="">
+            <div>
                 <div>
                     <div className="grid ">
-                        <div className="h-32 w-32 place-self-center">
+                        <div className="h-24 w-24 place-self-center">
                             <CoopLogo className="logo"/>
                         </div>
                         <br/>
-                        <h3 className="flex place-self-center">{CardTitle()}</h3>
                     </div>
 
                     {!state.accountCreated ? (<div className="">
-                        <div className="bg-base-100 pt-4 rounded-t-xl">
+                        <div className="bg-base-100 pt-4 rounded-t-xl m-12 lg:mx-64">
                             <div className="flex tabs justify-center">
                                 <a className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
                                    id="signup-tabs"
@@ -842,7 +870,7 @@ const Signup = () => {
 
                             {activeTab == 'farmer' ? (<div>
                                 {RenderFarmerForm()}
-                            </div>) : (<div>
+                            </div>) : (<div className="">
                                 {RenderForm()}
                             </div>)}
                         </div>
