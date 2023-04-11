@@ -38,17 +38,13 @@ const Home = () => {
     }
 
     return (
-        <Container fluid className="m-2" >
+        <div className="" >
             <ToastContainer limit={4}/>
             <Routes>
                 <Route
                     path="/"
                     element={
-                        <RequiredAuth>
-                            <Dashboard>
                                 <Landing/>
-                            </Dashboard>
-                        </RequiredAuth>
                     }
                 />
                 <Route
@@ -119,7 +115,7 @@ const Home = () => {
                 <Route path="/farmer/:farmerId" element={<Profile/>}/>
                 <Route path="/company/:companyId" element={<Company/>}/>
             </Routes>
-        </Container>
+        </div>
     );
 };
 

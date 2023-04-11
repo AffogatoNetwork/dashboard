@@ -24,8 +24,6 @@ import {IconLogin} from "./icons/login";
 
 const data = [{
     name: '', items: [{
-        title: 'home', icon: HomeIcon, href: routes.home, disabled: ''
-    }, {
         title: 'farmers', icon: ProfileIcon, href: routes.productores, disabled: ''
     }, {
         title: 'farms', icon: LandscapeIcon, href: routes.fincas, disabled: ''

@@ -27,6 +27,13 @@ export const CopracnilLanding = () => {
                             <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain.
                             </p>
+                            <div className="flex items-center justify-center mb-[87px]">
+                                <button className="btn btn-lg btn-outline btn-primary text-white">
+                                    <a href="/farmers">
+                                        Ir a la Plataforma
+                                    </a>
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>

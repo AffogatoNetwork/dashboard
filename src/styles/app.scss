@@ -1,15 +1,20 @@
 @import "./colors";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 html, body, #root {
   height: 100%;
+  padding: 0;
+  margin: 0;
+  overflow-x: hidden;
+  max-width: 100%;
 }
 
-  #button0 {
-    display: none;
-  }
+#button0 {
+  display: none;
+}
 
 
 .App {
@@ -45,16 +50,6 @@ html, body, #root {
   }
 }
 
-
-
-
-
-
-
-
-
-
-
 span {
   color: $primary;
   padding: 5px;
@@ -68,27 +63,24 @@ a {
   margin-bottom: 1rem;
 }
 
-
-
 .error-message {
   color: $error;
   font-size: 15px;
 }
 
-
-.google-map{
+.google-map {
   width: 100%;
   height: 20rem;
+
   &.small {
     width: 5rem;
     height: 5rem;
   }
+
   &.large {
     height: 30rem;
   }
 }
-
-
 
 html {
   font-size: 14px;
@@ -101,8 +93,6 @@ body {
   color: #495057;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  padding: .5em;
-  margin-bottom: 50px;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -113,12 +103,30 @@ h1, h2, h3, h4, h5, h6 {
   color: inherit;
 }
 
-h1 { font-size: 2.5rem; }
-h2 { font-size: 2rem; }
-h3 { font-size: 1.75rem; }
-h4 { font-size: 1.5rem; }
-h5 { font-size: 1.25rem; }
-h6 { font-size: 1rem; }
+h1 {
+  font-size: 2.5rem;
+}
+
+h2 {
+  font-size: 2rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.5rem;
+}
+
+h5 {
+  font-size: 1.25rem;
+}
+
+h6 {
+  font-size: 1rem;
+}
+
 p {
   line-height: 1.5;
   margin: 0 0 1rem 0;
@@ -280,13 +288,13 @@ input[type="number"]::-webkit-inner-spin-button {
 }
 
 span.flag {
-  width:44px;
-  height:30px;
-  display:inline-block;
+  width: 44px;
+  height: 30px;
+  display: inline-block;
 }
 
 img.flag {
-  width:30px
+  width: 30px
 }
 
 .tab-lifted.tab-active {
@@ -297,6 +305,51 @@ img.flag {
   border-width: 0px;
 }
 
+html {
+  overflow: auto
+}
+
+.col-12 {
+  flex: 0 0 auto;
+  width: 100%
+}
 
 
 
+.overlay {
+  background: 0 0;
+  cursor: crosshair;
+  display: none;
+  height: 100vh;
+  left: 0;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 11
+}
+
+@-webkit-keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0)
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0)
+  }
+}
+
+@keyframes fadeInDown {
+  0% {
+    opacity: 0;
+    transform: translate3d(0, -100%, 0)
+  }
+  to {
+    opacity: 1;
+    transform: translateZ(0)
+  }
+}
+
+.partner-item:hover {
+  box-shadow: 14px 14px 36px 0 hsla(0, 0%, 60%, .22)
+}

@@ -1,313 +1,91 @@
 import React from "react";
-import "../../styles/batchlist.scss";
-import {LinkIcon} from "../icons/link";
-import {Blockchain} from "../icons/blockchain";
-import {FarmIcon} from "../icons/farm";
 import {useTranslation} from "react-i18next";
-import {Youtube} from "../icons/Youtube";
-import {Instagram} from "../icons/Instagram";
-import {Facebook} from "../icons/Facebook";
-import {WebSite} from "../icons/WebSite";
-
 export const DefaultLanding = () => {
     const {t} = useTranslation();
 
     return (<>
-        <div className="bg-white card rounded-lg -mr-6 -my-6">
-            <div className="bg-white">
-                <div id="header" className="hero min-h-screen rounded-t-2xl"
-                     style={{backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FCOMSA.jpg?alt=media&token=bc36aa90-dc6f-4bb6-b40d-c17310dbd5f9")`}}>
-                    <div className="hero-overlay bg-opacity-40 bg-black rounded-t-2xl"></div>
-                    <div className="hero-content text-center text-neutral-content">
-                        <div className="max-w-md">
-                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
-                                Plataforma de trazabilidad de PlaceHolder de Cooperativa
-                            </h1>
-                            <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
-                                Nuestro café trazado con la seguridad de la tecnología de blockchain.
-                            </p>
 
-                        </div>
-                    </div>
+        <body className="overflow-x-hidden w-screen relative services-2-page">
+        <div className="wrapper mx-auto text-gray-900 font-normal max-w-[1320px]"><a> </a>
+            <div className="overlay"></div>
+            <div className="px-[12px] md:px-[36px] xl:px-0 mt-[70px] text-center z-10 relative lg:mt-[99px]">
+                <div className="text-center">
+                    <h2 className="font-bold font-chivo mx-auto text-gray-900 mb-5 md:mb-[30px] text-[35px] leading-[44px] md:text-[46px] md:leading-[52px] lg:text-heading-1 md:w-[20ch]">Affogato <span
+                        className="text-amber-900">trazabilidad</span> facil usando la tecnologia blockchain</h2>
+                    <p className="text-quote md:text-lead-lg text-gray-500 mx-auto md:w-[47ch] mb-[50px]">Vea todo el proceso desde la producción hasta el tostado y finalmente en su mesa con un simple escaneo
+                    </p>
                 </div>
-
-                <div id="info" className="section relative pt-20 pb-8 md:pt-16 md:pb-0">
-                    <div className="container xl:max-w-6xl mx-auto px-4">
-                        <div className="flex flex-wrap flex-row -mx-4 text-center">
-                            <div className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp"
-                                 data-wow-duration="1s"
-                            >
-                                <div
-                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-stone-100 shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-2">
-                                    <div className="inline-block text-black mb-4">
-                                        <Blockchain/>
-                                    </div>
-                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">BlockChain</h3>
-                                    <p className="text-gray-500">Tecnología y registro de información en una cadena de
-                                        bloques segura, transparente y descentralizada.</p>
-                                    <br className="w-4"/>
-                                </div>
-                            </div>
-                            <div className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp">
-                                <div
-                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-stone-100 shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-2">
-                                    <div className="inline-block text-gray-900 mb-4">
-                                        <LinkIcon/>
-                                    </div>
-                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Trazabilidad</h3>
-                                    <p className="text-gray-500">Los movimientos en la cadena de valor del café,
-                                        almacenados en un blockchain inmutable sin posibilidad de corromper la
-                                        información.</p>
-                                </div>
-                            </div>
-                            <div className="flex-shrink px-4 max-w-full w-full sm:w-1/2 lg:w-1/3 lg:px-6 wow fadeInUp">
-                                <div
-                                    className="py-8 px-12 mb-12  border-b border-gray-100 bg-stone-100  shadow-lg transform transition duration-300 ease-in-out hover:-translate-y-2">
-                                    <div className="inline-block text-gray-900 mb-4">
-                                        <FarmIcon/>
-                                    </div>
-                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Lotes</h3>
-                                    <p className="text-gray-500">Cada lote de café, con su productor y finca
-                                        correspondiente, es trazado y visible en el blockchain de Ethereum.</p>
-                                    <br className="w-4"/>
-                                </div>
-                            </div>
-                            <br/>
-                            <div id="map"
-                                 className="container px-5 py-24 mx-auto flex sm:flex-nowrap flex-wrap bg-zinc-100 rounded-lg">
-                                <div
-                                    className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative ">
-
-                                    <iframe width="100%" height="100%" className={'absolute inset-0 opacity-75'}
-                                            src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=COPRANIL,%20Corqu%C3%ADn+(COPRANIL,%20Corqu%C3%ADn)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"/>
-
-                                    <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
-                                        <div className="lg:w-1/2 px-6">
-                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección</h2>
-
-
-                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">EMAIL</h2>
-
-                                            <p className="text-indigo-500 mt-1 m-3">
-
-                                            </p>
-
-                                        </div>
-                                        <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-
-
-                                            <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">PHONE</h2>
-
-                                            <p className="text-indigo-500 leading-relaxed">
-
-                                            </p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
-
-                                    <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
-                                        num
-                                    </p>
-
-
-                                    <div className="flex mb-4 border-b-2 justify-center">
-          <span className="flex items-center">
-          Perfil de Taza
-          </span>
-                                    </div>
-                                    <p className="leading-relaxed">Socios:</p>
-
-                                    <div className="flex mt-4 items-center justify-center pb-2">
-                                        <div className=" items-center">
-                                                <span className="leading-relaxed">
-                                                                            <>{t('female')}:</>
-                                                </span>
-                                        </div>
-                                        <span className="flex ml-3 pl-3 py-2 space-x-2s">
-                                        <div className="flex ml-6 items-center">
-
-                                                    <span className="mr-3 text-2xl font-black">
-                                                        NUM
-                                                    </span>
-                                        </div>
-                                            </span>
-                                    </div>
-                                    <div className="flex  items-center justify-center pb-2">
-                                        <div className=" items-center">
-                                            <span className="leading-relaxed"><>{t('male')}:</></span>
-                                        </div>
-                                        <span className="flex ml-3 pl-3 py-2 space-x-2s">
-                                        <div className="flex ml-6 items-center">
-                                                    <span className="mr-3 text-2xl font-black">
-                                                        NUM
-                                                    </span>
-                                        </div>
-                                            </span>
-                                    </div>
-
-                                    <div className="flex mt-2 items-center justify-center pb-5">
-                                        <div className=" items-center">
-                                            <span className="leading-relaxed"><>{t('areas')}:</></span>
-                                        </div>
-                                        <span className="flex ml-3 pl-3 py-2 space-x-2s">
-                                        <div className="flex ml-6 items-center">
-
-                                                    <span className="mr-3 text-2xl font-black">
-                                                        num
-                                                    </span>
-                                        </div>
-                                            </span>
-                                    </div>
-                                    <p className="leading-relaxed">Productos / Servicios</p>
-
-                                    <p className="leading-relaxed">
-                                        num
-                                    </p>
-
-                                    <div className="flex mt-6 items-center justify-center pb-5">
-
-
-                                    </div>
-                                    <p className="leading-relaxed"><>{t('certificates')}:</>
-                                    </p>
-
-                                    <p className="leading-relaxed">
-                                        num
-                                    </p>
-                                    <br/>
-
-                                    <div className=" items-center">
-                                        <p className="leading-relaxed"><>{t('review')}:</>
-                                        </p>
-
-                                        <span className="leading-relaxed font-black">
-                                                <p className="leading-relaxed">
-                                                    datos
-                                                </p>
-                                        </span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                <div className="flex items-center justify-center mb-[87px]">
+                    <button className="btn btn-lg btn-primary text-white">
+                        <a href="/farmers">
+                            Ir a la Plataforma
+                        </a>
+                    </button>
                 </div>
-
-                <div id="fotos"
-                     className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-                    <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
-                        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                            nombre
-                        </h2>
-
-                    </div>
-                    <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
-                        <img
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F1.jpeg?alt=media&token=c35a5e80-0288-4d3b-a6b1-d857093d66a5"
-                            alt=""/>
-                        <img
-
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F2.jpeg?alt=media&token=715f446b-7b08-466d-b0c8-35b400c9ce1b"
-                            alt=""/>
-                        <img
-
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F3.jpeg?alt=media&token=74bb19fb-0eeb-42db-a271-c8cf832f376e"
-                            alt=""/>
-                        <img
-
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F4.jpeg?alt=media&token=b74b40fe-80df-4611-b116-9cb851a5bacf"
-                            alt=""/>
-                    </div>
-
+                <div className="relative mx-auto max-w-[1190px]"><img className="h-full w-full object-cover rounded-2xl"
+                                                                      src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Faffogato-dashboard.png?alt=media&token=ad0329a4-a784-4862-a7f3-aa6207765d78"
+                                                                      alt="Agon"/>
                 </div>
-
-                <div className="bg-gray-100">
-                    <footer>
-                        <div className="px-4 py-12 pb-0 mx-auto overflow-hidden max-w-7xl sm:px-6 lg:px-8">
-
-                            <div className="text-center p-2 ">
-                                <h1 className="text-xl font-black"> Proyecto patrocinado por BID LAB y ejecutado por HEIFER
-                                </h1>
-                            </div>
-                            <nav className="flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
-                                <div className="px-5 py-2">
-                                    <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
-                                        <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
-                                        />
-                                    </a>
-                                </div>
-
-                                <div className="px-5 py-2">
-                                    <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
-                                        <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
-                                        />
-                                    </a>
-
-                                </div>
-
-                                <div className="px-5 py-2">
-
-
-                                </div>
-
-                            </nav>
-                            <p className="text-center m-2">
-                                <a
-                                    className="text-gray-600 text-lg font-bold" > Powered by:</a>
-
-                            </p>
-
-                            <div className="mx-auto p-4 flex justify-center">
-                                <a href="https://affogato.co" rel="noopener noreferrer" target="_blank" className="self-center">
-
-                                    <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
-                                    />
-                                </a>
-                            </div>
-                        </div>
-                    </footer>
-
-                    <div className="bg-gray-100 pb-4 m-0 p-0">
-
-                        <p className="text-center ">
-                            <a
-                                className="text-gray-600 text-lg font-medium" > Redes Sociales</a>
-                        </p>
-                        <div className="flex justify-center m-4 space-x-6">
-
-                    <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
-
-                       <a className="text-gray-500 hover:text-blue-300" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
-      <WebSite/>
-        </a>
-
-                 <a className="text-gray-500 hover:text-blue-300" href="https://affogato.co" rel="noopener noreferrer" target="_blank" >
-      <Facebook/>
-        </a>
-                        <a className="ml-3 text-gray-500 hover:text-pink-500">
-         <Instagram/>
-        </a>
-                       <a className="ml-3 text-gray-500 hover:text-red-500">
-<Youtube/>
-                               </a>
-
-                    </span>
-                        </div>
-
-                    </div>
-                </div>
-
-
-
             </div>
+            <div className="px-[12px] md:px-[36px] xl:px-0 mt-[30px] md:mt-[80px] lg:mt-[143px]">
+                <h2 className="font-bold font-chivo text-[25px] leading-[30px] md:text-heading-3 text-center mb-[40px] md:mb-[60px] lg:mb-[84px]">Empresas y Cooperativas que confian en nosotros
+                </h2>
+                <div className="flex flex-wrap items-center justify-center mb-[30px] md:mb-[60px] lg:mb-[80px]"><a
+                    className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
+                    href="https://www.proexo.org/#"><img
+                    src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fproexo.png?alt=media&token=d726955b-e0c4-4f2b-b409-1b6472b07019" alt="Proexo"/></a><a
+                    className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
+                    href="https://www.comsa.hn"><img
+                    src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fcomsa.png?alt=media&token=37064738-74d0-4ba7-9363-07e8b382ce43" alt="Comsa"/></a>
+                    <a
+                    className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
+                    href=""><img
+                    src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fcommovel.png?alt=media&token=dbc7c2b0-406c-49f9-afa5-e7dc160114e3" alt="partner logo"/></a>
+                    <a
+                    className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
+                    href="https://montanaverdehn.com"><img
+                    src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fcopracnil.png?alt=media&token=64ae7aa5-baea-415a-b0e9-81b4daf3ee17" alt="partner logo"/></a>
+                </div>
+                <div className="w-full bg-gray-300 h-[1px] mb-[50px] md:mb-[90px] lg:mb-[150px]"></div>
+            </div>
+            <div
+                className="rounded-2xl p-[30px] md:py-[53px] md:px-[48px] gap-5 mx-auto bg-bg-6 md:flex lg:gap-[40px] lg:h-[420px] xl:h-[390px] max-w-[1190px] mt-[70px] lg:mt-[150px]"
+                >
+                <div className="flex-1 mb-[30px]">
+                    <p className="text-capitalized uppercase text-gray-500 tracking-[2px] mb-[13px]">Blockchain </p>
+                    <h4 className="font-bold font-chivo text-[28px] leading-[32px] md:text-heading-2 mb-[20px]">Nuestro café trazado con la seguridad de la tecnología de blockchain.</h4>
+                    <p className="text-text text-gray-500">Codigos QR unicos para los Hash
+                    </p>
+                </div>
+                <div className="relative flex-1"><img
+                    className="h-full w-full object-cover rounded-2xl img-shadow lg:absolute lg:max-w-[332px] lg:h-[403px] lg:right-0"
+                    src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F4.jpeg?alt=media&token=376da7da-4bbe-4d43-945e-d8d1574cc222" alt="Agon"/><img
+                    className="h-full w-full object-cover absolute animate-float max-w-[225px] max-h-[230px] rounded-[14px] bottom-[-20px] left-[-10px]"
+                    src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FCaptura%20de%20pantalla%202023-04-11%20a%20la(s)%2001.06.45.png?alt=media&token=41144e0a-0d33-47a1-8b8a-5eb5a3062a15" alt="Agon"/>
+                </div>
+            </div>
+            <div
+                className="bg fixed bottom-28 rounded-full grid place-items-center transition-all duration-300 right-[20px] z-[9999] w-[48px] h-[48px] opacity-0 invisible"
+                id="backToTop"><a className="rounded-full bg-green-900 grid place-items-center w-[48px] h-[48px]"
+                                  href="top"><img
+                src="./services 2_files/icon-up.svg" alt="to top icon"/></a></div>
+            <footer className="mt-[92px] lg:mt-[150px] xl:mt-[200px] mb-[30px]">
+                <div className="px-[12px] md:px-[36px] xl:px-0 mt-[70px]">
+                    <div className="flex flex-col items-center gap-2 mb-14 md:flex-row md:justify-between"><img
+                        className="h-full w-full object-cover max-w-[162px]" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                        alt="logo"/>
+                        <div className="flex items-center flex-col gap-5 md:flex-row lg:gap-[30px]">
+                            <p className="text-heading-6 font-chivo font-bold">Quieres trazar tu cafe?</p>
+                            <button className="btn btn-lg bg-black text-white">
+                                <a href="/signup">
+                                    Crea una Cuenta
+                                </a>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </footer>
         </div>
-
-
-
+        </body>
     </>);
 };
