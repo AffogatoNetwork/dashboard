@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BigNumber} from "ethers";
+import {BigNumber, ethers} from "ethers";
 import {Contract, Provider, setMulticallAddress} from "ethers-multicall";
 import {gql, useQuery} from "@apollo/client";
 import {useTranslation} from "react-i18next";
@@ -9,10 +9,11 @@ import Loading from "../Loading";
 import {useAuthContext} from "../../states/AuthContext";
 import {ipfsUrl, SEARCH_DIVIDER} from "../../utils/constants";
 import FormInput from "../common/FormInput";
-import { getFarms } from "../../db/firebase";
-import {CoffeeBatchType, FarmType} from "../common/types";
+import {CustomPagination} from "../common/Pagination";
+import {CoffeeBatchType} from "../common/types";
+import CoffeeBatch from "../../contracts/CoffeBatch.json";
 import BatchItem from "./BatchItem";
-import { isNumber,} from "../../utils/utils";
+import {getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNumber,} from "../../utils/utils";
 import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
@@ -155,6 +156,10 @@ export const List = () => {
                     variety: cooffeeBatch.wetMill.variety,
                 }
 
+                const id ={
+                    batchList: cooffeeBatch.ipfsHash,
+                }
+
              const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9"
              );
 
@@ -164,9 +169,12 @@ export const List = () => {
                 }
 
 
-                if (exist.variety !== '') {
-                    batchList.push(cooffeeBatch as CoffeeBatchType);
+                if (id.batchList == 'QmQpJWDG6kQkUgXThfGMSKSSUmEZtuZ3qn9vUmSKqytK8f') {
+                    console.log(cooffeeBatch)
+                    batchList.push(cooffeeBatch);
                 }
+
+
 
                 const total = batchList.length
                 setBatchesCount(total);
@@ -213,59 +221,36 @@ export const List = () => {
     });
 
     useEffect(() => {
+            const loadProvider = async () => {
 
-            const load = async () => {
+                let ethcallProvider = null;
 
-                const user = localStorage.getItem("address")
-                if(user !== ""){
-                    setOwnerAddress(user)
+
+                if (state.provider !== null) {
+                    ethcallProvider = new Provider(state.provider);
+                    const signer = state.provider.getSigner();
+                    const address = await signer.getAddress();
+                    setCompanyAddresses(getCompanyAddresses(address));
+                    setAuth(true);
                 } else {
-                    setOwnerAddress(user)
-
+                    const provider = getDefaultProvider();
+                    const randomSigner = ethers.Wallet.createRandom().connect(provider);
+                    ethcallProvider = new Provider(randomSigner.provider);
+                    setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
+                    setAuth(false);
                 }
-
-                const farmList = new Array<CoffeeBatchType>();
-                let companyName = "proexo";
-                const hostname = window.location.hostname;
-                if (hostname.includes("proexo")) {
-                    companyName = "PROEXO";
-                }else if (hostname.includes("copracnil")) {
-                    companyName = "COPRACNIL";
-                } else if (hostname.includes("commovel")) {
-                    companyName = "COMMOVEL";
-                } else if (hostname.includes("comsa")) {
-                    companyName = "COMSA";
-                }
-
-
-                await getFarms(companyName).then((result) => {
-                    for (let i = 0; i < result.length; i += 1) {
-                        const farmData = result[i].data();
-                        const l = farmData.location;
-                        const farm = {
-                            id: farmData.number,
-                            name: farmData.string,
-                            description: farmData.string,
-                            image: farmData.string,
-                            ipfsHash: farmData.string,
-                            farmer: farmData.any,
-                            farm: farmData.any,
-                            wetMill: farmData.any,
-                            dryMill: farmData.any,
-                            cupProfile: farmData.any,
-                            roasting: farmData.any,
-                            company: farmData.string
-                        };
-                        farmList.push(farm);
+                if (ethcallProvider !== null) {
+                    await ethcallProvider.init();
+                    // Set CoffeBatch contracts
+                    const currentCoffeeBatch = new Contract(CoffeeBatch.address, CoffeeBatch.abi);
+                    setCbContract(currentCoffeeBatch);
+                    setCurrentEthCallProvider(ethcallProvider);
+                    if (!dataLoaded) {
+                        refetch();
                     }
-                    setCoffeeBatchList(farmList);
-                    setCoffeeBatchList2(farmList);
-                    confPagination(result, 15);
-                    // calculateFarmersCount(result);
-                });
-                setLoadingIpfs(false);
+                }
             };
-            load();
+            loadProvider();
         }, // eslint-disable-next-line
         [state.provider]);
 
@@ -649,6 +634,13 @@ export const List = () => {
                                                 </tbody>
                                             </table>
                                         </div>)}
+                                </div>
+                                <div className="card-actions flex justify-center pt-4">
+                                    <CustomPagination
+                                        pagination={pagination}
+                                        onPageSelected={onPageSelected}
+                                        className={'btn-group-vertical'}
+                                    />
                                 </div>
                             </div>
                         </div>

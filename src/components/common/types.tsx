@@ -32,7 +32,6 @@ export type CoffeeBatchType = {
   dryMill: any;
   cupProfile: any;
   roasting: any;
-  company: string
 };
 
 export type FarmerType = {
