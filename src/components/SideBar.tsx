@@ -27,9 +27,7 @@ const data = [{
         title: 'farmers', icon: ProfileIcon, href: routes.productores, disabled: ''
     }, {
         title: 'farms', icon: LandscapeIcon, href: routes.fincas, disabled: ''
-    }, {
-        title: 'batches', icon: AgricultureIcon, href: routes.lotes, disabled: ''
-    }, {
+    },  {
         title: 'certificates', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
     }
     ]
