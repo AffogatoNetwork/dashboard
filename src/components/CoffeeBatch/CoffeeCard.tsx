@@ -32,6 +32,8 @@ const CoffeeCard = () => {
                         let wetMill = {};
                         let dryMill = {};
                         let roasting = {};
+                        let company : any;
+
                         for (let i = 0; i < jsonData.attributes.length; i += 1) {
                             const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                             if (traitType === "farmer") {
@@ -56,6 +58,9 @@ const CoffeeCard = () => {
                             if (traitType === "roasting") {
                                 [roasting] = jsonData.attributes[i].value;
                             }
+                            if (traitType === "roasting") {
+                                [company] = jsonData.attributes[i].value;
+                            }
                         }
                         const coffeeB = {
                             id: 0,
@@ -69,6 +74,7 @@ const CoffeeCard = () => {
                             dryMill,
                             roasting,
                             cupProfile,
+                            company
                         };
                         setCoffeeBatch(coffeeB);
                         setLoading(false);

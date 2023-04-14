@@ -165,7 +165,7 @@ export const List = () => {
 
 
                 if (exist.variety !== '') {
-                    batchList.push(cooffeeBatch);
+                    batchList.push(cooffeeBatch as CoffeeBatchType);
                 }
 
                 const total = batchList.length
@@ -254,6 +254,7 @@ export const List = () => {
                             dryMill: farmData.any,
                             cupProfile: farmData.any,
                             roasting: farmData.any,
+                            company: farmData.string
                         };
                         farmList.push(farm);
                     }
