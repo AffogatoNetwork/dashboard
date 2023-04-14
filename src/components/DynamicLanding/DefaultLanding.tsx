@@ -64,11 +64,6 @@ export const DefaultLanding = () => {
                     src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FCaptura%20de%20pantalla%202023-04-11%20a%20la(s)%2001.06.45.png?alt=media&token=41144e0a-0d33-47a1-8b8a-5eb5a3062a15" alt="Agon"/>
                 </div>
             </div>
-            <div
-                className="bg fixed bottom-28 rounded-full grid place-items-center transition-all duration-300 right-[20px] z-[9999] w-[48px] h-[48px] opacity-0 invisible"
-                id="backToTop"><a className="rounded-full bg-green-900 grid place-items-center w-[48px] h-[48px]"
-                                  href="top"><img
-                src="./services 2_files/icon-up.svg" alt="to top icon"/></a></div>
             <footer className="mt-[92px] lg:mt-[150px] xl:mt-[200px] mb-[30px]">
                 <div className="px-[12px] md:px-[36px] xl:px-0 mt-[70px]">
                     <div className="flex flex-col items-center gap-2 mb-14 md:flex-row md:justify-between"><img

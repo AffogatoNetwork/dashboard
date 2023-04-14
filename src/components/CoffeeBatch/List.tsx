@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from "react";
-import {BigNumber, ethers} from "ethers";
+import {BigNumber} from "ethers";
 import {Contract, Provider, setMulticallAddress} from "ethers-multicall";
 import {gql, useQuery} from "@apollo/client";
 import {useTranslation} from "react-i18next";
@@ -9,11 +9,10 @@ import Loading from "../Loading";
 import {useAuthContext} from "../../states/AuthContext";
 import {ipfsUrl, SEARCH_DIVIDER} from "../../utils/constants";
 import FormInput from "../common/FormInput";
-import {CustomPagination} from "../common/Pagination";
-import {CoffeeBatchType} from "../common/types";
-import CoffeeBatch from "../../contracts/CoffeBatch.json";
+import { getFarms } from "../../db/firebase";
+import {CoffeeBatchType, FarmType} from "../common/types";
 import BatchItem from "./BatchItem";
-import {getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNumber,} from "../../utils/utils";
+import { isNumber,} from "../../utils/utils";
 import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
@@ -214,36 +213,58 @@ export const List = () => {
     });
 
     useEffect(() => {
-            const loadProvider = async () => {
 
-                let ethcallProvider = null;
+            const load = async () => {
 
-
-                if (state.provider !== null) {
-                    ethcallProvider = new Provider(state.provider);
-                    const signer = state.provider.getSigner();
-                    const address = await signer.getAddress();
-                    setCompanyAddresses(getCompanyAddresses(address));
-                    setAuth(true);
+                const user = localStorage.getItem("address")
+                if(user !== ""){
+                    setOwnerAddress(user)
                 } else {
-                    const provider = getDefaultProvider();
-                    const randomSigner = ethers.Wallet.createRandom().connect(provider);
-                    ethcallProvider = new Provider(randomSigner.provider);
-                    setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
-                    setAuth(false);
+                    setOwnerAddress(user)
+
                 }
-                if (ethcallProvider !== null) {
-                    await ethcallProvider.init();
-                    // Set CoffeBatch contracts
-                    const currentCoffeeBatch = new Contract(CoffeeBatch.address, CoffeeBatch.abi);
-                    setCbContract(currentCoffeeBatch);
-                    setCurrentEthCallProvider(ethcallProvider);
-                    if (!dataLoaded) {
-                        refetch();
+
+                const farmList = new Array<CoffeeBatchType>();
+                let companyName = "proexo";
+                const hostname = window.location.hostname;
+                if (hostname.includes("proexo")) {
+                    companyName = "PROEXO";
+                }else if (hostname.includes("copracnil")) {
+                    companyName = "COPRACNIL";
+                } else if (hostname.includes("commovel")) {
+                    companyName = "COMMOVEL";
+                } else if (hostname.includes("comsa")) {
+                    companyName = "COMSA";
+                }
+
+
+                await getFarms(companyName).then((result) => {
+                    for (let i = 0; i < result.length; i += 1) {
+                        const farmData = result[i].data();
+                        const l = farmData.location;
+                        const farm = {
+                            id: farmData.number,
+                            name: farmData.string,
+                            description: farmData.string,
+                            image: farmData.string,
+                            ipfsHash: farmData.string,
+                            farmer: farmData.any,
+                            farm: farmData.any,
+                            wetMill: farmData.any,
+                            dryMill: farmData.any,
+                            cupProfile: farmData.any,
+                            roasting: farmData.any,
+                        };
+                        farmList.push(farm);
                     }
-                }
+                    setCoffeeBatchList(farmList);
+                    setCoffeeBatchList2(farmList);
+                    confPagination(result, 15);
+                    // calculateFarmersCount(result);
+                });
+                setLoadingIpfs(false);
             };
-            loadProvider();
+            load();
         }, // eslint-disable-next-line
         [state.provider]);
 
@@ -627,13 +648,6 @@ export const List = () => {
                                                 </tbody>
                                             </table>
                                         </div>)}
-                                </div>
-                                <div className="card-actions flex justify-center pt-4">
-                                    <CustomPagination
-                                        pagination={pagination}
-                                        onPageSelected={onPageSelected}
-                                        className={'btn-group-vertical'}
-                                    />
                                 </div>
                             </div>
                         </div>

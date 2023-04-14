@@ -183,3 +183,10 @@ export const getFarms = async (company: string) => {
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
 };
+
+
+export const getBatches = async (company: string) => {
+  const q = query(collection(db, "batches"), where("company", "==", company));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
+};

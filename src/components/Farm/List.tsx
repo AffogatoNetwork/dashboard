@@ -7,7 +7,6 @@ import {FarmType} from "../common/types";
 import {getFarms} from "../../db/firebase";
 import {useAuthContext} from "../../states/AuthContext";
 import FormInput from "../common/FormInput";
-import {CustomPagination} from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import {SEARCH_DIVIDER} from "../../utils/constants";
 import {SearchIcon} from "../icons/search";
@@ -375,12 +374,6 @@ export const List = () => {
                                 </>)}
                             </div>
                             <div className="card-actions flex justify-center pt-4">
-
-                                <CustomPagination
-                                    pagination={pagination}
-                                    onPageSelected={onPageSelected}
-                                    className={''}
-                                />
                             </div>
                         </div>
                     </div>

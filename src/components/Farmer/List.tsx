@@ -490,11 +490,6 @@ export const List = () => {
                                                 label={t("loading").concat("...")}
                                                 className="loading-wrapper"/>
                                         )}
-                                        <CustomPagination
-                                            pagination={pagination}
-                                            onPageSelected={onPageSelected}
-                                            className={''}
-                                        />
                                     </div>
                                 </div>
                             </div>

@@ -143,7 +143,7 @@ export const Profile = () => {
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                                 <div className="ml-4">
                                                     <h2 className="font-semibold">Miembros de Familia:</h2>
-                                                    <p className="mt-2 text-sm text-gray-500">{farms?.family_members}</p>
+                                                    <p className="mt-2 text-sm text-gray-500">{farms?.familyMembers}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
