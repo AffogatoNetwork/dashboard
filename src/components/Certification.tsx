@@ -17,7 +17,10 @@ const Certification = () => {
         }
         if (location.match("proexo") !== null) {
             setCompany('proexo')
+        } else {
+            setCompany('proexo')
         }
+
     })
 
 
@@ -86,6 +89,22 @@ const Certification = () => {
                         </div>
                     </div>
                     )}
+                {(company === 'comsa' || company === "proexo" || company === "copracnil" || company === "commovel") && (
+
+                    <div
+                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        <img
+                            className="object-cover w-full h-56 md:h-64 xl:h-80"
+                            src={require('../assets/certificaciones/10_EU Organic.png')}
+                            alt=""
+                        />
+                        <div
+                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
+                            <p className="mb-4 text-lg font-bold text-gray-100">EU Organic</p>
+
+                        </div>
+                    </div>
+                )}
 
                 {(company === 'comsa') && (
                     <div
