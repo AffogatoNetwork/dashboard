@@ -252,14 +252,6 @@ export const ComsaLanding = () => {
                             </div>
                             <nav className="flex flex-wrap justify-center -mx-5 -my-2" aria-label="Footer">
                                 <div className="px-5 py-2">
-                                    <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
-                                        <img alt="bid lab" className="w-15 h-10"
-                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FBIDLAB.png?alt=media&token=8463a32b-6f46-4b0b-9b02-8b4d8976fad5"
-                                        />
-                                    </a>
-                                </div>
-
-                                <div className="px-5 py-2">
                                     <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="heifer" className="w-15 h-10"
                                              src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
@@ -267,10 +259,15 @@ export const ComsaLanding = () => {
                                     </a>
 
                                 </div>
-
                                 <div className="px-5 py-2">
 
+                                </div>
 
+                                <div className="px-5 py-2">
+                                    <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
+                                        <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FLogo%20BID%20Lab%20-%20Color%20(SPA).png?alt=media&token=e1c9671a-f1f1-4104-b663-502faa89c893"
+                                        />
+                                    </a>
                                 </div>
 
                             </nav>
