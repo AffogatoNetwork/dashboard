@@ -132,7 +132,7 @@ const Certification = () => {
                         className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
-                            src={require('../assets/certificaciones/5_Con Manos de Mujer.png')}
+                            src={require('../assets/certificaciones/5_ConManosdeMujer.png')}
                             alt=""
                         />
                         <div
