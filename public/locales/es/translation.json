@@ -22,7 +22,7 @@
   "code": "Código",
   "coffee": "Café",
   "company": "Empresa",
-  "company-code": "Código de empresa",
+  "company-code": "Código de Empresa",
   "coordinates": "Coordenadas",
   "country": "País",
   "create": "Crear",
@@ -151,7 +151,7 @@
     "success2":  "Sus datos han sido enviados al equipo de affogato"
   },
   "placeholders": {
-    "bio": "Ingrese su biografía",
+    "bio": "Ingrese su Biografía",
     "id": "Ingrese su Identidad",
     "cellphone": "99990000",
     "email": "usuario@gmail.com",

@@ -423,7 +423,7 @@ const Signup = () => {
         }
     };
 
-    const emailCellphoneLabel = () => t("email").concat(" ").concat(t("or")).concat(" ").concat(t("cellphone"));
+    const emailCellphoneLabel = () => t("email").concat(" ").concat(t("o")).concat(" ").concat(t("cellphone"));
 
     const avgCupProfileLabel = () => t("cup-profile").concat(" ").concat(t("average"));
 
