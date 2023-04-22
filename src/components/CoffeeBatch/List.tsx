@@ -174,27 +174,41 @@ export const List = () => {
                 }
 
                 const id = {
-                    batchList: cooffeeBatch.ipfsHash,
+                    batchList: cooffeeBatch.id,
                 }
 
-                const exist = {
-                    variety: cooffeeBatch.roasting.type,
+                const company = {
+                    id: cooffeeBatch.cooperative,
                 }
 
                 const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9");
 
                 if (skywalker?.id != null) {
-                    console.log(skywalker)
                     const removeIndex = batchList.map(item => item.id).indexOf(skywalker?.id);
                     batchList.splice(removeIndex, 1);
                 }
 
 
+                const remove = batchList.find(item => item.ipfsHash === "QmQrDDTQk1HDSrUDjV1iW97K4JMok5f2dJ26pgnqmhQZAL");
+                if(remove?.id != null){
+                    const removeIndex = batchList.map(item => item.id).indexOf(remove?.id);
+                    batchList.splice(removeIndex, 1);
+                }
 
-                if (id.batchList == 'QmVaVdKVSNyuZ7FxveNa7k4rAANKqDxWgfMNYv6TC6UWEq') {
-                    const data = cooffeeBatch.dryMill.facillity;
-                    console.log(cooffeeBatch.dryMill.facillity)
-                    console.log(cooffeeBatch)
+                const remove2 = batchList.find(item => item.ipfsHash === "QmQacR4Q3MKmsRCVGNTAabjLR5ZirTTpA1Av242SPdWNUJ");
+                if(remove2?.id != null){
+                    const removeIndex = batchList.map(item => item.id).indexOf(remove2?.id);
+                    batchList.splice(removeIndex, 1);
+                }
+                const remove3 = batchList.find(item => item.ipfsHash === "QmVi9B73RFs2wn6XZtBJMhj5RNAXYdP64z9MKhTAztP49m");
+                if(remove3?.id != null){
+                    const removeIndex = batchList.map(item => item.id).indexOf(remove3?.id);
+                    batchList.splice(removeIndex, 1);
+                }
+
+
+
+                if (id.batchList >= 949) {
                     batchList.push(cooffeeBatch);
                 }
 
