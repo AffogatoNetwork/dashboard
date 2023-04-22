@@ -86,6 +86,7 @@ export const ProexoLanding = () => {
                                     <iframe width="100%" height="100%" className={'absolute inset-0 opacity-75'}
                                             src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=PROEXO,%20Corqu%C3%ADn+(PROEXO,%20Corqu%C3%ADn)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"/>
 
+
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección: </h2>
@@ -207,8 +208,12 @@ export const ProexoLanding = () => {
                                         Comercio Justo/ Fair Trade
                                     </p>
                                     <p className="leading-relaxed">
+                                        Con Manos de Mujer
+                                    </p>
+                                    <p className="leading-relaxed">
                                         Rainforest Alliance
                                     </p>
+
                                     <br/>
 
                                     <div className=" items-center">

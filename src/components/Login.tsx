@@ -19,7 +19,7 @@ const Login = () => {
     useEffect(() => {
         function check() {
             if (state.isLoggedIn) {
-                navigate("/", { replace: true });
+                navigate("/farmers", { replace: true });
             } else if (state.isLoggedIn ) {
                 setUserInput("");
             }

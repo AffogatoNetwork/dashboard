@@ -94,8 +94,17 @@ export const List = () => {
         if(user !== ""){
             setOwnerAddress(user)
         } else {
-            setOwnerAddress(user)
-
+            let companyName = "proexo";
+            const hostname = window.location.hostname;
+            if (hostname.includes("proexo")) {
+                companyName = "PROEXO";
+            }else if (hostname.includes("copracnil")) {
+                companyName = "COPRACNIL";
+            } else if (hostname.includes("commovel")) {
+                companyName = "COMMOVEL";
+            } else if (hostname.includes("comsa")) {
+                companyName = "COMSA";
+            }
         }
 
 
@@ -106,6 +115,8 @@ export const List = () => {
         fetch(url)
             .then((response) => response.json())
             .then((jsonData) => {
+                console.log(jsonData)
+                let cooperative ={}
                 let farmer = {};
                 let farm = {};
                 let wetMill = {
@@ -113,9 +124,14 @@ export const List = () => {
                 };
                 let dryMill = {};
                 let cupProfile = {};
-                let roasting = {};
+                let roasting = {
+                    type: undefined
+                };
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
+                    if(traitType === "cooperative"){
+                        [cooperative] = jsonData.attributes[i].value;
+                    }
                     if (traitType === "farmer") {
                         [farmer] = jsonData.attributes[i].value;
                     }
@@ -141,6 +157,7 @@ export const List = () => {
                 }
                 let cooffeeBatch = {
                     id: batchId,
+                    cooperative,
                     name: jsonData.name,
                     description: jsonData.description,
                     image: jsonData.image,
@@ -152,34 +169,41 @@ export const List = () => {
                     roasting,
                     cupProfile,
                 };
-                const exist = {
-                    variety: cooffeeBatch.wetMill.variety,
+                console.log(cooffeeBatch.roasting);
+                const hasCopperative = {
+                    cooperative: cooffeeBatch.cooperative,
                 }
 
                 const id ={
                     batchList: cooffeeBatch.ipfsHash,
                 }
 
+                const exist = {
+                    variety: cooffeeBatch.roasting.type,
+                }
+
              const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9"
              );
 
                 if (skywalker?.id != null) {
+                    console.log(skywalker)
                     const removeIndex = batchList.map(item => item.id).indexOf(skywalker?.id);
                     batchList.splice(removeIndex, 1);
                 }
 
 
-                if (id.batchList == 'QmVaVdKVSNyuZ7FxveNa7k4rAANKqDxWgfMNYv6TC6UWEq') {
-                    console.log(cooffeeBatch)
-                    batchList.push(cooffeeBatch);
+                if (hasCopperative.cooperative !== undefined && exist.variety !== undefined) {
                 }
+
+
+                batchList.push(cooffeeBatch);
 
 
 
                 const total = batchList.length
                 setBatchesCount(total);
-                setCoffeeBatchList(batchList.slice());
-                setCoffeeBatchList2(batchList.slice());
+                setCoffeeBatchList(batchList.slice(-3));
+                setCoffeeBatchList2(batchList.slice(-3));
             });
     };
 
@@ -414,7 +438,7 @@ export const List = () => {
         setMaxWeightError("");
         setMinNoteError("");
         setMaxNoteError("");
-        setCoffeeBatchList(coffeeBatchList2.slice());
+        setCoffeeBatchList2(coffeeBatchList);
         confPagination(coffeeBatchList2, isAuth ? 10 : 12);
     };
 
@@ -635,13 +659,7 @@ export const List = () => {
                                             </table>
                                         </div>)}
                                 </div>
-                                <div className="card-actions flex justify-center pt-4">
-                                    <CustomPagination
-                                        pagination={pagination}
-                                        onPageSelected={onPageSelected}
-                                        className={'btn-group-vertical'}
-                                    />
-                                </div>
+
                             </div>
                         </div>
                     </div>
