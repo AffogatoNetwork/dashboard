@@ -91,14 +91,14 @@ export const List = () => {
     const loadBatch = async (batchId: number, ipfsHash: any) => {
 
         const user = localStorage.getItem("address")
-        if(user !== ""){
+        if (user !== "") {
             setOwnerAddress(user)
         } else {
             let companyName = "proexo";
             const hostname = window.location.hostname;
             if (hostname.includes("proexo")) {
                 companyName = "PROEXO";
-            }else if (hostname.includes("copracnil")) {
+            } else if (hostname.includes("copracnil")) {
                 companyName = "COPRACNIL";
             } else if (hostname.includes("commovel")) {
                 companyName = "COMMOVEL";
@@ -108,28 +108,28 @@ export const List = () => {
         }
 
 
-
         const batchList = coffeeBatchList;
         const url = ipfsUrl.concat(ipfsHash);
         setBlockchainUrl(url);
         fetch(url)
             .then((response) => response.json())
             .then((jsonData) => {
-                console.log(jsonData)
-                let cooperative ={}
+                let cooperative = {}
                 let farmer = {};
                 let farm = {};
                 let wetMill = {
                     variety: undefined
                 };
-                let dryMill = {};
+                let dryMill = {
+                    facillity: undefined
+                };
                 let cupProfile = {};
                 let roasting = {
                     type: undefined
                 };
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
-                    if(traitType === "cooperative"){
+                    if (traitType === "cooperative") {
                         [cooperative] = jsonData.attributes[i].value;
                     }
                     if (traitType === "farmer") {
@@ -169,12 +169,11 @@ export const List = () => {
                     roasting,
                     cupProfile,
                 };
-                console.log(cooffeeBatch.roasting);
-                const hasCopperative = {
-                    cooperative: cooffeeBatch.cooperative,
+                const drymil = {
+                    cooperative: cooffeeBatch.dryMill?.facillity,
                 }
 
-                const id ={
+                const id = {
                     batchList: cooffeeBatch.ipfsHash,
                 }
 
@@ -182,8 +181,7 @@ export const List = () => {
                     variety: cooffeeBatch.roasting.type,
                 }
 
-             const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9"
-             );
+                const skywalker = batchList.find(item => item.ipfsHash === "QmbsQCk923PTwdCG8pYYHiwzYM9UbM1Pdhbdc1i1Z3v5m9");
 
                 if (skywalker?.id != null) {
                     console.log(skywalker)
@@ -192,18 +190,18 @@ export const List = () => {
                 }
 
 
-                if (hasCopperative.cooperative !== undefined && exist.variety !== undefined) {
+
+                if (id.batchList == 'QmVaVdKVSNyuZ7FxveNa7k4rAANKqDxWgfMNYv6TC6UWEq') {
+                    const data = cooffeeBatch.dryMill.facillity;
+                    console.log(cooffeeBatch.dryMill.facillity)
+                    console.log(cooffeeBatch)
+                    batchList.push(cooffeeBatch);
                 }
-
-
-                batchList.push(cooffeeBatch);
-
-
 
                 const total = batchList.length
                 setBatchesCount(total);
-                setCoffeeBatchList(batchList.slice(-3));
-                setCoffeeBatchList2(batchList.slice(-3));
+                setCoffeeBatchList(batchList.slice());
+                setCoffeeBatchList2(batchList.slice());
             });
     };
 
@@ -292,8 +290,7 @@ export const List = () => {
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(document.getElementById("qr-coffe-batch"), "qr-coffe-batch", {
-            scale: 10,
-            backgroundColor: 'white'
+            scale: 10, backgroundColor: 'white'
         });
     };
 
@@ -443,153 +440,153 @@ export const List = () => {
     };
 
     const RenderFilters = () => (<>
-            <div className="w-full p-5 rounded-lg">
-                <div className="text-center text-lg text-black ">
-                    <>{t("search-batches")}</>
-                </div>
-                <div className="relative">
-                    <div className="absolute flex items-center ml-2 h-full">
-                        <SearchIcon className="m-4 w-4 h-4 fill-current"/>
-                    </div>
-
-                    <FormInput
-                        label={t("")}
-                        value={searchCriteria}
-                        placeholder={t("search")}
-                        handleOnChange={handleSearchCriteriaChange}
-                        handleOnKeyDown={handleSearchCriteriaKeyDown}
-                        errorMsg=""
-                        className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-                </div>
-                <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-4">
-                    <FormInput
-                        label={t("min-height")}
-                        value={minHeight}
-                        placeholder={t("min-height")}
-                        handleOnChange={handleMinHeightChange}
-                        errorMsg={minHeightError}
-                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-
-                    <FormInput
-                        label={t("min-weight")}
-                        value={minWeight}
-                        placeholder={t("min-weight")}
-                        handleOnChange={handleMinWeightChange}
-                        errorMsg={minWeightError}
-                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-
-                    <FormInput
-                        label={t("max-weight")}
-                        value={maxWeight}
-                        placeholder={t("max-weight")}
-                        handleOnChange={handleMaxWeightChange}
-                        errorMsg={maxWeightError}
-                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-
-                    <FormInput
-                        label={t("min-note")}
-                        value={minNote}
-                        placeholder={t("min-note")}
-                        handleOnChange={handleMinNoteChange}
-                        errorMsg={minNoteError}
-                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-
-                    <FormInput
-                        label={t("max-note")}
-                        value={maxNote}
-                        placeholder={t("max-note")}
-                        handleOnChange={handleMaxNoteChange}
-                        errorMsg={maxNoteError}
-                        className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-
+        <div className="w-full p-5 rounded-lg">
+            <div className="text-center text-lg text-black ">
+                <>{t("search-batches")}</>
+            </div>
+            <div className="relative">
+                <div className="absolute flex items-center ml-2 h-full">
+                    <SearchIcon className="m-4 w-4 h-4 fill-current"/>
                 </div>
 
-                <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
+                <FormInput
+                    label={t("")}
+                    value={searchCriteria}
+                    placeholder={t("search")}
+                    handleOnChange={handleSearchCriteriaChange}
+                    handleOnKeyDown={handleSearchCriteriaKeyDown}
+                    errorMsg=""
+                    className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+            </div>
+            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-4">
+                <FormInput
+                    label={t("min-height")}
+                    value={minHeight}
+                    placeholder={t("min-height")}
+                    handleOnChange={handleMinHeightChange}
+                    errorMsg={minHeightError}
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
 
+                <FormInput
+                    label={t("min-weight")}
+                    value={minWeight}
+                    placeholder={t("min-weight")}
+                    handleOnChange={handleMinWeightChange}
+                    errorMsg={minWeightError}
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
 
-                    <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
-                                        focus:bg-amber-400 active:bg-amber-600">
-                        <SearchIcon className="w-4 h-4 mr-2"/>
-                        <>{t("search")}</>
-                    </button>
-                    <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
-                                        focus:bg-red-400 active:bg-red-700">
-                        <ClearIcon className="w-4 h-4 mr-2"/>
-                        <>{t("clear")}</>
-                    </button>
-                </div>
+                <FormInput
+                    label={t("max-weight")}
+                    value={maxWeight}
+                    placeholder={t("max-weight")}
+                    handleOnChange={handleMaxWeightChange}
+                    errorMsg={maxWeightError}
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
+                <FormInput
+                    label={t("min-note")}
+                    value={minNote}
+                    placeholder={t("min-note")}
+                    handleOnChange={handleMinNoteChange}
+                    errorMsg={minNoteError}
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+
+                <FormInput
+                    label={t("max-note")}
+                    value={maxNote}
+                    placeholder={t("max-note")}
+                    handleOnChange={handleMaxNoteChange}
+                    errorMsg={maxNoteError}
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
 
             </div>
-        </>);
+
+            <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
+
+
+                <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
+                                        focus:bg-amber-400 active:bg-amber-600">
+                    <SearchIcon className="w-4 h-4 mr-2"/>
+                    <>{t("search")}</>
+                </button>
+                <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
+                                        focus:bg-red-400 active:bg-red-700">
+                    <ClearIcon className="w-4 h-4 mr-2"/>
+                    <>{t("clear")}</>
+                </button>
+            </div>
+
+        </div>
+    </>);
 
     return (<>
-            <input type="checkbox" id="coffe-batch" className="modal-toggle"/>
-            <div className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box relative">
-                    <label htmlFor="coffe-batch"
-                           className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
-                    <div className="flex justify-center m-6">
-                        <div>
-                            <QRCode id="qr-coffe-batch" value={qrCodeUrl} size={300}/>
-                            <div className="flex pt-8 space-x-4 place-content-center">
-                                <div>
-                                    <button
-                                        className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
-                                        onClick={handleOnDownloadClick}>
-                                        <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                             viewBox="0 0 20 20">
-                                            <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
-                                        </svg>
-                                        <>{t("download")}</>
-                                    </button>
-                                </div>
-                                <div>
-                                    <button onClick={() => {
-                                        openInNewTab(qrCodeUrl);
-                                    }}
-                                            className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                                        <LinkIcon></LinkIcon>
-                                        <>{t("open-link")}</>
-                                    </button>
-                                </div>
-
-                            </div>
-                            <div className="text-center items-center">
-                                <br/>
-                                <button onClick={() => {
-                                    openInNewTab(blockchainUrl);}}
-                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                    <LinkIcon></LinkIcon>
-                                    <>Ver en el blockchain</>
+        <input type="checkbox" id="coffe-batch" className="modal-toggle"/>
+        <div className="modal modal-bottom sm:modal-middle">
+            <div className="modal-box relative">
+                <label htmlFor="coffe-batch"
+                       className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                <div className="flex justify-center m-6">
+                    <div>
+                        <QRCode id="qr-coffe-batch" value={qrCodeUrl} size={300}/>
+                        <div className="flex pt-8 space-x-4 place-content-center">
+                            <div>
+                                <button
+                                    className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
+                                    onClick={handleOnDownloadClick}>
+                                    <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
+                                         viewBox="0 0 20 20">
+                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
+                                    </svg>
+                                    <>{t("download")}</>
                                 </button>
                             </div>
+                            <div>
+                                <button onClick={() => {
+                                    openInNewTab(qrCodeUrl);
+                                }}
+                                        className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                    <LinkIcon></LinkIcon>
+                                    <>{t("open-link")}</>
+                                </button>
+                            </div>
+
+                        </div>
+                        <div className="text-center items-center">
+                            <br/>
+                            <button onClick={() => {
+                                openInNewTab(blockchainUrl);
+                            }}
+                                    className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                <LinkIcon></LinkIcon>
+                                <>Ver en el blockchain</>
+                            </button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
 
 
-            <div className="">
-                <div className="batch-list flex flex-row mb-1  justify-between w-full">
-                    <div className="w-full h-full ">
-                        <div className="card rounded rounded-lg shadow-xl bg-white">
-                            {RenderFilters()}
-                            <div className="card-body">
-                                <div className="card-title grid justify-items-stretch">
-                                    <div className="justify-self-start">
-                                        <h4>
-                                            <>{t("batches")}</>
-                                        </h4>
-                                    </div>
-                                    <div className="justify-self-end">
-                                        <h4>
-                                            <>
-                                                {t("total")}: {batchesCount}
-                                            </>
-                                        </h4>
+        <div className="">
+            <div className="batch-list flex flex-row mb-1  justify-between w-full">
+                <div className="w-full h-full ">
+                    <div className="card rounded rounded-lg shadow-xl bg-white">
+                        {RenderFilters()}
+                        <div className="card-body">
+                            <div className="card-title grid justify-items-stretch">
+                                <div className="justify-self-start">
+                                    <h4>
+                                        <>{t("batches")}</>
+                                    </h4>
+                                </div>
+                                <div className="justify-self-end">
+                                    <h4>
+                                        <>
+                                            {t("total")}: {batchesCount}
+                                        </>
+                                    </h4>
 
-                                        {ownerAddress ? (
-                                        <a className="link link-info" >
+                                    {ownerAddress ? (<a className="link link-info">
                                             <ReactHTMLTableToExcel
                                                 id="table-xls-button"
                                                 className="download-xls-button"
@@ -598,72 +595,69 @@ export const List = () => {
                                                 sheet={t("batches")}
                                                 buttonText={"(".concat(t("download")).concat(")")}
                                             />
-                                        </a>
-                                        ) : (
-                                            <>
-                                            </>
-                                        )}
-                                    </div>
+                                        </a>) : (<>
+                                        </>)}
                                 </div>
-                                <div className="overflow-x-scroll">
-                                    {loading || loadingIpfs ? (<Loading
-                                            label={t("loading").concat("...")}
-                                            className="loading-wrapper"
-                                        />) : (<div className="text-center">
-                                            <table id="batches-list"
-                                                className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
-                                                <thead>
-                                                <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                                    <th className="p-3 text-center border-white border">QR</th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("farm")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("height")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("location")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("variety")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("process")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("drying-code")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("drying-type")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("exporting-code")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("weight")}</>
-                                                    </th>
-                                                    <th className="p-3 text-center border-white border">
-                                                        <>{t("note")}</>
-                                                    </th>
-                                                </tr>
-                                                </thead>
-                                                <tbody className="flex-1 sm:flex-none">
-                                                {coffeeBatchList2.map((batch, index) => (<BatchItem
-                                                        key={index}
-                                                        index={index}
-                                                        coffeeBatch={batch}
-                                                        pagination={pagination}
-                                                        showQrModal={showQrModal}
-                                                    />))}
-                                                </tbody>
-                                            </table>
-                                        </div>)}
-                                </div>
-
                             </div>
+                            <div className="overflow-x-scroll">
+                                {loading || loadingIpfs ? (<Loading
+                                    label={t("loading").concat("...")}
+                                    className="loading-wrapper"
+                                />) : (<div className="text-center">
+                                    <table id="batches-list"
+                                           className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
+                                        <thead>
+                                        <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                            <th className="p-3 text-center border-white border">QR</th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("farm")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("height")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("location")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("variety")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("process")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("drying-code")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("drying-type")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("exporting-code")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("weight")}</>
+                                            </th>
+                                            <th className="p-3 text-center border-white border">
+                                                <>{t("note")}</>
+                                            </th>
+                                        </tr>
+                                        </thead>
+                                        <tbody className="flex-1 sm:flex-none">
+                                        {coffeeBatchList2.map((batch, index) => (<BatchItem
+                                            key={index}
+                                            index={index}
+                                            coffeeBatch={batch}
+                                            pagination={pagination}
+                                            showQrModal={showQrModal}
+                                        />))}
+                                        </tbody>
+                                    </table>
+                                </div>)}
+                            </div>
+
                         </div>
                     </div>
                 </div>
             </div>
-        </>);
+        </div>
+    </>);
 };

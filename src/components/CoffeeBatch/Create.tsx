@@ -61,7 +61,7 @@ export const Create = () => {
       if(user !== ""){
         setCurrentUser(user)
       } else {
-        setCurrentUser(user)
+        setCurrentUser("0xfa474d1e6d83c6ba0591117981d56dbf08c774af")
 
       }
       const address = getCompanyAddressesByHost(window.location.host)[0];
