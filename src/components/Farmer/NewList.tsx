@@ -1,5 +1,4 @@
-import React, {ReactNode, useEffect, useMemo, useState} from "react";
-
+import React, {useEffect, useMemo, useState} from "react";
 import MaterialReactTable, {MRT_ColumnDef} from "material-react-table";
 import {getAllFarmers} from "../../db/firebase";
 import {SEARCH_DIVIDER} from "../../utils/constants";
@@ -7,14 +6,9 @@ import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import {LinkIcon} from "../icons/link";
 import {useTranslation} from "react-i18next";
-import Button from "@mui/material/Button";
-import {Typography} from "@mui/material";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
-
-class Person {
-}
 
 export const NewList  = () => {
     const saveSvgAsPng = require("save-svg-as-png");
@@ -38,11 +32,6 @@ export const NewList  = () => {
         );
     };
 
-    const openReactNode = (url: ReactNode) => {
-        const urlStr = url?.toString();
-        window.open(urlStr, '_blank', 'noopener,noreferrer');
-    }
-
     const openInNewTab = (url: string | null | undefined) => {
         const urlStr = url?.toString();
         window.open(urlStr, '_blank', 'noopener,noreferrer');
@@ -57,7 +46,7 @@ export const NewList  = () => {
         farm: string;
         location: string;
         qrCode: string;
-        blockChaninUrl: string;
+        blockChainUrl: string;
         search: string;
     };
 
@@ -67,12 +56,13 @@ export const NewList  = () => {
             const user = localStorage.getItem("address")
             if(user !== ""){
                 setOwnerAddress(user)
+                setLoading(false);
             } else {
 
             }
 
 
-            let companyName = "";
+            let companyName:string;
             const url = window.location.toString();
 
             switch (url) {
@@ -102,8 +92,6 @@ export const NewList  = () => {
 
             await getAllFarmers(companyName).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
-
-                    let farmerUrl = window.location.origin.concat("/farmer/")
                     const farmerData = result[i].data();
                     const {
                         farmerId,
@@ -131,8 +119,8 @@ export const NewList  = () => {
                     let qrCode = window.location.origin
                         .concat("/farmer/")
                         .concat(address);
-                    let blockChaninUrl = "https://affogato.mypinata.cloud/ipfs/" + farm;
-                    setBlockchainUrl(blockChaninUrl)
+                    let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + farm;
+                    setBlockchainUrl(blockChainUrl)
                     farmerList.push({
                         farmerId,
                         address,
@@ -142,7 +130,7 @@ export const NewList  = () => {
                         farm,
                         location: l,
                         qrCode,
-                        blockChaninUrl,
+                        blockChainUrl,
                         search: s.toLowerCase()
                     });
                 }
@@ -151,12 +139,9 @@ export const NewList  = () => {
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
+                console.log(loading);
             });
-            setLoading(false);
         };
-
-        const farmerUrl = window.location.origin
-            .concat("/farmer/")
 
         load();
     }, []);
@@ -174,7 +159,7 @@ export const NewList  = () => {
             enableSorting: false,
             enableColumnFilter: false,
             // @ts-ignore
-            Cell: ({ renderedCellValue, row }) => (
+            Cell: ({ renderedCellValue}) => (
                 <>
                     <Box
                         sx={{
@@ -204,13 +189,14 @@ export const NewList  = () => {
         header: 'Direccion De Cuenta', accessorKey: 'address', enableClickToCopy: true,
 
             }, {
-            id: 'blockChaninUrl', //id is still required when using accessorFn instead of accessorKey
+                accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
+                id: 'blockChainUrl', //id is still required when using accessorFn instead of accessorKey
             header: 'Url',
             size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
             // @ts-ignore
-            Cell: ({ renderedCellValue, row }) => (
+            Cell: ({ renderedCellValue }) => (
                 <>
                     <Box
                         sx={{
@@ -220,15 +206,14 @@ export const NewList  = () => {
                         }}
                     >
 
-
-                        <Button  onClick={() => { openReactNode(renderedCellValue); }}
-                        >
-ver
-                        </Button>
+                        <button onClick={() => {
+                            openInNewTab(reactNodeToString(renderedCellValue));}}
+                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                            <LinkIcon></LinkIcon>
+                            <>Ver en el blockchain</>
+                        </button>
                     </Box>
-
                 </>
-
             ),
         }
         ],
@@ -283,7 +268,7 @@ ver
                                     )}
                                 </div>
 
-                                <div className="">
+                                <div className="overflow-auto overflow-scroll">
                                     <MaterialReactTable
                                         columns={columData}
                                         data={farmers}
