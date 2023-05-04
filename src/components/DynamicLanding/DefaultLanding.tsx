@@ -32,18 +32,18 @@ export const DefaultLanding = () => {
                 </h2>
                 <div className="flex flex-wrap items-center justify-center mb-[30px] md:mb-[60px] lg:mb-[80px]"><a
                     className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
-                    href="https://www.proexo.org/#"><img
+                    href="https://www.proexo.org/#"><img className="w-44 h-32"
                     src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fproexo.png?alt=media&token=d726955b-e0c4-4f2b-b409-1b6472b07019" alt="Proexo"/></a><a
                     className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
-                    href="https://www.comsa.hn"><img
+                    href="https://www.comsa.hn"><img className="w-30 h-32"
                     src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fcomsa.png?alt=media&token=37064738-74d0-4ba7-9363-07e8b382ce43" alt="Comsa"/></a>
                     <a
                     className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
-                    href=""><img
+                    href=""><img className="w-32 h-32"
                     src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fcommovel.png?alt=media&token=dbc7c2b0-406c-49f9-afa5-e7dc160114e3" alt="partner logo"/></a>
                     <a
                     className="transition-all duration-300 partner-item p-[15px] md:pr-[15px] xl:w-auto lg:w-[184px] hover:translate-y-[-3px]"
-                    href="https://montanaverdehn.com"><img
+                    href="https://montanaverdehn.com"><img className="w-28 h-28"
                     src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Fcopracnil.png?alt=media&token=64ae7aa5-baea-415a-b0e9-81b4daf3ee17" alt="partner logo"/></a>
                 </div>
                 <div className="w-full bg-gray-300 h-[1px] mb-[50px] md:mb-[90px] lg:mb-[150px]"></div>

@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from "react";
+import React, {useEffect, useMemo, useState} from "react";
 import QRCode from "react-qr-code";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {useTranslation} from "react-i18next";
@@ -7,12 +7,12 @@ import Loading from "../Loading";
 import {getAllFarmers} from "../../db/firebase";
 import {useAuthContext} from "../../states/AuthContext";
 import FormInput from "../common/FormInput";
-import {CustomPagination} from "../common/Pagination";
 import NotFound from "../common/NotFound";
 import {GenderFilterList, SEARCH_DIVIDER} from "../../utils/constants";
 import {SearchIcon} from "../icons/search";
 import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
+
 
 const openInNewTab = (url: string | URL | undefined) => {
     window.open(url, '_blank', 'noopener,noreferrer');
@@ -229,6 +229,7 @@ export const List = () => {
     };
 
 
+
     const handleGenderChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const key = event.target.value;
         for (let i = 0; i < GenderFilterList.length; i += 1) {
@@ -265,42 +266,7 @@ export const List = () => {
             <div className="text-center">
                 <>{t("search-farmers")}</>
             </div>
-            <div className="relative">
-                <div className="absolute flex items-center ml-2 h-full">
-                    <SearchIcon className="m-4 w-4 h-4 fill-current"/>
-                </div>
 
-                <FormInput
-                    label={t("")}
-                    value={searchCriteria}
-                    placeholder={t("search-name")}
-                    handleOnChange={handleSearchCriteriaChange}
-                    handleOnKeyDown={handleSearchCriteriaKeyDown}
-                    errorMsg=""
-                    className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
-            </div>
-
-            <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 gap-4 m-4">
-
-
-                <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white active:text-white
-                                        focus:bg-amber-400 active:bg-amber-600">
-                    <SearchIcon className="w-4 h-4 mr-2"/>
-                    <>{t("search")}</>
-                </button>
-                <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white active:text-white
-                                        focus:bg-red-400 active:bg-red-700">
-                    <ClearIcon className="w-4 h-4 mr-2"/>
-                    <>{t("clear")}</>
-                </button>
-                <select id="dropdown-cooperative" className="select w-full max-w-xs" onChange={handleGenderChange}>
-                    <option disabled defaultValue={""}><> {t("gender")}</>:</option>
-                    {currentGender.name}
-                    {GenderFilterList.map((item) => (<option key={item.key} value={item.key}>
-                        {item.name}
-                    </option>))}
-                </select>
-            </div>
 
         </div>
 
@@ -360,6 +326,10 @@ export const List = () => {
 
     return (
         <>
+
+
+
+
             <input type="checkbox" id="farmerlist" className="modal-toggle"/>
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
@@ -442,55 +412,9 @@ export const List = () => {
 
 
 
-                                        {farmers === null ? (
-                                            <NotFound msg="No se encontraron productores"/>
-                                        ) : (
-                                            <>
-
-                                                <div className="text-center">
-                                                    <table id="farmers-list"
-                                                        className="w-full sm:bg-white rounded-lg overflow-hidden  my-5">
-                                                        <thead>
-                                                        <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                                            <th className="p-3 text-center border-white border ">
-                                                                QR
-                                                            </th>
-
-                                                            <th className="p-3 text-center border-white border">
-                                                                <>{t("name")}</>
-                                                            </th>
-                                                            <th className="p-3 text-center border-white border">
-                                                                <>{t("gender")}</>
-                                                            </th>
-                                                            <th className="p-3 text-center border-white border">
-                                                                <>{t("location")}</>
-                                                            </th>
-                                                            <th className="p-3 text-center border-white border">
-                                                                <>{t("account-address")}</>
-                                                            </th>
-                                                            <th className="p-3 text-center border-white border">
-                                                                <>{t("Url")}</>
-                                                            </th>
-                                                        </tr>
-                                                        </thead>
-
-                                                        <tbody className="flex-1 sm:flex-none overflow-y-scroll">
-                                                        {farmers.map((farmer: any, index: number) =>
-                                                            RenderItem(farmer, index)
-                                                        )}
-                                                        </tbody>
-                                                    </table>
-                                                </div>
-                                            </>
-                                        )}
 
                                     </div>
-                                    <div className="card-actions flex justify-center pt-4">
-                                        {loading && (<Loading
-                                                label={t("loading").concat("...")}
-                                                className="loading-wrapper"/>
-                                        )}
-                                    </div>
+
                                 </div>
                             </div>
                         </div>
