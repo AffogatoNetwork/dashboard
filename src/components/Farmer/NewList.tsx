@@ -64,27 +64,20 @@ export const NewList  = () => {
 
             let companyName = "";
             const url = window.location.host.toString();
-            switch (url) {
-                case "copracnil": {
-                    companyName = "COPRACNIL";
-                    break;
-                }
-                case "proexo":{
-                    companyName = "PROEXO";
-                    break;
-                }
-                case "commovel":{
-                    companyName = "COMMOVEL";
-                    break;
-                }
-                case "comsa":{
-                    companyName = "COMSA";
-                    break;
-                }
-                default:{
-                    companyName = "PROEXO";
-                    break;
-                }
+            if (url.match("commovel") !== null) {
+                companyName = "COMMOVEL";
+            }
+            if (url.match("copracnil") !== null) {
+                companyName = "COPRACNIL";
+            }
+            if (url.match("comsa") !== null) {
+                companyName = "COMSA";
+            }
+            if (url.match("proexo") !== null) {
+                companyName = "PROEXO";
+            }
+            if (url.match("localhost") !== null) {
+                companyName = "PROEXO";
             }
 
 

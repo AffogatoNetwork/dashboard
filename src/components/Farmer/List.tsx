@@ -106,8 +106,8 @@ export const List = () => {
             }
 
 
-            let companyName = "PROEXO";
-            const url = window.location.toString();
+            let companyName: string;
+            const url = window.location.host.toString();
 
             switch (url) {
                 case "copracnil": {
