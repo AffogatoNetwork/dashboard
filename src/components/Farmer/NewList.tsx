@@ -62,9 +62,8 @@ export const NewList  = () => {
             }
 
 
-            let companyName = "PROEXO";
-            const url = window.location.toString();
-
+            let companyName = "";
+            const url = window.location.host.toString();
             switch (url) {
                 case "copracnil": {
                     companyName = "COPRACNIL";
@@ -82,11 +81,10 @@ export const NewList  = () => {
                     companyName = "COMSA";
                     break;
                 }
-                default :{
-                    companyName = "PROEXO"
+                default:{
+                    companyName = "PROEXO";
                     break;
                 }
-
             }
 
 
