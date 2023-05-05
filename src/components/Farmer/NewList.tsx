@@ -62,7 +62,7 @@ export const NewList  = () => {
             }
 
 
-            let companyName:string;
+            let companyName = "PROEXO";
             const url = window.location.toString();
 
             switch (url) {
@@ -91,6 +91,7 @@ export const NewList  = () => {
 
 
             await getAllFarmers(companyName).then((result) => {
+                console.log(companyName);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
