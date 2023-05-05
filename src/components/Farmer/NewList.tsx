@@ -176,38 +176,57 @@ export const NewList  = () => {
     },{
         header: 'Ubicacion ', accessorKey: 'location'
     },{
-        header: 'Género',  size: 50, accessorKey: 'gender',  enableSorting: false, enableColumnFilter: false,
-    }, {
-        header: 'Direccion De Cuenta', accessorKey: 'address', enableClickToCopy: true,
-
-            }, {
-                accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
-                id: 'blockChainUrl', //id is still required when using accessorFn instead of accessorKey
-            header: 'Url',
-            size: 50,
+                accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
+                id: 'gender', //id is still required when using accessorFn instead of accessorKey
+                header: 'Gender',
+                size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
-            // @ts-ignore
-            Cell: ({ renderedCellValue }) => (
-                <>
-                    <Box
-                        sx={{
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: '1rem',
-                        }}
-                    >
+                // @ts-ignore
+                Cell: ({ renderedCellValue }) => (
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                            }}
+                        >
+                           <span> {renderedCellValue}</span>
+                        </Box>
+                    </>
+                ),
+            }, {
+        header: 'Direccion De Cuenta', accessorKey: 'address', enableClickToCopy: true,
 
-                        <button onClick={() => {
-                            openInNewTab(reactNodeToString(renderedCellValue));}}
-                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                            <LinkIcon></LinkIcon>
-                            <>Ver en el blockchain</>
-                        </button>
-                    </Box>
-                </>
-            ),
-        }
+            },{
+                accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
+                id: 'blockChainUrl', //id is still required when using accessorFn instead of accessorKey
+                header: 'Url',
+                size: 50,
+                enableSorting: false,
+                enableColumnFilter: false,
+                // @ts-ignore
+                Cell: ({ renderedCellValue }) => (
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                            }}
+                        >
+
+                            <button onClick={() => {
+                                openInNewTab(reactNodeToString(renderedCellValue));}}
+                                    className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                <LinkIcon></LinkIcon>
+                                <>Ver en el blockchain</>
+                            </button>
+                        </Box>
+                    </>
+                ),
+            }
         ],
         [],
     );
@@ -285,9 +304,6 @@ export const NewList  = () => {
 
 
         <div className="m-4">
-
-
-
             <input type="checkbox" id="farmerlist" className="modal-toggle"/>
             <div className="modal modal-bottom sm:modal-middle">
                 <div className="modal-box relative">
@@ -330,8 +346,6 @@ export const NewList  = () => {
                     </div>
                 </div>
             </div>
-
-
         </div>
             </>
     )

@@ -3,14 +3,9 @@ import QRCode from "react-qr-code";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import {useTranslation} from "react-i18next";
 import "../../styles/farmers.scss";
-import Loading from "../Loading";
 import {getAllFarmers} from "../../db/firebase";
 import {useAuthContext} from "../../states/AuthContext";
-import FormInput from "../common/FormInput";
-import NotFound from "../common/NotFound";
 import {GenderFilterList, SEARCH_DIVIDER} from "../../utils/constants";
-import {SearchIcon} from "../icons/search";
-import {ClearIcon} from "../icons/clear";
 import {LinkIcon} from "../icons/link";
 
 
