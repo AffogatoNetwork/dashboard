@@ -60,7 +60,7 @@ const Certification = () => {
                         className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
-                            src={require('../assets/certificaciones/7_Pequeños_Productores.png')}
+                            src={require('../assets/certificaciones/11_Pequeños_Productores.jpg')}
                             alt=""
                         />
                         <div
@@ -147,12 +147,12 @@ const Certification = () => {
                     <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
-                            src={require('../assets/certificaciones/6_UTZ Certified.png')}
+                            src={require('../assets/certificaciones/3_Rainforest Alliance.png')}
                             alt=""/>
                         <div
                             className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
                             <p className="mb-4 text-lg font-bold text-gray-100">
-                            UTZ Certified
+                            Rain Forest Alliance
                             </p>
 
                         </div>

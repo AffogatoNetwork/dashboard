@@ -192,7 +192,9 @@ export const NewList  = () => {
                                 gap: '1rem',
                             }}
                         >
-                           <span> {renderedCellValue}</span>
+                           <span> 
+                            {renderedCellValue}
+                            </span>
                         </Box>
                     </>
                 ),
