@@ -172,13 +172,13 @@ export const NewList  = () => {
             ),
         },
         {
-        header: 'Nombre ', accessorKey: 'fullname'
+        header: 'Nombre ', accessorKey: 'fullname' 
     },{
         header: 'Ubicacion ', accessorKey: 'location'
     },{
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
-                header: 'Gender',
+                header: 'Género',
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -287,11 +287,13 @@ export const NewList  = () => {
                                         data={farmers}
                                         enableHiding={false}
                                         enableDensityToggle={false}
+                                        sortDescFirst={true}
                                         enableFullScreenToggle={false}
                                         enableColumnActions={false}
                                         enableFilters={true}
                                         localization={MRT_Localization_ES}
                                         initialState={{
+                                            sorting: [{ id: 'fullname', desc: false }],
                                             showGlobalFilter: true, isLoading: false
                                         }}
                                     />
