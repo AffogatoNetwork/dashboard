@@ -1,26 +1,45 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router";
-import {useTranslation} from "react-i18next";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
-import {CoffeeBatchType} from "../common/types";
-import {ipfsUrl} from "../../utils/constants";
-import {getFarmer} from "../../db/firebase";
+import { CoffeeBatchType } from "../common/types";
+import { ipfsUrl } from "../../utils/constants";
+import { getFarmer } from "../../db/firebase";
 import NewMap from "../common/NewMap";
 const NFTImage = "../../assets/affogato.png"
 
 
 const CoffeeCard = () => {
-    const {t} = useTranslation();
-    const {ipfsHash} = useParams();
+    const { t } = useTranslation();
+    const { ipfsHash } = useParams();
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<CoffeeBatchType | null>(null);
     const [farmerData, setFarmerData] = useState<any>();
     const [currentLat, setCurrentLat] = useState("0");
     const [currentLng, setCurrentLng] = useState("0");
     const [currentAddressL, setCurrentAddressL] = useState("");
-
+    const [NFT, setNFT] = useState("");
     useEffect(() => {
+        const determineNFT = () => {
+            const location = window.location.host;
+    
+            if (location.match("commovel") !== null) {
+                setNFT('Commovel');
+            }
+            if (location.match("copracnil") !== null) {
+                setNFT('Copracnil')
+            }
+            if (location.match("comsa") !== null) {
+                setNFT('Comsa')
+            }
+            if (location.match("proexo") !== null) {
+                setNFT('Proexo')
+            } else {
+                setNFT('Comsa')
+            }
+
+        }
         const load = () => {
             if (ipfsHash) {
                 const url = ipfsUrl.concat(ipfsHash);
@@ -84,17 +103,21 @@ const CoffeeCard = () => {
         };
 
         load();
+        determineNFT();
         // eslint-disable-next-line
     }, [ipfsHash]);
 
     if (loading) {
-        return <Loading label="Cargando..." className="loading-wrapper"/>;
+        return <Loading label="Cargando..." className="loading-wrapper" />;
     }
 
     if (coffeeBatch?.image === undefined) {
         console.log(coffeeBatch)
         return <h1> Huevos </h1>;
     }
+
+
+   
 
     const onMapBtnClick = (lat: string, lng: string, adressL: string) => {
         setCurrentLat(lat);
@@ -103,11 +126,11 @@ const CoffeeCard = () => {
     };
 
     return (<>
-        <input type="checkbox" id="map-batchModal" className="modal-toggle"/>
+        <input type="checkbox" id="map-batchModal" className="modal-toggle" />
         <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box">
                 <label htmlFor="map-batchModal"
-                       className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                    className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                 <div className="flex justify-center m-6">
                     <div>
                         <div className="flex pt-8 space-x-4 place-content-center">
@@ -136,21 +159,36 @@ const CoffeeCard = () => {
                                 Lote <span className="font-black">#</span>
                             </h1>
                             <figure className="px-10 pt-5">
-                                <img src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Faffogato.png?alt=media&token=cecc1330-c8b1-4c2e-a4a0-55dc042e0750" className="w-32"/>
+
+
+                                {NFT === 'Proexo' && (
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FNFT%2Fproexo.gif?alt=media&token=b46258aa-7c52-468b-af3d-d3edffe77f49" className="w-32" />
+                                )}
+                                {NFT === 'Comsa' && (
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FNFT%2Fcomsa.gif?alt=media&token=bba1fd79-c5de-493f-b0ef-b62f9ed2cd4a" className="w-32" />
+                                )}
+                                {NFT === 'Commovel' && (
+                                    <img src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FNFT%2Fcommovel.gif?alt=media&token=90369031-0bf8-499d-9cd2-26a02791dbd8" className="w-32" />
+                                )}
+                                {NFT === 'Copracnil' && (
+                                    <img src="https://console.firebase.google.com/u/0/project/affogato-fde9c/storage/affogato-fde9c.appspot.com/files/~2Fassets~2FNFT" className="w-32" />
+                                )}
+
+
                             </figure>
                             <div className="text-center">
                                 <span className="md:text-xl">
-                <span className="font-serif text">
-                  <span className="text-black text-6xl text-bold">
-                      {coffeeBatch?.cupProfile.note > 0 &&
-                              <span>{coffeeBatch?.cupProfile.note}%</span>
-                         }
-                </span>
-                  <br/>
-                  Perfil de taza
-                  <br/>
-                  Peso KG:<span className="font-black b-t"></span>
-                </span>
+                                    <span className="font-serif text">
+                                        <span className="text-black text-6xl text-bold">
+                                            {coffeeBatch?.cupProfile.note > 0 &&
+                                                <span>{coffeeBatch?.cupProfile.note}%</span>
+                                            }
+                                        </span>
+                                        <br />
+                                        Perfil de taza
+                                        <br />
+                                        Peso KG:<span className="font-black b-t"></span>
+                                    </span>
                                 </span>
                             </div>
                             <div className="grid gap-8 sm:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
@@ -253,32 +291,32 @@ const CoffeeCard = () => {
                                             :
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.variety}
-                  </span>
+                                            {coffeeBatch?.wetMill.variety}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.process && (<div>
                                         <h3>
                                             <>{t("process")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.process}
-                  </span>
+                                            {coffeeBatch?.wetMill.process}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.certifications && (<div>
                                         <h3>
                                             <>{t("certificates")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.certifications}
-                  </span>
+                                            {coffeeBatch?.wetMill.certifications}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.cupProfile.aroma && (<div>
                                         <h3>:
                                             <>{t("aroma")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.aroma}
-                  </span>
+                                            {coffeeBatch?.cupProfile.aroma}
+                                        </span>
                                     </div>)}
 
                                     {!!coffeeBatch?.cupProfile.acidity && (<div>
@@ -287,8 +325,8 @@ const CoffeeCard = () => {
                                             :
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.acidity}
-                  </span>
+                                            {coffeeBatch?.cupProfile.acidity}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.cupProfile.aftertaste && (<div>
                                         <h3>
@@ -296,8 +334,8 @@ const CoffeeCard = () => {
                                             :
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.aftertaste}
-                  </span>
+                                            {coffeeBatch?.cupProfile.aftertaste}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.cupProfile.body && (<div>
                                         <h3>
@@ -305,36 +343,36 @@ const CoffeeCard = () => {
                                             :
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.body}
-                  </span>
+                                            {coffeeBatch?.cupProfile.body}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.cupProfile.flavor && (<div>
                                         <h3>
                                             <>{t("flavor")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.flavor}
-                  </span>
+                                            {coffeeBatch?.cupProfile.flavor}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.cupProfile.sweetness && (<div>
                                         <h3>
                                             <>{t("sweetness")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.sweetness}
-                  </span>
+                                            {coffeeBatch?.cupProfile.sweetness}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.cupProfile.note && (<div>
                                         <h3>
                                             <>{t("note")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.cupProfile.note}
-                  </span>
+                                            {coffeeBatch?.cupProfile.note}
+                                        </span>
                                     </div>)}
                                 </div>
                             </div>)}
-                        <br/>
+                        <br />
                         {(!!coffeeBatch?.wetMill.drying_id || !!coffeeBatch?.wetMill.quality || !!coffeeBatch?.wetMill.process || !!coffeeBatch?.wetMill.drying_type || !!coffeeBatch?.wetMill.drying_hours || (!!coffeeBatch?.wetMill.date && coffeeBatch.wetMill.date !== "1970-01-01") || !!coffeeBatch?.wetMill.facility || !!coffeeBatch?.wetMill.weight || !!coffeeBatch?.wetMill.note) && (
                             <div
                                 className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 border border-gray-100  p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
@@ -349,64 +387,64 @@ const CoffeeCard = () => {
                                             <>{t("batch-id")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.drying_id}
-                  </span>
+                                            {coffeeBatch?.wetMill.drying_id}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.entry_id && (<div>
                                         <h3>
                                             <>{t("entry-batch-id")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.entry_id}
-                  </span>
+                                            {coffeeBatch?.wetMill.entry_id}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.quality && (<div>
                                         <h3>
                                             <>{t("quality")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.quality}
-                  </span>
+                                            {coffeeBatch?.wetMill.quality}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.process && (<div>
                                         <h3>
                                             <>{t("process")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.process}
-                  </span>
+                                            {coffeeBatch?.wetMill.process}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.drying_type && (<div>
                                         <h3>
                                             <>{t("drying-type")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.drying_type}
-                  </span>
+                                            {coffeeBatch?.wetMill.drying_type}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.drying_hours && (<div>
                                         <h3>
                                             <>{t("drying-hours")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.drying_hours}
-                  </span>
+                                            {coffeeBatch?.wetMill.drying_hours}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.date && coffeeBatch.wetMill.date !== "1970-01-01" && (<div>
                                         <h3>
                                             <>{t("entry-date")}</>
                                         </h3>
                                         <span>
-                      {coffeeBatch?.wetMill.date}
-                    </span>
+                                            {coffeeBatch?.wetMill.date}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.facility && (<div>
                                         <h3>
                                             <>{t("facility")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.wetMill.facility}
-                  </span>
+                                            {coffeeBatch?.wetMill.facility}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.latitude && !!coffeeBatch?.wetMill.longitude && (<div>
                                         <h3>
@@ -423,8 +461,8 @@ const CoffeeCard = () => {
                                     {!!coffeeBatch?.wetMill.weight && (<div>
                                         <h3>Peso</h3>
                                         <span>
-                    {coffeeBatch?.wetMill.weight} QQ
-                  </span>
+                                            {coffeeBatch?.wetMill.weight} QQ
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.note && (<div>
                                         <h3>
@@ -434,7 +472,7 @@ const CoffeeCard = () => {
                                     </div>)}
                                 </div>
                             </div>)}
-                        <br/>
+                        <br />
 
                         {(!!coffeeBatch?.dryMill.export_id || (!!coffeeBatch?.dryMill.date && coffeeBatch.dryMill.date !== "1970-01-01") || !!coffeeBatch?.dryMill.facility || !!coffeeBatch?.dryMill.drying_type || !!coffeeBatch?.dryMill.damage_percent || !!coffeeBatch?.dryMill.threshing_yield || !!coffeeBatch?.dryMill.weight || !!coffeeBatch?.dryMill.note) && (
                             <div
@@ -450,24 +488,24 @@ const CoffeeCard = () => {
                                             <>{t("exporting-code")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.export_id}
-                  </span>
+                                            {coffeeBatch?.dryMill.export_id}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.export_drying_id && (<div>
                                         <h3>
                                             <>{t("drying-batch-id")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.export_drying_id}
-                  </span>
+                                            {coffeeBatch?.dryMill.export_drying_id}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.date && coffeeBatch.dryMill.date !== "1970-01-01" && (<div>
                                         <h3>
                                             <>{t("date")}</>
                                         </h3>
                                         <span>
-                      {coffeeBatch?.dryMill.date}
-                    </span>
+                                            {coffeeBatch?.dryMill.date}
+                                        </span>
                                     </div>)}
 
                                     {!!coffeeBatch?.dryMill.facility && (<div>
@@ -475,8 +513,8 @@ const CoffeeCard = () => {
                                             <>{t("facility")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.facility}
-                  </span>
+                                            {coffeeBatch?.dryMill.facility}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.latitude && !!coffeeBatch?.dryMill.longitude && (<div>
                                         <h3>
@@ -495,32 +533,32 @@ const CoffeeCard = () => {
                                             <>{t("damage-percent")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.damage_percent}
-                  </span>
+                                            {coffeeBatch?.dryMill.damage_percent}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.threshing_process && (<div>
                                         <h3>
                                             <>{t("threshing_process")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.threshing_process}
-                  </span>
+                                            {coffeeBatch?.dryMill.threshing_process}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.threshing_yield && (<div>
                                         <h3>
                                             <>{t("threshing-yield")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.threshing_yield}
-                  </span>
+                                            {coffeeBatch?.dryMill.threshing_yield}
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.weight && (<div>
                                         <h3>
                                             <>{t("weight")}</>
                                         </h3>
                                         <span>
-                    {coffeeBatch?.dryMill.weight} QQ
-                  </span>
+                                            {coffeeBatch?.dryMill.weight} QQ
+                                        </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.note && (<div>
                                         <h3>
@@ -546,8 +584,8 @@ const CoffeeCard = () => {
                                         <>{t("bag_size")}</>
                                     </h3>
                                     <span>
-                    {coffeeBatch?.roasting.bag_size} onz
-                  </span>
+                                        {coffeeBatch?.roasting.bag_size} onz
+                                    </span>
                                 </div>)}
 
                                 {!!coffeeBatch?.roasting.grind_type && (<div>
@@ -555,8 +593,8 @@ const CoffeeCard = () => {
                                         <>{t("grind_type")}</>
                                     </h3>
                                     <span>
-                    {coffeeBatch?.roasting.grind_type}
-                  </span>
+                                        {coffeeBatch?.roasting.grind_type}
+                                    </span>
                                 </div>)}
 
                                 {!!coffeeBatch?.roasting.packaging && (<div>
@@ -564,8 +602,8 @@ const CoffeeCard = () => {
                                         <>{t("packaging")}</>
                                     </h3>
                                     <span>
-                    {coffeeBatch?.roasting.packaging}
-                  </span>
+                                        {coffeeBatch?.roasting.packaging}
+                                    </span>
                                 </div>)}
 
 
@@ -574,8 +612,8 @@ const CoffeeCard = () => {
                                         <>{t("roast_date")}</>
                                     </h3>
                                     <span>
-                    {coffeeBatch?.roasting.roast_date}
-                  </span>
+                                        {coffeeBatch?.roasting.roast_date}
+                                    </span>
                                 </div>)}
 
                                 {!!coffeeBatch?.roasting.roast_type && (<div>
@@ -583,8 +621,8 @@ const CoffeeCard = () => {
                                         <>{t("roast_type")}</>
                                     </h3>
                                     <span>
-                    {coffeeBatch?.roasting.roast_type}
-                  </span>
+                                        {coffeeBatch?.roasting.roast_type}
+                                    </span>
                                 </div>)}
 
                             </div>
