@@ -20,6 +20,7 @@ import Cupping from "./Cupping";
 import Certification from "./Certification";
 import {NewList} from "./Farmer/NewList";
 import {CoffeBatchNewList} from "./CoffeeBatch/NewList";
+import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
 
 
 const Home = () => {
@@ -113,7 +114,7 @@ const Home = () => {
 
                 <Route path="/login" element={<Login/>}/>
                 <Route path="/signup" element={<Signup/>}/>
-                <Route path="/batch/:ipfsHash" element={<CoffeeCard/>}/>
+                <Route path="/batch/:batchId" element={<CoffeeBatchId/>}/>
                 <Route path="/coffeebatches" element={<PublicList/>}/>
                 <Route path="/farmer/:farmerId" element={<Profile/>}/>
                 <Route path="/company/:companyId" element={<Company/>}/>

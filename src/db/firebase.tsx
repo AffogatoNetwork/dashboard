@@ -216,8 +216,17 @@ export const saveBatch = async (batch: any) => {
 };
 
 
+export const getBatch = async (ipfsHash: string) => {
+  const docRef = doc(db, "batches", ipfsHash);
+  const docData = await getDoc(docRef);
+  if (docData.exists()) {
+    return docData.data();
+  }
+  return null;
+};
+
+
 export const getAllBatches = async (company: string) => {
-  console.log(company);
   const q = query(collection(db, "batches"), where("parentId", "==", company));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
