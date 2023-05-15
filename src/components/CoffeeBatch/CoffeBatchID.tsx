@@ -66,7 +66,7 @@ const CoffeeBatchId = () => {
                                         </div>
                                     }
                                     <p>{coffeeBatch?.Description}</p>
-                                    <p>Productor: <br /> {JSON.stringify(farmers[0].fullname)}  <span>
+                                    <p>Productor: <br /> {JSON.stringify(farmers[0]?.fullname)}  <span>
                                     </span></p>
 
                                 </div>
