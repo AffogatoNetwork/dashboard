@@ -5,7 +5,7 @@ import { useDropzone } from "react-dropzone";
 import { useTranslation } from "react-i18next";
 import "../../styles/create.scss";
 import { useAuthContext } from "../../states/AuthContext";
-import { saveFarms } from "../../db/firebase";
+import { saveBatch, saveFarms } from "../../db/firebase";
 import { apiUrl } from "../../utils/constants";
 import {
   getCompanyName,

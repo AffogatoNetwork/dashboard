@@ -1,22 +1,22 @@
-import React, {useEffect, useState} from "react";
-import {BigNumber, ethers} from "ethers";
-import {Contract, Provider, setMulticallAddress} from "ethers-multicall";
-import {gql, useQuery} from "@apollo/client";
-import {useTranslation} from "react-i18next";
+import React, { useEffect, useState } from "react";
+import { BigNumber, ethers } from "ethers";
+import { Contract, Provider, setMulticallAddress } from "ethers-multicall";
+import { gql, useQuery } from "@apollo/client";
+import { useTranslation } from "react-i18next";
 import "../../styles/batchlist.scss";
 import QRCode from "react-qr-code";
 import Loading from "../Loading";
-import {useAuthContext} from "../../states/AuthContext";
-import {ipfsUrl, SEARCH_DIVIDER} from "../../utils/constants";
+import { useAuthContext } from "../../states/AuthContext";
+import { ipfsUrl, SEARCH_DIVIDER } from "../../utils/constants";
 import FormInput from "../common/FormInput";
-import {CustomPagination} from "../common/Pagination";
-import {CoffeeBatchType} from "../common/types";
+import { CustomPagination } from "../common/Pagination";
+import { CoffeeBatchType } from "../common/types";
 import CoffeeBatch from "../../contracts/CoffeBatch.json";
 import BatchItem from "./BatchItem";
-import {getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNumber,} from "../../utils/utils";
-import {SearchIcon} from "../icons/search";
-import {ClearIcon} from "../icons/clear";
-import {LinkIcon} from "../icons/link";
+import { getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNumber, } from "../../utils/utils";
+import { SearchIcon } from "../icons/search";
+import { ClearIcon } from "../icons/clear";
+import { LinkIcon } from "../icons/link";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 
 const openInNewTab = (url: string | URL | undefined) => {
@@ -30,8 +30,8 @@ const pagDefault = {
 };
 
 export const List = () => {
-    const {t} = useTranslation();
-    const {authState} = useAuthContext();
+    const { t } = useTranslation();
+    const { authState } = useAuthContext();
     const [state] = authState;
     const [currentEthCallProvider, setCurrentEthCallProvider] = useState<Provider | null>(null);
     const [cbContract, setCbContract] = useState<Contract>();
@@ -57,6 +57,7 @@ export const List = () => {
     const [minNoteError, setMinNoteError] = useState("");
     const [maxNoteError, setMaxNoteError] = useState("");
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
+    const [currentCompany, setCurrentCompany] = useState("");
 
     setMulticallAddress(10, "0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a");
 
@@ -95,17 +96,27 @@ export const List = () => {
             setOwnerAddress(user)
         } else {
             let companyName = "proexo";
+       
+        }
+
+        const getCurrentCompany =  () => {
+
             const hostname = window.location.hostname;
             if (hostname.includes("proexo")) {
-                companyName = "PROEXO";
+                setCurrentCompany('0xfa474D1E6d83C6bA0591117981D56dbF08C774AF');
             } else if (hostname.includes("copracnil")) {
-                companyName = "COPRACNIL";
+                setCurrentCompany('0xd109a56c1c3fa6a31e3cb2e09188ec2401e2e405');
             } else if (hostname.includes("commovel")) {
-                companyName = "COMMOVEL";
+                setCurrentCompany('0x7e02efc22e3351a020cd3bfa1fca540afb2c6f8c');
             } else if (hostname.includes("comsa")) {
-                companyName = "COMSA";
+                setCurrentCompany('0xcefe349b2c94910ca16be79598bc15eaee7c5e81');
+            } else {
+                setCurrentCompany('0xcefe349b2c94910ca16be79598bc15eaee7c5e81');
             }
+
+
         }
+
 
 
         const batchList = coffeeBatchList;
@@ -114,7 +125,7 @@ export const List = () => {
         fetch(url)
             .then((response) => response.json())
             .then((jsonData) => {
-                let cooperative = {}
+                let cooperative: string | undefined = undefined ;
                 let farmer = {};
                 let farm = {};
                 let wetMill = {
@@ -128,8 +139,10 @@ export const List = () => {
                     type: undefined
                 };
                 for (let i = 0; i < jsonData.attributes.length; i += 1) {
+
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "cooperative") {
+                        console.log(jsonData.attributes[i]);
                         [cooperative] = jsonData.attributes[i].value;
                     }
                     if (traitType === "farmer") {
@@ -169,9 +182,7 @@ export const List = () => {
                     roasting,
                     cupProfile,
                 };
-                const drymil = {
-                    cooperative: cooffeeBatch.dryMill?.facillity,
-                }
+          
 
                 const id = {
                     batchList: cooffeeBatch.id,
@@ -190,32 +201,34 @@ export const List = () => {
 
 
                 const remove = batchList.find(item => item.ipfsHash === "QmQrDDTQk1HDSrUDjV1iW97K4JMok5f2dJ26pgnqmhQZAL");
-                if(remove?.id != null){
+                if (remove?.id != null) {
                     const removeIndex = batchList.map(item => item.id).indexOf(remove?.id);
                     batchList.splice(removeIndex, 1);
                 }
 
                 const remove2 = batchList.find(item => item.ipfsHash === "QmQacR4Q3MKmsRCVGNTAabjLR5ZirTTpA1Av242SPdWNUJ");
-                if(remove2?.id != null){
+                if (remove2?.id != null) {
                     const removeIndex = batchList.map(item => item.id).indexOf(remove2?.id);
                     batchList.splice(removeIndex, 1);
                 }
                 const remove3 = batchList.find(item => item.ipfsHash === "QmVi9B73RFs2wn6XZtBJMhj5RNAXYdP64z9MKhTAztP49m");
-                if(remove3?.id != null){
+                if (remove3?.id != null) {
                     const removeIndex = batchList.map(item => item.id).indexOf(remove3?.id);
                     batchList.splice(removeIndex, 1);
                 }
+                console.log(company.id);
 
+                if (id.batchList >= 985) {
+                    console.log("here");
+                    console.log(company.id);
+                    if (company.id === currentCompany) {
+                        console.log("entrei");
+                        batchList.push(cooffeeBatch);
+                    }
 
-
-                if (id.batchList >= 949) {
-
-
-
-
-                    batchList.push(cooffeeBatch);
                 }
 
+                
                 const total = batchList.length
                 setBatchesCount(total);
                 setCoffeeBatchList(batchList.slice());
@@ -248,7 +261,7 @@ export const List = () => {
         }
     };
 
-    const {loading, data, refetch, error} = useQuery(batchesQuery, {
+    const { loading, data, refetch, error } = useQuery(batchesQuery, {
         variables: {
             owners: companyAddresses,
         }, fetchPolicy: "no-cache", notifyOnNetworkStatusChange: true, onError: () => {
@@ -261,37 +274,37 @@ export const List = () => {
     });
 
     useEffect(() => {
-            const loadProvider = async () => {
+        const loadProvider = async () => {
 
-                let ethcallProvider = null;
+            let ethcallProvider = null;
 
 
-                if (state.provider !== null) {
-                    ethcallProvider = new Provider(state.provider);
-                    const signer = state.provider.getSigner();
-                    const address = await signer.getAddress();
-                    setCompanyAddresses(getCompanyAddresses(address));
-                    setAuth(true);
-                } else {
-                    const provider = getDefaultProvider();
-                    const randomSigner = ethers.Wallet.createRandom().connect(provider);
-                    ethcallProvider = new Provider(randomSigner.provider);
-                    setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
-                    setAuth(false);
+            if (state.provider !== null) {
+                ethcallProvider = new Provider(state.provider);
+                const signer = state.provider.getSigner();
+                const address = await signer.getAddress();
+                setCompanyAddresses(getCompanyAddresses(address));
+                setAuth(true);
+            } else {
+                const provider = getDefaultProvider();
+                const randomSigner = ethers.Wallet.createRandom().connect(provider);
+                ethcallProvider = new Provider(randomSigner.provider);
+                setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
+                setAuth(false);
+            }
+            if (ethcallProvider !== null) {
+                await ethcallProvider.init();
+                // Set CoffeBatch contracts
+                const currentCoffeeBatch = new Contract(CoffeeBatch.address, CoffeeBatch.abi);
+                setCbContract(currentCoffeeBatch);
+                setCurrentEthCallProvider(ethcallProvider);
+                if (!dataLoaded) {
+                    refetch();
                 }
-                if (ethcallProvider !== null) {
-                    await ethcallProvider.init();
-                    // Set CoffeBatch contracts
-                    const currentCoffeeBatch = new Contract(CoffeeBatch.address, CoffeeBatch.abi);
-                    setCbContract(currentCoffeeBatch);
-                    setCurrentEthCallProvider(ethcallProvider);
-                    if (!dataLoaded) {
-                        refetch();
-                    }
-                }
-            };
-            loadProvider();
-        }, // eslint-disable-next-line
+            }
+        };
+        loadProvider();
+    }, // eslint-disable-next-line
         [state.provider]);
 
     const onPageSelected = (pageNumber: number) => {
@@ -464,7 +477,7 @@ export const List = () => {
             </div>
             <div className="relative">
                 <div className="absolute flex items-center ml-2 h-full">
-                    <SearchIcon className="m-4 w-4 h-4 fill-current"/>
+                    <SearchIcon className="m-4 w-4 h-4 fill-current" />
                 </div>
 
                 <FormInput
@@ -474,7 +487,7 @@ export const List = () => {
                     handleOnChange={handleSearchCriteriaChange}
                     handleOnKeyDown={handleSearchCriteriaKeyDown}
                     errorMsg=""
-                    className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+                    className="px-8 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" />
             </div>
             <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-5 gap-4 mt-4">
                 <FormInput
@@ -483,7 +496,7 @@ export const List = () => {
                     placeholder={t("min-height")}
                     handleOnChange={handleMinHeightChange}
                     errorMsg={minHeightError}
-                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" />
 
                 <FormInput
                     label={t("min-weight")}
@@ -491,7 +504,7 @@ export const List = () => {
                     placeholder={t("min-weight")}
                     handleOnChange={handleMinWeightChange}
                     errorMsg={minWeightError}
-                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" />
 
                 <FormInput
                     label={t("max-weight")}
@@ -499,7 +512,7 @@ export const List = () => {
                     placeholder={t("max-weight")}
                     handleOnChange={handleMaxWeightChange}
                     errorMsg={maxWeightError}
-                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" />
 
                 <FormInput
                     label={t("min-note")}
@@ -507,7 +520,7 @@ export const List = () => {
                     placeholder={t("min-note")}
                     handleOnChange={handleMinNoteChange}
                     errorMsg={minNoteError}
-                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" />
 
                 <FormInput
                     label={t("max-note")}
@@ -515,7 +528,7 @@ export const List = () => {
                     placeholder={t("max-note")}
                     handleOnChange={handleMaxNoteChange}
                     errorMsg={maxNoteError}
-                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm"/>
+                    className="px-4 py-3 w-full rounded-md bg-gray-100 border-transparent focus:border-gray-500 focus:bg-white focus:ring-0 text-sm" />
 
             </div>
 
@@ -524,12 +537,12 @@ export const List = () => {
 
                 <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
                                         focus:bg-amber-400 active:bg-amber-600">
-                    <SearchIcon className="w-4 h-4 mr-2"/>
+                    <SearchIcon className="w-4 h-4 mr-2" />
                     <>{t("search")}</>
                 </button>
                 <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
                                         focus:bg-red-400 active:bg-red-700">
-                    <ClearIcon className="w-4 h-4 mr-2"/>
+                    <ClearIcon className="w-4 h-4 mr-2" />
                     <>{t("clear")}</>
                 </button>
             </div>
@@ -538,22 +551,22 @@ export const List = () => {
     </>);
 
     return (<>
-        <input type="checkbox" id="coffe-batch" className="modal-toggle"/>
+        <input type="checkbox" id="coffe-batch" className="modal-toggle" />
         <div className="modal modal-bottom sm:modal-middle">
             <div className="modal-box relative">
                 <label htmlFor="coffe-batch"
-                       className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                    className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                 <div className="flex justify-center m-6">
                     <div>
-                        <QRCode id="qr-coffe-batch" value={qrCodeUrl} size={300}/>
+                        <QRCode id="qr-coffe-batch" value={qrCodeUrl} size={300} />
                         <div className="flex pt-8 space-x-4 place-content-center">
                             <div>
                                 <button
                                     className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                                     onClick={handleOnDownloadClick}>
                                     <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                         viewBox="0 0 20 20">
-                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z"/>
+                                        viewBox="0 0 20 20">
+                                        <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
                                     </svg>
                                     <>{t("download")}</>
                                 </button>
@@ -562,7 +575,7 @@ export const List = () => {
                                 <button onClick={() => {
                                     openInNewTab(qrCodeUrl);
                                 }}
-                                        className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                    className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
                                     <LinkIcon></LinkIcon>
                                     <>{t("open-link")}</>
                                 </button>
@@ -570,11 +583,11 @@ export const List = () => {
 
                         </div>
                         <div className="text-center items-center">
-                            <br/>
+                            <br />
                             <button onClick={() => {
                                 openInNewTab(blockchainUrl);
                             }}
-                                    className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
                                 <LinkIcon></LinkIcon>
                                 <>Ver en el blockchain</>
                             </button>
@@ -605,16 +618,16 @@ export const List = () => {
                                     </h4>
 
                                     {ownerAddress ? (<a className="link link-info">
-                                            <ReactHTMLTableToExcel
-                                                id="table-xls-button"
-                                                className="download-xls-button"
-                                                table="batches-list"
-                                                filename={t("batches")}
-                                                sheet={t("batches")}
-                                                buttonText={"(".concat(t("download")).concat(")")}
-                                            />
-                                        </a>) : (<>
-                                        </>)}
+                                        <ReactHTMLTableToExcel
+                                            id="table-xls-button"
+                                            className="download-xls-button"
+                                            table="batches-list"
+                                            filename={t("batches")}
+                                            sheet={t("batches")}
+                                            buttonText={"(".concat(t("download")).concat(")")}
+                                        />
+                                    </a>) : (<>
+                                    </>)}
                                 </div>
                             </div>
                             <div className="overflow-x-scroll">
@@ -623,50 +636,50 @@ export const List = () => {
                                     className="loading-wrapper"
                                 />) : (<div className="text-center">
                                     <table id="batches-list"
-                                           className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
+                                        className="coffeebatches w-full sm:bg-white rounded-lg overflow-hidden my-5">
                                         <thead>
-                                        <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
-                                            <th className="p-3 text-center border-white border">QR</th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("farm")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("height")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("location")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("variety")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("process")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("drying-code")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("drying-type")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("exporting-code")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("weight")}</>
-                                            </th>
-                                            <th className="p-3 text-center border-white border">
-                                                <>{t("note")}</>
-                                            </th>
-                                        </tr>
+                                            <tr className="bg-amber-800 flex flex-col flex-no wrap text-white sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
+                                                <th className="p-3 text-center border-white border">QR</th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("farm")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("height")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("location")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("variety")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("process")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("drying-code")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("drying-type")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("exporting-code")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("weight")}</>
+                                                </th>
+                                                <th className="p-3 text-center border-white border">
+                                                    <>{t("note")}</>
+                                                </th>
+                                            </tr>
                                         </thead>
                                         <tbody className="flex-1 sm:flex-none">
-                                        {coffeeBatchList2.map((batch, index) => (<BatchItem
-                                            key={index}
-                                            index={index}
-                                            coffeeBatch={batch}
-                                            pagination={pagination}
-                                            showQrModal={showQrModal}
-                                        />))}
+                                            {coffeeBatchList2.map((batch, index) => (<BatchItem
+                                                key={index}
+                                                index={index}
+                                                coffeeBatch={batch}
+                                                pagination={pagination}
+                                                showQrModal={showQrModal}
+                                            />))}
                                         </tbody>
                                     </table>
                                 </div>)}

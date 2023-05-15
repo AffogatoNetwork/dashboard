@@ -185,8 +185,40 @@ export const getFarms = async (company: string) => {
 };
 
 
-export const getBatches = async (company: string) => {
-  const q = query(collection(db, "batches"), where("company", "==", company));
+export const saveBatch = async (batch: any) => {
+  try {
+    const docId = batch.farmerAddress.concat(batch.name.toLocaleLowerCase());
+    const farmDoc = doc(db, "batches", docId);
+    const farmData = {
+      farmerAddress: batch.farmerAddress,
+      company: batch.company,
+      name: batch.name,
+      height: batch.height,
+      area: batch.area,
+      certifications: batch.certifications,
+      latitude: batch.latitude,
+      longitude: batch.longitude,
+      bio: batch.bio,
+      country: batch.country,
+      region: batch.region,
+      village: batch.village,
+      village2: batch.village2,
+      varieties: batch.varieties,
+      shadow: batch.shadow,
+      familyMembers: batch.familyMembers,
+      ethnicGroup: batch.ethnicGroup,
+    };
+    await setDoc(farmDoc, farmData);
+  } catch (error) {
+    
+  }
+
+};
+
+
+export const getAllBatches = async (company: string) => {
+  const q = query(collection(db, "batches"), where("Parent_ID", "==", company));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
 };
+

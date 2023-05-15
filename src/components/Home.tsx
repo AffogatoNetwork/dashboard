@@ -19,6 +19,8 @@ import Landing from "./CoffeeBatch/Landing";
 import Cupping from "./Cupping";
 import Certification from "./Certification";
 import {NewList} from "./Farmer/NewList";
+import {CoffeBatchNewList} from "./CoffeeBatch/NewList";
+
 
 const Home = () => {
     const {authState, authContext} = useAuthContext();
@@ -53,7 +55,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <List/>
+                                <CoffeBatchNewList/>
                             </Dashboard>
                         </RequiredAuth>
                     }
