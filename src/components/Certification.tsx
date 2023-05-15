@@ -4,24 +4,24 @@ import React, { useEffect, useState } from "react";
 const Certification = () => {
     const [company, setCompany] = useState("");
     useEffect(() => {
-        const location = window.location.host;
+        const url = window.location.host.toString();
+        if (url.match("commovel") !== null) {
+            setCompany("commovel");
+        }
+        if (url.match("copracnil") !== null) {
+            setCompany("copracnil");
+        }
+        if (url.match("comsa") !== null) {
+            setCompany("comsa");
+        }
+        if (url.match("proexo") !== null) {
+            setCompany("proexo");
+        }
+        if (url.match("localhost") !== null) {
+            setCompany("proexo");
+        }
 
-        if (location.match("commovel") !== null) {
-            setCompany('commovel');
-        }
-        if (location.match("copracnil") !== null) {
-            setCompany('copracnil')
-        }
-        if (location.match("comsa") !== null) {
-            setCompany('comsa')
-        }
-        if (location.match("proexo") !== null) {
-            setCompany('proexo')
-        } else {
-            setCompany('proexo')
-        }
-
-    })
+    }, []);
 
 
     return (
