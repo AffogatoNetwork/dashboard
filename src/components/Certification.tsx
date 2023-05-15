@@ -18,7 +18,7 @@ const Certification = () => {
         if (location.match("proexo") !== null) {
             setCompany('proexo')
         } else {
-            setCompany('comsa')
+            setCompany('proexo')
         }
 
     })
@@ -262,22 +262,6 @@ const Certification = () => {
                         <div
                             className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
                             <p className="mb-4 text-lg font-bold text-gray-100">EU Organic</p>
-
-                        </div>
-                    </div>
-
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                        <img
-                            className="object-cover w-full h-56 md:h-64 xl:h-80"
-                            src={require('../assets/certificaciones/4_DO Marcala.png')}
-                            alt=""
-                        />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Denominación de Origen Marcala
-                            </p>
-
                         </div>
                     </div>
                 </div>
@@ -345,20 +329,7 @@ const Certification = () => {
                         </div>
                     </div>
 
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                        <img
-                            className="object-cover w-full h-56 md:h-64 xl:h-80"
-                            src={require('../assets/certificaciones/4_DO Marcala.png')}
-                            alt=""
-                        />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Denominación de Origen Marcala
-                            </p>
-
-                        </div>
-                    </div>
+                    
                 </div>
             )}
 
@@ -424,20 +395,7 @@ const Certification = () => {
                         </div>
                     </div>
 
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                        <img
-                            className="object-cover w-full h-56 md:h-64 xl:h-80"
-                            src={require('../assets/certificaciones/4_DO Marcala.png')}
-                            alt=""
-                        />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Denominación de Origen Marcala
-                            </p>
-
-                        </div>
-                    </div>
+               
                 </div>
             )}
 
