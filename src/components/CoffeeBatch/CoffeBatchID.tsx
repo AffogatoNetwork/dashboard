@@ -68,7 +68,7 @@ const CoffeeBatchId = () => {
                                     <p>{coffeeBatch?.Description}</p>
                                     {coffeeBatch?.Farmer?.length == 1 && (
                                         <div>
-                                            <p>Productors: <br /> {JSON.stringify(farmers[0]?.fullname)}</p>
+                                            <p>Productors: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address } > {farmers[0]?.fullname} </a> </p>
                                         </div>
                                     )}
                                     {coffeeBatch?.Farmer?.length > 2 && (
