@@ -217,7 +217,8 @@ export const saveBatch = async (batch: any) => {
 
 
 export const getAllBatches = async (company: string) => {
-  const q = query(collection(db, "batches"), where("Parent_ID", "==", company));
+  console.log(company);
+  const q = query(collection(db, "batches"), where("parentId", "==", company));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
 };

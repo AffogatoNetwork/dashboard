@@ -218,14 +218,8 @@ export const List = () => {
                 }
                 console.log(company.id);
 
-                if (id.batchList >= 985) {
-                    console.log("here");
-                    console.log(company.id);
-                    if (company.id === currentCompany) {
-                        console.log("entrei");
-                        batchList.push(cooffeeBatch);
-                    }
-
+                if (id.batchList >= 975) {
+                    batchList.push(cooffeeBatch);
                 }
 
                 

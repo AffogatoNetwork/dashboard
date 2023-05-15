@@ -9,6 +9,7 @@ import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { FarmerData } from "../FarmerData";
 
 export const CoffeBatchNewList = () => {
     const saveSvgAsPng = require("save-svg-as-png");
@@ -41,8 +42,8 @@ export const CoffeBatchNewList = () => {
         qrCode: string;
         Name: string;
         ipfsHash: string;
-        DryMill: {};
-        WetMill:{};
+        dryMill: {};
+        wetMill:{};
         Profile:{};
         Roasting:{};
     };
@@ -79,19 +80,20 @@ export const CoffeBatchNewList = () => {
 
 
             await getAllBatches(companyName).then((result) => {
-                console.log(result);
-                console.log(companyName);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     console.log(farmerData);
+                    console.log(result[i].data());
                     const {
                         Name,
                         ipfsHash,
-                        DryMill,
-                        WetMill,
-                        Profile,
-                        Roasting,
+                        dryMill = {},
+                        wetMill = {},
+                        Profile = {},
+                        Roasting = {},
                     } = farmerData;
+
+                    console.log(farmerData);
 
                     let qrCode = window.location.origin
                         .concat("/batch/")
@@ -102,8 +104,8 @@ export const CoffeBatchNewList = () => {
                         qrCode,
                         Name,
                         ipfsHash,
-                        DryMill,
-                        WetMill,
+                        dryMill,
+                        wetMill,
                         Profile,
                         Roasting,
                     });
@@ -153,25 +155,26 @@ export const CoffeBatchNewList = () => {
                 ),
             },
             {
-                header: 'Name ', accessorKey: 'Name'
+                header: 'Name ', accessorKey: 'Name', size: 25,
             }, {
-                header: 'Altura ', accessorKey: 'DryMill.height'
+                header: 'Altura ', accessorKey: 'dryMill.height', size: 15,                
+ 
             }, {
-                header: 'Ubicación ', accessorKey: 'DryMill.location'
+                header: 'Ubicación ', accessorKey: 'dryMill.location', size: 20,
             }, {
-                header: 'Variedad ', accessorKey: 'WetMill.variety'
+                header: 'Variedad ', accessorKey: 'wetMill.variety', size: 15,
             }, {
-                header: 'Proceso ', accessorKey: 'WetMill.process'
+                header: 'Proceso ', accessorKey: 'wetMill.process', size: 15,
             }, {
-                header: 'ID De Secado ', accessorKey: 'WetMill.dryngId'
+                header: 'ID De Secado ', accessorKey: 'wetMill.drying_id', size: 15,
             }, {
-                header: 'Tipo De Secado', accessorKey: 'WetMill.dryngType'
+                header: 'Tipo De Secado', accessorKey: 'wetMill.drying_type', size: 15,
             }, {
-                header: 'Id De Exportación', accessorKey: 'DryMill.exportId'
+                header: 'Id De Exportación', accessorKey: 'dryMill.export_id', size: 15,
             }, {
-                header: 'Peso', accessorKey: 'DryMill.weight'
+                header: 'Peso', accessorKey: 'dryMill.weight', size: 15,
             }, {
-                header: 'Nota', accessorKey: 'DryMill.note'
+                header: 'Nota', accessorKey: 'dryMill.note', size: 15,
             },
         ],
         [],
@@ -231,6 +234,14 @@ export const CoffeBatchNewList = () => {
                                             enableColumnActions={false}
                                             enableFilters={true}
                                             localization={MRT_Localization_ES}
+                                            displayColumnDefOptions={{
+                                                'mrt-row-numbers': {
+                                                  size: 10,
+                                                },
+                                                'mrt-row-expand': {
+                                                  size: 10,
+                                                },
+                                              }}
                                             initialState={{
                                                 sorting: [{ id: 'Name', desc: false }],
                                                 showGlobalFilter: true, isLoading: false
