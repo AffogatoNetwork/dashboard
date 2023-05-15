@@ -79,25 +79,16 @@ const CoffeeBatchId = () => {
 
                     <li>
                         <a className="relative block group">
-                            {farms.map((item: any) => (
-                                <div className="card w-full h bg-base-100 shadow-xl">
+                        <div className="card w-full h bg-base-100 shadow-xl">
                                     <div className="card-body">
                                         <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name}</h2>
                                         <div className="card-actions">
                                             <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-                                                <p>Variedad: <br /> <span> {item?.area}</span></p>
-                                                <p>Variedad: <br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
-                                                <p>Variedad: <br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
-                                                <p>Variedad: <br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
+                                 
                                             </div>
                                         </div>
                                     </div>
                                 </div>
-                            ))}
-
-
-
-
                         </a>
                     </li>
 
