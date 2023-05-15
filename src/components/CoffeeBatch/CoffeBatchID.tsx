@@ -69,8 +69,6 @@ const CoffeeBatchId = () => {
                                     <p>Productor: <br /> {JSON.stringify(farmers[0].fullname)}  <span>
                                     </span></p>
 
-                               
-
                                 </div>
                             </div>
 
