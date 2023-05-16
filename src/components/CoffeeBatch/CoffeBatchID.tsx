@@ -21,12 +21,12 @@ const CoffeeBatchId = () => {
                     result?.Farmer.map((item: any) => {
                         getFarmer(item).then((result) => {
                             const Farmers = new Array(result);
-               
+
                             setFarmers(Farmers);
                             console.log(Farmers);
                         });
                         getFarmerFarms(item).then((result) => {
-           
+
 
                         });
                     });
@@ -61,19 +61,19 @@ const CoffeeBatchId = () => {
                                 <div className="card-body items-center text-center">
                                     {coffeeBatch?.Profile?.note > 0 &&
                                         <div className="stat">
-                                            <div className="stat-title">Nota</div>
+                                            <div className="stat-title"><>{t("note")}</></div>
                                             <div className="stat-value">{coffeeBatch?.wetMill?.note} %</div>
                                         </div>
                                     }
                                     <p>{coffeeBatch?.Description}</p>
                                     {coffeeBatch?.Farmer?.length == 1 && (
                                         <div>
-                                            <p>Productors: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address } > {farmers[0]?.fullname} </a> </p>
+                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
                                         </div>
                                     )}
                                     {coffeeBatch?.Farmer?.length > 2 && (
                                         <div>
-                                            <p > Productores: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address } > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span>productores más  </span></p>
+                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span>productores más  </span></p>
                                         </div>
                                     )}
 
@@ -87,16 +87,16 @@ const CoffeeBatchId = () => {
 
                     <li>
                         <a className="relative block group">
-                        <div className="card w-full h bg-base-100 shadow-xl">
-                                    <div className="card-body">
-                                        <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name}</h2>
-                                        <div className="card-actions">
-                                            <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-                                 
-                                            </div>
+                            <div className="card w-full h bg-base-100 shadow-xl">
+                                <div className="card-body">
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name}</h2>
+                                    <div className="card-actions">
+                                        <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
+
                                         </div>
                                     </div>
                                 </div>
+                            </div>
                         </a>
                     </li>
 
@@ -104,17 +104,17 @@ const CoffeeBatchId = () => {
                         <a className="relative block group">
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Detalle De Lote</h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</></h2>
 
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                            <p>Variedad: <br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
-                                            <p>Proceso: <br /> <span> {coffeeBatch?.wetMill?.process}</span></p>
-                                            <p>Acidez: <br /> <span> {coffeeBatch?.Profile?.acidity}</span></p>
-                                            <p>Post Gusto: <br /> <span> {coffeeBatch?.Profile?.aftertaste}</span></p>
-                                            <p>Cuerpo: <br /> <span> {coffeeBatch?.Profile?.body}</span></p>
-                                            <p>Aroma: <br /> <span> {coffeeBatch?.Profile?.aroma}</span></p>
-                                            <p>Sweetness: <br /> <span> {coffeeBatch?.Profile?.sweetness}</span></p>
+                                            <p><>{t("variety")}</>:<br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
+                                            <p><>{t("process")}</>: <br /> <span> {coffeeBatch?.wetMill?.process}</span></p>
+                                            <p><>{t("acidity")}</>: <br /> <span> {coffeeBatch?.Profile?.acidity}</span></p>
+                                            <p><>{t("aftertaste")}</>: <br /> <span> {coffeeBatch?.Profile?.aftertaste}</span></p>
+                                            <p><>{t("body")}</>: <br /> <span> {coffeeBatch?.Profile?.body}</span></p>
+                                            <p><>{t("aroma")}</>: <br /> <span> {coffeeBatch?.Profile?.aroma}</span></p>
+                                            <p><>{t("sweetness")}</>: <br /> <span> {coffeeBatch?.Profile?.sweetness}</span></p>
 
                                         </div>
                                     </div>
@@ -125,10 +125,10 @@ const CoffeeBatchId = () => {
                                     <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Beneficio Humedo</h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                            <p>Certificados: <br /> <span> {coffeeBatch?.wetMill?.certifications}</span></p>
-                                            <p>Horas de Secado: <br /> <span> {coffeeBatch?.wetMill?.drying_hours}</span></p>
-                                            <p>Proceso: <br /> <span> {coffeeBatch?.wetMill?.process}</span></p>
-                                            <p>Variedad: <br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
+                                            <p><>{t("certificates")}</>: <br /> <span> {coffeeBatch?.wetMill?.certifications}</span></p>
+                                            <p><>{t("drying-hours")}</>: <br /> <span> {coffeeBatch?.wetMill?.drying_hours}</span></p>
+                                            <p><>{t("process")}</>: <br /> <span> {coffeeBatch?.wetMill?.process}</span></p>
+                                            <p> <>{t("variety")}</> :<br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
                                         </div>
                                     </div>
                                 </div>
@@ -138,10 +138,10 @@ const CoffeeBatchId = () => {
                                     <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Beneficio Seco</h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                            <p>Porcentage De Daño: <br /> <span> {coffeeBatch?.dryMill?.damage_percent}</span></p>
-                                            <p>Id De Exportación: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
-                                            <p>Altura: <br /> <span> {coffeeBatch?.dryMill?.height}</span></p>
-                                            <p>Rendimiento de trilla: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
+                                            <p><>{t("damage-percent")}</>: <br /> <span> {coffeeBatch?.dryMill?.damage_percent}</span></p>
+                                            <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
+                                            <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height}</span></p>
+                                            <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
 
                                         </div>
                                     </div>
@@ -154,10 +154,10 @@ const CoffeeBatchId = () => {
                                         <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Tostado</h2>
                                         <div className="card-actions">
                                             <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                                <p>Tipo De Bolsa: <br /> <span> {coffeeBatch?.Roasting?.bag_type}</span></p>
-                                                <p>Peso De Bolsa: <br /> <span> {coffeeBatch?.Roasting?.bag_weight}</span></p>
-                                                <p>Tipo De Molienda: <br /> <span> {coffeeBatch?.Roasting?.grind_type}</span></p>
-                                                <p>Tipo: <br /> <span> {coffeeBatch?.Roasting?.type}</span></p>
+                                                <p><>{t("packaging")}</>: <br /> <span> {coffeeBatch?.Roasting?.bag_type}</span></p>
+                                                <p><>{t("bag_size")}</>: <br /> <span> {coffeeBatch?.Roasting?.bag_weight}</span></p>
+                                                <p><>{t("grind_type")}</>: <br /> <span> {coffeeBatch?.Roasting?.grind_type}</span></p>
+                                                <p><>{t("roast_type")}</>: <br /> <span> {coffeeBatch?.Roasting?.type}</span></p>
                                             </div>
                                         </div>
                                     </div>
