@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReactI18NextChild, useTranslation } from "react-i18next";
 import Loading from "../Loading";
-import { getBatch, getFarmer, getFarmerFarms, getFarms } from "../../db/firebase";
+import { getBatch, getFarmer, getFarmerFarms, getFarm} from "../../db/firebase";
 import NotFound from "../common/NotFound";
 
 const CoffeeBatchId = () => {
@@ -12,23 +12,32 @@ const CoffeeBatchId = () => {
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
     const [farms, setFarms] = useState<any>([]);
+
+
+function DisplayFarmers(data:any){
+    console.log(data);
+
+
+
+
+}
+
     useEffect(() => {
         const load = () => {
             if (batchId) {
                 getBatch(batchId).then((result) => {
                     setCoffeeBatch(result);
+                    getFarm(result?.Farmer[0]).then((result) => {
+                        console.log(result);
+                    })   
                     console.log(result);
                     result?.Farmer.map((item: any) => {
                         getFarmer(item).then((result) => {
                             const Farmers = new Array(result);
 
                             setFarmers(Farmers);
-                            console.log(Farmers);
                         });
-                        getFarmerFarms(item).then((result) => {
-
-
-                        });
+                 
                     });
                     setLoading(false);
 
@@ -68,12 +77,12 @@ const CoffeeBatchId = () => {
                                     <p>{coffeeBatch?.Description}</p>
                                     {coffeeBatch?.Farmer?.length == 1 && (
                                         <div>
-                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
+                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
                                         </div>
                                     )}
                                     {coffeeBatch?.Farmer?.length > 2 && (
                                         <div>
-                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span>productores más  </span></p>
+                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span onClick={()=> DisplayFarmers(coffeeBatch?.Farmer)}>productores más  </span></p>
                                         </div>
                                     )}
 

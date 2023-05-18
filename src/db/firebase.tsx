@@ -184,6 +184,15 @@ export const getFarms = async (company: string) => {
   return querySnapshot.docs;
 };
 
+export const getFarm = async (id: string) => {
+  const docRef = doc(db, "farms", id);
+  const docData = await getDoc(docRef);
+  if (docData.exists()) {
+    return docData.data();
+  }
+  return null;
+};
+
 
 export const saveBatch = async (batch: any) => {
   try {
