@@ -63,11 +63,14 @@ function DisplayFarmers(data:any){
                         <a className="relative block group">
 
                             <div className="card w-full bg-base-100 shadow-xl">
+                                
                                 <figure className="px-10 pt-10">
                                     <img src={coffeeBatch?.image} alt="NFT" className="rounded-xl w-40" />
                                 </figure>
 
                                 <div className="card-body items-center text-center">
+                                                                        <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</>: {coffeeBatch?.Name} </h2>
+
                                     {coffeeBatch?.Profile?.note > 0 &&
                                         <div className="stat">
                                             <div className="stat-title"><>{t("note")}</></div>
@@ -98,7 +101,7 @@ function DisplayFarmers(data:any){
                         <a className="relative block group">
                             <div className="card w-full h bg-base-100 shadow-xl">
                                 <div className="card-body">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name}</h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {}</h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
 
@@ -113,7 +116,7 @@ function DisplayFarmers(data:any){
                         <a className="relative block group">
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</></h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("cup-profile")}</></h2>
 
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
