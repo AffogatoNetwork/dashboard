@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useMemo, useReducer } from "react";
+import React, { useContext, useEffect, useMemo, useReducer, useState } from "react";
 import { Magic } from "magic-sdk";
 import { ethers } from "ethers";
 import emailjs from "@emailjs/browser";
@@ -6,8 +6,7 @@ import { CooperativeType } from "../utils/constants";
 import { CompanyType, FarmerType } from "../components/common/types";
 import CoffeeBatch from "../contracts/CoffeBatch.json";
 import { useContracts } from "../hooks/useContracts";
-import { saveCompany, saveFarmer } from "../db/firebase";
-import { getDefaultProvider } from "../utils/utils";
+import { saveCompany, saveFarmer, saveFarmerData } from "../db/firebase";
 
 type AuthType = {
   authContext: any;
@@ -41,6 +40,8 @@ export default function AuthProvider({ children }: props) {
     },
   });
   emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "");
+
+const [firebaseData ,setFirebaseData] = useState<any>([]);
 
   const [state, dispatch] = useReducer(
     (prevState: any, action: any) => {
@@ -173,7 +174,7 @@ export default function AuthProvider({ children }: props) {
       templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "";
     }
     const templateParams = {
-      to_name: "Jorge",
+      to_name: data?.companyData?.name || "Cooperativa/Empresa",
       address,
       id_productor: data.farmerId,
       to_email: data.isFarmer
@@ -189,7 +190,10 @@ export default function AuthProvider({ children }: props) {
       )
       .then(
         async function (response) {
+          console.log('here');
+          console.log(data);
           console.log(response);
+          saveFarmerData(data, templateParams.address);
           await magicSDK.user.logout();
           dispatch({ type: "ACCOUNT_CREATED" });
         },
@@ -234,6 +238,7 @@ export default function AuthProvider({ children }: props) {
       },
       createAccount: async (data: ContextDataType) => {
         dispatch({ type: "CREATING_ACCOUNT" });
+        
         if (data.emailLogin) {
           await magicSDK.auth.loginWithMagicLink({
             email: data.credential,
@@ -247,6 +252,9 @@ export default function AuthProvider({ children }: props) {
         } else {
           dispatch({ type: "CREATING_ACCOUNT_ERROR" });
         }
+
+        console.log('hey listen')
+        
       },
       signOut: async () => {
         await magicSDK.user.logout();

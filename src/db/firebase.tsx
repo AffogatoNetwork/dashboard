@@ -225,6 +225,34 @@ export const saveBatch = async (batch: any) => {
 };
 
 
+export const saveFarmerData = async (farmerData: any , id: string) => {
+  try {
+    const docId = id;
+    const farmDoc = doc(db, "batches", docId);
+    const farmData = {
+      address: id,
+      bio: farmerData.bio,
+      company: farmerData.company,
+      cooperativeID: farmerData.cooperativeId,
+      country: farmerData.country,
+      farmerId: farmerData.farmerId,
+      fullname: farmerData.fullname,
+      gender: farmerData.gender,
+      region: farmerData.region,
+      village: farmerData.village,
+      village2: farmerData.village2
+    };
+    await setDoc(farmDoc, farmData);
+  } catch (error) {
+    
+  }
+
+};
+
+
+
+
+
 export const getBatch = async (ipfsHash: string) => {
   const docRef = doc(db, "batches", ipfsHash);
   const docData = await getDoc(docRef);

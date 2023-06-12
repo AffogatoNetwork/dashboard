@@ -23,6 +23,7 @@ const Signup = () => {
     const [imageFile, setImageFile] = useState();
     const [userName, setUserName] = useState("");
     const [farmerId, setFarmerId] = useState("");
+    const [cooperativeId, setCooperativeId] = useState("");
     const [fullname, setFullname] = useState("");
     const [userNameError, setUserNameError] = useState("");
     const [farmerIdError, setFarmerIdError] = useState("");
@@ -139,6 +140,7 @@ const Signup = () => {
         country: "Honduras",
         region: currentRegion.key,
         company: currentCoop.name,
+        cooperativeId,
         village,
         village2,
     };
@@ -216,13 +218,25 @@ const Signup = () => {
 
     const handleIdProductorChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
-        setFarmerId(input);
+        setCooperativeId(input);
         if (input.trim().length > 25) {
             setFarmerIdError(t("errors.max-length", {length: 25}));
         } else {
             setFarmerIdError("");
         }
     };
+
+
+    const handleIdChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setFarmerId(input);
+        if (input.trim().length > 70) {
+            setFullnameError(t("errors.max-length", {length: 70}));
+        } else {
+            setFullnameError("");
+        }
+    };
+
 
     const handleFullnameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const input = event.target.value;
@@ -705,7 +719,7 @@ const Signup = () => {
                                 label={t("id")}
                                 value={farmerId}
                                 placeholder={t("placeholders.id")}
-                                handleOnChange={handleFullnameChange}
+                                handleOnChange={handleIdChange}
                                 errorMsg={fullnameError}
                                 className="input input-bordered w-full"
                             />
@@ -724,8 +738,9 @@ const Signup = () => {
 
                         <div className="md:col-span-5">
                             <FormInput
+                             
                                 label={t("company-code")}
-                                value={farmerId}
+                                value={cooperativeId}
                                 placeholder={t("company-code")}
                                 handleOnChange={handleIdProductorChange}
                                 errorMsg={farmerIdError}
