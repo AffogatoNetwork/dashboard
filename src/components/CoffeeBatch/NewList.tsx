@@ -155,7 +155,7 @@ export const CoffeBatchNewList = () => {
                 ),
             },
             {
-                header: 'Name ', accessorKey: 'Name', size: 25,
+                header: 'ID Lote', accessorKey: 'Name', size: 25,
             }, {
                 header: 'Altura ', accessorKey: 'dryMill.height', size: 15,                
  
@@ -190,16 +190,11 @@ export const CoffeBatchNewList = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-farmers")}</>
+                                    <>{t("search-batches")}</>
                                 </div>
                             </div>
                             <div className="m-6">
                                 <div className="card-title grid justify-items-stretch">
-                                    <div className="justify-self-start">
-                                        <h4>
-                                            <>{t("farmers")}</>
-                                        </h4>
-                                    </div>
                                     <div className="justify-self-end">
                                         <h4>
                                             <>

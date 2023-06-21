@@ -375,11 +375,6 @@ export const List = () => {
                             {RenderFilters()}
                             <div className="card-body overflow-y-scroll">
                                 <div className="card-title grid justify-items-stretch">
-                                    <div className="justify-self-start">
-                                        <h4>
-                                            <>{t("farmers")}</>
-                                        </h4>
-                                    </div>
                                     <div className="justify-self-end">
                                         <h4>
                                             <>
