@@ -18,7 +18,7 @@ export const CommovelLanding = () => {
                      style={{backgroundImage: `url("https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg")`}}>
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-<div className="max-w-lg">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
+<div className="">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                                 Plataforma de trazabilidad Empresa COMMOVEL
                             </h1>
                             <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">

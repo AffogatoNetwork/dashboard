@@ -19,7 +19,7 @@ export const ProexoLanding = () => {
                      style={{backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FPROEXO.jpg?alt=media&token=ec371948-d535-4994-aa54-7e6a7fb2dda3")`}}>
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-<div className="max-w-lg">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
+<div className="">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
                                 de trazabilidad de PROEXO
                             </h1>
                             <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
