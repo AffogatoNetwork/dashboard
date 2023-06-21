@@ -199,7 +199,7 @@ export const NewList  = () => {
                     </>
                 ),
             }, {
-        header: 'Direccion De Cuenta', accessorKey: 'address', enableClickToCopy: true,
+        header: 'Direccion de Cuenta', accessorKey: 'address', enableClickToCopy: true,
 
             },{
                 accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
