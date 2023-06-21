@@ -54,7 +54,7 @@ export const DefaultLanding = () => {
                 <div className="flex-1 mb-[30px]">
                     <p className="text-capitalized uppercase text-gray-500 tracking-[2px] mb-[13px]">Blockchain </p>
                     <h4 className="font-bold font-chivo text-[28px] leading-[32px] md:text-heading-2 mb-[20px]">Nuestro café trazado con la seguridad de la tecnología de blockchain</h4>
-                    <p className="text-text text-gray-500">Codigos QR unicos para los Hash
+                    <p className="text-text text-gray-500">Códigos QR unicos para los Hash
                     </p>
                 </div>
                 <div className="relative flex-1"><img
