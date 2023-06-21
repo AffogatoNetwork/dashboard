@@ -22,8 +22,9 @@ export const CommovelLanding = () => {
                                 Plataforma de trazabilidad 
                                 
                             </h1>
-                                                            Empresa COMMOVEL
-
+                            <br />
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Empresa COMMOVEL
+                            </h1>
                             <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
