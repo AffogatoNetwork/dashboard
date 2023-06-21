@@ -60,7 +60,7 @@ const Login = () => {
              style={{backgroundImage: `url(${background})`}}>
             <div className="bg-opacity-80 bg-black">
                 <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
-                    <div className="flex-col flex self-center p-10 sm:max-w-5xl md:pl-2 xl:max-w-2xl z-10">
+                    <div className="flex-col flex self-center p-10 sm:max-w-5xl md:pl-2 xl: z-10">
                         <div className="hidden lg:flex flex-col text-white">
                             <h1 className="mb-3 font-bold text-5xl "><>{t("welcome")}</>
                                 : a la Plataforma de trazabilidad

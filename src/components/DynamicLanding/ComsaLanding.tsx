@@ -21,14 +21,14 @@ export const ComsaLanding = () => {
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf")` }}>
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                        <div className="">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
+                        <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                             Plataforma de trazabilidad de
                         </h1>
                             <br />
-                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Empresa COMSA
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Empresa COMSA
                             </h1>
 
-                            <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
+                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
@@ -219,7 +219,7 @@ export const ComsaLanding = () => {
 
                 <div id="fotos"
                     className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
-                    <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg:max-w-2xl md:mb-12">
+                    <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg: md:mb-12">
                         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
                             COMSA Café Orgánico Marcala S.A
                         </h2>
