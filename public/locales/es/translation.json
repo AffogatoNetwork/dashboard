@@ -1,5 +1,5 @@
 {
-  "account-address": "Dirección De Cuenta",
+  "account-address": "Dirección de Cuenta",
   "acidity": "Acidez",
   "add": "Agregar",
   "add-batches": "Agregar Lotes",
@@ -129,14 +129,14 @@
     "access": "Iniciar Sesión",
     "create-account": "¿No tienes cuenta? Crea una aquí.",
     "subtitle": "Correo electrónico o No. Celular",
-    "title": "Accede A Tu Cuenta",
+    "title": "Accede a tu Cuenta",
     "buyer-access": "Accede Como Comprador.",
-    "buyer-title": "Ver Lotés De Café",
+    "buyer-title": "Ver Lotés de Café",
     "buyer-subtitle": "Si Todavía No Tiene Contraseña De Comprador Debe Comunicarse Con La Empresa Para Solicitarla.",
     "buyer-password": "Contraseña De Comprador"
   },
   "signup": {
-    "account-created": "La cuenta ha sido creada",
+    "account-created": "La Cuenta ha sido creada",
     "add-farmer": "Agregar Productor",
     "productive-areas": "Áreas productivas (en hectareas)",
     "back": "Regresar",
