@@ -130,7 +130,7 @@ export const CoffeBatchNewList = () => {
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'QR Code',
+                header: 'Codigo QR',
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,

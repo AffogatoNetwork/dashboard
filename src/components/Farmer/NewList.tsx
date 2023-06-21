@@ -174,7 +174,7 @@ export const NewList  = () => {
         {
         header: 'Nombre ', accessorKey: 'fullname' 
     },{
-        header: 'Ubicacion ', accessorKey: 'location'
+        header: 'Ubicación ', accessorKey: 'location'
     },{
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
