@@ -2,29 +2,35 @@
   "attributes": [
     {
       "trait_type": "Cooperative",
-      "value": "0xccdF342558d6D41a0e282B586dA463443E61eE4f"
+      "value": "0x7e02EFc22e3351A020cD3bfA1FCA540afb2C6F8c"
+    },
+    {
+      "trait_type": "Company",
+      "value": "COMSA"
     },
     {
       "trait_type": "Farmer",
-      "value": "0x03094B22109DAF6282b9221be4ed73273974A3d1"
+      "value": [
+        "0x17854913A273449555E78F207ae5c10850F23345"
+      ]
     },
     {
       "trait_type": "Wet Mill",
       "value": [
         {
-          "certifications": "Orgánico, Fairtrade",
-          "date": "2023-02-12",
-          "drying_hours": 192,
-          "drying_id": "L1",
-          "drying_type": "Mecanico",
-          "entry_id": "001",
-          "facility": "Finca Calidonio",
-          "latitude": 14.5927463,
-          "longitude": -88.7694127,
-          "note": 83.5,
+          "certifications": "Orgánico, Fairtrade , Rainforest",
+          "date": "2023-08-02",
+          "drying_hours": 360,
+          "drying_id": "",
+          "drying_type": "Secadora",
+          "entry_id": "5735",
+          "facility": "",
+          "latitude": 14.147262,
+          "longitude": -88.017033,
+          "note": 0,
           "process": "Lavado",
-          "variety": "Colombiano e Icatu",
-          "weight": 2
+          "variety": "Parainema, Catuaí",
+          "weight": 4
         }
       ]
     },
@@ -32,20 +38,20 @@
       "trait_type": "Farm",
       "value": [
         {
-          "altitude": 1242,
-          "area": 20,
-          "certifications": "Orgánico, Fairtrade",
+          "altitude": 1600,
+          "area": 3,
+          "certifications": "Orgánico",
           "country": "Honduras",
-          "etnic_group": "Maya Chorti",
-          "family_members": 5,
-          "latitude": 14.5927463,
-          "longitude": -88.7694127,
-          "name": "Finca Calidonio",
-          "region": "Copan",
-          "shadow": "Con Sombra",
-          "story": "Finca de 20 años, de muchas generaciones , con variedades como ser Icatu, Parainema, Colombiano, y Lempira, ubicada en la comunidad de la Quebradas.",
-          "varieties": "Colombiano e Icatu",
-          "village": "Las Quebradas "
+          "etnic_group": "",
+          "family_members": 6,
+          "latitude": 14.0750690179948,
+          "longitude": -87.9852227748396,
+          "name": "Génesis",
+          "region": "",
+          "shadow": "",
+          "story": "La Finca Génesis inició en el año 2013 con 13 hectáreas de café Catuaí. Poco a poco se fue agrandando el área cultivada, actualmente son aproximadamente 2 manzanas de café donde ha tocado re-sembrar otras variedades por cuestiones de cambio climático y la roya. Contigo a la propiedad hay un río permanente que pasa por toda la orilla de la propiedad y a la otra orilla una quebrada de invierno.",
+          "varieties": "",
+          "village": "La Laguna"
         }
       ]
     },
@@ -53,17 +59,17 @@
       "trait_type": "Dry Mill",
       "value": [
         {
-          "damage_percent": "2%",
-          "date": "2023-02-12",
-          "export_drying_id": "Secada001",
-          "export_id": "1",
-          "facility": "Finca Calidonio",
-          "latitude": 14.5927463,
-          "longitude": -88.7694127,
-          "note": 83.5,
-          "threshing_process": "Mecanico",
-          "threshing_yield": 1.25,
-          "weight": 2
+          "damage_percent": "1%",
+          "date": "2023-03-22",
+          "export_drying_id": "A I B - 02",
+          "export_id": "",
+          "facility": "",
+          "latitude": 14.147262,
+          "longitude": -88.017033,
+          "note": 0,
+          "threshing_process": "0.82",
+          "threshing_yield": 1.199,
+          "weight": 100
         }
       ]
     },
@@ -71,13 +77,13 @@
       "trait_type": "Profile",
       "value": [
         {
-          "acidity": "7.75",
-          "aftertaste": "",
+          "acidity": "Muy Jugosa",
+          "aftertaste": "Sostenido",
           "aroma": "",
-          "body": "",
-          "flavor": "Citrico, Chocolate, Miel",
-          "note": 83.5,
-          "sweetness": ""
+          "body": "Untuoso",
+          "flavor": "Manzana, tonos a miel",
+          "note": 0,
+          "sweetness": "Vainilla"
         }
       ]
     },
@@ -85,20 +91,17 @@
       "trait_type": "Roasting",
       "value": [
         {
-          "bag_size": "454g",
-          "grind_type": "Normal",
-          "packaging": "Trilaminar negro mate",
-          "roast_date": "2023-03-24",
-          "roast_type": "Medio"
+          "bag_type": "",
+          "bag_weight": "",
+          "date": "",
+          "grind_type": "",
+          "type": ""
         }
       ]
     }
   ],
-  "description": "Finca Calidonio",
+  "description": "Café orgánico y comercio justo",
   "external_url": "https://affogato.co",
   "image": "Qma5mzG5sFjBAmPyhxfkXaxM78HX6UPihH5hNSyp1Cm6a1",
-  "name": "Colombianio e Icatu, Finca Calidonio"
+  "name": "Parainema, Catuaí Génesis"
 }
-
-
-

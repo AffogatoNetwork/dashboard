@@ -20,7 +20,7 @@ export const CommovelLanding = () => {
                     <div className="hero-content text-center text-neutral-content">
                         <div className="max-w-md">
                             <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
-                                Plataforma de trazabilidad de COMMOVEL
+                                Plataforma de trazabilidad Empresa COMMOVEL
                             </h1>
                             <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain.
