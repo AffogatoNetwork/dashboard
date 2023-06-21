@@ -48,7 +48,7 @@ export const CommovelLanding = () => {
                                     <div className="inline-block text-black mb-4">
                                         <Blockchain/>
                                     </div>
-                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">BlockChain</h3>
+                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Blockchain</h3>
                                     <p className="text-gray-500">Tecnología y registro de información en una cadena de
                                         bloques segura, transparente y descentralizada.</p>
                                     <br className="w-4"/>
@@ -89,7 +89,7 @@ export const CommovelLanding = () => {
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección
                                                 : </h2>
-                                            Aldea San Luis, Planes, Sta. Bárbara
+                                            San Luis, Planes, Santa. Bárbara
 
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">

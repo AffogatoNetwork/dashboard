@@ -21,9 +21,12 @@ export const ComsaLanding = () => {
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf")` }}>
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-<div className="">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
+                        <div className="">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
+                            Plataforma de trazabilidad de
+                        </h1>
+                            <br />
+                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Empresa COMSA
                             </h1>
-                            Plataforma de trazabilidad de COMSA
 
                             <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
@@ -53,7 +56,7 @@ export const ComsaLanding = () => {
                                     <div className="inline-block text-black mb-4">
                                         <Blockchain />
                                     </div>
-                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">BlockChain</h3>
+                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Blockchain</h3>
                                     <p className="text-gray-500">Tecnología y registro de información en una cadena de
                                         bloques segura, transparente y descentralizada.</p>
                                     <br className="w-4" />

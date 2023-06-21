@@ -23,7 +23,12 @@ export const CopracnilLanding = () => {
 <div className="">                            <h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                                 Plataforma de trazabilidad  
                             </h1>
-                            COPRACNIL
+
+<br/>
+<h1 className="max-w-2xl mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> COPRACNIL
+                            </h1>
+
+                            
                             <p className="max-w-2xl mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
@@ -50,7 +55,7 @@ export const CopracnilLanding = () => {
                                     <div className="inline-block text-black mb-4">
                                         <Blockchain/>
                                     </div>
-                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">BlockChain</h3>
+                                    <h3 className="text-lg leading-normal mb-2 font-semibold text-black">Blockchain</h3>
                                     <p className="text-gray-500">Tecnología y registro de información en una cadena de
                                         bloques segura, transparente y descentralizada.</p>
                                     <br className="w-4"/>
