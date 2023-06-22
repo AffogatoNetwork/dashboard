@@ -20,10 +20,10 @@ export const ProexoLanding = () => {
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
-                            de trazabilidad de Empresa
+                            de Trazabilidad 
                         </h1>
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> PROEXO
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa PROEXO
                             </h1>
 
                             <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">

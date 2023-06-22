@@ -166,11 +166,11 @@ export const CoffeBatchNewList = () => {
             }, {
                 header: 'Proceso ', accessorKey: 'wetMill.process', size: 15,
             }, {
-                header: 'ID De Secado ', accessorKey: 'wetMill.drying_id', size: 15,
+                header: 'ID de Secado ', accessorKey: 'wetMill.drying_id', size: 15,
             }, {
-                header: 'Tipo De Secado', accessorKey: 'wetMill.drying_type', size: 15,
+                header: 'Tipo de Secado', accessorKey: 'wetMill.drying_type', size: 15,
             }, {
-                header: 'Id De Exportación', accessorKey: 'dryMill.export_id', size: 15,
+                header: 'Id de Exportación', accessorKey: 'dryMill.export_id', size: 15,
             }, {
                 header: 'Peso', accessorKey: 'dryMill.weight', size: 15,
             }, {

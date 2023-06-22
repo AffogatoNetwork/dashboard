@@ -21,11 +21,11 @@ export const CopracnilLanding = () => {
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
 <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
-                                Plataforma de trazabilidad  
+                                Plataforma de Trazabilidad  
                             </h1>
 
 <br/>
-<h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> COPRACNIL
+<h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa COPRACNIL
                             </h1>
 
                             
