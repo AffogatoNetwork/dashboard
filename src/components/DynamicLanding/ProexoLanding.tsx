@@ -93,8 +93,7 @@ export const ProexoLanding = () => {
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección: </h2>
-                                            Corquín, Copán 41051, Honduras, CA
-
+                                            Corquín, Copán
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
                                                 gerencia@proexo.org

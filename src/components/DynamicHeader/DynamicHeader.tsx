@@ -54,7 +54,7 @@ const DynamicHeader = () => {
         favicon.href = 'https://affogato.co/logo.png';
         return (<>
                 <HelmetProvider>
-                    <title> Plataforma de trazabilidad </title>
+                    <title> Plataforma de Trazabilidad </title>
                     <link rel="icon" type="image/png" href='https://affogato.co/logo.png' sizes="16x16" />
                 </HelmetProvider>
             </>

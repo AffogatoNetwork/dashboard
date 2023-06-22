@@ -63,7 +63,7 @@ const Login = () => {
                     <div className="flex-col flex self-center p-10 sm:max-w-5xl md:pl-2 xl: z-10">
                         <div className="hidden lg:flex flex-col text-white">
                             <h1 className="mb-3 font-bold text-5xl "><>{t("welcome")}</>
-                                : a la Plataforma de trazabilidad
+                                : a la Plataforma de Trazabilidad
                             </h1>
                             <p className="pr-3 md:text-light">Nuestro café trazado con la seguridad de la tecnología de
                                 blockchain. </p>

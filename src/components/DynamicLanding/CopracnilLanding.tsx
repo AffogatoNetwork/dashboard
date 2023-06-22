@@ -96,7 +96,7 @@ export const CopracnilLanding = () => {
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección
                                                 : </h2>
-                                            H4QM+522, carretera RN, Corquín
+                                                Corquín, Copán
 
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
