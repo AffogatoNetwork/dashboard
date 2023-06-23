@@ -204,7 +204,7 @@ export const NewList  = () => {
             },{
                 accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
                 id: 'blockChainUrl', //id is still required when using accessorFn instead of accessorKey
-                header: 'Url',
+                header: 'Enlace al Blockchain',
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
