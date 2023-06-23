@@ -181,7 +181,7 @@ export const FarmsNewList = () => {
             }, {
                 header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 5,
             }, {
-                header: 'Grupo étnico', accessorKey: 'ethnicGroup', size: 15,
+                header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,
             }, 
         ],
         [],
