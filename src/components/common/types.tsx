@@ -67,25 +67,25 @@ export type CompanyType = {
 };
 
 export type FarmType = {
-  farmerAddress: string;
+  farmerAddress : string;
   company: string;
   name: string;
-  height: number;
-  area: number;
+  height: string;
+  area: string;
   certifications: string;
   latitude: string;
   longitude: string;
   bio: string;
+  location?: string;
+  search?: string;
   country: string;
   region: string;
   village: string;
   village2: string;
-  location: string;
   varieties: string;
   shadow: string;
-  familyMembers: number;
+  familyMembers: string;
   ethnicGroup: string;
-  search: string;
 };
 
 export type CoordinatesType = {

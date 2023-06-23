@@ -10,7 +10,6 @@ import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import Login from "./Login";
 import {Profile, List as FarmerList} from "./Farmer/index";
-import {List as FarmList} from "./Farm/index";
 import Signup from "./Signup";
 import {useAuthContext} from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
@@ -19,6 +18,7 @@ import Landing from "./CoffeeBatch/Landing";
 import Cupping from "./Cupping";
 import Certification from "./Certification";
 import {NewList} from "./Farmer/NewList";
+import {FarmsNewList } from "./Farm/NewList";
 import {CoffeBatchNewList} from "./CoffeeBatch/NewList";
 import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
 
@@ -86,7 +86,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <FarmList/>
+                                <FarmsNewList/>
                             </Dashboard>
                         </RequiredAuth>
                     }

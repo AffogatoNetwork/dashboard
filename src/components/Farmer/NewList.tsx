@@ -126,8 +126,6 @@ export const NewList  = () => {
                         search: s.toLowerCase()
                     });
                 }
-
-
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
