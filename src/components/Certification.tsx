@@ -33,227 +33,171 @@ const Certification = () => {
 
             {(company === 'comsa') && (
                 <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-5 sm:row-gap-6 sm:grid-cols-2">
-                   
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+
+                    <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/2_Fair Trade.png')}
-                            alt=""/>
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Fair Trade
-                            </p>
+                            alt="" />
+                        <p className="mb-4 text-lg font-bold text-center">Fair Trade</p>
 
-                        </div>
                     </div>
-                    
+
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/11_Pequeños_Productores.jpg')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Pequeños Productores</p>
+                                               <p className="mb-4 text-lg font-bold text-center">Pequeños Productores</p>
 
-                        </div>
                     </div>
 
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                    <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/4_DO Marcala.png')}
-                            alt=""/>
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Denominación de Origen Marcala
-                            </p>
+                            alt="" />
+                                                <p className="mb-4 text-lg font-bold text-center"> Denominación de Origen Marcala</p>
 
-                        </div>
                     </div>
 
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                    <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/5_ConManosdeMujer.png')}
-                            alt=""/>
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Con Manos de Mujer
-                            </p>
+                            alt="" />
+                                                <p className="mb-4 text-lg font-bold text-center"> Con Manos de Mujer</p>
 
-                        </div>
                     </div>
 
 
-              
+
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/1_USDA Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">USDA Organic</p>
+                                               <p className="mb-4 text-lg font-bold text-center">USDA Organic</p>
 
-                        </div>
                     </div>
 
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/12_C.A.F.E. Practices.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">C.A.F.E. Practices</p>
+                                                <p className="mb-4 text-lg font-bold text-center">C.A.F.E. Practices</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/15_Bird Friendly.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Bird Friendly</p>
+                                                <p className="mb-4 text-lg font-bold text-center">Bird Friendly</p>
 
-                        </div>
                     </div>
 
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                    <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/3_Rainforest Alliance.png')}
-                            alt=""/>
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                            Rain Forest Alliance
-                            </p>
+                            alt="" />
+                                                <p className="mb-4 text-lg font-bold text-center"> Rain Forest Alliance</p>
 
-                        </div>
                     </div>
 
-           
-                    <div className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+
+                    <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/10_EU Organic.png')}
-                            alt=""/>
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                            EU Organic
-                            </p>
+                            alt="" />
+                                                <p className="mb-4 text-lg font-bold text-center"> EU Organic</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/14_Fair_Life.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Fair for life</p>
+                                                <p className="mb-4 text-lg font-bold text-center"> Fair for life</p>
 
-                        </div>
                     </div>
                     <div
-                        className="relative overflow-hidden md:h-64 xl:h-80 transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden md:h-64 xl:h-80 transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-center w-full h-56 pt-24 "
                             src={require('../assets/certificaciones/13_JAS.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Agricultura Orgánica de Japón</p>
+                                                <p className="mb-4 text-lg font-bold text-center">Agricultura Orgánica de Japón</p>
 
-                        </div>
                     </div>
 
-                  
+
                 </div>
             )}
 
             {(company === 'copracnil') && (
                 <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/1_USDA Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">USDA Organic</p>
+                                               <p className="mb-4 text-lg font-bold text-center">USDA Organic</p>
 
-                        </div>
                     </div>
 
 
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/2_Fair Trade.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Fair Trade
-                            </p>
+                        <p className="mb-4 text-lg font-bold text-center">Fair Trade</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/3_Rainforest Alliance.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Rainforest Alliance</p>
+                                               <p className="mb-4 text-lg font-bold text-center">Rainforest Alliance</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/10_EU Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">EU Organic</p>
-                        </div>
+                                                <p className="mb-4 text-lg font-bold text-center">EU Organic</p>
+
                     </div>
                 </div>
             )}
@@ -261,132 +205,103 @@ const Certification = () => {
             {(company === 'proexo') && (
                 <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/1_USDA Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">USDA Organic</p>
-
-                        </div>
+                        <p className="mb-4 text-lg font-bold text-center">USDA Organic</p>
                     </div>
 
 
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/2_Fair Trade.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Fair Trade
-                            </p>
+                        <p className="mb-4 text-lg font-bold text-center">Fair Trade</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/3_Rainforest Alliance.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Rainforest Alliance</p>
+                                               <p className="mb-4 text-lg font-bold text-center">Rainforest Alliance</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/10_EU Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">EU Organic</p>
+                                                <p className="mb-4 text-lg font-bold text-center">EU Organic</p>
 
-                        </div>
                     </div>
 
-                    
+
                 </div>
             )}
 
             {(company === 'commovel') && (
                 <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/1_USDA Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">USDA Organic</p>
+                                               <p className="mb-4 text-lg font-bold text-center">USDA Organic</p>
 
-                        </div>
                     </div>
 
 
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/2_Fair Trade.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">
-                                Fair Trade
-                            </p>
+                        <p className="mb-4 text-lg font-bold text-center">Fair Trade</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/3_Rainforest Alliance.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">Rainforest Alliance</p>
+                                               <p className="mb-4 text-lg font-bold text-center">Rainforest Alliance</p>
 
-                        </div>
                     </div>
 
                     <div
-                        className="relative overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                         <img
                             className="object-cover w-full h-56 md:h-64 xl:h-80"
                             src={require('../assets/certificaciones/10_EU Organic.png')}
                             alt=""
                         />
-                        <div
-                            className="absolute inset-0 px-6 py-4 transition-opacity duration-200 bg-black bg-opacity-75 opacity-0 hover:opacity-100">
-                            <p className="mb-4 text-lg font-bold text-gray-100">EU Organic</p>
+                                                <p className="mb-4 text-lg font-bold text-center">EU Organic</p>
 
-                        </div>
                     </div>
 
-               
+
                 </div>
             )}
 
