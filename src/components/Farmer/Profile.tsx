@@ -5,7 +5,6 @@ import Loading from "../Loading";
 import NotFound from "../common/NotFound";
 import {getFarmer, getFarmerFarms, getImageUrl} from "../../db/firebase";
 import NewMap from "../common/NewMap";
-import {ipfsUrl} from "../../utils/constants";
 
 
 export const Profile = () => {

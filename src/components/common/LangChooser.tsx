@@ -13,7 +13,7 @@ const FlagComponent = ({ type }: props) => {
   if (type === "de") {
     return <DE title="Deutsch" className="lang-flag" />;
   }
-  if (type === "de") {
+  if (type === "fr") {
     return <FR title="Français" className="lang-flag" />;
   }
 

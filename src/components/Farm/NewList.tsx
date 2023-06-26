@@ -2,13 +2,10 @@ import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import {getFarms} from "../../db/firebase";
 import Box from "@mui/material/Box";
-import QRCode from "react-qr-code";
-import { LinkIcon } from "../icons/link";
 import { useTranslation } from "react-i18next";
-import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
-import {FarmType} from "../common/types";
+import NewMap from "../common/NewMap";
 
 
 export const FarmsNewList = () => {
@@ -36,6 +33,7 @@ export const FarmsNewList = () => {
     };
 
     const onMapBtnClick = (lat: string, lng: string, adressL: string) => {
+        console.log(lat, lng, adressL);
         setCurrentLat(lat);
         setCurrentLng(lng);
         setCurrentAddressL(adressL);
@@ -116,9 +114,6 @@ export const FarmsNewList = () => {
                         longitude,
                         bio,
                         country,
-                        coordinates = [
-                            {lat: latitude, lng: longitude},
-                        ],
                         region,
                         village,
                         village2,
@@ -135,7 +130,6 @@ export const FarmsNewList = () => {
                         height,
                         area,
                         certifications,
-                        coordinates,
                         latitude,
                         longitude,
                         bio,
@@ -182,7 +176,36 @@ export const FarmsNewList = () => {
                 header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 5,
             }, {
                 header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,
-            }, 
+            }, {
+
+                accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`, 
+                id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
+                header: 'Código QR',
+                size: 50,
+                enableSorting: false,
+                enableColumnFilter: false,
+                // @ts-ignore
+                Cell: ({ renderedCellValue , row}) => (
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                            }}
+                        >
+                            <label  htmlFor="farmslist"  onClick={() => {
+                                onMapBtnClick( row.original.latitude, row.original.longitude, row.original.village)}}
+                                    className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                <>Ver en el Mapa</>
+                            </label>
+                          
+
+                        </Box>
+                    </>
+
+                ),
+            }
         ],
         [],
     );
@@ -260,17 +283,30 @@ export const FarmsNewList = () => {
 
 
             <div className="m-4">
-                <input type="checkbox" id="farmslist" className="modal-toggle" />
-                <div className="modal modal-bottom sm:modal-middle">
-                    <div className="modal-box relative">
-                        <label htmlFor="farmslist"
-                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
-                        <div className="flex justify-center m-6">
-                            
+            <input type="checkbox" id="farmslist" className="modal-toggle"/>
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box relative">
+                    <label htmlFor="farmslist"
+                           className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                    <div className="flex justify-center m-6">
+                        <div>
+                            <div className="flex pt-8 space-x-4 place-content-center">
+                                <div>
+                                    <NewMap latitude={currentLat} 
+                                    longitude={currentLng} 
+                                    addressLine={currentAddressL} 
+                                                zoomLevel={9}
+                                                className="google-map"                                    
+                                    />
+                                </div>
+                               
+                            </div>
+                          
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         </>
     )
 };

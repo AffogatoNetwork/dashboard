@@ -22,6 +22,11 @@ export const CoffeBatchNewList = () => {
     const [Data, setData] = useState<any>([]);
     const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
 
+
+    const [farmName, setfarmName]= useState("");
+
+
+
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
             document.getElementById("qr-farmer"),
@@ -130,7 +135,7 @@ export const CoffeBatchNewList = () => {
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: 'QR',
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -155,7 +160,7 @@ export const CoffeBatchNewList = () => {
                 ),
             },
             {
-                header: 'ID Lote', accessorKey: 'Name', size: 25,
+                header: `${farmName}`, accessorKey: 'Name', size: 25,
             }, {
                 header: 'Altura ', accessorKey: 'dryMill.height', size: 15,                
  
