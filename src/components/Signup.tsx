@@ -78,7 +78,7 @@ const Signup = () => {
 
     const setCooperative = () => {
         const location = window.location.host;
-        if (location.match("loca") !== null) {
+        if (location.match("localhost") !== null) {
             setCurrentCoop(CooperativeList[1]);
         }
         if (location.match("copracnil") !== null) {

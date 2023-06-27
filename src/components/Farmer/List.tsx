@@ -121,6 +121,10 @@ export const List = () => {
                     companyName = "COMSA";
                     break;
                 }
+                case "cafepsa":{
+                    companyName = "CAFEPSA";
+                    break;
+                }
                 default :{
                     companyName = "PROEXO"
                     break;

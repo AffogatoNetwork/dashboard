@@ -94,6 +94,10 @@ export const FarmsNewList = () => {
             if (url.match("proexo") !== null) {
                 companyName = "PROEXO";
             }
+            if (url.match("cafepsa") !== null) {
+                companyName = "CAFEPSA";
+            }
+            
             if (url.match("localhost") !== null) {
                 companyName = "COMSA";
             }

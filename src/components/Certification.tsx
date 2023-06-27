@@ -16,6 +16,9 @@ const Certification = () => {
         }
         if (url.match("proexo") !== null) {
             setCompany("proexo");
+        } 
+        if(url.match("cafepsa") !== null){
+            setCompany("cafepsa");
         }
         if (url.match("localhost") !== null) {
             setCompany("proexo");

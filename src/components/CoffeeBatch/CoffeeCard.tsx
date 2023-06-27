@@ -35,6 +35,10 @@ const CoffeeCard = () => {
             }
             if (location.match("proexo") !== null) {
                 setNFT('Proexo')
+
+                if (location.match("cafepsa") !== null) {
+                    setNFT('Cafepsa')
+                }
             } else {
                 setNFT('Comsa')
             }

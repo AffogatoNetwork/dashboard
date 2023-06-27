@@ -4,6 +4,7 @@ import {CommovelLanding} from "../DynamicLanding/CommovelLanding";
 import {CopracnilLanding} from "../DynamicLanding/CopracnilLanding";
 import {ComsaLanding} from "../DynamicLanding/ComsaLanding";
 import {ProexoLanding} from "../DynamicLanding/ProexoLanding";
+import { CafepsaLanding } from "../DynamicLanding/CafepsaLanding";
 
 const Landing = () => {
     const location = window.location.host;
@@ -34,6 +35,15 @@ const Landing = () => {
                 </>
             );
         }
+        if (location.match("cafepsa") !== null) {
+            return (<>
+                    <CafepsaLanding></CafepsaLanding>
+                </>
+            );
+        }
+
+
+
             return (
                 <>
                     <DefaultLanding></DefaultLanding>
