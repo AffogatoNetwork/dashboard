@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useTranslation } from "react-i18next";
 import { DE, ES, US, FR } from "country-flag-icons/react/3x2";
+import { Helmet } from "react-helmet-async";
 
 type props = {
   type: string;
@@ -38,15 +39,19 @@ const LangChooser = () => {
   const LangBar = () => (
     <div className="lang-container">
       <button className="w-12 px-2 btn btn-ghost" onClick={() => changeLanguage("es")}>
+      <Helmet htmlAttributes={{ lang : 'es' }}/>
         <ES title="Español" className="lang-flag" />
       </button>
       <button className="w-12 px-2 btn btn-ghost" onClick={() => changeLanguage("en")}>
+      <Helmet htmlAttributes={{ lang : 'en' }}/>
         <US title="English" className="lang-flag" />
       </button>
       <button className="w-12 px-2 btn btn-ghost" onClick={() => changeLanguage("de")}>
+      <Helmet htmlAttributes={{ lang : 'de' }}/>
         <DE title="Deutsch" className="lang-flag" />
       </button>
       <button className="w-12 px-2 btn btn-ghost" onClick={() => changeLanguage("fr")}>
+      <Helmet htmlAttributes={{ lang : 'fr' }}/>
         <FR title="Français" className="lang-flag" />
       </button>
     </div>
