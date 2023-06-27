@@ -20,10 +20,10 @@ export const CafepsaLanding = () => {
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
-                            de Trazabilidad 
+                            de Trazabilidad
                         </h1>
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa Cafedpsa
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa Cafepsa
                             </h1>
 
                             <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
@@ -95,7 +95,7 @@ export const CafepsaLanding = () => {
                                             Danli, El Paraíso
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
-                                                
+
                                             </p>
 
                                         </div>
@@ -105,7 +105,7 @@ export const CafepsaLanding = () => {
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Teléfono</h2>
 
                                             <p className="text-indigo-500 leading-relaxed">
-                                                
+
                                             </p>
 
                                         </div>
@@ -170,7 +170,7 @@ export const CafepsaLanding = () => {
                                     <p className="leading-relaxed">
                                     </p>
 
-                                
+
                                     <div className="flex mt-6 items-center justify-center pb-5">
 
 
@@ -208,7 +208,7 @@ export const CafepsaLanding = () => {
                     className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                     <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg: md:mb-12">
                         <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                             Empresa 
+                            Empresa
                         </h2>
 
                     </div>
@@ -294,14 +294,14 @@ export const CafepsaLanding = () => {
 
                             <span className="inline-flex justify-center w-full gap-3 m-auto md:justify-start md:w-auto">
 
-                            
+
 
                                 <a className="text-gray-500 hover:text-blue-500"
                                     href="https://www.facebook.com/Cafes-Especiales-de-El-Paraíso-CAFEPSA" rel="noopener noreferrer"
                                     target="_blank">
                                     <Facebook />
                                 </a>
-                              
+
                             </span>
                         </div>
 
