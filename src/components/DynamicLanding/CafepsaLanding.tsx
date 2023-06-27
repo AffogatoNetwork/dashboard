@@ -23,7 +23,7 @@ export const CafepsaLanding = () => {
                             de Trazabilidad 
                         </h1>
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa Cadepsa
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa Cafedpsa
                             </h1>
 
                             <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
@@ -87,13 +87,12 @@ export const CafepsaLanding = () => {
                                 <div
                                     className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative ">
                                     <iframe width="100%" height="100%" className={'absolute inset-0 opacity-75'}
-                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=,%20Corqu%C3%ADn+(,%20Corqu%C3%ADn)&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" />
-
+                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=CAFEPSA (Beneficio de Cafe El Trapiche #1)&amp;t=k&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" />
 
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección: </h2>
-                                            Corquín, Copán
+                                            Danli, El Paraíso
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
                                                 
@@ -115,7 +114,7 @@ export const CafepsaLanding = () => {
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 
                                     <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
-                                        83%
+                                        %
                                     </p>
 
                                     <div className="flex mb-4 border-b-2 justify-center">
@@ -298,7 +297,7 @@ export const CafepsaLanding = () => {
                             
 
                                 <a className="text-gray-500 hover:text-blue-500"
-                                    href="https://www.facebook.com//Cafes-Especiales-de-El-Paraíso-CAFEPSA" rel="noopener noreferrer"
+                                    href="https://www.facebook.com/Cafes-Especiales-de-El-Paraíso-CAFEPSA" rel="noopener noreferrer"
                                     target="_blank">
                                     <Facebook />
                                 </a>
