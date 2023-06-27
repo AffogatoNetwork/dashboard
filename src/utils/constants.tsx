@@ -58,6 +58,12 @@ export const CooperativeList = [
       "0xfa474d1e6d83c6ba0591117981d56dbf08c774af",
     ],
   },
+  {
+    key: "5",
+    name: "CAFEPSA",
+    email: "",
+    addresses: [],
+  },
 ];
 
 export const RegionList = [

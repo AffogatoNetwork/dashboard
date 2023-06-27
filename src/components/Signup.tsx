@@ -90,6 +90,9 @@ const Signup = () => {
         if (location.match("proexo") !== null) {
             setCurrentCoop(CooperativeList[4]);
         }
+        if (location.match("cafepsa") !== null) {
+            setCurrentCoop(CooperativeList[5]);
+        }
     };
 
     useEffect(() => {
