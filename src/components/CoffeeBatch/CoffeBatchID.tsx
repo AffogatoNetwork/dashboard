@@ -27,19 +27,37 @@ function DisplayFarmers(data:any){
             if (batchId) {
                 getBatch(batchId).then((result) => {
                     setCoffeeBatch(result);
-                    getFarm(result?.Farmer[0]).then((result) => {
-                        console.log(result);
-                        setFarms(result);
-                    })   
                     console.log(result);
-                    result?.Farmer.map((item: any) => {
-                        getFarmer(item).then((result) => {
-                            const Farmers = new Array(result);
+                                        // @ts-ignore
 
-                            setFarmers(Farmers);
+                    console.log(result.Farmer?.lenght);
+
+                    
+                    // @ts-ignore
+                    if( result?.Farmer?.length == undefined){
+                        getFarm(result?.Farmer.address).then((result) => {
+                            setFarms(result);
                         });
-                 
-                    });
+                        getFarmer(result?.Farmer.address).then((result) => {
+                            console.log(result);
+                            setFarmers(result);
+                        });
+
+
+                    } else {
+                        getFarm(result?.Farmer[0]).then((result) => {
+                            console.log(result);
+                            setFarms(result);
+                        }) 
+                        result?.Farmer.map((item: any) => {
+                            getFarmer(item).then((result) => {
+                                const Farmers = new Array(result);
+                                setFarmers(Farmers);
+                            });
+                     
+                        });
+                    }
+                    
                     setLoading(false);
 
                 });
@@ -82,6 +100,11 @@ function DisplayFarmers(data:any){
                                     {coffeeBatch?.Farmer?.length == 1 && (
                                         <div>
                                             <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
+                                        </div>
+                                    )}
+                                    {coffeeBatch?.Farmer?.address && (
+                                        <div>
+                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers.address} > {farmers?.fullname} </a> </p>
                                         </div>
                                     )}
                                     {coffeeBatch?.Farmer?.length > 2 && (

@@ -83,7 +83,7 @@ export const CoffeBatchNewList = () => {
                 companyName = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                companyName = "COMSA";
+                companyName = "COMMOVEL";
             }
 
 
@@ -163,7 +163,7 @@ export const CoffeBatchNewList = () => {
                 ),
             },
             {
-                header: `${farmName}`, accessorKey: 'Name', size: 25,
+                header: `name`, accessorKey: 'Name', size: 25,
             }, {
                 header: 'Altura ', accessorKey: 'dryMill.height', size: 15,                
  
@@ -226,7 +226,7 @@ export const CoffeBatchNewList = () => {
                                         )}
                                     </div>
 
-                                    <div className="overflow-auto overflow-scroll">
+                                    <div className="overflow-auto">
                                         <MaterialReactTable
                                             columns={columData}
                                             data={farmers}
