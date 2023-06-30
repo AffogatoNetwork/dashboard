@@ -23,7 +23,7 @@ export const CafepsaLanding = () => {
                             de Trazabilidad
                         </h1>
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa Cafepsa
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa CAFEPSA
                             </h1>
 
                             <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
@@ -87,15 +87,14 @@ export const CafepsaLanding = () => {
                                 <div
                                     className="lg:w-2/3 md:w-1/2 rounded-lg overflow-hidden sm:mr-10 p-10 flex items-end justify-start relative ">
                                     <iframe width="100%" height="100%" className={'absolute inset-0 opacity-75'}
-                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=CAFEPSA (Beneficio de Cafe El Trapiche #1)&amp;t=k&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" />
-
+                                        src="https://maps.google.com/maps?width=100%25&amp;height=600&amp;hl=es&amp;q=CAFEPSA%20El%20trapiche&amp;t=k&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;t=k&amp;z=18&amp;ie=UTF8&amp;iwloc=B&amp;output=embed" />
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección: </h2>
-                                            Danli, El Paraíso
+                                           El Paraiso, El Paraiso
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
-
+                                            cafepsa@gmail.com
                                             </p>
 
                                         </div>
@@ -105,7 +104,7 @@ export const CafepsaLanding = () => {
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Teléfono</h2>
 
                                             <p className="text-indigo-500 leading-relaxed">
-
+                                            (+504)  2793-5012/9327-9683
                                             </p>
 
                                         </div>
@@ -114,7 +113,7 @@ export const CafepsaLanding = () => {
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 
                                     <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
-                                        %
+                                        83%
                                     </p>
 
                                     <div className="flex mb-4 border-b-2 justify-center">
@@ -127,13 +126,14 @@ export const CafepsaLanding = () => {
                                     <div className="flex mt-4 items-center justify-center pb-2">
                                         <div className=" items-center">
                                             <span className="leading-relaxed">
-                                                <>{t('female')}:</>
+                                                <>{t('female')}: </>
                                             </span>
                                         </div>
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                             <div className="flex ml-6 items-center">
 
                                                 <span className="mr-3 text-2xl font-black">
+                                                    39
                                                 </span>
                                             </div>
                                         </span>
@@ -145,6 +145,7 @@ export const CafepsaLanding = () => {
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                             <div className="flex ml-6 items-center">
                                                 <span className="mr-3 text-2xl font-black">
+                                                    94
                                                 </span>
                                             </div>
                                         </span>
@@ -158,6 +159,7 @@ export const CafepsaLanding = () => {
                                             <div className="flex ml-6 items-center">
 
                                                 <span className="mr-3 text-2xl font-black">
+                                                    1,439 MZN
                                                 </span>
                                             </div>
                                         </span>
@@ -167,8 +169,35 @@ export const CafepsaLanding = () => {
                                     <p className="leading-relaxed">
                                         - Comercialización
                                     </p>
+
                                     <p className="leading-relaxed">
+                                        - Trenficiado Humedo
                                     </p>
+
+                                    <p className="leading-relaxed">
+                                        - Beenficiado Seco
+                                    </p>
+
+                                    <p className="leading-relaxed">
+                                        - Servicios de Exportacion
+                                    </p>
+
+                                    <p className="leading-relaxed">
+                                        - Financiamiento Pre-Cosecha  y Post Cosecha
+                                    </p>
+
+                                    <p className="leading-relaxed">
+                                        - Biocredito
+                                    </p>
+
+                                    <p className="leading-relaxed">
+                                        - Asistencia Tecnica,Laboratorio de control de calidad
+                                    </p>
+
+                                    <p className="leading-relaxed">
+                                        - Servicio de Tostaduria
+                                    </p>
+
 
 
                                     <div className="flex mt-6 items-center justify-center pb-5">
@@ -195,6 +224,7 @@ export const CafepsaLanding = () => {
 
                                         <span className="leading-relaxed font-black">
                                             <p className="leading-relaxed">
+                                                Somos un modelo empresarial que nació bajo la iniciativa de 24  pequeños productores de café, ubicados en el oriente de Honduras, que busca desarrollar e implementar  alternativas  agiles oportunas en  temas de  producción comercialización de café, fortalecimiento de capacidades,  acceso a crédito  y financiamiento bajo condiciones  favorable,  siendo parte del desarrollo sostenible del  entorno.
                                             </p>
                                         </span>
                                     </div>
@@ -207,32 +237,12 @@ export const CafepsaLanding = () => {
                 <div id="fotos"
                     className="px-4 py-16 mx-auto sm:max-w-xl md:max-w-full lg:max-w-screen-xl md:px-24 lg:px-8 lg:py-20">
                     <div className="max-w-xl mb-10 md:mx-auto sm:text-center lg: md:mb-12">
-                        <h2 className="max-w-lg mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
-                            Empresa
+                        <h2 className="max-w-xl mb-6 font-sans text-3xl font-bold leading-none tracking-tight text-gray-900 sm:text-4xl md:mx-auto">
+                            Cafes Especiales de El Paraiso S.A de C.V CAFEPSA
                         </h2>
 
                     </div>
-                    <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
-                        <img
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/%2F1.jpeg?alt=media&token=6dbdbc05-a684-4834-9c2e-fd5aaccefdd6"
-                            alt="" />
-                        <img
-
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/%2F2.jpeg?alt=media&token=5366f295-e214-4466-b998-a15b98ac2a0e"
-                            alt="" />
-                        <img
-
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/%2F3.jpeg?alt=media&token=f3eccac9-6178-41a5-af1a-a5244d254420"
-                            alt="" />
-                        <img
-
-                            className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/%2F4.jpeg?alt=media&token=376da7da-4bbe-4d43-945e-d8d1574cc222"
-                            alt="" />
-                    </div>
+                   
                 </div>
 
                 <div className="bg-gray-100">
@@ -297,7 +307,7 @@ export const CafepsaLanding = () => {
 
 
                                 <a className="text-gray-500 hover:text-blue-500"
-                                    href="https://www.facebook.com/Cafes-Especiales-de-El-Paraíso-CAFEPSA" rel="noopener noreferrer"
+                                    href="https://www.facebook.com/profile.php?id=100067090309183" rel="noopener noreferrer"
                                     target="_blank">
                                     <Facebook />
                                 </a>
