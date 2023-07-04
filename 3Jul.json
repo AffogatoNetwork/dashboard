@@ -1,0 +1,107 @@
+{
+  "attributes": [
+    {
+      "trait_type": "Cooperative",
+      "value": "0x7e02EFc22e3351A020cD3bfA1FCA540afb2C6F8c"
+    },
+    {
+      "trait_type": "Company",
+      "value": "COMSA"
+    },
+    {
+      "trait_type": "Farmer",
+      "value": "0x60E7CAd7bBE695a206583E98297FD316EB5D1558, 0xE4891BeEa5333BBdffa537A711109161D45F3329, 0x8a2cD9CD983D7133170848A760c7EC335f65b3f5, 0x0b7D244C377261a9111d36298499F86A8Af7F08b"
+    },
+    {
+      "trait_type": "Wet Mill",
+      "value": [
+        {
+          "certifications": "Orgánico, Fairtrade , Rainforest",
+          "date": "2023-08-02",
+          "drying_hours": 360,
+          "drying_id": "",
+          "drying_type": "Secadora",
+          "entry_id": "5735",
+          "facility": "",
+          "latitude": 14.147262,
+          "longitude": -88.017033,
+          "note": 0,
+          "process": "Lavado",
+          "variety": "Parainema, Catuaí",
+          "weight": 4
+        }
+      ]
+    },
+    {
+      "trait_type": "Farm",
+      "value": [
+        {
+          "altitude": 1600,
+          "area": 3,
+          "certifications": "Orgánico",
+          "country": "Honduras",
+          "etnic_group": "",
+          "family_members": 6,
+          "latitude": 14.0750690179948,
+          "longitude": -87.9852227748396,
+          "name": "Génesis",
+          "region": "",
+          "shadow": "",
+          "story": "La Finca Génesis inició en el año 2013 con 13 hectáreas de café Catuaí. Poco a poco se fue agrandando el área cultivada, actualmente son aproximadamente 2 manzanas de café donde ha tocado re-sembrar otras variedades por cuestiones de cambio climático y la roya. Contigo a la propiedad hay un río permanente que pasa por toda la orilla de la propiedad y a la otra orilla una quebrada de invierno.",
+          "varieties": "",
+          "village": "La Laguna"
+        }
+      ]
+    },
+    {
+      "trait_type": "Dry Mill",
+      "value": [
+        {
+          "damage_percent": "1%",
+          "date": "2023-03-22",
+          "export_drying_id": "A I B - 02",
+          "export_id": "",
+          "facility": "",
+          "latitude": 14.147262,
+          "longitude": -88.017033,
+          "note": 0,
+          "threshing_process": "0.82",
+          "threshing_yield": 1.199,
+          "weight": 100,
+          "cupping_url": " ",
+          "AvgHeight": " "
+        }
+      ]
+    },
+    {
+      "trait_type": "Profile",
+      "value": [
+        {
+          "acidity": "Muy Jugosa",
+          "aftertaste": "Sostenido",
+          "aroma": "",
+          "body": "Untuoso",
+          "flavor": "Manzana, tonos a miel",
+          "note": 0,
+          "sweetness": "Vainilla"
+        }
+      ]
+    },
+    {
+      "trait_type": "Roasting",
+      "value": [
+        {
+          "bag_type": "",
+          "bag_weight": "",
+          "date": "",
+          "grind_type": "",
+          "type": ""
+        }
+      ]
+    }
+  ],
+  "description": "Café orgánico y comercio justo",
+  "external_url": "https://affogato.co",
+  "image": "Qma5mzG5sFjBAmPyhxfkXaxM78HX6UPihH5hNSyp1Cm6a1",
+  "name": "Parainema, Catuaí Génesis"
+}

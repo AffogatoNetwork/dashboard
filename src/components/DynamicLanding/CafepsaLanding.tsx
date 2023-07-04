@@ -208,12 +208,16 @@ export const CafepsaLanding = () => {
                                     </p>
 
                                     <p className="leading-relaxed">
+                                    Orgánico
                                     </p>
                                     <p className="leading-relaxed">
+                                    Comercio Justo
                                     </p>
                                     <p className="leading-relaxed">
+                                    Con Manos de Mujer    
                                     </p>
                                     <p className="leading-relaxed">
+                                    Simbolo de pequeños productores
                                     </p>
 
                                     <br />
