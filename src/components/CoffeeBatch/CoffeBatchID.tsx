@@ -109,7 +109,11 @@ function DisplayFarmers(data:any){
                                     )}
                                     {coffeeBatch?.Farmer?.length > 2 && (
                                         <div>
-                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span onClick={()=> DisplayFarmers(coffeeBatch?.Farmer)}>productores más  </span></p>
+                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> 
+                                            <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[1]?.address} > {farmers[0]?.fullname} </a>
+                                            <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[2]?.address} > {farmers[0]?.fullname} </a>
+                                            <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[3]?.address} > {farmers[0]?.fullname} </a>
+                                            </p>
                                         </div>
                                     )}
 
