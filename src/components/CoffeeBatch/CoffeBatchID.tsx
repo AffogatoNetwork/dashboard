@@ -11,15 +11,8 @@ const CoffeeBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
-    const [individualFarmers, setIndividualFarmers] = useState<any>([]);
-
-    function DisplayFarmers(data: any) {
-        console.log(data);
 
 
-
-
-    }
 
     useEffect(() => {
         const load = () => {
@@ -34,31 +27,43 @@ const CoffeeBatchId = () => {
                             setFarmers(result);
                         });
                     } else {
-                        const Farmer = result?.Farmer?.map((farmer: string) => {
-                          const FarmerData =  getFarmer(farmer).then((farmerData) => {
-                                return farmerData;
-                            });
 
-                           return FarmerData;
-                        });
-                        setFarmers(Farmer);
-                        console.log(Farmer);
-                        console.log(farmers);
-                        
-                        
-
+                        FetchFarmer(result);
+                       
                     }
 
                     setLoading(false);
 
                 });
+                
+
                 setLoading(false);
             } else {
                 <NotFound msg={batchId + "Not Found"} />;
             }
         };
+        const FetchFarmer = async (result:any) => {
+            const Farmer = result?.Farmer?.map((farmer: string) => {
+                const FarmerData = getFarmer(farmer).then((farmerData) => {
+                    return farmerData;
+                });
+
+              
+                console.log(FarmerData);
+                return FarmerData;
+            });
+            const Debuged = Farmer.map((result:any) => {
+                const clean = result.then((data:any) => {
+                    return data;
+                });
+                setFarmers(clean);
+            });
+            console.log('debug');
+            console.log(Debuged);
+        };
+
         load();
-    }, [batchId]);
+    }, [],);
 
     if (loading) {
         return <Loading label="Cargando..." className="loading-wrapper" />;
@@ -88,22 +93,16 @@ const CoffeeBatchId = () => {
                                         </div>
                                     }
                                     <p>{coffeeBatch?.Description}</p>
-                                  
+
                                     {coffeeBatch?.Farmer?.address && (
                                         <div>
                                             <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers.address} > {farmers?.fullname} </a> </p>
                                         </div>
                                     )}
 
+                                    {JSON.stringify(farmers)}
 
-                                    {coffeeBatch?.Farmer !== undefined  && (
-                                        <>
-                                                      {JSON.stringify(farmers)} 
 
-                                           
-
-                                        </>
-                                    )}
 
 
 

@@ -173,7 +173,7 @@ export const FarmsNewList = () => {
             }, {
                 header: 'Variedades', accessorKey: 'varieties', size: 15,
             }, {
-                header: 'Ubicación', accessorKey: 'village', size: 15,
+                header: 'Ubicación', accessorKey: 'village2', size: 15,
             }, {
                 header: 'Sombra', accessorKey: 'shadow', size: 15,
             }, {
@@ -184,7 +184,7 @@ export const FarmsNewList = () => {
 
                 accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`, 
                 id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: 'Ver en el mapa',
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
