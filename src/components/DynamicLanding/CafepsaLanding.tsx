@@ -16,7 +16,7 @@ export const CafepsaLanding = () => {
         <div className="bg-white card rounded-lg -mr-6 -my-6">
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
-                    style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2F.jpg?alt=media&token=ec371948-d535-4994-aa54-7e6a7fb2dda3")` }}>
+                    style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F1.jpg?alt=media&token=1e15d575-f2af-44a1-b853-08ba8bf2d185")` }}>
                     <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
@@ -246,7 +246,27 @@ export const CafepsaLanding = () => {
                         </h2>
 
                     </div>
-                   
+                    <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
+                        <img
+                            className="object-cover w-full h-56 rounded shadow-lg"
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F2.jpg?alt=media&token=5bb2ade1-9321-49d5-8727-be4490e7d9dd"
+                            alt=""/>
+                        <img
+
+                            className="object-cover w-full h-56 rounded shadow-lg"
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F4.jpg?alt=media&token=a7ea9ef0-eb11-403a-a4fb-495db509e89b"
+                            alt=""/>
+                        <img
+
+                            className="object-cover w-full h-56 rounded shadow-lg"
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"
+                            alt=""/>
+                        <img
+
+                            className="object-cover w-full h-56 rounded shadow-lg"
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F8.jpg?alt=media&token=68f938c1-69ad-4f88-92f8-a0c6f82ffba7"
+                            alt=""/>
+                    </div>
                 </div>
 
                 <div className="bg-gray-100">

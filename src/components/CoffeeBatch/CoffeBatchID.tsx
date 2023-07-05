@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReactI18NextChild, useTranslation } from "react-i18next";
 import Loading from "../Loading";
-import { getBatch, getFarmer, getFarmerFarms, getFarm} from "../../db/firebase";
+import { getBatch, getFarmer } from "../../db/firebase";
 import NotFound from "../common/NotFound";
 
 const CoffeeBatchId = () => {
@@ -11,53 +11,44 @@ const CoffeeBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
-    const [farms, setFarms] = useState<any>([]);
+    const [individualFarmers, setIndividualFarmers] = useState<any>([]);
+
+    function DisplayFarmers(data: any) {
+        console.log(data);
 
 
-function DisplayFarmers(data:any){
-    console.log(data);
 
 
-
-
-}
+    }
 
     useEffect(() => {
         const load = () => {
             if (batchId) {
                 getBatch(batchId).then((result) => {
                     setCoffeeBatch(result);
-                    console.log(result);
-                                        // @ts-ignore
 
-                    console.log(result.Farmer?.lenght);
-
-                    
-                    // @ts-ignore
-                    if( result?.Farmer?.length == undefined){
-                        getFarm(result?.Farmer.address).then((result) => {
-                            setFarms(result);
-                        });
-                        getFarmer(result?.Farmer.address).then((result) => {
+                    if (result?.Farmer?.length === undefined) {
+                        console.log(result?.Farmer);
+                        getFarmer(result?.Farmer?.address).then((result) => {
                             console.log(result);
                             setFarmers(result);
                         });
-
-
                     } else {
-                        getFarm(result?.Farmer[0]).then((result) => {
-                            console.log(result);
-                            setFarms(result);
-                        }) 
-                        result?.Farmer.map((item: any) => {
-                            getFarmer(item).then((result) => {
-                                const Farmers = new Array(result);
-                                setFarmers(Farmers);
+                        const Farmer = result?.Farmer?.map((farmer: string) => {
+                          const FarmerData =  getFarmer(farmer).then((farmerData) => {
+                                return farmerData;
                             });
-                     
+
+                           return FarmerData;
                         });
+                        setFarmers(Farmer);
+                        console.log(Farmer);
+                        console.log(farmers);
+                        
+                        
+
                     }
-                    
+
                     setLoading(false);
 
                 });
@@ -82,13 +73,13 @@ function DisplayFarmers(data:any){
                         <a className="relative block group">
 
                             <div className="card w-full bg-base-100 shadow-xl">
-                                
+
                                 <figure className="px-10 pt-10">
                                     <img src={coffeeBatch?.image} alt="NFT" className="rounded-xl w-40" />
                                 </figure>
 
                                 <div className="card-body items-center text-center">
-                                                                        <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</>: {coffeeBatch?.Name} </h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</>: {coffeeBatch?.Name} </h2>
 
                                     {coffeeBatch?.Profile?.note > 0 &&
                                         <div className="stat">
@@ -97,24 +88,21 @@ function DisplayFarmers(data:any){
                                         </div>
                                     }
                                     <p>{coffeeBatch?.Description}</p>
-                                    {coffeeBatch?.Farmer?.length == 1 && (
-                                        <div>
-                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
-                                        </div>
-                                    )}
+                                  
                                     {coffeeBatch?.Farmer?.address && (
                                         <div>
                                             <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers.address} > {farmers?.fullname} </a> </p>
                                         </div>
                                     )}
-                                    {coffeeBatch?.Farmer?.length > 2 && (
-                                        <div>
-                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> 
-                                            <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[1]?.address} > {farmers[0]?.fullname} </a>
-                                            <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[2]?.address} > {farmers[0]?.fullname} </a>
-                                            <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers[3]?.address} > {farmers[0]?.fullname} </a>
-                                            </p>
-                                        </div>
+
+
+                                    {coffeeBatch?.Farmer !== undefined  && (
+                                        <>
+                                                      {JSON.stringify(farmers)} 
+
+                                           
+
+                                        </>
                                     )}
 
 

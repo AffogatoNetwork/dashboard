@@ -28,7 +28,7 @@ export const CooperativeList = [
   },
   {
     key: "2",
-    name: "COPRANIL",
+    name: "COPRACNIL",
     email: "jdestephen07@gmail.com",
     addresses: [
       "0x6db51e8cc765df7f007956c00b1ac83990149ab6",
