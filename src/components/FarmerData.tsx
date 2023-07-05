@@ -70,7 +70,7 @@
                let companyName = "PROEXO";
                const hostname = window.location.hostname;
                if (hostname.includes("copracnil")) {
-                   companyName = "COPRANIL";
+                   companyName = "COPRACNIL";
                } else if (hostname.includes("commovel")) {
                    companyName = "COMMOVEL";
                } else if (hostname.includes("comsa")) {
