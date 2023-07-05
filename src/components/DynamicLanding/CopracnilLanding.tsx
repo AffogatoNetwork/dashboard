@@ -121,7 +121,7 @@ export const CopracnilLanding = () => {
                                 <div className="lg:w-1/2 w-full lg:pl-10 lg:py-6 mt-6 lg:mt-0">
 
                                     <p className="text-gray-900 text-6xl text-center title-font font-bold  mb-1">
-                                        82-83%
+                                        83%
                                     </p>
 
 
