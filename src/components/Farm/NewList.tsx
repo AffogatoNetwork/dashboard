@@ -224,7 +224,7 @@ export const FarmsNewList = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-batches")}</>
+                                    <>{t("search-farms")}</>
                                 </div>
                             </div>
                             <div className="m-6">
@@ -252,7 +252,7 @@ export const FarmsNewList = () => {
                                         )}
                                     </div>
 
-                                    <div className="overflow-auto overflow-scroll">
+                                    <div className=" overflow-scroll">
                                         <MaterialReactTable
                                             columns={columData}
                                             data={farms}

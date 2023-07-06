@@ -29,31 +29,31 @@ const CoffeeBatchId = () => {
                     } else {
 
                         FetchFarmer(result);
-                       
+
                     }
 
                     setLoading(false);
 
                 });
-                
+
 
                 setLoading(false);
             } else {
                 <NotFound msg={batchId + "Not Found"} />;
             }
         };
-        const FetchFarmer = async (result:any) => {
+        const FetchFarmer = async (result: any) => {
             const Farmer = result?.Farmer?.map((farmer: string) => {
                 const FarmerData = getFarmer(farmer).then((farmerData) => {
                     return farmerData;
                 });
 
-              
+
                 console.log(FarmerData);
                 return FarmerData;
             });
-            const Debuged = Farmer.map((result:any) => {
-                const clean = result.then((data:any) => {
+            const Debuged = Farmer.map((result: any) => {
+                const clean = result.then((data: any) => {
                     return data;
                 });
                 setFarmers(clean);
@@ -169,7 +169,9 @@ const CoffeeBatchId = () => {
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
                                             <p><>{t("damage-percent")}</>: <br /> <span> {coffeeBatch?.dryMill?.damage_percent}</span></p>
-                                            <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
+                                            {(coffeeBatch.dryMill?.export_id !== '') &&
+                                                <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
+                                            }
                                             <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height}</span></p>
                                             <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
 
