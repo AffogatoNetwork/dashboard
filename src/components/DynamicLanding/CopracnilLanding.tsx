@@ -5,8 +5,6 @@ import { Blockchain } from "../icons/blockchain";
 import { FarmIcon } from "../icons/farm";
 import { useTranslation } from "react-i18next";
 import { Facebook } from "../icons/Facebook";
-import { Instagram } from "../icons/Instagram";
-import { Youtube } from "../icons/Youtube";
 import { WebSite } from "../icons/WebSite";
 
 
@@ -18,7 +16,7 @@ export const CopracnilLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2-3.jpeg?alt=media&token=7ec33154-a84f-4b52-9a70-131900ee96fe")` }}>
-                    <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className="">                           
                         

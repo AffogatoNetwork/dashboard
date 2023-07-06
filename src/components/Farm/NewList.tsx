@@ -184,7 +184,7 @@ export const FarmsNewList = () => {
 
                 accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`, 
                 id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
-                header: 'Ver en el mapa',
+                header: 'Ver en el Mapa',
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
