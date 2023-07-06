@@ -144,7 +144,7 @@ export const CopracnilLanding = () => {
                                             <div className="flex ml-6 items-center">
 
                                                 <span className="mr-3 text-2xl font-black">
-                                                    39
+                                                    38
                                                 </span>
                                             </div>
                                         </span>
@@ -156,7 +156,7 @@ export const CopracnilLanding = () => {
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                             <div className="flex ml-6 items-center">
                                                 <span className="mr-3 text-2xl font-black">
-                                                    105
+                                                    106
                                                 </span>
                                             </div>
                                         </span>
