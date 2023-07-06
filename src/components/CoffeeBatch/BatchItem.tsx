@@ -11,6 +11,7 @@ type props = {
 
 const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
+    console.log(coffeeBatch);
     const batchUrl = window.location.origin.concat("/batch/").concat(coffeeBatch.ipfsHash);
 
     const openInNewTab = (url: string | URL | undefined) => {
@@ -61,9 +62,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
             <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.wetMill.drying_type}</span>
             </td>
-            <td className="p-3 text-base font-light">
-                <span>{coffeeBatch.dryMill.export_id}</span>
-            </td>
+           
             <td className="p-3 text-base font-light">
                 <span>{coffeeBatch.dryMill.weight}</span>
             </td>
