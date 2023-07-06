@@ -165,7 +165,7 @@ export const CoffeBatchNewList = () => {
             {
                 header: `Nombre`, accessorKey: 'Name', size: 25,
             }, {
-                header: 'Altura ', accessorKey: 'dryMill.height', size: 15,                
+                header: 'Altura (m.s.n.m) ', accessorKey: 'dryMill.height', size: 15,                
  
             }, {
                 header: 'Ubicación ', accessorKey: 'dryMill.location', size: 20,
@@ -178,7 +178,7 @@ export const CoffeBatchNewList = () => {
             }, {
                 header: 'Tipo de Secado', accessorKey: 'wetMill.drying_type', size: 15,
             }, {
-                header: 'Peso', accessorKey: 'dryMill.weight', size: 15,
+                header: 'Peso (qq)', accessorKey: 'dryMill.weight', size: 15,
             }, {
                 header: 'Nota', accessorKey: 'dryMill.note', size: 15,
             },

@@ -172,7 +172,7 @@ const CoffeeBatchId = () => {
                                             {(coffeeBatch.dryMill?.export_id !== '') &&
                                                 <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
                                             }
-                                            <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height}</span></p>
+                                            <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height} m.s.n.m</span></p>
                                             <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
 
                                         </div>
