@@ -142,7 +142,7 @@ export const CopracnilLanding = () => {
                                             <div className="flex ml-6 items-center">
 
                                                 <span className="mr-3 text-2xl font-black">
-                                                    38
+                                                    39
                                                 </span>
                                             </div>
                                         </span>
@@ -154,7 +154,7 @@ export const CopracnilLanding = () => {
                                         <span className="flex ml-3 pl-3 py-2 space-x-2s">
                                             <div className="flex ml-6 items-center">
                                                 <span className="mr-3 text-2xl font-black">
-                                                    106
+                                                    105
                                                 </span>
                                             </div>
                                         </span>
@@ -206,13 +206,12 @@ export const CopracnilLanding = () => {
                                         Comercio Justo
                                     </p>
                                     <p className="leading-relaxed">
-                                        Rain Forest Alliance
+                                        RainForest Alliance
                                     </p>
                                     <br />
 
                                     <div className=" items-center">
                                         <p className="leading-relaxed"><>{t('review')}:</></p>
-
                                         <span className="leading-relaxed font-black">
                                             <p className="leading-relaxed">
                                                 Somos una Cooperativa de pequeños productores/as de café certificado de alta calidad, con principios y valores, que ofrece servicios de comercialización, financiamiento y asistencia técnica a sus afiliados/as; con enfoque de equidad de género y amigable con el medio ambiente, para mejorar la calidad de vida de sus familias.                                                </p>
