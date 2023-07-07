@@ -16,7 +16,7 @@ export const CommovelLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                      style={{backgroundImage: `url("https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg")`}}>
-                    <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
 <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                                 Plataforma de Trazabilidad 

@@ -19,9 +19,10 @@ export const ComsaLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf")` }}>
-                    <div className="hero-overlay bg-opacity-60 bg-black rounded-t-2xl"></div>
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                        <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
+                    <div className="bg-opacity-40 bg-black">                           
+                          <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                             Plataforma de Trazabilidad 
                         </h1>
                             <br />

@@ -165,7 +165,7 @@ export const FarmsNewList = () => {
             {
                 header: 'Nombre', accessorKey: 'name', size: 25,
             }, {
-                header: 'Altura ', accessorKey: 'height', size: 5,                
+                header: 'Altura (m.s.n.m.) ', accessorKey: 'height', size: 5,                
             }, {
                 header: 'Área', accessorKey: 'area', size: 5,
             }, {
@@ -177,7 +177,7 @@ export const FarmsNewList = () => {
             }, {
                 header: 'Sombra', accessorKey: 'shadow', size: 15,
             }, {
-                header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 5,
+                header: 'Intg de Familia', accessorKey: 'familyMembers', size: 5,
             }, {
                 header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,
             }, {
