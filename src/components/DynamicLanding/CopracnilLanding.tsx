@@ -18,8 +18,8 @@ export const CopracnilLanding = () => {
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2-3.jpeg?alt=media&token=7ec33154-a84f-4b52-9a70-131900ee96fe")` }}>
                     <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                        <div className="bg-opacity-40 bg-black">                           
-                        
+                        <div className="bg-opacity-40 bg-black ">                           
+                        <div className="mt-8"></div>
                          <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white drop-shadow-lg">
                             Plataforma de Trazabilidad
                         </h1>
@@ -32,7 +32,7 @@ export const CopracnilLanding = () => {
                             <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white ">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
-                            <div className="flex items-center justify-center mb-[87px]">
+                            <div className="flex items-center justify-center mb-8 ">
                                 <button className="btn btn-lg btn-outline btn-primary text-white">
                                     <a href="/farmers">
                                         Ir a la Plataforma
