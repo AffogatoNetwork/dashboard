@@ -16,20 +16,20 @@ export const CopracnilLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2-3.jpeg?alt=media&token=7ec33154-a84f-4b52-9a70-131900ee96fe")` }}>
-                    <div className=" rounded-t-2xl"></div>
+                    <div className="rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                        <div className="bg-opacity-30 bg-amber-900 ">                           
+                        <div className=" ">                           
                         <div className="mt-8"></div>
-                         <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white drop-shadow-lg stroke-black ">
+                         <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white text-shadow: 0 0 10px blue; stroke-text">
                             Plataforma de Trazabilidad
                         </h1>
 
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white drop-shadow-lg">Empresa COPRACNIL
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text">Empresa COPRACNIL
                             </h1>
 
 
-                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white ">
+                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white stroke-text">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-8 ">

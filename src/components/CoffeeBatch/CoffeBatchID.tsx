@@ -103,9 +103,6 @@ const CoffeeBatchId = () => {
                                     {JSON.stringify(farmers)}
 
 
-
-
-
                                 </div>
                             </div>
 
@@ -116,9 +113,8 @@ const CoffeeBatchId = () => {
                         <a className="relative block group">
                             <div className="card w-full h bg-base-100 shadow-xl">
                                 <div className="card-body">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : Genesis ,  Lempira, Parainema, IHCAFE 90 , Con sombra
-
-
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">
+                                        {coffeeBatch.wetMill?.variety} 
                                     </h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
