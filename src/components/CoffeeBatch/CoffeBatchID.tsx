@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { ReactI18NextChild, useTranslation } from "react-i18next";
 import Loading from "../Loading";
-import { getBatch, getFarmer } from "../../db/firebase";
+import { getBatch, getFarmer, getFarmerFarms, getFarms } from "../../db/firebase";
 import NotFound from "../common/NotFound";
 
 const CoffeeBatchId = () => {
@@ -11,59 +11,42 @@ const CoffeeBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
-
-
-
+    const [farms, setFarms] = useState<any>([]);
     useEffect(() => {
         const load = () => {
             if (batchId) {
                 getBatch(batchId).then((result) => {
                     setCoffeeBatch(result);
-
-                    if (result?.Farmer?.length === undefined) {
-                        console.log(result?.Farmer);
-                        getFarmer(result?.Farmer?.address).then((result) => {
+                    console.log(result);
+                    result?.Farmer.map((item: any) => {
+                        getFarmer(item).then((result) => {
+                            for(let i = 0; i < result?.Farm?.length; i++){
+                                // do something with result.Farm[i]
+                                const Farmers = new Array();
+                                Farmers.push({ i : result?.Farm[i] });
+                                console.log(Farmers);
+                                setFarmers(Farmers);
+                                console.log(Farmers);
+                            }
                             console.log(result);
-                            setFarmers(result);
+                            console.log(farmers);
+
                         });
-                    } else {
+                        getFarmerFarms(item).then((result) => {
 
-                        FetchFarmer(result);
 
-                    }
-
+                        });
+                    });
                     setLoading(false);
 
                 });
-
-
                 setLoading(false);
             } else {
                 <NotFound msg={batchId + "Not Found"} />;
             }
         };
-        const FetchFarmer = async (result: any) => {
-            const Farmer = result?.Farmer?.map((farmer: string) => {
-                const FarmerData = getFarmer(farmer).then((farmerData) => {
-                    return farmerData;
-                });
-
-
-                console.log(FarmerData);
-                return FarmerData;
-            });
-            const Debuged = Farmer.map((result: any) => {
-                const clean = result.then((data: any) => {
-                    return data;
-                });
-                setFarmers(clean);
-            });
-            console.log('debug');
-            console.log(Debuged);
-        };
-
         load();
-    }, [],);
+    }, [batchId]);
 
     if (loading) {
         return <Loading label="Cargando..." className="loading-wrapper" />;
@@ -78,14 +61,11 @@ const CoffeeBatchId = () => {
                         <a className="relative block group">
 
                             <div className="card w-full bg-base-100 shadow-xl">
-
                                 <figure className="px-10 pt-10">
                                     <img src={coffeeBatch?.image} alt="NFT" className="rounded-xl w-40" />
                                 </figure>
 
                                 <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</>: {coffeeBatch?.Name} </h2>
-
                                     {coffeeBatch?.Profile?.note > 0 &&
                                         <div className="stat">
                                             <div className="stat-title"><>{t("note")}</></div>
@@ -93,14 +73,17 @@ const CoffeeBatchId = () => {
                                         </div>
                                     }
                                     <p>{coffeeBatch?.Description}</p>
-
-                                    {coffeeBatch?.Farmer?.address && (
+                                    {coffeeBatch?.Farmer?.length == 1 && (
                                         <div>
-                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline hover:underline-offset-4 hover:font-black decoration-sky-500 underline underline-offset-2" href={'/farmer' + '/' + farmers.address} > {farmers?.fullname} </a> </p>
+                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
+                                        </div>
+                                    )}
+                                    {coffeeBatch?.Farmer?.length > 2 && (
+                                        <div>
+                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span>productores más  </span></p>
                                         </div>
                                     )}
 
-                                    {JSON.stringify(farmers)}
 
 
                                 </div>
@@ -113,9 +96,7 @@ const CoffeeBatchId = () => {
                         <a className="relative block group">
                             <div className="card w-full h bg-base-100 shadow-xl">
                                 <div className="card-body">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">
-                                        {coffeeBatch.wetMill?.variety} 
-                                    </h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name}</h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
 
@@ -130,7 +111,7 @@ const CoffeeBatchId = () => {
                         <a className="relative block group">
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("cup-profile")}</></h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</></h2>
 
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
@@ -165,10 +146,8 @@ const CoffeeBatchId = () => {
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
                                             <p><>{t("damage-percent")}</>: <br /> <span> {coffeeBatch?.dryMill?.damage_percent}</span></p>
-                                            {(coffeeBatch.dryMill?.export_id !== '') &&
-                                                <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
-                                            }
-                                            <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height} m.s.n.m</span></p>
+                                            <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
+                                            <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height}</span></p>
                                             <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
 
                                         </div>
