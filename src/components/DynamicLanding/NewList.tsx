@@ -177,6 +177,18 @@ export const FarmsNewList = () => {
             }, {
                 header: 'Sombra', accessorKey: 'shadow', size: 15,
             }, {
+                accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`,
+                id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
+                header: 'Coordenadas',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div>
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
+            }, {
                 header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 120,
             }, {
                 header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,

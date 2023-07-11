@@ -176,8 +176,18 @@ export const FarmsNewList = () => {
                 header: 'Ubicación', accessorKey: 'village2', size: 15,
             }, {
                 header: 'Sombra', accessorKey: 'shadow', size: 15,
-            }, {
-                header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 10,
+            },{
+                accessorFn: (farm: any) => `${farm.familyMembers}`,
+                id: 'familyMembers', //id is still required when using accessorFn instead of accessorKey
+                header: 'Miembros de Familia',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div className="text-center">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
             }, {
                 header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,
             }, {

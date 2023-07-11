@@ -16,7 +16,7 @@ export const CopracnilLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2-3.jpeg?alt=media&token=7ec33154-a84f-4b52-9a70-131900ee96fe")` }}>
-                    <div className="rounded-t-2xl"></div>
+                    <div className=" rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
                         <div className=" ">                           
                         <div className="mt-8"></div>
@@ -33,7 +33,7 @@ export const CopracnilLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-8 ">
-                                <button className="btn btn-lg btn-outline btn-primary text-white">
+                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
                                     <a href="/farmers">
                                         Ir a la Plataforma
                                     </a>
