@@ -177,7 +177,7 @@ export const FarmsNewList = () => {
             }, {
                 header: 'Sombra', accessorKey: 'shadow', size: 15,
             }, {
-                header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 10,
+                header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 120,
             }, {
                 header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,
             }, {
