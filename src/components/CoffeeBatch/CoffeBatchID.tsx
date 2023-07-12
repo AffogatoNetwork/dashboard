@@ -11,32 +11,35 @@ const CoffeeBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
-    const [farms, setFarms] = useState<any>([]);
+    const [farmerPromise, setFarmerPromise] = useState<any>([]);
     useEffect(() => {
         const load = () => {
             if (batchId) {
                 getBatch(batchId).then((result) => {
                     setCoffeeBatch(result);
                     console.log(result);
-                    result?.Farmer.map((item: any) => {
-                        getFarmer(item).then((result) => {
-                            for(let i = 0; i < result?.Farm?.length; i++){
-                                // do something with result.Farm[i]
-                                const Farmers = new Array();
-                                Farmers.push({ i : result?.Farm[i] });
-                                console.log(Farmers);
-                                setFarmers(Farmers);
-                                console.log(Farmers);
+                    console.log(result?.Farmer);
+                    console.log(result?.Farmer.length);
+
+                    for (let i = 0; i < result?.Farmer.length; i++) {
+                        let FarmerDetails = getFarmer(result?.Farmer[i]).then((result) => {
+                            if (result) {
+                                let Datas: any[] = [];
+                                Datas.push(result);
+                                console.log(Datas);
+                                console.log(Datas.length);
+                                return result;
+                            } else {
+                                throw new Error("Document not found");
                             }
-                            console.log(result);
-                            console.log(farmers);
-
                         });
-                        getFarmerFarms(item).then((result) => {
-
-
+                        FarmerDetails.then((result) => {
+                            let dataDatails = new Array();
+                            dataDatails.push(result);
+                            setFarmers(dataDatails);
                         });
-                    });
+                        setFarmerPromise(FarmerDetails);
+                    }
                     setLoading(false);
 
                 });
@@ -45,6 +48,10 @@ const CoffeeBatchId = () => {
                 <NotFound msg={batchId + "Not Found"} />;
             }
         };
+
+
+
+
         load();
     }, [batchId]);
 
@@ -58,7 +65,7 @@ const CoffeeBatchId = () => {
             <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
                 <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
                     <li>
-                        <a className="relative block group">
+                        <div className="relative block group">
 
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <figure className="px-10 pt-10">
@@ -73,27 +80,22 @@ const CoffeeBatchId = () => {
                                         </div>
                                     }
                                     <p>{coffeeBatch?.Description}</p>
-                                    {coffeeBatch?.Farmer?.length == 1 && (
-                                        <div>
-                                            <p><>{t("farmer")}</> <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> </p>
-                                        </div>
-                                    )}
-                                    {coffeeBatch?.Farmer?.length > 2 && (
-                                        <div>
-                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers[0]?.address} > {farmers[0]?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span>productores más  </span></p>
-                                        </div>
-                                    )}
 
 
+                                    {farmers.map((farmer: any, index: any) => (
+                                        <div key={index}>
+                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a> y  {coffeeBatch?.Farmer?.length - 1}<span>productores más  </span></p>
+                                        </div>
+                                    ))}
 
                                 </div>
                             </div>
 
-                        </a>
+                        </div>
                     </li>
 
                     <li>
-                        <a className="relative block group">
+                        <div className="relative block group">
                             <div className="card w-full h bg-base-100 shadow-xl">
                                 <div className="card-body">
                                     <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name}</h2>
@@ -104,11 +106,11 @@ const CoffeeBatchId = () => {
                                     </div>
                                 </div>
                             </div>
-                        </a>
+                        </div>
                     </li>
 
                     <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-                        <a className="relative block group">
+                        <div className="relative block group">
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <div className="card-body items-center text-center">
                                     <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</></h2>
@@ -174,7 +176,7 @@ const CoffeeBatchId = () => {
                             )}
 
 
-                        </a>
+                        </div>
                     </li>
                 </ul>
             </div>

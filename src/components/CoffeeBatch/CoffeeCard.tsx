@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
-import NotFound from "../common/NotFound";
 import { CoffeeBatchType } from "../common/types";
 import { ipfsUrl } from "../../utils/constants";
 import { getFarmer } from "../../db/firebase";
@@ -157,14 +156,12 @@ const CoffeeCard = () => {
 
                 <div className="grid gap-8 md:grid-cols-1 lg:grid-cols-2">
                     <div
-                        className="card border-2 border-amber-900	row-span-2 rounded-3xl border border-gray-100 bg-gray-50 p-8 text-center shadow-2xl shadow-gray-600/10">
+                        className="card border-2 border-amber-900	row-span-2 rounded-3xl bg-gray-50 p-8 text-center shadow-2xl shadow-gray-600/10">
                         <div className="flex h-full flex-col  space-y-2">
                             <h1 className="flex text-2xl">
                                 Lote <span className="font-black">#</span>
                             </h1>
                             <figure className="px-10 pt-5">
-
-
                                 {NFT === 'Proexo' && (
                                     <img src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FNFT%2Fproexo.gif?alt=media&token=b46258aa-7c52-468b-af3d-d3edffe77f49" className="w-32" />
                                 )}
@@ -177,8 +174,6 @@ const CoffeeCard = () => {
                                 {NFT === 'Copracnil' && (
                                     <img src="https://console.firebase.google.com/u/0/project/affogato-fde9c/storage/affogato-fde9c.appspot.com/files/~2Fassets~2FNFT" className="w-32" />
                                 )}
-
-
                             </figure>
                             <div className="text-center">
                                 <span className="md:text-xl">
@@ -283,7 +278,7 @@ const CoffeeCard = () => {
                     <div className="">
                         {(!!coffeeBatch?.wetMill.variety || !!coffeeBatch?.wetMill.process || !!coffeeBatch?.wetMill.certifications || !!coffeeBatch?.cupProfile.aroma || !!coffeeBatch?.cupProfile.acidity || !!coffeeBatch?.cupProfile.aftertaste || !!coffeeBatch?.cupProfile.body || !!coffeeBatch?.cupProfile.flavor || !!coffeeBatch?.cupProfile.sweetness || !!coffeeBatch?.cupProfile.note) && (
                             <div
-                                className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 border border-gray-100  p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
+                                className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
                                 <h1 className="text-2xl text-center pb-2 underline decoration-2 decoration-yellow-700">
                                     Detalle de lote
                                 </h1>
@@ -379,7 +374,7 @@ const CoffeeCard = () => {
                         <br />
                         {(!!coffeeBatch?.wetMill.drying_id || !!coffeeBatch?.wetMill.quality || !!coffeeBatch?.wetMill.process || !!coffeeBatch?.wetMill.drying_type || !!coffeeBatch?.wetMill.drying_hours || (!!coffeeBatch?.wetMill.date && coffeeBatch.wetMill.date !== "1970-01-01") || !!coffeeBatch?.wetMill.facility || !!coffeeBatch?.wetMill.weight || !!coffeeBatch?.wetMill.note) && (
                             <div
-                                className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 border border-gray-100  p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
+                                className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
                                 <h1 className="text-2xl text-center pb-2 underline decoration-2 decoration-yellow-700">
                                     Beneficio Húmedo
                                 </h1>
@@ -480,7 +475,7 @@ const CoffeeCard = () => {
 
                         {(!!coffeeBatch?.dryMill.export_id || (!!coffeeBatch?.dryMill.date && coffeeBatch.dryMill.date !== "1970-01-01") || !!coffeeBatch?.dryMill.facility || !!coffeeBatch?.dryMill.drying_type || !!coffeeBatch?.dryMill.damage_percent || !!coffeeBatch?.dryMill.threshing_yield || !!coffeeBatch?.dryMill.weight || !!coffeeBatch?.dryMill.note) && (
                             <div
-                                className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 border border-gray-100  p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
+                                className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
                                 <h1 className="text-2xl text-center pb-2 underline decoration-2 decoration-yellow-700">
                                     Beneficio seco
                                 </h1>
@@ -577,7 +572,7 @@ const CoffeeCard = () => {
 
                     <h1>{JSON.stringify(coffeeBatch.roasting?.type)}</h1>
                     {!!coffeeBatch?.roasting.bag_size && (
-                        <div className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 border border-gray-100  p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
+                        <div className="card border-2 border-amber-900 rounded-3xl sm:flex sm:space-x-8 p-8 text-center shadow-2xl shadow-gray-600/10 dark:shadow-none">
                             <h1 className="text-2xl text-center pb-2 underline decoration-2 decoration-yellow-700">
                                 Tostado
                             </h1>

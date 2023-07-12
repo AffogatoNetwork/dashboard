@@ -168,8 +168,6 @@ export const CoffeBatchNewList = () => {
                 header: 'Altura (m.s.n.m) ', accessorKey: 'dryMill.height', size: 15,                
  
             }, {
-                header: 'Ubicación ', accessorKey: 'dryMill.location', size: 20,
-            }, {
                 header: 'Variedad ', accessorKey: 'wetMill.variety', size: 15,
             }, {
                 header: 'Proceso ', accessorKey: 'wetMill.process', size: 15,
