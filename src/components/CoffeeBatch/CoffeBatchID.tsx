@@ -18,9 +18,9 @@ const CoffeeBatchId = () => {
                 getBatch(batchId).then((result) => {
                     console.log(result);
                     console.log(result?.image.includes("https://firebasestorage"));
-                    if(result?.image.includes("https://firebasestorage") === true){
+                    if (result?.image.includes("https://firebasestorage") === true) {
                         console.log("es una url");
-                       
+
                     } else {
                         if (result?.image) {
                             console.log("es un hash");
@@ -36,7 +36,7 @@ const CoffeeBatchId = () => {
                     console.log(result?.Farmer);
                     console.log(result?.Farmer.length);
                     console.log(result?.Farmer.address);
-                    if(result?.Farmer.address !== undefined){
+                    if (result?.Farmer.address !== undefined) {
                         getFarmer(result?.Farmer.address).then((result) => {
                             console.log(result);
                             setFarmers(result);
@@ -50,8 +50,6 @@ const CoffeeBatchId = () => {
                                 console.log(Datas);
                                 console.log(Datas.length);
                                 return result;
-                            } else {
-                                throw new Error("Document not found");
                             }
                         });
                         FarmerDetails.then((result) => {
@@ -79,21 +77,7 @@ const CoffeeBatchId = () => {
     if (loading) {
         return <Loading label="Cargando..." className="loading-wrapper" />;
     }
-    const farmerView = () => {
-        const farmer = farmers?.map((farmer: any) => 
-            <div>
-                        {JSON.stringify(farmer)}
 
-                <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a></p>
-            </div>
-        )
-        return (
-            <div>
-                {farmer}
-            </div>
-        );
-
-    };
 
 
     return (<>
@@ -117,16 +101,31 @@ const CoffeeBatchId = () => {
                                     }
                                     <p>{coffeeBatch?.Description}</p>
 
-                                   {coffeeBatch.Farmer?.address !== undefined && (
-                                    <div>
+                                    {coffeeBatch.Farmer?.address !== undefined && (
+                                        <div>
                                             <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers?.address} > {farmers?.fullname} </a></p>
                                         </div>
-                                    
-                                   )}
 
-                                    {coffeeBatch.Farmer >0 && (
+                                    )}
+                                    {coffeeBatch.Farmer !== undefined && (
                                         <>
-                                                            {farmerView}
+                                            <div>
+                                                <p > <>{t("farmers")}</>: <br />
+                                                    <>
+                                                        {farmers?.map((farmer: any) => {
+                                                            { JSON.stringify(farmers) }
+                                                            <div>
+                                                                <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a></p>
+                                                            </div>
+
+                                                        })
+
+
+                                                        }
+
+                                                    </>
+                                                </p>
+                                            </div>
                                         </>
 
                                     )}
@@ -140,7 +139,7 @@ const CoffeeBatchId = () => {
                         <div className="relative block group">
                             <div className="card w-full h bg-base-100 shadow-xl">
                                 <div className="card-body">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name} {coffeeBatch.wetMill.entry_id} , {coffeeBatch.wetMill.variety} {coffeeBatch.wetMill.facility} </h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
 
@@ -191,7 +190,7 @@ const CoffeeBatchId = () => {
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
                                             <p><>{t("damage-percent")}</>: <br /> <span> {coffeeBatch?.dryMill?.damage_percent}</span></p>
                                             {coffeeBatch?.dryMill?.export_id !== '' && (
-                                            <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
+                                                <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
                                             )}
                                             <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height || 'Aprox 1200'}  </span></p>
                                             <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
