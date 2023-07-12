@@ -47,6 +47,7 @@ export const CoffeBatchNewList = () => {
         qrCode: string;
         Name: string;
         ipfsHash: string;
+        parentId: string; 
         dryMill: {};
         wetMill: {};
         Profile: {};
@@ -90,10 +91,9 @@ export const CoffeBatchNewList = () => {
             await getAllBatches(companyName).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
-                    console.log(farmerData);
-                    console.log(result[i].data());
                     const {
                         Name = "",
+                        parentId,
                         ipfsHash,
                         dryMill = {},
                         wetMill = {},
@@ -101,7 +101,6 @@ export const CoffeBatchNewList = () => {
                         Roasting = {},
                     } = farmerData;
 
-                    console.log(farmerData);
 
                     let qrCode = window.location.origin
                         .concat("/batch/")
@@ -111,6 +110,7 @@ export const CoffeBatchNewList = () => {
                     farmerList.push({
                         qrCode,
                         Name,
+                        parentId,
                         ipfsHash,
                         dryMill,
                         wetMill,
@@ -163,7 +163,7 @@ export const CoffeBatchNewList = () => {
                 ),
             },
             {
-                accessorFn: (farmers: any) => `${farmers.Name} , ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
+                accessorFn: (farmers: any) => `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
                 header: `Nombre`, size: 25,
                 Cell(props) {
                     return (
@@ -179,7 +179,7 @@ export const CoffeBatchNewList = () => {
                     if (props.renderedCellValue === 'undefined') {
                         return (
                             <div className="text-left">
-                                {"Aprox Mayor a 1200"}
+                                {"Aprox 1200"}
                             </div>
                         );
                     }
@@ -201,7 +201,6 @@ export const CoffeBatchNewList = () => {
                 accessorFn: (farmers: any) => `${farmers.dryMill.note}`, //accessorFn used to join multiple data into a single cell
                 header: 'Nota', size: 15,
                 Cell(props) {
-                    console.log(props.renderedCellValue);
                     if (props.renderedCellValue === '0') {
                         return (
                             <div className="text-left">
