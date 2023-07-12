@@ -32,32 +32,26 @@ const CoffeeBatchId = () => {
 
 
                     setCoffeeBatch(result);
-                    console.log(result);
-                    console.log(result?.Farmer);
-                    console.log(result?.Farmer.length);
-                    console.log(result?.Farmer.address);
                     if (result?.Farmer.address !== undefined) {
                         getFarmer(result?.Farmer.address).then((result) => {
                             console.log(result);
                             setFarmers(result);
                         });
                     }
-                    for (let i = 0; i < result?.Farmer.length; i++) {
+                    for (let i = 0; i < result?.Farmer.length; i += 1) {
+                        console.log(i);
                         let FarmerDetails = getFarmer(result?.Farmer[i]).then((result) => {
                             if (result) {
                                 let Datas: any[] = [];
                                 Datas.push(result);
                                 console.log(Datas);
                                 console.log(Datas.length);
+                                setFarmers(Datas);
+
                                 return result;
                             }
                         });
-                        FarmerDetails.then((result) => {
-                            let dataDatails = new Array();
-                            dataDatails.push(result);
-                            setFarmers(dataDatails);
-                        });
-                        setFarmerPromise(FarmerDetails);
+
                     }
                     setLoading(false);
 
@@ -78,6 +72,28 @@ const CoffeeBatchId = () => {
         return <Loading label="Cargando..." className="loading-wrapper" />;
     }
 
+    const getFarmerDetails = async () => {
+        console.log(coffeeBatch?.Farmer.length);
+        console.log(farmerPromise)
+        console.log(farmerPromise.length)
+        for (let i = 0; i < coffeeBatch?.Farmer.length; i += 1) {
+            console.log(i);
+            console.log(coffeeBatch?.Farmer[i]);
+            let farmersDetails = new Array();
+            farmersDetails.push(
+                await getFarmer(coffeeBatch?.Farmer[i]).then((result) => {
+                    console.log(result);
+                    return result;
+                }));
+            console.log(farmersDetails);
+
+            console.log(farmersDetails);
+            setFarmerPromise(farmersDetails);
+        }
+
+
+
+    };
 
 
     return (<>
@@ -112,16 +128,14 @@ const CoffeeBatchId = () => {
                                             <div>
                                                 <p > <>{t("farmers")}</>: <br />
                                                     <>
-                                                        {farmers?.map((farmer: any) => {
-                                                            { JSON.stringify(farmers) }
-                                                            <div>
-                                                                <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a></p>
+                                                        {farmers.map((farmer: any, index: any) => (
+                                                            <div key={index}>
+                                                                <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a>
+
+                                                                    <button className="btn" onClick={() => { getFarmerDetails(); }}>  más</button>
+                                                                </p>
                                                             </div>
-
-                                                        })
-
-
-                                                        }
+                                                        ))}
 
                                                     </>
                                                 </p>
@@ -129,6 +143,9 @@ const CoffeeBatchId = () => {
                                         </>
 
                                     )}
+
+
+
                                 </div>
                             </div>
 
