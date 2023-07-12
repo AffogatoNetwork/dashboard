@@ -110,8 +110,8 @@ export const FarmsNewList = () => {
                     const {
                         farmerAddress,
                         company,
-                        name,
-                        height,
+                        name = "",
+                        height = "1200",
                         area,
                         certifications,
                         latitude,
@@ -163,7 +163,25 @@ export const FarmsNewList = () => {
     const columData = useMemo<MRT_ColumnDef<FarmType>[]>(
         () => [
             {
-                header: 'Nombre', accessorKey: 'name', size: 25,
+                accessorFn: (farm: any) => `${farm.name} ${farm.village}`,
+                header: 'Nombre', size: 25,
+                Cell(props) {
+                    console.log(props);
+                    if(props.renderedCellValue === "undefined"){
+                        return (
+                            <div className="text-center">
+                            </div>
+                        );
+                        
+                    } else {
+                        return (
+                            <div className="text-center">
+                                {props.renderedCellValue}
+                            </div>
+                        );
+                    }
+                   
+                },
             }, {
                 header: 'Altura (m.s.n.m.) ', accessorKey: 'height', size: 5,                
             }, {
