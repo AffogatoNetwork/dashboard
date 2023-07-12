@@ -23,7 +23,7 @@ export const CoffeBatchNewList = () => {
     const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
 
 
-    const [farmName, setfarmName]= useState("");
+    const [farmName, setfarmName] = useState("");
 
 
 
@@ -48,9 +48,9 @@ export const CoffeBatchNewList = () => {
         Name: string;
         ipfsHash: string;
         dryMill: {};
-        wetMill:{};
-        Profile:{};
-        Roasting:{};
+        wetMill: {};
+        Profile: {};
+        Roasting: {};
     };
 
     useEffect(() => {
@@ -79,11 +79,11 @@ export const CoffeBatchNewList = () => {
             if (url.match("proexo") !== null) {
                 companyName = "PROEXO";
             }
-            if(url.match("cafepsa") !== null){
+            if (url.match("cafepsa") !== null) {
                 companyName = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                companyName = "COMMOVEL";
+                companyName = "COPRACNIL";
             }
 
 
@@ -93,7 +93,7 @@ export const CoffeBatchNewList = () => {
                     console.log(farmerData);
                     console.log(result[i].data());
                     const {
-                        Name,
+                        Name = "",
                         ipfsHash,
                         dryMill = {},
                         wetMill = {},
@@ -163,10 +163,33 @@ export const CoffeBatchNewList = () => {
                 ),
             },
             {
-                header: `Nombre`, accessorKey: 'Name', size: 25,
+                accessorFn: (farmers: any) => `${farmers.Name} , ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
+                header: `Nombre`, size: 25,
+                Cell(props) {
+                    return (
+                        <div className="text-left">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
             }, {
-                header: 'Altura (m.s.n.m) ', accessorKey: 'dryMill.height', size: 15,                
- 
+                accessorFn: (farmers: any) => `${farmers.dryMill.height}`, //accessorFn used to join multiple data into a single cell
+                header: 'Altura (m.s.n.m) ', size: 15,
+                Cell(props) {
+                    console.log(props.renderedCellValue);
+                    if (props.renderedCellValue === 'undefined') {
+                        return (
+                            <div className="text-left">
+                                {"Aprox 1200"}
+                            </div>
+                        );
+                    }
+                    return (
+                        <div className="text-left">
+                            {props.renderedCellValue || "Aprox 1200"}
+                        </div>
+                    );
+                },
             }, {
                 header: 'Variedad ', accessorKey: 'wetMill.variety', size: 15,
             }, {
@@ -176,7 +199,23 @@ export const CoffeBatchNewList = () => {
             }, {
                 header: 'Peso (qq)', accessorKey: 'dryMill.weight', size: 15,
             }, {
-                header: 'Nota', accessorKey: 'dryMill.note', size: 15,
+                accessorFn: (farmers: any) => `${farmers.dryMill.note}`, //accessorFn used to join multiple data into a single cell
+                header: 'Nota', size: 15,
+                Cell(props) {
+                    console.log(props.renderedCellValue);
+                    if (props.renderedCellValue === '0') {
+                        return (
+                            <div className="text-left">
+                                {"Mayor 80"}
+                            </div>
+                        );
+                    }
+                    return (
+                        <div className="text-left">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
             },
         ],
         [],
@@ -233,12 +272,12 @@ export const CoffeBatchNewList = () => {
                                             localization={MRT_Localization_ES}
                                             displayColumnDefOptions={{
                                                 'mrt-row-numbers': {
-                                                  size: 10,
+                                                    size: 10,
                                                 },
                                                 'mrt-row-expand': {
-                                                  size: 10,
+                                                    size: 10,
                                                 },
-                                              }}
+                                            }}
                                             initialState={{
                                                 sorting: [{ id: 'Name', desc: false }],
                                                 showGlobalFilter: true, isLoading: false
