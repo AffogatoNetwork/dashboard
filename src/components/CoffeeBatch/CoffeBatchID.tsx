@@ -154,7 +154,7 @@ const CoffeeBatchId = () => {
                         <div className="relative block group">
                             <div className="card w-full h bg-base-100 shadow-xl">
                                 <div className="card-body">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Finca : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Detalles del lote : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
 
