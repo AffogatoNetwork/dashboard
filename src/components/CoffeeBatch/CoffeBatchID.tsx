@@ -208,8 +208,8 @@ const CoffeeBatchId = () => {
                                                 <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
                                             )}
                                             <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height || 'Aprox 1200'}  </span></p>
+                                            <p><>{t("cupping_profile")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={coffeeBatch?.dryMill?.cupping_url} > {coffeeBatch?.dryMill?.cupping_url}  </a></p>
                                             <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
-
                                         </div>
                                     </div>
                                 </div>

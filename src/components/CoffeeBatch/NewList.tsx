@@ -173,7 +173,7 @@ export const CoffeBatchNewList = () => {
                     );
                 },
             }, {
-                accessorFn: (farmers: any) => `${farmers.dryMill.height}`, //accessorFn used to join multiple data into a single cell
+                accessorFn: (farmers: any) => `${farmers.dryMill.average_height}`, //accessorFn used to join multiple data into a single cell
                 header: 'Altura (m.s.n.m) ', size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === 'undefined') {
