@@ -38,21 +38,16 @@ const CoffeeBatchId = () => {
                             setFarmers(result);
                         });
                     }
-                    for (let i = 0; i < result?.Farmer.length; i += 1) {
-                        console.log(i);
-                        let FarmerDetails = getFarmer(result?.Farmer[i]).then((result) => {
-                            if (result) {
-                                let Datas: any[] = [];
-                                Datas.push(result);
-                                console.log(Datas);
-                                console.log(Datas.length);
-                                setFarmers(Datas);
-
-                                return result;
-                            }
+                    let Farmers = result?.Farmer;
+                    console.log(Farmers);
+                    let FarmerDetails: any[] = [];
+                    Farmers.forEach((element: any) => {
+                        getFarmer(element).then((result) => {
+                            FarmerDetails.push(result);
+                            console.log(FarmerDetails);
+                            setFarmers(FarmerDetails);
                         });
-
-                    }
+                    });
                     setLoading(false);
 
                 });
@@ -72,28 +67,6 @@ const CoffeeBatchId = () => {
         return <Loading label="Cargando..." className="loading-wrapper" />;
     }
 
-    const getFarmerDetails = async () => {
-        console.log(coffeeBatch?.Farmer.length);
-        console.log(farmerPromise)
-        console.log(farmerPromise.length)
-        for (let i = 0; i < coffeeBatch?.Farmer.length; i += 1) {
-            console.log(i);
-            console.log(coffeeBatch?.Farmer[i]);
-            let farmersDetails = new Array();
-            farmersDetails.push(
-                await getFarmer(coffeeBatch?.Farmer[i]).then((result) => {
-                    console.log(result);
-                    return result;
-                }));
-            console.log(farmersDetails);
-
-            console.log(farmersDetails);
-            setFarmerPromise(farmersDetails);
-        }
-
-
-
-    };
 
 
     return (<>

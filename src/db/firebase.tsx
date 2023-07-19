@@ -51,18 +51,7 @@ export const getFarmer = async (address: string) => {
   return null;
 };
 
-export const getFarmerData = async (address: string) => {
-  const q = query(
-    collection(db, "famers"),
-    where("adress", "==", address)
-);
-const querySnapshot = await getDocs(q);
-const docData = querySnapshot.docs.map(doc => doc.data());
-if (docData !== null) {
-  return docData;
-}
-return null;
-};
+
 
 export const updateFarmer = async (farmer: any, farm: any) => {
   const farmerDoc = doc(db, "farmers", farmer);
