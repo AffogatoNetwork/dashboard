@@ -46,8 +46,8 @@ const Landing = () => {
 
             return (
                 <>
-                    <CopracnilLanding></CopracnilLanding>
-                </>
+                    <DefaultLanding/>
+                    </>
             );
 
     };

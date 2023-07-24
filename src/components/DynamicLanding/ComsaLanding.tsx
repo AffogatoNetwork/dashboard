@@ -19,9 +19,9 @@ export const ComsaLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf")` }}>
-                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
+                    <div className="hero-overlay rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                    <div className="bg-opacity-40 bg-black">                           
+                    <div className="bg-opacity-40">
                           <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
                             Plataforma de Trazabilidad 
                         </h1>
@@ -193,14 +193,39 @@ export const ComsaLanding = () => {
 
 
                                     <p className="leading-relaxed">
-                                        Orgánico
+                                        Fair Trade
                                     </p>
                                     <p className="leading-relaxed">
-                                        Comercio Justo
+                                        Pequeños Productores
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        Denominación de Origen
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        Con Manos de Mujer
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        USDA Organic
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        C.A.F.E Practices
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        Bird Friendly
                                     </p>
                                     <p className="leading-relaxed">
                                         Rainforest Alliance
                                     </p>
+                                    <p className="leading-relaxed">
+                                        EU Organic
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        Fair Trade
+                                    </p>
+                                    <p className="leading-relaxed">
+                                        Agricultura Orgánica de Japón
+                                    </p>
+
                                     <br />
 
                                     <div className=" items-center">
