@@ -16,19 +16,21 @@ export const CommovelLanding = () => {
             <div className="bg-white">
                 <div id="header" className="hero min-h-screen rounded-t-2xl"
                      style={{backgroundImage: `url("https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg")`}}>
-                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
+                     <div className=" rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-<div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">
-                                Plataforma de Trazabilidad 
-                            </h1>
+                        <div className=" ">                           
+                        <div className="mt-8"></div>
+                         <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white text-shadow: 0 0 10px blue; stroke-text">
+                            Plataforma de Trazabilidad
+                        </h1>
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Empresa COMMOVEL
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text"> Empresa COMMOVEL
                             </h1>
-                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
+                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white stroke-text">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
-                            <div className="flex items-center justify-center mb-[87px]">
-                                <button className="btn btn-lg btn-outline btn-primary text-white">
+                            <div className="flex items-center justify-center mb-8 ">
+                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
                                     <a href="/farmers">
                                         Ir a la Plataforma
                                     </a>
