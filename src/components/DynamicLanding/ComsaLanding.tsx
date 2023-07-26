@@ -220,7 +220,7 @@ export const ComsaLanding = () => {
                                         EU Organic
                                     </p>
                                     <p className="leading-relaxed">
-                                        Fair Trade
+                                        Fair for Life
                                     </p>
                                     <p className="leading-relaxed">
                                         Agricultura Orgánica de Japón

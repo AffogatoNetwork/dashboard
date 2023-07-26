@@ -162,9 +162,9 @@ export default function Home() {
                 <br/>
                 <br/>
                 {active && <AiOutlineMenuFold onClick={showLess}
-                                              className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
+                                              className='inline-flex items-center w-full h-12 px-3 mt-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
                 {!active && <AiOutlineMenuUnfold onClick={showMore}
-                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 px-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
+                                                 className='inline-flex items-center w-full h-12 px-3 mt-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer'/>}
 
 
                 <div>

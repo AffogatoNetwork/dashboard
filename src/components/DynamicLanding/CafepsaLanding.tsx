@@ -49,10 +49,14 @@ export const CafepsaLanding = () => {
                                     <div
                                         className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
                                         <img alt="gallery"
-                                             className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                             src="https://dummyimage.com/542x460"/>
+                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
+                                            src="https://dummyimage.com/542x460" />
                                         <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2">Perfil de Productor</h2>
+                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2">
+                                                <a href="/farmers-profile">
+                                                    Perfil de Productor
+                                                </a>
+                                            </h2>
                                         </div>
                                     </div>
                                 </div>
@@ -60,24 +64,28 @@ export const CafepsaLanding = () => {
                                     <div
                                         className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
                                         <img alt="gallery"
-                                             className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                             src="https://dummyimage.com/542x460"/>
+                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
+                                            src="https://dummyimage.com/542x460" />
                                         <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2">Módulo Fincas de Café</h2>
+                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2" >
+                                                <a href="/farms-module">
+                                                    Módulo Fincas de Café
+                                                </a>
+                                            </h2>
                                         </div>
                                     </div>
                                 </div>
                             </div>
 
 
-                            <br/>
+                            <br />
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
                                     <div
                                         className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
                                         <img alt="gallery"
-                                             className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                             src="https://dummyimage.com/542x460"/>
+                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
+                                            src="https://dummyimage.com/542x460" />
                                         <div className="text-center relative z-10 w-full">
                                             <h2 className="text-xl text-gray-900 font-medium title-font mb-2">Sellos de Certificación</h2>
                                         </div>
@@ -87,8 +95,8 @@ export const CafepsaLanding = () => {
                                     <div
                                         className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
                                         <img alt="gallery"
-                                             className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                             src="https://dummyimage.com/542x460"/>
+                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
+                                            src="https://dummyimage.com/542x460" />
                                         <div className="text-center relative z-10 w-full">
                                             <h2 className="text-xl text-gray-900 font-medium title-font mb-2">Beneficiado Lotes de Café</h2>
                                         </div>
@@ -151,10 +159,10 @@ export const CafepsaLanding = () => {
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección: </h2>
-                                           El Paraiso, El Paraiso
+                                            El Paraiso, El Paraiso
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
-                                            cafepsa@gmail.com
+                                                cafepsa@gmail.com
                                             </p>
 
                                         </div>
@@ -164,7 +172,7 @@ export const CafepsaLanding = () => {
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Teléfono</h2>
 
                                             <p className="text-indigo-500 leading-relaxed">
-                                            (+504)  2793-5012/9327-9683
+                                                (+504)  2793-5012/9327-9683
                                             </p>
 
                                         </div>
@@ -268,16 +276,16 @@ export const CafepsaLanding = () => {
                                     </p>
 
                                     <p className="leading-relaxed">
-                                    Orgánico
+                                        Orgánico
                                     </p>
                                     <p className="leading-relaxed">
-                                    Comercio Justo
+                                        Comercio Justo
                                     </p>
                                     <p className="leading-relaxed">
-                                    Con Manos de Mujer    
+                                        Con Manos de Mujer
                                     </p>
                                     <p className="leading-relaxed">
-                                    Simbolo de pequeños productores
+                                        Simbolo de pequeños productores
                                     </p>
 
                                     <br />
@@ -310,22 +318,22 @@ export const CafepsaLanding = () => {
                         <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F2.jpg?alt=media&token=5bb2ade1-9321-49d5-8727-be4490e7d9dd"
-                            alt=""/>
+                            alt="" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F4.jpg?alt=media&token=a7ea9ef0-eb11-403a-a4fb-495db509e89b"
-                            alt=""/>
+                            alt="" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"
-                            alt=""/>
+                            alt="" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F8.jpg?alt=media&token=68f938c1-69ad-4f88-92f8-a0c6f82ffba7"
-                            alt=""/>
+                            alt="" />
                     </div>
                 </div>
 

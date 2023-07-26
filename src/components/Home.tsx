@@ -21,6 +21,8 @@ import {NewList} from "./Farmer/NewList";
 import {FarmsNewList } from "./Farm/NewList";
 import {CoffeBatchNewList} from "./CoffeeBatch/NewList";
 import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
+import { FarmerProfileModule } from "./Cafepsa/FarmerProfile";
+import { FarmsModule } from "./Cafepsa/FarmsModule";
 
 
 const Home = () => {
@@ -33,7 +35,6 @@ const Home = () => {
         if(state.isLoggedIn !== false){
             authContext.signOut()
         } else {
-            console.log("logged out");
         }
     }
 
@@ -81,6 +82,42 @@ const Home = () => {
                         </RequiredAuth>
                     }
                 />
+                <Route
+                    path="/farmers-profile"
+                    element={
+                        <RequiredAuth>
+                            <Dashboard>
+                                <FarmerProfileModule/>
+                            </Dashboard>
+                        </RequiredAuth>
+                    }
+                />
+                <Route
+                    path="/farms-module"
+                    element={
+                        <RequiredAuth>
+                            <Dashboard>
+                                <FarmsModule/>
+                            </Dashboard>
+                        </RequiredAuth>
+                    }
+                />
+                
+                <Route
+                    path="/certification-module"
+                    element={
+                        <RequiredAuth>
+                            <Dashboard>
+                                <FarmerList/>
+                            </Dashboard>
+                        </RequiredAuth>
+                    }
+                />
+
+
+
+
+
                 <Route
                     path="/farms"
                     element={
