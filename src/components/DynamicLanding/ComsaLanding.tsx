@@ -186,6 +186,14 @@ export const ComsaLanding = () => {
                                         - Hotel La Fortaleza
                                     </p>
 
+                                    <p className="leading-relaxed">
+                                        - Tostaduria
+                                    </p>
+
+                                    <p className="leading-relaxed">
+                                        - BANCOMSA
+                                    </p>
+
                                     <div className="flex mt-6 items-center justify-center pb-5">
 
 
