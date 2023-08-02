@@ -19,18 +19,18 @@ export const CafepsaLanding = () => {
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F1.jpg?alt=media&token=1e15d575-f2af-44a1-b853-08ba8bf2d185")` }}>
                     <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                        <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white"> Plataforma
+                        <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text"> Plataforma
                             de Trazabilidad
                         </h1>
                             <br />
-                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white">Empresa CAFEPSA
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text">Empresa CAFEPSA
                             </h1>
 
-                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white">
+                            <p className=" mb-6 text-3xl font-light lg:mb-8 md:text-lg lg:text-xl xl:text-4xl text-white stroke-text">
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
-                                <button className="btn btn-lg btn-outline btn-primary text-white">
+                            <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
                                     <a href="/farmers">
                                         Ir a la Plataforma
                                     </a>
@@ -49,10 +49,10 @@ export const CafepsaLanding = () => {
                                     <div
                                         className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
                                         <img alt="gallery"
-                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                            src="https://dummyimage.com/542x460" />
+                                            className="w-full object-cover h-full object-center block opacity-35 absolute inset-0"
+                                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
                                         <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2">
+                                            <h2 className="text-xl text-white font-bold title-font mb-2 stroke-text">
                                                 <a href="/farmers-profile">
                                                     Perfil de Productor
                                                 </a>

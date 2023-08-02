@@ -46,7 +46,7 @@ const Landing = () => {
 
             return (
                 <>
-                    <DefaultLanding/>
+                    <CafepsaLanding/>
                     </>
             );
 

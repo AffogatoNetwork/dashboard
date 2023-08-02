@@ -39,6 +39,8 @@ export const FarmerProfileModule = () => {
 
     type FarmerType = {
         farmerId: string;
+        femaleMenbers: number;
+        maleMenbers: number;
         address: string;
         fullname: string;
         familyMembers: string;
@@ -47,6 +49,7 @@ export const FarmerProfileModule = () => {
         gender: string;
         farm: string;
         location: string;
+        region: string;
         village: string;
         village1: string;
         village2: string;
@@ -85,7 +88,7 @@ export const FarmerProfileModule = () => {
                 companyName = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                companyName = "PROEXO";
+                companyName = "CAFEPSA";
             }
 
 
@@ -97,6 +100,8 @@ export const FarmerProfileModule = () => {
                         farmerId,
                         address,
                         fullname,
+                        femaleMenbers,
+                        maleMenbers,
                         bio,
                         gender,
                         farm,
@@ -129,11 +134,14 @@ export const FarmerProfileModule = () => {
                         address,
                         country,
                         fullname,
+                        femaleMenbers,
+                        maleMenbers,
                         familyMembers,
                         bio,
                         gender,
                         farm,
                         location: l,
+                        region,
                         village,
                         village1,
                         village2,
@@ -142,6 +150,7 @@ export const FarmerProfileModule = () => {
                         search: s.toLowerCase()
                     });
                 }
+                console.log(farmerList);
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
@@ -226,12 +235,42 @@ export const FarmerProfileModule = () => {
                         </div>
                     );
                 },
+            },
+            
+            {
+                accessorFn: (farm: any) => `${farm.maleMenbers}`,
+                id: 'maleMenbers', //id is still required when using accessorFn instead of accessorKey
+                header: 'Integrantes Masculinos',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div className="text-center">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
+            },
+            {
+                accessorFn: (farm: any) => `${farm.femaleMenbers}`,
+                id: 'femaleMenbers', //id is still required when using accessorFn instead of accessorKey
+                header: 'Integrantes Femeninos',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div className="text-center">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
+            },
+            
+            
+            
+            
+            {
+                header: 'Comunidad ', accessorKey: 'region'
             }, {
-                header: 'Comunidad ', accessorKey: 'village'
-            }, {
-                header: 'Municipio ', accessorKey: 'village1'
-            }, {
-                header: 'Departamento ', accessorKey: 'village2'
+                header: 'Municipio ', accessorKey: 'village2'
             }, {
                 header: 'Pais', accessorKey: 'country'
             }
