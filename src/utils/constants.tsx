@@ -61,8 +61,10 @@ export const CooperativeList = [
   {
     key: "5",
     name: "CAFEPSA",
-    email: "",
-    addresses: [],
+    email: "antonio@affogato.co",
+    addresses: [
+      "0x0ef705a35701F6e7ddAcd596546D46740CEA122A",
+    ],
   },
 ];
 

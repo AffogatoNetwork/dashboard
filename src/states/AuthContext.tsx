@@ -212,9 +212,11 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
     sendAccountEmail(address, data);
     if (data.farmerData !== null) {
       saveFarmer({ ...data.farmerData, address }, data.imageFile);
+      console.log(address)
     }
     if (data.companyData !== null) {
       saveCompany({ ...data.companyData, address });
+      console.log(address)
     }
   };
 

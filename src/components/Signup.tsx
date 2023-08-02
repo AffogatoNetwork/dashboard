@@ -1,22 +1,22 @@
-import React, {useEffect, useRef, useState} from "react";
+import React, { useEffect, useRef, useState } from "react";
 import Form from "react-bootstrap/Form";
 import MultipleValueTextInput from "react-multivalue-text-input";
-import {useNavigate} from "react-router-dom";
-import {useTranslation} from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 import User from "../assets/user.png";
-import {useAuthContext} from "../states/AuthContext";
+import { useAuthContext } from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
 import Loading from "./Loading";
 import FormInput from "./common/FormInput";
 import "../styles/signup.scss";
-import {errorNotification, isValidCellphone, isValidEmail, notifyUser,} from "../utils/utils";
-import {CooperativeList, CooperativeType, GenderList, RegionList, RegionType,} from "../utils/constants";
+import { errorNotification, isValidCellphone, isValidEmail, notifyUser, } from "../utils/utils";
+import { CooperativeList, CooperativeType, GenderList, RegionList, RegionType, } from "../utils/constants";
 
 const Signup = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const areaCode = "+504";
     const navigate = useNavigate();
-    const {authContext, authState} = useAuthContext();
+    const { authContext, authState } = useAuthContext();
     const [state] = authState;
     const [activeTab, setActiveTab] = useState("farmer");
     const [selectedImage, setSelectedImage] = useState("");
@@ -223,7 +223,7 @@ const Signup = () => {
         const input = event.target.value;
         setCooperativeId(input);
         if (input.trim().length > 25) {
-            setFarmerIdError(t("errors.max-length", {length: 25}));
+            setFarmerIdError(t("errors.max-length", { length: 25 }));
         } else {
             setFarmerIdError("");
         }
@@ -234,7 +234,7 @@ const Signup = () => {
         const input = event.target.value;
         setFarmerId(input);
         if (input.trim().length > 70) {
-            setFullnameError(t("errors.max-length", {length: 70}));
+            setFullnameError(t("errors.max-length", { length: 70 }));
         } else {
             setFullnameError("");
         }
@@ -245,7 +245,7 @@ const Signup = () => {
         const input = event.target.value;
         setFullname(input);
         if (input.trim().length > 70) {
-            setFullnameError(t("errors.max-length", {length: 70}));
+            setFullnameError(t("errors.max-length", { length: 70 }));
         } else {
             setFullnameError("");
         }
@@ -255,7 +255,7 @@ const Signup = () => {
         const input = event.target.value;
         setVillage(input);
         if (input.trim().length > 70) {
-            setVillageError(t("errors.max-length", {length: 25}));
+            setVillageError(t("errors.max-length", { length: 25 }));
         } else {
             setVillageError("");
         }
@@ -265,7 +265,7 @@ const Signup = () => {
         const input = event.target.value;
         setVillage2(input);
         if (input.trim().length > 70) {
-            setVillage2Error(t("errors.max-length", {length: 25}));
+            setVillage2Error(t("errors.max-length", { length: 25 }));
         } else {
             setVillage2Error("");
         }
@@ -275,7 +275,7 @@ const Signup = () => {
         const input = event.target.value;
         setBio(input);
         if (input.trim().length > 700) {
-            setBioError(t("errors.max-length", {length: 700}));
+            setBioError(t("errors.max-length", { length: 700 }));
         } else {
             setBioError("");
         }
@@ -334,7 +334,7 @@ const Signup = () => {
         const input = event.target.value;
         setAddressLine(input);
         if (input.trim().length > 150) {
-            setAddressLineError(t("errors.max-length", {length: 150}));
+            setAddressLineError(t("errors.max-length", { length: 150 }));
         } else {
             setAddressLineError("");
         }
@@ -344,7 +344,7 @@ const Signup = () => {
         const input = event.target.value;
         setSocialReason(input);
         if (input.trim().length > 70) {
-            setSocialReasonError(t("errors.max-length", {length: 70}));
+            setSocialReasonError(t("errors.max-length", { length: 70 }));
         } else {
             setSocialReasonError("");
         }
@@ -384,7 +384,7 @@ const Signup = () => {
         const input = event.target.value;
         setReview(input);
         if (input.trim().length > 700) {
-            setReviewError(t("errors.max-length", {length: 700}));
+            setReviewError(t("errors.max-length", { length: 700 }));
         } else {
             setReviewError("");
         }
@@ -394,7 +394,7 @@ const Signup = () => {
         const input = event.target.value;
         setProductiveAreas(input);
         if (input.trim().length > 300) {
-            setProductiveAreasError(t("errors.max-length", {length: 300}));
+            setProductiveAreasError(t("errors.max-length", { length: 300 }));
         } else {
             setProductiveAreasError("");
         }
@@ -404,7 +404,7 @@ const Signup = () => {
         const input = event.target.value;
         setManagerName(input);
         if (input.trim().length > 80) {
-            setManagerNameError(t("errors.max-length", {length: 80}));
+            setManagerNameError(t("errors.max-length", { length: 80 }));
         } else {
             setManagerNameError("");
         }
@@ -434,7 +434,7 @@ const Signup = () => {
         const input = event.target.value;
         setNoPartnersF(input);
         if (input.trim().length > 120) {
-            setNoPartnersFError(t("errors.max-length", {length: 120}));
+            setNoPartnersFError(t("errors.max-length", { length: 120 }));
         } else {
             setNoPartnersFError("");
         }
@@ -447,7 +447,7 @@ const Signup = () => {
     const RenderForm = () => (
 
         <>
-            <div className="shadow-xl bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
+            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-3 lg:grid-cols-3">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
                         <div className="md:col-span-5">
@@ -510,7 +510,7 @@ const Signup = () => {
                                 />
                             </div>
                         </div>
-                        </div>
+                    </div>
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
                         <div className="md:col-span-5">
                             <div className="grid grid-cols-2 gap-2">
@@ -656,14 +656,14 @@ const Signup = () => {
                         </div>
 
 
-                        </div>
+                    </div>
                 </div>
                 {state.creatingAccountError && (<div className="account-created">
                     <h3>
                         <>{t("errors.creating-account")}</>
                     </h3>
                 </div>)}
-                <br/>
+                <br />
                 <div className="flex justify-center">
                     <button
                         className="btn btn-primary"
@@ -674,7 +674,7 @@ const Signup = () => {
                     <div className="divider divider-horizontal"></div>
                     <button
                         className="btn btn-secondary "
-                        onClick={() => navigate("/login", {replace: true})}
+                        onClick={() => navigate("/login", { replace: true })}
                     >
                         <u>
                             <>{t("signup.back")}</>
@@ -683,11 +683,11 @@ const Signup = () => {
                 </div>
             </div>
         </>
-        );
+    );
 
     const RenderFarmerForm = () => (
         <>
-            <div className="shadow-xl bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
+            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
                 <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2">
                     <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
                         <div className="md:col-span-5">
@@ -702,7 +702,7 @@ const Signup = () => {
                                     placeholder="Seleccione imagen."
                                     onChange={handleOnImageChange}
                                     ref={hiddenFileInput}
-                                    style={{display: "none"}}
+                                    style={{ display: "none" }}
                                     className="input input-bordered "
                                 />
                             </div>
@@ -741,7 +741,7 @@ const Signup = () => {
 
                         <div className="md:col-span-5">
                             <FormInput
-                             
+
                                 label={t("company-code")}
                                 value={cooperativeId}
                                 placeholder={t("company-code")}
@@ -767,7 +767,7 @@ const Signup = () => {
                         <div className="md:col-span-5 m-2">
                             <h1 className="text-base font-medium"> <> {t("signup.choose-company")}</></h1>
                             <select id="dropdown-cooperative" className="select select-bordered w-full"
-                                    onChange={handleCooperativeChange}>
+                                onChange={handleCooperativeChange}>
                                 <option disabled selected><> {t("signup.choose-company")}</>
                                     :
                                 </option>
@@ -780,7 +780,7 @@ const Signup = () => {
                             {coopError !== "" && (<span className="error-message">{coopError}</span>)}
                         </div>
                         <div className="md:col-span-5 m-2">
-<h1 className="text-base font-medium"> <> {t("region")}</> </h1>
+                            <h1 className="text-base font-medium"> <> {t("region")}</> </h1>
                             <select id="dropdown-cooperative" className="select select-bordered w-full" onChange={handleRegionChange}>
                                 <option disabled selected><> {t("region")}</>
                                     :
@@ -830,7 +830,7 @@ const Signup = () => {
                     </div>
 
                 </div>
-                <br/>
+                <br />
                 <div className="flex justify-center">
                     <button
                         className="btn btn-primary"
@@ -841,7 +841,7 @@ const Signup = () => {
                     <div className="divider divider-horizontal"></div>
                     <button
                         className="btn btn-secondary "
-                        onClick={() => navigate("/login", {replace: true})}
+                        onClick={() => navigate("/login", { replace: true })}
                     >
                         <u>
                             <>{t("signup.back")}</>
@@ -850,14 +850,14 @@ const Signup = () => {
                 </div>
             </div>
         </>
-        );
+    );
 
 
 
 
 
     if (state.creatingAccount) {
-        return (<Loading label={t("loading").concat("...")} className="loading-wrapper"/>);
+        return (<Loading label={t("loading").concat("...")} className="loading-wrapper" />);
     }
 
     return (<div className="">
@@ -866,22 +866,22 @@ const Signup = () => {
                 <div>
                     <div className="grid ">
                         <div className="h-24 w-24 place-self-center">
-                            <CoopLogo className="logo"/>
+                            <CoopLogo className="logo" />
                         </div>
-                        <br/>
+                        <br />
                     </div>
 
                     {!state.accountCreated ? (<div className="">
                         <div className="bg-base-100 pt-4 rounded-t-xl m-12 lg:mx-64">
                             <div className="flex tabs justify-center">
                                 <a className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
-                                   id="signup-tabs"
-                                   onClick={() => setActiveTab("farmer")}
+                                    id="signup-tabs"
+                                    onClick={() => setActiveTab("farmer")}
                                 ><>{t("farmer")}</>
                                 </a>
                                 <a className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
-                                   id="signup-tabs"
-                                   onClick={() => setActiveTab("cooperative")}
+                                    id="signup-tabs"
+                                    onClick={() => setActiveTab("cooperative")}
                                 ><>{t("company")}</>
                                 </a>
                             </div>
@@ -902,7 +902,7 @@ const Signup = () => {
                             className="btn auth-method"
                             onClick={() => {
                                 authContext.fakeSignOut();
-                                navigate("/login", {replace: true});
+                                navigate("/login", { replace: true });
                             }}
                         >
                             <>{t("login.access")}</>

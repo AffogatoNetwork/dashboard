@@ -278,7 +278,7 @@ export const NewList  = () => {
                                     )}
                                 </div>
 
-                                <div className="overflow-auto overflow-scroll">
+                                <div className="overflow-scroll">
                                     <MaterialReactTable
                                         columns={columData}
                                         data={farmers}
