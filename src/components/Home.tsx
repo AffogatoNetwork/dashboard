@@ -23,6 +23,7 @@ import {CoffeBatchNewList} from "./CoffeeBatch/NewList";
 import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
 import { FarmerProfileModule } from "./Cafepsa/FarmerProfile";
 import { FarmsModule } from "./Cafepsa/FarmsModule";
+import {CertificationsModule} from "./Cafepsa/CertificationsModule";
 
 
 const Home = () => {
@@ -108,7 +109,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <FarmerList/>
+                                <CertificationsModule/>
                             </Dashboard>
                         </RequiredAuth>
                     }

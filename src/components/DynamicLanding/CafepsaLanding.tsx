@@ -46,34 +46,33 @@ export const CafepsaLanding = () => {
                         <div className="lg:w-2/3 mx-auto">
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
+                                    <a href="/farmers-profile">
+
                                     <div
-                                        className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                                        <img alt="gallery"
-                                            className="w-full object-cover h-full object-center block opacity-35 absolute inset-0"
-                                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                        <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-white font-bold title-font mb-2 stroke-text">
-                                                <a href="/farmers-profile">
-                                                    Perfil de Productor
-                                                </a>
-                                            </h2>
+                                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                                        <img className="object-cover w-full h-56 md:h-64 xl:h-80"
+                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
+                                        <p className="m-2 text-xl font-bold text-center">
+                                                Perfil de Productor
+
+                                        </p>
                                         </div>
-                                    </div>
+                                    </a>
+
                                 </div>
                                 <div className="px-2 w-1/2">
-                                    <div
-                                        className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                                        <img alt="gallery"
-                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                            src="https://dummyimage.com/542x460" />
-                                        <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2" >
-                                                <a href="/farms-module">
-                                                    Módulo Fincas de Café
-                                                </a>
-                                            </h2>
+                                    <a  href="/farms-module">
+                                        <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+
+                                            <img className="object-cover w-full h-56 md:h-64 xl:h-80"
+                                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
+                                            <p className="m-2 text-xl font-bold text-center">
+                                                Módulo Fincas de Café
+                                            </p>
                                         </div>
-                                    </div>
+                                    </a>
+
+
                                 </div>
                             </div>
 
@@ -81,27 +80,36 @@ export const CafepsaLanding = () => {
                             <br />
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
-                                    <div
-                                        className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                                        <img alt="gallery"
-                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                            src="https://dummyimage.com/542x460" />
-                                        <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2">Sellos de Certificación</h2>
+                                    <a href="/certification-module">
+                                        <div
+                                            className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                                            <img className="object-cover w-full h-56 md:h-64 xl:h-80"
+                                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
+                                            <p className="m-2 text-xl font-bold text-center">
+                                                Sellos de Certificación
+                                            </p>
                                         </div>
-                                    </div>
+                                    </a>
+
+
                                 </div>
                                 <div className="px-2 w-1/2">
+                                    <a href="/farms-module">
+
                                     <div
-                                        className="flex flex-wrap w-full bg-gray-100 sm:py-24 py-16 sm:px-10 px-6 relative">
-                                        <img alt="gallery"
-                                            className="w-full object-cover h-full object-center block opacity-25 absolute inset-0"
-                                            src="https://dummyimage.com/542x460" />
-                                        <div className="text-center relative z-10 w-full">
-                                            <h2 className="text-xl text-gray-900 font-medium title-font mb-2">Beneficiado Lotes de Café</h2>
-                                        </div>
+                                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                                        <img className="object-cover w-full h-56 md:h-64 xl:h-80"
+                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
+                                        <p className="m-2 text-xl font-bold text-center">
+                                                Beneficiado Lotes de Café
+
+                                        </p>
                                     </div>
+                                    </a>
+
                                 </div>
+
+
                             </div>
                         </div>
                     </div>

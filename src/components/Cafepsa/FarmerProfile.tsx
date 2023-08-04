@@ -197,8 +197,6 @@ export const FarmerProfileModule = () => {
             {
                 header: 'Nombre ', accessorKey: 'fullname'
             }, {
-                header: 'No. de Identidad ', accessorKey: 'farmerId'
-            }, {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
                 header: 'Sexo',
