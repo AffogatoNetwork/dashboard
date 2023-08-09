@@ -330,6 +330,7 @@ export const FarmersModules = () => {
                                             <a className="link link-info">
                                                 <ReactHTMLTableToExcel
                                                     id="table-xls-button"
+
                                                     className="download-xls-button"
                                                     table="farmers-list"
                                                     filename={t("farmers")}
@@ -345,6 +346,7 @@ export const FarmersModules = () => {
 
                                     <div className="overflow-auto">
                                         <MaterialReactTable
+                                        enableStickyHeader={true}
                                             columns={columData}
                                             data={farmers}
                                             enableHiding={false}
