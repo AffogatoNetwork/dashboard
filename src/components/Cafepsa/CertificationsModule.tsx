@@ -1,15 +1,15 @@
-import {useTranslation} from "react-i18next";
-import React, {useEffect, useMemo, useState} from "react";
-import {getAllFarmers} from "../../db/firebase";
-import {SEARCH_DIVIDER} from "../../utils/constants";
-import MaterialReactTable, {MRT_ColumnDef} from "material-react-table";
+import { useTranslation } from "react-i18next";
+import React, { useEffect, useMemo, useState } from "react";
+import { getAllFarmers } from "../../db/firebase";
+import { SEARCH_DIVIDER } from "../../utils/constants";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import reactNodeToString from "react-node-to-string";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
-import {MRT_Localization_ES} from "material-react-table/locales/es";
-import {LinkIcon} from "../icons/link";
-
+import { MRT_Localization_ES } from "material-react-table/locales/es";
+import { LinkIcon } from "../icons/link";
+import {MdDoneOutline} from "react-icons/md";
 export const CertificationsModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
@@ -49,7 +49,7 @@ export const CertificationsModule = () => {
         usda: number;
         spp: number;
         manosdemujer: number;
-        fairtrade : number;
+        fairtrade: number;
         country: string;
         gender: string;
         farm: string;
@@ -190,13 +190,13 @@ export const CertificationsModule = () => {
                 id: 'spp', //id is still required when using accessorFn instead of accessorKey
                 header: 'SPP',
                 Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')}/>
+                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')} />
                 ), //arrow function
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
-                Cell: ({ renderedCellValue }) => (
+                Cell: ({row}) => (
                     <>
                         <Box
                             sx={{
@@ -205,24 +205,33 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            <span>
-                                {renderedCellValue}
-                            </span>
+                            
+                            {(row.original.usda === 1) && (
+                                <h1>
+                                    <MdDoneOutline className="icon"/>
+                                </h1>
+                            )}
+                            {(row.original.usda === null) && (
+                                <h1>
+                                    
+                                </h1>
+                            )}
+
                         </Box>
                     </>
+
                 ),
             }, {
                 accessorFn: (row: { fairtrade: any; }) => `${row.fairtrade} `, //accessorFn used to join multiple data into a single cell
                 id: 'spp', //id is still required when using accessorFn instead of accessorKey
                 header: 'SPP',
                 Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')}/>
+                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')} />
                 ), //arrow function
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
-                // @ts-ignore
-                Cell: ({ renderedCellValue }) => (
+                Cell: ({row}) => (
                     <>
                         <Box
                             sx={{
@@ -231,24 +240,33 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            <span>
-                                {renderedCellValue}
-                            </span>
+                            
+                            {(row.original.fairtrade === 1) && (
+                                <h1>
+                                    <MdDoneOutline className="icon"/>
+                                </h1>
+                            )}
+                            {(row.original.fairtrade === null) && (
+                                <h1>
+                                    
+                                </h1>
+                            )}
+
                         </Box>
                     </>
+
                 ),
             }, {
                 accessorFn: (row: { manosdemujer: any; }) => `${row.manosdemujer} `, //accessorFn used to join multiple data into a single cell
                 id: 'spp', //id is still required when using accessorFn instead of accessorKey
                 header: 'SPP',
                 Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')}/>
+                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} />
                 ), //arrow function
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
-                // @ts-ignore
-                Cell: ({ cell }) => (
+                Cell: ({row}) => (
                     <>
                         <Box
                             sx={{
@@ -257,22 +275,33 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            {cell.getValue<number>()}
+                            
+                            {(row.original.manosdemujer === 1) && (
+                                <h1>
+                                    <MdDoneOutline className="icon"/>
+                                </h1>
+                            )}
+                            {(row.original.manosdemujer === null) && (
+                                <h1>
+                                    
+                                </h1>
+                            )}
+
                         </Box>
                     </>
+
                 ),
             }, {
                 accessorFn: (row: { spp: any; }) => `${row.spp} `, //accessorFn used to join multiple data into a single cell
                 id: 'spp', //id is still required when using accessorFn instead of accessorKey
                 header: 'SPP',
-                Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')}/>
+                Header: () => (
+                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} />
                 ), //arrow function
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
-                // @ts-ignore
-                Cell: ({ renderedCellValue }) => (
+                Cell: ({row}) => (
                     <>
                         <Box
                             sx={{
@@ -281,11 +310,21 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            <span>
-                                {renderedCellValue}
-                            </span>
+                            
+                            {(row.original.spp === 1) && (
+                                <h1>
+                                    <MdDoneOutline className="icon"/>
+                                </h1>
+                            )}
+                            {(row.original.spp === null) && (
+                                <h1>
+                                    
+                                </h1>
+                            )}
+
                         </Box>
                     </>
+
                 ),
             }
         ],
@@ -336,8 +375,9 @@ export const CertificationsModule = () => {
                                         )}
                                     </div>
 
-                                    <div className="overflow-auto overflow-scroll">
+                                    <div className="overflow-auto ">
                                         <MaterialReactTable
+                                            enableStickyHeader={true}
                                             columns={columData}
                                             data={farmers}
                                             enableHiding={false}
@@ -367,7 +407,7 @@ export const CertificationsModule = () => {
                 <div className="modal modal-bottom sm:modal-middle">
                     <div className="modal-box relative">
                         <label htmlFor="farmerlist"
-                               className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                         <div className="flex justify-center m-6">
                             <div>
                                 <QRCode value={Data} size={300} id="qr-farmer" />
@@ -377,7 +417,7 @@ export const CertificationsModule = () => {
                                             className="bg-gray-300 hover:bg-gray-400 text-gray-800 font-bold py-2 px-4 rounded inline-flex items-center"
                                             onClick={handleOnDownloadClick}>
                                             <svg className="fill-current w-4 h-4 mr-2" xmlns="http://www.w3.org/2000/svg"
-                                                 viewBox="0 0 20 20">
+                                                viewBox="0 0 20 20">
                                                 <path d="M13 8V2H7v6H2l8 8 8-8h-5zM0 18h20v2H0v-2z" />
                                             </svg>
                                             <>{t("download")}</>
@@ -387,7 +427,7 @@ export const CertificationsModule = () => {
                                         <button onClick={() => {
                                             openInNewTab(Data);
                                         }}
-                                                className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
+                                            className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
                                             <LinkIcon></LinkIcon>
                                             <>{t("open-link")}</>
                                         </button>
@@ -398,7 +438,7 @@ export const CertificationsModule = () => {
                                     <button onClick={() => {
                                         openInNewTab(BlockchainUrl);
                                     }}
-                                            className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
                                         <LinkIcon></LinkIcon>
                                         <>Ver en el blockchain</>
                                     </button>

@@ -38,21 +38,21 @@ export const FarmsModule  = () => {
     };
 
     type FarmerType = {
-        farmerId: string;
+        area: number;
         address: string;
-        fullname: string;
-        familyMembers: string;
-        bio: string;
+        height: string;
+        ipfshash: string;
+        latitude: number;
+        longitude: number;
+        name: string;
+        shadow: string;
+        varieties: string;
         country: string;
-        gender: string;
-        farm: string;
-        location: string;
         village: string;
-        village1: string;
+        state: string;
         village2: string;
         qrCode: string;
         blockChainUrl: string;
-        search: string;
     };
 
     useEffect(() => {
@@ -85,7 +85,7 @@ export const FarmsModule  = () => {
                 companyName = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                companyName = "PROEXO";
+                companyName = "CAFEPSA";
             }
 
 
@@ -94,55 +94,47 @@ export const FarmsModule  = () => {
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
-                        farmerId,
+                        area,
                         address,
-                        fullname,
-                        bio,
-                        gender,
-                        farm,
-                        familyMembers,
-                        village,
-                        village1,
-                        village2,
-                        region,
+                        height,
+                        ipfshash,
+                        latitude,
+                        longitude,
+                        fullname :name,
+                        shadow,
+                        varieties,
                         country,
+                        village,
+                        state,
+                        village2,
                     } = farmerData;
-                    const l = village
-                        .concat(", ")
-                        .concat(region)
-                        .concat(", ")
-                        .concat(country);
-                    const s = farmerId
-                        .concat(SEARCH_DIVIDER)
-                        .concat(fullname)
-                        .concat(SEARCH_DIVIDER)
-                        .concat(bio)
-                        .concat(SEARCH_DIVIDER)
-                        .concat(l);
+                    
+                    
                     let qrCode = window.location.origin
                         .concat("/farmer/")
                         .concat(address);
-                    let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + farm;
+                    let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + ipfshash;
                     setBlockchainUrl(blockChainUrl)
                     farmerList.push({
-                        farmerId,
+                        area,
                         address,
+                        height,
+                        ipfshash,
+                        latitude,
+                        longitude,
+                        name,
+                        shadow,
+                        varieties,
                         country,
-                        fullname,
-                        familyMembers,
-                        bio,
-                        gender,
-                        farm,
-                        location: l,
                         village,
-                        village1,
+                        state,
                         village2,
-                        qrCode,
-                        blockChainUrl,
-                        search: s.toLowerCase()
+                        qrCode: qrCode,
+                        blockChainUrl: blockChainUrl
                     });
                 }
                 setFarmers(farmerList);
+                console.log(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
                 console.log(loading);
@@ -154,7 +146,7 @@ export const FarmsModule  = () => {
 
 
 
-    const columData = useMemo<MRT_ColumnDef<FarmerType>[]>(
+    const columData = useMemo<MRT_ColumnDef<any>[]>(
         () => [
 
         {
@@ -186,25 +178,25 @@ export const FarmsModule  = () => {
             ),
         },
         {
-        header: 'Nombre ', accessorKey: 'fullname' 
+        header: 'Nombre ', accessorKey: 'name'
     },{
         header: 'Comunidad ', accessorKey: 'village'
     },{
-        header: 'Municipio ', accessorKey: 'village1'
+        header: 'Municipio ', accessorKey: 'village2'
     },{
-        header: 'Departamento ', accessorKey: 'village2'
-    },{
+        header: 'Departamento ', accessorKey: 'state'
+    }, {
         header: 'Pais', accessorKey: 'country'
     }, {
-        header: 'Coordenadas ', accessorKey: 'village1'
+        header: 'Coordenadas ', accessorKey: 'latitude'
     }, {
-        header: 'Área (mz)', accessorKey: 'village1'
+        header: 'Área (mz)', accessorKey: 'area'
     }, {
-        header: 'Variedades de Café ', accessorKey: 'village1'
+        header: 'Variedades de Café ', accessorKey: 'varieties'
     },{
-        header: 'Altura de Finca(m.s.n.m)', accessorKey: 'village1'
+        header: 'Altura (m.s.n.m.) ', accessorKey: 'height'          
     },{
-        header: 'Sistema de Producción', accessorKey: 'village1'
+        header: 'Sistema de Producción', accessorKey: 'shadow'
     }
         ],
         [],
@@ -225,7 +217,7 @@ export const FarmsModule  = () => {
                     <div className="card shadow-xl bg-white">
                         <div className="w-full p-5 rounded-lg">
                             <div className="text-center text-xl font-bold">
-                                <>{t("search-farmers")}</>
+                                <>{t("search-farms")}</>
                             </div>
                         </div>
                         <div className="m-6">
@@ -254,8 +246,9 @@ export const FarmsModule  = () => {
                                     )}
                                 </div>
 
-                                <div className="overflow-auto overflow-scroll">
+                                <div className="overflow-auto">
                                     <MaterialReactTable
+                                    enableStickyHeader={true}
                                         columns={columData}
                                         data={farmers}
                                         enableHiding={false}

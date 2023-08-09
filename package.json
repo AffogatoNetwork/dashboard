@@ -41,8 +41,6 @@
     "postcss": "^8.4.18",
     "prettier": "^2.7.0",
     "prettier-plugin-tailwindcss": "^0.1.13",
-    "primeicons": "^6.0.1",
-    "primereact": "^8.7.3",
     "react": "^18.2.0",
     "react-bootstrap": "^2.5.0",
     "react-bootstrap-accordion": "^1.0.0",
