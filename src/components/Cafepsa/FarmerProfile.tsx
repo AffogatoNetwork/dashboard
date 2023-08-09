@@ -195,7 +195,30 @@ export const FarmerProfileModule = () => {
                 ),
             },
             {
-                header: 'Nombre ', accessorKey: 'fullname'
+                accessorFn: (row) => `${row.qrCode} ${row.fullname}`, //accessorFn used to join multiple data into a single cell
+                id: 'name', //id is still required when using accessorFn instead of accessorKey
+                header: 'Nombre',
+                enableSorting: false,
+                enableColumnFilter: false,
+                // @ts-ignore
+                Cell: ({ renderedCellValue, row}) => (
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                            }}
+                        >
+    
+                            <h1 onClick={() => {
+                                openInNewTab(reactNodeToString(row.original.qrCode));}}
+                                    className=" font-bold hover:underline hover:decoration-2">
+                               {row.original.fullname}
+                            </h1>
+                        </Box>
+                    </>
+                ),
             }, {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
@@ -320,7 +343,7 @@ export const FarmerProfileModule = () => {
                                         )}
                                     </div>
 
-                                    <div className="overflow-auto overflow-scroll">
+                                    <div className="overflow-auto">
                                         <MaterialReactTable
                                             columns={columData}
                                             data={farmers}
