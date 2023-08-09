@@ -184,15 +184,23 @@ export const CertificationsModule = () => {
 
 
             {
-                header: 'Nombre ', accessorKey: 'fullname'
+                header: 'Nombre de Productor ', accessorKey: 'fullname',
+                Header: ({ column }) => (
+                    <div className="flex align-bottom m-auto pt-12 ">
+                    <h1 className="text-xl">Nombre de Productor </h1>
+                    </div>
+                ),
             }, {
                 accessorFn: (row: { usda: any; }) => `${row.usda} `, //accessorFn used to join multiple data into a single cell
-                id: 'spp', //id is still required when using accessorFn instead of accessorKey
-                header: 'SPP',
+                id: 'usda', //id is still required when using accessorFn instead of accessorKey
+                header: 'USDA',
                 Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')} />
+                    <div className="text-center">
+                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')} className="w-24 h-24" />
+                    <h1 className="text-lg">USDA</h1>
+                    <h1 className="text-lg">Orgánico</h1>
+                    </div>
                 ), //arrow function
-                size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
@@ -207,9 +215,9 @@ export const CertificationsModule = () => {
                         >
                             
                             {(row.original.usda === 1) && (
-                                <h1>
-                                    <MdDoneOutline className="icon"/>
-                                </h1>
+                               <div className="ml-8">
+                               <MdDoneOutline className="icon"/>
+</div>
                             )}
                         
 
@@ -219,12 +227,20 @@ export const CertificationsModule = () => {
                 ),
             }, {
                 accessorFn: (row: { fairtrade: any; }) => `${row.fairtrade} `, //accessorFn used to join multiple data into a single cell
-                id: 'spp', //id is still required when using accessorFn instead of accessorKey
-                header: 'SPP',
+                id: 'fairtrade', //id is still required when using accessorFn instead of accessorKey
+                header: 'fairtrade',
                 Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')} />
+                    <>
+                    <div className="text-center">
+                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')} className="w-24 h-24"/>
+                    <h1 className="text-xl"> Comercio</h1>
+                    <h1 className="text-xl"> Justo</h1>
+
+                    </div>
+                                       
+                    </>
+                    
                 ), //arrow function
-                size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
                 Cell: ({row}) => (
@@ -238,9 +254,9 @@ export const CertificationsModule = () => {
                         >
                             
                             {(row.original.fairtrade === 1) && (
-                                <h1>
-                                    <MdDoneOutline className="icon"/>
-                                </h1>
+                                 <div className="ml-8">
+                                 <MdDoneOutline className="icon"/>
+</div>
                             )}
                         
 
@@ -250,12 +266,15 @@ export const CertificationsModule = () => {
                 ),
             }, {
                 accessorFn: (row: { manosdemujer: any; }) => `${row.manosdemujer} `, //accessorFn used to join multiple data into a single cell
-                id: 'spp', //id is still required when using accessorFn instead of accessorKey
-                header: 'SPP',
+                id: 'manosdemujer', //id is still required when using accessorFn instead of accessorKey
+                header: 'Manos de Mujer',
                 Header: ({ column }) => (
-                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} />
+                    <div className="text-center">
+                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} className="w-24 h-24"/>
+                    <h1 className="text-lg">Con Manos </h1>
+                    <h1 className="text-lg">de Mujer </h1>
+                    </div>
                 ), //arrow function
-                size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
                 Cell: ({row}) => (
@@ -269,9 +288,9 @@ export const CertificationsModule = () => {
                         >
                             
                             {(row.original.manosdemujer === 1) && (
-                                <h1>
-                                    <MdDoneOutline className="icon"/>
-                                </h1>
+                               <div className="ml-8">
+                               <MdDoneOutline className="icon"/>
+</div>
                             )}
                        
 
@@ -284,9 +303,14 @@ export const CertificationsModule = () => {
                 id: 'spp', //id is still required when using accessorFn instead of accessorKey
                 header: 'SPP',
                 Header: () => (
-                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} />
+                    <div className="text-center">
+                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} className="w-24 h-24" />
+                    <h1 className="text-lg">Pequeños</h1>
+                    <h1 className="text-lg">Productores</h1>
+
+                    </div>
                 ), //arrow function
-                size: 25,
+                size: 5,
                 enableSorting: false,
                 enableColumnFilter: false,
                 Cell: ({row}) => (
@@ -300,9 +324,9 @@ export const CertificationsModule = () => {
                         >
                             
                             {(row.original.spp === 1) && (
-                                <h1>
-                                    <MdDoneOutline className="icon"/>
-                                </h1>
+                                <div className="ml-8">
+                                                                     <MdDoneOutline className="icon"/>
+                                </div>
                             )}
                       
 
@@ -323,14 +347,13 @@ export const CertificationsModule = () => {
 
     return (
         <>
-
             <div className="">
                 <div className=" flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className=" w-full h-full p-1">
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-farmers")}</>
+                                    <>{t("Certificados")}</>
                                 </div>
                             </div>
                             <div className="m-6">
