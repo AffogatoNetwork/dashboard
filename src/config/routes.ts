@@ -10,6 +10,15 @@ const routes = {
   trazabilidad: '/trazabilidad',
   search: '/search',
   notification: '/notification',
+
+  cafepsaFarmers: '/farmers-module',
+  cafepsaFarms: '/farms-module',
+  cafepsaCertification: '/certification-module',
+  cafepsaBatches: '/batches-module',
 };
+
+
+
+
 
 export default routes;

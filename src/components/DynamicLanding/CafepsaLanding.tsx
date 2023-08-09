@@ -31,7 +31,7 @@ export const CafepsaLanding = () => {
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
                             <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
-                                    <a href="/farmers">
+                                    <a href="/farmers-module">
                                         Ir a la Plataforma
                                     </a>
                                 </button>

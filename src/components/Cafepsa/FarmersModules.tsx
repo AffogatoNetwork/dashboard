@@ -10,7 +10,7 @@ import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
-export const NewList = () => {
+export const FarmersModules = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
     const { t } = useTranslation();
@@ -39,12 +39,20 @@ export const NewList = () => {
 
     type FarmerType = {
         farmerId: string;
+        femaleMenbers: number;
+        maleMenbers: number;
         address: string;
         fullname: string;
+        familyMembers: string;
         bio: string;
+        country: string;
         gender: string;
         farm: string;
         location: string;
+        region: string;
+        village: string;
+        village1: string;
+        village2: string;
         qrCode: string;
         blockChainUrl: string;
         search: string;
@@ -80,7 +88,7 @@ export const NewList = () => {
                 companyName = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                companyName = "PROEXO";
+                companyName = "CAFEPSA";
             }
 
 
@@ -92,10 +100,15 @@ export const NewList = () => {
                         farmerId,
                         address,
                         fullname,
+                        femaleMenbers,
+                        maleMenbers,
                         bio,
                         gender,
                         farm,
+                        familyMembers,
                         village,
+                        village1,
+                        village2,
                         region,
                         country,
                     } = farmerData;
@@ -119,16 +132,25 @@ export const NewList = () => {
                     farmerList.push({
                         farmerId,
                         address,
+                        country,
                         fullname,
+                        femaleMenbers,
+                        maleMenbers,
+                        familyMembers,
                         bio,
                         gender,
                         farm,
                         location: l,
+                        region,
+                        village,
+                        village1,
+                        village2,
                         qrCode,
                         blockChainUrl,
                         search: s.toLowerCase()
                     });
                 }
+                console.log(farmerList);
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
@@ -179,7 +201,7 @@ export const NewList = () => {
                 enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
-                Cell: ({ row }) => (
+                Cell: ({ renderedCellValue, row}) => (
                     <>
                         <Box
                             sx={{
@@ -188,22 +210,19 @@ export const NewList = () => {
                                 gap: '1rem',
                             }}
                         >
-
+    
                             <h1 onClick={() => {
-                                openInNewTab(reactNodeToString(row.original.qrCode));
-                            }}
-                                className=" font-bold hover:underline hover:decoration-2">
-                                {row.original.fullname}
+                                openInNewTab(reactNodeToString(row.original.qrCode));}}
+                                    className=" font-bold hover:underline hover:decoration-2">
+                               {row.original.fullname}
                             </h1>
                         </Box>
                     </>
                 ),
             }, {
-                header: 'Ubicación ', accessorKey: 'location'
-            }, {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
-                header: 'Género',
+                header: 'Sexo',
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -224,36 +243,57 @@ export const NewList = () => {
                     </>
                 ),
             }, {
-                header: 'Dirección de Cuenta', accessorKey: 'address', enableClickToCopy: true,
-
+                header: 'Ubicación ', accessorKey: 'location'
             }, {
-                accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
-                id: 'blockChainUrl', //id is still required when using accessorFn instead of accessorKey
-                header: 'Enlace al Blockchain',
-                size: 50,
-                enableSorting: false,
-                enableColumnFilter: false,
-                // @ts-ignore
-                Cell: ({ renderedCellValue }) => (
-                    <>
-                        <Box
-                            sx={{
-                                display: 'flex',
-                                alignItems: 'center',
-                                gap: '1rem',
-                            }}
-                        >
-
-                            <button onClick={() => {
-                                openInNewTab(reactNodeToString(renderedCellValue));
-                            }}
-                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                <LinkIcon></LinkIcon>
-                                <>Ver en el blockchain</>
-                            </button>
-                        </Box>
-                    </>
-                ),
+                accessorFn: (farm: any) => `${farm.familyMembers}`,
+                id: 'familyMembers', //id is still required when using accessorFn instead of accessorKey
+                header: 'No. Integrantes',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div className="text-center">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
+            },
+            
+            {
+                accessorFn: (farm: any) => `${farm.maleMenbers}`,
+                id: 'maleMenbers', //id is still required when using accessorFn instead of accessorKey
+                header: 'Integrantes Masculinos',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div className="text-center">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
+            },
+            {
+                accessorFn: (farm: any) => `${farm.femaleMenbers}`,
+                id: 'femaleMenbers', //id is still required when using accessorFn instead of accessorKey
+                header: 'Integrantes Femeninos',
+                size: 10,
+                Cell(props) {
+                    return (
+                        <div className="text-center">
+                            {props.renderedCellValue}
+                        </div>
+                    );
+                },
+            },
+            
+            
+            
+            
+            {
+                header: 'Comunidad ', accessorKey: 'region'
+            }, {
+                header: 'Municipio ', accessorKey: 'village2'
+            }, {
+                header: 'Pais', accessorKey: 'country'
             }
         ],
         [],
@@ -303,7 +343,7 @@ export const NewList = () => {
                                         )}
                                     </div>
 
-                                    <div className="overflow-scroll">
+                                    <div className="overflow-auto">
                                         <MaterialReactTable
                                             columns={columData}
                                             data={farmers}

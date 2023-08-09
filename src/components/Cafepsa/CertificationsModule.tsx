@@ -211,11 +211,7 @@ export const CertificationsModule = () => {
                                     <MdDoneOutline className="icon"/>
                                 </h1>
                             )}
-                            {(row.original.usda === null) && (
-                                <h1>
-                                    
-                                </h1>
-                            )}
+                        
 
                         </Box>
                     </>
@@ -246,11 +242,7 @@ export const CertificationsModule = () => {
                                     <MdDoneOutline className="icon"/>
                                 </h1>
                             )}
-                            {(row.original.fairtrade === null) && (
-                                <h1>
-                                    
-                                </h1>
-                            )}
+                        
 
                         </Box>
                     </>
@@ -281,11 +273,7 @@ export const CertificationsModule = () => {
                                     <MdDoneOutline className="icon"/>
                                 </h1>
                             )}
-                            {(row.original.manosdemujer === null) && (
-                                <h1>
-                                    
-                                </h1>
-                            )}
+                       
 
                         </Box>
                     </>
@@ -316,11 +304,7 @@ export const CertificationsModule = () => {
                                     <MdDoneOutline className="icon"/>
                                 </h1>
                             )}
-                            {(row.original.spp === null) && (
-                                <h1>
-                                    
-                                </h1>
-                            )}
+                      
 
                         </Box>
                     </>

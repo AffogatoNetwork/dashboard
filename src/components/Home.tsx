@@ -1,7 +1,7 @@
 import React from "react";
-import {Routes, Route} from "react-router-dom";
+import { Routes, Route } from "react-router-dom";
 import Container from "react-bootstrap/esm/Container";
-import {ToastContainer} from "react-toastify";
+import { ToastContainer } from "react-toastify";
 import "../styles/app.scss";
 import "react-toastify/dist/ReactToastify.css";
 import CoffeeCard from "./CoffeeBatch/CoffeeCard";
@@ -9,48 +9,50 @@ import Company from "./Company";
 import Dashboard from "./Dashboard";
 import Loading from "./Loading";
 import Login from "./Login";
-import {Profile, List as FarmerList} from "./Farmer/index";
+import { Profile, List as FarmerList } from "./Farmer/index";
 import Signup from "./Signup";
-import {useAuthContext} from "../states/AuthContext";
+import { useAuthContext } from "../states/AuthContext";
 import RequiredAuth from "../states/RequiredAuth";
-import {Create, List, PublicList} from "./CoffeeBatch/index";
+import { Create, List, PublicList } from "./CoffeeBatch/index";
 import Landing from "./CoffeeBatch/Landing";
 import Cupping from "./Cupping";
 import Certification from "./Certification";
-import {NewList} from "./Farmer/NewList";
-import {FarmsNewList } from "./Farm/NewList";
-import {CoffeBatchNewList} from "./CoffeeBatch/NewList";
+import { NewList } from "./Farmer/NewList";
+import { FarmsNewList } from "./Farm/NewList";
+import { CoffeBatchNewList } from "./CoffeeBatch/NewList";
 import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
 import { FarmerProfileModule } from "./Cafepsa/FarmerProfile";
 import { FarmsModule } from "./Cafepsa/FarmsModule";
-import {CertificationsModule} from "./Cafepsa/CertificationsModule";
+import { CertificationsModule } from "./Cafepsa/CertificationsModule";
+import { FarmersModules } from "./Cafepsa/FarmersModules";
+import BatchesModule from "./Cafepsa/BatchesModule";
 
 
 const Home = () => {
-    const {authState, authContext} = useAuthContext();
+    const { authState, authContext } = useAuthContext();
     const [state] = authState;
     const CurrentLocalhost: string | null = localStorage.getItem("host");
     const location = window.location.host;
-    if (location.match(  `${CurrentLocalhost}` ) !== null && state.isLoggedIn !== true) {
+    if (location.match(`${CurrentLocalhost}`) !== null && state.isLoggedIn !== true) {
     } else {
-        if(state.isLoggedIn !== false){
+        if (state.isLoggedIn !== false) {
             authContext.signOut()
         } else {
         }
     }
 
     if (state.isLoading || state.isSigningIn) {
-        return <Loading label="" className="loading-wrapper"/>;
+        return <Loading label="" className="loading-wrapper" />;
     }
 
     return (
         <div className="" >
-            <ToastContainer limit={4}/>
+            <ToastContainer limit={4} />
             <Routes>
                 <Route
                     path="/"
                     element={
-                                <Landing/>
+                        <Landing />
                     }
                 />
                 <Route
@@ -58,7 +60,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <CoffeBatchNewList/>
+                                <CoffeBatchNewList />
                             </Dashboard>
                         </RequiredAuth>
                     }
@@ -68,7 +70,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <Create/>
+                                <Create />
                             </Dashboard>
                         </RequiredAuth>
                     }
@@ -78,17 +80,17 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <NewList/>
+                                <NewList />
                             </Dashboard>
                         </RequiredAuth>
                     }
                 />
                 <Route
-                    path="/farmers-profile"
+                    path="/farmers-module"
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <FarmerProfileModule/>
+                                <FarmersModules />
                             </Dashboard>
                         </RequiredAuth>
                     }
@@ -98,18 +100,27 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <FarmsModule/>
+                                <FarmsModule />
                             </Dashboard>
                         </RequiredAuth>
                     }
                 />
-                
+                <Route
+                    path="/batches-module"
+                    element={
+                        <RequiredAuth>
+                            <Dashboard>
+                                <BatchesModule />
+                            </Dashboard>
+                        </RequiredAuth>
+                    }
+                />
                 <Route
                     path="/certification-module"
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <CertificationsModule/>
+                                <CertificationsModule />
                             </Dashboard>
                         </RequiredAuth>
                     }
@@ -124,7 +135,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <FarmsNewList/>
+                                <FarmsNewList />
                             </Dashboard>
                         </RequiredAuth>
                     }
@@ -134,7 +145,7 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <Cupping/>
+                                <Cupping />
                             </Dashboard>
                         </RequiredAuth>
                     }
@@ -144,18 +155,18 @@ const Home = () => {
                     element={
                         <RequiredAuth>
                             <Dashboard>
-                                <Certification/>
+                                <Certification />
                             </Dashboard>
                         </RequiredAuth>
                     }
                 />
 
-                <Route path="/login" element={<Login/>}/>
-                <Route path="/signup" element={<Signup/>}/>
-                <Route path="/batch/:batchId" element={<CoffeeBatchId/>}/>
-                <Route path="/coffeebatches" element={<PublicList/>}/>
-                <Route path="/farmer/:farmerId" element={<Profile/>}/>
-                <Route path="/company/:companyId" element={<Company/>}/>
+                <Route path="/login" element={<Login />} />
+                <Route path="/signup" element={<Signup />} />
+                <Route path="/batch/:batchId" element={<CoffeeBatchId />} />
+                <Route path="/coffeebatches" element={<PublicList />} />
+                <Route path="/farmer/:farmerId" element={<Profile />} />
+                <Route path="/company/:companyId" element={<Company />} />
             </Routes>
         </div>
     );

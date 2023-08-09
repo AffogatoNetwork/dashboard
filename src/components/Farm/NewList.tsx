@@ -338,7 +338,7 @@ export const FarmsNewList = () => {
                     </div>
                 </div>
             </div>
-        </div>
+             </div>
         </>
     )
 };
