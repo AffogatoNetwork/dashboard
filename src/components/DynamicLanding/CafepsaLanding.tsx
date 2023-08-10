@@ -52,7 +52,7 @@ export const CafepsaLanding = () => {
                                         className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                         <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                                              src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                        <p className="m-2 text-xl font-bold text-center">
+                                        <p className="m-2 text-2xl font-bold text-center">
                                                 Perfil de Productor
 
                                         </p>
@@ -66,7 +66,7 @@ export const CafepsaLanding = () => {
 
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                                                  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                            <p className="m-2 text-xl font-bold text-center">
+                                            <p className="m-2 text-2xl font-bold text-center">
                                                 Módulo Fincas de Café
                                             </p>
                                         </div>
@@ -85,7 +85,7 @@ export const CafepsaLanding = () => {
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                                                  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                            <p className="m-2 text-xl font-bold text-center">
+                                            <p className="m-2 text-2xl font-bold text-center">
                                                 Sellos de Certificación
                                             </p>
                                         </div>
@@ -100,7 +100,7 @@ export const CafepsaLanding = () => {
                                         className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                         <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                                              src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                        <p className="m-2 text-xl font-bold text-center">
+                                        <p className="m-2 text-2xl font-bold text-center">
                                                 Beneficiado Lotes de Café
 
                                         </p>
