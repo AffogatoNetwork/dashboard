@@ -39,15 +39,27 @@ const CoffeeBatchId = () => {
                         });
                     }
                     let Farmers = result?.Farmer;
+                    if(Farmers.length > 1){
+                        Farmers.forEach((element: any) => {
+                            getFarmer(element).then((result) => {
+                                FarmerDetails.push(result);
+                                console.log(FarmerDetails);
+                                setFarmers(FarmerDetails);
+                            });
+                        });
+                    } else {
+                        console.log(Farmers);
+                    }
+
+
                     console.log(Farmers);
                     let FarmerDetails: any[] = [];
-                    Farmers.forEach((element: any) => {
-                        getFarmer(element).then((result) => {
-                            FarmerDetails.push(result);
-                            console.log(FarmerDetails);
-                            setFarmers(FarmerDetails);
-                        });
-                    });
+                    console.log(Farmers)
+
+
+
+
+
                     setLoading(false);
 
                 });
@@ -57,16 +69,12 @@ const CoffeeBatchId = () => {
             }
         };
 
-
-
-
         load();
     }, [batchId]);
 
     if (loading) {
         return <Loading label="Cargando..." className="loading-wrapper" />;
     }
-
 
 
     return (<>

@@ -21,11 +21,12 @@ import { NewList } from "./Farmer/NewList";
 import { FarmsNewList } from "./Farm/NewList";
 import { CoffeBatchNewList } from "./CoffeeBatch/NewList";
 import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
-import { FarmerProfileModule } from "./Cafepsa/FarmerProfile";
 import { FarmsModule } from "./Cafepsa/FarmsModule";
 import { CertificationsModule } from "./Cafepsa/CertificationsModule";
 import { FarmersModules } from "./Cafepsa/FarmersModules";
 import BatchesModule from "./Cafepsa/BatchesModule";
+import NewBatchId from "./Cafepsa/NewBatchId";
+import {FarmerProfileModule} from "./Cafepsa/FarmerProfile";
 
 
 const Home = () => {
@@ -164,8 +165,10 @@ const Home = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/batch/:batchId" element={<CoffeeBatchId />} />
+                <Route path="/newbatch/:newbatchId" element={<NewBatchId />} />
                 <Route path="/coffeebatches" element={<PublicList />} />
                 <Route path="/farmer/:farmerId" element={<Profile />} />
+                <Route path="/newfarmer/:newfarmerId" element={<FarmerProfileModule />} />
                 <Route path="/company/:companyId" element={<Company />} />
             </Routes>
         </div>

@@ -125,7 +125,7 @@ export const FarmersModules = () => {
                         .concat(SEARCH_DIVIDER)
                         .concat(l);
                     let qrCode = window.location.origin
-                        .concat("/farmer/")
+                        .concat("/newfarmer/")
                         .concat(address);
                     let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + farm;
                     setBlockchainUrl(blockChainUrl)
