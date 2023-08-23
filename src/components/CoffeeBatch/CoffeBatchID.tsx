@@ -20,7 +20,6 @@ const CoffeeBatchId = () => {
                     console.log(result?.image.includes("https://firebasestorage"));
                     if (result?.image.includes("https://firebasestorage") === true) {
                         console.log("es una url");
-
                     } else {
                         if (result?.image) {
                             console.log("es un hash");
@@ -32,10 +31,12 @@ const CoffeeBatchId = () => {
 
 
                     setCoffeeBatch(result);
+                    console.log(result)
                     if (result?.Farmer.address !== undefined) {
                         getFarmer(result?.Farmer.address).then((result) => {
                             console.log(result);
-                            setFarmers(result);
+                            FarmerDetails.push(result);
+                            setFarmers(FarmerDetails);
                         });
                     }
                     let Farmers = result?.Farmer;
@@ -98,12 +99,7 @@ const CoffeeBatchId = () => {
                                     }
                                     <p>{coffeeBatch?.Description}</p>
 
-                                    {coffeeBatch.Farmer?.address !== undefined && (
-                                        <div>
-                                            <p > <>{t("farmers")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmers?.address} > {farmers?.fullname} </a></p>
-                                        </div>
-
-                                    )}
+                                 
                                     {coffeeBatch.Farmer !== undefined && (
                                         <>
                                             <div>

@@ -37,7 +37,7 @@ const Landing = () => {
     }
     if (location.match("cafepsa") !== null) {
         return (<>
-            <DefaultLanding></DefaultLanding>
+            <CafepsaLanding/>
         </>
         );
     }
