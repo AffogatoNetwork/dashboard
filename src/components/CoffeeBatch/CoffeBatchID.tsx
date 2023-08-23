@@ -11,7 +11,6 @@ const CoffeeBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
-    const [farmerPromise, setFarmerPromise] = useState<any>([]);
     useEffect(() => {
         const load = () => {
             if (batchId) {
@@ -46,6 +45,7 @@ const CoffeeBatchId = () => {
                                 FarmerDetails.push(result);
                                 console.log(FarmerDetails);
                                 setFarmers(FarmerDetails);
+                                console.log(FarmerDetails);
                             });
                         });
                     } else {
