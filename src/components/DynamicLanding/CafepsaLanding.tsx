@@ -46,8 +46,7 @@ export const CafepsaLanding = () => {
                         <div className="lg:w-2/3 mx-auto">
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
-                                    <a href="//farmers-module">
-
+                                    <a href="/farmers-module">
                                     <div
                                         className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                         <img className="object-cover w-full h-56 md:h-64 xl:h-80"
