@@ -314,7 +314,7 @@ export const FarmersModules = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-farmers")}</>
+                                    <>{t("Buscar Perfil de productores")}</>
                                 </div>
                             </div>
                             <div className="m-6">
