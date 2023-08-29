@@ -71,13 +71,7 @@ export const FarmerProfileModule = () => {
                 <div className="lg:w-4/6 mx-auto bg-stone-100">
                     <div className="rounded-lg h-96 w-full overflow-hidden">
                     <div className="mx-auto w-full p-4">
-                                        <NewMap
-                                            latitude={farms?.latitude}
-                                            longitude={farms?.longitude}
-                                            zoomLevel={9}
-                                            addressLine={farms?.villa}
-                                            className="google-map "
-                                        />
+                                   
                                     </div>
                     </div>
                     <div className="flex flex-col sm:flex-row mt-10">
@@ -168,7 +162,13 @@ export const FarmerProfileModule = () => {
                                             </div>
                                         </div>
                                     </div>
-                                   
+                                        <NewMap
+                                            latitude={farms?.latitude}
+                                            longitude={farms?.longitude}
+                                            zoomLevel={9}
+                                            addressLine={farms?.villa}
+                                            className="google-map "
+                                        />
 
                                 </div>
                             </div>

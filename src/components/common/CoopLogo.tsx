@@ -5,7 +5,7 @@ import Comsa from "../../assets/comsa.png";
 import Commovel from "../../assets/commovel.png";
 import Copranil from "../../assets/copracnil.png";
 import Proexo from "../../assets/proexo.png";
-import Cafepsa from "../../assets/cafepsa.jpeg";
+import Cafepsa from "../../assets/cafepsa.png";
 
 type props = {
   className: string;
