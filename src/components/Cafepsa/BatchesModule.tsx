@@ -85,8 +85,9 @@ export const BatchesModule = () => {
             }
             if (url.match("localhost") !== null) {
                 companyName = "COPRACNIL";
+            } else {
+                companyName = "CAFEPSA";
             }
-
 
             await getAllBatches(companyName).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
@@ -209,15 +210,25 @@ export const BatchesModule = () => {
                     );
                 },
             }, {
-                accessorFn: (farmers: any) => `${farmers.dryMill.link}`, //accessorFn used to join multiple data into a single cell
+                accessorFn: (farmers: any) => `${farmers.dryMill.cupping_url}`, //accessorFn used to join multiple data into a single cell
                 header: 'Perfil de Catación', size: 15,
-                Cell(props) {
-                    return (
-                        <div className="text-left">
-                            {props.renderedCellValue || "Aprox 1200"}
-                        </div>
-                    );
-                },
+                Cell: ({ renderedCellValue }) => (
+                    <>
+                        <Box
+                            sx={{
+                                display: 'flex',
+                                alignItems: 'center',
+                                gap: '1rem',
+                            }}
+                        >
+                            <label htmlFor="farmerlist" className="btn btn-ghost h-full"
+                                onClick={() => { setData(renderedCellValue); }}>
+                            </label>
+
+                        </Box>
+                    </>
+
+                ),
             }
         ],
         [],
