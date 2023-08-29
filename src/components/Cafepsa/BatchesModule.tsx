@@ -164,7 +164,7 @@ export const BatchesModule = () => {
             },
             {
                 accessorFn: (farmers: any) => `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
-                header: `Nombre`, size: 25,
+                header: `Productores(a)`, size: 25,
                 Cell(props) {
                     return (
                         <div className="text-left">
@@ -174,7 +174,7 @@ export const BatchesModule = () => {
                 },
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.average_height}`, //accessorFn used to join multiple data into a single cell
-                header: 'Altura (m.s.n.m) ', size: 15,
+                header: 'Altura Promedio de lote (m.s.n.m) ', size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === 'undefined') {
                         return (
@@ -190,16 +190,10 @@ export const BatchesModule = () => {
                     );
                 },
             }, {
-                header: 'Variedad ', accessorKey: 'wetMill.variety', size: 15,
-            }, {
-                header: 'Proceso ', accessorKey: 'wetMill.process', size: 15,
-            }, {
-                header: 'Tipo de Secado', accessorKey: 'wetMill.drying_type', size: 15,
-            }, {
-                header: 'Peso (qq)', accessorKey: 'dryMill.weight', size: 15,
+                header: 'Peso de lote(QQ)', accessorKey: 'dryMill.weight', size: 15,
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.note}`, //accessorFn used to join multiple data into a single cell
-                header: 'Nota', size: 15,
+                header: 'Nota de Catación ', size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === '0') {
                         return (
@@ -214,7 +208,17 @@ export const BatchesModule = () => {
                         </div>
                     );
                 },
-            },
+            }, {
+                accessorFn: (farmers: any) => `${farmers.dryMill.link}`, //accessorFn used to join multiple data into a single cell
+                header: 'Perfil de Catación', size: 15,
+                Cell(props) {
+                    return (
+                        <div className="text-left">
+                            {props.renderedCellValue || "Aprox 1200"}
+                        </div>
+                    );
+                },
+            }
         ],
         [],
     );

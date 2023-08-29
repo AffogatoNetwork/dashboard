@@ -5,6 +5,7 @@ import Comsa from "../../assets/comsa.png";
 import Commovel from "../../assets/commovel.png";
 import Copranil from "../../assets/copracnil.png";
 import Proexo from "../../assets/proexo.png";
+import Cafepsa from "../../assets/cafepsa.jpeg";
 
 type props = {
   className: string;
@@ -24,6 +25,10 @@ const CoopLogo = ({ className }: props) => {
   if (location.match("proexo") !== null) {
     return <Image className={className} src={Proexo} />;
   }
+  if (location.match("cafepsa") !== null) {
+    return <Image className={className} src={Cafepsa} />;
+  }
+
   return <Image className="logo-affogato" src={Logo} />;
 };
 
