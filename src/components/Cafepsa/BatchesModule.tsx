@@ -223,7 +223,7 @@ export const BatchesModule = () => {
                         >
                             <label htmlFor="farmerlist" className="btn btn-ghost h-full"
                                 onClick={() => { setData(renderedCellValue); }}>
-                                    <>Ver Enlace </>
+                                    <> Ver Enlace </>
                             </label>
 
                         </Box>
