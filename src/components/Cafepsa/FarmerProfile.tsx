@@ -42,6 +42,7 @@ export const FarmerProfileModule = () => {
         // eslint-disable-next-line
     }, [newfarmerId]);
 
+   
     if (loading) {
         return (
             <Loading label={t("loading").concat("...")} className="loading-wrapper" />
@@ -64,18 +65,13 @@ export const FarmerProfileModule = () => {
                 </div>
             </div>
 
-            <section className=" p-5 m-5 ">
-                <button className="btn btn-ghost  absolute right-2 top-2" onClick={() => window.history.back()}
-                
-                >Volver</button>
-                <h3 className="text-2xl mb-5">
-                    {farmerData.fullname}
-
+            <section className="p-3 m-2 card border">
+                <button className="btn btn-ghost  absolute right-2 top-2">
+                <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmers-module'}> Volver </a>                
+                </button>
+                <h3 className="text-2xl font-bold mb-5">
+                    <> Finca :</>{farmerData.fullname}
                 </h3>
-                <p className="text-xs w-20 p-2 bg-amber-800 text-white px-4 rounded-full">
-                    {farmerData.company}
-                </p>
-                <br />
 
                 <div className="flex flex-col lg:flex-row gap-5 mt-2">
 
@@ -89,12 +85,22 @@ export const FarmerProfileModule = () => {
                                     </label>
                                 </div>
                             </div>
+                            <h3 className="text-xl mb-5">
+                                <>{t("farmer")}: </>
+                                {farmerData.fullname}
+                            </h3>
+                            <div className="flex flex-col items-center text-center justify-center">
+                                <p className="text-xs p-2 bg-amber-800 text-white px-4 rounded-full">
+                                    {farmerData.company}
+                                </p>
+                            </div>
+
                         </div>
 
                     </div>
 
                     <div className="w-full lg:w-1/2">
-                        <div className="p-2 rounded text-center border">
+                        <div className="p-5 rounded text-center border">
                             <p className="flex flex-col">
                                 <>{t("gender")}:</>
                                 <span className="text-black dark:text-white font-bold">
@@ -139,13 +145,13 @@ export const FarmerProfileModule = () => {
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
-                                            <h2 className="text-4xl font-bold pb-2">{farms?.certifications}</h2>
+                                            <h2 className="text-xl font-bold pb-2">{farms?.certifications}</h2>
                                             <h4 className="inline text-gray-500 text-sm">Certificados</h4>
                                         </div>
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
-                                            <h2 className="text-4xl font-bold pb-2">{farms?.familyMembers}</h2>
+                                            <h2 className="text-xl font-bold pb-2">{farms?.familyMembers}</h2>
                                             <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
                                         </div>
                                     </div>
@@ -159,13 +165,13 @@ export const FarmerProfileModule = () => {
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
-                                            <h2 className="text-4xl font-bold pb-2">{farms?.shadow}</h2>
+                                            <h2 className="text-xl font-bold pb-2">{farms?.shadow}</h2>
                                             <h4 className="inline text-gray-500 text-sm">Tipo de produccion </h4>
                                         </div>
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
-                                            <h2 className="text-4xl font-bold pb-2">{farms?.varieties}</h2>
+                                            <h2 className="text-xl font-bold pb-2">{farms?.varieties}</h2>
                                             <h4 className="inline text-gray-500 text-sm">Variedades </h4>
                                         </div>
                                     </div>
@@ -193,7 +199,7 @@ export const FarmerProfileModule = () => {
                     {!farms
                         ? <div
                             className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
-                            <h2 className="text-2xl font-light m-4">
+                            <h2 className="text-xl font-light m-4">
                                 Faltan datos de finca
                             </h2>
                         </div>

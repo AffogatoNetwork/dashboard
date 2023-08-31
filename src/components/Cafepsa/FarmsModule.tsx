@@ -369,15 +369,7 @@ export const FarmsModule = () => {
                                             <>{t("download")}</>
                                         </button>
                                     </div>
-                                    <div>
-                                        <button onClick={() => {
-                                            openInNewTab(Data);
-                                        }}
-                                            className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">
-                                            <LinkIcon></LinkIcon>
-                                            <>{t("open-link")}</>
-                                        </button>
-                                    </div>
+                        
                                 </div>
                             
                             </div>

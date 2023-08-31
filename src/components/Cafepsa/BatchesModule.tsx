@@ -221,10 +221,13 @@ export const BatchesModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            <label htmlFor="farmerlist" className="btn btn-ghost h-full"
-                                onClick={() => { setData(renderedCellValue); }}>
-                                    <> Ver Enlace </>
-                            </label>
+                            <button onClick={() => {
+                                openInNewTab(reactNodeToString(renderedCellValue));
+                            }}
+                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                <LinkIcon></LinkIcon>
+                                <>Ver Enlace</>
+                            </button>
 
                         </Box>
                     </>

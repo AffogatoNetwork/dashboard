@@ -1,15 +1,15 @@
-import React, {useEffect, useState} from "react";
-import {useParams} from "react-router";
-import {useTranslation} from "react-i18next";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router";
+import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
-import {getFarmer, getFarmerFarms, getImageUrl} from "../../db/firebase";
+import { getFarmer, getFarmerFarms, getImageUrl } from "../../db/firebase";
 import NewMap from "../common/NewMap";
 
 
 export const Profile = () => {
-    const {t} = useTranslation();
-    const {farmerId} = useParams();
+    const { t } = useTranslation();
+    const { farmerId } = useParams();
     const [loading, setLoading] = useState(true);
     const [farmerData, setFarmerData] = useState<any>();
     const [farms, setFarms] = useState<any>();
@@ -22,11 +22,13 @@ export const Profile = () => {
                 await getFarmer(farmerId).then((result) => {
                     setFarmerData(result);
                     console.log(result?.address);
-                    const firebase = getFarmerFarms(result?.address).then((result: any) => {{
-                        console.log(result[0]);
-                        setfarmName(result[0].name);
-                        setFarms(result[0]);
-                    }});
+                    const firebase = getFarmerFarms(result?.address).then((result: any) => {
+                        {
+                            console.log(result[0]);
+                            setfarmName(result[0].name);
+                            setFarms(result[0]);
+                        }
+                    });
                     setLoading(false);
                 });
                 await getImageUrl(farmerId).then((result) => {
@@ -41,12 +43,12 @@ export const Profile = () => {
 
     if (loading) {
         return (
-            <Loading label={t("loading").concat("...")} className="loading-wrapper"/>
+            <Loading label={t("loading").concat("...")} className="loading-wrapper" />
         );
     }
 
     if (farmerData === null) {
-        return <NotFound msg={t("errors.farmer-not-found")}/>;
+        return <NotFound msg={t("errors.farmer-not-found")} />;
     }
 
     return (
@@ -56,7 +58,7 @@ export const Profile = () => {
                 <div className="modal-box">
                     <label htmlFor="image-modal" className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
                     <div className="flex justify-center m-6">
-                        <img alt="profile photo" src={imageUrl}/>
+                        <img alt="profile photo" src={imageUrl} />
                     </div>
                 </div>
             </div>
@@ -68,16 +70,16 @@ export const Profile = () => {
                     <div className="lg:w-4/6 mx-auto bg-stone-100">
                         <div className="rounded-lg h-24 overflow-hidden">
                             <img alt="profilebanner" src={require('../../assets/coffee.jpg')}
-                                 className="object-cover object-center h-full w-full"/>
+                                className="object-cover object-center h-full w-full" />
                         </div>
                         <div className="flex flex-col sm:flex-row mt-10">
                             <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
                                 <div className="avatar">
                                     <div className="w-32 rounded-full border-2 border-amber-900 hover:border-red-700">
-                                        <div/>
+                                        <div />
                                         <label htmlFor="image-modal" className=" ">
-                                           <img alt="profile photo" src={imageUrl}/>
-                                       </label>
+                                            <img alt="profile photo" src={imageUrl} />
+                                        </label>
 
                                     </div>
                                 </div>
@@ -91,28 +93,28 @@ export const Profile = () => {
                                     <p className="text-base">
                                         {farmerData.bio}
                                     </p>
-                                    <br className="pt-4"/>
+                                    <br className="pt-4" />
                                     <p className="flex flex-col">
                                         <>{t("gender")}:</>
                                         <span className="text-black dark:text-white font-bold">
-                    <>{t(farmerData.gender)}</>
-                    </span>
+                                            <>{t(farmerData.gender)}</>
+                                        </span>
                                     </p>
 
-                                    <br className="pt-4"/>
+                                    <br className="pt-4" />
                                     <p className="flex flex-col">
                                         <>{t("location")}:</>
                                         <span className="text-black dark:text-white font-bold">
-                          {farmerData.village}, {farmerData.region}
-                    </span>
+                                            {farmerData.village}, {farmerData.region}
+                                        </span>
                                     </p>
 
-                                    <br className="pt-4"/>
+                                    <br className="pt-4" />
                                     <p className="flex flex-col">
                                         <>{t("country")}:</>
                                         <span className="text-black dark:text-white font-bold">
-                          {farmerData.country},
-                    </span>
+                                            {farmerData.country},
+                                        </span>
                                     </p>
 
                                 </div>
@@ -124,8 +126,8 @@ export const Profile = () => {
                                     <div className="flex flex-col m-2">
                                         <h2 className="text-2xl font-bold mb-4">
                                             Finca : <a>
-                                            {farmName}
-                                        </a>
+                                                {farmName}
+                                            </a>
                                         </h2>
 
                                         <div
@@ -170,7 +172,7 @@ export const Profile = () => {
 
                                     </div>
                                 </div>
-                            : null
+                                : null
                             }
                             {!farms
                                 ? <div

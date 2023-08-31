@@ -5,6 +5,7 @@ import Loading from "../Loading";
 import { getBatch, getFarmer, getFarmerFarms, getFarms } from "../../db/firebase";
 import NotFound from "../common/NotFound";
 import NewMap from "../common/NewMap";
+import { LinkIcon } from "../icons/link";
 
 const NewBatchId = () => {
     const { t } = useTranslation();
@@ -68,6 +69,13 @@ const NewBatchId = () => {
         load();
     }, [batchId]);
 
+
+
+    const openInNewTab = (url: string | null | undefined) => {
+        const urlStr = url?.toString();
+        window.open(urlStr, '_blank', 'noopener,noreferrer');
+    };
+
     if (loading) {
         return <Loading label="Cargando..." className="loading-wrapper" />;
     }
@@ -76,7 +84,7 @@ const NewBatchId = () => {
 
 
 
-        <div className="min-w-screen min-h-screen bg-yellow-700 flex items-center p-5 lg:p-10 overflow-hidden relative flex-col">
+        <div className="min-w-screen min-h-screen bg-yellow-900 flex items-center px-5 lg:px-10 overflow-hidden relative flex-col">
             <div className="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
                 <div className="md:flex items-center -mx-10">
                     <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
@@ -126,55 +134,55 @@ const NewBatchId = () => {
             </div>
             <div className="w-full max-w-6xl rounded bg-white shadow-xl px-10 pb-5 lg:px-20 mx-auto text-gray-800 relative md:text-left">
                 <div>
-                <div className="w-full ">
-                            <div className="p-2 rounded text-center bg-amber-800 text-white">
-                                Produccion
+                    <div className="w-full ">
+                        <div className="p-2 rounded text-center bg-amber-800 text-white">
+                            Produccion
+                        </div>
+                        <div className="flex gap-5 mt-2">
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.variety}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("variety")}</> </h4>
                             </div>
-                            <div className="flex gap-5 mt-2">
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.variety}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("variety")}</> </h4>
-                                </div>
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                     <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.process}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("process")}</> </h4>
-                                </div>
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.acidity}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("acidity")}</> </h4>
-                                </div>
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.aftertaste}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("aftertaste")}</> </h4>
-                                </div>
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.body}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("body")}</> </h4>
-                                </div>
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.aroma}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("aroma")}</> </h4>
-                                </div>
-                                <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.sweetness}</h2>
-                                    <h4 className="inline text-gray-500 text-sm"> <>{t("sweetness")}</> </h4>
-                                </div>
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.process}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("process")}</> </h4>
+                            </div>
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.acidity}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("acidity")}</> </h4>
+                            </div>
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.aftertaste}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("aftertaste")}</> </h4>
+                            </div>
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.body}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("body")}</> </h4>
+                            </div>
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.aroma}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("aroma")}</> </h4>
+                            </div>
+                            <div
+                                className="flex-grow border border-gray-300 rounded text-center py-8"
+                            >
+                                <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.sweetness}</h2>
+                                <h4 className="inline text-gray-500 text-sm"> <>{t("sweetness")}</> </h4>
                             </div>
                         </div>
+                    </div>
                     <div className="flex flex-col lg:flex-row gap-5 mt-2">
 
                         <div className="w-full lg:w-1/2">
@@ -182,65 +190,68 @@ const NewBatchId = () => {
                                 Beneficio Humedo
                             </div>
                             <div className="flex gap-5 mt-2">
-                            <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                <div className="flex-grow border border-gray-300 rounded text-center py-8">
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.certifications}</h2>
                                     <h4 className="inline text-gray-500 text-sm">Certificados</h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.drying_hours || 'Aprox 1200'} </h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("drying-hours")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                  <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.process} </h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("process")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.familyMembers}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
+                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.variety}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("variety")}</> </h4>
                                 </div>
                             </div>
                         </div>
                         <div className="w-full lg:w-1/2">
                             <div className="p-2 rounded text-center bg-amber-800 text-white">
-                                Beneficio Seco 
+                                Beneficio Seco
                             </div>
                             <div className="flex gap-5 mt-2">
-                            <div
-                                    className="flex-grow border border-gray-300 rounded text-center py-8"
-                                >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                <div className="flex-grow border border-gray-300 rounded text-center py-8">
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.dryMill?.damage_percent}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("damage-percent")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.dryMill?.height || 'Aprox 1200'} </h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("altitude")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                    <button onClick={() => {
+                                openInNewTab(coffeeBatch?.dryMill?.cupping_url);
+                            }}
+                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                <LinkIcon></LinkIcon>
+                                <>Ver Enlace</>
+                            </button>
+                            <br/>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("cupping_profile")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.familyMembers}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.dryMill?.threshing_yield}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("threshing-yield")}</> </h4>
                                 </div>
                             </div>
                         </div>
 
-                        
+
 
 
                     </div>
@@ -255,83 +266,7 @@ const NewBatchId = () => {
             <br />
         </div>
 
-        <section>
-            <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
-                <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
-                    <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
-                        <div className="relative block group">
-                            <div className="card w-full bg-base-100 shadow-xl">
-                                <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"><>{t("batch-id")}</></h2>
-
-                                    <div className="card-actions">
-                                        <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                            <p><>{t("variety")}</>:<br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
-                                            <p><>{t("process")}</>: <br /> <span> {coffeeBatch?.wetMill?.process}</span></p>
-                                            <p><>{t("acidity")}</>: <br /> <span> {coffeeBatch?.Profile?.acidity}</span></p>
-                                            <p><>{t("aftertaste")}</>: <br /> <span> {coffeeBatch?.Profile?.aftertaste}</span></p>
-                                            <p><>{t("body")}</>: <br /> <span> {coffeeBatch?.Profile?.body}</span></p>
-                                            <p><>{t("aroma")}</>: <br /> <span> {coffeeBatch?.Profile?.aroma}</span></p>
-                                            <p><>{t("sweetness")}</>: <br /> <span> {coffeeBatch?.Profile?.sweetness}</span></p>
-
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card w-full bg-base-100 shadow-xl">
-                                <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Beneficio Humedo</h2>
-                                    <div className="card-actions">
-                                        <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                            <p><>{t("certificates")}</>: <br /> <span> {coffeeBatch?.wetMill?.certifications}</span></p>
-                                            <p><>{t("drying-hours")}</>: <br /> <span> {coffeeBatch?.wetMill?.drying_hours}</span></p>
-                                            <p><>{t("process")}</>: <br /> <span> {coffeeBatch?.wetMill?.process}</span></p>
-                                            <p> <>{t("variety")}</> :<br /> <span> {coffeeBatch?.wetMill?.variety}</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="card w-full bg-base-100 shadow-xl">
-                                <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Beneficio Seco</h2>
-                                    <div className="card-actions">
-                                        <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                            <p><>{t("damage-percent")}</>: <br /> <span> {coffeeBatch?.dryMill?.damage_percent}</span></p>
-                                            {coffeeBatch?.dryMill?.export_id !== '' && (
-                                                <p> <>{t("exporting-code")}</>: <br /> <span> {coffeeBatch?.dryMill?.export_id}</span></p>
-                                            )}
-                                            <p><>{t("altitude")}</>: <br /> <span> {coffeeBatch?.dryMill?.height || 'Aprox 1200'}  </span></p>
-                                            <p><>{t("cupping_profile")}</>: <br /> <a className="hover:underline underline-offset-1 decoration-sky-500" href={coffeeBatch?.dryMill?.cupping_url} > {coffeeBatch?.dryMill?.cupping_url}  </a></p>
-                                            <p> <>{t("threshing-yield")}</>: <br /> <span> {coffeeBatch?.dryMill?.threshing_yield}</span></p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {coffeeBatch?.Roasting?.bag_type !== '' && (
-                                <div className="card w-full bg-base-100 shadow-xl">
-                                    <div className="card-body items-center text-center">
-                                        <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Tostado</h2>
-                                        <div className="card-actions">
-                                            <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
-                                                <p><>{t("packaging")}</>: <br /> <span> {coffeeBatch?.Roasting?.bag_type}</span></p>
-                                                <p><>{t("bag_size")}</>: <br /> <span> {coffeeBatch?.Roasting?.bag_weight}</span></p>
-                                                <p><>{t("grind_type")}</>: <br /> <span> {coffeeBatch?.Roasting?.grind_type}</span></p>
-                                                <p><>{t("roast_type")}</>: <br /> <span> {coffeeBatch?.Roasting?.type}</span></p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-
-
-                            )}
-
-
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </section>
+      
     </>);
 };
 
