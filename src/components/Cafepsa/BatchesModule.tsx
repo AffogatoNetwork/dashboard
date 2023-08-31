@@ -104,7 +104,7 @@ export const BatchesModule = () => {
 
 
                     let qrCode = window.location.origin
-                        .concat("/batch/")
+                        .concat("/newbatch/")
                         .concat(ipfsHash);
                     let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + ipfsHash;
                     setBlockchainUrl(blockChainUrl)

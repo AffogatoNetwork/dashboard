@@ -65,6 +65,9 @@ export const FarmerProfileModule = () => {
             </div>
 
             <section className=" p-5 m-5 ">
+                <button className="btn btn-ghost  absolute right-2 top-2" onClick={() => window.history.back()}
+                
+                >Volver</button>
                 <h3 className="text-2xl mb-5">
                     {farmerData.fullname}
 
@@ -73,49 +76,63 @@ export const FarmerProfileModule = () => {
                     {farmerData.company}
                 </p>
                 <br />
-                <div className="flex gap-5 p-10 max-w-max border border-gray-300 rounded">
-                    <div className="avatar">
-                        <div className="w-32 h-32 rounded-full border-2 border-amber-900 hover:border-red-700">
-                            <div />
-                            <label htmlFor="image-modal" className=" ">
-                                <img alt="profile photo" src={imageUrl} />
-                            </label>
+
+                <div className="flex flex-col lg:flex-row gap-5 mt-2">
+
+                    <div className="w-full lg:w-1/2">
+                        <div className="p-2 rounded text-center border ">
+                            <div className="avatar">
+                                <div className="w-32 h-32 rounded-full border-2 border-amber-900 hover:border-red-700">
+                                    <div />
+                                    <label htmlFor="image-modal" className=" ">
+                                        <img alt="profile photo" src={imageUrl} />
+                                    </label>
+                                </div>
+                            </div>
                         </div>
-                    </div>
-                    <br />
-                    <div className="flex flex-col items-center text-center w-32">
-                        <p className="flex flex-col">
-                            <>{t("gender")}:</>
-                            <span className="text-black dark:text-white font-bold">
-                                <>{t(farmerData.gender)}</>
-                            </span>
-                        </p>
-                        <br className="pt-2" />
-                        <p className="flex flex-col">
-                            <>{t("location")}:</>
-                            <span className="text-black dark:text-white font-bold">
-                                {farmerData.village}, {farmerData.region}
-                            </span>
-                        </p>
-                        <p className="flex flex-col">
-                        <>{t("country")}:</>
-                        <span className="text-black dark:text-white font-bold">
-                            {farmerData.country},
-                        </span>
-                    </p>
 
                     </div>
+
+                    <div className="w-full lg:w-1/2">
+                        <div className="p-2 rounded text-center border">
+                            <p className="flex flex-col">
+                                <>{t("gender")}:</>
+                                <span className="text-black dark:text-white font-bold">
+                                    <>{t(farmerData.gender)}</>
+                                </span>
+                            </p>
+                            <p className="flex flex-col py-2">
+                                <>{t("location")}:</>
+                                <span className="text-black dark:text-white font-bold">
+                                    {farmerData.village}, {farmerData.region}
+                                </span>
+                            </p>
+
+                            <p className="flex flex-col">
+                                <>{t("country")}:</>
+                                <span className="text-black dark:text-white font-bold">
+                                    {farmerData.country},
+                                </span>
+                            </p>
+                        </div>
+
+                    </div>
+
+
                 </div>
+
+
+
 
                 <div>
 
                     {farms
                         ?
                         <div>
-                            <div className="flex flex-col lg:flex-row gap-5 mt-8">
+                            <div className="flex flex-col lg:flex-row gap-5 mt-2">
 
                                 <div className="w-full lg:w-1/2">
-                                    <div className="p-2 rounded text-center bg-teal-500 text-white">
+                                    <div className="p-2 rounded text-center bg-amber-800 text-white">
                                         Finca
                                     </div>
                                     <div className="flex gap-5 mt-2">
@@ -135,7 +152,7 @@ export const FarmerProfileModule = () => {
                                 </div>
 
                                 <div className="w-full lg:w-1/2">
-                                    <div className="p-2 rounded text-center bg-teal-500 text-white">
+                                    <div className="p-2 rounded text-center bg-amber-800 text-white">
                                         Produccion
                                     </div>
                                     <div className="flex gap-5 mt-2">
@@ -157,7 +174,7 @@ export const FarmerProfileModule = () => {
 
                             </div>
                             <div className="flex flex-col lg:flex-col gap-5 mt-8">
-                                <div className="flex pt-8 space-x-4 place-content-center">
+                                <div className="flex place-content-center">
                                     <div>
                                         <NewMap latitude={latitude}
                                             longitude={longitude}
