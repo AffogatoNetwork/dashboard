@@ -236,7 +236,7 @@ export const Create = () => {
                       data={rows}
                       columns={cols}
                       tableClassName="excel"
-                      tableHeaderRowClass="heading"
+                      tableHeaderRowclassName="heading"
                     />
                   </div>
                 )}

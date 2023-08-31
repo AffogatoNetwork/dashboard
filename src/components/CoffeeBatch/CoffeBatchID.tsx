@@ -56,13 +56,7 @@ const CoffeeBatchId = () => {
                     console.log(Farmers);
                     let FarmerDetails: any[] = [];
                     console.log(Farmers)
-
-
-
-
-
                     setLoading(false);
-
                 });
                 setLoading(false);
             } else {
@@ -76,7 +70,6 @@ const CoffeeBatchId = () => {
     if (loading) {
         return <Loading label="Cargando..." className="loading-wrapper" />;
     }
-
 
     return (<>
         <section>
@@ -111,19 +104,13 @@ const CoffeeBatchId = () => {
                                                                 </p>
                                                             </div>
                                                         ))}
-
                                                     </>
                                                 </p>
                                             </div>
                                         </>
-
                                     )}
-
-
-
                                 </div>
                             </div>
-
                         </div>
                     </li>
 
@@ -134,7 +121,6 @@ const CoffeeBatchId = () => {
                                     <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Detalles del lote : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-
                                         </div>
                                     </div>
                                 </div>

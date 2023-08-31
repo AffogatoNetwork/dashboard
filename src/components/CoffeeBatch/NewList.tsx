@@ -322,16 +322,7 @@ export const CoffeBatchNewList = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="text-center items-center">
-                                    <br />
-                                    <button onClick={() => {
-                                        openInNewTab(BlockchainUrl);
-                                    }}
-                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                        <LinkIcon></LinkIcon>
-                                        <>Ver en el blockchain</>
-                                    </button>
-                                </div>
+                                
                             </div>
                         </div>
                     </div>

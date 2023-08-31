@@ -24,7 +24,7 @@ import CoffeeBatchId from "./CoffeeBatch/CoffeBatchID";
 import { FarmsModule } from "./Cafepsa/FarmsModule";
 import { CertificationsModule } from "./Cafepsa/CertificationsModule";
 import { FarmersModules } from "./Cafepsa/FarmersModules";
-import BatchesModule from "./Cafepsa/BatchesModule";
+import { BatchesModule } from "./Cafepsa/BatchesModule";
 import NewBatchId from "./Cafepsa/NewBatchId";
 import {FarmerProfileModule} from "./Cafepsa/FarmerProfile";
 

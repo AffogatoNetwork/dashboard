@@ -292,7 +292,7 @@ export const FarmsModule = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-farms")}</>
+                                    <>{t("Buscar Fincas")}</>
                                 </div>
                             </div>
                             <div className="m-6">
@@ -379,16 +379,7 @@ export const FarmsModule = () => {
                                         </button>
                                     </div>
                                 </div>
-                                <div className="text-center items-center">
-                                    <br />
-                                    <button onClick={() => {
-                                        openInNewTab(BlockchainUrl);
-                                    }}
-                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                        <LinkIcon></LinkIcon>
-                                        <>Ver en el blockchain</>
-                                    </button>
-                                </div>
+                            
                             </div>
                         </div>
                     </div>

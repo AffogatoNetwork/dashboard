@@ -19,9 +19,10 @@ export const CafepsaLanding = () => {
                     style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F1.jpg?alt=media&token=1e15d575-f2af-44a1-b853-08ba8bf2d185")` }}>
                     <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
                     <div className="hero-content text-center text-neutral-content">
-                        <div className="">                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text"> Plataforma
-                            de Trazabilidad
-                        </h1>
+                        <div className="">
+                            <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text"> Plataforma
+                                de Trazabilidad
+                            </h1>
                             <br />
                             <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text">Empresa CAFEPSA
                             </h1>
@@ -30,7 +31,7 @@ export const CafepsaLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
-                            <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
+                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
                                     <a href="/farmers-module">
                                         Ir a la Plataforma
                                     </a>
@@ -46,36 +47,30 @@ export const CafepsaLanding = () => {
                         <div className="lg:w-2/3 mx-auto">
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
-                                    <a href="//farmers-module">
-
-                                    <div
-                                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                                        <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                        <p className="m-2 text-2xl font-bold text-center">
+                                    <a href="/farmers-module">
+                                        <div
+                                            className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                                            <img className="object-cover w-full h-56 md:h-64 xl:h-80"
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FProductor.JPG?alt=media&token=431f093c-df0e-48e6-a874-b11c9d093b0e" />
+                                            <p className="m-2 text-2xl font-bold text-center">
                                                 Perfil de Productor
-
-                                        </p>
+                                            </p>
                                         </div>
                                     </a>
 
                                 </div>
                                 <div className="px-2 w-1/2">
-                                    <a  href="/farms-module">
+                                    <a href="/farms-module">
                                         <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FFinca.jpg?alt=media&token=5fb92056-5313-48fc-86a2-4772890de246" />
                                             <p className="m-2 text-2xl font-bold text-center">
                                                 Módulo Fincas de Café
                                             </p>
                                         </div>
                                     </a>
-
-
                                 </div>
                             </div>
-
 
                             <br />
                             <div className="flex flex-wrap -mx-2">
@@ -84,7 +79,7 @@ export const CafepsaLanding = () => {
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2F%20Certificacion.JPG?alt=media&token=32fec183-fb46-4d60-8263-37252259dd2f" />
                                             <p className="m-2 text-2xl font-bold text-center">
                                                 Sellos de Certificación
                                             </p>
@@ -94,22 +89,17 @@ export const CafepsaLanding = () => {
 
                                 </div>
                                 <div className="px-2 w-1/2">
-                                    <a href="/farms-module">
-
-                                    <div
-                                        className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
-                                        <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"/>
-                                        <p className="m-2 text-2xl font-bold text-center">
+                                    <a href="/batches-module">
+                                        <div
+                                            className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
+                                            <img className="object-cover w-full h-56 md:h-64 xl:h-80"
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FLotes.jpg?alt=media&token=820176a5-4b98-46c5-b1df-1ceec74015b3" />
+                                            <p className="m-2 text-2xl font-bold text-center">
                                                 Beneficiado Lotes de Café
-
-                                        </p>
-                                    </div>
+                                            </p>
+                                        </div>
                                     </a>
-
                                 </div>
-
-
                             </div>
                         </div>
                     </div>
@@ -175,14 +165,10 @@ export const CafepsaLanding = () => {
 
                                         </div>
                                         <div className="lg:w-1/2 px-6 mt-4 lg:mt-0">
-
-
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Teléfono</h2>
-
                                             <p className="text-indigo-500 leading-relaxed">
                                                 (+504)  2793-5012/9327-9683
                                             </p>
-
                                         </div>
                                     </div>
                                 </div>
