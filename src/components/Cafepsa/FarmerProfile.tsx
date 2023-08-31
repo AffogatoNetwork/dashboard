@@ -54,188 +54,137 @@ export const FarmerProfileModule = () => {
 
     return (
         <>
-        <input type="checkbox" id="image-modal" className="modal-toggle" />
-        <div className="modal modal-bottom sm:modal-middle">
-            <div className="modal-box">
-                <label htmlFor="image-modal" className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
-                <div className="flex justify-center m-6">
-                    <img alt="profile photo" src={imageUrl}/>
+            <input type="checkbox" id="image-modal" className="modal-toggle" />
+            <div className="modal modal-bottom sm:modal-middle">
+                <div className="modal-box">
+                    <label htmlFor="image-modal" className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                    <div className="flex justify-center m-6">
+                        <img alt="profile photo" src={imageUrl} />
+                    </div>
                 </div>
             </div>
-        </div>
 
-<section className="bg-white p-5 m-5 rounded">
-      <h3 className="text-2xl mb-5">
-      {farmerData.fullname}
-        <p className="text-gray-400 text-base">{farmerData.company}
-        </p>
-      </h3>
-      <div
-        className="flex gap-5 p-10 max-w-max border border-gray-300 rounded"
-      >
-        <div className="avatar">
-                                <div className="w-32 rounded-full border-2 border-amber-900 hover:border-red-700">
-                                    <div/>
-                                    <label htmlFor="image-modal" className=" ">
-                                       <img alt="profile photo" src={imageUrl}/>
-                                   </label>
+            <section className=" p-5 m-5 ">
+                <h3 className="text-2xl mb-5">
+                    {farmerData.fullname}
 
-                                </div>
-                            </div>
-      </div>
-
-      <div className="flex flex-col lg:flex-row gap-5 mt-8">
-       
-        <div className="w-full lg:w-2/5">
-          <div className="p-2 rounded text-center bg-teal-500 text-white">
-            Finca
-          </div>
-          <div className="flex gap-5 mt-2">
-            <div
-              className="flex-grow border border-gray-300 rounded text-center py-8"
-            >
-              <h2 className="text-4xl font-bold pb-2">{farms?.certifications}</h2>
-              <h4 className="inline text-gray-500 text-sm">Certificados</h4>
-            </div>
-            <div
-              className="flex-grow border border-gray-300 rounded text-center py-8"
-            >
-              <h2 className="text-4xl font-bold pb-2">{farms?.familyMembers}</h2>
-              <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
-            </div>
-          </div>
-        </div>
-
-        <div className="w-full lg:w-2/5">
-          <div className="p-2 rounded text-center bg-teal-500 text-white">
-            Produccion 
-          </div>
-          <div className="flex gap-5 mt-2">
-            <div
-              className="flex-grow border border-gray-300 rounded text-center py-8"
-            >
-              <h2 className="text-4xl font-bold pb-2">{farms?.shadow}</h2>
-              <h4 className="inline text-gray-500 text-sm">Tipo de produccion </h4>
-            </div>
-            <div
-              className="flex-grow border border-gray-300 rounded text-center py-8"
-            >
-              <h2 className="text-4xl font-bold pb-2">{farms?.varieties}</h2>
-              <h4 className="inline text-gray-500 text-sm">Variedades </h4>
-            </div>
-          </div>
-        </div>
-      </div>
-    </section>
-
-        <section className="text-gray-600 body-font">
-            <div className="container sm:p-2 xl:px-5 xl:py-2 mx-auto flex flex-col ">
-                <div className="lg:w-4/6 mx-auto bg-stone-100">
-                    <div className="rounded-lg h-96 w-full overflow-hidden">
-                    <div className="mx-auto w-full p-4">
-                                   
-                                    </div>
+                </h3>
+                <p className="text-xs w-20 p-2 bg-amber-800 text-white px-4 rounded-full">
+                    {farmerData.company}
+                </p>
+                <br />
+                <div className="flex gap-5 p-10 max-w-max border border-gray-300 rounded">
+                    <div className="avatar">
+                        <div className="w-32 h-32 rounded-full border-2 border-amber-900 hover:border-red-700">
+                            <div />
+                            <label htmlFor="image-modal" className=" ">
+                                <img alt="profile photo" src={imageUrl} />
+                            </label>
+                        </div>
                     </div>
-                    <div className="flex flex-col sm:flex-row mt-10">
-                        <div className="sm:w-1/3 text-center sm:pr-8 sm:py-8">
-                           
-                            <div className="flex flex-col items-center text-center justify-center">
-                                <h2 className="font-medium title-font mt-4 text-gray-900 text-lg">{farmerData.fullname}</h2>
-                                <div className="w-12 h-1 bg-amber-800 rounded mt-2 mb-4 ">
+                    <br />
+                    <div className="flex flex-col items-center text-center w-32">
+                        <p className="flex flex-col">
+                            <>{t("gender")}:</>
+                            <span className="text-black dark:text-white font-bold">
+                                <>{t(farmerData.gender)}</>
+                            </span>
+                        </p>
+                        <br className="pt-2" />
+                        <p className="flex flex-col">
+                            <>{t("location")}:</>
+                            <span className="text-black dark:text-white font-bold">
+                                {farmerData.village}, {farmerData.region}
+                            </span>
+                        </p>
+                        <p className="flex flex-col">
+                        <>{t("country")}:</>
+                        <span className="text-black dark:text-white font-bold">
+                            {farmerData.country},
+                        </span>
+                    </p>
+
+                    </div>
+                </div>
+
+                <div>
+
+                    {farms
+                        ?
+                        <div>
+                            <div className="flex flex-col lg:flex-row gap-5 mt-8">
+
+                                <div className="w-full lg:w-1/2">
+                                    <div className="p-2 rounded text-center bg-teal-500 text-white">
+                                        Finca
+                                    </div>
+                                    <div className="flex gap-5 mt-2">
+                                        <div
+                                            className="flex-grow border border-gray-300 rounded text-center py-8"
+                                        >
+                                            <h2 className="text-4xl font-bold pb-2">{farms?.certifications}</h2>
+                                            <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                        </div>
+                                        <div
+                                            className="flex-grow border border-gray-300 rounded text-center py-8"
+                                        >
+                                            <h2 className="text-4xl font-bold pb-2">{farms?.familyMembers}</h2>
+                                            <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
+                                        </div>
+                                    </div>
                                 </div>
-                                <p className="text-xs p-2 bg-amber-800 text-white px-4 rounded-full">
-                                    {farmerData.company}
-                                </p>
-                                <p className="text-base">
-                                    {farmerData.bio}
-                                </p>
-                                <br className="pt-4"/>
-                                <p className="flex flex-col">
-                                    <>{t("gender")}:</>
-                                    <span className="text-black dark:text-white font-bold">
-                <>{t(farmerData.gender)}</>
-                </span>
-                                </p>
 
-                                <br className="pt-4"/>
-                                <p className="flex flex-col">
-                                    <>{t("location")}:</>
-                                    <span className="text-black dark:text-white font-bold">
-                      {farmerData.village}, {farmerData.region}
-                </span>
-                                </p>
+                                <div className="w-full lg:w-1/2">
+                                    <div className="p-2 rounded text-center bg-teal-500 text-white">
+                                        Produccion
+                                    </div>
+                                    <div className="flex gap-5 mt-2">
+                                        <div
+                                            className="flex-grow border border-gray-300 rounded text-center py-8"
+                                        >
+                                            <h2 className="text-4xl font-bold pb-2">{farms?.shadow}</h2>
+                                            <h4 className="inline text-gray-500 text-sm">Tipo de produccion </h4>
+                                        </div>
+                                        <div
+                                            className="flex-grow border border-gray-300 rounded text-center py-8"
+                                        >
+                                            <h2 className="text-4xl font-bold pb-2">{farms?.varieties}</h2>
+                                            <h4 className="inline text-gray-500 text-sm">Variedades </h4>
+                                        </div>
+                                    </div>
+                                </div>
 
-                                <br className="pt-4"/>
-                                <p className="flex flex-col">
-                                    <>{t("country")}:</>
-                                    <span className="text-black dark:text-white font-bold">
-                      {farmerData.country},
-                </span>
-                                </p>
 
+                            </div>
+                            <div className="flex flex-col lg:flex-col gap-5 mt-8">
+                                <div className="flex pt-8 space-x-4 place-content-center">
+                                    <div>
+                                        <NewMap latitude={latitude}
+                                            longitude={longitude}
+                                            addressLine={farmName}
+                                            zoomLevel={9}
+                                            className="google-map"
+                                        />
+                                    </div>
+
+                                </div>
                             </div>
                         </div>
 
-                        {farms
-                            ? <div
-                                className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
-                                <div className="flex flex-col m-2">
-                                    <h2 className="text-2xl font-bold mb-4">
-                                        Finca : <a>
-                                        {farmName}
-                                    </a>
-                                    </h2>
-
-                                    <div
-                                        className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 mt-4 gap-4">
-                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
-
-
-                                            <div className="ml-4">
-                                                <h2 className="font-semibold">Certificados:</h2>
-                                                <p className="mt-2 text-sm text-gray-500"></p>
-                                            </div>
-                                        </div>
-
-                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
-                                            <div className="ml-4">
-                                                <h2 className="font-semibold">Miembros de Familia:</h2>
-                                                <p className="mt-2 text-sm text-gray-500"></p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
-                                            <div className="ml-4">
-                                                <h2 className="font-semibold">Variedades:</h2>
-                                                <p className="mt-2 text-sm text-gray-500"></p>
-                                            </div>
-                                        </div>
-                                        <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
-                                            <div className="ml-4">
-                                                <h2 className="font-semibold">Tiene Sombra:</h2>
-                                                <p className="mt-2 text-sm text-gray-500">{farms?.shadow}</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                        
-                                </div>
-                            </div>
                         : null
-                        }
-                        {!farms
-                            ? <div
-                                className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
-                                <h2 className="text-2xl font-light m-4">
-                                    Faltan datos de finca
-                                </h2>
-                            </div>
-                            : null
-                        }
-
-                    </div>
+                    }
+                    {!farms
+                        ? <div
+                            className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
+                            <h2 className="text-2xl font-light m-4">
+                                Faltan datos de finca
+                            </h2>
+                        </div>
+                        : null
+                    }
                 </div>
-            </div>
-        </section>
-    </>
+            </section>
+        </>
 
     );
 };
