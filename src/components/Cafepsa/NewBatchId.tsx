@@ -4,6 +4,7 @@ import { ReactI18NextChild, useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import { getBatch, getFarmer, getFarmerFarms, getFarms } from "../../db/firebase";
 import NotFound from "../common/NotFound";
+import NewMap from "../common/NewMap";
 
 const NewBatchId = () => {
     const { t } = useTranslation();
@@ -39,7 +40,7 @@ const NewBatchId = () => {
                         });
                     }
                     let Farmers = result?.Farmer;
-                    if(Farmers.length > 1){
+                    if (Farmers.length > 1) {
                         Farmers.forEach((element: any) => {
                             getFarmer(element).then((result) => {
                                 FarmerDetails.push(result);
@@ -72,62 +73,191 @@ const NewBatchId = () => {
     }
 
     return (<>
+
+
+
+        <div className="min-w-screen min-h-screen bg-yellow-700 flex items-center p-5 lg:p-10 overflow-hidden relative flex-col">
+            <div className="w-full max-w-6xl rounded bg-white shadow-xl p-10 lg:p-20 mx-auto text-gray-800 relative md:text-left">
+                <div className="md:flex items-center -mx-10">
+                    <div className="w-full md:w-1/2 px-10 mb-10 md:mb-0">
+                        <div className="relative">
+                            <img src={coffeeBatch?.image || "https://gateway.pinata.cloud/ipfs/" + coffeeBatch?.image} alt="NFT" className="relative z-10 h-96 w-64 m-auto" />
+                            <div className="border-4 border-yellow-700 absolute top-10 bottom-10 left-10 right-10 z-0"></div>
+                        </div>
+                    </div>
+                    <div className="w-full md:w-1/2 px-10">
+                        <div className="mb-10">
+
+                            <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"> </h2>
+                            <h1 className="font-bold uppercase text-2xl mb-5">Detalles del lote : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , <br /> {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h1>
+                            <p>{coffeeBatch?.Description}</p>
+                        </div>
+                        <div>
+                            <div className="inline-block align-bottom mr-5">
+                                {coffeeBatch.Farmer !== undefined && (
+                                    <>
+                                        <div>
+                                            <p > <>{t("farmers")}</>: <br />
+                                                <>
+                                                    {farmers.map((farmer: any, index: any) => (
+                                                        <div key={index}>
+                                                            <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a>
+                                                            </p>
+                                                        </div>
+                                                    ))}
+                                                </>
+                                            </p>
+                                        </div>
+                                    </>
+                                )}
+                            </div>
+                            <div className="inline-block align-bottom">
+
+                                {coffeeBatch?.Profile?.note > 0 &&
+                                    <div className="stat">
+                                        <div className="stat-title"><>{t("note")}</></div>
+                                        <div className="stat-value">{coffeeBatch?.wetMill?.note} %</div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="w-full max-w-6xl rounded bg-white shadow-xl px-10 pb-5 lg:px-20 mx-auto text-gray-800 relative md:text-left">
+                <div>
+                <div className="w-full ">
+                            <div className="p-2 rounded text-center bg-amber-800 text-white">
+                                Produccion
+                            </div>
+                            <div className="flex gap-5 mt-2">
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.variety}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("variety")}</> </h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                     <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.process}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("process")}</> </h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.acidity}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("acidity")}</> </h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.aftertaste}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("aftertaste")}</> </h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.body}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("body")}</> </h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.aroma}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("aroma")}</> </h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.Profile?.sweetness}</h2>
+                                    <h4 className="inline text-gray-500 text-sm"> <>{t("sweetness")}</> </h4>
+                                </div>
+                            </div>
+                        </div>
+                    <div className="flex flex-col lg:flex-row gap-5 mt-2">
+
+                        <div className="w-full lg:w-1/2">
+                            <div className="p-2 rounded text-center bg-amber-800 text-white">
+                                Beneficio Humedo
+                            </div>
+                            <div className="flex gap-5 mt-2">
+                            <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.familyMembers}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
+                                </div>
+                            </div>
+                        </div>
+                        <div className="w-full lg:w-1/2">
+                            <div className="p-2 rounded text-center bg-amber-800 text-white">
+                                Beneficio Seco 
+                            </div>
+                            <div className="flex gap-5 mt-2">
+                            <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.certifications}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                </div>
+                                <div
+                                    className="flex-grow border border-gray-300 rounded text-center py-8"
+                                >
+                                    <h2 className="text-4xl font-bold pb-2">{coffeeBatch?.familyMembers}</h2>
+                                    <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
+                                </div>
+                            </div>
+                        </div>
+
+                        
+
+
+                    </div>
+                    <div className="flex flex-col lg:flex-col gap-5 mt-8">
+                        <div className="flex place-content-center">
+
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <br />
+        </div>
+
         <section>
             <div className="max-w-screen-xl px-4 py-8 mx-auto sm:px-6 sm:py-12 lg:px-8">
                 <ul className="grid grid-cols-1 gap-4 mt-8 lg:grid-cols-3">
-                    <li>
-                        <div className="relative block group">
-
-                            <div className="card w-full bg-base-100 shadow-xl">
-                                <figure className="px-10 pt-10">
-                                    <img src={coffeeBatch?.image || "https://gateway.pinata.cloud/ipfs/" + coffeeBatch?.image} alt="NFT" className="rounded-xl w-40" />
-                                </figure>
-
-                                <div className="card-body items-center text-center">
-                                    {coffeeBatch?.Profile?.note > 0 &&
-                                        <div className="stat">
-                                            <div className="stat-title"><>{t("note")}</></div>
-                                            <div className="stat-value">{coffeeBatch?.wetMill?.note} %</div>
-                                        </div>
-                                    }
-                                    <p>{coffeeBatch?.Description}</p>
-
-                                 
-                                    {coffeeBatch.Farmer !== undefined && (
-                                        <>
-                                            <div>
-                                                <p > <>{t("farmers")}</>: <br />
-                                                    <>
-                                                        {farmers.map((farmer: any, index: any) => (
-                                                            <div key={index}>
-                                                                <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a>
-                                                                </p>
-                                                            </div>
-                                                        ))}
-                                                    </>
-                                                </p>
-                                            </div>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li>
-                        <div className="relative block group">
-                            <div className="card w-full h bg-base-100 shadow-xl">
-                                <div className="card-body">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Detalles del lote : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h2>
-                                    <div className="card-actions">
-                                        <div className="grid gap-6 row-gap-5 mb-8 lg:grid-cols-4 sm:row-gap-6 sm:grid-cols-2">
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-
                     <li className="lg:col-span-2 lg:col-start-2 lg:row-span-2 lg:row-start-1">
                         <div className="relative block group">
                             <div className="card w-full bg-base-100 shadow-xl">

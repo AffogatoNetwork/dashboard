@@ -165,7 +165,7 @@ const Home = () => {
                 <Route path="/login" element={<Login />} />
                 <Route path="/signup" element={<Signup />} />
                 <Route path="/batch/:batchId" element={<CoffeeBatchId />} />
-                <Route path="/newbatch/:batchId" element={<CoffeeBatchId />} />
+                <Route path="/newbatch/:batchId" element={<NewBatchId />} />
                 <Route path="/coffeebatches" element={<PublicList />} />
 
                 <Route path="/farmer/:farmerId" element={<Profile />} />
