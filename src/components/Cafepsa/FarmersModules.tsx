@@ -165,7 +165,6 @@ export const FarmersModules = () => {
 
     const columData = useMemo<MRT_ColumnDef<FarmerType>[]>(
         () => [
-
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
@@ -183,9 +182,8 @@ export const FarmersModules = () => {
                                 gap: '1rem',
                             }}
                         >
-
                             <label htmlFor="farmerlist" className="btn btn-ghost h-full"
-                                onClick={() => { setData(renderedCellValue); }}>
+                                   onClick={() => { setData(renderedCellValue); }}>
                                 <QRCode value={reactNodeToString(renderedCellValue)} size={90} />
                             </label>
 
@@ -198,7 +196,6 @@ export const FarmersModules = () => {
                 accessorFn: (row) => `${row.qrCode} ${row.fullname}`, //accessorFn used to join multiple data into a single cell
                 id: 'name', //id is still required when using accessorFn instead of accessorKey
                 header: 'Nombre',
-                enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
                 Cell: ({ renderedCellValue, row}) => (
@@ -357,7 +354,7 @@ export const FarmersModules = () => {
                                             enableFilters={true}
                                             localization={MRT_Localization_ES}
                                             initialState={{
-                                                sorting: [{ id: 'fullname', desc: false }],
+                                                sorting: [{ id: 'name', desc: true }],
                                                 showGlobalFilter: true, isLoading: false
                                             }}
                                         />
@@ -394,6 +391,7 @@ export const FarmersModules = () => {
                                     </div>
                                     <div>
                                         <button onClick={() => {
+                                            console.log(Data);
                                             openInNewTab(Data);
                                         }}
                                             className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">

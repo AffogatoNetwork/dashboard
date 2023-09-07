@@ -32,6 +32,7 @@ export const Profile = () => {
                     setLoading(false);
                 });
                 await getImageUrl(farmerId).then((result) => {
+
                     setImageUrl(result);
                 });
                 setLoading(false);

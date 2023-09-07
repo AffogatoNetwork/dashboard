@@ -165,6 +165,7 @@ export const BatchesModule = () => {
             },
             {
                 accessorFn: (farmers: any) => `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
+                id: 'name', //id is still required when using accessorFn instead of accessorKey
                 header: `Productores(a)`, size: 25,
                 Cell(props) {
                     return (
@@ -296,7 +297,6 @@ export const BatchesModule = () => {
                                                 },
                                             }}
                                             initialState={{
-                                                sorting: [{ id: 'Name', desc: false }],
                                                 showGlobalFilter: true, isLoading: false
                                             }}
                                         />

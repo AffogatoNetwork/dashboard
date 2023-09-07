@@ -3,7 +3,7 @@ import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
 import NotFound from "../common/NotFound";
-import { getFarmer, getFarmerFarms, getImageUrl } from "../../db/firebase";
+import { getFarmer, getFarmerFarms, getCafepsaImageUrl } from "../../db/firebase";
 import NewMap from "../common/NewMap";
 
 
@@ -34,6 +34,9 @@ export const FarmerProfileModule = () => {
                         }
                     });
                     setLoading(false);
+                });
+                await getCafepsaImageUrl(newfarmerId).then((result) => {
+                    setImageUrl(result);
                 });
                 setLoading(false);
             }

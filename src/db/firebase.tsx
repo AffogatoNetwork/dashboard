@@ -113,6 +113,14 @@ export const getImageUrl = async (id: string) => {
   return url;
 };
 
+export const getCafepsaImageUrl = async (id: string) => {
+  let download = id + '.jpeg'
+  console.log(download)
+  const url = await getDownloadURL(ref(storage, download));
+  console.log(download)
+  return url;
+};
+
 export const saveFarm = async (farm: FarmType) => {
   try {
     const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());

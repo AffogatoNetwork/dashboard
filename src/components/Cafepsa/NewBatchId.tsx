@@ -13,6 +13,8 @@ const NewBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
+    const [ObservableFarmers, ObservableSetFarmers] = useState<any>([]);
+
     useEffect(() => {
         const load = () => {
             if (batchId) {
@@ -30,6 +32,7 @@ const NewBatchId = () => {
                         }
                     }
 
+                    let FarmerDetails: any[] = [];
 
                     setCoffeeBatch(result);
                     console.log(result)
@@ -37,7 +40,7 @@ const NewBatchId = () => {
                         getFarmer(result?.Farmer.address).then((result) => {
                             console.log(result);
                             FarmerDetails.push(result);
-                            setFarmers(FarmerDetails);
+                            ObservableSetFarmers(FarmerDetails);
                         });
                     }
                     let Farmers = result?.Farmer;
@@ -45,7 +48,6 @@ const NewBatchId = () => {
                         Farmers.forEach((element: any) => {
                             getFarmer(element).then((result) => {
                                 FarmerDetails.push(result);
-                                console.log(FarmerDetails);
                                 setFarmers(FarmerDetails);
                                 console.log(FarmerDetails);
                             });
@@ -56,8 +58,7 @@ const NewBatchId = () => {
 
 
                     console.log(Farmers);
-                    let FarmerDetails: any[] = [];
-                    console.log(Farmers)
+                    setFarmers(Farmers)
                     setLoading(false);
                 });
                 setLoading(false);
@@ -136,7 +137,7 @@ const NewBatchId = () => {
                 <div>
                     <div className="w-full ">
                         <div className="p-2 rounded text-center bg-amber-800 text-white">
-                            Produccion
+                            Producción
                         </div>
                         <div className="flex gap-5 mt-2">
                             <div
