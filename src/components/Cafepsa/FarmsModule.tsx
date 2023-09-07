@@ -46,7 +46,7 @@ export const FarmsModule = () => {
     type FarmerType = {
         area: number;
         address: string;
-        height: string;
+        height: number;
         ipfshash: string;
         latitude: number;
         longitude: number;
@@ -262,6 +262,7 @@ export const FarmsModule = () => {
                 Cell(props) {
                     return (
                         <div className="text-center">
+                            {JSON.stringify(props.renderedCellValue)}
                             {props.renderedCellValue}
                         </div>
                     );
@@ -285,14 +286,13 @@ export const FarmsModule = () => {
 
     return (
         <>
-
             <div className="">
                 <div className=" flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className=" w-full h-full p-1">
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("Buscar Fincas")}</>
+                                    <>{t("search-farms")}</>
                                 </div>
                             </div>
                             <div className="m-6">

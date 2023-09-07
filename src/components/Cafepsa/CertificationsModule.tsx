@@ -353,7 +353,7 @@ export const CertificationsModule = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("Certificados")}</>
+                                    <>{t("certificates")}</>
                                 </div>
                             </div>
                             <div className="m-6">

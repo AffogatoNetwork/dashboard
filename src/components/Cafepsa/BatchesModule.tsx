@@ -248,7 +248,7 @@ export const BatchesModule = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-batches")}</>
+                                    <>{t("coffe-batches-benefied")}</>
                                 </div>
                             </div>
                             <div className="m-6">

@@ -105,7 +105,7 @@ const NewBatchId = () => {
                                 {coffeeBatch.Farmer !== undefined && (
                                     <>
                                         <div>
-                                            <p > <>{t("farmers")}</>: <br />
+                                            <h1 > <>{t("farmers")}</>: <br />
                                                 <>
                                                     {farmers.map((farmer: any, index: any) => (
                                                         <div key={index}>
@@ -114,7 +114,7 @@ const NewBatchId = () => {
                                                         </div>
                                                     ))}
                                                 </>
-                                            </p>
+                                            </h1>
                                         </div>
                                     </>
                                 )}
