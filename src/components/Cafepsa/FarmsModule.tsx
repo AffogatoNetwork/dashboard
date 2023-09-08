@@ -258,11 +258,10 @@ export const FarmsModule = () => {
 
             {
                 accessorFn: (farm: any) => `${farm.height} `,
-                header: 'Altura (m.s.n.m.) ', size: 5,
+                header: 'Altura (m.s.n.m.) ', size: 10,
                 Cell(props) {
                     return (
                         <div className="text-center">
-                            {JSON.stringify(props.renderedCellValue)}
                             {props.renderedCellValue}
                         </div>
                     );
