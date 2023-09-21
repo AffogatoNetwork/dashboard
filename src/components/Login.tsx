@@ -107,6 +107,17 @@ const Login = () => {
                                 </div>
                             </div>
                             <div className="pt-5 text-center text-gray-400 text-xs">
+                            <h4> 
+                                Estamos haciendo cambios por favor elegir el bòton de Iniciar con Google 
+                            </h4>
+                            <h4>
+                            para poder editar y tener permisos Administrativos las cuentas debes estar en la lista de Administradores y tener inicio seguro con 2FA
+                            </h4>
+                            </div>
+                            <div className="pt-5 text-center text-gray-400 text-xs">
+                         
+                           
+                           
                            <span>
                            <LangChooser/>
                             </span>
