@@ -1,4 +1,4 @@
-import React, {ReactDOM, useEffect, useMemo, useState} from "react";
+import React, { ReactDOM, useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
 import { getAllFarmers } from "../../db/firebase";
 import { SEARCH_DIVIDER } from "../../utils/constants";
@@ -14,7 +14,7 @@ import { MRT_Localization_ES } from 'material-react-table/locales/es';
 export const FarmersModules = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -164,20 +164,20 @@ export const FarmersModules = () => {
     const [tableData, setTableData] = useState<any[]>(() => Data);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
-    async ({ exitEditingMode, row, values }) => {
-      //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
-      tableData[row.index] = values;
-      //send/receive api updates here
-    
-      exitEditingMode(); //required to exit editing mode
-    };
+        async ({ exitEditingMode, row, values }) => {
+            //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
+            tableData[row.index] = values;
+            //send/receive api updates here
+
+            exitEditingMode(); //required to exit editing mode
+        };
 
     const columData = useMemo<MRT_ColumnDef<any>[]>(
         () => [
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: t('tables.qr'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -192,7 +192,7 @@ export const FarmersModules = () => {
                             }}
                         >
                             <label htmlFor="farmerlist" className="btn btn-ghost h-full"
-                                   onClick={() => { setData(renderedCellValue); }}>
+                                onClick={() => { setData(renderedCellValue); }}>
                                 <QRCode value={reactNodeToString(renderedCellValue)} size={90} />
                             </label>
 
@@ -204,10 +204,10 @@ export const FarmersModules = () => {
             {
                 accessorFn: (row) => `${row.qrCode} ${row.fullname}`, //accessorFn used to join multiple data into a single cell
                 id: 'name', //id is still required when using accessorFn instead of accessorKey
-                header: 'Nombre',
+                header: t('tables.name'),
                 enableColumnFilter: false,
                 // @ts-ignore
-                Cell: ({ renderedCellValue, row}) => (
+                Cell: ({ renderedCellValue, row }) => (
                     <>
                         <Box
                             sx={{
@@ -216,11 +216,12 @@ export const FarmersModules = () => {
                                 gap: '1rem',
                             }}
                         >
-    
+
                             <h1 onClick={() => {
-                                openInNewTab(reactNodeToString(row.original.qrCode));}}
-                                    className=" font-bold hover:underline hover:decoration-2">
-                               {row.original.fullname}
+                                openInNewTab(reactNodeToString(row.original.qrCode));
+                            }}
+                                className=" font-bold hover:underline hover:decoration-2">
+                                {row.original.fullname}
                             </h1>
                         </Box>
                     </>
@@ -228,7 +229,7 @@ export const FarmersModules = () => {
             }, {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
-                header: 'Sexo',
+                header: t('tables.sex'),
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -249,11 +250,11 @@ export const FarmersModules = () => {
                     </>
                 ),
             }, {
-                header: 'Ubicación ', accessorKey: 'location'
+                header: t('tables.location'), accessorKey: 'location'
             }, {
                 accessorFn: (farm: any) => `${farm.familyMembers}`,
                 id: 'familyMembers', //id is still required when using accessorFn instead of accessorKey
-                header: 'No. Integrantes',
+                header: t('tables.members'),
                 size: 10,
                 Cell(props) {
                     return (
@@ -263,11 +264,11 @@ export const FarmersModules = () => {
                     );
                 },
             },
-            
+
             {
                 accessorFn: (farm: any) => `${farm.maleMenbers}`,
                 id: 'maleMenbers', //id is still required when using accessorFn instead of accessorKey
-                header: 'Integrantes Masculinos',
+                header: t('tables.male-members'),
                 size: 10,
                 Cell(props) {
                     return (
@@ -280,7 +281,7 @@ export const FarmersModules = () => {
             {
                 accessorFn: (farm: any) => `${farm.femaleMenbers}`,
                 id: 'femaleMenbers', //id is still required when using accessorFn instead of accessorKey
-                header: 'Integrantes Femeninos',
+                header: t('tables.female-members'),
                 size: 10,
                 Cell(props) {
                     return (
@@ -290,19 +291,19 @@ export const FarmersModules = () => {
                     );
                 },
             },
-            
-            
-            
-            
+
+
+
+
             {
-                header: 'Comunidad ', accessorKey: 'region'
+                header: t('tables.community'), accessorKey: 'region'
             }, {
-                header: 'Municipio ', accessorKey: 'village2'
+                header: t('tables.municipality'), accessorKey: 'village2'
             }, {
-                header: 'Pais', accessorKey: 'country'
+                header: t('tables.country'), accessorKey: 'country'
             }
         ],
-        [],
+        [i18n.language],
     );
 
 
@@ -353,15 +354,15 @@ export const FarmersModules = () => {
                                     <div className="overflow-auto">
 
 
-                            
+
 
                                         <MaterialReactTable
-                                        enableStickyHeader={true}
+                                            enableStickyHeader={true}
                                             columns={columData}
                                             editingMode="modal" //default
                                             enableEditing
                                             onEditingRowSave={handleSaveRow}
-                                           
+
                                             data={farmers}
                                             enableHiding={false}
                                             enableDensityToggle={false}

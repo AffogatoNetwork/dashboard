@@ -14,7 +14,7 @@ import NewMap from "../common/NewMap";
 export const FarmsModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -153,13 +153,13 @@ export const FarmsModule = () => {
     const [tableData, setTableData] = useState<any[]>(() => Data);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
-    async ({ exitEditingMode, row, values }) => {
-      //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
-      tableData[row.index] = values;
-      //send/receive api updates here
-    
-      exitEditingMode(); //required to exit editing mode
-    };
+        async ({ exitEditingMode, row, values }) => {
+            //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
+            tableData[row.index] = values;
+            //send/receive api updates here
+
+            exitEditingMode(); //required to exit editing mode
+        };
 
 
     const onMapBtnClick = (lat: string, lng: string, adressL: string) => {
@@ -175,7 +175,7 @@ export const FarmsModule = () => {
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: t('tables.qr'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -201,7 +201,7 @@ export const FarmsModule = () => {
                 ),
             },
             {
-                header: 'Nombre ', accessorKey: 'name'
+                header: t('tables.name'), accessorKey: 'name'
             }, {
                 header: 'Comunidad ', accessorKey: 'village'
             }, {
@@ -281,19 +281,12 @@ export const FarmsModule = () => {
                 },
             },
 
-
             {
                 header: 'Sistema de Producción', accessorKey: 'shadow'
             }
         ],
-        [],
+        [i18n.language],
     );
-
-
-
-
-
-
 
     return (
         <>
@@ -383,9 +376,9 @@ export const FarmsModule = () => {
                                             <>{t("download")}</>
                                         </button>
                                     </div>
-                        
+
                                 </div>
-                            
+
                             </div>
                         </div>
                     </div>

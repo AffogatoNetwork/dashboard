@@ -45,7 +45,7 @@ export const FarmerProfileModule = () => {
         // eslint-disable-next-line
     }, [newfarmerId]);
 
-   
+
     if (loading) {
         return (
             <Loading label={t("loading").concat("...")} className="loading-wrapper" />
@@ -70,10 +70,10 @@ export const FarmerProfileModule = () => {
 
             <section className="p-3 m-2 card border">
                 <button className="btn btn-ghost  absolute right-2 top-2">
-                <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmers-module'}> Volver </a>                
+                    <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmers-module'}> <>{t('back')}</> </a>
                 </button>
                 <h3 className="text-2xl font-bold mb-5">
-                    <> Finca :</>{farmerData.fullname}
+                    <>{t('tables.name')}:</> {farmerData.fullname}
                 </h3>
 
                 <div className="flex flex-col lg:flex-row gap-5 mt-2">
@@ -142,40 +142,40 @@ export const FarmerProfileModule = () => {
 
                                 <div className="w-full lg:w-1/2">
                                     <div className="p-2 rounded text-center bg-amber-800 text-white">
-                                        Finca
+                                        <>{t('farm-name')}</>
                                     </div>
                                     <div className="flex gap-5 mt-2">
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
                                             <h2 className="text-xl font-bold pb-2">{farms?.certifications}</h2>
-                                            <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                            <h4 className="inline text-gray-500 text-sm"><>{t('certificates')}</></h4>
                                         </div>
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
                                             <h2 className="text-xl font-bold pb-2">{farms?.familyMembers}</h2>
-                                            <h4 className="inline text-gray-500 text-sm">Mienbros de Familia</h4>
+                                            <h4 className="inline text-gray-500 text-sm"><>{t('family-members')}</></h4>
                                         </div>
                                     </div>
                                 </div>
 
                                 <div className="w-full lg:w-1/2">
                                     <div className="p-2 rounded text-center bg-amber-800 text-white">
-                                        Produccion
+                                        <>{t('production')}</>
                                     </div>
                                     <div className="flex gap-5 mt-2">
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
                                             <h2 className="text-xl font-bold pb-2">{farms?.shadow}</h2>
-                                            <h4 className="inline text-gray-500 text-sm">Tipo de produccion </h4>
+                                            <h4 className="inline text-gray-500 text-sm"><>{t('type-production')}</></h4>
                                         </div>
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"
                                         >
                                             <h2 className="text-xl font-bold pb-2">{farms?.varieties}</h2>
-                                            <h4 className="inline text-gray-500 text-sm">Variedades </h4>
+                                            <h4 className="inline text-gray-500 text-sm"><>{t('varieties')}</> </h4>
                                         </div>
                                     </div>
                                 </div>
