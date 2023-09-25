@@ -126,7 +126,7 @@ export const Profile = () => {
                                     className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
                                     <div className="flex flex-col m-2">
                                         <h2 className="text-2xl font-bold mb-4">
-                                            Finca : <a>
+                                            <>{t('tables.name')}</> : <a>
                                                 {farmName}
                                             </a>
                                         </h2>
@@ -137,26 +137,26 @@ export const Profile = () => {
 
 
                                                 <div className="ml-4">
-                                                    <h2 className="font-semibold">Certificados:</h2>
+                                                    <h2 className="font-semibold"><>{t('certificates')}</>:</h2>
                                                     <p className="mt-2 text-sm text-gray-500">{farms?.certifications}</p>
                                                 </div>
                                             </div>
 
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                                 <div className="ml-4">
-                                                    <h2 className="font-semibold">Miembros de Familia:</h2>
+                                                    <h2 className="font-semibold"><>{t('family-members')}</>:</h2>
                                                     <p className="mt-2 text-sm text-gray-500">{farms?.familyMembers}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                                 <div className="ml-4">
-                                                    <h2 className="font-semibold">Variedades:</h2>
+                                                    <h2 className="font-semibold"><>{t('varieties')}</>:</h2>
                                                     <p className="mt-2 text-sm text-gray-500">{farms?.varieties}</p>
                                                 </div>
                                             </div>
                                             <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                                                 <div className="ml-4">
-                                                    <h2 className="font-semibold">Tiene Sombra:</h2>
+                                                    <h2 className="font-semibold"><>{t('shadow')}</>:</h2>
                                                     <p className="mt-2 text-sm text-gray-500">{farms?.shadow}</p>
                                                 </div>
                                             </div>
@@ -179,7 +179,7 @@ export const Profile = () => {
                                 ? <div
                                     className="sm:border-l border-gray-200 sm:border-t-0 border-t ">
                                     <h2 className="text-2xl font-light m-4">
-                                        Faltan datos de finca
+                                        <>{t('missing-data')}</>
                                     </h2>
                                 </div>
                                 : null

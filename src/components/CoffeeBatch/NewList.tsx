@@ -14,7 +14,7 @@ import { FarmerData } from "../FarmerData";
 export const CoffeBatchNewList = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -47,7 +47,7 @@ export const CoffeBatchNewList = () => {
         qrCode: string;
         Name: string;
         ipfsHash: string;
-        parentId: string; 
+        parentId: string;
         dryMill: {};
         wetMill: {};
         Profile: {};
@@ -138,7 +138,7 @@ export const CoffeBatchNewList = () => {
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: t('tables.qr'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -164,7 +164,7 @@ export const CoffeBatchNewList = () => {
             },
             {
                 accessorFn: (farmers: any) => `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
-                header: `Nombre`, size: 25,
+                header: t('tables.name'), size: 25,
                 Cell(props) {
                     return (
                         <div className="text-left">
@@ -174,7 +174,7 @@ export const CoffeBatchNewList = () => {
                 },
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.average_height}`, //accessorFn used to join multiple data into a single cell
-                header: 'Altura (m.s.n.m) ', size: 15,
+                header: t('variety'), size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === 'undefined') {
                         return (
@@ -190,16 +190,16 @@ export const CoffeBatchNewList = () => {
                     );
                 },
             }, {
-                header: 'Variedad ', accessorKey: 'wetMill.variety', size: 15,
+                header: t('tables.height'), accessorKey: 'wetMill.variety', size: 15,
             }, {
-                header: 'Proceso ', accessorKey: 'wetMill.process', size: 15,
+                header: t('tables.process'), accessorKey: 'wetMill.process', size: 15,
             }, {
-                header: 'Tipo de Secado', accessorKey: 'wetMill.drying_type', size: 15,
+                header: t('tables.type-drying'), accessorKey: 'wetMill.drying_type', size: 15,
             }, {
-                header: 'Peso (qq)', accessorKey: 'dryMill.weight', size: 15,
+                header: t('tables.weight'), accessorKey: 'dryMill.weight', size: 15,
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.note}`, //accessorFn used to join multiple data into a single cell
-                header: 'Nota', size: 15,
+                header: t('tables.note'), size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === '0') {
                         return (
@@ -216,7 +216,7 @@ export const CoffeBatchNewList = () => {
                 },
             },
         ],
-        [],
+        [i18n.language],
     );
 
 
@@ -322,7 +322,7 @@ export const CoffeBatchNewList = () => {
                                         </button>
                                     </div>
                                 </div>
-                                
+
                             </div>
                         </div>
                     </div>

@@ -13,7 +13,7 @@ import { MRT_Localization_ES } from 'material-react-table/locales/es';
 export const NewList = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -147,7 +147,7 @@ export const NewList = () => {
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: t('tables.qr'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -175,7 +175,7 @@ export const NewList = () => {
             {
                 accessorFn: (row) => `${row.qrCode} ${row.fullname}`, //accessorFn used to join multiple data into a single cell
                 id: 'name', //id is still required when using accessorFn instead of accessorKey
-                header: 'Nombre',
+                header: t('tables.name'),
                 enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
@@ -199,11 +199,11 @@ export const NewList = () => {
                     </>
                 ),
             }, {
-                header: 'Ubicación ', accessorKey: 'location'
+                header: t('tables.location'), accessorKey: 'location'
             }, {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
-                header: 'Género',
+                header: t('tables.gender'),
                 size: 25,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -224,12 +224,12 @@ export const NewList = () => {
                     </>
                 ),
             }, {
-                header: 'Dirección de Cuenta', accessorKey: 'address', enableClickToCopy: true,
+                header: t('tables.account-address'), accessorKey: 'address', enableClickToCopy: true,
 
             }, {
                 accessorFn: (row: { blockChainUrl: any; }) => `${row.blockChainUrl} `, //accessorFn used to join multiple data into a single cell
                 id: 'blockChainUrl', //id is still required when using accessorFn instead of accessorKey
-                header: 'Enlace al Blockchain',
+                header: t('tables.blockchain-link'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -249,21 +249,15 @@ export const NewList = () => {
                             }}
                                 className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
                                 <LinkIcon></LinkIcon>
-                                <>Ver en el blockchain</>
+                                <>{t('tables.view-blockchain')}</>
                             </button>
                         </Box>
                     </>
                 ),
             }
         ],
-        [],
+        [i18n.language],
     );
-
-
-
-
-
-
 
     return (
         <>
