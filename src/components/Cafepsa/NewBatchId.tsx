@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
-import { getBatch, getFarmer, getFarmerFarms, getFarms } from "../../db/firebase";
+import { getBatch, getFarmer } from "../../db/firebase";
 import NotFound from "../common/NotFound";
 import NewMap from "../common/NewMap";
 import { LinkIcon } from "../icons/link";
+import Farmers from './Farmers';
 
 const NewBatchId = () => {
     const { t } = useTranslation();
@@ -17,13 +18,13 @@ const NewBatchId = () => {
     useEffect(() => {
         const load = () => {
             if (batchId) {
+                let farmerDetails: any[] = [];
                 getBatch(batchId).then((result) => {
-                    console.log(result?.image.includes("https://firebasestorage"));
+                    //console.log(result?.image.includes("https://firebasestorage"));
                     if (result?.image.includes("https://firebasestorage") === true) {
                         // console.log("es una url");
                     } else {
                         if (result?.image) {
-                            // console.log("es un hash");
                             let url = 'https://affogato.mypinata.cloud/ipfs/'
                             result.image = url + result.image;
                             // console.log(result.image);
@@ -31,37 +32,32 @@ const NewBatchId = () => {
                     }
 
                     setCoffeeBatch(result);
-                    // console.log(result)
-                    if (result?.Farmer.address !== undefined) {
-                        getFarmer(result?.Farmer.address).then((result) => {
-                            // console.log(result);
-                            FarmerDetails.push(result);
-                            setFarmers(FarmerDetails);
-                        });
-                    }
-                    let Farmers = result?.Farmer;
-                    if (Farmers.length > 1) {
-                        Farmers.forEach((element: any) => {
-                            getFarmer(element).then((result) => {
-                                FarmerDetails.push(result);
-                                console.log(FarmerDetails);
-                                setFarmers(FarmerDetails);
-                                // console.log(FarmerDetails);
+
+                    let dataFarmers = result?.Farmer;
+                    if (dataFarmers && dataFarmers.length > 0) {
+                        // Utiliza Promise.all para esperar a que todas las promesas se resuelvan
+                        Promise.all(dataFarmers.map((element: any) => getFarmer(element)))
+                            .then((farmers) => {
+                                setFarmers(farmers);
+                                setLoading(false);
+                            })
+                            .catch((error) => {
+                                console.error("Error al obtener detalles de los agricultores:", error);
+                                setLoading(false);
                             });
-                        });
                     } else {
+                        setLoading(false);
                     }
-                    // console.log(Farmers);
-                    let FarmerDetails: any[] = [];
-                    // console.log(Farmers)
-                    setLoading(false);
-                });
-                setLoading(false);
+                })
+                    .catch((error) => {
+                        console.error("Error al cargar datos del lote de café:", error);
+                        setLoading(false);
+                    });
+
             } else {
                 <NotFound msg={batchId + "Not Found"} />;
             }
         };
-
         load();
     }, [batchId]);
 
@@ -103,13 +99,9 @@ const NewBatchId = () => {
                                         <div>
                                             <h1 > <>{t("farmers")}</>: <br />
                                                 <>
-
-                                                    {farmers.map((farmer: any, index: any) => (
-                                                        <div key={index}>
-                                                            <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a>
-                                                            </p>
-                                                        </div>
-                                                    ))}
+                                                    <Farmers
+                                                        farmers={farmers}
+                                                    />
                                                 </>
                                             </h1>
                                         </div>
