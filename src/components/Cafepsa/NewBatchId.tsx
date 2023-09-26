@@ -13,7 +13,6 @@ const NewBatchId = () => {
     const [loading, setLoading] = useState(true);
     const [coffeeBatch, setCoffeeBatch] = useState<any>([]);
     const [farmers, setFarmers] = useState<any>([]);
-    const [ObservableFarmers, ObservableSetFarmers] = useState<any>([]);
 
     useEffect(() => {
         const load = () => {
@@ -32,40 +31,32 @@ const NewBatchId = () => {
                         }
                     }
 
-                    let FarmerDetails: any[] = [];
-
                     setCoffeeBatch(result);
                     console.log(result)
-                    if(result?.Farmers.length > 0){
-                        setFarmers(result?.Farmers);
-                    } else {
-                        if (result?.Farmer.address !== undefined) {
-                            getFarmer(result?.Farmer.address).then((result) => {
-                                console.log(result);
+                    if (result?.Farmer.address !== undefined) {
+                        getFarmer(result?.Farmer.address).then((result) => {
+                            console.log(result);
+                            FarmerDetails.push(result);
+                            setFarmers(FarmerDetails);
+                        });
+                    }
+                    let Farmers = result?.Farmer;
+                    if (Farmers.length > 1) {
+                        Farmers.forEach((element: any) => {
+                            getFarmer(element).then((result) => {
                                 FarmerDetails.push(result);
+                                console.log(FarmerDetails);
+                                setFarmers(FarmerDetails);
+                                console.log(FarmerDetails);
                             });
-                        }
-                        let Farmers = result?.Farmer;
-                        if (Farmers.length > 1) {
-                            Farmers.forEach((element: any) => {
-                                getFarmer(element).then((result) => {
-                                    let data = {
-                                        address: result?.address,
-                                        name: result?.fullname
-                                    }
-                                    FarmerDetails.push(data);
-                                    setFarmers(FarmerDetails);
-                                    console.log(FarmerDetails);
-                                });
-                            });
-                        } else {
-                            console.log(Farmers);
-                        }
-
-                        console.log(Farmers);
-                        setFarmers(Farmers)
+                        });
+                    } else {
                     }
 
+
+                    console.log(Farmers);
+                    let FarmerDetails: any[] = [];
+                    console.log(Farmers)
                     setLoading(false);
                 });
                 setLoading(false);
@@ -116,10 +107,9 @@ const NewBatchId = () => {
                                             <h1 > <>{t("farmers")}</>: <br />
                                                 <>
 
-                                                    {farmers.map((farmer: any, index: any) => (
-
+                                                {farmers.map((farmer: any, index: any) => (
                                                         <div key={index}>
-                                                            <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.adress} > {farmer?.name} </a>
+                                                            <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a>
                                                             </p>
                                                         </div>
                                                     ))}

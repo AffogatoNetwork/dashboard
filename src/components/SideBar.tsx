@@ -72,7 +72,7 @@ export default function Home() {
   const controlText = useAnimation()
   const controlTitleText = useAnimation()
 
-  /*const getCooperative = (companyName: string) => {
+  const getCooperative = (companyName: string) => {
     if (companyName === 'CAFEPSA') {
 
       data = [{
@@ -92,10 +92,7 @@ export default function Home() {
       },]
     }
 
-  }*/
-
-
-
+  }
 
   const showMore = () => {
     controls.start({
@@ -155,7 +152,7 @@ export default function Home() {
 
 
     showMore()
-    // getCooperative(companyName)
+    getCooperative(companyName)
   }, [])
 
 

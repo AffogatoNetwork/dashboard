@@ -265,12 +265,12 @@ export const FarmsModule = () => {
 
 
             {
-                header: 'Variedades de Café ', accessorKey: 'varieties'
+                header: t('tables.coffee-varieties'), accessorKey: 'varieties'
             },
 
             {
                 accessorFn: (farm: any) => `${farm.height} `,
-                header: 'Altura (m.s.n.m.) ', size: 10,
+                header: 'Altura (m.s.n.m.)', size: 10,
                 Cell(props) {
                     return (
                         <div className="text-center">
