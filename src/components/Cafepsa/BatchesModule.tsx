@@ -14,7 +14,7 @@ import { FarmerData } from "../FarmerData";
 export const BatchesModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -28,13 +28,13 @@ export const BatchesModule = () => {
     const [tableData, setTableData] = useState<any[]>(() => Data);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
-    async ({ exitEditingMode, row, values }) => {
-      //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
-      tableData[row.index] = values;
-      //send/receive api updates here
-    
-      exitEditingMode(); //required to exit editing mode
-    };
+        async ({ exitEditingMode, row, values }) => {
+            //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
+            tableData[row.index] = values;
+            //send/receive api updates here
+
+            exitEditingMode(); //required to exit editing mode
+        };
 
 
     const handleOnDownloadClick = () => {
@@ -57,7 +57,7 @@ export const BatchesModule = () => {
         qrCode: string;
         Name: string;
         ipfsHash: string;
-        parentId: string; 
+        parentId: string;
         dryMill: {};
         wetMill: {};
         Profile: {};
@@ -149,7 +149,7 @@ export const BatchesModule = () => {
             {
                 accessorFn: (row: { qrCode: any; }) => `${row.qrCode} `, //accessorFn used to join multiple data into a single cell
                 id: 'qrCode', //id is still required when using accessorFn instead of accessorKey
-                header: 'Código QR',
+                header: t('tables.qr'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -176,7 +176,7 @@ export const BatchesModule = () => {
             {
                 accessorFn: (farmers: any) => `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
                 id: 'name', //id is still required when using accessorFn instead of accessorKey
-                header: `Productores(a)`, size: 25,
+                header: t("farmers"), size: 25,
                 Cell(props) {
                     return (
                         <div className="text-left">
@@ -186,7 +186,7 @@ export const BatchesModule = () => {
                 },
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.average_height}`, //accessorFn used to join multiple data into a single cell
-                header: 'Altura Promedio de lote (m.s.n.m) ', size: 15,
+                header: t("tables.height-lot"), size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === 'undefined') {
                         return (
@@ -202,10 +202,10 @@ export const BatchesModule = () => {
                     );
                 },
             }, {
-                header: 'Peso de lote(QQ)', accessorKey: 'dryMill.weight', size: 15,
+                header: t('tables.batch-weight'), accessorKey: 'dryMill.weight', size: 15,
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.note}`, //accessorFn used to join multiple data into a single cell
-                header: 'Nota de Catación ', size: 15,
+                header: t('tables.tasting-note'), size: 15,
                 Cell(props) {
                     if (props.renderedCellValue === '0') {
                         return (
@@ -222,7 +222,7 @@ export const BatchesModule = () => {
                 },
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.cupping_url}`, //accessorFn used to join multiple data into a single cell
-                header: 'Perfil de Catación', size: 15,
+                header: t('tables.tasting-profile'), size: 15,
                 Cell: ({ renderedCellValue }) => (
                     <>
                         <Box
@@ -237,7 +237,7 @@ export const BatchesModule = () => {
                             }}
                                 className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
                                 <LinkIcon></LinkIcon>
-                                <>Ver Enlace</>
+                                <>{t('open-link')}</>
                             </button>
 
                         </Box>
@@ -246,7 +246,7 @@ export const BatchesModule = () => {
                 ),
             }
         ],
-        [],
+        [i18n.language],
     );
 
 

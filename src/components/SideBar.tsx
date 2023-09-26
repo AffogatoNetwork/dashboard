@@ -33,7 +33,7 @@ let data = [{
     }, {
       title: 'batches', icon: AgricultureIcon, href: routes.lotes, disabled: ''
     }, {
-      title: 'certificates', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
+      title: 'certifications', icon: VerifiedIcon, href: routes.certificacion, disabled: ''
     }
   ]
 },]
@@ -78,15 +78,15 @@ export default function Home() {
       data = [{
         name: '', items: [
           {
-            title: 'Inicio', icon: HomeIcon, href: routes.home, disabled: ''
+            title: 'home', icon: HomeIcon, href: routes.home, disabled: ''
           }, {
-            title: 'Perfil de Productores', icon: ProfileIcon, href: routes.cafepsaFarmers, disabled: ''
+            title: 'producers profile', icon: ProfileIcon, href: routes.cafepsaFarmers, disabled: ''
           }, {
-            title: 'Modulo Fincas de Café', icon: LandscapeIcon, href: routes.cafepsaFarms, disabled: ''
+            title: 'module-farms', icon: LandscapeIcon, href: routes.cafepsaFarms, disabled: ''
           }, {
-            title: 'Beneficiado Lote de Café', icon: AgricultureIcon, href: routes.cafepsaBatches, disabled: ''
+            title: 'coffe-batches-benefied', icon: AgricultureIcon, href: routes.cafepsaBatches, disabled: ''
           }, {
-            title: 'Certificaciones', icon: VerifiedIcon, href: routes.cafepsaCertification, disabled: ''
+            title: 'certifications', icon: VerifiedIcon, href: routes.cafepsaCertification, disabled: ''
           }
         ]
       },]

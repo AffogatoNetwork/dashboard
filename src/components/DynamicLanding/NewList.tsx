@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
-import {getFarms} from "../../db/firebase";
+import { getFarms } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import { useTranslation } from "react-i18next";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
@@ -11,7 +11,7 @@ import NewMap from "../common/NewMap";
 export const FarmsNewList = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farms, setFarms] = useState<Array<FarmType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -20,7 +20,7 @@ export const FarmsNewList = () => {
     const [currentLat, setCurrentLat] = useState("0");
     const [currentLng, setCurrentLng] = useState("0");
     const [currentAddressL, setCurrentAddressL] = useState("");
-    
+
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
             document.getElementById("qr-farmer"),
@@ -97,13 +97,13 @@ export const FarmsNewList = () => {
             if (url.match("cafepsa") !== null) {
                 companyName = "CAFEPSA";
             }
-            
+
             if (url.match("localhost") !== null) {
                 companyName = "COMSA";
             }
 
 
-             await getFarms(companyName).then((result) => {
+            await getFarms(companyName).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const farmData = result[i].data();
                     const l = farmData.location;
@@ -147,7 +147,7 @@ export const FarmsNewList = () => {
                         ethnicGroup
                     });
                 }
-                setFarms(farmList);  
+                setFarms(farmList);
                 const itemsCount = farmList.length;
                 setFarmersCount(itemsCount);
                 console.log(loading);              // calculateFarmersCount(result);
@@ -163,23 +163,23 @@ export const FarmsNewList = () => {
     const columData = useMemo<MRT_ColumnDef<FarmType>[]>(
         () => [
             {
-                header: 'Nombre', accessorKey: 'name', size: 25,
+                header: t('name'), accessorKey: 'name', size: 25,
             }, {
-                header: 'Altura (m.s.n.m.) ', accessorKey: 'height', size: 5,                
+                header: t('height'), accessorKey: 'height', size: 5,
             }, {
-                header: 'Área', accessorKey: 'area', size: 5,
+                header: t('area'), accessorKey: 'area', size: 5,
             }, {
-                header: 'Certificados', accessorKey: 'certifications', size: 15,
+                header: t('certificates'), accessorKey: 'certifications', size: 15,
             }, {
-                header: 'Variedades', accessorKey: 'varieties', size: 15,
+                header: t('varieties'), accessorKey: 'varieties', size: 15,
             }, {
-                header: 'Ubicación', accessorKey: 'village2', size: 15,
+                header: t('location'), accessorKey: 'village2', size: 15,
             }, {
-                header: 'Sombra', accessorKey: 'shadow', size: 15,
+                header: t('shadow'), accessorKey: 'shadow', size: 15,
             }, {
                 accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`,
                 id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
-                header: 'Coordenadas',
+                header: t('coordinates'),
                 size: 10,
                 Cell(props) {
                     return (
@@ -189,19 +189,19 @@ export const FarmsNewList = () => {
                     );
                 },
             }, {
-                header: 'Miembros de Familia', accessorKey: 'familyMembers', size: 120,
+                header: t('family-members'), accessorKey: 'familyMembers', size: 120,
             }, {
-                header: 'Grupo Étnico', accessorKey: 'ethnicGroup', size: 15,
+                header: t('ethnic-group'), accessorKey: 'ethnicGroup', size: 15,
             }, {
 
-                accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`, 
+                accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`,
                 id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
-                header: 'Ver en el Mapa',
+                header: t('view-map'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
-                Cell: ({ renderedCellValue , row}) => (
+                Cell: ({ renderedCellValue, row }) => (
                     <>
                         <Box
                             sx={{
@@ -210,12 +210,13 @@ export const FarmsNewList = () => {
                                 gap: '1rem',
                             }}
                         >
-                            <label  htmlFor="farmslist"  onClick={() => {
-                                onMapBtnClick( row.original.latitude, row.original.longitude, row.original.village)}}
-                                    className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                <>Ver en el Mapa</>
+                            <label htmlFor="farmslist" onClick={() => {
+                                onMapBtnClick(row.original.latitude, row.original.longitude, row.original.village)
+                            }}
+                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                <>{t('view-map')}</>
                             </label>
-                          
+
 
                         </Box>
                     </>
@@ -223,7 +224,7 @@ export const FarmsNewList = () => {
                 ),
             }
         ],
-        [],
+        [i18n.language],
     );
 
 
@@ -277,12 +278,12 @@ export const FarmsNewList = () => {
                                             localization={MRT_Localization_ES}
                                             displayColumnDefOptions={{
                                                 'mrt-row-numbers': {
-                                                  size: 10,
+                                                    size: 10,
                                                 },
                                                 'mrt-row-expand': {
-                                                  size: 10,
+                                                    size: 10,
                                                 },
-                                              }}
+                                            }}
                                             initialState={{
                                                 sorting: [{ id: 'Name', desc: false }],
                                                 showGlobalFilter: true, isLoading: false
@@ -299,30 +300,30 @@ export const FarmsNewList = () => {
 
 
             <div className="m-4">
-            <input type="checkbox" id="farmslist" className="modal-toggle"/>
-            <div className="modal modal-bottom sm:modal-middle">
-                <div className="modal-box relative">
-                    <label htmlFor="farmslist"
-                           className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
-                    <div className="flex justify-center m-6">
-                        <div>
-                            <div className="flex pt-8 space-x-4 place-content-center">
-                                <div>
-                                    <NewMap latitude={currentLat} 
-                                    longitude={currentLng} 
-                                    addressLine={currentAddressL} 
-                                                zoomLevel={9}
-                                                className="google-map"                                    
-                                    />
+                <input type="checkbox" id="farmslist" className="modal-toggle" />
+                <div className="modal modal-bottom sm:modal-middle">
+                    <div className="modal-box relative">
+                        <label htmlFor="farmslist"
+                            className="btn btn-sm bg-red-500 text-white btn-circle hover:bg-red-700 absolute right-2 top-2">✕</label>
+                        <div className="flex justify-center m-6">
+                            <div>
+                                <div className="flex pt-8 space-x-4 place-content-center">
+                                    <div>
+                                        <NewMap latitude={currentLat}
+                                            longitude={currentLng}
+                                            addressLine={currentAddressL}
+                                            zoomLevel={9}
+                                            className="google-map"
+                                        />
+                                    </div>
+
                                 </div>
-                               
+
                             </div>
-                          
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         </>
     )
 };
