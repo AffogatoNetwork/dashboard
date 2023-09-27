@@ -203,20 +203,20 @@ export const FarmsModule = () => {
             {
                 header: t('tables.name'), accessorKey: 'name'
             }, {
-                header: 'Comunidad ', accessorKey: 'village'
+                header: t('tables.community'), accessorKey: 'village'
             }, {
-                header: 'Municipio ', accessorKey: 'village2'
+                header: t('tables.municipality'), accessorKey: 'village2'
             }, {
-                header: 'Departamento ', accessorKey: 'state'
+                header: t('region'), accessorKey: 'state'
             }, {
-                header: 'Pais', accessorKey: 'country'
+                header: t('country'), accessorKey: 'country'
             },
 
             {
 
                 accessorFn: (farm: any) => `${farm.latitude} ${farm.longitude}`,
                 id: 'coordinates', //id is still required when using accessorFn instead of accessorKey
-                header: 'Coordenadas',
+                header: t('coordinates'),
                 size: 50,
                 enableSorting: false,
                 enableColumnFilter: false,
@@ -234,7 +234,7 @@ export const FarmsModule = () => {
                                 onMapBtnClick(row.original.latitude, row.original.longitude, row.original.village)
                             }}
                                 className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                <>Ver en el Mapa</>
+                                <>{t('tables.view-map')}</>
                             </label>
 
 
@@ -250,7 +250,7 @@ export const FarmsModule = () => {
 
             {
                 accessorFn: (farm: any) => `${farm.area} `,
-                header: 'Área (mz)', size: 5,
+                header: t('area') + '(mz)', size: 5,
                 Cell(props) {
                     return (
                         <div className="text-center">
@@ -270,7 +270,7 @@ export const FarmsModule = () => {
 
             {
                 accessorFn: (farm: any) => `${farm.height} `,
-                header: 'Altura (m.s.n.m.)', size: 10,
+                header: t('height'), size: 10,
                 Cell(props) {
                     return (
                         <div className="text-center">
@@ -282,7 +282,7 @@ export const FarmsModule = () => {
             },
 
             {
-                header: 'Sistema de Producción', accessorKey: 'shadow'
+                header: t('tables.production-system'), accessorKey: 'shadow'
             }
         ],
         [i18n.language],

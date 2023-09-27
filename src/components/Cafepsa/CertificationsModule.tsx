@@ -9,11 +9,11 @@ import reactNodeToString from "react-node-to-string";
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from "material-react-table/locales/es";
 import { LinkIcon } from "../icons/link";
-import {MdDoneOutline} from "react-icons/md";
+import { MdDoneOutline } from "react-icons/md";
 export const CertificationsModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const [loading, setLoading] = useState(true);
     const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
     const [farmersCount, setFarmersCount] = useState(0);
@@ -39,7 +39,7 @@ export const CertificationsModule = () => {
 
 
 
-    
+
     type FarmerType = {
         farmerId: string;
         femaleMenbers: number;
@@ -184,23 +184,23 @@ export const CertificationsModule = () => {
     const [tableData, setTableData] = useState<any[]>(() => Data);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
-    async ({ exitEditingMode, row, values }) => {
-      //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
-      tableData[row.index] = values;
-      //send/receive api updates here
-    
-      exitEditingMode(); //required to exit editing mode
-    };
-    
+        async ({ exitEditingMode, row, values }) => {
+            //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
+            tableData[row.index] = values;
+            //send/receive api updates here
+
+            exitEditingMode(); //required to exit editing mode
+        };
+
     const columData = useMemo<MRT_ColumnDef<any>[]>(
         () => [
 
 
             {
-                header: 'Nombre de Productor ', accessorKey: 'fullname',
+                header: t('tables.name-farmer'), accessorKey: 'fullname',
                 Header: ({ column }) => (
                     <div className="flex align-bottom m-auto pt-12 ">
-                    <h1 className="text-xl">Nombre de Productor </h1>
+                        <h1 className="text-xl"><> {t('tables.name-farmer')}</> </h1>
                     </div>
                 ),
             }, {
@@ -209,15 +209,15 @@ export const CertificationsModule = () => {
                 header: 'USDA',
                 Header: ({ column }) => (
                     <div className="text-center">
-                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')} className="w-24 h-24" />
-                    <h1 className="text-lg">USDA</h1>
-                    <h1 className="text-lg">Orgánico</h1>
+                        <img src={require('../../assets/certificaciones/1_USDA Organic.png')} className="w-24 h-24" />
+                        <h1 className="text-lg">USDA</h1>
+                        <h1 className="text-lg">Orgánico</h1>
                     </div>
                 ), //arrow function
                 enableSorting: false,
                 enableColumnFilter: false,
                 // @ts-ignore
-                Cell: ({row}) => (
+                Cell: ({ row }) => (
                     <>
                         <Box
                             sx={{
@@ -226,13 +226,13 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            
+
                             {(row.original.usda === 1) && (
-                               <div className="ml-8">
-                               <MdDoneOutline className="icon"/>
-</div>
+                                <div className="ml-8">
+                                    <MdDoneOutline className="icon" />
+                                </div>
                             )}
-                        
+
 
                         </Box>
                     </>
@@ -244,19 +244,19 @@ export const CertificationsModule = () => {
                 header: 'fairtrade',
                 Header: ({ column }) => (
                     <>
-                    <div className="text-center">
-                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')} className="w-24 h-24"/>
-                    <h1 className="text-xl"> Comercio</h1>
-                    <h1 className="text-xl"> Justo</h1>
+                        <div className="text-center">
+                            <img src={require('../../assets/certificaciones/2_Fair Trade.png')} className="w-24 h-24" />
+                            <h1 className="text-xl"> Comercio</h1>
+                            <h1 className="text-xl"> Justo</h1>
 
-                    </div>
-                                       
+                        </div>
+
                     </>
-                    
+
                 ), //arrow function
                 enableSorting: false,
                 enableColumnFilter: false,
-                Cell: ({row}) => (
+                Cell: ({ row }) => (
                     <>
                         <Box
                             sx={{
@@ -265,13 +265,13 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            
+
                             {(row.original.fairtrade === 1) && (
-                                 <div className="ml-8">
-                                 <MdDoneOutline className="icon"/>
-</div>
+                                <div className="ml-8">
+                                    <MdDoneOutline className="icon" />
+                                </div>
                             )}
-                        
+
 
                         </Box>
                     </>
@@ -283,14 +283,14 @@ export const CertificationsModule = () => {
                 header: 'Manos de Mujer',
                 Header: ({ column }) => (
                     <div className="text-center">
-                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} className="w-24 h-24"/>
-                    <h1 className="text-lg">Con Manos </h1>
-                    <h1 className="text-lg">de Mujer </h1>
+                        <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} className="w-24 h-24" />
+                        <h1 className="text-lg">Con Manos </h1>
+                        <h1 className="text-lg">de Mujer </h1>
                     </div>
                 ), //arrow function
                 enableSorting: false,
                 enableColumnFilter: false,
-                Cell: ({row}) => (
+                Cell: ({ row }) => (
                     <>
                         <Box
                             sx={{
@@ -299,13 +299,13 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            
+
                             {(row.original.manosdemujer === 1) && (
-                               <div className="ml-8">
-                               <MdDoneOutline className="icon"/>
-</div>
+                                <div className="ml-8">
+                                    <MdDoneOutline className="icon" />
+                                </div>
                             )}
-                       
+
 
                         </Box>
                     </>
@@ -317,16 +317,16 @@ export const CertificationsModule = () => {
                 header: 'SPP',
                 Header: () => (
                     <div className="text-center">
-                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} className="w-24 h-24" />
-                    <h1 className="text-lg">Pequeños</h1>
-                    <h1 className="text-lg">Productores</h1>
+                        <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} className="w-24 h-24" />
+                        <h1 className="text-lg">Pequeños</h1>
+                        <h1 className="text-lg">Productores</h1>
 
                     </div>
                 ), //arrow function
                 size: 5,
                 enableSorting: false,
                 enableColumnFilter: false,
-                Cell: ({row}) => (
+                Cell: ({ row }) => (
                     <>
                         <Box
                             sx={{
@@ -335,13 +335,13 @@ export const CertificationsModule = () => {
                                 gap: '1rem',
                             }}
                         >
-                            
+
                             {(row.original.spp === 1) && (
                                 <div className="ml-8">
-                                                                     <MdDoneOutline className="icon"/>
+                                    <MdDoneOutline className="icon" />
                                 </div>
                             )}
-                      
+
 
                         </Box>
                     </>
@@ -349,7 +349,7 @@ export const CertificationsModule = () => {
                 ),
             }
         ],
-        [],
+        [i18n.language],
     );
 
 
@@ -456,7 +456,7 @@ export const CertificationsModule = () => {
                                         </button>
                                     </div>
                                 </div>
-                               
+
                             </div>
                         </div>
                     </div>
