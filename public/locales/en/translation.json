@@ -169,6 +169,7 @@
   },
   "login":  {
     "access": "Login",
+    "access-google": "Login as Administrator",
     "create-account": "Don't have an account? Create one here.",
     "subtitle": "Email or Mobile Number",
     "title": "Login to your account",

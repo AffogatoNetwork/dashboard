@@ -1,4 +1,4 @@
-import React, {  useEffect, useMemo, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
 import { getAllFarmers } from "../../db/firebase";
 import { SEARCH_DIVIDER } from "../../utils/constants";
@@ -9,7 +9,6 @@ import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
-
 
 export const FarmersModules = () => {
     const saveSvgAsPng = require("save-svg-as-png");
@@ -70,6 +69,14 @@ export const FarmersModules = () => {
 
             }
 
+            // utiliza esto para extraer el nombre y lo que ocupes
+            const dataUser = localStorage.getItem('user');
+            if (dataUser !== null) {
+                const myObject = JSON.parse(dataUser);
+                // Ahora puedes trabajar con 'myObject' como un objeto válido
+                console.log(myObject.displayName);
+            }
+            console.log("desde FarmerModule:", dataUser);
 
             let companyName = "";
             const url = window.location.host.toString();
@@ -226,11 +233,11 @@ export const FarmersModules = () => {
                         </Box>
                     </>
                 ),
-            },{
+            }, {
                 header: t('tables.community'), accessorKey: 'address'
-            }, 
-            
-            
+            },
+
+
             {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey

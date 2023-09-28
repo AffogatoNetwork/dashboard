@@ -172,6 +172,7 @@
   },
   "login":  {
     "access": "Iniciar Sesión",
+    "access-google": "Iniciar Sesión como Administrador",
     "create-account": "¿No tienes cuenta? Crea una aquí.",
     "subtitle": "Correo electrónico o No. Celular",
     "title": "Accede a tu Cuenta",

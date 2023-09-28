@@ -1,17 +1,19 @@
-import React, {useContext, useEffect, useState} from "react";
-import {useTranslation} from "react-i18next";
-import {useNavigate} from "react-router-dom";
-import {useAuthContext} from "../states/AuthContext";
+import React, { useContext, useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useAuthContext } from "../states/AuthContext";
 import CoopLogo from "./common/CoopLogo";
 import LangChooser from "./common/LangChooser";
-import {isValidCellphone, isValidEmail,} from "../utils/utils";
+import { isValidCellphone, isValidEmail, } from "../utils/utils";
 import background from "../assets/coffee.jpg";
+import { AiOutlineGoogle } from "react-icons/ai";
+import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
 
 const Login = () => {
-    const {t} = useTranslation();
+    const { t } = useTranslation();
     const areaCode = "+504";
     const navigate = useNavigate();
-    const {authContext, authState} = useAuthContext();
+    const { authContext, authState } = useAuthContext();
     const [state] = authState;
     const [userInput, setUserInput] = useState("");
     const [userInputError, setUserInputError] = useState("");
@@ -20,7 +22,7 @@ const Login = () => {
         function check() {
             if (state.isLoggedIn) {
                 navigate("/farmers", { replace: true });
-            } else if (state.isLoggedIn ) {
+            } else if (state.isLoggedIn) {
                 setUserInput("");
             }
         }
@@ -29,17 +31,18 @@ const Login = () => {
     }, [state.isLoggedIn, state.isSignInError]);
 
     const magicLogin = async () => {
-        try{
-        if (isValidEmail(userInput)) {
-            authContext.signIn({emailLogin: true, credential: userInput});
-            localStorage.setItem('host', window.location.host);
+        try {
+            if (isValidEmail(userInput)) {
+                authContext.signIn({ emailLogin: true, credential: userInput });
+                localStorage.setItem('host', window.location.host);
 
-        } else if (isValidCellphone(userInput)) {
-            localStorage.setItem('host', window.location.host);
-            authContext.signIn({
-                emailLogin: false, credential: areaCode.concat(userInput),
-            });
-        } } catch (e) {
+            } else if (isValidCellphone(userInput)) {
+                localStorage.setItem('host', window.location.host);
+                authContext.signIn({
+                    emailLogin: false, credential: areaCode.concat(userInput),
+                });
+            }
+        } catch (e) {
             console.log(e);
         }
     };
@@ -55,9 +58,37 @@ const Login = () => {
         }
     };
 
+    const handleLoginWithGoogle = () => {
+        const provider = new GoogleAuthProvider();
+        const auth = getAuth();
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const user = result.user;
+                localStorage.setItem('user', JSON.stringify(user));
+
+
+                navigate('/farmers-module');
+
+
+
+            }).catch((error) => {
+                // Handle Errors here.
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                // The email of the user's account used.
+                const email = error.customData.email;
+                // The AuthCredential type that was used.
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                // ...
+            });
+
+    }
+
     return (
         <div className="bg-no-repeat bg-cover bg-center relative bg-black -m-4"
-             style={{backgroundImage: `url(${background})`}}>
+            style={{ backgroundImage: `url(${background})` }}>
             <div className="bg-opacity-80 bg-black">
                 <div className="min-h-screen sm:flex sm:flex-row mx-0 justify-center">
                     <div className="flex-col flex self-center p-10 sm:max-w-5xl md:pl-2 xl: z-10">
@@ -73,7 +104,7 @@ const Login = () => {
                         <div
                             className="p-12 bg-white mx-auto rounded-2xl w-100 flex flex-col justify-center items-center ">
                             <div className="w-14 pb-4">
-                                <CoopLogo className=""/>
+                                <CoopLogo className="" />
                             </div>
                             <div className="mb-4">
                                 <h3 className="font-semibold text-2xl text-gray-800">
@@ -89,38 +120,45 @@ const Login = () => {
                                         type="email"
                                         value={userInput}
                                         placeholder={t("placeholders.email")}
-                                        onChange={handleUserInputChange}/>
+                                        onChange={handleUserInputChange} />
                                 </div>
 
                                 <div>
                                     <button type="submit"
-                                            className="w-full flex justify-center bg-amber-900 hover:bg-black text-gray-100 p-3 tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
-                                            onClick={() => magicLogin()}>
+                                        className="w-full flex justify-center bg-amber-900 hover:bg-black text-gray-100 p-3 tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
+                                        onClick={() => magicLogin()}>
                                         <>{t("login.access")}</>
                                     </button>
+
+                                    <button type="submit"
+                                        className="mt-5 w-full flex justify-center items-center bg-[#EA2F07] hover:bg-black text-gray-100 p-3 tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
+                                        onClick={() => handleLoginWithGoogle()}>
+                                        <><AiOutlineGoogle className="text-2xl mr-2" />{t("login.access-google")}</>
+                                    </button>
+
                                     <p className="pt-6 text-sm link link-info text-gray-500"
-                                       onClick={() => navigate("/signup", {replace: true})}>
+                                        onClick={() => navigate("/signup", { replace: true })}>
                                         <>{t("login.create-account")}</>
                                     </p>
-
-                                    <br/>
+                                    <br />
                                 </div>
+
                             </div>
                             <div className="pt-5 text-center text-gray-400 text-xs">
-                            <h4> 
-                                Estamos haciendo cambios por favor elegir el bòton de Iniciar con Google 
-                            </h4>
-                            <h4>
-                            para poder editar y tener permisos Administrativos las cuentas debes estar en la lista de Administradores y tener inicio seguro con 2FA
-                            </h4>
+                                <h4>
+                                    Estamos haciendo cambios por favor elegir el bòton de Iniciar con Google
+                                </h4>
+                                <h4>
+                                    para poder editar y tener permisos Administrativos las cuentas debes estar en la lista de Administradores y tener inicio seguro con 2FA
+                                </h4>
                             </div>
                             <div className="pt-5 text-center text-gray-400 text-xs">
-                         
-                           
-                           
-                           <span>
-                           <LangChooser/>
-                            </span>
+
+
+
+                                <span>
+                                    <LangChooser />
+                                </span>
                             </div>
                         </div>
                     </div>
