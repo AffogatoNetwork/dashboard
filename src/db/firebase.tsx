@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import {initializeApp} from "firebase/app";
 import {
   collection,
   doc,
@@ -11,8 +11,9 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import { getStorage, getDownloadURL, ref, uploadBytes } from "firebase/storage";
-import { CompanyType, FarmType, FarmerType } from "../components/common/types";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {CompanyType, FarmerType, FarmType} from "../components/common/types";
+import {getAuth} from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -283,8 +284,31 @@ export const saveFarmerData = async (farmerData: any, id: string) => {
 
 };
 
+export const authData = () => {
+  return getAuth(app)
+}
 
-
+export const UserData = () =>{
+  const dataUser = localStorage.getItem('user');
+  if (dataUser !== null) {
+    const myObject = JSON.parse(dataUser);
+    // Ahora puedes trabajar con 'myObject' como un objeto válido
+    console.log(myObject.displayName);
+    console.log(myObject.email)
+    // @ts-ignore
+   return {
+     name: myObject.displayName,
+     email: myObject.email,
+     photo: myObject.photoURL
+   };
+  } else {
+    return {
+      name: '',
+      email: '',
+      photo: '',
+    };
+  }
+}
 
 
 export const getBatch = async (ipfsHash: string) => {

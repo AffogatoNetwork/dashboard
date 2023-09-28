@@ -20,6 +20,7 @@ export const CertificationsModule = () => {
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
     const [Data, setData] = useState<any>([]);
     const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
+    const [editingBehavior, setEditingBehavior] = useState<boolean>(false);
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
@@ -178,6 +179,10 @@ export const CertificationsModule = () => {
         };
 
         load();
+
+
+
+
     }, []);
 
 

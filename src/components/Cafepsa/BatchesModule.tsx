@@ -20,6 +20,7 @@ export const BatchesModule = () => {
     const [Data, setData] = useState<any>([]);
     const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
     const [tableData, setTableData] = useState<any[]>(() => Data);
+    const [editingBehavior, setEditingBehavior] = useState<boolean>(false);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
         async ({ exitEditingMode, row, values }) => {

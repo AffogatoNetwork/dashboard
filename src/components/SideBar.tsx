@@ -2,7 +2,8 @@ import React, { useEffect, useState } from "react";
 import { motion, useAnimation } from 'framer-motion'
 import routes from "../config/routes";
 import { useTranslation } from "react-i18next";
-import { makeShortAddress } from "../utils/utils";
+import {  signOut } from "firebase/auth";
+import { authData , UserData } from "../db/firebase";
 
 // Icons
 import { HomeIcon } from "./icons/home";
@@ -20,6 +21,7 @@ import { useAuthContext } from "../states/AuthContext";
 import LangChooser from "./common/LangChooser";
 import { WorldIcon } from "./icons/world";
 import { IconLogin } from "./icons/login";
+import firebase from "firebase/compat";
 
 
 let data = [{
@@ -46,6 +48,19 @@ export default function Home() {
   const { authContext, authState } = useAuthContext();
   const [state] = authState;
   const [ownerAddress, setOwnerAddress] = useState("");
+  const [userData, setUserData] = useState<any>({name:"", email:"", photo:""})
+  const auth = authData();
+  const firebaseConfig = {
+    apiKey: process.env.REACT_APP_FB_API_KEY,
+    authDomain: process.env.REACT_APP_FB_AUTH_DOMAIN,
+    projectId: process.env.REACT_APP_FB_PROJECT_ID,
+    storageBucket: process.env.REACT_APP_FB_STORAGE_BUCKET,
+    messagingSenderId: process.env.REACT_APP_FB_MSG_SENDER_ID,
+    appId: process.env.REACT_APP_FB_APP_ID,
+  };
+
+
+
   useEffect(() => {
     const loadProvider = async () => {
       if (state.provider != null) {
@@ -56,11 +71,28 @@ export default function Home() {
       }
       localStorage.setItem('addres', ownerAddress);
     };
+
+    let data = UserData();
+    console.log(data);
+    setUserData(data)
+
+
+
     loadProvider();
-  });
+  }, []);
 
 
   const logout = () => {
+    signOut(auth).then(() => {
+      // Sign-out successful.
+      localStorage.removeItem('user');
+      navigate("/");
+      console.log("Signed out successfully")
+    }).catch((error) => {
+      console.log(error);
+      // An error happened.
+    });
+
     authContext.signOut();
   };
 
@@ -168,9 +200,11 @@ export default function Home() {
 
         </div>
       </div>
+
       <div className="flex justify-center md:m-4 m-2 ">
-        <div className="text-sm">
-          {makeShortAddress(ownerAddress)}
+        <div className="text-sm text-center">
+      <h1> {userData?.name} </h1>
+          <h1> {userData?.email} </h1>
         </div>
 
       </div>
@@ -218,7 +252,7 @@ export default function Home() {
 
         <div>
 
-          {ownerAddress ? (
+          {userData.name ? (
             <div className='m-2'>
               <motion.p animate={controlTitleText}
                 className='mb-2 ml-4 text-sm font-bold text-gray-500'></motion.p>

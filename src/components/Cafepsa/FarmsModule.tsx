@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import {getAllFarmers, getCafepsaJsonUrl } from "../../db/firebase";
+import {getAllFarmers, getCafepsaJsonUrl , UserData} from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import { LinkIcon } from "../icons/link";
@@ -29,6 +29,7 @@ export const FarmsModule = () => {
 
     const [links, setlInks] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FIMG_1718.jpeg?alt=media&token=c37a0d05-a8dc-4cfd-b3c1-fcc0502dcd77");
     const { currentFarmerId } = useParams();
+    const [editingBehavior, setEditingBehavior] = useState<boolean>(false);
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
@@ -329,7 +330,7 @@ export const FarmsModule = () => {
                                                 <ReactHTMLTableToExcel
                                                     id="table-xls-button"
                                                     className="download-xls-button"
-                                                    table="farmers-list"
+                                                    table="farmerlist"
                                                     filename={t("farmers")}
                                                     sheet={t("farmers")}
                                                     buttonText={"(".concat(t("download")).concat(")")}

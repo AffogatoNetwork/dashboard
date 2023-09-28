@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import { getAllFarmers } from "../../db/firebase";
+import {getAllFarmers, UserData} from "../../db/firebase";
 import { SEARCH_DIVIDER } from "../../utils/constants";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
@@ -20,6 +20,8 @@ export const FarmersModules = () => {
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
     const [Data, setData] = useState<any>([]);
     const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
+    const [editingBehavior, setEditingBehavior] = useState<boolean>(true);
+    const [userData, setUserData] = useState<any>()
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
@@ -59,13 +61,18 @@ export const FarmersModules = () => {
     };
 
     useEffect(() => {
+
+
         const load = async () => {
             const farmerList = new Array<FarmerType>();
-            const user = localStorage.getItem("address")
+            const user = localStorage.getItem("user")
             if (user !== "") {
                 setOwnerAddress(user)
+                setEditingBehavior(true)
                 setLoading(false);
+                console.log(editingBehavior)
             } else {
+                setEditingBehavior(false)
 
             }
 
@@ -374,7 +381,6 @@ export const FarmersModules = () => {
                                             editingMode="modal" //default
                                             enableEditing
                                             onEditingRowSave={handleSaveRow}
-
                                             data={farmers}
                                             enableHiding={false}
                                             enableDensityToggle={false}
