@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
 import { getAllBatches } from "../../db/firebase";
-import { SEARCH_DIVIDER } from "../../utils/constants";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import { LinkIcon } from "../icons/link";
@@ -9,7 +8,6 @@ import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
-import { FarmerData } from "../FarmerData";
 
 export const BatchesModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
@@ -21,18 +19,14 @@ export const BatchesModule = () => {
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
     const [Data, setData] = useState<any>([]);
     const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
-
-
-    const [farmName, setfarmName] = useState("");
-
     const [tableData, setTableData] = useState<any[]>(() => Data);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
         async ({ exitEditingMode, row, values }) => {
             //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
             tableData[row.index] = values;
-            //send/receive api updates here
 
+            //send/receive api updates here
             exitEditingMode(); //required to exit editing mode
         };
 
@@ -354,6 +348,17 @@ export const BatchesModule = () => {
                                         </button>
                                     </div>
                                 </div>
+                                <div className="text-center items-center">
+                                    <br />
+                                    <button onClick={() => {
+                                        openInNewTab(BlockchainUrl);
+                                    }}
+                                            className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                        <LinkIcon></LinkIcon>
+                                        <>Ver en el blockchain</>
+                                    </button>
+                                </div>
+
                             </div>
                         </div>
                     </div>

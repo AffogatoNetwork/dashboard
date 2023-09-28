@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import { getAllFarmers } from "../../db/firebase";
-import { SEARCH_DIVIDER } from "../../utils/constants";
+import {getAllFarmers, getCafepsaJsonUrl } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import { LinkIcon } from "../icons/link";
@@ -10,6 +9,7 @@ import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import NewMap from "../common/NewMap";
+import {useParams} from "react-router";
 
 export const FarmsModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
@@ -20,12 +20,15 @@ export const FarmsModule = () => {
     const [farmersCount, setFarmersCount] = useState(0);
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
     const [Data, setData] = useState<any>([]);
-    const [BlockchainUrl, setBlockchainUrl] = useState<string | null>(null);
+    const [BlockchainUrl, setBlockchainUrl] = useState<string >('');
 
 
     const [currentLat, setCurrentLat] = useState("0");
     const [currentLng, setCurrentLng] = useState("0");
     const [currentAddressL, setCurrentAddressL] = useState("");
+
+    const [links, setlInks] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FIMG_1718.jpeg?alt=media&token=c37a0d05-a8dc-4cfd-b3c1-fcc0502dcd77");
+    const { currentFarmerId } = useParams();
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
@@ -38,9 +41,20 @@ export const FarmsModule = () => {
         );
     };
 
-    const openInNewTab = (url: string | null | undefined) => {
-        const urlStr = url?.toString();
-        window.open(urlStr, '_blank', 'noopener,noreferrer');
+    const  getLink = (data: string) => {
+        getCafepsaJsonUrl(data).then((result) => {
+            setlInks(result);
+        });
+    }
+
+
+    const openInNewTab = (url: string) => {
+        getCafepsaJsonUrl(url).then((result) => {
+            setlInks(result);
+            console.log(result)
+            const urlStr = result?.toString();
+            window.open(urlStr, '_blank', 'noopener,noreferrer');
+        });
     };
 
     type FarmerType = {
@@ -94,6 +108,8 @@ export const FarmsModule = () => {
                 companyName = "CAFEPSA";
             }
 
+            // @ts-ignore
+
 
             await getAllFarmers(companyName).then((result) => {
                 console.log(companyName);
@@ -120,7 +136,7 @@ export const FarmsModule = () => {
                         .concat("/farmer/")
                         .concat(address);
                     let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + ipfshash;
-                    setBlockchainUrl(blockChainUrl)
+                    setBlockchainUrl(address)
                     farmerList.push({
                         area,
                         address,
@@ -376,7 +392,16 @@ export const FarmsModule = () => {
                                             <>{t("download")}</>
                                         </button>
                                     </div>
-
+                                </div>
+                                <div className="text-center items-center">
+                                    <br />
+                                    <button onClick={() => {
+                                        openInNewTab(BlockchainUrl);
+                                    }}
+                                            className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                        <LinkIcon></LinkIcon>
+                                        <>Ver en el blockchain</>
+                                    </button>
                                 </div>
 
                             </div>
