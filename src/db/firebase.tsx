@@ -51,14 +51,31 @@ export const getFarmer = async (address: string) => {
   return null;
 };
 
+export const getFarmerByBatche = async (result: any) => {
+  let farmerDetails: any[] = []
+  if (result?.Farmer.address !== undefined) {
+    getFarmer(result?.Farmer.address).then((result) => {
+      farmerDetails.push(result);
+    });
+  }
 
+  let farmers = result?.Farmer;
+  if (farmers.length > 1) {
+    farmers.forEach((element: any) => {
+      getFarmer(element).then((result) => {
+        farmerDetails.push(result);
+      });
+    });
+  }
+  return farmerDetails;
+}
 
 export const updateFarmer = async (farmer: any, farm: any) => {
   const farmerDoc = doc(db, "farmers", farmer);
   await updateDoc(farmerDoc,
-      {
-        farm: farm
-      });
+    {
+      farm: farm
+    });
 };
 
 export const updateFarms = async (Farmdata: any) => {
@@ -67,7 +84,7 @@ export const updateFarms = async (Farmdata: any) => {
     const farmDoc = doc(db, "farms", docId);
     await setDoc(farmDoc, Farmdata);
   } catch (error) {
-    
+
   }
 };
 
@@ -79,8 +96,8 @@ export const getAllFarmers = async (company: string) => {
 
 export const getFarmerFarms = async (farmerAddress: string) => {
   const q = query(
-      collection(db, "farms"),
-      where("farmerAddress", "==", farmerAddress)
+    collection(db, "farms"),
+    where("farmerAddress", "==", farmerAddress)
   );
   const querySnapshot = await getDocs(q);
   const docData = querySnapshot.docs.map(doc => doc.data());
@@ -95,7 +112,7 @@ export const saveCompany = async (company: CompanyType) => {
     const companyDoc = doc(db, "companies", company.address);
     await setDoc(companyDoc, company);
   } catch (error) {
-    
+
   }
 };
 
@@ -146,7 +163,7 @@ export const saveFarm = async (farm: FarmType) => {
     };
     await setDoc(farmDoc, farmData);
   } catch (error) {
-    
+
   }
 };
 
@@ -182,7 +199,7 @@ export const saveFarms = async (farms: Array<FarmType>) => {
       }
     }
   } catch (error) {
-    
+
   }
 };
 
@@ -227,13 +244,13 @@ export const saveBatch = async (batch: any) => {
     };
     await setDoc(farmDoc, farmData);
   } catch (error) {
-    
+
   }
 
 };
 
 
-export const saveFarmerData = async (farmerData: any , id: string) => {
+export const saveFarmerData = async (farmerData: any, id: string) => {
   try {
     const docId = id;
     const farmDoc = doc(db, "batches", docId);
@@ -252,7 +269,7 @@ export const saveFarmerData = async (farmerData: any , id: string) => {
     };
     await setDoc(farmDoc, farmData);
   } catch (error) {
-    
+
   }
 
 };

@@ -1,11 +1,12 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useMemo } from "react";
 import { useParams } from "react-router";
 import { useTranslation } from "react-i18next";
 import Loading from "../Loading";
-import { getBatch, getFarmer, getFarmerFarms, getFarms } from "../../db/firebase";
+import { getBatch, getFarmer } from "../../db/firebase";
 import NotFound from "../common/NotFound";
 import NewMap from "../common/NewMap";
 import { LinkIcon } from "../icons/link";
+import Farmers from './Farmers';
 
 const NewBatchId = () => {
     const { t } = useTranslation();
@@ -17,54 +18,46 @@ const NewBatchId = () => {
     useEffect(() => {
         const load = () => {
             if (batchId) {
+                let farmerDetails: any[] = [];
                 getBatch(batchId).then((result) => {
-                    console.log(result);
-                    console.log(result?.image.includes("https://firebasestorage"));
+                    //console.log(result?.image.includes("https://firebasestorage"));
                     if (result?.image.includes("https://firebasestorage") === true) {
-                        console.log("es una url");
+                        // console.log("es una url");
                     } else {
                         if (result?.image) {
-                            console.log("es un hash");
                             let url = 'https://affogato.mypinata.cloud/ipfs/'
                             result.image = url + result.image;
-                            console.log(result.image);
+                            // console.log(result.image);
                         }
                     }
 
                     setCoffeeBatch(result);
-                    console.log(result)
-                    if (result?.Farmer.address !== undefined) {
-                        getFarmer(result?.Farmer.address).then((result) => {
-                            console.log(result);
-                            FarmerDetails.push(result);
-                            setFarmers(FarmerDetails);
-                        });
-                    }
-                    let Farmers = result?.Farmer;
-                    if (Farmers.length > 1) {
-                        Farmers.forEach((element: any) => {
-                            getFarmer(element).then((result) => {
-                                FarmerDetails.push(result);
-                                console.log(FarmerDetails);
-                                setFarmers(FarmerDetails);
-                                console.log(FarmerDetails);
+
+                    let dataFarmers = result?.Farmer;
+                    if (dataFarmers && dataFarmers.length > 0) {
+                        // Utiliza Promise.all para esperar a que todas las promesas se resuelvan
+                        Promise.all(dataFarmers.map((element: any) => getFarmer(element)))
+                            .then((farmers) => {
+                                setFarmers(farmers);
+                                setLoading(false);
+                            })
+                            .catch((error) => {
+                                console.error("Error al obtener detalles de los agricultores:", error);
+                                setLoading(false);
                             });
-                        });
                     } else {
+                        setLoading(false);
                     }
+                })
+                    .catch((error) => {
+                        console.error("Error al cargar datos del lote de café:", error);
+                        setLoading(false);
+                    });
 
-
-                    console.log(Farmers);
-                    let FarmerDetails: any[] = [];
-                    console.log(Farmers)
-                    setLoading(false);
-                });
-                setLoading(false);
             } else {
                 <NotFound msg={batchId + "Not Found"} />;
             }
         };
-
         load();
     }, [batchId]);
 
@@ -106,13 +99,9 @@ const NewBatchId = () => {
                                         <div>
                                             <h1 > <>{t("farmers")}</>: <br />
                                                 <>
-
-                                                {farmers.map((farmer: any, index: any) => (
-                                                        <div key={index}>
-                                                            <p ><a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmer' + '/' + farmer?.address} > {farmer?.fullname} </a>
-                                                            </p>
-                                                        </div>
-                                                    ))}
+                                                    <Farmers
+                                                        farmers={farmers}
+                                                    />
                                                 </>
                                             </h1>
                                         </div>
@@ -136,7 +125,7 @@ const NewBatchId = () => {
                 <div>
                     <div className="w-full ">
                         <div className="p-2 rounded text-center bg-amber-800 text-white">
-                            Producción
+                            <>{t('production')}</>
                         </div>
                         <div className="flex gap-5 mt-2">
                             <div
@@ -187,36 +176,36 @@ const NewBatchId = () => {
 
                         <div className="w-full lg:w-1/2">
                             <div className="p-2 rounded text-center bg-amber-800 text-white">
-                                Beneficio Humedo
+                                <>{t('wet-mill')}</>
                             </div>
                             <div className="flex gap-5 mt-2">
                                 <div className="flex-grow border border-gray-300 rounded text-center py-8">
                                     <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.certifications}</h2>
-                                    <h4 className="inline text-gray-500 text-sm">Certificados</h4>
+                                    <h4 className="inline text-gray-500 text-sm"><>{t('certificates')}</></h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.drying_hours || 'Aprox 1200'} </h2>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.drying_hours || 'Aprox 1200'} </h2>
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("drying-hours")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                  <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.process} </h2>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.process} </h2>
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("process")}</> </h4>
                                 </div>
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                   <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.variety}</h2>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.variety}</h2>
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("variety")}</> </h4>
                                 </div>
                             </div>
                         </div>
                         <div className="w-full lg:w-1/2">
                             <div className="p-2 rounded text-center bg-amber-800 text-white">
-                                Beneficio Seco
+                                <>{t('dry-mill')}</>
                             </div>
                             <div className="flex gap-5 mt-2">
                                 <div className="flex-grow border border-gray-300 rounded text-center py-8">
@@ -233,13 +222,13 @@ const NewBatchId = () => {
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
                                     <button onClick={() => {
-                                openInNewTab(coffeeBatch?.dryMill?.cupping_url);
-                            }}
-                                className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
-                                <LinkIcon></LinkIcon>
-                                <>Ver Enlace</>
-                            </button>
-                            <br/>
+                                        openInNewTab(coffeeBatch?.dryMill?.cupping_url);
+                                    }}
+                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                        <LinkIcon></LinkIcon>
+                                        <>{t('open-link')}</>
+                                    </button>
+                                    <br />
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("cupping_profile")}</> </h4>
                                 </div>
                                 <div
@@ -266,7 +255,7 @@ const NewBatchId = () => {
             <br />
         </div>
 
-      
+
     </>);
 };
 

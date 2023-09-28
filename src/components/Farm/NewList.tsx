@@ -185,7 +185,7 @@ export const FarmsNewList = () => {
             }, {
                 header: t('tables.height'), accessorKey: 'height', size: 5,
             }, {
-                header: 'Área', accessorKey: 'area', size: 5,
+                header: t('area'), accessorKey: 'area', size: 5,
             }, {
                 header: t('certificates'), accessorKey: 'certifications', size: 15,
             }, {
