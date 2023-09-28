@@ -192,6 +192,12 @@ const Signup = () => {
         }
     };
 
+
+    const createFarm = async () => {
+
+    }
+
+
     const handleOnImageChange = (event: any) => {
         if (event.target.files !== null) {
             setImageFile(event.target.files[0]);
@@ -853,7 +859,173 @@ const Signup = () => {
     );
 
 
+    const RenderFarmForm = () => (
+        <>
+            <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
+                <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2">
+                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("farm-name")}
+                                value={farmerId}
+                                placeholder={t("placeholders.id")}
+                                handleOnChange={handleIdChange}
+                                errorMsg={fullnameError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5 m-2">
+                            <h1 className="text-base font-medium"> <> {t("region")}</> </h1>
+                            <select id="dropdown-cooperative" className="select select-bordered w-full" onChange={handleRegionChange}>
+                                <option disabled selected><> {t("region")}</>
+                                    :
+                                </option>
+                                {currentRegion.name}
+                                {RegionList.map((item) => (<option key={item.key} value={item.key}>
+                                    {item.name}
+                                </option>))}
+                            </select>
+                            {coopError !== "" && (<span className="error-message">{regionError}</span>)}
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("village")}
+                                value={village}
+                                placeholder={t("village")}
+                                handleOnChange={handleVillageChange}
+                                errorMsg={villageError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("village2")}
+                                value={village2}
+                                placeholder={t("village2")}
+                                handleOnChange={handleVillage2Change}
+                                errorMsg={village2Error}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
 
+                        <div className="md:col-span-5">
+                            <div className="grid grid-cols-2 gap-2">
+                                <FormInput
+                                    label={t("latitude")}
+                                    value={latitude}
+                                    placeholder={t("latitude")}
+                                    handleOnChange={handleLatitudeChange}
+                                    errorMsg={latitudeError}
+                                    className="input input-bordered w-full"
+                                />
+                                <FormInput
+                                    label={t("longitude")}
+                                    value={longitude}
+                                    placeholder={t("longitude")}
+                                    handleOnChange={handleLongitudeChange}
+                                    errorMsg={longitudeError}
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                        </div>
+                    </div>
+                    <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
+                        <div className="md:col-span-5 m-2">
+                            <h1 className="text-base font-medium"> <> {t("signup.choose-company")}</></h1>
+                            <select id="dropdown-cooperative" className="select select-bordered w-full"
+                                    onChange={handleCooperativeChange}>
+                                <option disabled selected><> {t("signup.choose-company")}</>
+                                    :
+                                </option>
+                                {currentCoop.name}
+
+                                {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
+                                    {item.name}
+                                </option>))}
+                            </select>
+                            {coopError !== "" && (<span className="error-message">{coopError}</span>)}
+                        </div>
+                        <div className="md:col-span-5 m-2">
+                            <h1 className="text-base font-medium"> <> {t("signup.")}</></h1>
+                            <select id="dropdown-cooperative" className="select select-bordered w-full"
+                                    onChange={handleCooperativeChange}>
+                                <option disabled selected><> {t("signup.choose-farmer")}</>
+                                    :
+                                </option>
+                                {currentCoop.name}
+
+                                {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
+                                    {item.name}
+                                </option>))}
+                            </select>
+                            {coopError !== "" && (<span className="error-message">{coopError}</span>)}
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("area")}
+                                value={farmerId}
+                                placeholder={t("placeholders.area")}
+                                handleOnChange={handleIdChange}
+                                errorMsg={fullnameError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("varieties")}
+                                value={fullname}
+                                placeholder={t("placeholders.varieties")}
+                                handleOnChange={handleFullnameChange}
+                                errorMsg={fullnameError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("height")}
+                                value={fullname}
+                                placeholder={t("placeholders.varieties")}
+                                handleOnChange={handleFullnameChange}
+                                errorMsg={fullnameError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                        <div className="md:col-span-5">
+                            <FormInput
+                                label={t("type-production")}
+                                value={fullname}
+                                placeholder={t("placeholders.type-production")}
+                                handleOnChange={handleFullnameChange}
+                                errorMsg={fullnameError}
+                                className="input input-bordered w-full"
+                            />
+                        </div>
+                    </div>
+
+                </div>
+                <br />
+                <div className="flex justify-center">
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => createFarm()}
+                    >
+                        <u>
+                            <>{t("add-farm")}</>
+                        </u>                    </button>
+                    <div className="divider divider-horizontal"></div>
+                    <button
+                        className="btn btn-secondary "
+                        onClick={() => navigate("/login", { replace: true })}
+                    >
+                        <u>
+                            <>{t("signup.back")}</>
+                        </u>
+                    </button>
+                </div>
+            </div>
+        </>
+    )
 
 
     if (state.creatingAccount) {
@@ -884,13 +1056,25 @@ const Signup = () => {
                                     onClick={() => setActiveTab("cooperative")}
                                 ><>{t("company")}</>
                                 </a>
+                                <a className={`${activeTab == 'farm' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
+                                   id="signup-tabs"
+                                   onClick={() => setActiveTab("farm")}
+                                ><>{t("farm")}</>
+                                </a>
                             </div>
 
-                            {activeTab == 'farmer' ? (<div>
+                            {activeTab == 'farmer' && (<div>
                                 {RenderFarmerForm()}
-                            </div>) : (<div className="">
+                            </div>)}
+
+                            {activeTab == 'cooperative' && (<div>
                                 {RenderForm()}
                             </div>)}
+
+                            {activeTab == 'farm' && (<div>
+                                {RenderFarmForm()}
+                            </div>)}
+
                         </div>
                     </div>) : (<div className="account-created">
                         {activeTab === "farmer" ? (<h6>

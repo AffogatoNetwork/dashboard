@@ -150,6 +150,25 @@ export const FarmerProfileModule = () => {
                                         >
                                             <h2 className="text-xl font-bold pb-2">{farms?.certifications}</h2>
                                             <h4 className="inline text-gray-500 text-sm"><>{t('certificates')}</></h4>
+                                            <div className="grid grid-cols-4">
+                                                {(farms.manosdemujer !== null) && (<div>
+                                                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} className="w-24 h-24" alt="Con Manos de Mujer"/>
+                                                </div>)}
+
+                                                {(farms.fairtrade !== null) && (
+                                                    <div>
+                                                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')} className="w-24 h-24" alt="Fair Trade"/>
+                                                </div>)}
+                                                {(farms.usda !== null) && (
+                                                <div>
+                                                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')} className="w-24 h-24" alt="USDA Organico" />
+                                                </div>)}
+                                                {(farms.spp !== null) && (
+                                                    <div>
+                                                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} className="w-24 h-24" alt="Pequeños Productores" />
+                                                </div>)}
+                                            </div>
+
                                         </div>
                                         <div
                                             className="flex-grow border border-gray-300 rounded text-center py-8"

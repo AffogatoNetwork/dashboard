@@ -1,4 +1,4 @@
-import React, { ReactDOM, useEffect, useMemo, useState } from "react";
+import React, {  useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
 import { getAllFarmers } from "../../db/firebase";
 import { SEARCH_DIVIDER } from "../../utils/constants";
@@ -226,7 +226,12 @@ export const FarmersModules = () => {
                         </Box>
                     </>
                 ),
-            }, {
+            },{
+                header: t('tables.community'), accessorKey: 'address'
+            }, 
+            
+            
+            {
                 accessorFn: (row: { gender: any; }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
                 id: 'gender', //id is still required when using accessorFn instead of accessorKey
                 header: t('tables.sex'),
