@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState } from "react";
-import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import {getAllFarmers, getCafepsaJsonUrl , editFarm} from "../../db/firebase";
+import React, {useEffect, useMemo, useState} from "react";
+import MaterialReactTable, {MaterialReactTableProps, MRT_ColumnDef} from "material-react-table";
+import {editFarm, getAllFarmers, getCafepsaJsonUrl} from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
-import { LinkIcon } from "../icons/link";
-import { useTranslation } from "react-i18next";
+import {LinkIcon} from "../icons/link";
+import {useTranslation} from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
-import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import {MRT_Localization_ES} from 'material-react-table/locales/es';
 import NewMap from "../common/NewMap";
 import {useParams} from "react-router";
 
@@ -49,7 +49,12 @@ export const FarmsModule = () => {
     }
 
 
-    const openInNewTab = (url: string) => {
+    const openInNewTab = () => {
+
+        console.log(Data);
+        const origin = window.location.origin.toString() + '/farmer/';
+        const url = Data.replaceAll(origin, '').trim();
+
         getCafepsaJsonUrl(url).then((result) => {
             setlInks(result);
             console.log(result)
@@ -399,7 +404,7 @@ export const FarmsModule = () => {
                                 <div className="text-center items-center">
                                     <br />
                                     <button onClick={() => {
-                                        openInNewTab(BlockchainUrl);
+                                        openInNewTab();
                                     }}
                                             className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
                                         <LinkIcon></LinkIcon>
