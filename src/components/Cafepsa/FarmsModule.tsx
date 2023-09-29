@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import {getAllFarmers, getCafepsaJsonUrl , UserData} from "../../db/firebase";
+import {getAllFarmers, getCafepsaJsonUrl , editFarm} from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import { LinkIcon } from "../icons/link";
@@ -171,6 +171,8 @@ export const FarmsModule = () => {
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
         async ({ exitEditingMode, row, values }) => {
+             editFarm(values);
+
             //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
             tableData[row.index] = values;
             //send/receive api updates here

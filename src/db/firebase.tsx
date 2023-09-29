@@ -148,6 +148,39 @@ export const getCafepsaJsonUrl = async (id: string) => {
   return url;
 };
 
+
+export const editFarm = async (data: any) => {
+  console.log(data);
+  let user = UserData();
+  const origin = window.location.origin.toString() + '/farmer/';
+  const qrCode = data.qrCode.toString();
+  const dir = qrCode.replaceAll(origin, '');
+  try {
+    const farmDoc = doc(db, "farms", dir);
+    console.log(farmDoc)
+    const farmData = {
+      area: data.area,
+      height: data.height,
+      country: data.country,
+      name: data.name,
+      shadow: data.shadow,
+      region: data.state,
+      varieties: data.varieties,
+      village : data.village,
+      village2: data.village2,
+      updateAt: data.data.now(),
+      updatedBy: user.email,
+    };
+    console.log(farmData);
+    await updateDoc(farmDoc, farmData);
+    console.log('updated')
+  } catch (error) {
+
+  }
+  console.log(dir.toString())
+};
+
+
 export const saveFarm = async (farm: FarmType) => {
   try {
     const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
@@ -228,7 +261,6 @@ export const getFarm = async (id: string) => {
   return null;
 };
 
-
 export const saveBatch = async (batch: any) => {
   try {
     const docId = batch.farmerAddress.concat(batch.name.toLocaleLowerCase());
@@ -262,8 +294,7 @@ export const saveBatch = async (batch: any) => {
 
 export const saveFarmerData = async (farmerData: any, id: string) => {
   try {
-    const docId = id;
-    const farmDoc = doc(db, "batches", docId);
+    const farmDoc = doc(db, "batches", id);
     const farmData = {
       address: id,
       bio: farmerData.bio,
@@ -279,9 +310,7 @@ export const saveFarmerData = async (farmerData: any, id: string) => {
     };
     await setDoc(farmDoc, farmData);
   } catch (error) {
-
   }
-
 };
 
 export const authData = () => {
@@ -326,4 +355,3 @@ export const getAllBatches = async (company: string) => {
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
 };
-
