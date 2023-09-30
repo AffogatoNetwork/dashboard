@@ -154,30 +154,28 @@ export const editFarm = async (data: any) => {
   let user = UserData();
   const origin = window.location.origin.toString() + '/farmer/';
   const qrCode = data.qrCode.toString();
-  const dir = qrCode.replaceAll(origin, '');
+  const dir = qrCode.replaceAll(origin, '').trim();
   try {
-    const farmDoc = doc(db, "farms", dir);
-    console.log(farmDoc)
+    const farmDoc = doc(db, "farms", dir.toString());
     const farmData = {
-      area: data.area,
-      height: data.height,
       country: data.country,
-      name: data.name,
+      fullname: data.name,
       shadow: data.shadow,
       region: data.state,
       varieties: data.varieties,
       village : data.village,
       village2: data.village2,
-      updateAt: data.data.now(),
+      updateAt: Date.now(),
       updatedBy: user.email,
     };
     console.log(farmData);
-    await updateDoc(farmDoc, farmData);
-    console.log('updated')
+    await updateDoc(farmDoc, farmData).then((farmDoc) => {
+      console.log(farmDoc);
+      console.log("updated in firestore")
+    })
   } catch (error) {
-
+    console.log(error);
   }
-  console.log(dir.toString())
 };
 
 

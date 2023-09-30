@@ -22,14 +22,11 @@ export const FarmsModule = () => {
     const [Data, setData] = useState<any>([]);
     const [BlockchainUrl, setBlockchainUrl] = useState<string >('');
 
-
     const [currentLat, setCurrentLat] = useState("0");
     const [currentLng, setCurrentLng] = useState("0");
     const [currentAddressL, setCurrentAddressL] = useState("");
 
     const [links, setlInks] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FIMG_1718.jpeg?alt=media&token=c37a0d05-a8dc-4cfd-b3c1-fcc0502dcd77");
-    const { currentFarmerId } = useParams();
-    const [editingBehavior, setEditingBehavior] = useState<boolean>(false);
 
     const handleOnDownloadClick = () => {
         saveSvgAsPng.saveSvgAsPng(
@@ -178,11 +175,9 @@ export const FarmsModule = () => {
         async ({ exitEditingMode, row, values }) => {
              editFarm(values);
 
-            //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
             tableData[row.index] = values;
-            //send/receive api updates here
 
-            exitEditingMode(); //required to exit editing mode
+            exitEditingMode();
         };
 
 
