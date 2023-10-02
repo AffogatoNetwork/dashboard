@@ -70,7 +70,7 @@ export const FarmerProfileModule = () => {
 
             <section className="p-3 m-2 card border">
                 <button className="btn btn-ghost  absolute right-2 top-2">
-                    <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/farmers-module'}> <>{t('back')}</> </a>
+                    <a className="hover:underline underline-offset-1 decoration-sky-500" href={'/newfarmers-module'}> <>{t('back')}</> </a>
                 </button>
                 <h3 className="text-2xl font-bold mb-5">
                     <>{t('tables.name')}:</> {farmerData.fullname}

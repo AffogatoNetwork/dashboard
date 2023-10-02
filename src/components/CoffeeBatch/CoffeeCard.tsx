@@ -194,7 +194,7 @@ const CoffeeCard = () => {
                                 <div>
                                     <h3 className=" font-black">Productores: </h3>
                                     <span className="">
-                                        <a className="link link-info" href={'/farmer' + '/' + farmerData?.address}>
+                                        <a className="link link-info" href={'/newfarmer' + '/' + farmerData?.address}>
                                             {farmerData?.fullname}
                                         </a>
                                     </span>
