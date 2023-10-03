@@ -1,4 +1,4 @@
-import {initializeApp} from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   collection,
   doc,
@@ -11,9 +11,9 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import {CompanyType, FarmerType, FarmType} from "../components/common/types";
-import {getAuth} from "firebase/auth";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { CompanyType, FarmerType, FarmType } from "../components/common/types";
+import { getAuth } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -95,6 +95,12 @@ export const getAllFarmers = async (company: string) => {
   return querySnapshot.docs;
 };
 
+export const getAllFarmsByCompany = async (company: string) => {
+  const q = query(collection(db, "farms"), where("company", "==", company));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
+};
+
 export const getFarmerFarms = async (farmerAddress: string) => {
   const q = query(
     collection(db, "farms"),
@@ -152,29 +158,31 @@ export const getCafepsaJsonUrl = async (id: string) => {
 export const editFarm = async (data: any) => {
   console.log(data);
   let user = UserData();
-  const origin = window.location.origin.toString() + '/farmer/';
-  const qrCode = data.qrCode.toString();
+  const origin = window.location.origin + '/farmer/';
+  const qrCode = data.qrCode;
+  console.log(qrCode);
+
   const dir = qrCode.replaceAll(origin, '').trim();
+  console.log(dir);
+
   try {
-    const farmDoc = doc(db, "farms", dir.toString());
+    const farmDoc = doc(db, "farms", dir);
     const farmData = {
       country: data.country,
       fullname: data.name,
       shadow: data.shadow,
       region: data.state,
       varieties: data.varieties,
-      village : data.village,
+      village: data.village,
       village2: data.village2,
       updateAt: Date.now(),
       updatedBy: user.email,
     };
-    console.log(farmData);
-    await updateDoc(farmDoc, farmData).then((farmDoc) => {
-      console.log(farmDoc);
-      console.log("updated in firestore")
-    })
+    await updateDoc(farmDoc, farmData);
+    console.log("Updated");
+
   } catch (error) {
-    console.log(error);
+    console.log("Error", error);
   }
 };
 
@@ -315,7 +323,7 @@ export const authData = () => {
   return getAuth(app)
 }
 
-export const UserData = () =>{
+export const UserData = () => {
   const dataUser = localStorage.getItem('user');
   if (dataUser !== null) {
     const myObject = JSON.parse(dataUser);
@@ -323,11 +331,11 @@ export const UserData = () =>{
     console.log(myObject.displayName);
     console.log(myObject.email)
     // @ts-ignore
-   return {
-     name: myObject.displayName,
-     email: myObject.email,
-     photo: myObject.photoURL
-   };
+    return {
+      name: myObject.displayName,
+      email: myObject.email,
+      photo: myObject.photoURL
+    };
   } else {
     return {
       name: '',
