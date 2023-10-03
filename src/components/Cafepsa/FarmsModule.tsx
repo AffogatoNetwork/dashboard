@@ -1,31 +1,31 @@
-import React, {useEffect, useMemo, useState} from "react";
-import MaterialReactTable, {MaterialReactTableProps, MRT_ColumnDef} from "material-react-table";
-import {editFarm, getAllFarmers, getCafepsaJsonUrl} from "../../db/firebase";
+import React, { useEffect, useMemo, useState } from "react";
+import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from "material-react-table";
+import { editFarm, getAllFarmers, getCafepsaJsonUrl } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
-import {LinkIcon} from "../icons/link";
-import {useTranslation} from "react-i18next";
+import { LinkIcon } from "../icons/link";
+import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-excel";
-import {MRT_Localization_ES} from 'material-react-table/locales/es';
+import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import NewMap from "../common/NewMap";
-import {useParams} from "react-router";
+import { useFarmers } from "../../hooks/useFarmers";
 
 export const FarmsModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
 
     const { t, i18n } = useTranslation();
-    const [loading, setLoading] = useState(true);
-    const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
-    const [farmersCount, setFarmersCount] = useState(0);
-    const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
+    /*   const [loading, setLoading] = useState(true);
+      const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
+      const [farmersCount, setFarmersCount] = useState(0); */
+    // const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
     const [Data, setData] = useState<any>([]);
-    const [BlockchainUrl, setBlockchainUrl] = useState<string >('');
+    // const [BlockchainUrl, setBlockchainUrl] = useState<string>('');
 
     const [currentLat, setCurrentLat] = useState("0");
     const [currentLng, setCurrentLng] = useState("0");
     const [currentAddressL, setCurrentAddressL] = useState("");
-
+    const [farmers, farmersCount, ownerAddress, setReload] = useFarmers();
     const [links, setlInks] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FIMG_1718.jpeg?alt=media&token=c37a0d05-a8dc-4cfd-b3c1-fcc0502dcd77");
 
     const handleOnDownloadClick = () => {
@@ -39,7 +39,7 @@ export const FarmsModule = () => {
         );
     };
 
-    const  getLink = (data: string) => {
+    const getLink = (data: string) => {
         getCafepsaJsonUrl(data).then((result) => {
             setlInks(result);
         });
@@ -60,124 +60,26 @@ export const FarmsModule = () => {
         });
     };
 
-    type FarmerType = {
-        area: number;
-        address: string;
-        height: number;
-        ipfshash: string;
-        latitude: number;
-        longitude: number;
-        name: string;
-        shadow: string;
-        varieties: string;
-        country: string;
-        village: string;
-        state: string;
-        village2: string;
-        qrCode: string;
-        blockChainUrl: string;
-    };
-
-    useEffect(() => {
-        const load = async () => {
-            const farmerList = new Array<FarmerType>();
-            const user = localStorage.getItem("address")
-            if (user !== "") {
-                setOwnerAddress(user)
-                setLoading(false);
-            } else {
-
-            }
+    // useEffect(() => {
 
 
-            let companyName = "";
-            const url = window.location.host.toString();
-            if (url.match("commovel") !== null) {
-                companyName = "COMMOVEL";
-            }
-            if (url.match("copracnil") !== null) {
-                companyName = "COPRACNIL";
-            }
-            if (url.match("comsa") !== null) {
-                companyName = "COMSA";
-            }
-            if (url.match("proexo") !== null) {
-                companyName = "PROEXO";
-            }
-            if (url.match("cafepsa") !== null) {
-                companyName = "CAFEPSA";
-            }
-            if (url.match("localhost") !== null) {
-                companyName = "CAFEPSA";
-            }
+    // }, []);
 
-            // @ts-ignore
-
-
-            await getAllFarmers(companyName).then((result) => {
-                console.log(companyName);
-                for (let i = 0; i < result.length; i += 1) {
-                    const farmerData = result[i].data();
-                    const {
-                        area,
-                        address,
-                        height,
-                        ipfshash,
-                        latitude,
-                        longitude,
-                        fullname: name,
-                        shadow,
-                        varieties,
-                        country,
-                        village,
-                        state,
-                        village2,
-                    } = farmerData;
-
-
-                    let qrCode = window.location.origin
-                        .concat("/farmer/")
-                        .concat(address);
-                    let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + ipfshash;
-                    setBlockchainUrl(address)
-                    farmerList.push({
-                        area,
-                        address,
-                        height,
-                        ipfshash,
-                        latitude,
-                        longitude,
-                        name,
-                        shadow,
-                        varieties,
-                        country,
-                        village,
-                        state,
-                        village2,
-                        qrCode: qrCode,
-                        blockChainUrl: blockChainUrl
-                    });
-                }
-                setFarmers(farmerList);
-                console.log(farmerList);
-                const itemsCount = farmerList.length;
-                setFarmersCount(itemsCount);
-                console.log(loading);
-            });
-        };
-
-        load();
-    }, []);
-
-    const [tableData, setTableData] = useState<any[]>(() => Data);
+    const [tableData, setTableData] = useState<any[]>(() => farmers);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
         async ({ exitEditingMode, row, values }) => {
-             editFarm(values);
+            try {
+                await editFarm(values); // Espera a que la edición de la granja se complete
 
-            tableData[row.index] = values;
-
-            exitEditingMode();
+                tableData[row.index] = values; // Actualiza los datos de la tabla
+                setTableData([...tableData]);
+                setReload(true);
+                exitEditingMode(); // Sale del modo de edición
+            } catch (error) {
+                // Maneja cualquier error que pueda ocurrir durante la edición de la granja
+                console.error("Error al guardar la fila:", error);
+            }
         };
 
 
@@ -356,6 +258,11 @@ export const FarmsModule = () => {
                                             enableDensityToggle={false}
                                             sortDescFirst={true}
                                             enableFullScreenToggle={false}
+                                            displayColumnDefOptions={{
+                                                'mrt-row-actions': {
+                                                    header: 'Acciones',
+                                                },
+                                            }}
                                             enableColumnActions={false}
                                             enableFilters={true}
                                             localization={MRT_Localization_ES}
@@ -401,7 +308,7 @@ export const FarmsModule = () => {
                                     <button onClick={() => {
                                         openInNewTab();
                                     }}
-                                            className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
                                         <LinkIcon></LinkIcon>
                                         <>Ver en el blockchain</>
                                     </button>

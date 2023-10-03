@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import {getAllFarmers, UserData} from "../../db/firebase";
+import { getAllFarmers, UserData } from "../../db/firebase";
 import { SEARCH_DIVIDER } from "../../utils/constants";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
@@ -181,7 +181,7 @@ export const FarmersModules = () => {
         async ({ exitEditingMode, row, values }) => {
             //if using flat data and simple accessorKeys/ids, you can just do a simple assignment here.
             tableData[row.index] = values;
-            //send/receive api updates here
+
 
             exitEditingMode(); //required to exit editing mode
         };
