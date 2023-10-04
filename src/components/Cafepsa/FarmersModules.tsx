@@ -129,7 +129,11 @@ export const FarmersModules = () => {
                         country,
                     } = farmerData;
                     const zone = state ? state : region;
-                    const l = `${village},${zone},${country}`;
+                    const l = region
+                        .concat(", ")
+                        .concat(village2)
+                        .concat(", ")
+                        .concat(country);
                     /* nota algunos tiene state y otros region */
 
                     const s = farmerId
