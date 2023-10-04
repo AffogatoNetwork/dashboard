@@ -19,7 +19,9 @@ const NewBatchId = () => {
         const load = () => {
             if (batchId) {
                 let farmerDetails: any[] = [];
+                console.log(batchId);
                 getBatch(batchId).then((result) => {
+                    console.log(result)
                     //console.log(result?.image.includes("https://firebasestorage"));
                     if (result?.image.includes("https://firebasestorage") === true) {
                         // console.log("es una url");

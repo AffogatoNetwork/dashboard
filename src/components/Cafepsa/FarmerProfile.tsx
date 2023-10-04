@@ -113,7 +113,7 @@ export const FarmerProfileModule = () => {
                             <p className="flex flex-col py-2">
                                 <>{t("location")}:</>
                                 <span className="text-black dark:text-white font-bold">
-                                    {farmerData.village}, {farmerData.region}
+                                     {farmerData.village} ,{farmerData.village2}
                                 </span>
                             </p>
 
