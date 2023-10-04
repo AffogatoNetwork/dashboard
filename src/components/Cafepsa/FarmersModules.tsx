@@ -125,13 +125,13 @@ export const FarmersModules = () => {
                         village1,
                         village2,
                         region,
+                        state,
                         country,
                     } = farmerData;
-                    const l = village
-                        .concat(", ")
-                        .concat(region)
-                        .concat(", ")
-                        .concat(country);
+                    const zone = state ? state : region;
+                    const l = `${village},${zone},${country}`;
+                    /* nota algunos tiene state y otros region */
+
                     const s = farmerId
                         .concat(SEARCH_DIVIDER)
                         .concat(fullname)
