@@ -89,17 +89,28 @@ const NewBatchId = () => {
                     </div>
                     <div className="w-full md:w-1/2 px-10">
                         <div className="mb-10">
-
-                            <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700"> </h2>
-                            <h1 className="font-bold uppercase text-2xl mb-5">Detalles del lote : {coffeeBatch?.Name} {coffeeBatch?.wetMill?.entry_id} , <br /> {coffeeBatch?.wetMill?.variety} {coffeeBatch?.wetMill?.facility} </h1>
-                            <p>{coffeeBatch?.Description}</p>
+                            <h1 className="  text-2xl mb-5"><>{t("batch-id")}</>:
+                                <span className="font-bold">
+                                 {coffeeBatch?.ipfsHash.substring(0, 6)}.
+                                </span>
+                            </h1>
+                            <h1 className="text-2xl mb-5"> <>{t("varieties")}</>:
+                                <span className="font-bold">
+                                  {coffeeBatch?.Name}.
+                                </span>
+                            </h1>
+                            <h1 className="text-2xl mb-5"><>{t("certifications")}</>:
+                                <span className="font-bold">
+                                  {coffeeBatch?.wetMill?.certifications}.
+                                </span>
+                            </h1>
                         </div>
                         <div>
                             <div className="inline-block align-bottom mr-5">
                                 {coffeeBatch.Farmer !== undefined && (
                                     <>
                                         <div>
-                                            <h1 > <>{t("farmers")}</>: <br />
+                                            <h1> <>{t("farmers")}</>: <br />
                                                 <>
                                                     <Farmers
                                                         farmers={farmers}
