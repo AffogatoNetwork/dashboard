@@ -96,7 +96,7 @@ const NewBatchId = () => {
                             </h1>
                             <h1 className="text-2xl mb-5"> <>{t("varieties")}</>:
                                 <span className="font-bold">
-                                  {coffeeBatch?.Name}.
+                                  {coffeeBatch?.wetMill?.variety}.
                                 </span>
                             </h1>
                             <h1 className="text-2xl mb-5"><>{t("certifications")}</>:
