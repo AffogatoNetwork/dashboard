@@ -102,8 +102,6 @@ export const CertificationsModule = () => {
 
 
             await getAllFarmers(companyName).then((result) => {
-                console.log(companyName);
-                console.log(result);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
@@ -170,11 +168,9 @@ export const CertificationsModule = () => {
                         search: s.toLowerCase()
                     });
                 }
-                console.log(farmerList);
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
-                console.log(loading);
             });
         };
 

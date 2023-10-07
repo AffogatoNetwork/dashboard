@@ -190,11 +190,11 @@ export const ProexoLanding = () => {
                                         - Financiamiento Pre y Post Cosecha
                                     </p>
                                     <p className="leading-relaxed">
-                                        - Asistencia Tecnica
+                                        - Asistencia Técnica
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Beneficio Humedo
+                                        - Beneficio Húmedo
                                     </p>
                                     <p className="leading-relaxed">
                                         - Laboratorio de Catación

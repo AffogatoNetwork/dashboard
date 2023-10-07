@@ -190,15 +190,11 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
       )
       .then(
         async function (response) {
-          console.log('here');
-          console.log(data);
-          console.log(response);
           saveFarmerData(data, templateParams.address);
           await magicSDK.user.logout();
           dispatch({ type: "ACCOUNT_CREATED" });
         },
         function (error) {
-          console.log("FAILED...", error);
           dispatch({ type: "CREATING_ACCOUNT_ERROR" });
         }
       );
@@ -212,11 +208,9 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
     sendAccountEmail(address, data);
     if (data.farmerData !== null) {
       saveFarmer({ ...data.farmerData, address }, data.imageFile);
-      console.log(address)
     }
     if (data.companyData !== null) {
       saveCompany({ ...data.companyData, address });
-      console.log(address)
     }
   };
 
@@ -254,8 +248,6 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
         } else {
           dispatch({ type: "CREATING_ACCOUNT_ERROR" });
         }
-
-        console.log('hey listen')
         
       },
       signOut: async () => {

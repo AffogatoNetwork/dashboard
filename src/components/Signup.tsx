@@ -210,7 +210,6 @@ const Signup = () => {
             // @ts-ignore
             hiddenFileInput.current.click();
         } else {
-            console.log(event);
         }
     };
 

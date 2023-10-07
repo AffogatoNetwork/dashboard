@@ -19,17 +19,12 @@ const NewBatchId = () => {
         const load = () => {
             if (batchId) {
                 let farmerDetails: any[] = [];
-                console.log(batchId);
                 getBatch(batchId).then((result) => {
-                    console.log(result)
-                    //console.log(result?.image.includes("https://firebasestorage"));
                     if (result?.image.includes("https://firebasestorage") === true) {
-                        // console.log("es una url");
                     } else {
                         if (result?.image) {
                             let url = 'https://affogato.mypinata.cloud/ipfs/'
                             result.image = url + result.image;
-                            // console.log(result.image);
                         }
                     }
 
@@ -44,7 +39,6 @@ const NewBatchId = () => {
                                 setLoading(false);
                             })
                             .catch((error) => {
-                                console.error("Error al obtener detalles de los agricultores:", error);
                                 setLoading(false);
                             });
                     } else {
@@ -52,7 +46,6 @@ const NewBatchId = () => {
                     }
                 })
                     .catch((error) => {
-                        console.error("Error al cargar datos del lote de café:", error);
                         setLoading(false);
                     });
 
@@ -252,15 +245,10 @@ const NewBatchId = () => {
                                 </div>
                             </div>
                         </div>
-
-
-
-
                     </div>
+
                     <div className="flex flex-col lg:flex-col gap-5 mt-8">
                         <div className="flex place-content-center">
-
-
                         </div>
                     </div>
                 </div>
@@ -269,7 +257,7 @@ const NewBatchId = () => {
         </div>
 
 
-    </>);
+    </>)
 };
 
 export default NewBatchId;

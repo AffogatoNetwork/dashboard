@@ -23,8 +23,6 @@ export const FarmerProfileModule = () => {
             if (newfarmerId) {
                 await getFarmer(newfarmerId).then((result) => {
                     setFarmerData(result);
-                    console.log(result);
-                    console.log(result?.address);
                     const firebase = getFarmerFarms(result?.address).then((result: any) => {
                         {
                             setfarmName(result[0].name);

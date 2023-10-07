@@ -119,11 +119,10 @@ export const CoffeBatchNewList = () => {
                     });
                 }
 
-                console.log(farmerList);
+              
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
-                console.log(loading);
             });
         };
 

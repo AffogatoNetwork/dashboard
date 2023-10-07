@@ -183,7 +183,6 @@ export const Create = () => {
       })
         .then((res) => res.json())
         .then((json) => {
-          console.log(json);
           notifyUser(t("create-batches.success"));
           setSaving(false);
           clearFiles();

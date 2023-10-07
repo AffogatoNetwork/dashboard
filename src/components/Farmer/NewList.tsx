@@ -85,7 +85,6 @@ export const NewList = () => {
 
 
             await getAllFarmers(companyName).then((result) => {
-                console.log(companyName);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
@@ -132,7 +131,6 @@ export const NewList = () => {
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
-                console.log(loading);
             });
         };
 

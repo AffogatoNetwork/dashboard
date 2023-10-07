@@ -11,7 +11,6 @@ type props = {
 
 const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
-    console.log(coffeeBatch);
     const batchUrl = window.location.origin.concat("/batch/").concat(coffeeBatch.ipfsHash);
 
     const openInNewTab = (url: string | URL | undefined) => {

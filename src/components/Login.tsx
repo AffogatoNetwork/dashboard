@@ -43,7 +43,6 @@ const Login = () => {
                 });
             }
         } catch (e) {
-            console.log(e);
         }
     };
 

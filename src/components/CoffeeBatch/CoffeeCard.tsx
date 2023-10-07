@@ -99,7 +99,6 @@ const CoffeeCard = () => {
 
                     })
                     .catch((error) => {
-                        console.error(error);
                         setLoading(false);
                     });
             }
@@ -115,7 +114,6 @@ const CoffeeCard = () => {
     }
 
     if (coffeeBatch?.image === undefined) {
-        console.log(coffeeBatch)
         return <h1> Huevos </h1>;
     }
 

@@ -73,11 +73,7 @@ export default function Home() {
     };
 
     let data = UserData();
-    console.log(data);
     setUserData(data)
-
-
-
     loadProvider();
   }, []);
 
@@ -87,9 +83,7 @@ export default function Home() {
       // Sign-out successful.
       localStorage.removeItem('user');
       navigate("/");
-      console.log("Signed out successfully")
     }).catch((error) => {
-      console.log(error);
       // An error happened.
     });
 

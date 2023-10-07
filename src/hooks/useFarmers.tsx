@@ -67,7 +67,6 @@ export const useFarmers = () => {
 
         for (let i = 0; i < result.length; i += 1) {
             const farmerData = result[i].data();
-            // console.log(farmerData);
 
             const {
                 area,
@@ -114,10 +113,8 @@ export const useFarmers = () => {
         }
 
         setFarmers(farmerList);
-        // console.log(farmerList);
         const itemsCount = farmerList.length;
         setFarmersCount(itemsCount);
-        console.log(loading);
     }
 
 

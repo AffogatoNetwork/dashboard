@@ -70,10 +70,8 @@ export const FarmersModules = () => {
                 setOwnerAddress(user)
                 setEditingBehavior(true)
                 setLoading(false);
-                console.log(editingBehavior)
             } else {
                 setEditingBehavior(false)
-
             }
 
             // utiliza esto para extraer el nombre y lo que ocupes
@@ -81,10 +79,7 @@ export const FarmersModules = () => {
             if (dataUser !== null) {
                 const myObject = JSON.parse(dataUser);
                 // Ahora puedes trabajar con 'myObject' como un objeto válido
-                console.log(myObject.displayName);
             }
-            console.log("desde FarmerModule:", dataUser);
-
             let companyName = "";
             const url = window.location.host.toString();
             if (url.match("commovel") !== null) {
@@ -108,7 +103,6 @@ export const FarmersModules = () => {
 
 
             await getAllFarmers(companyName).then((result) => {
-                console.log(companyName);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
@@ -169,11 +163,9 @@ export const FarmersModules = () => {
                         search: s.toLowerCase()
                     });
                 }
-                console.log(farmerList);
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
-                console.log(loading);
             });
         };
 
@@ -351,22 +343,7 @@ export const FarmersModules = () => {
                                                 {t("total")}: {farmersCount}
                                             </>
                                         </h4>
-                                        {ownerAddress ? (
-                                            <a className="link link-info">
-                                                <ReactHTMLTableToExcel
-                                                    id="table-xls-button"
-
-                                                    className="download-xls-button"
-                                                    table="farmers-list"
-                                                    filename={t("farmers")}
-                                                    sheet={t("farmers")}
-                                                    buttonText={"(".concat(t("download")).concat(")")}
-                                                />
-                                            </a>
-                                        ) : (
-                                            <>
-                                            </>
-                                        )}
+                                   
                                     </div>
 
                                     <div className="overflow-auto">
@@ -426,7 +403,6 @@ export const FarmersModules = () => {
                                     </div>
                                     <div>
                                         <button onClick={() => {
-                                            console.log(Data);
                                             openInNewTab(Data);
                                         }}
                                             className="bg-blue-300 hover:bg-blue-400 text-white font-bold py-2 px-4 rounded inline-flex items-center">

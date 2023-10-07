@@ -33,7 +33,6 @@ export const FarmsNewList = () => {
     };
 
     const onMapBtnClick = (lat: string, lng: string, adressL: string) => {
-        console.log(lat, lng, adressL);
         setCurrentLat(lat);
         setCurrentLng(lng);
         setCurrentAddressL(adressL);
@@ -41,7 +40,6 @@ export const FarmsNewList = () => {
 
 
     const DetermineValue = (value: string) => {
-        console.log(value);
     }
 
 
@@ -150,7 +148,6 @@ export const FarmsNewList = () => {
                 setFarms(farmList);
                 const itemsCount = farmList.length;
                 setFarmersCount(itemsCount);
-                console.log(loading);              // calculateFarmersCount(result);
             });
             setLoading(false);
         };

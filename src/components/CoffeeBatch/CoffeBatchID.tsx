@@ -15,25 +15,18 @@ const CoffeeBatchId = () => {
         const load = () => {
             if (batchId) {
                 getBatch(batchId).then((result) => {
-                    console.log(result);
-                    console.log(result?.image.includes("https://firebasestorage"));
                     if (result?.image.includes("https://firebasestorage") === true) {
-                        console.log("es una url");
                     } else {
                         if (result?.image) {
-                            console.log("es un hash");
                             let url = 'https://affogato.mypinata.cloud/ipfs/'
                             result.image = url + result.image;
-                            console.log(result.image);
                         }
                     }
 
 
                     setCoffeeBatch(result);
-                    console.log(result)
                     if (result?.Farmer.address !== undefined) {
                         getFarmer(result?.Farmer.address).then((result) => {
-                            console.log(result);
                             FarmerDetails.push(result);
                             setFarmers(FarmerDetails);
                         });
@@ -43,19 +36,14 @@ const CoffeeBatchId = () => {
                         Farmers.forEach((element: any) => {
                             getFarmer(element).then((result) => {
                                 FarmerDetails.push(result);
-                                console.log(FarmerDetails);
                                 setFarmers(FarmerDetails);
-                                console.log(FarmerDetails);
                             });
                         });
                     } else {
-                        console.log(Farmers);
                     }
 
 
-                    console.log(Farmers);
                     let FarmerDetails: any[] = [];
-                    console.log(Farmers)
                     setLoading(false);
                 });
                 setLoading(false);
@@ -150,7 +138,7 @@ const CoffeeBatchId = () => {
                             </div>
                             <div className="card w-full bg-base-100 shadow-xl">
                                 <div className="card-body items-center text-center">
-                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Beneficio Humedo</h2>
+                                    <h2 className="card-title text-xl text-center pb-2 underline decoration-2 decoration-yellow-700">Beneficio Húmedo</h2>
                                     <div className="card-actions">
                                         <div className="grid gap-6 mb-8 lg:grid-cols-4  sm:grid-cols-2 text-center">
                                             <p><>{t("certificates")}</>: <br /> <span> {coffeeBatch?.wetMill?.certifications}</span></p>

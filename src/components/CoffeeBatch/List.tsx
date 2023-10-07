@@ -142,7 +142,6 @@ export const List = () => {
 
                     const traitType = jsonData.attributes[i].trait_type.toLowerCase();
                     if (traitType === "cooperative") {
-                        console.log(jsonData.attributes[i]);
                         [cooperative] = jsonData.attributes[i].value;
                     }
                     if (traitType === "farmer") {
@@ -216,7 +215,6 @@ export const List = () => {
                     const removeIndex = batchList.map(item => item.id).indexOf(remove3?.id);
                     batchList.splice(removeIndex, 1);
                 }
-                console.log(company.id);
 
                 if (id.batchList >= 975) {
                     batchList.push(cooffeeBatch);

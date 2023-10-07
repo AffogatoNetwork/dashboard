@@ -139,31 +139,24 @@ export const getImageUrl = async (id: string) => {
 
 export const getCafepsaImageUrl = async (id: string) => {
   let download = id + '.jpeg'
-  console.log(download)
   const url = await getDownloadURL(ref(storage, download));
-  console.log(download)
   return url;
 };
 
 
 export const getCafepsaJsonUrl = async (id: string) => {
   let download = 'CAFEPSA/' + id + '.json'
-  console.log(download)
   const url = await getDownloadURL(ref(storage, download));
-  console.log(download)
   return url;
 };
 
 
 export const editFarm = async (data: any) => {
-  console.log(data);
   let user = UserData();
   const origin = window.location.origin + '/farmer/';
   const qrCode = data.qrCode;
-  console.log(qrCode);
 
   const dir = qrCode.replaceAll(origin, '').trim();
-  console.log(dir);
 
   try {
     const farmDoc = doc(db, "farms", dir);
@@ -179,10 +172,8 @@ export const editFarm = async (data: any) => {
       updatedBy: user.email,
     };
     await updateDoc(farmDoc, farmData);
-    console.log("Updated");
 
   } catch (error) {
-    console.log("Error", error);
   }
 };
 
@@ -328,8 +319,6 @@ export const UserData = () => {
   if (dataUser !== null) {
     const myObject = JSON.parse(dataUser);
     // Ahora puedes trabajar con 'myObject' como un objeto válido
-    console.log(myObject.displayName);
-    console.log(myObject.email)
     // @ts-ignore
     return {
       name: myObject.displayName,

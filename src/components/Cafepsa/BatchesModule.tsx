@@ -125,11 +125,9 @@ export const BatchesModule = () => {
                     });
                 }
 
-                console.log(farmerList);
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
-                console.log(loading);
             });
         };
 
@@ -169,9 +167,9 @@ export const BatchesModule = () => {
                 ),
             },
             {
-                accessorFn: (farmers: any) => `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(0, 6)} `, //accessorFn used to join multiple data into a single cell
+                accessorFn: (farmers: any) => `${farmers.ipfsHash.substring(0, 6)} , ${farmers.Name}  ${farmers.parentId}  `, //accessorFn used to join multiple data into a single cell
                 id: 'name', //id is still required when using accessorFn instead of accessorKey
-                header: t("farmers"), size: 25,
+                header: t("batch-id"), size: 25,
                 Cell(props) {
                     return (
                         <div className="text-left">

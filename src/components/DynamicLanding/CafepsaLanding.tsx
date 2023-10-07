@@ -95,7 +95,8 @@ export const CafepsaLanding = () => {
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FLotes.jpg?alt=media&token=820176a5-4b98-46c5-b1df-1ceec74015b3" />
                                             <p className="m-2 text-2xl font-bold text-center">
-                                                Beneficiado Lotes de Café
+                                                Beneficiados Lotes de Café
+
                                             </p>
                                         </div>
                                     </a>
@@ -233,15 +234,15 @@ export const CafepsaLanding = () => {
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Trenficiado Humedo
+                                        - Beneficio Húmedo
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Beenficiado Seco
+                                        - Beneficio Seco
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Servicios de Exportacion
+                                        - Servicios de Exportación
                                     </p>
 
                                     <p className="leading-relaxed">
@@ -253,7 +254,7 @@ export const CafepsaLanding = () => {
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Asistencia Tecnica,Laboratorio de control de calidad
+                                        - Asistencia Técnica, Laboratorio de control de calidad
                                     </p>
 
                                     <p className="leading-relaxed">
@@ -279,7 +280,7 @@ export const CafepsaLanding = () => {
                                         Con Manos de Mujer
                                     </p>
                                     <p className="leading-relaxed">
-                                        Simbolo de pequeños productores
+                                        Símbolo de pequeños productores
                                     </p>
 
                                     <br />
@@ -290,7 +291,7 @@ export const CafepsaLanding = () => {
 
                                         <span className="leading-relaxed font-black">
                                             <p className="leading-relaxed">
-                                                Somos un modelo empresarial que nació bajo la iniciativa de 24  pequeños productores de café, ubicados en el oriente de Honduras, que busca desarrollar e implementar  alternativas  agiles oportunas en  temas de  producción comercialización de café, fortalecimiento de capacidades,  acceso a crédito  y financiamiento bajo condiciones  favorable,  siendo parte del desarrollo sostenible del  entorno.
+                                                Somos un modelo empresarial que nació bajo la iniciativa de 24  pequeños productores de café, ubicados en el oriente de Honduras, que busca desarrollar e implementar  alternativas ágiles, oportunas en  temas de  producción, comercialización de café, fortalecimiento de capacidades,  acceso a crédito  y financiamiento bajo condiciones favorables  siendo parte del desarrollo sostenible del  entorno.
                                             </p>
                                         </span>
                                     </div>

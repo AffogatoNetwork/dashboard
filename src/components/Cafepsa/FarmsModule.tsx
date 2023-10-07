@@ -47,14 +47,11 @@ export const FarmsModule = () => {
 
 
     const openInNewTab = () => {
-
-        console.log(Data);
         const origin = window.location.origin.toString() + '/farmer/';
         const url = Data.replaceAll(origin, '').trim();
 
         getCafepsaJsonUrl(url).then((result) => {
             setlInks(result);
-            console.log(result)
             const urlStr = result?.toString();
             window.open(urlStr, '_blank', 'noopener,noreferrer');
         });
@@ -78,13 +75,11 @@ export const FarmsModule = () => {
                 exitEditingMode(); // Sale del modo de edición
             } catch (error) {
                 // Maneja cualquier error que pueda ocurrir durante la edición de la granja
-                console.error("Error al guardar la fila:", error);
             }
         };
 
 
     const onMapBtnClick = (lat: string, lng: string, adressL: string) => {
-        console.log(lat, lng, adressL);
         setCurrentLat(lat);
         setCurrentLng(lng);
         setCurrentAddressL(adressL);
