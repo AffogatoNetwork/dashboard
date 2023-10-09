@@ -458,7 +458,7 @@ const CoffeeCard = () => {
                                     {!!coffeeBatch?.wetMill.weight && (<div>
                                         <h3>Peso</h3>
                                         <span>
-                                            {coffeeBatch?.wetMill.weight} QQ
+                                            {coffeeBatch?.wetMill.weight} Quintales
                                         </span>
                                     </div>)}
                                     {!!coffeeBatch?.wetMill.note && (<div>
@@ -554,7 +554,7 @@ const CoffeeCard = () => {
                                             <>{t("weight")}</>
                                         </h3>
                                         <span>
-                                            {coffeeBatch?.dryMill.weight} QQ
+                                            {coffeeBatch?.dryMill.weight} Quintales
                                         </span>
                                     </div>)}
                                     {!!coffeeBatch?.dryMill.note && (<div>

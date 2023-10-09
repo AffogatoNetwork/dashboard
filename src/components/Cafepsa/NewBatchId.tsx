@@ -29,6 +29,7 @@ const NewBatchId = () => {
                     }
 
                     setCoffeeBatch(result);
+                    console.log(result);
 
                     let dataFarmers = result?.Farmer;
                     if (dataFarmers && dataFarmers.length > 0) {
@@ -192,7 +193,7 @@ const NewBatchId = () => {
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.drying_hours || 'Aprox 1200'} </h2>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.wetMill?.drying_hours || 'Aprox. 1200'} </h2>
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("drying-hours")}</> </h4>
                                 </div>
                                 <div
@@ -221,7 +222,7 @@ const NewBatchId = () => {
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.dryMill?.height || 'Aprox 1200'} </h2>
+                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.dryMill?.height || 'Aprox. 1200'} </h2>
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("altitude")}</> </h4>
                                 </div>
                                 <div
@@ -240,7 +241,7 @@ const NewBatchId = () => {
                                 <div
                                     className="flex-grow border border-gray-300 rounded text-center py-8"
                                 >
-                                    <h2 className="text-md font-bold pb-2">{coffeeBatch?.dryMill?.threshing_yield}</h2>
+                                    <h2 className="text-md font-bold pb-2">{parseFloat(coffeeBatch?.dryMill?.threshing_yield).toFixed(2) }</h2>
                                     <h4 className="inline text-gray-500 text-sm"> <>{t("threshing-yield")}</> </h4>
                                 </div>
                             </div>

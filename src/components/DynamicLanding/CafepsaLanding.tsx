@@ -158,7 +158,7 @@ export const CafepsaLanding = () => {
                                     <div className="bg-white relative flex flex-wrap py-6 rounded shadow-md">
                                         <div className="lg:w-1/2 px-6">
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs">Dirección: </h2>
-                                            El Paraiso, El Paraiso
+                                            El Paraíso, El Paraíso
                                             <h2 className="title-font font-semibold text-gray-900 tracking-widest text-xs mt-4">Correo</h2>
                                             <p className="text-indigo-500 mt-1 m-3">
                                                 cafepsa@gmail.com
@@ -246,19 +246,24 @@ export const CafepsaLanding = () => {
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Financiamiento Pre-Cosecha  y Post Cosecha
+                                        - Financiamiento Pre-Cosecha  y Post-Cosecha
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Biocredito
+                                        - Biocrédito
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        - Asistencia Técnica, Laboratorio de control de calidad
+                                        - Asistencia Técnica
+                                    </p>
+                                
+                                    <p className="leading-relaxed">
+                                    Laboratorio de control de calidad
                                     </p>
 
+
                                     <p className="leading-relaxed">
-                                        - Servicio de Tostaduria
+                                        - Servicio de Tostaduría
                                     </p>
 
 
@@ -271,16 +276,16 @@ export const CafepsaLanding = () => {
                                     </p>
 
                                     <p className="leading-relaxed">
-                                        Orgánico
+                                       - Orgánico
                                     </p>
                                     <p className="leading-relaxed">
-                                        Comercio Justo
+                                       - Comercio Justo
                                     </p>
                                     <p className="leading-relaxed">
-                                        Con Manos de Mujer
+                                       - Con Manos de Mujer
                                     </p>
                                     <p className="leading-relaxed">
-                                        Símbolo de pequeños productores
+                                      -  Pequeños Productores
                                     </p>
 
                                     <br />
@@ -291,7 +296,7 @@ export const CafepsaLanding = () => {
 
                                         <span className="leading-relaxed font-black">
                                             <p className="leading-relaxed">
-                                                Somos un modelo empresarial que nació bajo la iniciativa de 24  pequeños productores de café, ubicados en el oriente de Honduras, que busca desarrollar e implementar  alternativas ágiles, oportunas en  temas de  producción, comercialización de café, fortalecimiento de capacidades,  acceso a crédito  y financiamiento bajo condiciones favorables  siendo parte del desarrollo sostenible del  entorno.
+                                                Somos un modelo empresarial que nació bajo la iniciativa de 24  pequeños productores de café, ubicados en el oriente de Honduras, que busca desarrollar e implementar  alternativas ágiles, oportunas en  temas de  producción, comercialización de café, fortalecimiento de capacidades,  acceso a crédito  y financiamiento bajo condiciones favorables  siendo parte del desarrollo sostenible del entorno.
                                             </p>
                                         </span>
                                     </div>

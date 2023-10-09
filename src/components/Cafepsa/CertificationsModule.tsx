@@ -401,7 +401,7 @@ export const CertificationsModule = () => {
                                             enableStickyHeader={true}
                                             columns={columData}
                                             editingMode="modal" //default
-                                            enableEditing
+                                            
                                             onEditingRowSave={handleSaveRow}
                                             data={farmers}
                                             enableHiding={false}

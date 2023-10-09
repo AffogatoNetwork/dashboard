@@ -166,7 +166,7 @@ export const FarmsModule = () => {
 
             {
                 accessorFn: (farm: any) => `${farm.area} `,
-                header: t('area') + '(mz)', size: 5,
+                header: t('area') + '  ' +'(mz)', size: 5,
                 Cell(props) {
                     return (
                         <div className="text-center">
@@ -212,7 +212,7 @@ export const FarmsModule = () => {
                         <div className="card shadow-xl bg-white">
                             <div className="w-full p-5 rounded-lg">
                                 <div className="text-center text-xl font-bold">
-                                    <>{t("search-farms")}</>
+                                    <>{t("search-coffe-farms")}</>
                                 </div>
                             </div>
                             <div className="m-6">
@@ -246,7 +246,7 @@ export const FarmsModule = () => {
                                             enableStickyHeader={true}
                                             columns={columData}
                                             editingMode="modal" //default
-                                            enableEditing
+                                            
                                             onEditingRowSave={handleSaveRow}
                                             data={farmers}
                                             enableHiding={false}

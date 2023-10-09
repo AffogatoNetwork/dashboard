@@ -310,6 +310,8 @@ export const FarmersModules = () => {
             }, {
                 header: t('tables.municipality'), accessorKey: 'village2'
             }, {
+                header: t('region'), accessorKey: 'region'
+            }, {
                 header: t('tables.country'), accessorKey: 'country'
             }
         ],
@@ -324,7 +326,6 @@ export const FarmersModules = () => {
 
     return (
         <>
-
             <div className="">
                 <div className=" flex flex-row mb-1 sm:mb-0 justify-between w-full">
                     <div className=" w-full h-full p-1">
@@ -343,19 +344,15 @@ export const FarmersModules = () => {
                                                 {t("total")}: {farmersCount}
                                             </>
                                         </h4>
-                                   
+
                                     </div>
 
                                     <div className="overflow-auto">
-
-
-
-
                                         <MaterialReactTable
                                             enableStickyHeader={true}
                                             columns={columData}
                                             editingMode="modal" //default
-                                            enableEditing
+                                            
                                             onEditingRowSave={handleSaveRow}
                                             data={farmers}
                                             enableHiding={false}
@@ -371,7 +368,6 @@ export const FarmersModules = () => {
                                             }}
                                         />
                                     </div>
-
                                 </div>
                             </div>
                         </div>
