@@ -204,7 +204,7 @@ export const CertificationsModule = () => {
                         <h1 className="text-xl"><> {t('tables.name-farmer')}</> </h1>
                     </div>
                 ),
-            },{
+            }, {
                 accessorFn: (farm: any) => `${farm.area}`,
                 id: 'area', //id is still required when using accessorFn instead of accessorKey
                 header: t('tables.certified-area'),
@@ -221,13 +221,7 @@ export const CertificationsModule = () => {
                         </div>
                     );
                 },
-            }, 
-            
-            
-            
-            
-            
-            {
+            },{
                 accessorFn: (row: { usda: any; }) => `${row.usda} `, //accessorFn used to join multiple data into a single cell
                 id: 'usda', //id is still required when using accessorFn instead of accessorKey
                 header: 'USDA',
@@ -424,7 +418,7 @@ export const CertificationsModule = () => {
                                             enableStickyHeader={true}
                                             columns={columData}
                                             editingMode="modal" //default
-                                            
+
                                             onEditingRowSave={handleSaveRow}
                                             data={farmers}
                                             enableHiding={false}
