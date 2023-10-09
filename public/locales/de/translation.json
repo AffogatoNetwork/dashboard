@@ -103,6 +103,7 @@
   "total": "Gesamt",
   "tables":{
       "actions":"Aktionen",
+      "certified-area": "Zertifikate Bereich",
       "qr":"QR code",
       "name":"Bezeichnung",
       "sex":"Geschlecht",

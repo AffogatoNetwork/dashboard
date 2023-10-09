@@ -114,6 +114,7 @@
   "type-production":"Type of Production",
   "tables":{
       "actions":"Actions",
+      "certified-area": "Certified Area",
       "qr":"QR code",
       "name":"Name",
       "name-farmer":"Name of Producer",
