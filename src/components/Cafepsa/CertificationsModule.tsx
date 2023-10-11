@@ -210,7 +210,7 @@ export const CertificationsModule = () => {
                 header: t('tables.certified-area'),
                 Header: ({ column }) => (
                     <div className="flex align-bottom m-auto pt-12 ">
-                        <h1 className="text-xl"><> {t('tables.certified-area')}</> </h1>
+                        <h1 className="text-xl"><> {t('tables.certified-area')}</> (mz)</h1>
                     </div>
                 ),
                 size: 10,

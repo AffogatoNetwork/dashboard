@@ -310,7 +310,7 @@ export const FarmersModules = () => {
             }, {
                 header: t('tables.municipality'), accessorKey: 'village2'
             }, {
-                header: t('region'), accessorKey: 'region'
+                header: t('region'), accessorKey: 'state'
             }, {
                 header: t('tables.country'), accessorKey: 'country'
             }
