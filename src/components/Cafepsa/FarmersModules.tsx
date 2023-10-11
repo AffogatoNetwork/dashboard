@@ -50,6 +50,7 @@ export const FarmersModules = () => {
         country: string;
         gender: string;
         farm: string;
+        state: string;
         location: string;
         region: string;
         village: string;
@@ -114,12 +115,12 @@ export const FarmersModules = () => {
                         bio,
                         gender,
                         farm,
+                        state,
                         familyMembers,
                         village,
                         village1,
                         village2,
                         region,
-                        state,
                         country,
                     } = farmerData;
                     const zone = state ? state : region;
@@ -153,6 +154,7 @@ export const FarmersModules = () => {
                         bio,
                         gender,
                         farm,
+                        state,
                         location: l,
                         region,
                         village,
