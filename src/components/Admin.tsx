@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {canEdit} from "../db/firebase";
 import {useTranslation} from "react-i18next";
 import {EditFarmsModule} from "./Admin/EditFarmsModule";
@@ -6,11 +6,10 @@ import {EditFarmersModule} from "./Admin/EditFarmersModule";
 import {EditCertificationsModule} from "./Admin/EditCertificationsModule";
 
 export const AdminModule = () => {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation();
     const [userData, setUserData] = useState<any>('')
     const [isAdmin , setIsAdmin] = useState<any>(false);
     const [activeTab, setActiveTab] = useState("farmer");
-    const [companyName, setCompanyName] = useState("PROEXO");
 
     useEffect(() => {
         const load = async () => {
@@ -18,33 +17,35 @@ export const AdminModule = () => {
             setUserData(email);
 
             const url = window.location.host.toString();
-
+            let company = ''
             if (url.match("commovel") !== null) {
-                setCompanyName( "COMMOVEL");
+               company = "COMMOVEL";
             }
             if (url.match("copracnil") !== null) {
-                setCompanyName("COPRACNIL");
+                company = "COPRACNIL";
             }
             if (url.match("comsa") !== null) {
-                setCompanyName("COMSA");
+                company = "COMSA";
             }
             if (url.match("proexo") !== null) {
-                setCompanyName("PROEXO");
+                company = "PROEXO";
             }
             if (url.match("cafepsa") !== null) {
-                setCompanyName("CAFEPSA");
+                company = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                setCompanyName("PROEXO");
+                company = "PROEXO";
             }
 
-            await canEdit(userData, companyName).then((result) => {
+            await canEdit(userData, company).then((result) => {
+
                 for (let i = 0; i < result.length; i += 1) {
                     const data = result[i].data();
                     const userExist =  data.user
 
                     if(userExist.includes(email)) {
                         setIsAdmin(true);
+                        console.log("yes")
 
                     } else {
                         setIsAdmin(false);
@@ -107,7 +108,7 @@ export const AdminModule = () => {
 
                                     </div>
 
-                                    {activeTab == 'farmer' && (<div className={`overflow-hidden`}>
+                                    {activeTab == 'farmer'  && (<div className={`overflow-hidden`}>
                                         {renderEditFarmer()}
 
                                     </div>)}
@@ -123,7 +124,7 @@ export const AdminModule = () => {
                             ): (
                                 <>
                                     <div className='text-center'>
-                                        <h1> No tienes permisos de Admistrador </h1>
+                                        <h1> No tienes permisos de Administrador </h1>
                                     </div>
 
                                 </>

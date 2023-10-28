@@ -133,21 +133,18 @@ export const getCompany = async (address: string) => {
 };
 
 export const getImageUrl = async (id: string) => {
-  const url = await getDownloadURL(ref(storage, id));
-  return url;
+  return await getDownloadURL(ref(storage, id));
 };
 
 export const getCafepsaImageUrl = async (id: string) => {
   let download = id + '.jpeg'
-  const url = await getDownloadURL(ref(storage, download));
-  return url;
+  return await getDownloadURL(ref(storage, download));
 };
 
 
 export const getCafepsaJsonUrl = async (id: string) => {
   let download = 'CAFEPSA/' + id + '.json'
-  const url = await getDownloadURL(ref(storage, download));
-  return url;
+  return await getDownloadURL(ref(storage, download));
 };
 
 
