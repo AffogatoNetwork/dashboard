@@ -176,7 +176,6 @@ export const editFarm = async (data: any) => {
 
 export const editFarmers = async (data: any) => {
   let user = UserData();
-  console.log(data)
 
   const dir = data.address;
 
@@ -196,7 +195,6 @@ export const editFarmers = async (data: any) => {
     await updateDoc(farmDoc, farmData);
 
   } catch (error) {
-    console.log(error)
   }
 };
 

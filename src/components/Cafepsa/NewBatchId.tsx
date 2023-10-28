@@ -29,7 +29,6 @@ const NewBatchId = () => {
                     }
 
                     setCoffeeBatch(result);
-                    console.log(result);
 
                     let dataFarmers = result?.Farmer;
                     if (dataFarmers && dataFarmers.length > 0) {

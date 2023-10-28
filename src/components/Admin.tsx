@@ -45,8 +45,6 @@ export const AdminModule = () => {
 
                     if(userExist.includes(email)) {
                         setIsAdmin(true);
-                        console.log("yes")
-
                     } else {
                         setIsAdmin(false);
                     }
