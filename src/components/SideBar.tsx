@@ -82,6 +82,7 @@ export default function Home() {
     signOut(auth).then(() => {
       // Sign-out successful.
       localStorage.removeItem('user');
+      localStorage.removeItem('email');
       navigate("/");
     }).catch((error) => {
       // An error happened.
@@ -191,7 +192,6 @@ export default function Home() {
       <div className="flex justify-center md:m-4 m-2 ">
         <div className="w-14 h-14">
           <CoopLogo className="inline-block" />
-
         </div>
       </div>
 
@@ -199,6 +199,8 @@ export default function Home() {
         <div className="text-sm text-center">
       <h1> {userData?.name} </h1>
           <h1> {userData?.email} </h1>
+          <br/>
+          <button className="m-2 btn btn-accent text-white" onClick={() => navigate(`/admin`)}>  Modulo de Administrador </button>
         </div>
 
       </div>

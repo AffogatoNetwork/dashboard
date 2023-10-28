@@ -27,6 +27,7 @@ import { FarmersModules } from "./Cafepsa/FarmersModules";
 import { BatchesModule } from "./Cafepsa/BatchesModule";
 import NewBatchId from "./Cafepsa/NewBatchId";
 import {FarmerProfileModule} from "./Cafepsa/FarmerProfile";
+import { AdminModule } from "./Admin";
 
 
 const Home = () => {
@@ -66,6 +67,18 @@ const Home = () => {
                         </RequiredAuth>
                     }
                 />
+                <Route
+                    path="/admin"
+                    element={
+                    <RequiredAuth>
+                        <Dashboard>
+                            <AdminModule/>
+                        </Dashboard>
+                    </RequiredAuth>
+
+
+                    }
+                    />
                 <Route
                     path="/create"
                     element={

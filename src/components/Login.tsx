@@ -66,8 +66,7 @@ const Login = () => {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const user = result.user;
                 localStorage.setItem('user', JSON.stringify(user));
-
-
+                localStorage.setItem('email', JSON.stringify(user.email));
                 navigate('/farmers-module');
 
 

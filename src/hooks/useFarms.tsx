@@ -1,34 +1,36 @@
 import { useEffect, useState } from "react";
-import { getAllFarmers } from "../db/firebase";
+import { getAllFarmsByCompany } from "../db/firebase";
 
-type FarmerType = {
-    farmerId: string;
-    femaleMenbers: number;
-    maleMenbers: number;
+type FarmType = {
+    area: number;
     address: string;
-    fullname: string;
-    familyMembers: string;
-    bio: string;
+    height: number;
+    ipfshash: string;
+    latitude: number;
+    longitude: number;
+    name: string;
+    shadow: string;
+    varieties: string;
     country: string;
-    gender: string;
-    farm: string;
-    location: string;
-    region: string;
     village: string;
-    village1: string;
+    state: string;
     village2: string;
     qrCode: string;
     blockChainUrl: string;
-    search: string;
 };
 
 
-export const useFarmers = () => {
+
+export const useFarms = () => {
     const [reload, setReload] = useState(false);
+
+
     const [loading, setLoading] = useState(true);
-    const [farmers, setFarmers] = useState<any>([]);
-    const [farmersCount, setFarmersCount] = useState(0);
+    // const [farms, setFarms] = useState<Array<FarmerType>>([]);
+    const [farms, setFarms] = useState<any>([]);
+    const [farmsCount, setFarmsCount] = useState(0);
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
+    const [BlockchainUrl, setBlockchainUrl] = useState<string>('');
 
     const load = async () => {
         // const farmerList = new Array<FarmerType>();
@@ -61,52 +63,58 @@ export const useFarmers = () => {
             companyName = "CAFEPSA";
         }
 
-        const result: any = await getAllFarmers(companyName);
+        const result: any = await getAllFarmsByCompany(companyName);
 
         for (let i = 0; i < result.length; i += 1) {
             const farmerData = result[i].data();
 
             const {
-                farmerId,
-                femaleMenbers,
-                maleMenbers,
-                address,
-                fullname,
-                familyMembers,
+                area,
+                farmerAddress: address,
+                height,
+                ipfshash,
+                latitude,
+                longitude,
+                fullname: name,
+                shadow,
+                varieties,
                 country,
-                gender,
-                farm,
-                location,
-                region,
                 village,
-                village1,
+                state,
                 village2,
             } = farmerData;
 
 
+            let qrCode = window.location.origin
+                .concat("/farmer/")
+                .concat(farmerData.farmerAddress);
+            let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + farmerData.ipfshash;
+            setBlockchainUrl(farmerData.farmerAddress);
+
             farmerList.push({
-                    farmerId,
-                    femaleMenbers,
-                    maleMenbers,
+                    area,
                     address,
-                    fullname,
-                    familyMembers,
+                    height,
+                    ipfshash,
+                    latitude,
+                    longitude,
+                    name,
+                    shadow,
+                    varieties,
                     country,
-                    gender,
-                    farm,
-                    location,
-                    region,
                     village,
-                    village1,
+                    state,
                     village2,
-            }
+                    qrCode: qrCode,
+                    blockChainUrl: blockChainUrl
+                }
             );
 
         }
 
-        setFarmers(farmerList);
+        setFarms(farmerList);
         const itemsCount = farmerList.length;
-        setFarmersCount(itemsCount);
+        setFarmsCount(itemsCount);
     }
 
 
@@ -114,5 +122,6 @@ export const useFarmers = () => {
         load();
     }, [reload]);
 
-    return [farmers, farmersCount, ownerAddress, setReload] as const
+
+    return [farms, farmsCount, ownerAddress, setReload] as const
 };

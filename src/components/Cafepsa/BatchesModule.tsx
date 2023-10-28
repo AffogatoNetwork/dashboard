@@ -215,7 +215,7 @@ export const BatchesModule = () => {
                 },
             }, {
                 accessorFn: (farmers: any) => `${farmers.dryMill.cupping_url}`, //accessorFn used to join multiple data into a single cell
-                header: t('tables.tasting-profile'), size: 15,
+                header: t('cupping_url'), size: 15,
                 Cell: ({ renderedCellValue }) => (
                     <>
                         <Box

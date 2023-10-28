@@ -1,4 +1,4 @@
-import { initializeApp } from "firebase/app";
+import {initializeApp} from "firebase/app";
 import {
   collection,
   doc,
@@ -11,9 +11,9 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
-import { CompanyType, FarmerType, FarmType } from "../components/common/types";
-import { getAuth } from "firebase/auth";
+import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
+import {CompanyType, FarmerType, FarmType} from "../components/common/types";
+import {getAuth} from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -177,6 +177,65 @@ export const editFarm = async (data: any) => {
   }
 };
 
+export const editFarmers = async (data: any) => {
+  let user = UserData();
+  console.log(data)
+
+  const dir = data.address;
+
+  try {
+    const farmDoc = doc(db, "farmers", dir);
+    const farmData = {
+      fullname: data.fullname,
+      gender: data.gender,
+      femaleMenbers: data.femaleMenbers,
+      maleMenbers: data.maleMenbers,
+      region: data.region,
+      village2: data.village2,
+      country: data.country,
+      updateAt: Date.now(),
+      updatedBy: user.email,
+    };
+    await updateDoc(farmDoc, farmData);
+
+  } catch (error) {
+    console.log(error)
+  }
+};
+
+
+
+
+export const editCertifications = async (data: any) => {
+  let user = UserData();
+  const origin = window.location.origin + '/farmers/';
+  const qrCode = data.qrCode;
+  const dir = qrCode.replaceAll(origin, '').trim();
+
+  try {
+    const farmDoc = doc(db, "farmers", dir);
+    const farmData = {
+      fullname: data.fullName,
+      area: data.area,
+      usda: data.usda,
+      fairtrade: data.fairtrade,
+      manosdemujer: data.manosdemujer,
+      spp: data.spp,
+      updateAt: Date.now(),
+      updatedBy: user.email,
+    };
+    await updateDoc(farmDoc, farmData);
+
+  } catch (error) {
+  }
+};
+
+
+
+
+
+
+
 
 export const saveFarm = async (farm: FarmType) => {
   try {
@@ -333,6 +392,18 @@ export const UserData = () => {
     };
   }
 }
+
+
+export const canEdit = async (mail:string, company: string) => {
+  const q = query(collection(db, "permissions"),
+      where("admin", "==", true) ,
+      where("slug", "==", company ));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
+}
+
+
+
 
 
 export const getBatch = async (ipfsHash: string) => {

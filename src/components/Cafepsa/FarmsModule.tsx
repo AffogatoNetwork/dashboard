@@ -10,6 +10,7 @@ import ReactHTMLTableToExcel from "react-html-table-to-excel";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import NewMap from "../common/NewMap";
 import { useFarmers } from "../../hooks/useFarmers";
+import {useFarms} from "../../hooks/useFarms";
 
 export const FarmsModule = () => {
     const saveSvgAsPng = require("save-svg-as-png");
@@ -25,7 +26,7 @@ export const FarmsModule = () => {
     const [currentLat, setCurrentLat] = useState("0");
     const [currentLng, setCurrentLng] = useState("0");
     const [currentAddressL, setCurrentAddressL] = useState("");
-    const [farmers, farmersCount, ownerAddress, setReload] = useFarmers();
+    const [farms, farmsCount, ownerAddress, setReload] = useFarms();
     const [links, setlInks] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FIMG_1718.jpeg?alt=media&token=c37a0d05-a8dc-4cfd-b3c1-fcc0502dcd77");
 
     const handleOnDownloadClick = () => {
@@ -62,7 +63,7 @@ export const FarmsModule = () => {
 
     // }, []);
 
-    const [tableData, setTableData] = useState<any[]>(() => farmers);
+    const [tableData, setTableData] = useState<any[]>(() => farms);
 
     const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
         async ({ exitEditingMode, row, values }) => {
@@ -221,7 +222,7 @@ export const FarmsModule = () => {
                                     <div className="justify-self-end">
                                         <h4>
                                             <>
-                                                {t("total")}: {farmersCount}
+                                                {t("total")}: {farmsCount}
                                             </>
                                         </h4>
                                         {ownerAddress ? (
@@ -246,9 +247,8 @@ export const FarmsModule = () => {
                                             enableStickyHeader={true}
                                             columns={columData}
                                             editingMode="modal" //default
-                                            
                                             onEditingRowSave={handleSaveRow}
-                                            data={farmers}
+                                            data={farms}
                                             enableHiding={false}
                                             enableDensityToggle={false}
                                             sortDescFirst={true}
