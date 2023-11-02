@@ -182,6 +182,7 @@ const Signup = () => {
             };
             if (isValidEmail(userName.trim())) {
                 authContext.createAccount(data);
+                
             } else if (isValidCellphone(userName.trim())) {
                 data.credential = areaCode.concat(userName.trim());
                 data.emailLogin = false;
@@ -932,7 +933,7 @@ const Signup = () => {
                         <div className="md:col-span-5 m-2">
                             <h1 className="text-base font-medium"> <> {t("signup.choose-company")}</></h1>
                             <select id="dropdown-cooperative" className="select select-bordered w-full"
-                                    onChange={handleCooperativeChange}>
+                                onChange={handleCooperativeChange}>
                                 <option disabled selected><> {t("signup.choose-company")}</>
                                     :
                                 </option>
@@ -947,7 +948,7 @@ const Signup = () => {
                         <div className="md:col-span-5 m-2">
                             <h1 className="text-base font-medium"> <> {t("signup.")}</></h1>
                             <select id="dropdown-cooperative" className="select select-bordered w-full"
-                                    onChange={handleCooperativeChange}>
+                                onChange={handleCooperativeChange}>
                                 <option disabled selected><> {t("signup.choose-farmer")}</>
                                     :
                                 </option>
@@ -1056,8 +1057,8 @@ const Signup = () => {
                                 ><>{t("company")}</>
                                 </a>
                                 <a className={`${activeTab == 'farm' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
-                                   id="signup-tabs"
-                                   onClick={() => setActiveTab("farm")}
+                                    id="signup-tabs"
+                                    onClick={() => setActiveTab("farm")}
                                 ><>{t("farm")}</>
                                 </a>
                             </div>

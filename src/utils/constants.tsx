@@ -20,7 +20,7 @@ export const CooperativeList = [
   {
     key: "1",
     name: "COMMOVEL",
-    email: "robert@affogato.co",
+    email: "commovel.coffeechain@gmail.com",
     addresses: [
       "0x7e02efc22e3351a020cd3bfa1fca540afb2c6f8c",
       "0x27825e62c42e23364efc8e967cc6e69ef70a4813",
@@ -29,7 +29,7 @@ export const CooperativeList = [
   {
     key: "2",
     name: "COPRACNIL",
-    email: "jdestephen07@gmail.com",
+    email: "proexo.coffeechain@gmail.com",
     addresses: [
       "0x6db51e8cc765df7f007956c00b1ac83990149ab6",
       "0x2b97b5692a5c2c9221fdacbba30f7fd4d56b6293",
@@ -40,7 +40,7 @@ export const CooperativeList = [
   {
     key: "3",
     name: "COMSA",
-    email: "robert@affogato.co",
+    email: "comsa.coffeechain@gmail.com",
     addresses: [
       "0xcefe349b2c94910ca16be79598bc15eaee7c5e81",
       "0xadc801905c98e4ef00a9392edae72cbbeef402f4",
@@ -50,7 +50,7 @@ export const CooperativeList = [
   {
     key: "4",
     name: "PROEXO",
-    email: "cristian@affogato.co",
+    email: "proexo.coffeechain@gmail.com",
     addresses: [
       "0xd109a56c1c3fa6a31e3cb2e09188ec2401e2e405",
       "0x370c3da4428c0e366098e8fe8068c3d480d880ae",
@@ -61,7 +61,7 @@ export const CooperativeList = [
   {
     key: "5",
     name: "CAFEPSA",
-    email: "antonio@affogato.co",
+    email: "comsa.coffeechain@gmail.com",
     addresses: [
       "0x0ef705a35701F6e7ddAcd596546D46740CEA122A",
     ],

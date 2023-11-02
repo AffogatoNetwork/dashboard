@@ -7,15 +7,12 @@ import {EditCertificationsModule} from "./Admin/EditCertificationsModule";
 
 export const AdminModule = () => {
     const { t } = useTranslation();
-    const [userData, setUserData] = useState<any>('')
     const [isAdmin , setIsAdmin] = useState<any>(false);
     const [activeTab, setActiveTab] = useState("farmer");
 
     useEffect(() => {
         const load = async () => {
             const email = JSON.parse(localStorage.getItem('email') || '{}');
-            setUserData(email);
-
             const url = window.location.host.toString();
             let company = ''
             if (url.match("commovel") !== null) {
@@ -37,12 +34,11 @@ export const AdminModule = () => {
                 company = "PROEXO";
             }
 
-            await canEdit(userData, company).then((result) => {
-
+            await canEdit(email, company).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const data = result[i].data();
                     const userExist =  data.user
-
+                    console.log(userExist)
                     if(userExist.includes(email)) {
                         setIsAdmin(true);
                     } else {
