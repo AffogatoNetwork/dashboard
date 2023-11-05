@@ -125,7 +125,7 @@ export const Profile = () => {
                                     <div className="flex flex-col m-2">
                                         <h2 className="text-2xl font-bold mb-4">
                                             <>{t('tables.name')}</> : <a>
-                                                {farmName}
+                                                {farmerData.fullname}
                                             </a>
                                         </h2>
 
