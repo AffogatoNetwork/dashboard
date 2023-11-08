@@ -16,7 +16,7 @@ export const FarmerProfileModule = () => {
     const [latitude, setLatitude] = useState('');
     const [longitude, setLongitude] = useState('');
     const [farmName, setfarmName] = useState("");
-    const [imageUrl, setImageUrl] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FIMG_1718.jpeg?alt=media&token=c37a0d05-a8dc-4cfd-b3c1-fcc0502dcd77");
+    const [imageUrl, setImageUrl] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/no_image.jpeg?alt=media&token=0d07fc99-d598-4c9b-9022-c4d018e67881");
 
     useEffect(() => {
         const load = async () => {
