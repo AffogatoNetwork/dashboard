@@ -4,6 +4,7 @@ import {useTranslation} from "react-i18next";
 import {EditFarmsModule} from "./Admin/EditFarmsModule";
 import {EditFarmersModule} from "./Admin/EditFarmersModule";
 import {EditCertificationsModule} from "./Admin/EditCertificationsModule";
+import { CreateFarmModule } from "./Admin/CreateFarmModele";
 
 export const AdminModule = () => {
     const { t } = useTranslation();
@@ -38,7 +39,6 @@ export const AdminModule = () => {
                 for (let i = 0; i < result.length; i += 1) {
                     const data = result[i].data();
                     const userExist =  data.user
-                    console.log(userExist)
                     if(userExist.includes(email)) {
                         setIsAdmin(true);
                     } else {
@@ -64,6 +64,10 @@ export const AdminModule = () => {
     const renderEditCertifications = () => (<>
         <EditCertificationsModule/>
     </>)
+    const renderCreateFarmer = () => (<>
+        <CreateFarmModule/>
+    </>)
+
 
 
     return (
@@ -99,6 +103,11 @@ export const AdminModule = () => {
                                            onClick={() => setActiveTab("certifications")}
                                         ><>{t("certifications")}</>
                                         </a>
+                                        <a className={`${activeTab == 'createFarmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
+                                           id="signup-tabs"
+                                           onClick={() => setActiveTab("createFarmer")}
+                                        ><>{t("create")}</>
+                                        </a>
 
                                     </div>
 
@@ -114,6 +123,9 @@ export const AdminModule = () => {
                                     {activeTab == 'certifications' && (<div className={`overflow-hidden`}>
                                         {renderEditCertifications()}
                                     </div>)}
+
+                                    {activeTab == 'createFarmer' && (<div className={`overflow-hidden`}>
+                                        {renderCreateFarmer()}                                  </div>)}
                                 </>
                             ): (
                                 <>
