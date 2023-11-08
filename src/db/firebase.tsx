@@ -226,12 +226,6 @@ export const editCertifications = async (data: any) => {
 };
 
 
-
-
-
-
-
-
 export const saveFarm = async (farm: FarmType) => {
   try {
     const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
