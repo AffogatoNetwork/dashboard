@@ -103,7 +103,7 @@ export const CoffeBatchNewList = () => {
 
 
                     let qrCode = window.location.origin
-                        .concat("/batch/")
+                        .concat("/newbatch/")
                         .concat(ipfsHash);
                     let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + ipfsHash;
                     setBlockchainUrl(blockChainUrl)
@@ -119,7 +119,7 @@ export const CoffeBatchNewList = () => {
                     });
                 }
 
-              
+
                 setFarmers(farmerList);
                 const itemsCount = farmerList.length;
                 setFarmersCount(itemsCount);
@@ -320,6 +320,16 @@ export const CoffeBatchNewList = () => {
                                             <>{t("open-link")}</>
                                         </button>
                                     </div>
+                                </div>
+                                <div className="text-center items-center">
+                                    <br />
+                                    <button onClick={() => {
+                                        openInNewTab(BlockchainUrl);
+                                    }}
+                                        className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center">
+                                        <LinkIcon></LinkIcon>
+                                        <>Ver en el blockchain</>
+                                    </button>
                                 </div>
 
                             </div>

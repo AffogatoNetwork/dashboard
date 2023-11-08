@@ -527,12 +527,12 @@ export const List = () => {
             <div className="grid grid-cols-2 md:grid-cols-2 xl:grid-cols-4 gap-4 m-4">
 
 
-                <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
+                <button onClick={() => onSearchClick()} className="btn font-bold py-2 px-4  inline-flex items-center rounded-md bg-amber-200 active:text-white hover:text-white
                                         focus:bg-amber-400 active:bg-amber-600">
                     <SearchIcon className="w-4 h-4 mr-2" />
                     <>{t("search")}</>
                 </button>
-                <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4 rounded inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
+                <button onClick={() => onClearClick()} className="btn font-bold py-2 px-4  inline-flex items-center rounded-md bg-red-200 active:text-white hover:text-white
                                         focus:bg-red-400 active:bg-red-700">
                     <ClearIcon className="w-4 h-4 mr-2" />
                     <>{t("clear")}</>
@@ -584,7 +584,7 @@ export const List = () => {
         <div className="">
             <div className="batch-list flex flex-row mb-1  justify-between w-full">
                 <div className="w-full h-full ">
-                    <div className="card rounded rounded-lg shadow-xl bg-white">
+                    <div className="card  rounded-lg shadow-xl bg-white">
                         {RenderFilters()}
                         <div className="card-body">
                             <div className="card-title grid justify-items-stretch">

@@ -68,6 +68,14 @@ const Signup = () => {
     const [noPartnersMError, setNoPartnersMError] = useState("");
     const [noPartnersF, setNoPartnersF] = useState("");
     const [noPartnersFError, setNoPartnersFError] = useState("");
+    const [farmName, setFarmName] = useState("");
+    const [country, setCountry] = useState("");
+    const [shadow, setShadow] = useState("");
+    const [area, setArea] = useState("");
+    const [varieties, setVarieties] = useState("");
+    const [height, setHeigth] = useState('');
+    const [typeofProduction, setTypeofProduction] = useState("")
+
 
     const cleanFields = () => {
         setUserName("");
@@ -168,6 +176,26 @@ const Signup = () => {
         femalePartners: noPartnersF,
     };
 
+
+
+    const FarmData = {
+        farmName,
+        state: currentRegion.key,
+        country,
+        village,
+        latitude,
+        longitude,
+        company: currentCoop.name,
+        shadow,
+        area,
+        varieties,
+        height,
+        typeofProduction
+    }
+
+
+
+
     const magicLogin = async () => {
         if (isValid()) {
             const data = {
@@ -182,7 +210,7 @@ const Signup = () => {
             };
             if (isValidEmail(userName.trim())) {
                 authContext.createAccount(data);
-                
+
             } else if (isValidCellphone(userName.trim())) {
                 data.credential = areaCode.concat(userName.trim());
                 data.emailLogin = false;
@@ -195,6 +223,8 @@ const Signup = () => {
 
 
     const createFarm = async () => {
+        FarmData
+        console.log(FarmData);
 
     }
 
@@ -300,6 +330,46 @@ const Signup = () => {
             }
         }
     };
+
+    const handleFarmChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setFarmName(input.trim());
+    }
+
+    const countryChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setCountry(input.trim());
+    }
+
+    const shadowChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setShadow(input.trim());
+    }
+
+
+    const varietiesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setVarieties(input.trim());
+    }
+
+    const heightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setHeigth(input.trim());
+
+    }
+
+    const areaChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setArea(input.trim());
+
+    }
+
+    const typeofProductionChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+        const input = event.target.value;
+        setTypeofProduction(input.trim());
+    }
+
+
 
     const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const key = event.target.value;
@@ -867,9 +937,9 @@ const Signup = () => {
                         <div className="md:col-span-5">
                             <FormInput
                                 label={t("farm-name")}
-                                value={farmerId}
-                                placeholder={t("placeholders.id")}
-                                handleOnChange={handleIdChange}
+                                value={farmName}
+                                placeholder={t("name")}
+                                handleOnChange={handleFarmChange}
                                 errorMsg={fullnameError}
                                 className="input input-bordered w-full"
                             />
@@ -890,9 +960,9 @@ const Signup = () => {
                         <div className="md:col-span-5">
                             <FormInput
                                 label={t("village")}
-                                value={village}
+                                value={country}
                                 placeholder={t("village")}
-                                handleOnChange={handleVillageChange}
+                                handleOnChange={countryChange}
                                 errorMsg={villageError}
                                 className="input input-bordered w-full"
                             />
@@ -900,7 +970,7 @@ const Signup = () => {
                         <div className="md:col-span-5">
                             <FormInput
                                 label={t("village2")}
-                                value={village2}
+                                value={village}
                                 placeholder={t("village2")}
                                 handleOnChange={handleVillage2Change}
                                 errorMsg={village2Error}
@@ -945,59 +1015,54 @@ const Signup = () => {
                             </select>
                             {coopError !== "" && (<span className="error-message">{coopError}</span>)}
                         </div>
-                        <div className="md:col-span-5 m-2">
-                            <h1 className="text-base font-medium"> <> {t("signup.")}</></h1>
-                            <select id="dropdown-cooperative" className="select select-bordered w-full"
-                                onChange={handleCooperativeChange}>
-                                <option disabled selected><> {t("signup.choose-farmer")}</>
-                                    :
-                                </option>
-                                {currentCoop.name}
 
-                                {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
-                                    {item.name}
-                                </option>))}
-                            </select>
-                            {coopError !== "" && (<span className="error-message">{coopError}</span>)}
-                        </div>
-                        <div className="md:col-span-5">
+
+                        <div className="md:col-span-5 m-2">
                             <FormInput
-                                label={t("area")}
-                                value={farmerId}
-                                placeholder={t("placeholders.area")}
-                                handleOnChange={handleIdChange}
-                                errorMsg={fullnameError}
-                                className="input input-bordered w-full"
-                            />
-                        </div>
+                                    label={t("shadow")}
+                                    value={shadow}
+                                    placeholder={t("tables.shadow")}
+                                    handleOnChange={shadowChange}
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+                            <div className="md:col-span-5">
+                                <FormInput
+                                    label={t("area")}
+                                    value={area}
+                                    placeholder={t("signup.productive-areas")}
+                                    handleOnChange={areaChange}
+                                    className="input input-bordered w-full"
+                                />
+                            </div>
+
+
+
 
                         <div className="md:col-span-5">
                             <FormInput
                                 label={t("varieties")}
-                                value={fullname}
-                                placeholder={t("placeholders.varieties")}
-                                handleOnChange={handleFullnameChange}
-                                errorMsg={fullnameError}
+                                value={varieties}
+                                placeholder={t("tables.coffee-varieties")}
+                                handleOnChange={varietiesChange}
                                 className="input input-bordered w-full"
                             />
                         </div>
                         <div className="md:col-span-5">
                             <FormInput
                                 label={t("height")}
-                                value={fullname}
-                                placeholder={t("placeholders.varieties")}
-                                handleOnChange={handleFullnameChange}
-                                errorMsg={fullnameError}
+                                value={height}
+                                placeholder={t("tables.height")}
+                                handleOnChange={heightChange}
                                 className="input input-bordered w-full"
                             />
                         </div>
                         <div className="md:col-span-5">
                             <FormInput
                                 label={t("type-production")}
-                                value={fullname}
-                                placeholder={t("placeholders.type-production")}
-                                handleOnChange={handleFullnameChange}
-                                errorMsg={fullnameError}
+                                value={typeofProduction}
+                                placeholder={t("tables.production-system")}
+                                handleOnChange={typeofProductionChange}
                                 className="input input-bordered w-full"
                             />
                         </div>
