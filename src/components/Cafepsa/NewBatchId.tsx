@@ -31,6 +31,8 @@ const NewBatchId = () => {
                     setCoffeeBatch(result);
 
                     let dataFarmers = result?.Farmer;
+                    console.log(dataFarmers.length);
+                    console.log(dataFarmers);
                     if (dataFarmers && dataFarmers.length > 0) {
                         // Utiliza Promise.all para esperar a que todas las promesas se resuelvan
                         Promise.all(dataFarmers.map((element: any) => getFarmer(element)))
