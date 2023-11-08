@@ -9,68 +9,70 @@ import { getAllFarmers } from '../../db/firebase';
 
 export const CreateFarmModule = () => {
     const [currentRegion, setCurrentRegion] = useState<RegionType>(RegionList[0]);
-const [farmers, setFarmers] = useState<Array<any>>([]);
-const [farmName, setFarmName] = useState("");
-const [farmAddress, setFarmAddress] = useState("");
-const [farmNameError, setFarmNameError] = useState("");
-const [farmAddressError, setFarmAddressError] = useState("");
-const [country, setCountry] = useState("");
-const [countryError, setCountryError] = useState("");
-const [village, setVillage] = useState("");
-const [villageError, setVillageError] = useState("");
-const [village2, setVillage2] = useState("");
-const [village2Error, setVillage2Error] = useState("");
-const [latitude, setLatitude] = useState("");
-const [latitudeError, setLatitudeError] = useState("");
-const [longitude, setLongitude] = useState("");
-const [longitudeError, setLongitudeError] = useState("");
-const [typeofProduction, setTypeofProduction] = useState("");
-const [typeofProductionError, setTypeofProductionError] = useState("");
-const [height, setHeight] = useState("");
-const [heightError, setHeightError] = useState("");
-const [varieties, setVarieties] = useState("");
-const [varietiesError, setVarietiesError] = useState("");
-const [area, setArea] = useState("");
-const [areaError, setAreaError] = useState("");
-const [shadow, setShadow] = useState("");
-const [shadowError, setShadowError] = useState("");
-const [currentCoop, setCurrentCoop] = useState(CooperativeList[0]);
-const [farmerList, setFarmerList] = useState<Array<any>>([]);
-const [coopError, setCoopError] = useState("");
+    const [farmers, setFarmers] = useState<Array<any>>([]);
+    const [farmName, setFarmName] = useState("");
+    const [farmAddress, setFarmAddress] = useState("");
+    const [farmNameError, setFarmNameError] = useState("");
+    const [farmAddressError, setFarmAddressError] = useState("");
+    const [country, setCountry] = useState("");
+    const [countryError, setCountryError] = useState("");
+    const [village, setVillage] = useState("");
+    const [villageError, setVillageError] = useState("");
+    const [village2, setVillage2] = useState("");
+    const [village2Error, setVillage2Error] = useState("");
+    const [latitude, setLatitude] = useState("");
+    const [latitudeError, setLatitudeError] = useState("");
+    const [longitude, setLongitude] = useState("");
+    const [longitudeError, setLongitudeError] = useState("");
+    const [typeofProduction, setTypeofProduction] = useState("");
+    const [typeofProductionError, setTypeofProductionError] = useState("");
+    const [height, setHeight] = useState("");
+    const [heightError, setHeightError] = useState("");
+    const [varieties, setVarieties] = useState("");
+    const [varietiesError, setVarietiesError] = useState("");
+    const [area, setArea] = useState("");
+    const [areaError, setAreaError] = useState("");
+    const [shadow, setShadow] = useState("");
+    const [shadowError, setShadowError] = useState("");
+    const [currentCoop, setCurrentCoop] = useState("");
+    const [farmerList, setFarmerList] = useState<Array<any>>([]);
+    const [coopError, setCoopError] = useState("");
     const { t } = useTranslation();
     const navigate = useNavigate();
     const [regionError, setRegionError] = useState("");
-    
+
 
 
 
     useEffect(() => {
-    
+
         const load = async () => {
             const location = window.location.host;
-            if (location.match("localhost") !== null) {
-                setCurrentCoop(CooperativeList[1]);
+            if (location.match("COMMOVEL") !== null) {
+                setCurrentCoop("COMMOVEL");
             }
             if (location.match("copracnil") !== null) {
-                setCurrentCoop(CooperativeList[2]);
+                setCurrentCoop("COPRACNIL")
             }
             if (location.match("comsa") !== null) {
-                setCurrentCoop(CooperativeList[3]);
+                setCurrentCoop("COMSA")
             }
             if (location.match("proexo") !== null) {
-                setCurrentCoop(CooperativeList[4]);
+                setCurrentCoop("PROEXO")
             }
             if (location.match("cafepsa") !== null) {
-                setCurrentCoop(CooperativeList[5]);
+                setCurrentCoop("CAFEPSA")
+            } else {
+                setCurrentCoop("PROEXO")
             }
-            await getAllFarmers(currentCoop.name).then((result) => {
+            await getAllFarmers(currentCoop).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
                         address,
                         fullname,
                     } = farmerData;
-                
+
                     farmerList.push({
                         address,
                         fullname,
@@ -88,8 +90,21 @@ const [coopError, setCoopError] = useState("");
 
 
     const createFarm = () => {
-
+        console.log(farmName);
+        console.log(farmAddress);
+        console.log(country);
+        console.log(village);
+        console.log(village2);
+        console.log(latitude);
+        console.log(longitude);
+        console.log(typeofProduction);
+        console.log(height);
+        console.log(varieties);
+        console.log(area);
+        console.log(shadow);
         
+
+
     }
 
     const handleFarmNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -102,6 +117,7 @@ const [coopError, setCoopError] = useState("");
         const key = event.target.value;
         for (let i = 0; i < farmers.length; i += 1) {
             if (farmers[i].key === key) {
+                console.log(farmers[i]);
                 setFarmAddress(farmers[i]);
                 if (key === "0") {
                     setFarmAddressError(t("signup.choose-company"));
@@ -154,21 +170,9 @@ const [coopError, setCoopError] = useState("");
         setTypeofProduction(value);
     }
 
-    const handleCooperativeChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-        const key = event.target.value;
-        for (let i = 0; i < CooperativeList.length; i += 1) {
-            if (CooperativeList[i].key === key) {
-                setCurrentCoop(CooperativeList[i]);
-                if (key === "0") {
-                    setCoopError(t("signup.choose-company"));
-                } else {
-                    setCoopError("");
-                }
-            }
-        }
-    }
 
-   const handleShadowChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+
+    const handleShadowChange = (event: React.ChangeEvent<HTMLInputElement>) => {
         const value = event.target.value;
         setShadow(value);
     }
@@ -189,8 +193,8 @@ const [coopError, setCoopError] = useState("");
     }
 
 
-    return ( <>
-        <div className="bg-white rounded shadow-lg p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
+    return (<>
+        <div className="bg-white p-4 px-4 md:p-8 mb-6 rounded-b-lg ">
             <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2">
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5 ">
                     <div className="md:col-span-5">
@@ -221,8 +225,8 @@ const [coopError, setCoopError] = useState("");
                             <option disabled selected><> {t("search-farmers")}</>
                                 :
                             </option>
-                            {farmers}
-                            {farmers.map((item) => (<option key={item.key} value={item.fullname}>
+                            {JSON.stringify(farmers)}
+                            {farmers.map((item) => (<option key={item.key} value={item.address}>
                                 {item.fullname}
                             </option>))}
                         </select>
@@ -271,41 +275,25 @@ const [coopError, setCoopError] = useState("");
                 </div>
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div className="md:col-span-5 m-2">
-                        <h1 className="text-base font-medium"> <> {t("signup.choose-company")}</></h1>
-                        <select id="dropdown-cooperative" className="select select-bordered w-full"
-                            onChange={handleCooperativeChange}>
-                            <option disabled selected><> {t("signup.choose-company")}</>
-                                :
-                            </option>
-                            {currentCoop.name}
-
-                            {CooperativeList.map((item) => (<option key={item.key} value={item.key}>
-                                {item.name}
-                            </option>))}
-                        </select>
-                    </div>
-
-
-                    <div className="md:col-span-5 m-2">
                         <FormInput
-                                label={t("shadow")}
-                                value={shadow}
-                                placeholder={t("tables.shadow")}
-                                handleOnChange={handleShadowChange}
-                                errorMsg={shadowError}
-                                className="input input-bordered w-full"
-                            />
-                        </div>
-                        <div className="md:col-span-5">
-                            <FormInput
-                                label={t("area")}
-                                value={area}
-                                placeholder={t("signup.productive-areas")}
-                                handleOnChange={handleareaChange}
-                                errorMsg={areaError}
-                                className="input input-bordered w-full"
-                            />
-                        </div>
+                            label={t("shadow")}
+                            value={shadow}
+                            placeholder={t("tables.shadow")}
+                            handleOnChange={handleShadowChange}
+                            errorMsg={shadowError}
+                            className="input input-bordered w-full"
+                        />
+                    </div>
+                    <div className="md:col-span-5">
+                        <FormInput
+                            label={t("area")}
+                            value={area}
+                            placeholder={t("signup.productive-areas")}
+                            handleOnChange={handleareaChange}
+                            errorMsg={areaError}
+                            className="input input-bordered w-full"
+                        />
+                    </div>
 
                     <div className="md:col-span-5">
                         <FormInput
