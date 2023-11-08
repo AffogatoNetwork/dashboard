@@ -17,6 +17,21 @@ export const FarmerProfileModule = () => {
     const [longitude, setLongitude] = useState('');
     const [farmName, setfarmName] = useState("");
     const [imageUrl, setImageUrl] = useState("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/no_image.jpeg?alt=media&token=0d07fc99-d598-4c9b-9022-c4d018e67881");
+    0x151AeD3A8C781dDBccC399955B8240Af9201B397,
+     0x9aD71C2cb51781e44a8E814bF974f2a7cA92A026, 
+     0x4B5EA0452900e6c0d243F885C957415608cd2285,
+      0x5E67EA419e4C83f597dE9bfE08122d2aF05Df5Fb, 
+      0x514081BA2bD6dF1A35449003523c66BffB485e46, 
+      0x98844c93f3795518B0caF6b69b3F6effecBe263e,
+       0x0Ec7A9d55C13DaCAA5e82dC58d7706c04b0D49fD,
+        0x5137098f510664f8812460f4dC890475D8919121, 
+        0x0559e03D5071C7c376462e73E7bFBf06226BA4F7, 
+        0xF0E725C2DD365295a27E26CA8E6D793c9021980a,
+         0xC1158bc84b7A1e5DEE29706d84c97284c8D3a3dc, 
+         0x26D9050800B50dba3A67Dd81c5380f7648567991, 
+         0xAa4b891339AbF1bd0509b1d2BFc59edbE852b04B,
+          0x9d11BfBcae3A55dBe7c9BDf656
+
 
     useEffect(() => {
         const load = async () => {
@@ -111,7 +126,7 @@ export const FarmerProfileModule = () => {
                             <p className="flex flex-col py-2">
                                 <>{t("location")}:</>
                                 <span className="text-black dark:text-white font-bold">
-                                     {farmerData.village} ,{farmerData.village2}
+                                    {farmerData.village} ,{farmerData.village2}
                                 </span>
                             </p>
 
@@ -150,21 +165,21 @@ export const FarmerProfileModule = () => {
                                             <h4 className="inline text-gray-500 text-sm"><>{t('certificates')}</></h4>
                                             <div className="grid grid-cols-4">
                                                 {(farms.manosdemujer !== null) && (<div>
-                                                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} className="w-24 h-24" alt="Con Manos de Mujer"/>
+                                                    <img src={require('../../assets/certificaciones/5_ConManosdeMujer.png')} className="w-24 h-24" alt="Con Manos de Mujer" />
                                                 </div>)}
 
                                                 {(farms.fairtrade !== null) && (
                                                     <div>
-                                                    <img src={require('../../assets/certificaciones/2_Fair Trade.png')} className="w-24 h-24" alt="Fair Trade"/>
-                                                </div>)}
+                                                        <img src={require('../../assets/certificaciones/2_Fair Trade.png')} className="w-24 h-24" alt="Fair Trade" />
+                                                    </div>)}
                                                 {(farms.usda !== null) && (
-                                                <div>
-                                                    <img src={require('../../assets/certificaciones/1_USDA Organic.png')} className="w-24 h-24" alt="USDA Organico" />
-                                                </div>)}
+                                                    <div>
+                                                        <img src={require('../../assets/certificaciones/1_USDA Organic.png')} className="w-24 h-24" alt="USDA Organico" />
+                                                    </div>)}
                                                 {(farms.spp !== null) && (
                                                     <div>
-                                                    <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} className="w-24 h-24" alt="Pequeños Productores" />
-                                                </div>)}
+                                                        <img src={require('../../assets/certificaciones/7_Pequeños_Productores.png')} className="w-24 h-24" alt="Pequeños Productores" />
+                                                    </div>)}
                                             </div>
 
                                         </div>

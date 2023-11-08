@@ -133,7 +133,8 @@ const NewBatchId = () => {
                         <div className="p-2 rounded text-center bg-amber-800 text-white">
                             <>{t('production')}</>
                         </div>
-                        <div className="flex gap-5 mt-2">
+                        <div className="grid grid-col-3 lg:grid-cols-7">
+                       
                             <div
                                 className="flex-grow border border-gray-300 rounded text-center py-8"
                             >
