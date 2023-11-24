@@ -48,24 +48,28 @@ export const CreateFarmModule = () => {
 
         const load = async () => {
             const location = window.location.host;
+            console.log(location);
+            let currentCoop = "";
             if (location.match("COMMOVEL") !== null) {
-                setCurrentCoop("COMMOVEL");
+                currentCoop = "COMMOVEL"
             }
             if (location.match("copracnil") !== null) {
-                setCurrentCoop("COPRACNIL")
+                currentCoop = "COPRACNIL"
             }
             if (location.match("comsa") !== null) {
-                setCurrentCoop("COMSA")
+                currentCoop = "COMSA"
             }
             if (location.match("proexo") !== null) {
-                setCurrentCoop("PROEXO")
+                currentCoop = "PROEXO"
             }
             if (location.match("cafepsa") !== null) {
-                setCurrentCoop("CAFEPSA")
+                currentCoop = "CAFEPSA"
             } else {
-                setCurrentCoop("PROEXO")
+                currentCoop = "PROEXO"
             }
-            await getAllFarmers(currentCoop).then((result) => {
+            console.log(currentCoop);
+            getAllFarmers(currentCoop).then((result) => {
+                console.log(result);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
@@ -102,9 +106,6 @@ export const CreateFarmModule = () => {
         console.log(varieties);
         console.log(area);
         console.log(shadow);
-        
-
-
     }
 
     const handleFarmNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -225,7 +226,6 @@ export const CreateFarmModule = () => {
                             <option disabled selected><> {t("search-farmers")}</>
                                 :
                             </option>
-                            {JSON.stringify(farmers)}
                             {farmers.map((item) => (<option key={item.key} value={item.address}>
                                 {item.fullname}
                             </option>))}
@@ -244,7 +244,7 @@ export const CreateFarmModule = () => {
                     <div className="md:col-span-5">
                         <FormInput
                             label={t("village2")}
-                            value={village}
+                            value={village2}
                             placeholder={t("village2")}
                             handleOnChange={handleVillage2Change}
                             errorMsg={village2Error}
