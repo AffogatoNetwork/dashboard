@@ -686,7 +686,7 @@ const Signup = () => {
                     <div className="divider divider-horizontal"></div>
                     <button
                         className="btn btn-secondary "
-                        onClick={() => navigate("/login", { replace: true })}
+                        onClick={() => navigate("/farms", { replace: true })}
                     >
                         <u>
                             <>{t("signup.back")}</>

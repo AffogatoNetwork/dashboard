@@ -4,37 +4,38 @@ import {useTranslation} from "react-i18next";
 import {EditFarmsModule} from "./Admin/EditFarmsModule";
 import {EditFarmersModule} from "./Admin/EditFarmersModule";
 import {EditCertificationsModule} from "./Admin/EditCertificationsModule";
-import { CreateFarmModule } from "./Admin/CreateFarmModele";
+import { CreateFarmModule } from "./Admin/CreateFarmModule";
 
 export const AdminModule = () => {
     const { t } = useTranslation();
     const [isAdmin , setIsAdmin] = useState<any>(false);
     const [activeTab, setActiveTab] = useState("farmer");
-
+    const [company, setCompany] = useState("PROEXO");
     useEffect(() => {
         const load = async () => {
             const email = JSON.parse(localStorage.getItem('email') || '{}');
             const url = window.location.host.toString();
-            let company = ''
+            let companyName = ''
             if (url.match("commovel") !== null) {
-               company = "COMMOVEL";
+                companyName = "COMMOVEL";
             }
             if (url.match("copracnil") !== null) {
-                company = "COPRACNIL";
+                companyName = "COPRACNIL";
             }
             if (url.match("comsa") !== null) {
-                company = "COMSA";
+                companyName = "COMSA";
             }
             if (url.match("proexo") !== null) {
-                company = "PROEXO";
+                companyName = "PROEXO";
             }
             if (url.match("cafepsa") !== null) {
-                company = "CAFEPSA";
+                companyName = "CAFEPSA";
             }
             if (url.match("localhost") !== null) {
-                company = "PROEXO";
+                companyName = "PROEXO";
             }
 
+            setCompany(company);
             await canEdit(email, company).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {
                     const data = result[i].data();
@@ -61,9 +62,16 @@ export const AdminModule = () => {
         <EditFarmsModule/>
     </>)
 
+
+
+
+
     const renderEditCertifications = () => (<>
         <EditCertificationsModule/>
     </>)
+
+
+
     const renderCreateFarmer = () => (<>
         <CreateFarmModule/>
     </>)
@@ -98,11 +106,20 @@ export const AdminModule = () => {
                                         ><>{t("farm")}</>
                                         </a>
 
-                                        <a className={`${activeTab == 'certifications' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
-                                           id="signup-tabs"
-                                           onClick={() => setActiveTab("certifications")}
-                                        ><>{t("certifications")}</>
-                                        </a>
+                                    
+
+                                        {company !== "PROEXO" && (
+                                                    <a
+                                                        className={`${
+                                                            activeTab == "farmer" &&
+                                                            `tab btn-wide tab-lg tab-lifted tab-active`
+                                                        } tab btn-wide tab-lg `}
+                                                        id="signup-tabs"
+                                                        onClick={() => setActiveTab("farmer")}
+                                                    ><>{t("certifications")}</>
+                                                    </a>
+                                                )}
+
                                         <a className={`${activeTab == 'createFarmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
                                            id="signup-tabs"
                                            onClick={() => setActiveTab("createFarmer")}
@@ -113,8 +130,8 @@ export const AdminModule = () => {
 
                                     {activeTab == 'farmer'  && (<div className={`overflow-hidden`}>
                                         {renderEditFarmer()}
-
                                     </div>)}
+
                                     {activeTab == 'farm' && (<div className={`overflow-hidden`}>
                                         {renderEditFarm()}
 

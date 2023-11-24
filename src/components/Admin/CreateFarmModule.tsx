@@ -3,7 +3,8 @@ import FormInput from '../common/FormInput'
 import { useNavigate } from 'react-router';
 import { CooperativeList, RegionList, RegionType } from '../../utils/constants';
 import { useTranslation } from 'react-i18next';
-import { getAllFarmers } from '../../db/firebase';
+import { getAllFarmers, saveFarm } from '../../db/firebase';
+import Certification from '../Certification';
 
 
 
@@ -67,6 +68,7 @@ export const CreateFarmModule = () => {
             } else {
                 currentCoop = "PROEXO"
             }
+            setCurrentCoop(currentCoop);
             console.log(currentCoop);
             getAllFarmers(currentCoop).then((result) => {
                 console.log(result);
@@ -94,18 +96,25 @@ export const CreateFarmModule = () => {
 
 
     const createFarm = () => {
-        console.log(farmName);
-        console.log(farmAddress);
-        console.log(country);
-        console.log(village);
-        console.log(village2);
-        console.log(latitude);
-        console.log(longitude);
-        console.log(typeofProduction);
-        console.log(height);
-        console.log(varieties);
-        console.log(area);
-        console.log(shadow);
+        saveFarm({farmerAddress : farmAddress,
+            company: currentCoop,
+            name: farmName,
+            height: height,
+            area: area,
+            certifications: "", // Provide a string value
+            latitude: latitude,
+            longitude: longitude,
+            bio: '',
+            country: "Honduras",
+            region: currentRegion.name,
+            village: village,
+            village2: village,
+            varieties: varieties,
+            shadow: shadow,
+            familyMembers: "",
+            ethnicGroup: "",}).then((result) => {
+            console.log(result);
+        });
     }
 
     const handleFarmNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -116,17 +125,8 @@ export const CreateFarmModule = () => {
 
     const handleFarmerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const key = event.target.value;
-        for (let i = 0; i < farmers.length; i += 1) {
-            if (farmers[i].key === key) {
-                console.log(farmers[i]);
-                setFarmAddress(farmers[i]);
-                if (key === "0") {
-                    setFarmAddressError(t("signup.choose-company"));
-                } else {
-                    setFarmAddressError("");
-                }
-            }
-        }
+        console.log(key);
+        setFarmAddress(key);
     }
 
 

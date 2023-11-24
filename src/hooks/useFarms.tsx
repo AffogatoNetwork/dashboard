@@ -8,7 +8,7 @@ type FarmType = {
     ipfshash: string;
     latitude: number;
     longitude: number;
-    name: string;
+    name?: string;
     shadow: string;
     varieties: string;
     country: string;
@@ -60,7 +60,7 @@ export const useFarms = () => {
             companyName = "CAFEPSA";
         }
         if (url.match("localhost") !== null) {
-            companyName = "CAFEPSA";
+            companyName = "PROEXO";
         }
 
         const result: any = await getAllFarmsByCompany(companyName);
@@ -72,10 +72,11 @@ export const useFarms = () => {
                 area,
                 farmerAddress: address,
                 height,
+                name,
                 ipfshash,
                 latitude,
                 longitude,
-                fullname: name,
+                fullname,
                 shadow,
                 varieties,
                 country,

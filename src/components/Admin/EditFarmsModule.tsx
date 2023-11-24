@@ -22,6 +22,7 @@ export const EditFarmsModule = () => {
                 setTableData([...tableData]);
                 setReload(true);
                 exitEditingMode();
+                console.log('values', farmers)
             } catch (error) {
             }
         };
@@ -29,13 +30,12 @@ export const EditFarmsModule = () => {
     const columData = useMemo<MRT_ColumnDef<any>[]>(
         () => [
             {
-                header: t('tables.name'), accessorKey: 'name',
+                header: t('tables.name'),  accessorKey: 'name',
+
             }, {
                 header: t('tables.community'), accessorKey: 'village'
             }, {
                 header: t('tables.municipality'), accessorKey: 'village2'
-            }, {
-                header: t('region'), accessorKey: 'state'
             }, {
                 header: t('country'), accessorKey: 'country'
             },

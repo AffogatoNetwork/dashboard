@@ -83,6 +83,7 @@ export const updateFarms = async (Farmdata: any) => {
   try {
     const docId = Farmdata.farmerAddress.concat(Farmdata.name.replace(/\s/g, "").toLocaleLowerCase());
     const farmDoc = doc(db, "farms", docId);
+    console.log(Farmdata)
     await setDoc(farmDoc, Farmdata);
   } catch (error) {
 
@@ -227,6 +228,7 @@ export const editCertifications = async (data: any) => {
 
 
 export const saveFarm = async (farm: FarmType) => {
+  console.log(farm)
   try {
     const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
     const farmDoc = doc(db, "farms", docId);
@@ -249,7 +251,10 @@ export const saveFarm = async (farm: FarmType) => {
       familyMembers: farm.familyMembers,
       ethnicGroup: farm.ethnicGroup,
     };
-    await setDoc(farmDoc, farmData);
+    await setDoc(farmDoc, farmData).then((result) => {
+      console.log(result);
+    });
+    console.log('save')
   } catch (error) {
 
   }
