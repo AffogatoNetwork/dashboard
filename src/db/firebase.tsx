@@ -251,8 +251,9 @@ export const saveFarm = async (farm: FarmType) => {
       familyMembers: farm.familyMembers,
       ethnicGroup: farm.ethnicGroup,
     };
-    await setDoc(farmDoc, farmData).then((result) => {
-      console.log(result);
+    await setDoc(farmDoc, farmData).then(() => {
+      console.log();
+      return true;
     });
     console.log('save')
   } catch (error) {

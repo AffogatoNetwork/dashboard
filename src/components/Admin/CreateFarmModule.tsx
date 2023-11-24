@@ -96,7 +96,8 @@ export const CreateFarmModule = () => {
 
 
     const createFarm = () => {
-        saveFarm({farmerAddress : farmAddress,
+        saveFarm({
+            farmerAddress: farmAddress,
             company: currentCoop,
             name: farmName,
             height: height,
@@ -112,8 +113,24 @@ export const CreateFarmModule = () => {
             varieties: varieties,
             shadow: shadow,
             familyMembers: "",
-            ethnicGroup: "",}).then((result) => {
+            ethnicGroup: "",
+        }).then((result) => {
             console.log(result);
+            // Reset forms
+            setFarmName("");
+            setFarmAddress("");
+            setLatitude("");
+            setLongitude("");
+            setTypeofProduction("");
+            setHeight("");
+            setVarieties("");
+            setArea("");
+            setShadow("");
+            setCurrentCoop("");
+            setRegionError("");
+            // Show success message
+            alert("Farm created successfully!");
+            navigate("/farms", { replace: true });
         });
     }
 
