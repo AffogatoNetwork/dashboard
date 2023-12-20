@@ -151,27 +151,31 @@ export const getCafepsaJsonUrl = async (id: string) => {
 
 export const editFarm = async (data: any) => {
   let user = UserData();
-  const origin = window.location.origin + '/farmer/';
-  const qrCode = data.qrCode;
-
-  const dir = qrCode.replaceAll(origin, '').trim();
+  console.log(data)
+  const dir = data.address;
 
   try {
     const farmDoc = doc(db, "farms", dir);
     const farmData = {
+      area: data.area,
+      latitude: data.latitude,
+      longitude: data.longitude,
+      heigth: data.heigth,
       country: data.country,
       fullname: data.name,
       shadow: data.shadow,
-      region: data.state,
       varieties: data.varieties,
       village: data.village,
       village2: data.village2,
       updateAt: Date.now(),
       updatedBy: user.email,
     };
+    console.log('save')
+    console.log(farmData)
+  
     await updateDoc(farmDoc, farmData);
-
   } catch (error) {
+    console.error(error)
   }
 };
 

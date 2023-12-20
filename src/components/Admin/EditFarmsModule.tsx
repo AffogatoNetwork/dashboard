@@ -4,9 +4,6 @@ import { editFarm } from "../../db/firebase";
 import { useTranslation } from "react-i18next";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { useFarms } from "../../hooks/useFarms";
-import Box from "@mui/material/Box";
-import QRCode from "react-qr-code";
-import reactNodeToString from "react-node-to-string";
 
 export const EditFarmsModule = () => {
     const { t, i18n } = useTranslation();
@@ -22,7 +19,6 @@ export const EditFarmsModule = () => {
                 setTableData([...tableData]);
                 setReload(true);
                 exitEditingMode();
-                console.log('values', farmers)
             } catch (error) {
             }
         };
@@ -33,9 +29,9 @@ export const EditFarmsModule = () => {
                 header: t('tables.name'),  accessorKey: 'name',
 
             }, {
-                header: t('tables.community'), accessorKey: 'village'
+                header: t('tables.municipality'), accessorKey: 'village'
             }, {
-                header: t('tables.municipality'), accessorKey: 'village2'
+                header: t('tables.community'), accessorKey: 'village2'
             }, {
                 header: t('country'), accessorKey: 'country'
             },
@@ -45,6 +41,7 @@ export const EditFarmsModule = () => {
                 header: t('latitude'), accessorKey: 'latitude'
             }, {
                 accessorFn: (farm: any) => `${farm.area} `,
+                accessorKey: 'area',
                 header: t('area') + '  ' +'(mz)', size: 5,
                 Cell(props) {
                     return (
@@ -58,6 +55,7 @@ export const EditFarmsModule = () => {
                 header: t('tables.coffee-varieties'), accessorKey: 'varieties'
             },{
                 accessorFn: (farm: any) => `${farm.height} `,
+                accessorKey: 'heigth',
                 header: t('height'), size: 10,
                 Cell(props) {
                     return (

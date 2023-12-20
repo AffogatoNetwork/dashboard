@@ -4,9 +4,6 @@ import { useTranslation } from "react-i18next";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { useFarmers } from "../../hooks/useFarmers";
 import React, {useMemo, useState} from "react";
-import Box from "@mui/material/Box";
-import QRCode from "react-qr-code";
-import reactNodeToString from "react-node-to-string";
 export const EditFarmersModule = () => {
     const { t, i18n } = useTranslation();
     const [farmers, farmersCount, ownerAddress, setReload] = useFarmers();
@@ -36,9 +33,9 @@ export const EditFarmersModule = () => {
             }, {
                 header: t('tables.male-members'), accessorKey: 'maleMenbers'
             }, {
-                header: t('tables.community'), accessorKey: 'region'
+                header: t('tables.community'), accessorKey: 'village2'
             }, {
-                header: t('tables.municipality'), accessorKey: 'village2'
+                header: t('tables.municipality'), accessorKey: 'village'
             },{
                 header: t('tables.country'), accessorKey: 'country'
             },{
