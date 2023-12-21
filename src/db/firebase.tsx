@@ -1,4 +1,4 @@
-import {initializeApp} from "firebase/app";
+import { initializeApp } from "firebase/app";
 import {
   collection,
   doc,
@@ -11,9 +11,9 @@ import {
   where,
   writeBatch,
 } from "firebase/firestore";
-import {getDownloadURL, getStorage, ref, uploadBytes} from "firebase/storage";
-import {CompanyType, FarmerType, FarmType} from "../components/common/types";
-import {getAuth} from "firebase/auth";
+import { getDownloadURL, getStorage, ref, uploadBytes } from "firebase/storage";
+import { CompanyType, FarmerType, FarmType } from "../components/common/types";
+import { getAuth } from "firebase/auth";
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -41,6 +41,48 @@ export const saveFarmer = async (farmer: FarmerType, image: any) => {
     await setDoc(farmerDoc, farmer);
   } catch (error) {
   }
+};
+
+
+export const saveVarietyData = async (varietyData: any, id: string) => {
+  console.log(varietyData, id)
+  try {
+    await setDoc(doc(db, "varieties", varietyData), {
+      variety: varietyData,
+      createdBy: id,
+      Date: Date.now().toString(),
+      active: true
+    });
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+export const saveCertificationData = async (certificationData: any, id: string) => {
+  try {
+    await setDoc(doc(db, "certifications", certificationData), {
+      certification: certificationData,
+      Date: Date.now(),
+      createdBy: id,
+      active: true
+    });
+  } catch (error) {
+    console.error(error)
+  }
+}
+
+
+export const getVarieties = async () => {
+  const q = query(collection(db, "varieties"));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
+};
+
+export const getCertifications = async (company: string) => {
+  console.log(company)
+  const q = query(collection(db, "certifications"), where("createdBy", "==", company));
+  const querySnapshot = await getDocs(q);
+  return querySnapshot.docs;
 };
 
 export const getFarmer = async (address: string) => {
@@ -78,6 +120,21 @@ export const updateFarmer = async (farmer: any, farm: any) => {
       farm: farm
     });
 };
+
+
+export const updateFarmerImage = async (address:string, image:any) => {
+try{
+  if(image !== null){
+    const storageRef = ref(storage, address);
+    uploadBytes(storageRef, image).then((snapshot) => {
+      console.log(snapshot)
+    });
+  }
+} catch (error) {}
+}
+
+
+
 
 export const updateFarms = async (Farmdata: any) => {
   try {
@@ -172,7 +229,7 @@ export const editFarm = async (data: any) => {
     };
     console.log('save')
     console.log(farmData)
-  
+
     await updateDoc(farmDoc, farmData);
   } catch (error) {
     console.error(error)
@@ -376,8 +433,6 @@ export const UserData = () => {
   const dataUser = localStorage.getItem('user');
   if (dataUser !== null) {
     const myObject = JSON.parse(dataUser);
-    // Ahora puedes trabajar con 'myObject' como un objeto válido
-    // @ts-ignore
     return {
       name: myObject.displayName,
       email: myObject.email,
@@ -393,17 +448,13 @@ export const UserData = () => {
 }
 
 
-export const canEdit = async (mail:string, company: string) => {
+export const canEdit = async (mail: string, company: string) => {
   const q = query(collection(db, "permissions"),
-      where("admin", "==", true) ,
-      where("slug", "==", company ));
+    where("admin", "==", true),
+    where("slug", "==", company));
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
 }
-
-
-
-
 
 export const getBatch = async (ipfsHash: string) => {
   const docRef = doc(db, "batches", ipfsHash);
@@ -413,7 +464,6 @@ export const getBatch = async (ipfsHash: string) => {
   }
   return null;
 };
-
 
 export const getAllBatches = async (company: string) => {
   const q = query(collection(db, "batches"), where("parentId", "==", company));

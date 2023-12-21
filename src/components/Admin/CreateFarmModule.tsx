@@ -1,10 +1,9 @@
 import React, { useEffect, useState } from 'react'
 import FormInput from '../common/FormInput'
 import { useNavigate } from 'react-router';
-import { CooperativeList, RegionList, RegionType } from '../../utils/constants';
+import { RegionList, RegionType } from '../../utils/constants';
 import { useTranslation } from 'react-i18next';
-import { getAllFarmers, saveFarm } from '../../db/firebase';
-import Certification from '../Certification';
+import { getAllFarmers, getCertifications, getVarieties, saveFarm } from '../../db/firebase';
 
 
 
@@ -37,6 +36,10 @@ export const CreateFarmModule = () => {
     const [shadowError, setShadowError] = useState("");
     const [currentCoop, setCurrentCoop] = useState("");
     const [farmerList, setFarmerList] = useState<Array<any>>([]);
+    const [certificationList, setCertificationList] = useState<Array<any>>([]);
+    const [certificationNames, setCertificationNames] = useState<Array<any>>([]);
+    const [varietyList, setVarietyList] = useState<Array<any>>([]);
+    const [varietyNames, setVarietyNames] = useState<Array<any>>([]);
     const [coopError, setCoopError] = useState("");
     const { t } = useTranslation();
     const navigate = useNavigate();
@@ -88,7 +91,29 @@ export const CreateFarmModule = () => {
                 console.log(farmers);
                 // calculateFarmersCount(result);
             });
+
+            getCertifications(currentCoop).then((data: any) => {
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i].data();
+                    const {
+                        certification
+                    } = element;
+                    certificationList.push(certification);
+                }
+                setCertificationNames(certificationList);
+            });
+            getVarieties().then((data: any) => {
+                for (let i = 0; i < data.length; i++) {
+                    const element = data[i].data();
+                    const {
+                        variety
+                    } = element;
+                    varietyList.push(variety);
+                }
+                setVarietyNames(varietyList);
+            });
         };
+        
         load();
     }, []);
 
@@ -200,7 +225,7 @@ export const CreateFarmModule = () => {
         setArea(value);
     }
 
-    const handlevarietiesChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const handlevarietiesChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const value = event.target.value;
         setVarieties(value);
     }
@@ -289,6 +314,7 @@ export const CreateFarmModule = () => {
                             />
                         </div>
                     </div>
+                    
                 </div>
                 <div className="grid gap-4 gap-y-2 text-sm grid-cols-1 md:grid-cols-5">
                     <div className="md:col-span-5 m-2">
@@ -312,16 +338,7 @@ export const CreateFarmModule = () => {
                         />
                     </div>
 
-                    <div className="md:col-span-5">
-                        <FormInput
-                            label={t("varieties")}
-                            value={varieties}
-                            placeholder={t("tables.coffee-varieties")}
-                            handleOnChange={handlevarietiesChange}
-                            errorMsg={varietiesError}
-                            className="input input-bordered w-full"
-                        />
-                    </div>
+                   
                     <div className="md:col-span-5">
                         <FormInput
                             label={t("height")}
@@ -341,6 +358,29 @@ export const CreateFarmModule = () => {
                             errorMsg={typeofProductionError}
                             className="input input-bordered w-full"
                         />
+                    </div>
+                    <div className="md:col-span-5">
+                    <h1 className="text-base font-medium"> <> {"Variedades"}</> </h1>
+                        <select id="dropdown-cooperative" className="select select-bordered w-full" onChange={handlevarietiesChange}>
+                            <option disabled selected><> {"Seleccione una Variedad"}</>
+                                :
+                            </option>
+                            {varietyList.map((item) => (<option key={item} value={item}>
+                                {item}
+                            </option>))}
+                        </select>
+                    </div>
+
+                    <div className="md:col-span-5">
+                    <h1 className="text-base font-medium"> <> {"Certificados"}</> </h1>
+                        <select id="dropdown-cooperative" className="select select-bordered w-full" onChange={handlevarietiesChange}>
+                            <option disabled selected><> {"Seleccione un Certificado"}</>
+                                :
+                            </option>
+                            {certificationList.map((item) => (<option key={item} value={item}>
+                                {item}
+                            </option>))}
+                        </select>
                     </div>
                 </div>
 
