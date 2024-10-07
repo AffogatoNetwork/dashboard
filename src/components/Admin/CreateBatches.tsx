@@ -275,6 +275,86 @@ export const CreateBatchesModule = () => {
     setIsFormValid(isValid);
   }, [formData, currentStep]);
 
+  const fieldConfig: {
+    [key in keyof FormData]: {
+      [key: string]: { type: string; placeholder: string };
+    };
+  } = {
+    farm: {
+      name: { type: 'text', placeholder: 'Nombre de la Finca' },
+      description: { type: 'textarea', placeholder: 'Descripción de la Finca' },
+      id_lote: { type: 'text', placeholder: 'ID del Lote' },
+    },
+    wetMill: {
+      entry_id: { type: 'text', placeholder: 'ID de Entrada' },
+      drying_id: { type: 'text', placeholder: 'ID de Secado' },
+      facility: { type: 'text', placeholder: 'Instalación' },
+      latitude: { type: 'number', placeholder: 'Latitud' },
+      longitude: { type: 'number', placeholder: 'Longitud' },
+      variety: { type: 'text', placeholder: 'Variedad' },
+      process: { type: 'text', placeholder: 'Proceso' },
+      drying_type: { type: 'text', placeholder: 'Tipo de Secado' },
+      drying_hours: { type: 'number', placeholder: 'Horas de Secado' },
+      date: { type: 'date', placeholder: 'Fecha de Beneficio' },
+      weight: { type: 'number', placeholder: 'Peso (kg)' },
+      certifications: { type: 'text', placeholder: 'Certificaciones' },
+      note: { type: 'textarea', placeholder: 'Notas Adicionales' },
+    },
+    dryMill: {
+      export_id: { type: 'text', placeholder: 'ID de Exportación' },
+      export_drying_id: {
+        type: 'text',
+        placeholder: 'ID de Secado para Exportación',
+      },
+      facility: { type: 'text', placeholder: 'Instalación' },
+      latitude: { type: 'number', placeholder: 'Latitud' },
+      longitude: { type: 'number', placeholder: 'Longitud' },
+      date: { type: 'date', placeholder: 'Fecha de Secado' },
+      prep_type: { type: 'text', placeholder: 'Tipo de Preparación' },
+      variety: { type: 'text', placeholder: 'Variedad' },
+      quality: { type: 'text', placeholder: 'Calidad' },
+      coffee_type: { type: 'text', placeholder: 'Tipo de Café' },
+      origin_cert: { type: 'text', placeholder: 'Certificado de Origen' },
+      threshing_process: { type: 'text', placeholder: 'Proceso de Trillado' },
+      threshing_yield: {
+        type: 'number',
+        placeholder: 'Rendimiento de Trillado (%)',
+      },
+      damage_percent: {
+        type: 'number',
+        placeholder: 'Porcentaje de Daños (%)',
+      },
+      weight: { type: 'number', placeholder: 'Peso (kg)' },
+      note: { type: 'textarea', placeholder: 'Notas Adicionales' },
+      buyer: { type: 'text', placeholder: 'Comprador' },
+    },
+    cupProfile: {
+      acidity: { type: 'number', placeholder: 'Acidez' },
+      aftertaste: { type: 'text', placeholder: 'Regusto' },
+      aroma: { type: 'text', placeholder: 'Aroma' },
+      body: { type: 'text', placeholder: 'Cuerpo' },
+      flavor: { type: 'text', placeholder: 'Sabor' },
+      note: { type: 'textarea', placeholder: 'Notas de Cata' },
+      sweetness: { type: 'number', placeholder: 'Dulzura' },
+      general_description: {
+        type: 'textarea',
+        placeholder: 'Descripción General',
+      },
+      cup_profile: { type: 'text', placeholder: 'Perfil de Taza' },
+      scaa_url: { type: 'url', placeholder: 'URL del Perfil SCAA' },
+    },
+    roasting: {
+      roast_date: { type: 'date', placeholder: 'Fecha de Tostado' },
+      roast_type: { type: 'text', placeholder: 'Tipo de Tostado' },
+      grind_type: { type: 'text', placeholder: 'Tipo de Molienda' },
+      packaging: { type: 'text', placeholder: 'Empaque' },
+      bag_size: { type: 'number', placeholder: 'Tamaño de la Bolsa (g)' },
+    },
+    Farmer: {
+      '0': { type: 'select', placeholder: 'Seleccionar Productores' }, // Assuming this is handled by a select input
+    },
+  };
+
   const handleFarmerSelect = (farmers: string[]) => {
     setSelectedFarmers(farmers);
   };
@@ -409,22 +489,33 @@ export const CreateBatchesModule = () => {
     }
 
     return (
-      <div className="grid grid-cols-2 justify-items-center gap-2 sm:grid-cols-2 lg:grid-cols-4">
+      <div className="grid grid-cols-2 gap-4 sm:grid-cols-2 lg:grid-cols-4">
         {Object.entries(sectionData).map(([key, value]) => {
+          // Access the type and placeholder from fieldConfig
+          const config = fieldConfig[currentSection]?.[key];
+
+          if (!config) {
+            return null; // Skip fields without a config
+          }
+
+          const { type, placeholder } = config;
+
           return (
             <div key={key}>
-              <label>
+              <label className="w-full sm:w-24 md:w-32 lg:w-48">
                 {t(`${key.replace('_', '-')}`) as string}{' '}
                 {requiredFields[currentSection]?.includes(key) && '*'}
               </label>
+
+              {/* Render input based on type */}
               <Input
-                type="text"
+                type={type} // Use dynamic type from config
                 name={key}
                 id={key}
                 value={value}
                 className="input-bordered input w-full"
                 onChange={(e) => handleInputChange(e, currentSection)}
-                placeholder={''}
+                placeholder={placeholder} // Use dynamic placeholder from config
               />
             </div>
           );
