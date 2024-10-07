@@ -10,9 +10,7 @@
     },
     {
       "trait_type": "Farmer",
-      "value": [
-        "0x17854913A273449555E78F207ae5c10850F23345"
-      ]
+      "value": ["0x17854913A273449555E78F207ae5c10850F23345"]
     },
     {
       "trait_type": "Wet Mill",
@@ -67,10 +65,10 @@
           "latitude": 14.147262,
           "longitude": -88.017033,
           "note": 0,
-          "threshing_process": "0.82",
+          "threshing-process": "0.82",
           "threshing_yield": 1.199,
           "weight": 100,
-          "cupping_url" : " ",
+          "cupping_url": " ",
           "AvgHeight": " "
         }
       ]

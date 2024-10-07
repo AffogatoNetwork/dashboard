@@ -8,7 +8,7 @@
   "all": "Tous",
   "area": "Zone",
   "areas": "Zones",
-  "altitude":  "Altitude",
+  "altitude": "Altitude",
   "aroma": "Parfum",
   "average": "Moyenne",
   "batch": "Lot",
@@ -108,16 +108,16 @@
   "search-coffe-farms": "Rechercher fermes de Cafe",
   "search-name": "Fermes de Recherche",
   "services": "Services",
-  "shadow":"Ombre",
+  "shadow": "Ombre",
   "show-map": "Afficher la carte",
   "social-networks": "Réseaux sociaux",
   "sweetness": "Douceur",
-  "threshing_process": "Threshing Process",
+  "threshing-process": "Threshing Process",
   "threshing-yield": "Rendement de battage",
   "total": "Totale",
   "type-production": "Production de Caractères",
   "tables": {
-    "actions":"Actions",
+    "actions": "Actions",
     "certified-area": "Zone Certifiée",
     "qr": "QR",
     "name": " Nom",
@@ -131,7 +131,7 @@
     "community": "Communauté",
     "municipality": "Municipalité",
     "country": "Pays",
-    "coffee-varieties" : "Variétés de café",
+    "coffee-varieties": "Variétés de café",
     "account-address": "Adresse du compte",
     "blockchain-link": "Lien blockchain",
     "gender": "Genre",
@@ -172,7 +172,7 @@
     "success": "Les lots de café ont été créés.",
     "title": "Créer un lot de café"
   },
-  "login":  {
+  "login": {
     "access": "Connexion",
     "access-google": "Accéder à Google",
     "create-account": "Vous n'avez pas de compte? Créez-en un ici.",
@@ -195,8 +195,8 @@
     "farmer-added": "Farmer added",
     "manager-name": "Gérant de l'entreprise",
     "new-company": "New Company",
-    "success":  "Les détails de votre compte ont été envoyés à l'entreprise",
-    "success2":  "Les détails de votre compte ont été envoyés à l'équipe Affogato"
+    "success": "Les détails de votre compte ont été envoyés à l'entreprise",
+    "success2": "Les détails de votre compte ont été envoyés à l'équipe Affogato"
   },
   "placeholders": {
     "bio": "Entrez votre bio",

@@ -11,7 +11,14 @@ import {
   where,
   writeBatch,
 } from 'firebase/firestore';
-import { getDownloadURL, getStorage, ref, uploadBytes } from 'firebase/storage';
+import {
+  getDownloadURL,
+  getStorage,
+  ref,
+  StringFormat,
+  uploadBytes,
+  uploadString,
+} from 'firebase/storage';
 import { CompanyType, FarmerType, FarmType } from '../components/common/types';
 import { getAuth } from 'firebase/auth';
 
@@ -379,6 +386,101 @@ export const saveBatch = async (batch: any) => {
     };
     await setDoc(farmDoc, farmData);
   } catch (error) {}
+};
+
+export const createBatch = async (formData: any) => {
+  try {
+    // Use id_lote as the document ID
+    const docId = formData.Name;
+    const batchDoc = doc(db, 'batches', docId);
+    console.log(formData);
+    // Construct the batch data from the provided structure
+    const batchData = {
+      Name: formData.Name || '',
+      Farm: formData.Farm || '',
+      Cooperative: formData.Cooperative || '',
+      Description: formData.Description || '',
+      Farmers: formData.Farmers || [],
+      image: formData.image || '',
+      parentId: formData.parentId || '',
+      ipfsHash: formData.ipfsHash || '',
+      Profile: {
+        acidity: formData.Profile.acidity || '',
+        aftertaste: formData.Profile.aftertaste || '',
+        aroma: formData.Profile.aroma || '',
+        body: formData.Profile.body || '',
+        flavor: formData.Profile.flavor || '',
+        note: formData.Profile.note || '',
+        sweetness: formData.Profile.sweetness || '',
+        general_description: formData.Profile.general_description || '',
+        cup_profile: formData.Profile.cup_profile || '',
+        scaa_url: formData.Profile.scaa_url || '',
+      },
+      Roasting: {
+        roast_date: formData.Roasting.roast_date || '',
+        roast_type: formData.Roasting.roast_type || '',
+        grind_type: formData.Roasting.grind_type || '',
+        packaging: formData.Roasting.packaging || '',
+        bag_size: formData.Roasting.bag_size || '',
+      },
+      dryMill: {
+        export_id: formData.dryMill.export_id || '',
+        export_drying_id: formData.dryMill.export_drying_id || '',
+        facility: formData.dryMill.facility || '',
+        latitude: formData.dryMill.latitude || '',
+        longitude: formData.dryMill.longitude || '',
+        date: formData.dryMill.date || '',
+        prep_type: formData.dryMill.prep_type || '',
+        variety: formData.dryMill.variety || '',
+        quality: formData.dryMill.quality || '',
+        coffee_type: formData.dryMill.coffee_type || '',
+        origin_cert: formData.dryMill.origin_cert || '',
+        threshing_process: formData.dryMill.threshing_process || '',
+        threshing_yield: formData.dryMill.threshing_yield || '',
+        damage_percent: formData.dryMill.damage_percent || '',
+        weight: formData.dryMill.weight || '',
+        note: formData.dryMill.note || '',
+        buyer: formData.dryMill.buyer || '',
+      },
+      wetMill: {
+        entry_id: formData.wetMill.entry_id || '',
+        drying_id: formData.wetMill.drying_id || '',
+        facility: formData.wetMill.facility || '',
+        latitude: formData.wetMill.latitude || '',
+        longitude: formData.wetMill.longitude || '',
+        variety: formData.wetMill.variety || '',
+        process: formData.wetMill.process || '',
+        drying_type: formData.wetMill.drying_type || '',
+        drying_hours: formData.wetMill.drying_hours || '',
+        date: formData.wetMill.date || '',
+        weight: formData.wetMill.weight || '',
+        certifications: formData.wetMill.certifications || '',
+        note: formData.wetMill.note || '',
+      },
+      createdAd: Date.now(),
+    };
+
+    // Save the batch data to Firestore
+    await setDoc(batchDoc, batchData);
+
+    // Convert the batch data to JSON
+    const batchJson = JSON.stringify(batchData);
+
+    // Create a reference to Firebase Storage using id_lote for the filename
+    const storageRef = ref(storage, `batches/${docId}.json`);
+
+    // Upload the JSON data as a string to Firebase Storage
+    await uploadString(storageRef, batchJson);
+
+    // Log success
+    console.log(
+      'Batch data saved to Firestore and uploaded to Storage successfully.'
+    );
+
+    return true;
+  } catch (error) {
+    console.error('Error saving batch:', error);
+  }
 };
 
 export const saveFarmerData = async (farmerData: any, id: string) => {

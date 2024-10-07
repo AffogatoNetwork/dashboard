@@ -21,6 +21,7 @@ const NewBatchId = () => {
         let farmerDetails: any[] = [];
         getBatch(batchId)
           .then((result) => {
+            console.log(result);
             if (result?.image.includes('https://firebasestorage') === true) {
             } else {
               if (result?.image) {
