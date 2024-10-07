@@ -1,105 +1,162 @@
-import React, {Component, useMemo, useState} from 'react';
-import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from "material-react-table";
-import { editFarm } from "../../db/firebase";
-import { useTranslation } from "react-i18next";
+import React, { Component, useMemo, useState } from 'react';
+import MaterialReactTable, {
+  MaterialReactTableProps,
+  MRT_ColumnDef,
+} from 'material-react-table';
+import { editBatch } from '../../db/firebase';
+import { useTranslation } from 'react-i18next';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
-import { useBatches } from "../../hooks/useBatches";
+import { useBatches } from '../../hooks/useBatches';
 
 export const EditBatchesModule = () => {
-    const { t, i18n } = useTranslation();
-    const [batches, batchesCount, ownerAddress, setReload] = useBatches();
+  const { t, i18n } = useTranslation();
+  const [batches, batchesCount, ownerAddress, setReload] = useBatches();
 
-    const [tableData, setTableData] = useState<any[]>(() => batches);
+  const [tableData, setTableData] = useState<any[]>(() => batches);
 
-    const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
-        async ({ exitEditingMode, row, values }) => {
-            try {
-                await editFarm(values);
-                tableData[row.index] = values;
-                setTableData([...tableData]);
-                setReload(true);
-                exitEditingMode();
-            } catch (error) {
-            }
-        };
+  const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
+    async ({ exitEditingMode, row, values }) => {
+      try {
+        await editBatch(values);
+        tableData[row.index] = values;
+        setTableData([...tableData]);
+        setReload(true);
+        exitEditingMode();
+      } catch (error) {
+        console.error(error);
+      }
+    };
 
-    const columData = useMemo<MRT_ColumnDef<any>[]>(
-        () => [
+  const columData = useMemo<MRT_ColumnDef<any>[]>(
+    () => [
+      // Main Batch Fields
+      { accessorKey: 'Name', header: t('tables.batch-name'), size: 20 },
+      { accessorKey: 'Description', header: t('tables.description'), size: 40 },
+      {
+        accessorKey: 'parentId',
+        header: t('tables.parent-id'),
+        size: 20,
+        enableEditing: false,
+      },
+      {
+        accessorKey: 'ipfsHash',
+        header: t('tables.ipfs-hash'),
+        size: 20,
+        enableEditing: false,
+      },
 
-            {
-                accessorFn: (farmers: any) => `${farmers.ipfsHash.substring(0, 6)} , ${farmers.Name}  ${farmers.parentId}  `, //accessorFn used to join multiple data into a single cell
-                id: 'name', //id is still required when using accessorFn instead of accessorKey
-                header: t("batch-id"), size: 25,
-                Cell(props) {
-                    return (
-                        <div className="text-left">
-                            {props.renderedCellValue}
-                        </div>
-                    );
-                },
-            }, {
-                accessorFn: (farmers: any) => `${farmers.dryMill.average_height}`, //accessorFn used to join multiple data into a single cell
-                header: t("tables.height-lot"), size: 15,
-                Cell(props) {
-                    if (props.renderedCellValue === 'undefined') {
-                        return (
-                            <div className="text-left">
-                                {"Aprox 1200"}
-                            </div>
-                        );
-                    }
-                    return (
-                        <div className="text-left">
-                            {props.renderedCellValue || "Aprox 1200"}
-                        </div>
-                    );
-                },
-            }, {
-                header: t('tables.batch-weight'), accessorKey: 'dryMill.weight', size: 15,
+      // Profile Fields
+      {
+        accessorKey: 'Profile.general_description',
+        header: t('tables.general-description'),
+        size: 30,
+      },
+      {
+        accessorKey: 'Profile.cup_profile',
+        header: t('tables.cup-profile'),
+        size: 30,
+      },
+      {
+        accessorKey: 'Profile.scaa_url',
+        header: t('tables.scaa-url'),
+        size: 25,
+      },
+
+      // Roasting Fields
+      {
+        accessorKey: 'Roasting.roast_date',
+        header: t('tables.roast-date'),
+        size: 15,
+      },
+      {
+        accessorKey: 'Roasting.roast_type',
+        header: t('tables.roast-type'),
+        size: 15,
+      },
+      {
+        accessorKey: 'Roasting.grind_type',
+        header: t('tables.grind-type'),
+        size: 15,
+      },
+      {
+        accessorKey: 'Roasting.packaging',
+        header: t('tables.packaging'),
+        size: 15,
+      },
+      {
+        accessorKey: 'Roasting.bag_size',
+        header: t('tables.bag-size'),
+        size: 15,
+      },
+
+      // Dry Mill Fields
+      {
+        accessorKey: 'dryMill.export_id',
+        header: t('tables.export-id-dry'),
+        size: 15,
+      },
+      {
+        accessorKey: 'dryMill.export_drying_id',
+        header: t('tables.export-drying-id'),
+        size: 15,
+      },
+      {
+        accessorKey: 'dryMill.facility',
+        header: t('tables.facility'),
+        size: 15,
+      },
+      { accessorKey: 'dryMill.buyer', header: t('tables.buyer'), size: 20 },
+
+      // Wet Mill Fields
+      {
+        accessorKey: 'wetMill.entry_id',
+        header: t('tables.entry-id-wet'),
+        size: 15,
+      },
+      {
+        accessorKey: 'wetMill.drying_id',
+        header: t('tables.drying-id-wet'),
+        size: 15,
+      },
+      {
+        accessorKey: 'wetMill.facility',
+        header: t('tables.facility'),
+        size: 15,
+      },
+      { accessorKey: 'wetMill.process', header: t('tables.process'), size: 15 },
+    ],
+    [i18n.language]
+  );
+
+  return (
+    <>
+      <div className="overflow-hidden">
+        <MaterialReactTable
+          enableStickyHeader={true}
+          columns={columData}
+          editingMode="modal" //default
+          enableEditing={true}
+          onEditingRowSave={handleSaveRow}
+          data={batches}
+          enableHiding={false}
+          enableDensityToggle={false}
+          sortDescFirst={true}
+          enableFullScreenToggle={false}
+          displayColumnDefOptions={{
+            'mrt-row-actions': {
+              header: t('edit'),
             },
-
-            {
-                header: t('tables.tasting-note'), accessorKey: 'farmers.dryMill.note', size: 15,
-            },
-            {
-                header: t('cupping_url'), accessorKey: 'farmers.dryMill.cupping_url', size: 15,
-            },
-        ],
-        [i18n.language],
-    );
-
-
-    return (
-        <>
-            <div className="overflow-hidden">
-                <MaterialReactTable
-                    enableStickyHeader={true}
-                    columns={columData}
-                    editingMode="modal" //default
-                    enableEditing={true}
-
-                    onEditingRowSave={handleSaveRow}
-                    data={batches}
-                    enableHiding={false}
-                    enableDensityToggle={false}
-                    sortDescFirst={true}
-                    enableFullScreenToggle={false}
-                    displayColumnDefOptions={{
-                        'mrt-row-actions': {
-                            header: 'edit',
-                        },
-                    }}
-                    enableColumnActions={false}
-                    enableFilters={true}
-                    localization={MRT_Localization_ES}
-                    initialState={{
-                        sorting: [{ id: 'name', desc: false }],
-                        showGlobalFilter: true, isLoading: false
-                    }}
-                />
-            </div>
-        </>
-    )
-}
-
-
+          }}
+          enableColumnActions={false}
+          enableFilters={true}
+          localization={MRT_Localization_ES}
+          initialState={{
+            sorting: [{ id: 'Name', desc: false }],
+            showGlobalFilter: true,
+            isLoading: false,
+          }}
+        />
+      </div>
+    </>
+  );
+};

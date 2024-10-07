@@ -280,6 +280,74 @@ export const editCertifications = async (data: any) => {
   } catch (error) {}
 };
 
+export const editBatch = async (formData: any) => {
+  const docId = formData.ipfsHash; // Assuming the batch is identified by 'Name'
+  console.log(formData);
+  try {
+    const batchDoc = doc(db, 'batches', docId);
+
+    // Retrieve the current batch data
+    const docSnap = await getDoc(batchDoc);
+
+    if (!docSnap.exists()) {
+      console.error('No such document!');
+      return;
+    }
+
+    // Get the current batch data
+    const currentData = docSnap.data();
+
+    console.log('Current batch data:', currentData);
+
+    // Prepare batch data for update, keeping specific fields unchanged
+    const updatedData = {
+      ...currentData, // Keep existing data
+      Name: formData.Name || currentData.Name,
+      Description: formData.Description || currentData.Description,
+      Profile: {
+        general_description:
+          formData.Profile?.general_description ||
+          currentData.Profile?.general_description,
+        cup_profile:
+          formData.Profile?.cup_profile || currentData.Profile?.cup_profile,
+        scaa_url: formData.Profile?.scaa_url || currentData.Profile?.scaa_url,
+      },
+      Roasting: {
+        roast_type:
+          formData.Roasting?.roast_type || currentData.Roasting?.roast_type,
+        grind_type:
+          formData.Roasting?.grind_type || currentData.Roasting?.grind_type,
+        packaging:
+          formData.Roasting?.packaging || currentData.Roasting?.packaging,
+        bag_size: formData.Roasting?.bag_size || currentData.Roasting?.bag_size,
+      },
+      dryMill: {
+        export_id:
+          formData.dryMill?.export_id || currentData.dryMill?.export_id,
+        export_drying_id:
+          formData.dryMill?.export_drying_id ||
+          currentData.dryMill?.export_drying_id,
+        facility: formData.dryMill?.facility || currentData.dryMill?.facility,
+        buyer: formData.dryMill?.buyer || currentData.dryMill?.buyer,
+      },
+      wetMill: {
+        entry_id: formData.wetMill?.entry_id || currentData.wetMill?.entry_id,
+        drying_id:
+          formData.wetMill?.drying_id || currentData.wetMill?.drying_id,
+        facility: formData.wetMill?.facility || currentData.wetMill?.facility,
+        process: formData.wetMill?.process || currentData.wetMill?.process,
+      },
+      createdAd: Date.now(),
+    };
+
+    // Update the batch data in Firestore
+    await updateDoc(batchDoc, updatedData);
+    console.log('Batch data updated successfully.');
+  } catch (error) {
+    console.error('Error updating batch:', error);
+  }
+};
+
 export const saveFarm = async (farm: FarmType) => {
   console.log(farm);
   try {
@@ -417,45 +485,45 @@ export const createBatch = async (formData: any) => {
         scaa_url: formData.Profile.scaa_url || '',
       },
       Roasting: {
-        roast_date: formData.Roasting.roast_date || '',
-        roast_type: formData.Roasting.roast_type || '',
-        grind_type: formData.Roasting.grind_type || '',
-        packaging: formData.Roasting.packaging || '',
-        bag_size: formData.Roasting.bag_size || '',
+        roast_date: formData.Roasting?.roast_date || '',
+        roast_type: formData.Roasting?.roast_type || '',
+        grind_type: formData.Roasting?.grind_type || '',
+        packaging: formData.Roasting?.packaging || '',
+        bag_size: formData.Roasting?.bag_size || '',
       },
       dryMill: {
-        export_id: formData.dryMill.export_id || '',
-        export_drying_id: formData.dryMill.export_drying_id || '',
-        facility: formData.dryMill.facility || '',
-        latitude: formData.dryMill.latitude || '',
-        longitude: formData.dryMill.longitude || '',
-        date: formData.dryMill.date || '',
-        prep_type: formData.dryMill.prep_type || '',
-        variety: formData.dryMill.variety || '',
-        quality: formData.dryMill.quality || '',
-        coffee_type: formData.dryMill.coffee_type || '',
-        origin_cert: formData.dryMill.origin_cert || '',
-        threshing_process: formData.dryMill.threshing_process || '',
-        threshing_yield: formData.dryMill.threshing_yield || '',
-        damage_percent: formData.dryMill.damage_percent || '',
-        weight: formData.dryMill.weight || '',
-        note: formData.dryMill.note || '',
-        buyer: formData.dryMill.buyer || '',
+        export_id: formData.dryMill?.export_id || '',
+        export_drying_id: formData.dryMill?.export_drying_id || '',
+        facility: formData.dryMill?.facility || '',
+        latitude: formData.dryMill?.latitude || '',
+        longitude: formData.dryMill?.longitude || '',
+        date: formData.dryMill?.date || '',
+        prep_type: formData.dryMill?.prep_type || '',
+        variety: formData.dryMill?.variety || '',
+        quality: formData.dryMill?.quality || '',
+        coffee_type: formData.dryMill?.coffee_type || '',
+        origin_cert: formData.dryMill?.origin_cert || '',
+        threshing_process: formData.dryMill?.threshing_process || '',
+        threshing_yield: formData.dryMill?.threshing_yield || '',
+        damage_percent: formData.dryMill?.damage_percent || '',
+        weight: formData.dryMill?.weight || '',
+        note: formData.dryMill?.note || '',
+        buyer: formData.dryMill?.buyer || '',
       },
       wetMill: {
-        entry_id: formData.wetMill.entry_id || '',
-        drying_id: formData.wetMill.drying_id || '',
-        facility: formData.wetMill.facility || '',
-        latitude: formData.wetMill.latitude || '',
-        longitude: formData.wetMill.longitude || '',
-        variety: formData.wetMill.variety || '',
-        process: formData.wetMill.process || '',
-        drying_type: formData.wetMill.drying_type || '',
-        drying_hours: formData.wetMill.drying_hours || '',
-        date: formData.wetMill.date || '',
-        weight: formData.wetMill.weight || '',
-        certifications: formData.wetMill.certifications || '',
-        note: formData.wetMill.note || '',
+        entry_id: formData.wetMill?.entry_id || '',
+        drying_id: formData.wetMill?.drying_id || '',
+        facility: formData.wetMill?.facility || '',
+        latitude: formData.wetMill?.latitude || '',
+        longitude: formData.wetMill?.longitude || '',
+        variety: formData.wetMill?.variety || '',
+        process: formData.wetMill?.process || '',
+        drying_type: formData.wetMill?.drying_type || '',
+        drying_hours: formData.wetMill?.drying_hours || '',
+        date: formData.wetMill?.date || '',
+        weight: formData.wetMill?.weight || '',
+        certifications: formData.wetMill?.certifications || '',
+        note: formData.wetMill?.note || '',
       },
       createdAd: Date.now(),
     };

@@ -9,6 +9,7 @@ import { CreateVarietyModule } from './Admin/CreateVarietyModule';
 import { CreateCertificationModule } from './Admin/CreateCertificationModule';
 import { EditProfilePhotoModule } from './Admin/EditProfilePhotoModule';
 import { CreateBatchesModule } from './Admin/CreateBatches';
+import { EditBatchesModule } from './Admin/EditBatchesModule';
 
 export const AdminModule = () => {
   const { t } = useTranslation();
@@ -67,6 +68,13 @@ export const AdminModule = () => {
       <EditFarmersModule />
     </>
   );
+
+  const renderEditBatches = () => (
+    <>
+      <EditBatchesModule />
+    </>
+  );
+
   const renderEditFarm = () => (
     <>
       <EditFarmsModule />
@@ -128,6 +136,17 @@ export const AdminModule = () => {
                           onClick={() => setActiveTab('create-batch')}
                         >
                           <>{'Crear Lotes'}</>
+                        </a>
+
+                        <a
+                          className={`${
+                            activeTab == 'edit-batches' &&
+                            `tab-lifted tab tab-active btn-wide tab-lg`
+                          } tab btn-wide tab-lg `}
+                          id="signup-tabs"
+                          onClick={() => setActiveTab('edit-batches')}
+                        >
+                          <>{'Editar Lotes'}</>
                         </a>
 
                         <a
@@ -213,6 +232,12 @@ export const AdminModule = () => {
                       {activeTab == 'crear-certificados' && (
                         <div className={`overflow-hidden`}>
                           {renderCreateCertifications()}
+                        </div>
+                      )}
+
+                      {activeTab == 'edit-batches' && (
+                        <div className={`overflow-hidden`}>
+                          {renderEditBatches()}
                         </div>
                       )}
 
