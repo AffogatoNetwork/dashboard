@@ -135,6 +135,7 @@
   "tables": {
     "actions": "Acciones",
     "entry-id-wet": "ID de Ingreso Beneficio Húmedo",
+    "export-drying_id": "ID de Exportación de Secado",
     "batch-name": "Nombre de Lote",
     "certified-area": "Área Certificada",
     "description": "Descripción",
