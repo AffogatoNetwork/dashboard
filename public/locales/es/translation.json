@@ -54,7 +54,6 @@
   "exporting-code": "ID de Exportación",
   "export-id": "ID de Exportación",
   "export-drying-id": "ID de Exportación de Secado",
-  "export-drying_id": "ID de Exportación de Secado",
   "facility": "Instalación",
   "family-members": "Miembros de Familia",
   "farm": "Finca",
@@ -135,6 +134,7 @@
   "tables": {
     "actions": "Acciones",
     "entry-id-wet": "ID de Ingreso Beneficio Húmedo",
+    "export-drying-id": "ID de Exportación de Secado",
     "batch-name": "Nombre de Lote",
     "certified-area": "Área Certificada",
     "description": "Descripción",

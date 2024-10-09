@@ -329,13 +329,13 @@ export const CreateBatchesModule = () => {
       buyer: { type: 'text', placeholder: 'Comprador' },
     },
     cupProfile: {
-      acidity: { type: 'number', placeholder: 'Acidez' },
+      acidity: { type: 'text', placeholder: 'Acidez' },
       aftertaste: { type: 'text', placeholder: 'Regusto' },
       aroma: { type: 'text', placeholder: 'Aroma' },
       body: { type: 'text', placeholder: 'Cuerpo' },
       flavor: { type: 'text', placeholder: 'Sabor' },
       note: { type: 'textarea', placeholder: 'Notas de Cata' },
-      sweetness: { type: 'number', placeholder: 'Dulzura' },
+      sweetness: { type: 'text', placeholder: 'Dulzura' },
       general_description: {
         type: 'textarea',
         placeholder: 'Descripción General',
