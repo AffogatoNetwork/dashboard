@@ -143,7 +143,7 @@
     "ipfs-hash": "Id de Lote",
     "name-farmer": "Nombre de Productor",
     "name-farm": "Nombre de Finca",
-    "parent-id": "Cooperativa",
+    "parent-id": "Cooperativa/Empresa",
     "sex": "Sexo",
     "production-system": "Sistema de Producción",
     "location": "Ubicación",
