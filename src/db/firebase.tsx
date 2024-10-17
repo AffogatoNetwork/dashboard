@@ -281,8 +281,8 @@ export const editCertifications = async (data: any) => {
 };
 
 export const editBatch = async (formData: any) => {
+  const user = UserData();
   const docId = formData.ipfsHash; // Assuming the batch is identified by 'Name'
-  console.log(formData);
   try {
     const batchDoc = doc(db, 'batches', docId);
 
@@ -307,37 +307,52 @@ export const editBatch = async (formData: any) => {
       Profile: {
         general_description:
           formData.Profile?.general_description ||
-          currentData.Profile?.general_description,
+          currentData.Profile?.general_description ||
+          '',
         cup_profile:
-          formData.Profile?.cup_profile || currentData.Profile?.cup_profile,
-        scaa_url: formData.Profile?.scaa_url || currentData.Profile?.scaa_url,
+          formData.Profile?.cup_profile ||
+          currentData.Profile?.cup_profile ||
+          '',
+        scaa_url:
+          formData.Profile?.scaa_url || currentData.Profile?.scaa_url || '',
       },
       Roasting: {
         roast_type:
-          formData.Roasting?.roast_type || currentData.Roasting?.roast_type,
+          formData.Roasting?.roast_type ||
+          currentData.Roasting?.roast_type ||
+          '',
         grind_type:
-          formData.Roasting?.grind_type || currentData.Roasting?.grind_type,
+          formData.Roasting?.grind_type ||
+          currentData.Roasting?.grind_type ||
+          '',
         packaging:
-          formData.Roasting?.packaging || currentData.Roasting?.packaging,
-        bag_size: formData.Roasting?.bag_size || currentData.Roasting?.bag_size,
+          formData.Roasting?.packaging || currentData.Roasting?.packaging || '',
+        bag_size:
+          formData.Roasting?.bag_size || currentData.Roasting?.bag_size || '',
       },
       dryMill: {
         export_id:
-          formData.dryMill?.export_id || currentData.dryMill?.export_id,
+          formData.dryMill?.export_id || currentData.dryMill?.export_id || '',
         export_drying_id:
           formData.dryMill?.export_drying_id ||
-          currentData.dryMill?.export_drying_id,
-        facility: formData.dryMill?.facility || currentData.dryMill?.facility,
-        buyer: formData.dryMill?.buyer || currentData.dryMill?.buyer,
+          currentData.dryMill?.export_drying_id ||
+          '',
+        facility:
+          formData.dryMill?.facility || currentData.dryMill?.facility || '',
+        buyer: formData.dryMill?.buyer || currentData.dryMill?.buyer || '',
       },
       wetMill: {
-        entry_id: formData.wetMill?.entry_id || currentData.wetMill?.entry_id,
+        entry_id:
+          formData.wetMill?.entry_id || currentData.wetMill?.entry_id || '',
         drying_id:
-          formData.wetMill?.drying_id || currentData.wetMill?.drying_id,
-        facility: formData.wetMill?.facility || currentData.wetMill?.facility,
-        process: formData.wetMill?.process || currentData.wetMill?.process,
+          formData.wetMill?.drying_id || currentData.wetMill?.drying_id || '',
+        facility:
+          formData.wetMill?.facility || currentData.wetMill?.facility || '',
+        process:
+          formData.wetMill?.process || currentData.wetMill?.process || '',
       },
-      createdAd: Date.now(),
+      createdAt: Date.now(),
+      updatedBy: user.email,
     };
 
     // Update the batch data in Firestore
@@ -457,6 +472,8 @@ export const saveBatch = async (batch: any) => {
 };
 
 export const createBatch = async (formData: any) => {
+  const user = UserData();
+
   try {
     // Use id_lote as the document ID
     const docId = formData.Name;
@@ -525,7 +542,8 @@ export const createBatch = async (formData: any) => {
         certifications: formData.wetMill?.certifications || '',
         note: formData.wetMill?.note || '',
       },
-      createdAd: Date.now(),
+      createdAt: Date.now(),
+      createdBy: user.email,
     };
 
     // Save the batch data to Firestore
