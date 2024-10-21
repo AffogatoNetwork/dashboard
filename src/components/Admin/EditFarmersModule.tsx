@@ -34,14 +34,6 @@ export const EditFarmersModule = () => {
         accessorKey: 'gender',
       },
       {
-        header: t('tables.female-members'),
-        accessorKey: 'femaleMenbers',
-      },
-      {
-        header: t('tables.male-members'),
-        accessorKey: 'maleMenbers',
-      },
-      {
         header: t('tables.community'),
         accessorKey: 'village2',
       },
@@ -85,7 +77,7 @@ export const EditFarmersModule = () => {
           enableFilters={true}
           localization={MRT_Localization_ES}
           initialState={{
-            sorting: [{ id: 'fullname', desc: false }],
+            sorting: [{ id: 'village2', desc: false }],
             showGlobalFilter: true,
             isLoading: false,
           }}

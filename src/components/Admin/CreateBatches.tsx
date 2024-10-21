@@ -384,11 +384,11 @@ export const CreateBatchesModule = () => {
       const farmsDirty = `/farms/${selectedFarmers.join(', ')}`;
 
       let firebaseData = {
-        Name: formData.farm.name,
+        Name: formData.farm.id_lote || formData.farm.name.trim(),
         Farm: farmsDirty,
         Cooperative: coopAddress,
         Description: formData.farm.description,
-        Farmers: selectedFarmers.length > 0 ? selectedFarmers : [], // Ensure it's an array
+        Farmers: selectedFarmers || [], // Ensure it's an array
         image: coopImage,
         parentId: currentCoop,
         ipfsHash: formData.farm.id_lote,
