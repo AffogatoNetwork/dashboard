@@ -209,8 +209,7 @@ export const getCafepsaJsonUrl = async (id: string) => {
 export const editFarm = async (data: any) => {
   let user = UserData();
   console.log(data);
-  const dir = data.address;
-
+  const dir = data.address + data.name.toLocaleLowerCase();
   try {
     const farmDoc = doc(db, 'farms', dir);
     const farmData = {
@@ -228,7 +227,6 @@ export const editFarm = async (data: any) => {
       updatedBy: user.email,
     };
     console.log('save');
-    console.log(farmData);
 
     await updateDoc(farmDoc, farmData);
   } catch (error) {
@@ -255,6 +253,7 @@ export const editFarmers = async (data: any) => {
       updatedBy: user.email,
     };
     await updateDoc(farmDoc, farmData);
+    console.log('Farm data updated successfully.');
   } catch (error) {}
 };
 
@@ -304,6 +303,8 @@ export const editBatch = async (formData: any) => {
       ...currentData, // Keep existing data
       Name: formData.Name || currentData.Name,
       Description: formData.Description || currentData.Description,
+      UrlCatacion: formData.UrlCatacion || currentData.UrlCatacion || '',
+      UrlTrilla: formData.UrlTrilla || currentData.UrlTrilla || '',
       Profile: {
         general_description:
           formData.Profile?.general_description ||
@@ -489,6 +490,8 @@ export const createBatch = async (formData: any) => {
       image: formData.image || '',
       parentId: formData.parentId || '',
       ipfsHash: formData.ipfsHash || '',
+      UrlCatacion: formData.UrlCatacion || '',
+      UrlTrilla: formData.UrlTrilla || '',
       Profile: {
         acidity: formData.Profile.acidity || '',
         aftertaste: formData.Profile.aftertaste || '',

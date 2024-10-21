@@ -38,6 +38,8 @@ export const EditBatchesModule = () => {
         size: 20,
         enableEditing: false,
       },
+      { accessorKey: 'urlCatacion', header: t('tables.cupping-url'), size: 20 },
+      { accessorKey: 'urlTrilla', header: t('tables.threshing-url'), size: 20 },
       {
         accessorKey: 'ipfsHash',
         header: t('tables.ipfs-hash'),

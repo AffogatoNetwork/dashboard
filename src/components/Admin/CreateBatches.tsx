@@ -24,6 +24,8 @@ export const CreateBatchesModule = () => {
       name: '',
       description: '',
       id_lote: '',
+      urlCatacion: '',
+      urlTrilla: '',
     },
     wetMill: {
       entry_id: '',
@@ -86,6 +88,8 @@ export const CreateBatchesModule = () => {
       name: string;
       description: string;
       id_lote: string;
+      urlCatacion: string;
+      urlTrilla: string;
     };
     wetMill: {
       entry_id: string;
@@ -170,6 +174,8 @@ export const CreateBatchesModule = () => {
         name: '',
         description: '',
         id_lote: '',
+        urlCatacion: '',
+        urlTrilla: '',
       },
       wetMill: {
         entry_id: '',
@@ -284,6 +290,8 @@ export const CreateBatchesModule = () => {
       name: { type: 'text', placeholder: 'Nombre de la Finca' },
       description: { type: 'textarea', placeholder: 'Descripción de la Finca' },
       id_lote: { type: 'text', placeholder: 'ID del Lote' },
+      urlCatacion: { type: 'url', placeholder: 'URL de Catación' },
+      urlTrilla: { type: 'url', placeholder: 'URL de Trilla' },
     },
     wetMill: {
       entry_id: { type: 'text', placeholder: 'ID de Entrada' },
@@ -390,6 +398,8 @@ export const CreateBatchesModule = () => {
         Description: formData.farm.description,
         Farmers: selectedFarmers || [], // Ensure it's an array
         image: coopImage,
+        urlCatacion: formData.farm.urlCatacion,
+        urlTrilla: formData.farm.urlTrilla,
         parentId: currentCoop,
         ipfsHash: formData.farm.id_lote,
         Profile: {

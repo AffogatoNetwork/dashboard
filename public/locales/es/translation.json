@@ -137,6 +137,8 @@
     "export-drying-id": "ID de Exportación de Secado",
     "batch-name": "Nombre de Lote",
     "certified-area": "Área Certificada",
+    "cupping-url": "URL de Catación",
+    "threshing-url": "URL de Trilla",
     "description": "Descripción",
     "qr": "Código QR",
     "name": "Nombre",
