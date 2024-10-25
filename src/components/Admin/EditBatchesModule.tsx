@@ -22,6 +22,7 @@ export const EditBatchesModule = () => {
         setTableData([...tableData]);
         setReload(true);
         exitEditingMode();
+        window.location.reload();
       } catch (error) {
         console.error(error);
       }
@@ -48,11 +49,6 @@ export const EditBatchesModule = () => {
       },
 
       // Profile Fields
-      {
-        accessorKey: 'Profile.general_description',
-        header: t('tables.general-description'),
-        size: 30,
-      },
       {
         accessorKey: 'Profile.cup_profile',
         header: t('tables.cup-profile'),

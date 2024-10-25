@@ -21,6 +21,7 @@ export const EditFarmersModule = () => {
         setTableData([...tableData]);
         setReload(true);
         exitEditingMode();
+        window.location.reload();
       } catch (error) {}
     };
   const columData = useMemo<MRT_ColumnDef<any>[]>(

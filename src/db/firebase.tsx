@@ -212,6 +212,14 @@ export const editFarm = async (data: any) => {
   const dir = data.address + data.name.toLocaleLowerCase();
   try {
     const farmDoc = doc(db, 'farms', dir);
+
+    const docSnap = await getDoc(farmDoc);
+
+    if (!docSnap.exists()) {
+      console.error('No such document!');
+      return;
+    }
+
     const farmData = {
       area: data.area,
       latitude: data.latitude,
@@ -235,26 +243,36 @@ export const editFarm = async (data: any) => {
 };
 
 export const editFarmers = async (data: any) => {
+  console.log(data);
   let user = UserData();
 
   const dir = data.address;
 
   try {
+    if (!dir) {
+      throw new Error('Document reference (address) is missing.');
+    }
+
     const farmDoc = doc(db, 'farmers', dir);
+    console.log('Updating document for:', dir);
+
     const farmData = {
-      fullname: data.fullname,
+      fullname: data.fullname.trim(),
       gender: data.gender,
-      femaleMenbers: data.femaleMenbers,
-      maleMenbers: data.maleMenbers,
-      region: data.region,
+      region: data.region || '',
       village2: data.village2,
       country: data.country,
       updateAt: Date.now(),
       updatedBy: user.email,
     };
+
+    console.log('Prepared farm data:', farmData);
+
     await updateDoc(farmDoc, farmData);
     console.log('Farm data updated successfully.');
-  } catch (error) {}
+  } catch (error) {
+    console.error('Error updating farm data:', error);
+  }
 };
 
 export const editCertifications = async (data: any) => {
@@ -276,11 +294,13 @@ export const editCertifications = async (data: any) => {
       updatedBy: user.email,
     };
     await updateDoc(farmDoc, farmData);
+    window.location.reload();
   } catch (error) {}
 };
 
 export const editBatch = async (formData: any) => {
   const user = UserData();
+
   const docId = formData.ipfsHash; // Assuming the batch is identified by 'Name'
   try {
     const batchDoc = doc(db, 'batches', docId);
@@ -295,7 +315,6 @@ export const editBatch = async (formData: any) => {
 
     // Get the current batch data
     const currentData = docSnap.data();
-
     console.log('Current batch data:', currentData);
 
     // Prepare batch data for update, keeping specific fields unchanged
@@ -306,51 +325,50 @@ export const editBatch = async (formData: any) => {
       UrlCatacion: formData.UrlCatacion || currentData.UrlCatacion || '',
       UrlTrilla: formData.UrlTrilla || currentData.UrlTrilla || '',
       Profile: {
-        general_description:
-          formData.Profile?.general_description ||
-          currentData.Profile?.general_description ||
-          '',
+        general_description: '',
         cup_profile:
-          formData.Profile?.cup_profile ||
+          formData['Profile.cup_profile'] ||
           currentData.Profile?.cup_profile ||
           '',
         scaa_url:
-          formData.Profile?.scaa_url || currentData.Profile?.scaa_url || '',
+          formData['Profile.scaa_url'] || currentData.Profile?.scaa_url || '',
       },
       Roasting: {
         roast_type:
-          formData.Roasting?.roast_type ||
+          formData['Roasting.roast_type'] ||
           currentData.Roasting?.roast_type ||
           '',
         grind_type:
-          formData.Roasting?.grind_type ||
+          formData['Roasting.grind_type'] ||
           currentData.Roasting?.grind_type ||
           '',
         packaging:
-          formData.Roasting?.packaging || currentData.Roasting?.packaging || '',
+          formData['Roasting.packaging'] ||
+          currentData.Roasting?.packaging ||
+          '',
         bag_size:
-          formData.Roasting?.bag_size || currentData.Roasting?.bag_size || '',
+          formData['Roasting.bag_size'] || currentData.Roasting?.bag_size || '',
       },
       dryMill: {
         export_id:
-          formData.dryMill?.export_id || currentData.dryMill?.export_id || '',
+          formData['dryMill.export_id'] || currentData.dryMill?.export_id || '',
         export_drying_id:
-          formData.dryMill?.export_drying_id ||
+          formData['dryMill.export_drying_id'] ||
           currentData.dryMill?.export_drying_id ||
           '',
         facility:
-          formData.dryMill?.facility || currentData.dryMill?.facility || '',
-        buyer: formData.dryMill?.buyer || currentData.dryMill?.buyer || '',
+          formData['dryMill.facility'] || currentData.dryMill?.facility || '',
+        buyer: formData['dryMill.buyer'] || currentData.dryMill?.buyer || '',
       },
       wetMill: {
         entry_id:
-          formData.wetMill?.entry_id || currentData.wetMill?.entry_id || '',
+          formData['wetMill.entry_id'] || currentData.wetMill?.entry_id || '',
         drying_id:
-          formData.wetMill?.drying_id || currentData.wetMill?.drying_id || '',
+          formData['wetMill.drying_id'] || currentData.wetMill?.drying_id || '',
         facility:
-          formData.wetMill?.facility || currentData.wetMill?.facility || '',
+          formData['wetMill.facility'] || currentData.wetMill?.facility || '',
         process:
-          formData.wetMill?.process || currentData.wetMill?.process || '',
+          formData['wetMill.process'] || currentData.wetMill?.process || '',
       },
       createdAt: Date.now(),
       updatedBy: user.email,
