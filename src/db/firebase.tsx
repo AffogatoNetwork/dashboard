@@ -64,7 +64,7 @@ export const saveVarietyData = async (varietyData: any, id: string) => {
 
 export const saveCertificationData = async (
   certificationData: any,
-  id: string
+  id: string,
 ) => {
   try {
     await setDoc(doc(db, 'certifications', certificationData), {
@@ -88,7 +88,7 @@ export const getCertifications = async (company: string) => {
   console.log(company);
   const q = query(
     collection(db, 'certifications'),
-    where('createdBy', '==', company)
+    where('createdBy', '==', company),
   );
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;
@@ -143,7 +143,7 @@ export const updateFarmerImage = async (address: string, image: any) => {
 export const updateFarms = async (Farmdata: any) => {
   try {
     const docId = Farmdata.farmerAddress.concat(
-      Farmdata.name.replace(/\s/g, '').toLocaleLowerCase()
+      Farmdata.name.replace(/\s/g, '').toLocaleLowerCase(),
     );
     const farmDoc = doc(db, 'farms', docId);
     console.log(Farmdata);
@@ -166,7 +166,7 @@ export const getAllFarmsByCompany = async (company: string) => {
 export const getFarmerFarms = async (farmerAddress: string) => {
   const q = query(
     collection(db, 'farms'),
-    where('farmerAddress', '==', farmerAddress)
+    where('farmerAddress', '==', farmerAddress),
   );
   const querySnapshot = await getDocs(q);
   const docData = querySnapshot.docs.map((doc) => doc.data());
@@ -581,7 +581,7 @@ export const createBatch = async (formData: any) => {
 
     // Log success
     console.log(
-      'Batch data saved to Firestore and uploaded to Storage successfully.'
+      'Batch data saved to Firestore and uploaded to Storage successfully.',
     );
 
     return true;
@@ -636,7 +636,7 @@ export const canEdit = async (mail: string, company: string) => {
   const q = query(
     collection(db, 'permissions'),
     where('admin', '==', true),
-    where('slug', '==', company)
+    where('slug', '==', company),
   );
   const querySnapshot = await getDocs(q);
   return querySnapshot.docs;

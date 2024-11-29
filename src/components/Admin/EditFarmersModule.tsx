@@ -1,4 +1,5 @@
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
@@ -52,16 +53,15 @@ export const EditFarmersModule = () => {
         enableEditing: false,
       },
     ],
-    [i18n.language]
+    [i18n.language],
   );
 
   return (
     <>
-      <div className="overflow-hidden">
+      <div className="overflow-auto">
         <MaterialReactTable
           enableStickyHeader={true}
           columns={columData}
-          editingMode="modal" //default
           enableEditing={true}
           onEditingRowSave={handleSaveRow}
           data={farmers}

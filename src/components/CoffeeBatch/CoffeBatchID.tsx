@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
-import { ReactI18NextChild, useTranslation } from 'react-i18next';
+import { useTranslation } from 'react-i18next';
 import Loading from '../Loading';
 import {
   getBatch,

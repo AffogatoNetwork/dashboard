@@ -2,14 +2,15 @@ import { useTranslation } from 'react-i18next';
 import React, { useEffect, useMemo, useState } from 'react';
 import { getAllFarmers } from '../../db/firebase';
 import { SEARCH_DIVIDER } from '../../utils/constants';
-import MaterialReactTable, {
+import {
+  MaterialReactTable,
   MRT_ColumnDef,
   MaterialReactTableProps,
 } from 'material-react-table';
 import Box from '@mui/material/Box';
 import QRCode from 'react-qr-code';
 import reactNodeToString from 'react-node-to-string';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { LinkIcon } from '../icons/link';
 import { MdDoneOutline } from 'react-icons/md';
@@ -32,7 +33,7 @@ export const CertificationsModule = () => {
       {
         scale: 10,
         backgroundColor: 'white',
-      }
+      },
     );
   };
 
@@ -320,7 +321,7 @@ export const CertificationsModule = () => {
         ),
       },
     ],
-    [i18n.language]
+    [i18n.language],
   );
 
   return (
@@ -362,7 +363,6 @@ export const CertificationsModule = () => {
                     <MaterialReactTable
                       enableStickyHeader={true}
                       columns={columData}
-                      editingMode="modal" //default
                       onEditingRowSave={handleSaveRow}
                       data={farmers}
                       enableHiding={false}

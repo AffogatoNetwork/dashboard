@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from 'react';
-import MaterialReactTable, { MRT_ColumnDef } from 'material-react-table';
+import { MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
 import { getAllBatches, updateAllBatches } from '../../db/firebase';
 import { SEARCH_DIVIDER } from '../../utils/constants';
 import Box from '@mui/material/Box';
@@ -7,7 +7,7 @@ import QRCode from 'react-qr-code';
 import { LinkIcon } from '../icons/link';
 import { useTranslation } from 'react-i18next';
 import reactNodeToString from 'react-node-to-string';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { FarmerData } from '../FarmerData';
 import Company from '../Company';
@@ -32,7 +32,7 @@ export const CoffeBatchNewList = () => {
       {
         scale: 10,
         backgroundColor: 'white',
-      }
+      },
     );
   };
 
@@ -75,13 +75,13 @@ export const CoffeBatchNewList = () => {
           cleaned2.trim() +
           '.json?alt=media&token=10ee7b3b-e0cd-4a52-8689-9b867c3f9f91',
         '_blank',
-        'noopener,noreferrer'
+        'noopener,noreferrer',
       );
     } else {
       window.open(
         'https://affogato.mypinata.cloud/ipfs/' + cleaned2.trim(),
         '_blank',
-        'noopener,noreferrer'
+        'noopener,noreferrer',
       );
     }
   };
@@ -217,7 +217,7 @@ export const CoffeBatchNewList = () => {
         accessorFn: (farmers: any) =>
           `${farmers.Name}  ${farmers.parentId},  ${farmers.ipfsHash.substring(
             0,
-            6
+            6,
           )} `, //accessorFn used to join multiple data into a single cell
         header: t('tables.name'),
         size: 25,
@@ -272,7 +272,7 @@ export const CoffeBatchNewList = () => {
         },
       },
     ],
-    [i18n.language]
+    [i18n.language],
   );
 
   return (

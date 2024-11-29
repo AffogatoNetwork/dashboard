@@ -114,10 +114,10 @@ export const AdminModule = () => {
   return (
     <>
       <div className="">
-        <div className=" mb-1 flex w-full flex-row justify-between sm:mb-0">
-          <div className=" h-full w-full p-1">
-            <div className="card bg-white shadow-xl">
-              <div className="w-full rounded-lg p-5">
+        <div className=" flex flex-row mb-1 sm:mb-0 justify-between w-full">
+          <div className=" w-full h-full p-1">
+            <div className="card shadow-xl bg-white">
+              <div className="w-full p-5 rounded-lg">
                 <div className="text-center text-xl font-bold">
                   <h1> Modulo de Administracion </h1>
                 </div>
@@ -126,7 +126,7 @@ export const AdminModule = () => {
                 <div className="card-title grid justify-items-stretch">
                   {isAdmin ? (
                     <>
-                      <div className="tabs flex justify-center">
+                      <div className="justify-center">
                         <a
                           className={`${
                             activeTab == 'create-batch' &&
@@ -230,58 +230,34 @@ export const AdminModule = () => {
                       </div>
 
                       {activeTab == 'crear-certificados' && (
-                        <div className={`overflow-hidden`}>
-                          {renderCreateCertifications()}
-                        </div>
+                        <>{renderCreateCertifications()}</>
                       )}
 
                       {activeTab == 'edit-batches' && (
-                        <div className={`overflow-hidden`}>
-                          {renderEditBatches()}
-                        </div>
+                        <>{renderEditBatches()}</>
                       )}
 
                       {activeTab == 'variedades' && (
-                        <div className={`overflow-hidden`}>
-                          {renderCreateVariety()}
-                        </div>
+                        <>{renderCreateVariety()}</>
                       )}
 
-                      {activeTab == 'farmer' && (
-                        <div className={`overflow-hidden`}>
-                          {renderEditFarmer()}
-                        </div>
-                      )}
+                      {activeTab == 'farmer' && <>{renderEditFarmer()}</>}
 
-                      {activeTab == 'farm' && (
-                        <div className={`overflow-hidden`}>
-                          {renderEditFarm()}
-                        </div>
-                      )}
+                      {activeTab == 'farm' && <>{renderEditFarm()}</>}
 
                       {activeTab == 'certifications' && (
-                        <div className={`overflow-hidden`}>
-                          {renderEditCertifications()}
-                        </div>
+                        <>{renderEditCertifications()}</>
                       )}
 
                       {activeTab == 'createFarmer' && (
-                        <div className={`overflow-hidden`}>
-                          {renderCreateFarmer()}
-                        </div>
+                        <>{renderCreateFarmer()}</>
                       )}
 
                       {activeTab == 'create-batch' && (
-                        <div className={`overflow-hidden`}>
-                          {renderCreateBatch()}
-                        </div>
+                        <>{renderCreateBatch()}</>
                       )}
 
-                      {activeTab == 'photo' && (
-                        <div className={`overflow-hidden`}>
-                          {renderPhotoEdit()}
-                        </div>
-                      )}
+                      {activeTab == 'photo' && <>{renderPhotoEdit()}</>}
                     </>
                   ) : (
                     <>
