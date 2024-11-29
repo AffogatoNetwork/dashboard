@@ -3,7 +3,7 @@
 @tailwind utilities;
 @layer base {
   :root {
-    --color-brand: #E34235;
+    --color-brand: #e34235;
   }
   html,
   body {
