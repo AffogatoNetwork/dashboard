@@ -53,6 +53,7 @@ export const CertificationsModule = () => {
     area: number;
     usda: number;
     spp: number;
+    roc: number;
     manosdemujer: number;
     fairtrade: number;
     country: string;
@@ -96,7 +97,7 @@ export const CertificationsModule = () => {
         companyName = 'CAFEPSA';
       }
       if (url.match('localhost') !== null) {
-        companyName = 'CAFEPSA';
+        companyName = 'PROEXO';
       }
 
       await getAllFarmers(companyName).then((result) => {
@@ -108,6 +109,7 @@ export const CertificationsModule = () => {
             area,
             usda,
             spp,
+            roc,
             manosdemujer,
             fairtrade,
             fullname,
@@ -154,6 +156,7 @@ export const CertificationsModule = () => {
             area,
             usda,
             spp,
+            roc,
             manosdemujer,
             fairtrade,
             location: l,

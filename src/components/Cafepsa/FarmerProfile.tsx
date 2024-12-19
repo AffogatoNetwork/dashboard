@@ -20,23 +20,25 @@ export const FarmerProfileModule = () => {
   const [longitude, setLongitude] = useState('');
   const [farmName, setfarmName] = useState('');
   const [imageUrl, setImageUrl] = useState(
-    'https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/no_image.jpeg?alt=media&token=0d07fc99-d598-4c9b-9022-c4d018e67881'
+    'https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/no_image.jpeg?alt=media&token=0d07fc99-d598-4c9b-9022-c4d018e67881',
   );
 
   useEffect(() => {
     const load = async () => {
       if (newfarmerId) {
         await getFarmer(newfarmerId).then((result) => {
+          console.log(result);
           setFarmerData(result);
           const firebase = getFarmerFarms(result?.address).then(
             (result: any) => {
+              console.log(result);
               {
                 setfarmName(result[0].name);
                 setLatitude(result[0].latitude);
                 setLongitude(result[0].longitude);
                 setFarms(result[0]);
               }
-            }
+            },
           );
           setLoading(false);
         });
@@ -162,6 +164,15 @@ export const FarmerProfileModule = () => {
                               src={require('../../assets/certificaciones/5_ConManosdeMujer.png')}
                               className="h-24 w-24"
                               alt="Con Manos de Mujer"
+                            />
+                          </div>
+                        )}
+                        {farms.roc !== null && (
+                          <div>
+                            <img
+                              src={require('../../assets/certificaciones/16_ROC.jpeg')}
+                              className="h-24 w-24"
+                              alt="Regenerative Organic Certified"
                             />
                           </div>
                         )}

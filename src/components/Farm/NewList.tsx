@@ -91,7 +91,7 @@ export const FarmsNewList = () => {
       }
 
       if (url.match('localhost') !== null) {
-        companyName = 'COMSA';
+        companyName = 'PROEXO';
       }
 
       await getFarms(companyName).then((result) => {

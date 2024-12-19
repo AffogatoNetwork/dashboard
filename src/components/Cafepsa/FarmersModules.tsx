@@ -100,7 +100,7 @@ export const FarmersModules = () => {
         companyName = 'CAFEPSA';
       }
       if (url.match('localhost') !== null) {
-        companyName = 'CAFEPSA';
+        companyName = 'PROEXO';
       }
 
       await getAllFarmers(companyName).then((result) => {
