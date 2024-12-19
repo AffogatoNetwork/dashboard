@@ -165,7 +165,7 @@ export const CreateFarmModule = () => {
       if (RegionList[i].key === key) {
         setCurrentRegion(RegionList[i]);
         if (key === '0') {
-          setRegionError(t('signup.choose-county'));
+          setRegionError(t('signup.choose-county') || '');
         } else {
           setRegionError('');
         }
@@ -189,14 +189,14 @@ export const CreateFarmModule = () => {
   };
 
   const handleLongitudeChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = event.target.value;
     setLongitude(value);
   };
 
   const handletypeofProductionChange = (
-    event: React.ChangeEvent<HTMLInputElement>
+    event: React.ChangeEvent<HTMLInputElement>,
   ) => {
     const value = event.target.value;
     setTypeofProduction(value);
@@ -213,7 +213,7 @@ export const CreateFarmModule = () => {
   };
 
   const handlevarietiesChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
+    event: React.ChangeEvent<HTMLSelectElement>,
   ) => {
     const value = event.target.value;
     setVarieties(value);

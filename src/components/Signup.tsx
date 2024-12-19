@@ -229,7 +229,7 @@ const Signup = () => {
       setEmailUser(isValidEmail(input));
       setUserNameError('');
     } else {
-      setUserNameError(t('errors.no-valid'));
+      setUserNameError(t('errors.no-valid') || '');
     }
   };
 
@@ -239,7 +239,7 @@ const Signup = () => {
     const input = event.target.value;
     setCooperativeId(input);
     if (input.trim().length > 25) {
-      setFarmerIdError(t('errors.max-length', { length: 25 }));
+      setFarmerIdError(t('errors.max-length', { length: 25 }) || '');
     } else {
       setFarmerIdError('');
     }
@@ -249,7 +249,7 @@ const Signup = () => {
     const input = event.target.value;
     setFarmerId(input);
     if (input.trim().length > 70) {
-      setFullnameError(t('errors.max-length', { length: 70 }));
+      setFullnameError(t('errors.max-length', { length: 70 }) || '');
     } else {
       setFullnameError('');
     }
@@ -259,7 +259,7 @@ const Signup = () => {
     const input = event.target.value;
     setFullname(input);
     if (input.trim().length > 70) {
-      setFullnameError(t('errors.max-length', { length: 70 }));
+      setFullnameError(t('errors.max-length', { length: 70 }) || '');
     } else {
       setFullnameError('');
     }
@@ -269,7 +269,7 @@ const Signup = () => {
     const input = event.target.value;
     setVillage(input);
     if (input.trim().length > 70) {
-      setVillageError(t('errors.max-length', { length: 25 }));
+      setVillageError(t('errors.max-length', { length: 25 }) || '');
     } else {
       setVillageError('');
     }
@@ -279,7 +279,7 @@ const Signup = () => {
     const input = event.target.value;
     setVillage2(input);
     if (input.trim().length > 70) {
-      setVillage2Error(t('errors.max-length', { length: 25 }));
+      setVillage2Error(t('errors.max-length', { length: 25 }) || '');
     } else {
       setVillage2Error('');
     }
@@ -289,7 +289,7 @@ const Signup = () => {
     const input = event.target.value;
     setBio(input);
     if (input.trim().length > 700) {
-      setBioError(t('errors.max-length', { length: 700 }));
+      setBioError(t('errors.max-length', { length: 700 }) || '');
     } else {
       setBioError('');
     }
@@ -303,7 +303,7 @@ const Signup = () => {
       if (CooperativeList[i].key === key) {
         setCurrentCoop(CooperativeList[i]);
         if (key === '0') {
-          setCoopError(t('signup.choose-company'));
+          setCoopError(t('signup.choose-company') || '');
         } else {
           setCoopError('');
         }
@@ -317,7 +317,7 @@ const Signup = () => {
       if (RegionList[i].key === key) {
         setCurrentRegion(RegionList[i]);
         if (key === '0') {
-          setRegionError(t('signup.choose-county'));
+          setRegionError(t('signup.choose-county') || '');
         } else {
           setRegionError('');
         }
@@ -342,7 +342,7 @@ const Signup = () => {
     setCellphone(input);
     const valid = isEmailUser ? isValidCellphone(input) : isValidEmail(input);
     if (!valid) {
-      setCellphoneError(t('errors.no-valid'));
+      setCellphoneError(t('errors.no-valid') || '');
     } else {
       setCellphoneError('');
     }
@@ -354,7 +354,7 @@ const Signup = () => {
     const input = event.target.value;
     setAddressLine(input);
     if (input.trim().length > 150) {
-      setAddressLineError(t('errors.max-length', { length: 150 }));
+      setAddressLineError(t('errors.max-length', { length: 150 }) || '');
     } else {
       setAddressLineError('');
     }
@@ -366,7 +366,7 @@ const Signup = () => {
     const input = event.target.value;
     setSocialReason(input);
     if (input.trim().length > 70) {
-      setSocialReasonError(t('errors.max-length', { length: 70 }));
+      setSocialReasonError(t('errors.max-length', { length: 70 }) || '');
     } else {
       setSocialReasonError('');
     }
@@ -378,7 +378,7 @@ const Signup = () => {
     const input = event.target.value;
     setCupProfile(input);
     if (Number.isNaN(input)) {
-      setCupProfileError(t('errors.no-valid'));
+      setCupProfileError(t('errors.no-valid') || '');
     } else {
       setCupProfileError('');
     }
@@ -390,7 +390,7 @@ const Signup = () => {
     const input = event.target.value;
     setLongitude(input);
     if (Number.isNaN(input)) {
-      setLongitudeError(t('errors.no-valid'));
+      setLongitudeError(t('errors.no-valid') || '');
     } else {
       setLongitudeError('');
     }
@@ -400,7 +400,7 @@ const Signup = () => {
     const input = event.target.value;
     setLatitude(input);
     if (Number.isNaN(input)) {
-      setLatitudeError(t('errors.no-valid'));
+      setLatitudeError(t('errors.no-valid') || '');
     } else {
       setLatitudeError('');
     }
@@ -410,7 +410,7 @@ const Signup = () => {
     const input = event.target.value;
     setReview(input);
     if (input.trim().length > 700) {
-      setReviewError(t('errors.max-length', { length: 700 }));
+      setReviewError(t('errors.max-length', { length: 700 }) || '');
     } else {
       setReviewError('');
     }
@@ -422,7 +422,7 @@ const Signup = () => {
     const input = event.target.value;
     setProductiveAreas(input);
     if (input.trim().length > 300) {
-      setProductiveAreasError(t('errors.max-length', { length: 300 }));
+      setProductiveAreasError(t('errors.max-length', { length: 300 }) || '');
     } else {
       setProductiveAreasError('');
     }
@@ -434,7 +434,7 @@ const Signup = () => {
     const input = event.target.value;
     setManagerName(input);
     if (input.trim().length > 80) {
-      setManagerNameError(t('errors.max-length', { length: 80 }));
+      setManagerNameError(t('errors.max-length', { length: 80 }) || '');
     } else {
       setManagerNameError('');
     }
@@ -444,7 +444,7 @@ const Signup = () => {
     const input = event.target.value;
     setWebsite(input);
     if (Number.isNaN(input)) {
-      setWebsiteError(t('errors.no-valid'));
+      setWebsiteError(t('errors.no-valid') || '');
     } else {
       setWebsiteError('');
     }
@@ -456,7 +456,7 @@ const Signup = () => {
     const input = event.target.value;
     setNoPartnersM(input);
     if (Number.isNaN(input)) {
-      setNoPartnersMError(t('errors.no-valid'));
+      setNoPartnersMError(t('errors.no-valid') || '');
     } else {
       setNoPartnersMError('');
     }
@@ -468,7 +468,7 @@ const Signup = () => {
     const input = event.target.value;
     setNoPartnersF(input);
     if (input.trim().length > 120) {
-      setNoPartnersFError(t('errors.max-length', { length: 120 }));
+      setNoPartnersFError(t('errors.max-length', { length: 120 }) || '');
     } else {
       setNoPartnersFError('');
     }
@@ -611,7 +611,7 @@ const Signup = () => {
                 value={review}
                 as="textarea"
                 rows={4}
-                placeholder={t('review')}
+                placeholder={t('review') as string}
                 onChange={handleReviewChange}
                 className="textarea textarea-bordered w-full"
               />
@@ -883,7 +883,7 @@ const Signup = () => {
                 value={bio}
                 as="textarea"
                 rows={5}
-                placeholder={t('placeholders.bio')}
+                placeholder={t('placeholders.bio') as string}
                 onChange={handleBioChange}
                 className="textarea textarea-bordered w-full"
               />

@@ -222,7 +222,7 @@ export const EditCertificationsModule = () => {
           enableFullScreenToggle={false}
           displayColumnDefOptions={{
             'mrt-row-actions': {
-              header: t('edit'),
+              header: t('edit') || '',
             },
           }}
           enableColumnActions={false}
