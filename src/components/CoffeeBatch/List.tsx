@@ -1,28 +1,23 @@
-import React, { useEffect, useState } from 'react';
-import { BigNumber, ethers } from 'ethers';
-import { Contract, Provider, setMulticallAddress } from 'ethers-multicall';
-import { gql, useQuery } from '@apollo/client';
-import { useTranslation } from 'react-i18next';
-import '../../styles/batchlist.scss';
-import QRCode from 'react-qr-code';
-import Loading from '../Loading';
-import { useAuthContext } from '../../states/AuthContext';
-import { ipfsUrl, SEARCH_DIVIDER } from '../../utils/constants';
-import FormInput from '../common/FormInput';
-import { CustomPagination } from '../common/Pagination';
-import { CoffeeBatchType } from '../common/types';
-import CoffeeBatch from '../../contracts/CoffeBatch.json';
-import BatchItem from './BatchItem';
-import {
-  getCompanyAddresses,
-  getCompanyAddressesByHost,
-  getDefaultProvider,
-  isNumber,
-} from '../../utils/utils';
-import { SearchIcon } from '../icons/search';
-import { ClearIcon } from '../icons/clear';
-import { LinkIcon } from '../icons/link';
-import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
+import React, { useEffect, useState } from "react";
+import { BigNumber, ethers } from "ethers";
+import { Contract, Provider, setMulticallAddress } from "ethers-multicall";
+import { gql, useQuery } from "@apollo/client";
+import { useTranslation } from "react-i18next";
+import "../../styles/batchlist.scss";
+import QRCode from "react-qr-code";
+import Loading from "../Loading";
+import { useAuthContext } from "../../states/AuthContext";
+import { ipfsUrl, SEARCH_DIVIDER } from "../../utils/constants";
+import FormInput from "../common/FormInput";
+import { CustomPagination } from "../common/Pagination";
+import { CoffeeBatchType } from "../common/types";
+import CoffeeBatch from "../../contracts/CoffeBatch.json";
+import BatchItem from "./BatchItem";
+import { getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isNumber, } from "../../utils/utils";
+import { SearchIcon } from "../icons/search";
+import { ClearIcon } from "../icons/clear";
+import { LinkIcon } from "../icons/link";
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 
 const openInNewTab = (url: string | URL | undefined) => {
   window.open(url, '_blank', 'noopener,noreferrer');

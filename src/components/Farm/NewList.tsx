@@ -1,9 +1,9 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
-import { getFarms } from '../../db/firebase';
-import Box from '@mui/material/Box';
-import { useTranslation } from 'react-i18next';
-import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
+import React, { useEffect, useMemo, useState } from "react";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
+import { getFarms } from "../../db/firebase";
+import Box from "@mui/material/Box";
+import { useTranslation } from "react-i18next";
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import NewMap from '../common/NewMap';
 

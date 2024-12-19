@@ -1,12 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import QRCode from 'react-qr-code';
-import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
-import { useTranslation } from 'react-i18next';
-import '../../styles/farmers.scss';
-import { getAllFarmers } from '../../db/firebase';
-import { useAuthContext } from '../../states/AuthContext';
-import { GenderFilterList, SEARCH_DIVIDER } from '../../utils/constants';
-import { LinkIcon } from '../icons/link';
+import React, {useEffect, useMemo, useState} from "react";
+import QRCode from "react-qr-code";
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
+import {useTranslation} from "react-i18next";
+import "../../styles/farmers.scss";
+import {getAllFarmers} from "../../db/firebase";
+import {useAuthContext} from "../../states/AuthContext";
+import {GenderFilterList, SEARCH_DIVIDER} from "../../utils/constants";
+import {LinkIcon} from "../icons/link";
+
 
 const openInNewTab = (url: string | URL | undefined) => {
   window.open(url, '_blank', 'noopener,noreferrer');

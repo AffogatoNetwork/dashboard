@@ -1,13 +1,13 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import { MaterialReactTable, MRT_ColumnDef } from 'material-react-table';
-import { getAllFarmers } from '../../db/firebase';
-import { SEARCH_DIVIDER } from '../../utils/constants';
-import Box from '@mui/material/Box';
-import QRCode from 'react-qr-code';
-import { LinkIcon } from '../icons/link';
-import { useTranslation } from 'react-i18next';
-import reactNodeToString from 'react-node-to-string';
-import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
+import React, { useEffect, useMemo, useState } from "react";
+import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
+import { getAllFarmers } from "../../db/firebase";
+import { SEARCH_DIVIDER } from "../../utils/constants";
+import Box from "@mui/material/Box";
+import QRCode from "react-qr-code";
+import { LinkIcon } from "../icons/link";
+import { useTranslation } from "react-i18next";
+import reactNodeToString from "react-node-to-string"
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 export const NewList = () => {

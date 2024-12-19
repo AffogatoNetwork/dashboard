@@ -973,7 +973,7 @@ const Signup = () => {
                     navigate('/login', { replace: true });
                   }}
                 >
-                  {t('login')}
+                  {t('login') as string}
                 </button>
               </div>
             )}

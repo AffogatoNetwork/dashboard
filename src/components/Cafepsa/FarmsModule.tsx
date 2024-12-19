@@ -1,16 +1,12 @@
-import React, { useEffect, useMemo, useState } from 'react';
-import {
-  MaterialReactTable,
-  MaterialReactTableProps,
-  MRT_ColumnDef,
-} from 'material-react-table';
-import { editFarm, getAllFarmers, getCafepsaJsonUrl } from '../../db/firebase';
-import Box from '@mui/material/Box';
-import QRCode from 'react-qr-code';
-import { LinkIcon } from '../icons/link';
-import { useTranslation } from 'react-i18next';
-import reactNodeToString from 'react-node-to-string';
-import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
+import React, { useEffect, useMemo, useState } from "react";
+import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from "material-react-table";
+import { editFarm, getAllFarmers, getCafepsaJsonUrl } from "../../db/firebase";
+import Box from "@mui/material/Box";
+import QRCode from "react-qr-code";
+import { LinkIcon } from "../icons/link";
+import { useTranslation } from "react-i18next";
+import reactNodeToString from "react-node-to-string"
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import NewMap from '../common/NewMap';
 import { useFarmers } from '../../hooks/useFarmers';
