@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from "react";
 import QRCode from "react-qr-code";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import {useTranslation} from "react-i18next";
 import "../../styles/farmers.scss";
 import {getAllFarmers} from "../../db/firebase";

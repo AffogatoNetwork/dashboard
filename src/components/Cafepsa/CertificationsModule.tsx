@@ -9,7 +9,7 @@ import MaterialReactTable, {
 import Box from '@mui/material/Box';
 import QRCode from 'react-qr-code';
 import reactNodeToString from 'react-node-to-string';
-import ReactHTMLTableToExcel from 'react-html-table-to-excel';
+import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { LinkIcon } from '../icons/link';
 import { MdDoneOutline } from 'react-icons/md';
@@ -32,7 +32,7 @@ export const CertificationsModule = () => {
       {
         scale: 10,
         backgroundColor: 'white',
-      }
+      },
     );
   };
 
@@ -320,7 +320,7 @@ export const CertificationsModule = () => {
         ),
       },
     ],
-    [i18n.language]
+    [i18n.language],
   );
 
   return (

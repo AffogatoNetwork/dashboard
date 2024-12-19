@@ -6,7 +6,7 @@ import QRCode from "react-qr-code";
 import { LinkIcon } from "../icons/link";
 import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 
 export const BatchesModule = () => {

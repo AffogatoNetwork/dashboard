@@ -17,7 +17,7 @@ import { getCompanyAddresses, getCompanyAddressesByHost, getDefaultProvider, isN
 import { SearchIcon } from "../icons/search";
 import { ClearIcon } from "../icons/clear";
 import { LinkIcon } from "../icons/link";
-import ReactHTMLTableToExcel from "react-html-table-to-excel";
+import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 
 const openInNewTab = (url: string | URL | undefined) => {
     window.open(url, '_blank', 'noopener,noreferrer');
