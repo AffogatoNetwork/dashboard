@@ -80,6 +80,8 @@
   "devDependencies": {
     "@babel/core": "7.26.0",
     "@babel/preset-env": "7.26.0",
+    "@types/react": "^19.0.2",
+    "@types/react-dom": "^19.0.2",
     "@types/react-modal": "^3.16.3",
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/parser": "^5.62.0",
