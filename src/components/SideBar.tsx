@@ -19,9 +19,7 @@ import { AiOutlineMenuFold, AiOutlineMenuUnfold } from 'react-icons/ai';
 import CoopLogo from './common/CoopLogo';
 import { useAuthContext } from '../states/AuthContext';
 import LangChooser from './common/LangChooser';
-import { WorldIcon } from './icons/world';
 import { IconLogin } from './icons/login';
-import firebase from 'firebase/compat';
 
 let data = [
   {
@@ -274,36 +272,16 @@ export default function Home() {
               <>{t('add-batches')}</>
             </p>
           </div>
-          <div
-            tabIndex={0}
-            className={`dropdown dropdown-right dropdown-end inline-flex items-center w-full h-12 rounded-l-lg mt-2 px-4 py-4 hover:bg-white hover:text-amber-900 font-medium rounded-md cursor-pointer ml-2`}
-          >
-            <WorldIcon className="w-8" />
-            <p className="ml-4 text-sm">
-              <>{t('change-lang')}</>
-            </p>
-            <ul
-              tabIndex={0}
-              className="dropdown-content menu p-2 hover:text-black text-black shadow bg-base-100 rounded-box  rounded-l-lg w-52"
-            >
-              <LangChooser />
-            </ul>
+          <div className="divider">
+            {' '}
+            <>{t('change-lang')}</>
+          </div>
+          <div className="m-2 ">
+            <LangChooser />
           </div>
 
           <br />
           <br />
-          {active && (
-            <AiOutlineMenuFold
-              onClick={showLess}
-              className="inline-flex items-center w-full h-12 px-3 mt-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer"
-            />
-          )}
-          {!active && (
-            <AiOutlineMenuUnfold
-              onClick={showMore}
-              className="inline-flex items-center w-full h-12 px-3 mt-2 py-2 hover:text-amber-900  active:bg-white active:text-white font-medium rounded-md cursor-pointer"
-            />
-          )}
 
           <div>
             {userData.name ? (
