@@ -41,7 +41,7 @@ export default function AuthProvider({ children }: props) {
   });
   emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "");
 
-const [firebaseData ,setFirebaseData] = useState<any>([]);
+  const [firebaseData, setFirebaseData] = useState<any>([]);
 
   const [state, dispatch] = useReducer(
     (prevState: any, action: any) => {
@@ -122,9 +122,9 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
     const load = async () => {
       const loggedIn = await magicSDK.user.isLoggedIn();
       if (loggedIn) {
-        const provider = new ethers.providers.Web3Provider(
-            // @ts-ignore
-            magicSDK.rpcProvider
+        const provider = new ethers.BrowserProvider(
+          // @ts-ignore
+          magicSDK.rpcProvider
         );
         dispatch({
           type: "SIGN_IN",
@@ -133,7 +133,7 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
           provider,
         });
 
-    } else {
+      } else {
         dispatch({ type: "SIGN_OUT", isLoading: false });
       }
     };
@@ -143,8 +143,8 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
 
   const verifyAccount = async () => {
     // @ts-ignore
-    const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
-    const signer = provider.getSigner();
+    const provider = new ethers.BrowserProvider(magicSDK.rpcProvider);
+    const signer = await provider.getSigner();
     const userAddress = await signer.getAddress();
     // Set CoffeBatch contracts
     const currentCoffeeBatch = new ethers.Contract(
@@ -203,8 +203,8 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
 
   const afterSignupAction = async (data: ContextDataType) => {
     // @ts-ignore
-    const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
-    const signer = provider.getSigner();
+    const provider = new ethers.BrowserProvider(magicSDK.rpcProvider);
+    const signer = await provider.getSigner();
     const address = await signer.getAddress();
     sendAccountEmail(address, data);
     if (data.farmerData !== null) {
@@ -235,7 +235,7 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
       },
       createAccount: async (data: ContextDataType) => {
         dispatch({ type: "CREATING_ACCOUNT" });
-        
+
         if (data.emailLogin) {
           await magicSDK.auth.loginWithMagicLink({
             email: data.credential,
@@ -249,7 +249,7 @@ const [firebaseData ,setFirebaseData] = useState<any>([]);
         } else {
           dispatch({ type: "CREATING_ACCOUNT_ERROR" });
         }
-        
+
       },
       signOut: async () => {
         await magicSDK.user.logout();

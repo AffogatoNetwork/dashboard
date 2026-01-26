@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import MaterialReactTable, { MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
+import { MaterialReactTable, MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
 import { getAllFarmers, UserData } from "../../db/firebase";
 import { SEARCH_DIVIDER } from "../../utils/constants";
 import Box from "@mui/material/Box";
