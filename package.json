@@ -30,7 +30,7 @@
     "bcryptjs": "^3.0.3",
     "caniuse-lite": "^1.0.30001766",
     "country-flag-icons": "^1.6.8",
-    "daisyui": "^5.5.14",
+    "daisyui": "^4.12.23",
     "dayjs": "^1.11.19",
     "ethers": "^6.16.0",
     "ethers-multicall": "^0.2.3",
@@ -71,6 +71,7 @@
     "react-scripts": "^5.0.1",
     "react-toastify": "^11.0.5",
     "react-use": "^17.6.0",
+    "rxjs": "^7.8.2",
     "sass": "^1.97.3",
     "sass-loader": "^16.0.6",
     "save-svg-as-png": "^1.4.17",
@@ -80,7 +81,28 @@
     "web-vitals": "^5.1.0"
   },
   "resolutions": {
-    "autoprefixer": "10.4.4"
+    "autoprefixer": "10.4.4",
+    "css-minimizer-webpack-plugin": "3.0.0",
+    "react-helmet-async": "2.0.5"
+  },
+  "overrides": {
+    "react-helmet-async": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "react-node-to-string": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "@typescript-eslint/eslint-plugin": "^8.54.0",
+    "@typescript-eslint/parser": "^8.54.0",
+    "css-minimizer-webpack-plugin": "3.0.0",
+    "eslint": "^8.57.0",
+    "react-query": {
+      "react": "$react",
+      "react-dom": "$react-dom"
+    },
+    "typescript": "$typescript"
   },
   "devDependencies": {
     "@babel/core": "7.28.6",
@@ -92,7 +114,7 @@
     "@types/react-router-dom": "^5.3.3",
     "@typescript-eslint/parser": "^8.54.0",
     "dotenv": "17.2.3",
-    "eslint": "^9.39.2",
+    "eslint": "^8.57.0",
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-html": "^8.1.4",
     "eslint-plugin-import": "^2.32.0",

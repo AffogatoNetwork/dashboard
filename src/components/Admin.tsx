@@ -10,6 +10,7 @@ import { CreateCertificationModule } from './Admin/CreateCertificationModule';
 import { EditProfilePhotoModule } from './Admin/EditProfilePhotoModule';
 import { CreateBatchesModule } from './Admin/CreateBatches';
 import { EditBatchesModule } from './Admin/EditBatchesModule';
+import { FirebaseStatus } from './Admin/FirebaseStatus';
 
 export const AdminModule = () => {
   const { t } = useTranslation();
@@ -120,6 +121,9 @@ export const AdminModule = () => {
               <div className="w-full p-5 rounded-lg">
                 <div className="text-center text-xl font-bold">
                   <h1> Modulo de Administracion </h1>
+                  <div className="flex justify-center mt-2">
+                    <FirebaseStatus />
+                  </div>
                 </div>
               </div>
               <div className="m-6">
@@ -128,10 +132,9 @@ export const AdminModule = () => {
                     <>
                       <div className="justify-center">
                         <a
-                          className={`${
-                            activeTab == 'create-batch' &&
+                          className={`${activeTab == 'create-batch' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('create-batch')}
                         >
@@ -139,10 +142,9 @@ export const AdminModule = () => {
                         </a>
 
                         <a
-                          className={`${
-                            activeTab == 'edit-batches' &&
+                          className={`${activeTab == 'edit-batches' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('edit-batches')}
                         >
@@ -150,10 +152,9 @@ export const AdminModule = () => {
                         </a>
 
                         <a
-                          className={`${
-                            activeTab == 'crear-certificados' &&
+                          className={`${activeTab == 'crear-certificados' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('crear-certificados')}
                         >
@@ -161,10 +162,9 @@ export const AdminModule = () => {
                         </a>
 
                         <a
-                          className={`${
-                            activeTab == 'variedades' &&
+                          className={`${activeTab == 'variedades' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('variedades')}
                         >
@@ -172,10 +172,9 @@ export const AdminModule = () => {
                         </a>
 
                         <a
-                          className={`${
-                            activeTab == 'farmer' &&
+                          className={`${activeTab == 'farmer' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('farmer')}
                         >
@@ -183,10 +182,9 @@ export const AdminModule = () => {
                         </a>
 
                         <a
-                          className={`${
-                            activeTab == 'farm' &&
+                          className={`${activeTab == 'farm' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('farm')}
                         >
@@ -195,10 +193,9 @@ export const AdminModule = () => {
 
                         {company !== 'PROEXO' && (
                           <a
-                            className={`${
-                              activeTab == 'farmer' &&
+                            className={`${activeTab == 'farmer' &&
                               `tab-lifted tab tab-active btn-wide tab-lg`
-                            } tab btn-wide tab-lg `}
+                              } tab btn-wide tab-lg `}
                             id="signup-tabs"
                             onClick={() => setActiveTab('farmer')}
                           >
@@ -207,10 +204,9 @@ export const AdminModule = () => {
                         )}
 
                         <a
-                          className={`${
-                            activeTab == 'createFarmer' &&
+                          className={`${activeTab == 'createFarmer' &&
                             `tab-lifted tab tab-active  btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('createFarmer')}
                         >
@@ -218,10 +214,9 @@ export const AdminModule = () => {
                         </a>
 
                         <a
-                          className={`${
-                            activeTab == 'photo' &&
+                          className={`${activeTab == 'photo' &&
                             `tab-lifted tab tab-active btn-wide tab-lg`
-                          } tab btn-wide tab-lg `}
+                            } tab btn-wide tab-lg `}
                           id="signup-tabs"
                           onClick={() => setActiveTab('photo')}
                         >
