@@ -26,11 +26,6 @@ export const DefaultLanding = () => {
                         src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2Faffogato-dashboard.png?alt=media&token=ad0329a4-a784-4862-a7f3-aa6207765d78"
                         alt="Agon" />
                     </div>
-                    <div className="flex flex-wrap justify-center md:justify-start gap-6 border-t border-gray-100 pt-8 mt-8">
-                        <a href="/privacy" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Política de Privacidad</a>
-                        <a href="/terms" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Términos de Servicio</a>
-                        <p className="text-gray-400 text-sm ml-auto">© 2026 Affogato Network. Todos los derechos reservados.</p>
-                    </div>
                 </div>
                 <div className="px-[12px] md:px-[36px] xl:px-0 mt-[30px] md:mt-[80px] lg:mt-[143px]">
                     <h2 className="font-bold font-chivo text-[25px] leading-[30px] md:text-heading-3 text-center mb-[40px] md:mb-[60px] lg:mb-[84px]">Empresas y Cooperativas que confian en nosotros
@@ -82,6 +77,11 @@ export const DefaultLanding = () => {
                                     </a>
                                 </button>
                             </div>
+                        </div>
+                        <div className="flex flex-wrap justify-center md:justify-start gap-6 border-t border-gray-100 pt-8 mt-8">
+                            <a href="/privacy" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Política de Privacidad</a>
+                            <a href="/terms" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Términos de Servicio</a>
+                            <p className="text-gray-400 text-sm ml-auto">© 2026 Affogato Network. Todos los derechos reservados.</p>
                         </div>
                     </div>
                 </footer>
