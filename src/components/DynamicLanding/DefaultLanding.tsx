@@ -5,7 +5,7 @@ export const DefaultLanding = () => {
 
     return (<>
 
-        <body className="overflow-x-hidden w-screen relative services-2-page">
+        <div className="overflow-x-hidden w-screen relative services-2-page">
         <div className="wrapper mx-auto text-gray-900 font-normal max-w-[1320px]"><a> </a>
             <div className="overlay"></div>
             <div className="px-[12px] md:px-[36px] xl:px-0 mt-[70px] text-center z-10 relative lg:mt-[99px]">
@@ -78,9 +78,14 @@ export const DefaultLanding = () => {
                             </button>
                         </div>
                     </div>
+                    <div className="flex flex-wrap justify-center md:justify-start gap-6 border-t border-gray-100 pt-8 mt-8">
+                        <a href="/privacy" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Política de Privacidad</a>
+                        <a href="/terms" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Términos de Servicio</a>
+                        <p className="text-gray-400 text-sm ml-auto">© 2026 Affogato Network. Todos los derechos reservados.</p>
+                    </div>
                 </div>
             </footer>
         </div>
-        </body>
+        </div>
     </>);
 };

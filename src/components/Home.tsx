@@ -28,6 +28,8 @@ import { BatchesModule } from './Cafepsa/BatchesModule';
 import NewBatchId from './Cafepsa/NewBatchId';
 import { FarmerProfileModule } from './Cafepsa/FarmerProfile';
 import { AdminModule } from './Admin';
+import PrivacyPolicy from './PrivacyPolicy';
+import TermsOfService from './TermsOfService';
 
 const Home = () => {
   const { authState, authContext } = useAuthContext();
@@ -178,6 +180,8 @@ const Home = () => {
           element={<FarmerProfileModule />}
         />
         <Route path="/company/:companyId" element={<Company />} />
+        <Route path="/privacy" element={<PrivacyPolicy />} />
+        <Route path="/terms" element={<TermsOfService />} />
       </Routes>
     </div>
   );
