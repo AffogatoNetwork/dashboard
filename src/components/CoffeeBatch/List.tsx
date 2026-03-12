@@ -41,7 +41,7 @@ export const List = () => {
   const { authState } = useAuthContext();
   const [state] = authState;
   const [currentEthCallProvider, setCurrentEthCallProvider] =
-    useState<ethers.Provider | null>(null);
+    useState<ethers.providers.Provider | null>(null);
   const [cbContract, setCbContract] = useState<Contract>();
   const [coffeeBatchList, setCoffeeBatchList] = useState<
     Array<CoffeeBatchType>

@@ -6,7 +6,7 @@ import NotFound from '../common/NotFound';
 import {
   getFarmer,
   getFarmerFarms,
-  getCafepsaImageUrl,
+  getImageUrl,
 } from '../../db/firebase';
 import NewMap from '../common/NewMap';
 
@@ -19,9 +19,8 @@ export const FarmerProfileModule = () => {
   const [latitude, setLatitude] = useState('');
   const [longitude, setLongitude] = useState('');
   const [farmName, setfarmName] = useState('');
-  const [imageUrl, setImageUrl] = useState(
-    'https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/no_image.jpeg?alt=media&token=0d07fc99-d598-4c9b-9022-c4d018e67881',
-  );
+  const [imageUrl, setImageUrl] = useState('');
+
 
   useEffect(() => {
     const load = async () => {
@@ -42,7 +41,7 @@ export const FarmerProfileModule = () => {
           );
           setLoading(false);
         });
-        await getCafepsaImageUrl(newfarmerId).then((result) => {
+        await getImageUrl(newfarmerId).then((result) => {
           setImageUrl(result);
         });
         setLoading(false);

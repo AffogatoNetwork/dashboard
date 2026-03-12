@@ -122,7 +122,7 @@ export default function AuthProvider({ children }: props) {
     const load = async () => {
       const loggedIn = await magicSDK.user.isLoggedIn();
       if (loggedIn) {
-        const provider = new ethers.BrowserProvider(
+        const provider = new ethers.providers.Web3Provider(
           // @ts-ignore
           magicSDK.rpcProvider
         );
@@ -143,7 +143,7 @@ export default function AuthProvider({ children }: props) {
 
   const verifyAccount = async () => {
     // @ts-ignore
-    const provider = new ethers.BrowserProvider(magicSDK.rpcProvider);
+    const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
     const signer = await provider.getSigner();
     const userAddress = await signer.getAddress();
     // Set CoffeBatch contracts
@@ -203,7 +203,7 @@ export default function AuthProvider({ children }: props) {
 
   const afterSignupAction = async (data: ContextDataType) => {
     // @ts-ignore
-    const provider = new ethers.BrowserProvider(magicSDK.rpcProvider);
+    const provider = new ethers.providers.Web3Provider(magicSDK.rpcProvider);
     const signer = await provider.getSigner();
     const address = await signer.getAddress();
     sendAccountEmail(address, data);

@@ -4,7 +4,7 @@ import { CooperativeList } from "./constants";
 
 export const getDefaultProvider = () => {
   const url = "https://rpc.ankr.com/gnosis";
-  const customHttpProvider = new ethers.JsonRpcProvider(url);
+  const customHttpProvider = new ethers.providers.JsonRpcProvider(url);
   return customHttpProvider;
 };
 

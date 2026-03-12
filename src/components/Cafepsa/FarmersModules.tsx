@@ -298,6 +298,7 @@ export const FarmersModules = () => {
       {
         header: t('tables.community'),
         accessorKey: 'region',
+        id: 'community',
       },
       {
         header: t('tables.municipality'),
@@ -306,6 +307,7 @@ export const FarmersModules = () => {
       {
         header: t('region'),
         accessorKey: 'region',
+        id: 'region',
       },
       {
         header: t('tables.country'),
