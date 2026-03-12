@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import MaterialReactTable, { MRT_ColumnDef } from "material-react-table";
+import { MaterialReactTable, MRT_ColumnDef } from "material-react-table";
 import { getFarms } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import { useTranslation } from "react-i18next";
@@ -37,7 +37,7 @@ export const FarmsNewList = () => {
     setCurrentAddressL(adressL);
   };
 
-  const DetermineValue = (value: string) => {};
+  const DetermineValue = (value: string) => { };
 
   type FarmType = {
     farmerAddress: string;

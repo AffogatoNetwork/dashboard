@@ -1,6 +1,7 @@
 import React from "react";
 import { BrowserRouter } from 'react-router-dom';
-import { ApolloProvider, ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloClient, InMemoryCache, HttpLink } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 
 import { CookiesProvider } from 'react-cookie';
 import './i18n';
@@ -16,7 +17,9 @@ import DynamicHeader from './components/DynamicHeader/DynamicHeader';
 
 const clientOracle = () =>
   new ApolloClient({
-    uri: 'https://api.thegraph.com/subgraphs/name/jdestephen/affogato-sg',
+    link: new HttpLink({
+      uri: 'https://api.thegraph.com/subgraphs/name/jdestephen/affogato-sg',
+    }),
     cache: new InMemoryCache(),
   });
 

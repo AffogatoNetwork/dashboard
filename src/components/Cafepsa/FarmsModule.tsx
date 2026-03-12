@@ -1,5 +1,5 @@
 import React, { useEffect, useMemo, useState } from "react";
-import MaterialReactTable, { MaterialReactTableProps, MRT_ColumnDef } from "material-react-table";
+import { MaterialReactTable, MaterialReactTableProps, MRT_ColumnDef } from "material-react-table";
 import { editFarm, getAllFarmers, getCafepsaJsonUrl } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";

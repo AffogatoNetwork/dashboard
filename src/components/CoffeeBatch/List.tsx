@@ -1,7 +1,8 @@
 import React, { useEffect, useState } from "react";
-import { BigNumber, ethers } from "ethers";
-import { Contract, Provider, setMulticallAddress } from "ethers-multicall";
-import { gql, useQuery } from "@apollo/client";
+import { ethers } from "ethers";
+import { Contract } from "ethers";
+import { gql } from "@apollo/client";
+import { useQuery } from "@apollo/client/react";
 import { useTranslation } from "react-i18next";
 import "../../styles/batchlist.scss";
 import QRCode from "react-qr-code";
@@ -40,7 +41,7 @@ export const List = () => {
   const { authState } = useAuthContext();
   const [state] = authState;
   const [currentEthCallProvider, setCurrentEthCallProvider] =
-    useState<Provider | null>(null);
+    useState<ethers.Provider | null>(null);
   const [cbContract, setCbContract] = useState<Contract>();
   const [coffeeBatchList, setCoffeeBatchList] = useState<
     Array<CoffeeBatchType>
@@ -70,7 +71,7 @@ export const List = () => {
   const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
   const [currentCompany, setCurrentCompany] = useState('');
 
-  setMulticallAddress(10, '0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a');
+  // setMulticallAddress(10, '0xb5b692a88bdfc81ca69dcb1d924f59f0413a602a');
 
   const batchesQuery = gql`
     query getCoffeeBatches($owners: [String!]!) {
@@ -261,13 +262,14 @@ export const List = () => {
       setCoffeeBatchList2([]);
       const ethcalls = [];
       for (let i = 0; i < cbData.length; i += 1) {
-        const batchCall = await cbContract?.tokenURI(
-          BigNumber.from(cbData[i].id),
+        // cbContract is standard ethers Contract now, so this returns a Promise
+        const batchCall = cbContract.tokenURI(
+          BigInt(cbData[i].id),
         );
         ethcalls.push(batchCall);
       }
       if (ethcalls.length > 0) {
-        const allCalls = await currentEthCallProvider?.all(ethcalls);
+        const allCalls = await Promise.all(ethcalls);
         if (allCalls) {
           for (let i = 0; i < allCalls?.length; i += 1) {
             await loadBatch(cbData[i].id, allCalls[i]);
@@ -282,20 +284,20 @@ export const List = () => {
     }
   };
 
-  const { loading, data, refetch, error } = useQuery(batchesQuery, {
+  const { loading, data, refetch, error } = useQuery<any>(batchesQuery, {
     variables: {
       owners: companyAddresses,
     },
     fetchPolicy: 'no-cache',
     notifyOnNetworkStatusChange: true,
-    onError: () => {},
-    onCompleted: () => {
-      if (data.coffeeBatches.length > 0) {
-        setLoadingIpfs(true);
-        loadBatchesData(data.coffeeBatches);
-      }
-    },
   });
+
+  useEffect(() => {
+    if (data && data.coffeeBatches && data.coffeeBatches.length > 0) {
+      setLoadingIpfs(true);
+      loadBatchesData(data.coffeeBatches);
+    }
+  }, [data]);
 
   useEffect(
     () => {
@@ -303,27 +305,26 @@ export const List = () => {
         let ethcallProvider = null;
 
         if (state.provider !== null) {
-          ethcallProvider = new Provider(state.provider);
-          const signer = state.provider.getSigner();
+          ethcallProvider = state.provider;
+          const signer = await state.provider.getSigner();
           const address = await signer.getAddress();
           setCompanyAddresses(getCompanyAddresses(address));
           setAuth(true);
         } else {
           const provider = getDefaultProvider();
-          const randomSigner = ethers.Wallet.createRandom().connect(provider);
-          ethcallProvider = new Provider(randomSigner.provider);
+          ethcallProvider = provider;
           setCompanyAddresses(getCompanyAddressesByHost(window.location.host));
           setAuth(false);
         }
         if (ethcallProvider !== null) {
-          await ethcallProvider.init();
           // Set CoffeBatch contracts
           const currentCoffeeBatch = new Contract(
             CoffeeBatch.address,
             CoffeeBatch.abi,
+            ethcallProvider
           );
           setCbContract(currentCoffeeBatch);
-          setCurrentEthCallProvider(ethcallProvider);
+          setCurrentEthCallProvider(null);
           if (!dataLoaded) {
             refetch();
           }

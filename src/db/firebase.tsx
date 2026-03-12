@@ -41,11 +41,11 @@ export const saveFarmer = async (farmer: FarmerType, image: any) => {
   try {
     if (image !== null) {
       const storageRef = ref(storage, farmer.address);
-      uploadBytes(storageRef, image).then((snapshot) => {});
+      uploadBytes(storageRef, image).then((snapshot) => { });
     }
     const farmerDoc = doc(db, 'farmers', farmer.address);
     await setDoc(farmerDoc, farmer);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const saveVarietyData = async (varietyData: any, id: string) => {
@@ -137,7 +137,7 @@ export const updateFarmerImage = async (address: string, image: any) => {
         console.log(snapshot);
       });
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const updateFarms = async (Farmdata: any) => {
@@ -148,7 +148,7 @@ export const updateFarms = async (Farmdata: any) => {
     const farmDoc = doc(db, 'farms', docId);
     console.log(Farmdata);
     await setDoc(farmDoc, Farmdata);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const getAllFarmers = async (company: string) => {
@@ -180,7 +180,7 @@ export const saveCompany = async (company: CompanyType) => {
   try {
     const companyDoc = doc(db, 'companies', company.address);
     await setDoc(companyDoc, company);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const getCompany = async (address: string) => {
@@ -295,7 +295,7 @@ export const editCertifications = async (data: any) => {
     };
     await updateDoc(farmDoc, farmData);
     window.location.reload();
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const editBatch = async (formData: any) => {
@@ -411,7 +411,7 @@ export const saveFarm = async (farm: FarmType) => {
       return true;
     });
     console.log('save');
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const saveFarms = async (farms: Array<FarmType>) => {
@@ -445,7 +445,7 @@ export const saveFarms = async (farms: Array<FarmType>) => {
         currentLast = farms.length;
       }
     }
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const getFarms = async (company: string) => {
@@ -487,7 +487,7 @@ export const saveBatch = async (batch: any) => {
       ethnicGroup: batch.ethnicGroup,
     };
     await setDoc(farmDoc, farmData);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const createBatch = async (formData: any) => {
@@ -607,7 +607,7 @@ export const saveFarmerData = async (farmerData: any, id: string) => {
       village2: farmerData.village2,
     };
     await setDoc(farmDoc, farmData);
-  } catch (error) {}
+  } catch (error) { }
 };
 
 export const authData = () => {
@@ -673,5 +673,18 @@ export const updateAllBatches = async (company: string) => {
     });
 
     console.log(`Updated document ID ${documentId} in the document.`);
+  }
+};
+
+export const checkFirebaseConnection = async () => {
+  try {
+    // Attempt to access a non-existent document to minimize data transfer
+    // We just want to check if we can reach the server
+    const docRef = doc(db, 'connectivity_check', 'ping');
+    await getDoc(docRef);
+    return true;
+  } catch (error) {
+    console.warn('Firebase connection check failed:', error);
+    return false;
   }
 };
