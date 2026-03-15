@@ -32,6 +32,7 @@ export const Profile = () => {
         });
         await getImageUrl(farmerId).then((result) => {
           setImageUrl(result);
+          console.log('img' + result);
         });
         setLoading(false);
       }
@@ -62,7 +63,7 @@ export const Profile = () => {
             ✕
           </label>
           <div className="flex justify-center m-6">
-            <img alt="profile photo" src={imageUrl} />
+            {imageUrl && <img alt="profile photo" src={imageUrl} />}
           </div>
         </div>
       </div>
@@ -83,7 +84,7 @@ export const Profile = () => {
                   <div className="w-32 rounded-full border-2 border-amber-900 hover:border-red-700">
                     <div />
                     <label htmlFor="image-modal" className=" ">
-                      <img alt="profile photo" src={imageUrl} />
+                      {imageUrl && <img alt="profile photo" src={imageUrl} />}
                     </label>
                   </div>
                 </div>

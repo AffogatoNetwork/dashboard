@@ -13,6 +13,7 @@ import {
 } from 'firebase/firestore';
 import {
   getDownloadURL,
+  getMetadata,
   getStorage,
   ref,
   StringFormat,
@@ -40,7 +41,7 @@ const storage = getStorage();
 export const saveFarmer = async (farmer: FarmerType, image: any) => {
   try {
     if (image !== null) {
-      const storageRef = ref(storage, farmer.address);
+      const storageRef = ref(storage, farmer.address.trim());
       uploadBytes(storageRef, image).then((snapshot) => { });
     }
     const farmerDoc = doc(db, 'farmers', farmer.address);
@@ -132,7 +133,7 @@ export const updateFarmer = async (farmer: any, farm: any) => {
 export const updateFarmerImage = async (address: string, image: any) => {
   try {
     if (image !== null) {
-      const storageRef = ref(storage, address);
+      const storageRef = ref(storage, address.trim());
       uploadBytes(storageRef, image).then((snapshot) => {
         console.log(snapshot);
       });
@@ -193,12 +194,54 @@ export const getCompany = async (address: string) => {
 };
 
 export const getImageUrl = async (id: string) => {
-  return await getDownloadURL(ref(storage, id));
+  const extensions = ['', '.jpeg', '.jpg', '.png', '.webp', '.gif'];
+  const trimmedId = id.trim();
+
+  for (const ext of extensions) {
+    try {
+      const download = trimmedId + ext;
+      const fileRef = ref(storage, download);
+      const metadata = await getMetadata(fileRef);
+
+      if (metadata.contentType?.startsWith('image/')) {
+        const url = await getDownloadURL(fileRef);
+        console.log('found download ' + download);
+        return url;
+      }
+    } catch (error: any) {
+      if (error.code !== 'storage/object-not-found') {
+        throw error;
+      }
+    }
+  }
+
+  // Return a placeholder if not found or not an image
+  return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
 };
 
 export const getCafepsaImageUrl = async (id: string) => {
-  let download = id + '.jpeg';
-  return await getDownloadURL(ref(storage, download));
+  const extensions = ['', '.jpeg', '.jpg', '.png', '.webp', '.gif'];
+  const trimmedId = id.trim();
+
+  for (const ext of extensions) {
+    try {
+      const download = trimmedId + ext;
+      const fileRef = ref(storage, download);
+      const metadata = await getMetadata(fileRef);
+
+      if (metadata.contentType?.startsWith('image/')) {
+        const url = await getDownloadURL(fileRef);
+        console.log('found download ' + download);
+        return url;
+      }
+    } catch (error: any) {
+      if (error.code !== 'storage/object-not-found') {
+        throw error;
+      }
+    }
+  }
+
+  return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
 };
 
 export const getCafepsaJsonUrl = async (id: string) => {
