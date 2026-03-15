@@ -17,23 +17,27 @@ export const Profile = () => {
 
   useEffect(() => {
     const load = async () => {
-      if (farmerId) {
-        await getFarmer(farmerId).then((result) => {
-          setFarmerData(result);
-          const firebase = getFarmerFarms(result?.address).then(
-            (result: any) => {
-              {
-                setfarmName(result[0].name);
-                setFarms(result[0]);
-              }
-            },
-          );
-          setLoading(false);
-        });
-        await getImageUrl(farmerId).then((result) => {
-          setImageUrl(result);
-          console.log('img' + result);
-        });
+      if (!farmerId) return;
+      
+      setLoading(true);
+      try {
+        const farmer = await getFarmer(farmerId);
+        setFarmerData(farmer);
+        
+        if (farmer) {
+          const farmList = await getFarmerFarms(farmer.address);
+          if (farmList && farmList.length > 0) {
+            setfarmName(farmList[0].name);
+            setFarms(farmList[0]);
+          }
+        }
+        
+        const url = await getImageUrl(farmerId);
+        setImageUrl(url);
+        console.log('img' + url);
+      } catch (error) {
+        console.error('Error loading profile:', error);
+      } finally {
         setLoading(false);
       }
     };

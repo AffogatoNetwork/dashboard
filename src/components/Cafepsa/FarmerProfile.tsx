@@ -24,26 +24,28 @@ export const FarmerProfileModule = () => {
 
   useEffect(() => {
     const load = async () => {
-      if (newfarmerId) {
-        await getFarmer(newfarmerId).then((result) => {
-          console.log(result);
-          setFarmerData(result);
-          const firebase = getFarmerFarms(result?.address).then(
-            (result: any) => {
-              console.log(result);
-              {
-                setfarmName(result[0].name);
-                setLatitude(result[0].latitude);
-                setLongitude(result[0].longitude);
-                setFarms(result[0]);
-              }
-            },
-          );
-          setLoading(false);
-        });
-        await getImageUrl(newfarmerId).then((result) => {
-          setImageUrl(result);
-        });
+      if (!newfarmerId) return;
+
+      setLoading(true);
+      try {
+        const farmer = await getFarmer(newfarmerId);
+        setFarmerData(farmer);
+        
+        if (farmer) {
+          const farmList = await getFarmerFarms(farmer.address);
+          if (farmList && farmList.length > 0) {
+            setfarmName(farmList[0].name);
+            setLatitude(farmList[0].latitude);
+            setLongitude(farmList[0].longitude);
+            setFarms(farmList[0]);
+          }
+        }
+
+        const url = await getImageUrl(newfarmerId);
+        setImageUrl(url);
+      } catch (error) {
+        console.error('Error loading farmer profile:', error);
+      } finally {
         setLoading(false);
       }
     };
@@ -73,7 +75,7 @@ export const FarmerProfileModule = () => {
             ✕
           </label>
           <div className="m-6 flex justify-center">
-            <img alt="profile photo" src={imageUrl} />
+            {imageUrl && <img alt="profile photo" src={imageUrl} />}
           </div>
         </div>
       </div>
@@ -99,7 +101,7 @@ export const FarmerProfileModule = () => {
                 <div className="h-32 w-32 rounded-full border-2 border-amber-900 hover:border-red-700">
                   <div />
                   <label htmlFor="image-modal" className=" ">
-                    <img alt="profile photo" src={imageUrl} />
+                    {imageUrl && <img alt="profile photo" src={imageUrl} />}
                   </label>
                 </div>
               </div>

@@ -208,6 +208,11 @@ export const getImageUrl = async (id: string) => {
         console.log('found download ' + download);
         return url;
       }
+      
+      // If we find a file but it's not an image (e.g. octet-stream), 
+      // stop checking other extensions and return placeholder immediately.
+      console.log('found file but not an image: ' + download);
+      break;
     } catch (error: any) {
       if (error.code !== 'storage/object-not-found') {
         throw error;
@@ -234,6 +239,10 @@ export const getCafepsaImageUrl = async (id: string) => {
         console.log('found download ' + download);
         return url;
       }
+      
+      // If we find a file but it's not an image, stop checking other extensions.
+      console.log('found file but not an image: ' + download);
+      break;
     } catch (error: any) {
       if (error.code !== 'storage/object-not-found') {
         throw error;
