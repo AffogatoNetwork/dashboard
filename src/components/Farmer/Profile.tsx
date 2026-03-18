@@ -18,12 +18,12 @@ export const Profile = () => {
   useEffect(() => {
     const load = async () => {
       if (!farmerId) return;
-      
+
       setLoading(true);
       try {
         const farmer = await getFarmer(farmerId);
         setFarmerData(farmer);
-        
+
         if (farmer) {
           const farmList = await getFarmerFarms(farmer.address);
           if (farmList && farmList.length > 0) {
@@ -31,7 +31,7 @@ export const Profile = () => {
             setFarms(farmList[0]);
           }
         }
-        
+
         const url = await getImageUrl(farmerId);
         setImageUrl(url);
         console.log('img' + url);
@@ -176,7 +176,7 @@ export const Profile = () => {
                           </p>
                         </div>
                       </div>
-                      {farms.pnud !== true && (
+                      {farms.pnud == true && (
                         <>
                           <div className="flex items-start p-4 rounded-xl shadow-lg bg-white">
                             <div className="ml-4">
