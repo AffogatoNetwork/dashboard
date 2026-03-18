@@ -68,6 +68,7 @@ export type CompanyType = {
 
 export type FarmType = {
   farmerAddress : string;
+  farmerId?: string;
   company: string;
   name: string;
   height: string;
@@ -86,6 +87,11 @@ export type FarmType = {
   shadow: string;
   familyMembers: string;
   ethnicGroup: string;
+  fairtrade?: string;
+  organico?: string;
+  rainforest?: string;
+  manosdemujer?: string;
+  roc?: string;
 };
 
 export type CoordinatesType = {

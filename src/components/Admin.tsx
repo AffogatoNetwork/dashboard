@@ -11,6 +11,7 @@ import { EditProfilePhotoModule } from './Admin/EditProfilePhotoModule';
 import { CreateBatchesModule } from './Admin/CreateBatches';
 import { EditBatchesModule } from './Admin/EditBatchesModule';
 import { FirebaseStatus } from './Admin/FirebaseStatus';
+import { EditBannerModule } from './Admin/EditBannerModule';
 
 export const AdminModule = () => {
   const { t } = useTranslation();
@@ -109,6 +110,12 @@ export const AdminModule = () => {
   const renderPhotoEdit = () => (
     <>
       <EditProfilePhotoModule />
+    </>
+  );
+
+  const renderBannerEdit = () => (
+    <>
+      <EditBannerModule />
     </>
   );
 
@@ -222,6 +229,16 @@ export const AdminModule = () => {
                         >
                           <>{'Editar Foto'}</>
                         </a>
+
+                        <a
+                          className={`${activeTab == 'banner' &&
+                            `tab-lifted tab tab-active btn-wide tab-lg`
+                            } tab btn-wide tab-lg `}
+                          id="signup-tabs"
+                          onClick={() => setActiveTab('banner')}
+                        >
+                          <>{'Banner'}</>
+                        </a>
                       </div>
 
                       {activeTab == 'crear-certificados' && (
@@ -253,6 +270,7 @@ export const AdminModule = () => {
                       )}
 
                       {activeTab == 'photo' && <>{renderPhotoEdit()}</>}
+                      {activeTab == 'banner' && <>{renderBannerEdit()}</>}
                     </>
                   ) : (
                     <>

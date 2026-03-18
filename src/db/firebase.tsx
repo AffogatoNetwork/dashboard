@@ -123,6 +123,11 @@ export const getFarmerByBatche = async (result: any) => {
   return farmerDetails;
 };
 
+export const toggleFarmerActive = async (address: string, active: boolean) => {
+  const farmerDoc = doc(db, 'farmers', address);
+  await updateDoc(farmerDoc, { active });
+};
+
 export const updateFarmer = async (farmer: any, farm: any) => {
   const farmerDoc = doc(db, 'farmers', farmer);
   await updateDoc(farmerDoc, {
@@ -208,7 +213,7 @@ export const getImageUrl = async (id: string) => {
         console.log('found download ' + download);
         return url;
       }
-      
+
       // If we find a file but it's not an image (e.g. octet-stream), 
       // stop checking other extensions and return placeholder immediately.
       console.log('found file but not an image: ' + download);
@@ -236,10 +241,9 @@ export const getCafepsaImageUrl = async (id: string) => {
 
       if (metadata.contentType?.startsWith('image/')) {
         const url = await getDownloadURL(fileRef);
-        console.log('found download ' + download);
         return url;
       }
-      
+
       // If we find a file but it's not an image, stop checking other extensions.
       console.log('found file but not an image: ' + download);
       break;
@@ -480,12 +484,27 @@ export const saveFarms = async (farms: Array<FarmType>) => {
       const farmsBatch = farms.slice(currentInit, currentLast);
 
       for (let i = 0; i < farmsBatch.length; i += 1) {
-        const nameArray = farmsBatch[i].name.toLocaleLowerCase().split(' ');
-        const docId = farmsBatch[i].farmerAddress
-          .concat('#')
-          .concat(nameArray.join('-'));
+        const farm = farmsBatch[i];
+        // Use PXO código (farmerId) as base doc ID; fall back to eth address slug
+        const baseId = farm.farmerId
+          ? farm.farmerId.trim()
+          : farm.farmerAddress.replace(/[^a-zA-Z0-9-_]/g, '').slice(0, 20);
+
+        // Find a doc ID that either doesn't exist yet or belongs to this same farm
+        let docId = baseId;
+        let suffix = 1;
+        while (true) {
+          const existing = await getDoc(doc(db, 'farms', docId));
+          if (!existing.exists()) break; // slot is free — use it
+          const existingData = existing.data();
+          if (existingData.farmerAddress === farm.farmerAddress) break; // same farmer — update in place
+          // Different farmer owns this doc — try next suffix
+          docId = `${baseId}#${suffix}`;
+          suffix += 1;
+        }
+
         const farmDoc = doc(db, 'farms', docId);
-        batch.set(farmDoc, farmsBatch[i]);
+        batch.set(farmDoc, farm);
       }
       await batch.commit();
 
@@ -725,6 +744,26 @@ export const updateAllBatches = async (company: string) => {
     });
 
     console.log(`Updated document ID ${documentId} in the document.`);
+  }
+};
+
+export const saveBannerImage = async (company: string, image: File) => {
+  try {
+    const storageRef = ref(storage, `banners/${company}`);
+    await uploadBytes(storageRef, image);
+    return await getDownloadURL(storageRef);
+  } catch (error) {
+    console.error(error);
+    return null;
+  }
+};
+
+export const getBannerUrl = async (company: string) => {
+  try {
+    const storageRef = ref(storage, `banners/${company}`);
+    return await getDownloadURL(storageRef);
+  } catch (error) {
+    return null;
   }
 };
 

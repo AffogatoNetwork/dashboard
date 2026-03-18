@@ -27,6 +27,7 @@ export const Profile = () => {
         if (farmer) {
           const farmList = await getFarmerFarms(farmer.address);
           if (farmList && farmList.length > 0) {
+            console.log(farmList)
             setfarmName(farmList[0].name);
             setFarms(farmList[0]);
           }
@@ -34,7 +35,6 @@ export const Profile = () => {
 
         const url = await getImageUrl(farmerId);
         setImageUrl(url);
-        console.log('img' + url);
       } catch (error) {
         console.error('Error loading profile:', error);
       } finally {

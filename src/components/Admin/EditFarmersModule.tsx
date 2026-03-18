@@ -3,14 +3,22 @@ import {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
-import { editFarmers } from '../../db/firebase';
+import { editFarmers, toggleFarmerActive } from '../../db/firebase';
 import { useTranslation } from 'react-i18next';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import { useFarmers } from '../../hooks/useFarmers';
-import React, { useMemo, useState } from 'react';
+import React, { useMemo, useState, useCallback } from 'react';
 export const EditFarmersModule = () => {
   const { t, i18n } = useTranslation();
   const [farmers, farmersCount, ownerAddress, setReload] = useFarmers();
+  const [toggling, setToggling] = useState<string | null>(null);
+
+  const handleToggleActive = useCallback(async (address: string, current: boolean) => {
+    setToggling(address);
+    await toggleFarmerActive(address, !current);
+    setReload(true);
+    setToggling(null);
+  }, [setReload]);
 
   const [tableData, setTableData] = useState<any[]>(() => farmers);
 
@@ -52,8 +60,27 @@ export const EditFarmersModule = () => {
         accessorKey: 'address',
         enableEditing: false,
       },
+      {
+        header: 'Activo',
+        accessorKey: 'active',
+        enableEditing: false,
+        size: 80,
+        Cell: ({ row }: any) => {
+          const isActive: boolean = row.original.active !== false;
+          const addr: string = row.original.address;
+          return (
+            <input
+              type="checkbox"
+              className="toggle toggle-success"
+              checked={isActive}
+              disabled={toggling === addr}
+              onChange={() => handleToggleActive(addr, isActive)}
+            />
+          );
+        },
+      },
     ],
-    [i18n.language],
+    [i18n.language, toggling, handleToggleActive],
   );
 
   return (

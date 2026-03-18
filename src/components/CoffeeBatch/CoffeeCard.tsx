@@ -204,7 +204,7 @@ const CoffeeCard = () => {
                     <span className="">
                       <a
                         className="link-info link"
-                        href={'/newfarmer' + '/' + farmerData?.address}
+                        href={'/farmer/' + farmerData?.address}
                       >
                         {farmerData?.fullname}
                       </a>

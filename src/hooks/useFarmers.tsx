@@ -81,6 +81,7 @@ export const useFarmers = () => {
                 village,
                 village1,
                 village2,
+                active,
             } = farmerData;
 
 
@@ -99,6 +100,7 @@ export const useFarmers = () => {
                 village,
                 village1,
                 village2,
+                active: active !== false, // default true if field absent
             }
             );
 

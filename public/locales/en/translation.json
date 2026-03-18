@@ -188,6 +188,11 @@
     "type-drying": "Drying Type",
     "view-blockchain": "View on Blockchain"
   },
+  "farmer-id-card": "Farmer ID Card",
+  "farm-details": "Farm Details",
+  "personal-info": "Personal Information",
+  "cooperative-id": "Cooperative ID",
+  "no-data": "N/A",
   "variety": "Variety",
   "varieties": "Varieties",
   "village": "Municipality",

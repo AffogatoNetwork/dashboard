@@ -5,7 +5,7 @@ import { useDropzone } from 'react-dropzone';
 import { useTranslation } from 'react-i18next';
 import '../../styles/create.scss';
 import { useAuthContext } from '../../states/AuthContext';
-import { saveBatch, saveFarms } from '../../db/firebase';
+import { saveBatch, saveFarms, getAllFarmers } from '../../db/firebase';
 import { apiUrl } from '../../utils/constants';
 import {
   getCompanyName,
@@ -110,6 +110,18 @@ export const Create = () => {
     const farms = new Array<FarmType>();
     const companyName = getCompanyName(ownerAddress);
 
+    // Build cooperativeId → eth address lookup
+    const coopToAddress: Record<string, string> = {};
+    try {
+      const farmerDocs = await getAllFarmers(companyName);
+      farmerDocs.forEach((d) => {
+        const data = d.data();
+        if (data.cooperativeId && data.address) {
+          coopToAddress[data.cooperativeId.toUpperCase()] = data.address;
+        }
+      });
+    } catch (_) {}
+
     if (rows !== null) {
       // @ts-ignore
       for (let i = 2; i < rows.length; i += 1) {
@@ -118,40 +130,55 @@ export const Create = () => {
           if (rows[i] !== null && rows[i].length > 0) {
             // @ts-ignore
             if (rows[i][1] !== '' && rows[i][2] !== '') {
+              // @ts-ignore
+              const cooperativeId = String(rows[i][1] || '').trim();
+              const ethAddress = coopToAddress[cooperativeId.toUpperCase()] || cooperativeId;
               farms.push({
-                // @ts-ignore
-                farmerAddress: rows[i][1],
+                farmerAddress: ethAddress,       // eth address (fallback: Código)
+                farmerId: cooperativeId,         // PXO código used as doc ID base
                 company: companyName,
                 // @ts-ignore
-                name: rows[i][2] || '',
+                name: rows[i][2] || '',          // Nombres
                 // @ts-ignore
-                height: rows[i][3] || 0,
+                height: String(rows[i][8] || ''),  // Altura
                 // @ts-ignore
-                area: rows[i][4] || 0,
+                area: String(rows[i][14] || ''),   // Superficie (Ha.)
                 // @ts-ignore
-                certifications: rows[i][5] || '',
+                fairtrade: String(rows[i][15] || '').trim().toUpperCase() === 'X' ? 'X' : '',
                 // @ts-ignore
-                latitude: rows[i][6] || '',
+                organico: String(rows[i][16] || '').trim().toUpperCase() === 'X' ? 'X' : '',
                 // @ts-ignore
-                longitude: rows[i][7] || '',
+                rainforest: String(rows[i][17] || '').trim().toUpperCase() === 'X' ? 'X' : '',
                 // @ts-ignore
-                bio: rows[i][8] || '',
+                manosdemujer: String(rows[i][18] || '').trim().toUpperCase() === 'X' ? 'X' : '',
                 // @ts-ignore
-                country: rows[i][9] || '',
+                roc: String(rows[i][19] || '').trim().toUpperCase() === 'X' ? 'X' : '',
                 // @ts-ignore
-                region: rows[i][10] || '',
+                certifications: [
+                  String(rows[i][15] || '').trim().toUpperCase() === 'X' ? 'Fairtrade' : '',
+                  String(rows[i][16] || '').trim().toUpperCase() === 'X' ? 'Organico' : '',
+                  String(rows[i][17] || '').trim().toUpperCase() === 'X' ? 'Rainforest' : '',
+                  String(rows[i][18] || '').trim().toUpperCase() === 'X' ? 'Con Manos de Mujer' : '',
+                  String(rows[i][19] || '').trim().toUpperCase() === 'X' ? 'ROC' : '',
+                ].filter(Boolean).join(', '),
                 // @ts-ignore
-                village: rows[i][11] || '',
+                latitude: rows[i][6] || '',      // Latitud
                 // @ts-ignore
-                village2: rows[i][12] || '',
+                longitude: rows[i][7] || '',     // Longitud
                 // @ts-ignore
-                varieties: rows[i][13] || '',
+                bio: rows[i][10] || '',          // Nombre de finca
+                country: '',
                 // @ts-ignore
-                shadow: rows[i][14] || '',
+                region: rows[i][11] || '',       // Departamento
                 // @ts-ignore
-                familyMembers: rows[i][15] || 1,
+                village: rows[i][13] || '',      // Comunidad
                 // @ts-ignore
-                ethnicGroup: rows[i][16] || '',
+                village2: rows[i][12] || '',     // Municipio
+                // @ts-ignore
+                varieties: rows[i][9] || '',     // Variedad
+                shadow: '',
+                familyMembers: '',
+                ethnicGroup: '',
                 location: '',
                 search: '',
               });

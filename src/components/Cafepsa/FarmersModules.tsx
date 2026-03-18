@@ -135,10 +135,12 @@ export const FarmersModules = () => {
             .concat(SEARCH_DIVIDER)
             .concat(l);
           let qrCode = window.location.origin
-            .concat('/newfarmer/')
+            .concat('/farmer/')
             .concat(address);
           let blockChainUrl = 'https://affogato.mypinata.cloud/ipfs/' + farm;
           setBlockchainUrl(blockChainUrl);
+          if (farmerData.active === false) continue;
+
           farmerList.push({
             farmerId,
             address,

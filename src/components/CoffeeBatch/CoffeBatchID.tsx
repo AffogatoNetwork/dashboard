@@ -108,7 +108,7 @@ const CoffeeBatchId = () => {
                                     <a
                                       className="decoration-sky-500 underline-offset-1 hover:underline"
                                       href={
-                                        '/newfarmer' + '/' + farmer?.address
+                                        '/farmer/' + farmer?.address
                                       }
                                     >
                                       {' '}

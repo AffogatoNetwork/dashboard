@@ -188,6 +188,11 @@
     "type-drying": "Trocknungsart",
     "view-blockchain": "Auf Blockchain Ansehen"
   },
+  "farmer-id-card": "Landwirt-Ausweis",
+  "farm-details": "Farm-Details",
+  "personal-info": "Persönliche Informationen",
+  "cooperative-id": "Genossenschafts-ID",
+  "no-data": "N/V",
   "variety": "Sorte",
   "varieties": "Sorten",
   "village": "Gemeinde",
