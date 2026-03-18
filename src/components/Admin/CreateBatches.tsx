@@ -453,7 +453,7 @@ export const CreateBatchesModule = () => {
           date: formData.wetMill.date,
           weight: formData.wetMill.weight,
           certifications: formData.wetMill.certifications,
-          note: formData.wetMill,
+          note: formData.wetMill.note,
         },
       };
 

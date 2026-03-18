@@ -41,6 +41,7 @@ export const CreateFarmModule = () => {
   const [farmerList, setFarmerList] = useState<Array<any>>([]);
   const [certificationList, setCertificationList] = useState<Array<any>>([]);
   const [certificationNames, setCertificationNames] = useState<Array<any>>([]);
+  const [certifications, setCertifications] = useState('');
   const [varietyList, setVarietyList] = useState<Array<any>>([]);
   const [varietyNames, setVarietyNames] = useState<Array<any>>([]);
   const [coopError, setCoopError] = useState('');
@@ -55,17 +56,13 @@ export const CreateFarmModule = () => {
       let currentCoop = '';
       if (location.match('COMMOVEL') !== null) {
         currentCoop = 'COMMOVEL';
-      }
-      if (location.match('copracnil') !== null) {
+      } else if (location.match('copracnil') !== null) {
         currentCoop = 'COPRACNIL';
-      }
-      if (location.match('comsa') !== null) {
+      } else if (location.match('comsa') !== null) {
         currentCoop = 'COMSA';
-      }
-      if (location.match('proexo') !== null) {
+      } else if (location.match('proexo') !== null) {
         currentCoop = 'PROEXO';
-      }
-      if (location.match('cafepsa') !== null) {
+      } else if (location.match('cafepsa') !== null) {
         currentCoop = 'CAFEPSA';
       } else {
         currentCoop = 'PROEXO';
@@ -116,14 +113,14 @@ export const CreateFarmModule = () => {
       name: farmName,
       height: height,
       area: area,
-      certifications: '', // Provide a string value
+      certifications: certifications,
       latitude: latitude,
       longitude: longitude,
       bio: '',
       country: 'Honduras',
       region: currentRegion.name,
       village: village,
-      village2: village,
+      village2: village2,
       varieties: varieties,
       shadow: shadow,
       familyMembers: '',
@@ -219,6 +216,18 @@ export const CreateFarmModule = () => {
     setVarieties(value);
   };
 
+  const handleVillageChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const value = event.target.value;
+    setVillage(value);
+  };
+
+  const handleCertificationsChange = (
+    event: React.ChangeEvent<HTMLSelectElement>,
+  ) => {
+    const value = event.target.value;
+    setCertifications(value);
+  };
+
   const handleheightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setHeight(value);
@@ -283,10 +292,10 @@ export const CreateFarmModule = () => {
             <div className="md:col-span-5">
               <FormInput
                 label={t('village')}
-                value={country}
+                value={village}
                 placeholder={t('village')}
-                handleOnChange={countryChange}
-                errorMsg={countryError}
+                handleOnChange={handleVillageChange}
+                errorMsg={villageError}
                 className="input-bordered input w-full"
               />
             </div>
@@ -393,7 +402,7 @@ export const CreateFarmModule = () => {
               <select
                 id="dropdown-cooperative"
                 className="select-bordered select w-full"
-                onChange={handlevarietiesChange}
+                onChange={handleCertificationsChange}
               >
                 <option disabled selected>
                   <> {'Seleccione un Certificado'}</>:

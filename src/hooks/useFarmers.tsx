@@ -58,7 +58,7 @@ export const useFarmers = () => {
             companyName = "CAFEPSA";
         }
         if (url.match("localhost") !== null) {
-            companyName = "CAFEPSA";
+            companyName = "PROEXO";
         }
 
         const result: any = await getAllFarmers(companyName);
@@ -85,20 +85,20 @@ export const useFarmers = () => {
 
 
             farmerList.push({
-                    farmerId,
-                    femaleMenbers,
-                    maleMenbers,
-                    address,
-                    fullname,
-                    familyMembers,
-                    country,
-                    gender,
-                    farm,
-                    location,
-                    region,
-                    village,
-                    village1,
-                    village2,
+                farmerId,
+                femaleMenbers,
+                maleMenbers,
+                address,
+                fullname,
+                familyMembers,
+                country,
+                gender,
+                farm,
+                location,
+                region,
+                village,
+                village1,
+                village2,
             }
             );
 
