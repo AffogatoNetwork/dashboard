@@ -50,7 +50,6 @@ export const saveFarmer = async (farmer: FarmerType, image: any) => {
 };
 
 export const saveVarietyData = async (varietyData: any, id: string) => {
-  console.log(varietyData, id);
   try {
     await setDoc(doc(db, 'varieties', varietyData), {
       variety: varietyData,
@@ -59,7 +58,6 @@ export const saveVarietyData = async (varietyData: any, id: string) => {
       active: true,
     });
   } catch (error) {
-    console.error(error);
   }
 };
 
@@ -75,7 +73,6 @@ export const saveCertificationData = async (
       active: true,
     });
   } catch (error) {
-    console.error(error);
   }
 };
 
@@ -86,7 +83,6 @@ export const getVarieties = async () => {
 };
 
 export const getCertifications = async (company: string) => {
-  console.log(company);
   const q = query(
     collection(db, 'certifications'),
     where('createdBy', '==', company),
@@ -140,7 +136,6 @@ export const updateFarmerImage = async (address: string, image: any) => {
     if (image !== null) {
       const storageRef = ref(storage, address.trim());
       uploadBytes(storageRef, image).then((snapshot) => {
-        console.log(snapshot);
       });
     }
   } catch (error) { }
@@ -152,7 +147,6 @@ export const updateFarms = async (Farmdata: any) => {
       Farmdata.name.replace(/\s/g, '').toLocaleLowerCase(),
     );
     const farmDoc = doc(db, 'farms', docId);
-    console.log(Farmdata);
     await setDoc(farmDoc, Farmdata);
   } catch (error) { }
 };
@@ -210,13 +204,11 @@ export const getImageUrl = async (id: string) => {
 
       if (metadata.contentType?.startsWith('image/')) {
         const url = await getDownloadURL(fileRef);
-        console.log('found download ' + download);
         return url;
       }
 
       // If we find a file but it's not an image (e.g. octet-stream), 
       // stop checking other extensions and return placeholder immediately.
-      console.log('found file but not an image: ' + download);
       break;
     } catch (error: any) {
       if (error.code !== 'storage/object-not-found') {
@@ -245,7 +237,6 @@ export const getCafepsaImageUrl = async (id: string) => {
       }
 
       // If we find a file but it's not an image, stop checking other extensions.
-      console.log('found file but not an image: ' + download);
       break;
     } catch (error: any) {
       if (error.code !== 'storage/object-not-found') {
@@ -264,7 +255,6 @@ export const getCafepsaJsonUrl = async (id: string) => {
 
 export const editFarm = async (data: any) => {
   let user = UserData();
-  console.log(data);
   const dir = data.address + data.name.toLocaleLowerCase();
   try {
     const farmDoc = doc(db, 'farms', dir);
@@ -272,7 +262,6 @@ export const editFarm = async (data: any) => {
     const docSnap = await getDoc(farmDoc);
 
     if (!docSnap.exists()) {
-      console.error('No such document!');
       return;
     }
 
@@ -280,9 +269,9 @@ export const editFarm = async (data: any) => {
       area: data.area,
       latitude: data.latitude,
       longitude: data.longitude,
-      heigth: data.heigth,
+      height: data.height,
       country: data.country,
-      fullname: data.name,
+      name: data.name,
       shadow: data.shadow,
       varieties: data.varieties,
       village: data.village,
@@ -290,16 +279,28 @@ export const editFarm = async (data: any) => {
       updateAt: Date.now(),
       updatedBy: user.email,
     };
-    console.log('save');
 
     await updateDoc(farmDoc, farmData);
   } catch (error) {
-    console.error(error);
+  }
+};
+
+export const updateFarmByAddress = async (farmerAddress: string, updatedData: Record<string, any>) => {
+  try {
+    const q = query(
+      collection(db, 'farms'),
+      where('farmerAddress', '==', farmerAddress)
+    );
+    const querySnapshot = await getDocs(q);
+    if (!querySnapshot.empty) {
+      const docRef = querySnapshot.docs[0].ref;
+      await updateDoc(docRef, updatedData);
+    }
+  } catch (error) {
   }
 };
 
 export const editFarmers = async (data: any) => {
-  console.log(data);
   let user = UserData();
 
   const dir = data.address;
@@ -310,7 +311,6 @@ export const editFarmers = async (data: any) => {
     }
 
     const farmDoc = doc(db, 'farmers', dir);
-    console.log('Updating document for:', dir);
 
     const farmData = {
       fullname: data.fullname.trim(),
@@ -322,12 +322,17 @@ export const editFarmers = async (data: any) => {
       updatedBy: user.email,
     };
 
-    console.log('Prepared farm data:', farmData);
 
     await updateDoc(farmDoc, farmData);
-    console.log('Farm data updated successfully.');
   } catch (error) {
-    console.error('Error updating farm data:', error);
+  }
+};
+
+export const updateFarmerPnud = async (farmerAddress: string, pnudValue: boolean) => {
+  try {
+    const farmDoc = doc(db, 'farmers', farmerAddress);
+    await updateDoc(farmDoc, { pnud: pnudValue, updateAt: Date.now() });
+  } catch (error) {
   }
 };
 
@@ -340,7 +345,7 @@ export const editCertifications = async (data: any) => {
   try {
     const farmDoc = doc(db, 'farmers', dir);
     const farmData = {
-      fullname: data.fullName,
+      fullname: data.fullname,
       area: data.area,
       usda: data.usda,
       fairtrade: data.fairtrade,
@@ -354,6 +359,31 @@ export const editCertifications = async (data: any) => {
   } catch (error) { }
 };
 
+export const editMultipleCertifications = async (farmers: any[], certToToggle: string, value: number) => {
+  let user = UserData();
+  const origin = window.location.origin + '/farmers/';
+
+  try {
+    const promises = farmers.map(async (data) => {
+      const qrCode = data.qrCode;
+      if (!qrCode) return;
+      const dir = qrCode.replaceAll(origin, '').trim();
+      const farmDoc = doc(db, 'farmers', dir);
+
+      const farmData = {
+        [certToToggle]: value,
+        updateAt: Date.now(),
+        updatedBy: user.email,
+      };
+      await updateDoc(farmDoc, farmData);
+    });
+
+    await Promise.all(promises);
+    window.location.reload();
+  } catch (error) {
+  }
+};
+
 export const editBatch = async (formData: any) => {
   const user = UserData();
 
@@ -365,13 +395,11 @@ export const editBatch = async (formData: any) => {
     const docSnap = await getDoc(batchDoc);
 
     if (!docSnap.exists()) {
-      console.error('No such document!');
       return;
     }
 
     // Get the current batch data
     const currentData = docSnap.data();
-    console.log('Current batch data:', currentData);
 
     // Prepare batch data for update, keeping specific fields unchanged
     const updatedData = {
@@ -432,14 +460,11 @@ export const editBatch = async (formData: any) => {
 
     // Update the batch data in Firestore
     await updateDoc(batchDoc, updatedData);
-    console.log('Batch data updated successfully.');
   } catch (error) {
-    console.error('Error updating batch:', error);
   }
 };
 
 export const saveFarm = async (farm: FarmType) => {
-  console.log(farm);
   try {
     const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
     const farmDoc = doc(db, 'farms', docId);
@@ -463,10 +488,8 @@ export const saveFarm = async (farm: FarmType) => {
       ethnicGroup: farm.ethnicGroup,
     };
     await setDoc(farmDoc, farmData).then(() => {
-      console.log();
       return true;
     });
-    console.log('save');
   } catch (error) { }
 };
 
@@ -568,7 +591,6 @@ export const createBatch = async (formData: any) => {
     // Use id_lote as the document ID
     const docId = formData.Name;
     const batchDoc = doc(db, 'batches', docId);
-    console.log(formData);
     // Construct the batch data from the provided structure
     const batchData = {
       Name: formData.Name || '',
@@ -650,14 +672,9 @@ export const createBatch = async (formData: any) => {
     // Upload the JSON data as a string to Firebase Storage
     await uploadString(storageRef, batchJson);
 
-    // Log success
-    console.log(
-      'Batch data saved to Firestore and uploaded to Storage successfully.',
-    );
 
     return true;
   } catch (error) {
-    console.error('Error saving batch:', error);
   }
 };
 
@@ -743,7 +760,6 @@ export const updateAllBatches = async (company: string) => {
       ipfsHash: documentId, // Replace 'idField' with the actual field name where you want to store the ID
     });
 
-    console.log(`Updated document ID ${documentId} in the document.`);
   }
 };
 
@@ -753,7 +769,6 @@ export const saveBannerImage = async (company: string, image: File) => {
     await uploadBytes(storageRef, image);
     return await getDownloadURL(storageRef);
   } catch (error) {
-    console.error(error);
     return null;
   }
 };

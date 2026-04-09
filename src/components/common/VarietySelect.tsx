@@ -29,7 +29,6 @@ const VarietySelect: React.FC<VarietySelectProps> = ({ onSelect }) => {
 
         setVarietyList(varieties);
       } catch (error) {
-        console.error('Error fetching varieties:', error);
       }
     };
 

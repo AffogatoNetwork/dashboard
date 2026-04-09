@@ -66,7 +66,6 @@ print(json.dumps(rows, ensure_ascii=False))
 "`, { cwd: process.cwd() }).toString();
 
 const pnudRows = JSON.parse(raw);
-console.log(`Parsed ${pnudRows.length} PNUD farmers\n`);
 
 // Load all PROEXO farmers — build lookup by farmerId and fullname
 const farmersSnap = await getDocs(query(collection(db, 'farmers'), where('company', '==', 'PROEXO')));
@@ -79,7 +78,6 @@ farmersSnap.forEach(d => {
   if (data.farmerId) farmerIdToDoc[data.farmerId.toUpperCase()] = { address: data.address, docId: d.id };
   if (data.fullname) nameToDoc[data.fullname.toLowerCase().split(/\s+/).join(' ')] = { address: data.address, docId: d.id };
 });
-console.log(`Loaded ${farmersSnap.size} PROEXO farmers from Firestore\n`);
 
 const notFoundList = [];
 let updated = 0;
@@ -106,18 +104,18 @@ for (const row of pnudRows) {
 
   const farmPayload = {
     pnud: true,
-    fairtrade:      row.fairtrade,
-    organico:       row.organico,
-    rainforest:     row.rainforest,
-    manosdemujer:   row.manosdemujer,
-    roc:            row.roc,
+    fairtrade: row.fairtrade,
+    organico: row.organico,
+    rainforest: row.rainforest,
+    manosdemujer: row.manosdemujer,
+    roc: row.roc,
     certifications: row.certifications,
-    latitude:       row.latitude,
-    longitude:      row.longitude,
-    region:         row.region,
-    village2:       row.village2,
-    village:        row.village,
-    area:           row.area,
+    latitude: row.latitude,
+    longitude: row.longitude,
+    region: row.region,
+    village2: row.village2,
+    village: row.village,
+    area: row.area,
   };
 
   if (farmsSnap.empty) {
@@ -130,19 +128,14 @@ for (const row of pnudRows) {
       familyMembers: '', ethnicGroup: '', varieties: '',
       country: '', location: '', search: '',
     });
-    console.log(`  Created farm ${docId} | ${row.codigo} | certs: ${row.certifications}`);
   } else {
     for (const farmDoc of farmsSnap.docs) {
       await setDoc(doc(db, 'farms', farmDoc.id), farmPayload, { merge: true });
-      console.log(`  Updated farm ${farmDoc.id} | ${row.codigo} | certs: ${row.certifications}`);
     }
   }
   updated++;
 }
 
-console.log(`\nDone — updated: ${updated}, not found: ${notFoundList.length}`);
 if (notFoundList.length > 0) {
-  console.log('\nNot found:');
-  notFoundList.forEach(l => console.log(l));
 }
 process.exit(0);

@@ -18,7 +18,6 @@ export const EditProfilePhotoModule = () => {
 
         const load = async () => {
             const location = window.location.host;
-            console.log(location);
             let currentCoop = "";
             if (location.match("COMMOVEL") !== null) {
                 currentCoop = "COMMOVEL"
@@ -38,9 +37,7 @@ export const EditProfilePhotoModule = () => {
                 currentCoop = "PROEXO"
             }
             setCurrentCoop(currentCoop);
-            console.log(currentCoop);
             getAllFarmers(currentCoop).then((result) => {
-                console.log(result);
                 for (let i = 0; i < result.length; i += 1) {
                     const farmerData = result[i].data();
                     const {
@@ -54,8 +51,6 @@ export const EditProfilePhotoModule = () => {
                     });
                 }
                 setFarmers(farmerList);
-                console.log(farmers);
-                // calculateFarmersCount(result);
             });
         };
 
@@ -83,13 +78,11 @@ export const EditProfilePhotoModule = () => {
 
     const handleFarmerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
         const key = event.target.value;
-        console.log(key);
         setFarmAddress(key);
     }
 
     const updatePhoto = () => {
         updateFarmerImage(farmAddress, imageFile);
-        console.log(farmAddress);
     };
 
     return (

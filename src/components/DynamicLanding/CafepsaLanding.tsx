@@ -8,9 +8,11 @@ import { WebSite } from "../icons/WebSite";
 import { Facebook } from "../icons/Facebook";
 import { Instagram } from "../icons/Instagram";
 import { Youtube } from "../icons/Youtube";
+import { Link, useNavigate } from "react-router-dom";
 
 export const CafepsaLanding = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (<>
         <div className="bg-white card rounded-lg -mr-6 -my-6">
@@ -31,10 +33,11 @@ export const CafepsaLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
-                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
-                                    <a href="/farmers-module">
-                                        Ir a la Plataforma
-                                    </a>
+                                <button 
+                                    className="btn btn-lg bg-orange-400 hover:bg-primary text-white"
+                                    onClick={() => navigate('/farmers-module')}
+                                >
+                                    Ir a la Plataforma
                                 </button>
                             </div>
                         </div>
@@ -47,7 +50,7 @@ export const CafepsaLanding = () => {
                         <div className="lg:w-2/3 mx-auto">
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
-                                    <a href="/farmers-module">
+                                <Link to="/farmers-module">
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
@@ -56,11 +59,11 @@ export const CafepsaLanding = () => {
                                                 Perfil de Productor
                                             </p>
                                         </div>
-                                    </a>
+                                </Link>
 
                                 </div>
                                 <div className="px-2 w-1/2">
-                                    <a href="/farms-module">
+                                <Link to="/farms-module">
                                         <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
                                                 src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FFinca.jpg?alt=media&token=5fb92056-5313-48fc-86a2-4772890de246" />
@@ -68,14 +71,14 @@ export const CafepsaLanding = () => {
                                                 Módulo Fincas de Café
                                             </p>
                                         </div>
-                                    </a>
+                                </Link>
                                 </div>
                             </div>
 
                             <br />
                             <div className="flex flex-wrap -mx-2">
                                 <div className="px-2 w-1/2">
-                                    <a href="/certification-module">
+                                <Link to="/certification-module">
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
@@ -84,12 +87,12 @@ export const CafepsaLanding = () => {
                                                 Sellos de Certificación
                                             </p>
                                         </div>
-                                    </a>
+                                </Link>
 
 
                                 </div>
                                 <div className="px-2 w-1/2">
-                                    <a href="/batches-module">
+                                <Link to="/batches-module">
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
@@ -99,7 +102,7 @@ export const CafepsaLanding = () => {
 
                                             </p>
                                         </div>
-                                    </a>
+                                </Link>
                                 </div>
                             </div>
                         </div>
@@ -316,24 +319,29 @@ export const CafepsaLanding = () => {
                     </div>
                     <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
                         <img
+                            loading="lazy"
+                            decoding="async"
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F2.jpg?alt=media&token=5bb2ade1-9321-49d5-8727-be4490e7d9dd"
-                            alt="" />
+                            alt="CAFEPSA gallery 1" />
                         <img
-
+                            loading="lazy"
+                            decoding="async"
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F4.jpg?alt=media&token=a7ea9ef0-eb11-403a-a4fb-495db509e89b"
-                            alt="" />
+                            alt="CAFEPSA gallery 2" />
                         <img
-
+                            loading="lazy"
+                            decoding="async"
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F5.JPG?alt=media&token=33db5f33-1ffa-418a-8f0c-e44a07634c3c"
-                            alt="" />
+                            alt="CAFEPSA gallery 3" />
                         <img
-
+                            loading="lazy"
+                            decoding="async"
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F8.jpg?alt=media&token=68f938c1-69ad-4f88-92f8-a0c6f82ffba7"
-                            alt="" />
+                            alt="CAFEPSA gallery 4" />
                     </div>
                 </div>
 

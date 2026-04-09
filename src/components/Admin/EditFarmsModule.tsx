@@ -18,6 +18,8 @@ export const EditFarmsModule = () => {
   const handleSaveRow: MaterialReactTableProps<any>['onEditingRowSave'] =
     async ({ exitEditingMode, row, values }) => {
       try {
+        if (values.shadow === 'true') values.shadow = true;
+        if (values.shadow === 'false') values.shadow = false;
         await editFarm(values);
         tableData[row.index] = values;
         setTableData([...tableData]);
@@ -54,31 +56,25 @@ export const EditFarmsModule = () => {
         accessorKey: 'latitude',
       },
       {
-        accessorFn: (farm: any) => `${farm.area} `,
         accessorKey: 'area',
         header: t('area') + '  ' + '(mz)',
         size: 5,
-        Cell(props) {
-          return <div className="text-center">{props.renderedCellValue}</div>;
-        },
       },
       {
         header: t('tables.coffee-varieties'),
         accessorKey: 'varieties',
       },
       {
-        accessorFn: (farm: any) => `${farm.height} `,
-        accessorKey: 'heigth',
+        accessorKey: 'height',
         header: t('height'),
         size: 10,
-        Cell(props) {
-          return <div className="text-center">{props.renderedCellValue}</div>;
-        },
       },
-
       {
         header: t('tables.production-system'),
         accessorKey: 'shadow',
+        Cell: ({ cell }) => (cell.getValue() ? 'Sí' : 'No'),
+        editVariant: 'select',
+        editSelectOptions: ['true', 'false'],
       },
       {
         header: t('address'),

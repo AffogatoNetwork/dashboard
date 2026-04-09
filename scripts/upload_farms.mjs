@@ -70,7 +70,6 @@ print(json.dumps(farms, ensure_ascii=False))
 "`, { cwd: process.cwd() }).toString();
 
 const excelFarms = JSON.parse(raw);
-console.log(`Parsed ${excelFarms.length} farms from Excel`);
 
 // Build a map of cooperativeId → eth address + farm doc id
 // by querying farmers collection
@@ -82,7 +81,6 @@ farmersSnap.forEach(d => {
     coopToFarmer[data.cooperativeId.toUpperCase()] = { address: data.address, fullname: data.fullname };
   }
 });
-console.log(`Loaded ${Object.keys(coopToFarmer).length} farmers from Firestore`);
 
 let updated = 0;
 let notFound = 0;
@@ -141,16 +139,13 @@ for (const farm of excelFarms) {
       suffix++;
     }
     await setDoc(doc(db, 'farms', docId), { ...payload, farmerId: farm.cooperativeId });
-    console.log(`  Created ${docId} → varieties: ${farm.varieties} | certs: ${farm.certifications}`);
   } else {
     // Update all existing docs (usually one)
     for (const farmDoc of farmsSnap.docs) {
       await setDoc(doc(db, 'farms', farmDoc.id), { ...payload, farmerId: farm.cooperativeId }, { merge: true });
-      console.log(`  Updated ${farmDoc.id} → varieties: ${farm.varieties} | certs: ${farm.certifications}`);
     }
   }
   updated++;
 }
 
-console.log(`\nDone — updated: ${updated}, not found: ${notFound}`);
 process.exit(0);

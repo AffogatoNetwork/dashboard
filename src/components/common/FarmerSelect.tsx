@@ -22,7 +22,6 @@ const FarmerSelect: React.FC<FarmerSelectProps> = ({
   useEffect(() => {
     const fetchFarmers = async () => {
       const result = await getAllFarmers(currentCoop);
-      console.log(result);
 
       const farmers = result.map((farmer: any) => {
         const farmerData = farmer.data();

@@ -52,7 +52,6 @@ export const CreateFarmModule = () => {
   useEffect(() => {
     const load = async () => {
       const location = window.location.host;
-      console.log(location);
       let currentCoop = '';
       if (location.match('COMMOVEL') !== null) {
         currentCoop = 'COMMOVEL';
@@ -68,9 +67,7 @@ export const CreateFarmModule = () => {
         currentCoop = 'PROEXO';
       }
       setCurrentCoop(currentCoop);
-      console.log(currentCoop);
       getAllFarmers(currentCoop).then((result) => {
-        console.log(result);
         for (let i = 0; i < result.length; i += 1) {
           const farmerData = result[i].data();
           const { address, fullname } = farmerData;
@@ -81,8 +78,6 @@ export const CreateFarmModule = () => {
           });
         }
         setFarmers(farmerList);
-        console.log(farmers);
-        // calculateFarmersCount(result);
       });
 
       getCertifications(currentCoop).then((data: any) => {
@@ -126,7 +121,6 @@ export const CreateFarmModule = () => {
       familyMembers: '',
       ethnicGroup: '',
     }).then((result) => {
-      console.log(result);
       // Reset forms
       setFarmName('');
       setFarmAddress('');
@@ -152,7 +146,6 @@ export const CreateFarmModule = () => {
 
   const handleFarmerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const key = event.target.value;
-    console.log(key);
     setFarmAddress(key);
   };
 

@@ -4,7 +4,7 @@ import {
   MaterialReactTableProps,
   MRT_ColumnDef,
 } from 'material-react-table';
-import { editCertifications } from '../../db/firebase';
+import { editCertifications, editMultipleCertifications } from '../../db/firebase';
 import { useTranslation } from 'react-i18next';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
 import Box from '@mui/material/Box';
@@ -214,6 +214,7 @@ export const EditCertificationsModule = () => {
           enableStickyHeader={true}
           columns={columData}
           enableEditing={true}
+          enableRowSelection={true}
           onEditingRowSave={handleSaveRow}
           data={certifications}
           enableHiding={false}
@@ -232,6 +233,47 @@ export const EditCertificationsModule = () => {
             sorting: [{ id: 'fullname', desc: false }],
             showGlobalFilter: true,
             isLoading: false,
+          }}
+          renderTopToolbarCustomActions={({ table }) => {
+            const handleToggle = async (certKey: string) => {
+              const selected = table.getSelectedRowModel().flatRows.map((r: any) => r.original);
+              if (selected.length === 0) return;
+              
+              const shouldTurnOn = selected.some((s: any) => s[certKey] !== 1);
+              const newValue = shouldTurnOn ? 1 : 0;
+              
+              await editMultipleCertifications(selected, certKey, newValue);
+            };
+
+            return (
+              <Box sx={{ display: 'flex', gap: '1rem', p: '0.5rem', alignItems: 'center' }}>
+                <span className="font-bold text-gray-700 mx-2">Asignar a seleccionados:</span>
+                <img
+                  src={require('../../assets/certificaciones/1_USDA Organic.png')}
+                  className="w-12 h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  title="Activar/Desactivar USDA"
+                  onClick={() => handleToggle('usda')}
+                />
+                <img
+                  src={require('../../assets/certificaciones/2_Fair Trade.png')}
+                  className="w-12 h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  title="Activar/Desactivar Fairtrade"
+                  onClick={() => handleToggle('fairtrade')}
+                />
+                <img
+                  src={require('../../assets/certificaciones/5_ConManosdeMujer.png')}
+                  className="w-12 h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  title="Activar/Desactivar Manos de Mujer"
+                  onClick={() => handleToggle('manosdemujer')}
+                />
+                <img
+                  src={require('../../assets/certificaciones/7_Pequeños_Productores.png')}
+                  className="w-12 h-12 cursor-pointer hover:opacity-80 transition-opacity"
+                  title="Activar/Desactivar SPP"
+                  onClick={() => handleToggle('spp')}
+                />
+              </Box>
+            );
           }}
         />
       </div>

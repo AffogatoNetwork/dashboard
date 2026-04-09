@@ -3,7 +3,8 @@ import { useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import Loading from '../Loading';
 import NotFound from '../common/NotFound';
-import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl } from '../../db/firebase';
+import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl, canEdit, updateFarmByAddress, updateFarmerPnud } from '../../db/firebase';
+import { Select, MenuItem, Checkbox, ListItemText, OutlinedInput } from '@mui/material';
 import NewMap from '../common/NewMap';
 import proexoLogo from '../../assets/proexo.png';
 import QRCode from 'react-qr-code';
@@ -34,6 +35,11 @@ export const FarmerProfileModule = () => {
   const [farmName, setFarmName] = useState('');
   const [imageUrl, setImageUrl] = useState('');
   const [bannerUrl, setBannerUrl] = useState('');
+  const [isAdmin, setIsAdmin] = useState(false);
+  const [isEditingCerts, setIsEditingCerts] = useState(false);
+  const [selectedCerts, setSelectedCerts] = useState<string[]>([]);
+  const [isEditingFarm, setIsEditingFarm] = useState(false);
+  const [editFarmData, setEditFarmData] = useState<any>({});
 
   useEffect(() => {
     const load = async () => {
@@ -57,8 +63,26 @@ export const FarmerProfileModule = () => {
 
         const url = await getImageUrl(newfarmerId);
         setImageUrl(url);
+
+        // Check Admin
+        try {
+          const emailStr = localStorage.getItem('email');
+          if (emailStr) {
+            const email = JSON.parse(emailStr);
+            if (email && typeof email === 'string') {
+              const companyName = farmer?.company || 'PROEXO';
+              const permResult = await canEdit(email, companyName);
+              for (let i = 0; i < permResult.length; i += 1) {
+                const data = permResult[i].data();
+                if (data.user?.includes(email)) {
+                  setIsAdmin(true);
+                }
+              }
+            }
+          }
+        } catch (e) {
+        }
       } catch (error) {
-        console.error('Error loading farmer profile:', error);
       } finally {
         setLoading(false);
       }
@@ -70,6 +94,63 @@ export const FarmerProfileModule = () => {
   if (loading) {
     return <Loading label={t('loading').concat('...')} className="loading-wrapper" />;
   }
+
+  const handleSaveCertifications = async () => {
+    if (!farms) return;
+    setLoading(true);
+
+    // Build updated certs object
+    // Set all known certs to either 'X' or ''
+    const updatedCerts = { ...farms };
+    Object.keys(CERT_ICONS).forEach(key => {
+      updatedCerts[key] = selectedCerts.includes(key) ? 'X' : '';
+    });
+
+    await updateFarmByAddress(farmerData.address, updatedCerts);
+
+    // Update local state
+    setFarms(updatedCerts);
+    setIsEditingCerts(false);
+    setLoading(false);
+  };
+
+  const handleEditClick = () => {
+    // Populate selected certs
+    const current = Object.keys(CERT_ICONS).filter(k => farms?.[k] === 'X');
+    setSelectedCerts(current);
+    setIsEditingCerts(true);
+  };
+
+  const handleEditFarmClick = () => {
+    setEditFarmData({
+      name: farms?.name || farms?.bio || farmName || '',
+      height: farms?.height || '',
+      area: farms?.area || '',
+      varieties: farms?.varieties || '',
+      shadow: farms?.shadow || '',
+      familyMembers: farms?.familyMembers || '',
+    });
+    setIsEditingFarm(true);
+  };
+
+  const handleSaveFarm = async () => {
+    if (!farms) return;
+    setLoading(true);
+    const updated = {
+      ...farms,
+      name: editFarmData.name,
+      height: editFarmData.height,
+      area: editFarmData.area,
+      varieties: editFarmData.varieties,
+      shadow: editFarmData.shadow,
+      familyMembers: editFarmData.familyMembers,
+    };
+    await updateFarmByAddress(farmerData.address, updated);
+    setFarms(updated);
+    setFarmName(editFarmData.name);
+    setIsEditingFarm(false);
+    setLoading(false);
+  };
 
   if (!farmerData) {
     return <NotFound msg={t('errors.farmer-not-found')} />;
@@ -159,10 +240,33 @@ export const FarmerProfileModule = () => {
                       {t('cooperative-id')}: {farmerData.farmerId}
                     </span>
                   )}
-                  {farmerData.pnud && (
+                  {!isAdmin && farmerData.pnud && (
                     <span className="rounded-full bg-blue-100 border border-blue-300 px-3 py-0.5 text-xs font-semibold text-blue-800">
                       PNUD
                     </span>
+                  )}
+                  {isAdmin && (
+                    <span className="rounded-full bg-red-100 border border-red-300 px-3 py-0.5 text-xs font-semibold text-red-800 flex items-center gap-1 shadow-sm">
+                      <svg className="w-3 h-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z" />
+                      </svg>
+                      {t('admin-view', 'VISTA DE ADMINISTRADOR')}
+                    </span>
+                  )}
+                  {isAdmin && (
+                    <label className="cursor-pointer label inline-flex items-center gap-2 bg-blue-50 px-3 py-0.5 rounded-full border border-blue-200 ml-1">
+                      <span className="label-text text-xs font-semibold text-blue-800">Socio PNUD</span>
+                      <input 
+                        type="checkbox" 
+                        className="toggle toggle-info toggle-xs" 
+                        checked={farmerData.pnud || false} 
+                        onChange={async (e) => {
+                          const val = e.target.checked;
+                          setFarmerData({...farmerData, pnud: val});
+                          await updateFarmerPnud(farmerData.address, val);
+                        }}
+                      />
+                    </label>
                   )}
                 </div>
                 {farmerData.pnud && (
@@ -193,27 +297,114 @@ export const FarmerProfileModule = () => {
             {/* Farm details */}
             {farms && (
               <div className="px-6 py-5 border-b border-gray-100">
-                <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-amber-700">
-                  {t('farm-details')}
-                </h2>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                  <InfoItem label={t('farm-name')} value={farms.bio || farmName} />
-                  <InfoItem label={t('height')} value={farms.height ? `${farms.height} msnm` : undefined} />
-                  <InfoItem label={t('area')} value={farms.area ? `${farms.area} ha` : undefined} />
-                  <InfoItem label={t('variety')} value={farms.varieties} />
-                  <InfoItem label={t('shadow')} value={farms.shadow} />
-                  <InfoItem label={t('family-members')} value={farms.familyMembers} />
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-amber-700">
+                    {t('farm-details')}
+                  </h2>
+                  {isAdmin && !isEditingFarm && (
+                    <button
+                      className="btn btn-sm btn-outline btn-warning"
+                      onClick={handleEditFarmClick}
+                    >
+                      Editar
+                    </button>
+                  )}
                 </div>
+
+                {isEditingFarm ? (
+                  <div className="flex flex-col gap-4">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                      <div className="form-control">
+                        <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('farm-name')}</span></label>
+                        <input type="text" className="input input-bordered input-sm w-full" value={editFarmData.name} onChange={e => setEditFarmData({ ...editFarmData, name: e.target.value })} />
+                      </div>
+                      <div className="form-control">
+                        <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('height')} (msnm)</span></label>
+                        <input type="text" className="input input-bordered input-sm w-full" value={editFarmData.height} onChange={e => setEditFarmData({ ...editFarmData, height: e.target.value })} />
+                      </div>
+                      <div className="form-control">
+                        <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('area')} (ha)</span></label>
+                        <input type="text" className="input input-bordered input-sm w-full" value={editFarmData.area} onChange={e => setEditFarmData({ ...editFarmData, area: e.target.value })} />
+                      </div>
+                      <div className="form-control">
+                        <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('variety')}</span></label>
+                        <input type="text" className="input input-bordered input-sm w-full" value={editFarmData.varieties} onChange={e => setEditFarmData({ ...editFarmData, varieties: e.target.value })} />
+                      </div>
+                      <div className="form-control">
+                        <label className="label cursor-pointer justify-start gap-4 inline-flex mt-6">
+                          <span className="label-text text-amber-700 font-bold uppercase text-xs">{t('shadow', 'Sombra')}</span>
+                          <input 
+                            type="checkbox" 
+                            className="toggle toggle-primary toggle-sm" 
+                            checked={!!editFarmData.shadow} 
+                            onChange={e => setEditFarmData({ ...editFarmData, shadow: e.target.checked })} 
+                          />
+                        </label>
+                      </div>
+                      <div className="form-control">
+                        <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('family-members')}</span></label>
+                        <input type="text" className="input input-bordered input-sm w-full" value={editFarmData.familyMembers} onChange={e => setEditFarmData({ ...editFarmData, familyMembers: e.target.value })} />
+                      </div>
+                    </div>
+                    <div className="flex gap-2">
+                      <button className="btn btn-sm btn-primary" onClick={handleSaveFarm}>Guardar</button>
+                      <button className="btn btn-sm" onClick={() => setIsEditingFarm(false)}>Cancelar</button>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                    <InfoItem label={t('farm-name')} value={farms.name || farms.bio || farmName} />
+                    <InfoItem label={t('height')} value={farms.height ? `${farms.height} msnm` : undefined} />
+                    <InfoItem label={t('area')} value={farms.area ? `${farms.area} ha` : undefined} />
+                    <InfoItem label={t('variety')} value={farms.varieties} />
+                    <InfoItem label={t('shadow')} value={farms.shadow} />
+                    <InfoItem label={t('family-members')} value={farms.familyMembers} />
+                  </div>
+                )}
               </div>
             )}
 
             {/* Certifications */}
             {farms && (
               <div className="px-6 py-5 border-b border-gray-100">
-                <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-amber-700">
-                  {t('certificates')}
-                </h2>
-                {activeCerts.length > 0 ? (
+                <div className="flex justify-between items-center mb-4">
+                  <h2 className="text-xs font-bold uppercase tracking-widest text-amber-700">
+                    {t('certificates')}
+                  </h2>
+                  {isAdmin && !isEditingCerts && (
+                    <button
+                      className="btn btn-sm btn-outline btn-warning"
+                      onClick={handleEditClick}
+                    >
+                      Editar
+                    </button>
+                  )}
+                </div>
+
+                {isEditingCerts ? (
+                  <div className="flex flex-col gap-4">
+                    <Select
+                      multiple
+                      value={selectedCerts}
+                      onChange={(e) => setSelectedCerts(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
+                      input={<OutlinedInput label="Certificados" />}
+                      renderValue={(selected) => selected.map(s => CERT_ICONS[s]?.label).join(', ')}
+                      className="w-full max-w-sm"
+                      displayEmpty
+                    >
+                      {Object.entries(CERT_ICONS).map(([key, cert]) => (
+                        <MenuItem key={key} value={key}>
+                          <Checkbox checked={selectedCerts.indexOf(key) > -1} />
+                          <ListItemText primary={cert.label} />
+                        </MenuItem>
+                      ))}
+                    </Select>
+                    <div className="flex gap-2">
+                      <button className="btn btn-sm btn-primary" onClick={handleSaveCertifications}>Guardar</button>
+                      <button className="btn btn-sm" onClick={() => setIsEditingCerts(false)}>Cancelar</button>
+                    </div>
+                  </div>
+                ) : activeCerts.length > 0 ? (
                   <div className="flex flex-wrap gap-4">
                     {activeCerts.map(([key, cert]) => (
                       <div key={key} className="flex flex-col items-center gap-1">

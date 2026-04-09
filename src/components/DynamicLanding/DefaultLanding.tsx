@@ -1,7 +1,9 @@
 import React from "react";
 import { useTranslation } from "react-i18next";
+import { Link, useNavigate } from "react-router-dom";
 export const DefaultLanding = () => {
     const { t } = useTranslation();
+    const navigate = useNavigate();
 
     return (<>
 
@@ -16,10 +18,11 @@ export const DefaultLanding = () => {
                         </p>
                     </div>
                     <div className="flex items-center justify-center mb-[87px]">
-                        <button className="btn btn-lg btn-primary text-white">
-                            <a href="/farmers">
-                                Ir a la Plataforma
-                            </a>
+                        <button 
+                            className="btn btn-lg btn-primary text-white"
+                            onClick={() => navigate('/farmers')}
+                        >
+                            Ir a la Plataforma
                         </button>
                     </div>
                     <div className="relative mx-auto max-w-[1190px]"><img className="h-full w-full object-cover rounded-2xl"
@@ -71,16 +74,17 @@ export const DefaultLanding = () => {
                             alt="logo" />
                             <div className="flex items-center flex-col gap-5 md:flex-row lg:gap-[30px]">
                                 <p className="text-heading-6 font-chivo font-bold">Quieres trazar tu cafe?</p>
-                                <button className="btn btn-lg bg-black text-white">
-                                    <a href="/signup">
-                                        Crea una Cuenta
-                                    </a>
+                                <button 
+                                    className="btn btn-lg bg-black text-white"
+                                    onClick={() => navigate('/signup')}
+                                >
+                                    Crea una Cuenta
                                 </button>
                             </div>
                         </div>
                         <div className="flex flex-wrap justify-center md:justify-start gap-6 border-t border-gray-100 pt-8 mt-8">
-                            <a href="/privacy" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Política de Privacidad</a>
-                            <a href="/terms" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Términos de Servicio</a>
+                            <Link to="/privacy" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Política de Privacidad</Link>
+                            <Link to="/terms" className="text-gray-500 hover:text-amber-900 transition-colors text-sm font-medium">Términos de Servicio</Link>
                             <p className="text-gray-400 text-sm ml-auto">© 2026 Affogato Network. Todos los derechos reservados.</p>
                         </div>
                     </div>

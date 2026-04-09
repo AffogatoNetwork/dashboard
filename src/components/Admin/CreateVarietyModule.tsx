@@ -20,7 +20,6 @@ export const CreateVarietyModule = () => {
 
         const load = async () => {
             const location = window.location.host;
-            console.log(location);
             let currentCoop = "";
             if (location.match("COMMOVEL") !== null) {
                 currentCoop = "COMMOVEL"
@@ -40,19 +39,15 @@ export const CreateVarietyModule = () => {
                 currentCoop = "PROEXO"
             }
             setCurrentCoop(currentCoop);
-            console.log(currentCoop);
             getVarieties().then((data: any) => {
-                console.log(data);
                 for (let i = 0; i < data.length; i++) {
                     const element = data[i].data();
                     const {
                         variety
                     } = element;
                     varietyList.push(variety);
-                    console.log(varietyList);
                 }
                 setVarietyNames(varietyList);
-                console.log(varietyNames);
             });
         };
         load();
@@ -68,7 +63,6 @@ export const CreateVarietyModule = () => {
             });
 
         } catch (error) {
-            console.log(error);
         }
 
     };
@@ -97,10 +91,10 @@ export const CreateVarietyModule = () => {
                         errorMsg={varietyError}
                         className="input input-bordered w-full"
                     />
-                                        <button className='btn btn-primary' onClick={() => createVariety()}> Agregar Variedad</button>
+                    <button className='btn btn-primary' onClick={() => createVariety()}> Agregar Variedad</button>
 
                 </div>
-               
+
                 <div className='col-span-1 '>
                     <h1 className='bold'>
                         Lista de Variedades

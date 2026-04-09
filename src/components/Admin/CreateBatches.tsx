@@ -386,7 +386,6 @@ export const CreateBatchesModule = () => {
       setCurrentStep((prevStep) => prevStep + 1);
     } else if (currentStep === Object.keys(formData).length - 1) {
       // Finalize form data with `currentCoop` as `parentId`
-      console.log(selectedFarmers);
       formData.Farmer = selectedFarmers; // Make sure this is an array
 
       const farmsDirty = `/farms/${selectedFarmers.join(', ')}`;
@@ -458,15 +457,12 @@ export const CreateBatchesModule = () => {
       };
 
       createBatch(firebaseData).then((result) => {
-        console.log(result);
         if (result) {
           resetForm();
         }
         alert('Lote Creado');
         navigate('/batches-module', { replace: true });
       });
-
-      console.log(firebaseData);
     }
   };
 

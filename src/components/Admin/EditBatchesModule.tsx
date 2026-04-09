@@ -25,7 +25,6 @@ export const EditBatchesModule = () => {
         exitEditingMode();
         window.location.reload();
       } catch (error) {
-        console.error(error);
       }
     };
 

@@ -39,10 +39,8 @@ for (const d_ of snap.docs) {
   if (isPxoCode(farmerId)) { skipped++; continue; } // PXO-xxx — keep it
 
   // Non-PXO value (national ID, raw number, etc.) — clear it
-  console.log(`  Clearing farmerId "${farmerId}" on ${data.fullname} (${data.address})`);
   await updateDoc(doc(db, 'farmers', d_.id), { farmerId: '' });
   cleared++;
 }
 
-console.log(`\nDone — cleared: ${cleared}, skipped (already ok): ${skipped}`);
 process.exit(0);

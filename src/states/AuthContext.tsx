@@ -169,7 +169,6 @@ export default function AuthProvider({ children }: props) {
   };
 
   const sendAccountEmail = async (address: string, data: ContextDataType) => {
-    console.log(data);
     let templateId = process.env.REACT_APP_EMAILJS_COOP_TEMPLATE_ID || "";
     if (!data.isFarmer) {
       templateId = process.env.REACT_APP_EMAILJS_TEMPLATE_ID || "";

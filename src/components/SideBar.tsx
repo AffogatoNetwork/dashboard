@@ -113,9 +113,7 @@ export default function Home() {
   const navigate = useNavigate();
   const [active, setActive] = useState(false);
   const [primary] = useState('bg-white');
-  const controls = useAnimation();
-  const controlText = useAnimation();
-  const controlTitleText = useAnimation();
+  const [isExpanded, setIsExpanded] = useState(true);
 
   const getCooperative = (companyName: string) => {
     if (companyName === 'CAFEPSA') {
@@ -159,41 +157,7 @@ export default function Home() {
     }
   };
 
-  const showMore = () => {
-    controls.start({
-      width: '250px',
-      transition: { duration: 0.001 },
-    });
-    controlText.start({
-      opacity: 1,
-      display: 'block',
-      transition: { delay: 0.3 },
-    });
-    controlTitleText.start({
-      opacity: 1,
-      transition: { delay: 0.3 },
-    });
-
-    setActive(true);
-  };
-
-  const showLess = () => {
-    controls.start({
-      width: '55px',
-      transition: { duration: 0.001 },
-    });
-
-    controlText.start({
-      opacity: 0,
-      display: 'none',
-    });
-
-    controlTitleText.start({
-      opacity: 0,
-    });
-
-    setActive(false);
-  };
+  // Removed framer motion methods showMore, showLess
 
   useEffect(() => {
     let companyName = '';
@@ -217,45 +181,51 @@ export default function Home() {
       companyName = 'CAFEPSA';
     }
 
-    showMore();
+
     getCooperative(companyName);
   }, []);
 
   return (
-    <div className="min-h-screen bg-base-100">
-      <div className="max-w-[250px] animate duration-300  relative flex flex-col pt-2 min-h-screen group">
-        <div className="flex justify-center md:m-4 m-2 ">
-          <div className="w-14 h-14">
+    <div className={`min-h-screen bg-base-100 transition-all duration-300 relative border-r border-gray-100 ${isExpanded ? 'w-64' : 'w-20'}`}>
+      <button 
+        onClick={() => setIsExpanded(!isExpanded)} 
+        className="absolute -right-3 top-6 bg-white border border-gray-200 rounded-full p-1 text-gray-500 hover:text-amber-700 hover:shadow-md transition-all z-50 hidden sm:block"
+      >
+        {isExpanded ? <AiOutlineMenuFold size={20} /> : <AiOutlineMenuUnfold size={20} />}
+      </button>
+
+      <div className="flex flex-col pt-2 min-h-screen h-full w-full overflow-hidden">
+        <div className="flex justify-center md:m-4 m-2 min-w-[56px]">
+          <div className="w-14 h-14 flex-shrink-0">
             <CoopLogo className="inline-block" />
           </div>
         </div>
 
-        <div className="flex justify-center md:m-4 m-2 ">
-          <div className="text-sm text-center">
-            <h1> {userData?.name} </h1>
-            <h1> {userData?.email} </h1>
-            <br />
-            <button
-              className="m-2 btn btn-accent text-white"
-              onClick={() => navigate(`/admin`)}
-            >
-              {' '}
-              Modulo de Administrador{' '}
-            </button>
-          </div>
+        <div className={`flex flex-col items-center mx-2 text-sm text-center min-w-[150px] transition-opacity duration-300 ${isExpanded ? 'opacity-100' : 'opacity-0'} ${!isExpanded && 'h-0 overflow-hidden'}`}>
+          <h1 className="truncate w-full font-semibold px-2"> {userData?.name} </h1>
+          <h1 className="truncate w-full text-xs text-gray-500 mb-2 px-2"> {userData?.email} </h1>
+          <button
+            className="m-2 btn btn-xs btn-accent text-white"
+            onClick={() => navigate(`/admin`)}
+          >
+            Ajustes
+          </button>
         </div>
 
-        <div className="grow">
+        <div className="grow mt-4 flex flex-col px-2 max-w-full overflow-hidden">
           {data.map((group, index) => (
-            <div key={index} className="ml-2">
+            <div key={index} className="">
               {group.items.map((item, index2) => (
                 <div
                   key={index2}
                   onClick={() => navigate(`${item.href}`)}
-                  className={`${item.href === window.location.pathname && `${primary}  text-amber-900 hover:text-amber-900`}  ${item.disabled && 'cursor-not-allowed bg-gray-100 rounded-l-lg text-gray-500 opacity-50 hover:text-amber-900'} inline-flex items-center w-full h-12  mt-2 px-4 py-4 hover:bg-white rounded-l-lg rounded hover:text-amber-900 font-medium  cursor-pointer `}
+                  className={`${item.href === window.location.pathname && `${primary} text-amber-900 border-l-4 border-amber-900 bg-amber-50`} ${item.disabled && 'cursor-not-allowed text-gray-500 opacity-50'} inline-flex items-center w-full h-12 mt-1 px-4 hover:bg-amber-50 hover:text-amber-900 font-medium cursor-pointer rounded-lg transition-colors ${!isExpanded && 'justify-center border-l-0 px-0'}`}
+                  title={t(item.title) as string}
                 >
-                  <item.icon className="" />
-                  <p className="ml-4 text-sm">
+                  <div className="flex-shrink-0 flex items-center justify-center w-6">
+                    <item.icon className="" />
+                  </div>
+                  <p className={`ml-4 text-sm truncate transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 h-0 hidden'}`}>
                     <>{t(item.title)}</>
                   </p>
                 </div>
@@ -265,62 +235,49 @@ export default function Home() {
           <div
             tabIndex={1}
             onClick={() => navigate(`/create`)}
-            className={`${ownerAddress && window.location.pathname == '/create' && `${primary} rounded-l-lg text-white hover:bg-white hover:text-amber-900 visible`}  ${!ownerAddress && 'cursor-not-allowed bg-gray-100 text-gray-500 opacity-50 hover:text-amber-900 hidden'} inline-flex items-center w-full h-12  mt-2 px-4 py-4  font-medium rounded-md cursor-pointer `}
+            className={`${ownerAddress && window.location.pathname == '/create' && `${primary} text-white hover:bg-white hover:text-amber-900 visible`} ${!ownerAddress && 'hidden'} inline-flex items-center w-full h-12 mt-2 px-4 font-medium rounded-lg cursor-pointer ${!isExpanded && 'justify-center px-0'}`}
+            title={t('add-batches') as string}
           >
-            <VoteIcon className="w-8" />
-            <p className="ml-4 text-sm">
+            <div className="flex-shrink-0 flex items-center justify-center w-6">
+              <VoteIcon className="w-6" />
+            </div>
+            <p className={`ml-4 text-sm truncate transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 h-0 hidden'}`}>
               <>{t('add-batches')}</>
             </p>
           </div>
-          <div className="divider">
-            {' '}
-            <>{t('change-lang')}</>
-          </div>
-          <div className="m-2 ">
-            <LangChooser />
-          </div>
-
-          <br />
-          <br />
-
-          <div>
+          
+          <div className="mt-auto mb-4">
             {userData.name ? (
-              <div className="m-2">
-                <p className="mb-2 ml-4 text-sm font-bold text-gray-500"></p>
-
-                <div
-                  onClick={() => logout()}
-                  className={`inline-flex items-center button justify-center w-full h-16 mt-auto hover:text-amber-900 bg-gray-100  font-medium rounded-md`}
-                >
-                  <LogOutIcon className=" hover:text-white" />
-
-                  <p className="ml-4 text-sm font-bold hover:text-amber-900">
-                    <>
-                      <>{t('logout')}</>
-                    </>
-                  </p>
+              <div
+                onClick={() => logout()}
+                className={`inline-flex items-center justify-center w-full h-12 mt-2 hover:bg-red-50 hover:text-red-700 bg-gray-50 text-gray-600 font-medium rounded-lg cursor-pointer transition-colors ${!isExpanded && 'px-0'}`}
+                title={t('logout') as string}
+              >
+                <div className="flex-shrink-0 flex items-center justify-center w-6">
+                  <LogOutIcon className="" />
                 </div>
+                <p className={`ml-4 text-sm font-bold truncate transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 h-0 hidden'}`}>
+                  <>{t('logout')}</>
+                </p>
               </div>
             ) : (
-              <div className="my-2">
-                <p className="mb-2 ml-4 text-sm font-bold text-red-500"></p>
-
-                <div
-                  onClick={() => navigate('/login', { replace: true })}
-                  className={`inline-flex items-center button justify-center w-full h-16 mt-auto hover:text-amber-900 bg-gray-100  font-medium rounded-md`}
-                >
-                  <IconLogin className="hover:text-white" />
-                  <p className="ml-4 text-sm font-bold hover:text-amber-900">
-                    <>
-                      <>{t('login.access')}</>
-                    </>
-                  </p>
+              <div
+                onClick={() => navigate('/login', { replace: true })}
+                className={`inline-flex items-center justify-center w-full h-12 mt-2 hover:bg-amber-50 hover:text-amber-900 bg-gray-50 text-gray-600 font-medium rounded-lg cursor-pointer transition-colors ${!isExpanded && 'px-0'}`}
+                title={t('login.access') as string}
+              >
+                <div className="flex-shrink-0 flex items-center justify-center w-6">
+                  <IconLogin className="" />
                 </div>
+                <p className={`ml-4 text-sm font-bold truncate transition-all duration-300 ${isExpanded ? 'opacity-100 w-auto' : 'opacity-0 w-0 h-0 hidden'}`}>
+                  <>{t('login.access')}</>
+                </p>
               </div>
             )}
           </div>
         </div>
       </div>
+      <LangChooser />
     </div>
   );
 }
