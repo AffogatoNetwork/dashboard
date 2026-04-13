@@ -41,7 +41,7 @@ export const CreateFarmModule = () => {
   const [farmerList, setFarmerList] = useState<Array<any>>([]);
   const [certificationList, setCertificationList] = useState<Array<any>>([]);
   const [certificationNames, setCertificationNames] = useState<Array<any>>([]);
-  const [certifications, setCertifications] = useState('');
+  const [selectedCertifications, setSelectedCertifications] = useState<string[]>([]);
   const [varietyList, setVarietyList] = useState<Array<any>>([]);
   const [varietyNames, setVarietyNames] = useState<Array<any>>([]);
   const [coopError, setCoopError] = useState('');
@@ -108,7 +108,7 @@ export const CreateFarmModule = () => {
       name: farmName,
       height: height,
       area: area,
-      certifications: certifications,
+      certifications: selectedCertifications.join(', '),
       latitude: latitude,
       longitude: longitude,
       bio: '',
@@ -131,6 +131,7 @@ export const CreateFarmModule = () => {
       setVarieties('');
       setArea('');
       setShadow('');
+      setSelectedCertifications([]);
       setCurrentCoop('');
       setRegionError('');
       // Show success message
@@ -214,11 +215,10 @@ export const CreateFarmModule = () => {
     setVillage(value);
   };
 
-  const handleCertificationsChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const value = event.target.value;
-    setCertifications(value);
+  const handleCertificationToggle = (cert: string) => {
+    setSelectedCertifications(prev =>
+      prev.includes(cert) ? prev.filter(c => c !== cert) : [...prev, cert]
+    );
   };
 
   const handleheightChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -368,8 +368,7 @@ export const CreateFarmModule = () => {
             </div>
             <div className="md:col-span-5">
               <h1 className="text-base font-medium">
-                {' '}
-                <> {'Variedades'}</>{' '}
+                {t('varieties')}{' '}
               </h1>
               <select
                 id="dropdown-cooperative"
@@ -377,7 +376,7 @@ export const CreateFarmModule = () => {
                 onChange={handlevarietiesChange}
               >
                 <option disabled selected>
-                  <> {'Seleccione una Variedad'}</>:
+                  {t('select-variety')}
                 </option>
                 {varietyList.map((item) => (
                   <option key={item} value={item}>
@@ -388,24 +387,22 @@ export const CreateFarmModule = () => {
             </div>
 
             <div className="md:col-span-5">
-              <h1 className="text-base font-medium">
-                {' '}
-                <> {'Certificados'}</>{' '}
+              <h1 className="text-base font-medium mb-2">
+                {t('certifications')}
               </h1>
-              <select
-                id="dropdown-cooperative"
-                className="select-bordered select w-full"
-                onChange={handleCertificationsChange}
-              >
-                <option disabled selected>
-                  <> {'Seleccione un Certificado'}</>:
-                </option>
-                {certificationList.map((item) => (
-                  <option key={item} value={item}>
-                    {item}
-                  </option>
+              <div className="flex flex-wrap gap-3">
+                {certificationNames.map((cert) => (
+                  <label key={cert} className="flex items-center gap-2 cursor-pointer select-none">
+                    <input
+                      type="checkbox"
+                      className="checkbox checkbox-sm checkbox-primary"
+                      checked={selectedCertifications.includes(cert)}
+                      onChange={() => handleCertificationToggle(cert)}
+                    />
+                    <span className="text-sm">{cert}</span>
+                  </label>
                 ))}
-              </select>
+              </div>
             </div>
           </div>
         </div>

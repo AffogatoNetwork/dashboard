@@ -131,8 +131,14 @@
   "threshing-yield": "Threshing Yield",
   "total": "Total",
   "type-production": "Production Type",
+  "yes": "Yes",
+  "no": "No",
+  "select-variety": "Select a Variety",
+  "select-certificate": "Select a Certificate",
+  "welcome": "Welcome",
   "tables": {
     "actions": "Actions",
+    "active": "Active",
     "entry-id-wet": "Wet Processing Entry ID",
     "export-drying-id": "Export Drying ID",
     "batch-name": "Batch Name",
@@ -207,6 +213,15 @@
   "packaging": "Packaging",
   "roast-date": "Roast Date",
   "roast-type": "Roast Type",
+  "upload-farms": {
+    "title": "Update Farms from Excel",
+    "download-template": "Download Template",
+    "saving": "Updating farms...",
+    "success": "{{count}} farms updated successfully.",
+    "upload-another": "Upload Another File",
+    "preview": "Preview — {{count}} farms found",
+    "save": "Update {{count}} Farms"
+  },
   "create-batches": {
     "creating": "Creating batches...",
     "drag-drop": "Drag and Drop the File Here, or Click to Select",
@@ -224,7 +239,10 @@
     "buyer-access": "Log In as Buyer.",
     "buyer-title": "View Coffee Batches",
     "buyer-subtitle": "If you don't yet have a buyer password, contact the company to request one.",
-    "buyer-password": "Buyer Password"
+    "buyer-password": "Buyer Password",
+    "platform-subtitle": "to the Traceability Platform",
+    "slogan": "Our coffee traced with the security of blockchain technology.",
+    "warning": "We are making changes, please use the Sign In with Google button. To edit and have Admin permissions, your account must be on the Administrators list and have secure login with 2FA."
   },
   "signup": {
     "account-created": "Account has been created",
@@ -239,7 +257,8 @@
     "manager-name": "Manager Name",
     "new-company": "New Company",
     "success": "Your Data Has Been Sent to the Company",
-    "success2": "Your Data Has Been Sent to the Affogato Team"
+    "success2": "Your Data Has Been Sent to the Affogato Team",
+    "choose-company-error": "Please select a company."
   },
   "placeholders": {
     "bio": "Enter Your Biography",
@@ -260,6 +279,9 @@
     "no-valid": "The Value is Not Valid",
     "max-length": "Value Must Be Less Than {{length}} Characters",
     "numeric-value": "Value must be numeric",
-    "missing-data": "Farm data is missing"
+    "missing-data": "Farm data is missing",
+    "file-invalid-type": "* File {{name}} has an invalid type, only .xlsx and .xls files are accepted.",
+    "file-too-big": "* File {{name}} ({{size}} MB) exceeds the maximum allowed size (1 MB).",
+    "file-load-failed": "* File {{name}} could not be loaded."
   }
 }

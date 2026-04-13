@@ -82,22 +82,12 @@ export const Create = () => {
 
   const fileError = (file: File, errors: any) => {
     if (errors.code === 'file-invalid-type') {
-      return (
-        <span>
-          * El tipo del archivo {file.name} no es valido, solo se acepta
-          archivos tipo .xlsx y xls
-        </span>
-      );
+      return <span>{t('errors.file-invalid-type', { name: file.name })}</span>;
     }
     if (errors.code === 'file-too-big') {
-      return (
-        <span>
-          * El tamaño del archivo {file.name} ({file.size} MB) excede el máximo
-          permitido (1 MB.)
-        </span>
-      );
+      return <span>{t('errors.file-too-big', { name: file.name, size: file.size })}</span>;
     }
-    return <span>* El archivo {file.name} no se pudo cargar.</span>;
+    return <span>{t('errors.file-load-failed', { name: file.name })}</span>;
   };
 
   const fileRejectionItems = fileRejections.map(({ file, errors }, index) => (
@@ -124,63 +114,53 @@ export const Create = () => {
 
     if (rows !== null) {
       // @ts-ignore
-      for (let i = 2; i < rows.length; i += 1) {
+      for (let i = 4; i < rows.length; i += 1) {
+        // Rows 0-3: company header, blank, main headers, sub-headers — skip
         try {
           // @ts-ignore
           if (rows[i] !== null && rows[i].length > 0) {
+            // Need at least Código (col 1) and Nombre Finca (col 12)
             // @ts-ignore
-            if (rows[i][1] !== '' && rows[i][2] !== '') {
+            if (rows[i][1] !== '' && rows[i][12] !== '') {
               // @ts-ignore
               const cooperativeId = String(rows[i][1] || '').trim();
               const ethAddress = coopToAddress[cooperativeId.toUpperCase()] || cooperativeId;
+              // @ts-ignore
+              const isX = (col: number) => String(rows![i][col] || '').trim().toUpperCase() === 'X';
               farms.push({
-                farmerAddress: ethAddress,       // eth address (fallback: Código)
-                farmerId: cooperativeId,         // PXO código used as doc ID base
+                farmerAddress: ethAddress,
+                farmerId: cooperativeId,
                 company: companyName,
                 // @ts-ignore
-                name: rows[i][2] || '',          // Nombres
+                name: String(rows[i][12] || ''),         // M Nombre Finca
                 // @ts-ignore
-                height: String(rows[i][8] || ''),  // Altura
+                height: String(rows[i][13] || ''),       // N Altura (msnm)
                 // @ts-ignore
-                area: String(rows[i][14] || ''),   // Superficie (Ha.)
-                // @ts-ignore
-                fairtrade: String(rows[i][15] || '').trim().toUpperCase() === 'X' ? 'X' : '',
-                // @ts-ignore
-                organico: String(rows[i][16] || '').trim().toUpperCase() === 'X' ? 'X' : '',
-                // @ts-ignore
-                rainforest: String(rows[i][17] || '').trim().toUpperCase() === 'X' ? 'X' : '',
-                // @ts-ignore
-                manosdemujer: String(rows[i][18] || '').trim().toUpperCase() === 'X' ? 'X' : '',
-                // @ts-ignore
-                roc: String(rows[i][19] || '').trim().toUpperCase() === 'X' ? 'X' : '',
-                // @ts-ignore
+                area: String(rows[i][11] || ''),         // L Superficie (Ha.)
                 certifications: [
-                  String(rows[i][15] || '').trim().toUpperCase() === 'X' ? 'Fairtrade' : '',
-                  String(rows[i][16] || '').trim().toUpperCase() === 'X' ? 'Organico' : '',
-                  String(rows[i][17] || '').trim().toUpperCase() === 'X' ? 'Rainforest' : '',
-                  String(rows[i][18] || '').trim().toUpperCase() === 'X' ? 'Con Manos de Mujer' : '',
-                  String(rows[i][19] || '').trim().toUpperCase() === 'X' ? 'ROC' : '',
+                  isX(15) ? 'Fairtrade' : '',
+                  isX(16) ? 'Orgánico' : '',
+                  isX(17) ? 'Rainforest Alliance' : '',
+                  isX(18) ? 'Con Manos de Mujer' : '',
+                  isX(19) ? 'ROC' : '',
                 ].filter(Boolean).join(', '),
                 // @ts-ignore
-                latitude: rows[i][6] || '',      // Latitud
+                latitude: rows[i][6] || '',              // G Latitud
                 // @ts-ignore
-                longitude: rows[i][7] || '',     // Longitud
-                // @ts-ignore
-                bio: rows[i][10] || '',          // Nombre de finca
+                longitude: rows[i][7] || '',             // H Longitud
+                bio: '',
                 country: '',
                 // @ts-ignore
-                region: rows[i][11] || '',       // Departamento
+                region: String(rows[i][8] || ''),        // I Departamento
                 // @ts-ignore
-                village: rows[i][13] || '',      // Comunidad
+                village: String(rows[i][10] || ''),      // K Comunidad
                 // @ts-ignore
-                village2: rows[i][12] || '',     // Municipio
+                village2: String(rows[i][9] || ''),      // J Municipio
                 // @ts-ignore
-                varieties: rows[i][9] || '',     // Variedad
+                varieties: String(rows[i][14] || ''),    // O Variedad
                 shadow: '',
                 familyMembers: '',
                 ethnicGroup: '',
-                location: '',
-                search: '',
               });
             }
           }

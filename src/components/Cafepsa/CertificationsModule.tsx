@@ -12,12 +12,16 @@ import QRCode from 'react-qr-code';
 import reactNodeToString from 'react-node-to-string';
 import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_EN } from 'material-react-table/locales/en';
+import { MRT_Localization_DE } from 'material-react-table/locales/de';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { LinkIcon } from '../icons/link';
 import { MdDoneOutline } from 'react-icons/md';
 export const CertificationsModule = () => {
   const saveSvgAsPng = require('save-svg-as-png');
 
   const { t, i18n } = useTranslation();
+  const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
   const [loading, setLoading] = useState(true);
   const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
@@ -374,7 +378,7 @@ export const CertificationsModule = () => {
                       enableFullScreenToggle={false}
                       enableColumnActions={false}
                       enableFilters={true}
-                      localization={MRT_Localization_ES}
+                      localization={mrtLocale}
                       initialState={{
                         sorting: [{ id: 'fullname', desc: false }],
                         showGlobalFilter: true,

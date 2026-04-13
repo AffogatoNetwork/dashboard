@@ -112,10 +112,10 @@ const Signup = () => {
     setCooperative();
     const checkAccount = () => {
       if (state.accountCreated) {
-        notifyUser('La cuenta ha sido creada!');
+        notifyUser(t('signup.account-created'));
         cleanFields();
       } else {
-        errorNotification('No se pudo crear la cuenta!');
+        errorNotification(t('errors.creating-account'));
       }
     };
     const checkIsLoggedIn = () => {
@@ -133,15 +133,15 @@ const Signup = () => {
   const isValid = (): boolean => {
     let valid = true;
     if (!isValidCellphone(userName) && !isValidEmail(userName)) {
-      setUserNameError('El valor no es valido.');
+      setUserNameError(t('errors.no-valid'));
       valid = false;
     }
     if (farmerId.trim().length > 25) {
-      setFarmerIdError('Valor debe de tener menos de 25 carácteres.');
+      setFarmerIdError(t('errors.max-length', { length: 25 }));
       valid = false;
     }
     if (currentCoop.key === '0') {
-      setCoopError('Seleccione una empresa.');
+      setCoopError(t('signup.choose-company-error'));
       valid = false;
     }
     return valid;

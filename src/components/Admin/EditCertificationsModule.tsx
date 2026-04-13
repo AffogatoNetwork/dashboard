@@ -7,12 +7,16 @@ import {
 import { editCertifications, editMultipleCertifications } from '../../db/firebase';
 import { useTranslation } from 'react-i18next';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_EN } from 'material-react-table/locales/en';
+import { MRT_Localization_DE } from 'material-react-table/locales/de';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import Box from '@mui/material/Box';
 import { MdDoneOutline } from 'react-icons/md';
 import { useCertifications } from '../../hooks/useCertifications';
 
 export const EditCertificationsModule = () => {
   const { t, i18n } = useTranslation();
+  const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
   const [certifications, certificationsCount, ownerAddress, setReload] =
     useCertifications();
 
@@ -228,7 +232,7 @@ export const EditCertificationsModule = () => {
           }}
           enableColumnActions={false}
           enableFilters={true}
-          localization={MRT_Localization_ES}
+          localization={mrtLocale}
           initialState={{
             sorting: [{ id: 'fullname', desc: false }],
             showGlobalFilter: true,

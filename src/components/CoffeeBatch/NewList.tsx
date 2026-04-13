@@ -9,6 +9,9 @@ import { useTranslation } from 'react-i18next';
 import reactNodeToString from 'react-node-to-string';
 import ReactHTMLTableToExcel from 'react-html-table-to-xlsx';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_EN } from 'material-react-table/locales/en';
+import { MRT_Localization_DE } from 'material-react-table/locales/de';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { FarmerData } from '../FarmerData';
 import Company from '../Company';
 
@@ -16,6 +19,7 @@ export const CoffeBatchNewList = () => {
   const saveSvgAsPng = require('save-svg-as-png');
 
   const { t, i18n } = useTranslation();
+  const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
   const [loading, setLoading] = useState(true);
   const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
@@ -244,16 +248,19 @@ export const CoffeBatchNewList = () => {
         header: t('tables.height'),
         accessorKey: 'wetMill.variety',
         size: 15,
+        Cell: ({ cell }) => t(cell.getValue<string>()),
       },
       {
         header: t('tables.process'),
         accessorKey: 'wetMill.process',
         size: 15,
+        Cell: ({ cell }) => t(cell.getValue<string>()),
       },
       {
         header: t('tables.type-drying'),
         accessorKey: 'wetMill.drying_type',
         size: 15,
+        Cell: ({ cell }) => t(cell.getValue<string>()),
       },
       {
         header: t('tables.weight'),
@@ -320,7 +327,7 @@ export const CoffeBatchNewList = () => {
                       enableFullScreenToggle={false}
                       enableColumnActions={false}
                       enableFilters={true}
-                      localization={MRT_Localization_ES}
+                      localization={mrtLocale}
                       displayColumnDefOptions={{
                         'mrt-row-numbers': {
                           size: 10,
@@ -393,7 +400,7 @@ export const CoffeBatchNewList = () => {
                     className="inline-flex items-center rounded bg-black py-2 px-4 font-bold text-white  hover:bg-slate-600"
                   >
                     <LinkIcon></LinkIcon>
-                    <>Ver en el blockchain</>
+                    <>{t('tables.view-blockchain')}</>
                   </button>
                 </div>
               </div>

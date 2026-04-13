@@ -372,7 +372,7 @@ export const List = () => {
                   className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center"
                 >
                   <LinkIcon></LinkIcon>
-                  <>Ver en el blockchain</>
+                  <>{t('tables.view-blockchain')}</>
                 </button>
               </div>
             </div>

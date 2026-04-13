@@ -9,11 +9,15 @@ import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_EN } from 'material-react-table/locales/en';
+import { MRT_Localization_DE } from 'material-react-table/locales/de';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 
 export const NewList = () => {
   const saveSvgAsPng = require('save-svg-as-png');
 
   const { t, i18n } = useTranslation();
+  const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
   const [loading, setLoading] = useState(true);
   const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
@@ -202,14 +206,14 @@ export const NewList = () => {
         accessorKey: 'location',
       },
       {
-        accessorFn: (row: { gender: any }) => `${row.gender} `, //accessorFn used to join multiple data into a single cell
+        accessorFn: (row: { gender: any }) => `${row.gender}`, //accessorFn used to join multiple data into a single cell
         id: 'gender', //id is still required when using accessorFn instead of accessorKey
         header: t('tables.gender'),
         size: 25,
         enableSorting: false,
         enableColumnFilter: false,
         // @ts-ignore
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ row }) => (
           <>
             <Box
               sx={{
@@ -218,7 +222,7 @@ export const NewList = () => {
                 gap: '1rem',
               }}
             >
-              <span>{renderedCellValue}</span>
+              <span>{t(row.original.gender)}</span>
             </Box>
           </>
         ),
@@ -307,7 +311,7 @@ export const NewList = () => {
                       enableFullScreenToggle={false}
                       enableColumnActions={false}
                       enableFilters={true}
-                      localization={MRT_Localization_ES}
+                      localization={mrtLocale}
                       initialState={{
                         sorting: [{ id: 'fullname', desc: false }],
                         showGlobalFilter: true,
@@ -372,7 +376,7 @@ export const NewList = () => {
                     className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center"
                   >
                     <LinkIcon></LinkIcon>
-                    <>Ver en el blockchain</>
+                    <>{t('tables.view-blockchain')}</>
                   </button>
                 </div>
               </div>

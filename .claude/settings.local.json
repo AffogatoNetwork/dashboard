@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Read(//tmp/**)",
+      "Bash(grep -n \"localization={MRT_Localization_ES}\" /Users/antoniocardenas/Documents/GitHub/dashboard/src/components/Cafepsa/*.tsx /Users/antoniocardenas/Documents/GitHub/dashboard/src/components/Admin/*.tsx)",
+      "Bash(find /Users/antoniocardenas/Documents/GitHub/dashboard/src/components -name \"*.tsx\" -exec grep -l \"\\\\\"[A-Z][a-zA-Z ].*\\\\\"\" {} \\\\;)",
+      "Bash(grep -l \"MaterialReactTable\\\\|material-react-table\" /Users/antoniocardenas/Documents/GitHub/dashboard/src/components/**/*.tsx)",
+      "Bash(grep -n \"saveFarmer\\\\|editFarmers\\\\|FarmerType\" /Users/antoniocardenas/Documents/GitHub/dashboard/src/components/Admin/*.tsx)",
+      "Bash(node -e \"const p = require\\('/Users/antoniocardenas/Documents/GitHub/dashboard/package.json'\\); console.log\\('firebase:', p.dependencies.firebase\\)\")",
+      "Bash(node scripts/export_proexo.mjs)",
+      "Bash(node -e ':*)",
+      "Bash(node scripts/migrate_certifications.mjs --dry-run)",
+      "Bash(node scripts/migrate_certifications.mjs)",
+      "Bash(node -e \"const p = require\\('/Users/antoniocardenas/Documents/GitHub/dashboard/package.json'\\); const d = {...p.dependencies,...p.devDependencies}; console.log\\('xlsx:', d.xlsx\\); console.log\\('react-excel-renderer:', d['react-excel-renderer']\\); console.log\\('exceljs:', d.exceljs\\)\")",
+      "Bash(grep -E \"^xlsx$|^exceljs$|^sheet\")",
+      "Bash(node scripts/generate_template.mjs)",
+      "Bash(ls /Users/antoniocardenas/Documents/GitHub/dashboard/public/*.xlsx)",
+      "Bash(npx tsc:*)",
+      "Bash(node scripts/export_to_excel.mjs)",
+      "Bash(npm start:*)"
+    ]
+  }
+}

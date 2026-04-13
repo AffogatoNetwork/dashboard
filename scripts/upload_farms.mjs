@@ -31,39 +31,31 @@ ws = wb.active
 
 farms = []
 for i, row in enumerate(ws.iter_rows(values_only=True)):
-    if i < 3:
-        continue
-    if not row or not row[1] or not row[2]:
-        continue
-    fairtrade    = 'X' if str(row[15] or '').strip().upper() == 'X' else ''
-    organico     = 'X' if str(row[16] or '').strip().upper() == 'X' else ''
-    rainforest   = 'X' if str(row[17] or '').strip().upper() == 'X' else ''
-    manosdemujer = 'X' if str(row[18] or '').strip().upper() == 'X' else ''
-    roc          = 'X' if str(row[19] or '').strip().upper() == 'X' else ''
+    if i < 2:
+        continue   # skip main headers (row 0) and sub-headers (row 1)
+    if not row or not row[0] or not row[12]:
+        continue   # need Dirección (col 0) and Nombre Finca (col 12)
+    def isX(col): return len(row) > col and str(row[col] or '').strip().upper() == 'X'
     farms.append({
-        'cooperativeId': str(row[1] or '').strip(),
-        'name': str(row[2] or '').strip(),
-        'height': str(row[8] or '').strip(),
-        'area': str(row[14] or '').strip(),
-        'fairtrade': fairtrade,
-        'organico': organico,
-        'rainforest': rainforest,
-        'manosdemujer': manosdemujer,
-        'roc': roc,
+        'address':       str(row[0]  or '').strip(),   # A Dirección (0x)
+        'cooperativeId': str(row[1]  or '').strip(),   # B Código
+        'name':          str(row[12] or '').strip(),   # M Nombre Finca
+        'height':        str(row[13] or '').strip(),   # N Altura (msnm)
+        'area':          str(row[11] or '').strip(),   # L Superficie (Ha.)
+        'latitude':      str(row[6]  or '').strip(),   # G Latitud
+        'longitude':     str(row[7]  or '').strip(),   # H Longitud
+        'region':        str(row[8]  or '').strip(),   # I Departamento
+        'village2':      str(row[9]  or '').strip(),   # J Municipio
+        'village':       str(row[10] or '').strip(),   # K Comunidad
+        'varieties':     str(row[14] or '').strip(),   # O Variedad
+        'bio': '',
         'certifications': ', '.join(filter(None, [
-            'Fairtrade'          if fairtrade    == 'X' else '',
-            'Organico'           if organico     == 'X' else '',
-            'Rainforest'         if rainforest   == 'X' else '',
-            'Con Manos de Mujer' if manosdemujer == 'X' else '',
-            'ROC'                if roc          == 'X' else '',
+            'Fairtrade'           if isX(15) else '',
+            'Orgánico'            if isX(16) else '',
+            'Rainforest Alliance' if isX(17) else '',
+            'Con Manos de Mujer'  if isX(18) else '',
+            'ROC'                 if isX(19) else '',
         ])),
-        'latitude': str(row[6] or '').strip(),
-        'longitude': str(row[7] or '').strip(),
-        'bio': str(row[10] or '').strip(),
-        'region': str(row[11] or '').strip(),
-        'village': str(row[13] or '').strip(),
-        'village2': str(row[12] or '').strip(),
-        'varieties': str(row[9] or '').strip(),
     })
 
 print(json.dumps(farms, ensure_ascii=False))
@@ -86,29 +78,25 @@ let updated = 0;
 let notFound = 0;
 
 for (const farm of excelFarms) {
-  const farmer = coopToFarmer[farm.cooperativeId.toUpperCase()];
-  if (!farmer) {
-    console.warn(`  No farmer found for cooperativeId: ${farm.cooperativeId}`);
+  // Use address from the Excel file directly (col 0); fall back to lookup by cooperativeId
+  const ethAddress = farm.address || coopToFarmer[farm.cooperativeId.toUpperCase()]?.address;
+  if (!ethAddress) {
+    console.warn(`  No address found for cooperativeId: ${farm.cooperativeId}`);
     notFound++;
     continue;
   }
 
   // Find existing farm document by eth address
   const farmsSnap = await getDocs(
-    query(collection(db, 'farms'), where('farmerAddress', '==', farmer.address))
+    query(collection(db, 'farms'), where('farmerAddress', '==', ethAddress))
   );
 
   const payload = {
-    farmerAddress: farmer.address,       // always eth address going forward
+    farmerAddress: ethAddress,
     company: 'PROEXO',
     name: farm.name,
     varieties: farm.varieties,
     certifications: farm.certifications,
-    fairtrade: farm.fairtrade,
-    organico: farm.organico,
-    rainforest: farm.rainforest,
-    manosdemujer: farm.manosdemujer,
-    roc: farm.roc,
     height: farm.height,
     area: farm.area,
     latitude: farm.latitude,
@@ -121,8 +109,6 @@ for (const farm of excelFarms) {
     shadow: '',
     familyMembers: '',
     ethnicGroup: '',
-    location: '',
-    search: '',
   };
 
   if (farmsSnap.empty) {
@@ -134,7 +120,7 @@ for (const farm of excelFarms) {
     while (true) {
       const existing = await getDoc(doc(db, 'farms', docId));
       if (!existing.exists()) break;
-      if (existing.data().farmerAddress === farmer.address) break; // same farmer
+      if (existing.data().farmerAddress === ethAddress) break; // same farmer
       docId = `${baseId}#${suffix}`;
       suffix++;
     }

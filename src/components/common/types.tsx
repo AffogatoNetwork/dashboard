@@ -77,8 +77,6 @@ export type FarmType = {
   latitude: string;
   longitude: string;
   bio: string;
-  location?: string;
-  search?: string;
   country: string;
   region: string;
   village: string;
@@ -87,11 +85,6 @@ export type FarmType = {
   shadow: string;
   familyMembers: string;
   ethnicGroup: string;
-  fairtrade?: string;
-  organico?: string;
-  rainforest?: string;
-  manosdemujer?: string;
-  roc?: string;
 };
 
 export type CoordinatesType = {

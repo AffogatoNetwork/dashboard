@@ -7,10 +7,14 @@ import {
 import { editFarm } from '../../db/firebase';
 import { useTranslation } from 'react-i18next';
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_EN } from 'material-react-table/locales/en';
+import { MRT_Localization_DE } from 'material-react-table/locales/de';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 import { useFarms } from '../../hooks/useFarms';
 
 export const EditFarmsModule = () => {
   const { t, i18n } = useTranslation();
+  const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
   const [farmers, farmersCount, ownerAddress, setReload] = useFarms();
 
   const [tableData, setTableData] = useState<any[]>(() => farmers);
@@ -65,6 +69,10 @@ export const EditFarmsModule = () => {
         accessorKey: 'varieties',
       },
       {
+        header: t('certifications'),
+        accessorKey: 'certifications',
+      },
+      {
         accessorKey: 'height',
         header: t('height'),
         size: 10,
@@ -72,7 +80,7 @@ export const EditFarmsModule = () => {
       {
         header: t('tables.production-system'),
         accessorKey: 'shadow',
-        Cell: ({ cell }) => (cell.getValue() ? 'Sí' : 'No'),
+        Cell: ({ cell }) => (cell.getValue() ? t('yes') : t('no')),
         editVariant: 'select',
         editSelectOptions: ['true', 'false'],
       },
@@ -100,12 +108,12 @@ export const EditFarmsModule = () => {
           enableFullScreenToggle={false}
           displayColumnDefOptions={{
             'mrt-row-actions': {
-              header: 'Acciones',
+              header: t('tables.actions'),
             },
           }}
           enableColumnActions={false}
           enableFilters={true}
-          localization={MRT_Localization_ES}
+          localization={mrtLocale}
           initialState={{
             sorting: [{ id: 'name', desc: false }],
             showGlobalFilter: true,

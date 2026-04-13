@@ -12,6 +12,7 @@ import { CreateBatchesModule } from './Admin/CreateBatches';
 import { EditBatchesModule } from './Admin/EditBatchesModule';
 import { FirebaseStatus } from './Admin/FirebaseStatus';
 import { EditBannerModule } from './Admin/EditBannerModule';
+import { UploadFarmsModule } from './Admin/UploadFarmsModule';
 
 export const AdminModule = () => {
   const { t } = useTranslation();
@@ -116,6 +117,12 @@ export const AdminModule = () => {
   const renderBannerEdit = () => (
     <>
       <EditBannerModule />
+    </>
+  );
+
+  const renderUploadFarms = () => (
+    <>
+      <UploadFarmsModule />
     </>
   );
 
@@ -239,6 +246,16 @@ export const AdminModule = () => {
                         >
                           <>{'Banner'}</>
                         </a>
+
+                        <a
+                          className={`${activeTab == 'upload-farms' &&
+                            `tab-lifted tab tab-active btn-wide tab-lg`
+                            } tab btn-wide tab-lg `}
+                          id="signup-tabs"
+                          onClick={() => setActiveTab('upload-farms')}
+                        >
+                          <>{t('upload-farms.title')}</>
+                        </a>
                       </div>
 
                       {activeTab == 'crear-certificados' && (
@@ -271,6 +288,7 @@ export const AdminModule = () => {
 
                       {activeTab == 'photo' && <>{renderPhotoEdit()}</>}
                       {activeTab == 'banner' && <>{renderBannerEdit()}</>}
+                      {activeTab == 'upload-farms' && <>{renderUploadFarms()}</>}
                     </>
                   ) : (
                     <>

@@ -9,12 +9,13 @@ import NewMap from '../common/NewMap';
 import proexoLogo from '../../assets/proexo.png';
 import QRCode from 'react-qr-code';
 
-const CERT_ICONS: Record<string, { img: string; label: string }> = {
-  fairtrade: { img: require('../../assets/certificaciones/2_Fair Trade.png'), label: 'Fair Trade' },
-  organico: { img: require('../../assets/certificaciones/10_EU Organic.png'), label: 'Orgánico' },
-  rainforest: { img: require('../../assets/certificaciones/3_Rainforest Alliance.png'), label: 'Rainforest Alliance' },
-  manosdemujer: { img: require('../../assets/certificaciones/5_ConManosdeMujer.png'), label: 'Con Manos de Mujer' },
-  roc: { img: require('../../assets/certificaciones/16_ROC.jpeg'), label: 'ROC' },
+// Keys are the canonical certification names stored in the `certifications` field
+const CERT_ICONS: Record<string, { img: string }> = {
+  'Fairtrade':           { img: require('../../assets/certificaciones/2_Fair Trade.png') },
+  'Orgánico':            { img: require('../../assets/certificaciones/10_EU Organic.png') },
+  'Rainforest Alliance': { img: require('../../assets/certificaciones/3_Rainforest Alliance.png') },
+  'Con Manos de Mujer':  { img: require('../../assets/certificaciones/5_ConManosdeMujer.png') },
+  'ROC':                 { img: require('../../assets/certificaciones/16_ROC.jpeg') },
 };
 
 const InfoItem = ({ label, value }: { label: string; value?: string }) => (
@@ -98,25 +99,17 @@ export const FarmerProfileModule = () => {
   const handleSaveCertifications = async () => {
     if (!farms) return;
     setLoading(true);
-
-    // Build updated certs object
-    // Set all known certs to either 'X' or ''
-    const updatedCerts = { ...farms };
-    Object.keys(CERT_ICONS).forEach(key => {
-      updatedCerts[key] = selectedCerts.includes(key) ? 'X' : '';
-    });
-
-    await updateFarmByAddress(farmerData.address, updatedCerts);
-
-    // Update local state
-    setFarms(updatedCerts);
+    const certStr = selectedCerts.join(', ');
+    await updateFarmByAddress(farmerData.address, { certifications: certStr });
+    setFarms({ ...farms, certifications: certStr });
     setIsEditingCerts(false);
     setLoading(false);
   };
 
   const handleEditClick = () => {
-    // Populate selected certs
-    const current = Object.keys(CERT_ICONS).filter(k => farms?.[k] === 'X');
+    const current = farms?.certifications
+      ? farms.certifications.split(',').map((s: string) => s.trim()).filter((s: string) => s in CERT_ICONS)
+      : [];
     setSelectedCerts(current);
     setIsEditingCerts(true);
   };
@@ -156,9 +149,10 @@ export const FarmerProfileModule = () => {
     return <NotFound msg={t('errors.farmer-not-found')} />;
   }
 
-  const activeCerts = Object.entries(CERT_ICONS).filter(
-    ([key]) => farms?.[key] === 'X'
-  );
+  const certList = farms?.certifications
+    ? farms.certifications.split(',').map((s: string) => s.trim())
+    : [];
+  const activeCerts = Object.entries(CERT_ICONS).filter(([key]) => certList.includes(key));
 
   return (
     <>
@@ -387,15 +381,15 @@ export const FarmerProfileModule = () => {
                       multiple
                       value={selectedCerts}
                       onChange={(e) => setSelectedCerts(typeof e.target.value === 'string' ? e.target.value.split(',') : e.target.value)}
-                      input={<OutlinedInput label="Certificados" />}
-                      renderValue={(selected) => selected.map(s => CERT_ICONS[s]?.label).join(', ')}
+                      input={<OutlinedInput label={t('certifications')} />}
+                      renderValue={(selected) => selected.join(', ')}
                       className="w-full max-w-sm"
                       displayEmpty
                     >
-                      {Object.entries(CERT_ICONS).map(([key, cert]) => (
-                        <MenuItem key={key} value={key}>
-                          <Checkbox checked={selectedCerts.indexOf(key) > -1} />
-                          <ListItemText primary={cert.label} />
+                      {Object.keys(CERT_ICONS).map((name) => (
+                        <MenuItem key={name} value={name}>
+                          <Checkbox checked={selectedCerts.indexOf(name) > -1} />
+                          <ListItemText primary={name} />
                         </MenuItem>
                       ))}
                     </Select>
@@ -406,11 +400,11 @@ export const FarmerProfileModule = () => {
                   </div>
                 ) : activeCerts.length > 0 ? (
                   <div className="flex flex-wrap gap-4">
-                    {activeCerts.map(([key, cert]) => (
-                      <div key={key} className="flex flex-col items-center gap-1">
-                        <img src={cert.img} alt={cert.label} className="h-16 w-16 object-contain" />
+                    {activeCerts.map(([name, cert]) => (
+                      <div key={name} className="flex flex-col items-center gap-1">
+                        <img src={cert.img} alt={name} className="h-16 w-16 object-contain" />
                         <span className="text-xs text-gray-500 text-center max-w-[72px] leading-tight">
-                          {cert.label}
+                          {name}
                         </span>
                       </div>
                     ))}

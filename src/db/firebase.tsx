@@ -274,6 +274,7 @@ export const editFarm = async (data: any) => {
       name: data.name,
       shadow: data.shadow,
       varieties: data.varieties,
+      certifications: data.certifications ?? '',
       village: data.village,
       village2: data.village2,
       updateAt: Date.now(),

@@ -8,11 +8,15 @@ import { useTranslation } from "react-i18next";
 import reactNodeToString from "react-node-to-string"
 import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
 import { MRT_Localization_ES } from 'material-react-table/locales/es';
+import { MRT_Localization_EN } from 'material-react-table/locales/en';
+import { MRT_Localization_DE } from 'material-react-table/locales/de';
+import { MRT_Localization_FR } from 'material-react-table/locales/fr';
 
 export const BatchesModule = () => {
   const saveSvgAsPng = require('save-svg-as-png');
 
   const { t, i18n } = useTranslation();
+  const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
   const [loading, setLoading] = useState(true);
   const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
   const [farmersCount, setFarmersCount] = useState(0);
@@ -283,7 +287,7 @@ export const BatchesModule = () => {
                       enableFullScreenToggle={false}
                       enableColumnActions={false}
                       enableFilters={true}
-                      localization={MRT_Localization_ES}
+                      localization={mrtLocale}
                       displayColumnDefOptions={{
                         'mrt-row-numbers': {
                           size: 10,
@@ -355,7 +359,7 @@ export const BatchesModule = () => {
                     className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center"
                   >
                     <LinkIcon></LinkIcon>
-                    <>Ver en el blockchain</>
+                    <>{t('tables.view-blockchain')}</>
                   </button>
                 </div>
               </div>

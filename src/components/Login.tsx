@@ -54,7 +54,7 @@ const Login = () => {
     if (isValidCellphone(input) || isValidEmail(input)) {
       setUserInputError('');
     } else {
-      setUserInputError('El valor no es valido.');
+      setUserInputError(t('errors.no-valid'));
     }
   };
 
@@ -92,11 +92,10 @@ const Login = () => {
           <div className="flex-col flex self-center p-10 sm:max-w-5xl md:pl-2 xl: z-10">
             <div className="hidden lg:flex flex-col text-white">
               <h1 className="mb-3 font-bold text-5xl ">
-                <>{t('welcome')}</>: a la Plataforma de Trazabilidad
+                <>{t('welcome')}</>: {t('login.platform-subtitle')}
               </h1>
               <p className="pr-3 md:text-light">
-                Nuestro café trazado con la seguridad de la tecnología de
-                blockchain.{' '}
+                {t('login.slogan')}
               </p>
             </div>
           </div>
@@ -116,7 +115,7 @@ const Login = () => {
               >
                 <div className="space-y-2">
                   <label className="text-sm font-medium text-gray-700 tracking-wide">
-                    Email:
+                    {t('email')}:
                   </label>
                   <input
                     className=" w-full text-base px-4 py-2 border  border-gray-300 rounded-lg focus:border-green-400 focus:ring-2 focus:ring-sky-300 focus:outline-none
@@ -158,15 +157,7 @@ const Login = () => {
                 </div>
               </div>
               <div className="pt-5 text-center text-gray-400 text-xs">
-                <h4>
-                  Estamos haciendo cambios por favor elegir el bòton de Iniciar
-                  con Google
-                </h4>
-                <h4>
-                  para poder editar y tener permisos Administrativos las cuentas
-                  debes estar en la lista de Administradores y tener inicio
-                  seguro con 2FA
-                </h4>
+                <h4>{t('login.warning')}</h4>
               </div>
               <div className="pt-5 text-center text-gray-400 text-xs">
                 <span>

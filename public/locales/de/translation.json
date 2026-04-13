@@ -131,8 +131,14 @@
   "threshing-yield": "Dreschertrag",
   "total": "Gesamt",
   "type-production": "Produktionsart",
+  "yes": "Ja",
+  "no": "Nein",
+  "select-variety": "Sorte auswählen",
+  "select-certificate": "Zertifikat auswählen",
+  "welcome": "Willkommen",
   "tables": {
     "actions": "Aktionen",
+    "active": "Aktiv",
     "entry-id-wet": "ID des Nassen Verarbeitungszugangs",
     "export-drying-id": "Export-Trocknungs-ID",
     "batch-name": "Chargenname",
@@ -207,6 +213,15 @@
   "packaging": "Verpackung",
   "roast-date": "Röstdatum",
   "roast-type": "Rösttyp",
+  "upload-farms": {
+    "title": "Farmen aus Excel aktualisieren",
+    "download-template": "Vorlage herunterladen",
+    "saving": "Farmen werden aktualisiert...",
+    "success": "{{count}} Farmen erfolgreich aktualisiert.",
+    "upload-another": "Weitere Datei hochladen",
+    "preview": "Vorschau — {{count}} Farmen gefunden",
+    "save": "{{count}} Farmen aktualisieren"
+  },
   "create-batches": {
     "creating": "Chargen werden erstellt...",
     "drag-drop": "Ziehen und Ablegen der Datei Hier oder Klicken zum Auswählen",
@@ -224,7 +239,10 @@
     "buyer-access": "Als Käufer Anmelden.",
     "buyer-title": "Kaffeebatches Ansehen",
     "buyer-subtitle": "Wenn Sie noch kein Käuferpasswort haben, wenden Sie sich an das Unternehmen, um es anzufordern.",
-    "buyer-password": "Käuferpasswort"
+    "buyer-password": "Käuferpasswort",
+    "platform-subtitle": "zur Rückverfolgbarkeitsplattform",
+    "slogan": "Unser Kaffee verfolgt mit der Sicherheit der Blockchain-Technologie.",
+    "warning": "Wir nehmen Änderungen vor, bitte den Button 'Mit Google anmelden' verwenden. Um zu bearbeiten und Admin-Berechtigungen zu haben, muss das Konto in der Administrator-Liste stehen und sicheres 2FA-Login haben."
   },
   "signup": {
     "account-created": "Das Konto wurde erstellt",
@@ -239,7 +257,8 @@
     "manager-name": "Name des Managers",
     "new-company": "Neues Unternehmen",
     "success": "Ihre Daten wurden an das Unternehmen gesendet.",
-    "success2": "Ihre Daten wurden an das Affogato-Team gesendet."
+    "success2": "Ihre Daten wurden an das Affogato-Team gesendet.",
+    "choose-company-error": "Bitte wählen Sie ein Unternehmen aus."
   },
   "placeholders": {
     "bio": "Geben Sie Ihre Biografie ein",
@@ -260,6 +279,9 @@
     "no-valid": "Der Wert ist nicht gültig",
     "max-length": "Der Wert muss weniger als {{length}} Zeichen enthalten",
     "numeric-value": "Der Wert muss numerisch sein",
-    "missing-data": "Farmdaten fehlen"
+    "missing-data": "Farmdaten fehlen",
+    "file-invalid-type": "* Datei {{name}} hat einen ungültigen Typ, nur .xlsx und .xls Dateien werden akzeptiert.",
+    "file-too-big": "* Datei {{name}} ({{size}} MB) überschreitet die maximale Größe (1 MB).",
+    "file-load-failed": "* Datei {{name}} konnte nicht geladen werden."
   }
 }

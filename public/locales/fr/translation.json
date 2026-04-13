@@ -131,8 +131,14 @@
   "threshing-yield": "Rendement de Battage",
   "total": "Total",
   "type-production": "Type de Production",
+  "yes": "Oui",
+  "no": "Non",
+  "select-variety": "Sélectionner une variété",
+  "select-certificate": "Sélectionner un certificat",
+  "welcome": "Bienvenue",
   "tables": {
     "actions": "Actions",
+    "active": "Actif",
     "entry-id-wet": "ID d'Entrée du Traitement Humide",
     "export-drying-id": "ID d'Exportation de Séchage",
     "batch-name": "Nom du Lot",
@@ -207,6 +213,15 @@
   "packaging": "Emballage",
   "roast-date": "Date de Torréfaction",
   "roast-type": "Type de Torréfaction",
+  "upload-farms": {
+    "title": "Mettre à Jour les Fermes depuis Excel",
+    "download-template": "Télécharger le Modèle",
+    "saving": "Mise à jour des fermes...",
+    "success": "{{count}} fermes mises à jour avec succès.",
+    "upload-another": "Importer un Autre Fichier",
+    "preview": "Aperçu — {{count}} fermes trouvées",
+    "save": "Mettre à Jour {{count}} Fermes"
+  },
   "create-batches": {
     "creating": "Création de lots...",
     "drag-drop": "Glissez et Déposez le Fichier Ici, ou Cliquez pour Sélectionner",
@@ -224,7 +239,10 @@
     "buyer-access": "Se Connecter en Tant qu'Acheteur.",
     "buyer-title": "Voir les Lots de Café",
     "buyer-subtitle": "Si vous n'avez pas encore de mot de passe d'acheteur, contactez l'entreprise pour le demander.",
-    "buyer-password": "Mot de Passe Acheteur"
+    "buyer-password": "Mot de Passe Acheteur",
+    "platform-subtitle": "à la Plateforme de Traçabilité",
+    "slogan": "Notre café tracé avec la sécurité de la technologie blockchain.",
+    "warning": "Nous effectuons des modifications, veuillez utiliser le bouton Se connecter avec Google. Pour modifier et avoir des permissions Admin, le compte doit être dans la liste des Administrateurs et avoir une connexion sécurisée 2FA."
   },
   "signup": {
     "account-created": "Le Compte a été créé",
@@ -239,7 +257,8 @@
     "manager-name": "Nom du Gérant",
     "new-company": "Nouvelle Entreprise",
     "success": "Vos Données Ont Été Envoyées à l'Entreprise",
-    "success2": "Vos Données Ont Été Envoyées à l'Équipe d'Affogato"
+    "success2": "Vos Données Ont Été Envoyées à l'Équipe d'Affogato",
+    "choose-company-error": "Veuillez sélectionner une entreprise."
   },
   "placeholders": {
     "bio": "Entrez Votre Biographie",
@@ -260,6 +279,9 @@
     "no-valid": "La Valeur n'est Pas Valide",
     "max-length": "La Valeur Doit Contenir Moins de {{length}} Caractères",
     "numeric-value": "La Valeur Doit Être Numérique",
-    "missing-data": "Données de la Ferme Manquantes"
+    "missing-data": "Données de la Ferme Manquantes",
+    "file-invalid-type": "* Le fichier {{name}} a un type invalide, seuls les fichiers .xlsx et .xls sont acceptés.",
+    "file-too-big": "* Le fichier {{name}} ({{size}} Mo) dépasse la taille maximale autorisée (1 Mo).",
+    "file-load-failed": "* Le fichier {{name}} n'a pas pu être chargé."
   }
 }
