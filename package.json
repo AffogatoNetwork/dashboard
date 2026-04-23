@@ -97,7 +97,6 @@
     "eslint-plugin-prettier": "^5.2.3",
     "eslint-plugin-react": "^7.37.4",
     "eslint-plugin-react-hooks": "5.1.0",
-    "prettier": "^3.4.1",
     "pretty-quick": "4.0.0",
     "ts-node": "10.9.2"
   },

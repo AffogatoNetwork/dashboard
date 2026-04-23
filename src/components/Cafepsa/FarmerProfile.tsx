@@ -3,7 +3,7 @@ import { useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import Loading from '../Loading';
 import NotFound from '../common/NotFound';
-import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl, canEdit, updateFarmByAddress, updateFarmerPnud } from '../../db/firebase';
+import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl, canEdit, updateFarmByAddress, updateFarmerPnud, updateFarmerPersonalInfo } from '../../db/firebase';
 import { Select, MenuItem, Checkbox, ListItemText, OutlinedInput } from '@mui/material';
 import NewMap from '../common/NewMap';
 import proexoLogo from '../../assets/proexo.png';
@@ -41,6 +41,8 @@ export const FarmerProfileModule = () => {
   const [selectedCerts, setSelectedCerts] = useState<string[]>([]);
   const [isEditingFarm, setIsEditingFarm] = useState(false);
   const [editFarmData, setEditFarmData] = useState<any>({});
+  const [isEditingPersonal, setIsEditingPersonal] = useState(false);
+  const [editPersonalData, setEditPersonalData] = useState<any>({});
 
   useEffect(() => {
     const load = async () => {
@@ -112,6 +114,24 @@ export const FarmerProfileModule = () => {
       : [];
     setSelectedCerts(current);
     setIsEditingCerts(true);
+  };
+
+  const handleEditPersonalClick = () => {
+    setEditPersonalData({
+      gender: farmerData.gender || '',
+      country: farmerData.country || '',
+      region: farmerData.region || farms?.region || '',
+      village2: farmerData.village2 || farms?.village2 || '',
+    });
+    setIsEditingPersonal(true);
+  };
+
+  const handleSavePersonal = async () => {
+    setLoading(true);
+    await updateFarmerPersonalInfo(farmerData.address, editPersonalData);
+    setFarmerData({ ...farmerData, ...editPersonalData });
+    setIsEditingPersonal(false);
+    setLoading(false);
   };
 
   const handleEditFarmClick = () => {
@@ -275,16 +295,62 @@ export const FarmerProfileModule = () => {
 
             {/* Personal info */}
             <div className="px-6 py-5 border-b border-gray-100">
-              <h2 className="mb-4 text-xs font-bold uppercase tracking-widest text-amber-700">
-                {t('personal-info')}
-              </h2>
-              <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
-                <InfoItem label={t('gender')} value={t(farmerData.gender)} />
-                <InfoItem label={t('country')} value={farmerData.country} />
-                <InfoItem label={t('region')} value={farmerData.region || farms?.region} />
-                <InfoItem label={t('village')} value={farmerData.village2 || farms?.village2} />
-                <InfoItem label={t('village2')} value={farmerData.village || farms?.village} />
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xs font-bold uppercase tracking-widest text-amber-700">
+                  {t('personal-info')}
+                </h2>
+                {isAdmin && !isEditingPersonal && (
+                  <button
+                    className="btn btn-sm btn-outline btn-warning"
+                    onClick={handleEditPersonalClick}
+                  >
+                    Editar
+                  </button>
+                )}
               </div>
+
+              {isEditingPersonal ? (
+                <div className="flex flex-col gap-4">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div className="form-control">
+                      <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('gender')}</span></label>
+                      <select
+                        className="select select-bordered select-sm w-full"
+                        value={editPersonalData.gender}
+                        onChange={e => setEditPersonalData({ ...editPersonalData, gender: e.target.value })}
+                      >
+                        <option value="">—</option>
+                        <option value="male">{t('male')}</option>
+                        <option value="female">{t('female')}</option>
+                      </select>
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('country')}</span></label>
+                      <input type="text" className="input input-bordered input-sm w-full" value={editPersonalData.country} onChange={e => setEditPersonalData({ ...editPersonalData, country: e.target.value })} />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('region')}</span></label>
+                      <input type="text" className="input input-bordered input-sm w-full" value={editPersonalData.region} onChange={e => setEditPersonalData({ ...editPersonalData, region: e.target.value })} />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('village')}</span></label>
+                      <input type="text" className="input input-bordered input-sm w-full" value={editPersonalData.village2} onChange={e => setEditPersonalData({ ...editPersonalData, village2: e.target.value })} />
+                    </div>
+                  </div>
+                  <div className="flex gap-2">
+                    <button className="btn btn-sm btn-primary" onClick={handleSavePersonal}>Guardar</button>
+                    <button className="btn btn-sm" onClick={() => setIsEditingPersonal(false)}>Cancelar</button>
+                  </div>
+                </div>
+              ) : (
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                  <InfoItem label={t('gender')} value={t(farmerData.gender)} />
+                  <InfoItem label={t('country')} value={farmerData.country} />
+                  <InfoItem label={t('region')} value={farmerData.region || farms?.region} />
+                  <InfoItem label={t('village')} value={farmerData.village2 || farms?.village2} />
+                  <InfoItem label={t('village2')} value={farmerData.village || farms?.village} />
+                </div>
+              )}
             </div>
 
 
