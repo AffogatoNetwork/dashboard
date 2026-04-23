@@ -122,6 +122,7 @@ export const FarmerProfileModule = () => {
       country: farmerData.country || '',
       region: farmerData.region || farms?.region || '',
       village2: farmerData.village2 || farms?.village2 || '',
+      village: farmerData.village || farms?.village || '',
     });
     setIsEditingPersonal(true);
   };
@@ -129,7 +130,9 @@ export const FarmerProfileModule = () => {
   const handleSavePersonal = async () => {
     setLoading(true);
     await updateFarmerPersonalInfo(farmerData.address, editPersonalData);
+    if (farms) await updateFarmByAddress(farmerData.address, { village: editPersonalData.village });
     setFarmerData({ ...farmerData, ...editPersonalData });
+    if (farms) setFarms({ ...farms, village: editPersonalData.village });
     setIsEditingPersonal(false);
     setLoading(false);
   };
@@ -335,6 +338,10 @@ export const FarmerProfileModule = () => {
                     <div className="form-control">
                       <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('village')}</span></label>
                       <input type="text" className="input input-bordered input-sm w-full" value={editPersonalData.village2} onChange={e => setEditPersonalData({ ...editPersonalData, village2: e.target.value })} />
+                    </div>
+                    <div className="form-control">
+                      <label className="label"><span className="label-text text-amber-700 font-bold uppercase text-xs">{t('village2')}</span></label>
+                      <input type="text" className="input input-bordered input-sm w-full" value={editPersonalData.village} onChange={e => setEditPersonalData({ ...editPersonalData, village: e.target.value })} />
                     </div>
                   </div>
                   <div className="flex gap-2">
