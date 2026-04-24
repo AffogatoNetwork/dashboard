@@ -61,9 +61,16 @@ export const saveVarietyData = async (varietyData: any, id: string) => {
   }
 };
 
+export const uploadCertificationImage = async (name: string, image: File): Promise<string> => {
+  const storageRef = ref(storage, `certifications/${name.trim()}`);
+  await uploadBytes(storageRef, image);
+  return await getDownloadURL(storageRef);
+};
+
 export const saveCertificationData = async (
   certificationData: any,
   id: string,
+  imageUrl?: string,
 ) => {
   try {
     await setDoc(doc(db, 'certifications', certificationData), {
@@ -71,6 +78,7 @@ export const saveCertificationData = async (
       Date: Date.now(),
       createdBy: id,
       active: true,
+      ...(imageUrl ? { imageUrl } : {}),
     });
   } catch (error) {
   }

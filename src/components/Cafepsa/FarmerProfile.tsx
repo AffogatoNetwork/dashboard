@@ -3,19 +3,26 @@ import { useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import Loading from '../Loading';
 import NotFound from '../common/NotFound';
-import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl, canEdit, updateFarmByAddress, updateFarmerPnud, updateFarmerPersonalInfo } from '../../db/firebase';
+import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl, canEdit, updateFarmByAddress, updateFarmerPnud, updateFarmerPersonalInfo, getCertifications } from '../../db/firebase';
 import { Select, MenuItem, Checkbox, ListItemText, OutlinedInput } from '@mui/material';
 import NewMap from '../common/NewMap';
 import proexoLogo from '../../assets/proexo.png';
 import QRCode from 'react-qr-code';
 
-// Keys are the canonical certification names stored in the `certifications` field
-const CERT_ICONS: Record<string, { img: string }> = {
-  'Fairtrade':           { img: require('../../assets/certificaciones/2_Fair Trade.png') },
-  'Orgánico':            { img: require('../../assets/certificaciones/10_EU Organic.png') },
-  'Rainforest Alliance': { img: require('../../assets/certificaciones/3_Rainforest Alliance.png') },
-  'Con Manos de Mujer':  { img: require('../../assets/certificaciones/5_ConManosdeMujer.png') },
-  'ROC':                 { img: require('../../assets/certificaciones/16_ROC.jpeg') },
+// Fallback local images for certs not yet added to Firestore
+const CERT_FALLBACKS: Record<string, string> = {
+  'Fairtrade':            require('../../assets/certificaciones/2_Fair Trade.png'),
+  'Orgánico':             require('../../assets/certificaciones/1_USDA Organic.png'),
+  'EU Orgánico':          require('../../assets/certificaciones/10_EU Organic.png'),
+  'Rainforest Alliance':  require('../../assets/certificaciones/3_Rainforest Alliance.png'),
+  'Con Manos de Mujer':   require('../../assets/certificaciones/5_ConManosdeMujer.png'),
+  'ROC':                  require('../../assets/certificaciones/16_ROC.jpeg'),
+  'Pequeños Productores': require('../../assets/certificaciones/7_Pequeños_Productores.png'),
+  'Bird Friendly':        require('../../assets/certificaciones/15_Bird Friendly.png'),
+  'C.A.F.E. Practices':  require('../../assets/certificaciones/12_C.A.F.E. Practices.png'),
+  'JAS':                  require('../../assets/certificaciones/13_JAS.png'),
+  'Fair for Life':        require('../../assets/certificaciones/14_Fair_Life.png'),
+  'DO Marcala':           require('../../assets/certificaciones/4_DO Marcala.png'),
 };
 
 const InfoItem = ({ label, value }: { label: string; value?: string }) => (
@@ -43,6 +50,7 @@ export const FarmerProfileModule = () => {
   const [editFarmData, setEditFarmData] = useState<any>({});
   const [isEditingPersonal, setIsEditingPersonal] = useState(false);
   const [editPersonalData, setEditPersonalData] = useState<any>({});
+  const [certMap, setCertMap] = useState<Record<string, string>>(CERT_FALLBACKS);
 
   useEffect(() => {
     const load = async () => {
@@ -62,6 +70,24 @@ export const FarmerProfileModule = () => {
           }
           const banner = await getBannerUrl(farmer.company || 'PROEXO');
           if (banner) setBannerUrl(banner);
+
+          // Load dynamic certifications, falling back to local assets
+          const company = farmer.company || 'PROEXO';
+          try {
+            const certDocs = await getCertifications(company);
+            if (certDocs.length > 0) {
+              const dynamic: Record<string, string> = { ...CERT_FALLBACKS };
+              certDocs.forEach((doc: any) => {
+                const d = doc.data();
+                if (d.certification && d.imageUrl) {
+                  dynamic[d.certification] = d.imageUrl;
+                } else if (d.certification && !dynamic[d.certification]) {
+                  dynamic[d.certification] = '';
+                }
+              });
+              setCertMap(dynamic);
+            }
+          } catch (e) {}
         }
 
         const url = await getImageUrl(newfarmerId);
@@ -110,7 +136,7 @@ export const FarmerProfileModule = () => {
 
   const handleEditClick = () => {
     const current = farms?.certifications
-      ? farms.certifications.split(',').map((s: string) => s.trim()).filter((s: string) => s in CERT_ICONS)
+      ? farms.certifications.split(',').map((s: string) => s.trim()).filter((s: string) => s in certMap)
       : [];
     setSelectedCerts(current);
     setIsEditingCerts(true);
@@ -175,7 +201,7 @@ export const FarmerProfileModule = () => {
   const certList = farms?.certifications
     ? farms.certifications.split(',').map((s: string) => s.trim())
     : [];
-  const activeCerts = Object.entries(CERT_ICONS).filter(([key]) => certList.includes(key));
+  const activeCerts = Object.entries(certMap).filter(([key, img]) => certList.includes(key) && img);
 
   return (
     <>
@@ -459,7 +485,7 @@ export const FarmerProfileModule = () => {
                       className="w-full max-w-sm"
                       displayEmpty
                     >
-                      {Object.keys(CERT_ICONS).map((name) => (
+                      {Object.keys(certMap).map((name) => (
                         <MenuItem key={name} value={name}>
                           <Checkbox checked={selectedCerts.indexOf(name) > -1} />
                           <ListItemText primary={name} />
@@ -473,9 +499,9 @@ export const FarmerProfileModule = () => {
                   </div>
                 ) : activeCerts.length > 0 ? (
                   <div className="flex flex-wrap gap-4">
-                    {activeCerts.map(([name, cert]) => (
+                    {activeCerts.map(([name, img]) => (
                       <div key={name} className="flex flex-col items-center gap-1">
-                        <img src={cert.img} alt={name} className="h-16 w-16 object-contain" />
+                        <img src={img as string} alt={name} className="h-16 w-16 object-contain" />
                         <span className="text-xs text-gray-500 text-center max-w-[72px] leading-tight">
                           {name}
                         </span>
