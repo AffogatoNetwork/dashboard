@@ -8,11 +8,11 @@ import { LinkIcon } from '../icons/link';
 
 // ── Certification logos ───────────────────────────────────────────────────────
 const CERT_ICONS: Record<string, string> = {
-  'Fairtrade':           require('../../assets/certificaciones/2_Fair Trade.png'),
-  'Orgánico':            require('../../assets/certificaciones/10_EU Organic.png'),
+  'Fairtrade': require('../../assets/certificaciones/2_Fair Trade.png'),
+  'Orgánico': require('../../assets/certificaciones/10_EU Organic.png'),
   'Rainforest Alliance': require('../../assets/certificaciones/3_Rainforest Alliance.png'),
-  'Con Manos de Mujer':  require('../../assets/certificaciones/5_ConManosdeMujer.png'),
-  'ROC':                 require('../../assets/certificaciones/16_ROC.jpeg'),
+  'Con Manos de Mujer': require('../../assets/certificaciones/5_ConManosdeMujer.png'),
+  'ROC': require('../../assets/certificaciones/16_ROC.jpeg'),
 };
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
@@ -96,7 +96,7 @@ const NewBatchId = () => {
               if (permResult[i].data().user?.includes(email)) { setIsAdmin(true); break; }
             }
           }
-        } catch (_) {}
+        } catch (_) { }
 
         const raw = result.Farmer || result.Farmers;
         const addrs: string[] = Array.isArray(raw) ? raw : raw ? [raw] : [];
@@ -193,7 +193,7 @@ const NewBatchId = () => {
 
   const validFarmers = farmers.filter((f: any) => f?.address);
 
-  const hasCupData = ['acidity','aftertaste','aroma','body','flavor','sweetness','note']
+  const hasCupData = ['acidity', 'aftertaste', 'aroma', 'body', 'flavor', 'sweetness', 'note']
     .some(k => nonEmpty((batch.Profile as any)?.[k]));
   const hasRoasting = nonEmpty(batch.Roasting?.roast_type) || nonEmpty(batch.Roasting?.roast_date);
   const hasLinks = nonEmpty(batch.urlCatacion) || nonEmpty(batch.urlTrilla) ||
@@ -201,7 +201,7 @@ const NewBatchId = () => {
 
   return (
     <div className="min-h-screen bg-stone-100">
-      <div className="mx-auto max-w-5xl px-4 pb-12 pt-2">
+      <div className="mx-auto  px-4 pb-12 pt-2">
 
         {/* Save / Cancel bar – full width */}
         {isEditing && (
@@ -223,10 +223,10 @@ const NewBatchId = () => {
         )}
 
         {/* ── Bento grid ── */}
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 md:grid-cols-3">
 
           {/* Batch identity — hero: 2 cols on md */}
-          <div className="rounded-2xl bg-white p-5 shadow-sm md:col-span-2">
+          <div className="rounded-2xl bg-white p-5 shadow-sm sm:col-span-2 md:col-span-1">
             <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
               <div className="flex-1">
                 <div className="mb-1 flex items-baseline justify-between gap-2">
@@ -295,16 +295,34 @@ const NewBatchId = () => {
           {/* Certifications — 1 col on md */}
           {isEditing ? (
             <div className="rounded-2xl bg-white p-5 shadow-sm md:col-span-1">
-              <p className="mb-2 text-xs font-medium uppercase tracking-widest text-amber-700">
+              <p className="mb-3 text-xs font-medium uppercase tracking-widest text-amber-700">
                 {t('certifications')}
               </p>
-              <input
-                value={gf('wetMill.certifications')}
-                onChange={(e) => sf('wetMill.certifications', e.target.value)}
-                placeholder="Fairtrade, Orgánico…"
-                className="w-full rounded-lg border border-amber-200 px-3 py-2 text-sm text-gray-700 focus:border-amber-500 focus:outline-none"
-              />
-              <p className="mt-1 text-xs text-gray-400">Separar con comas</p>
+              <div className="flex flex-wrap gap-3">
+                {Object.keys(CERT_ICONS).map((cert) => {
+                  const selected = certs.includes(cert);
+                  return (
+                    <button
+                      key={cert}
+                      type="button"
+                      onClick={() => {
+                        const next = selected
+                          ? certs.filter(c => c !== cert)
+                          : [...certs, cert];
+                        sf('wetMill.certifications', next.join(', '));
+                      }}
+                      className={`flex flex-col items-center gap-1 rounded-xl border-2 p-2 transition-colors ${
+                        selected
+                          ? 'border-amber-500 bg-amber-50'
+                          : 'border-transparent bg-gray-50 opacity-50'
+                      }`}
+                    >
+                      <img src={CERT_ICONS[cert]} alt={cert} className="h-12 w-12 object-contain" />
+                      <span className="text-xs text-gray-600 text-center max-w-[60px] leading-tight">{cert}</span>
+                    </button>
+                  );
+                })}
+              </div>
             </div>
           ) : (
             certs.filter(c => CERT_ICONS[c]).length > 0 && (
@@ -324,49 +342,12 @@ const NewBatchId = () => {
             )
           )}
 
-          {/* Farmers accordion — 1 col on md */}
-          {validFarmers.length > 0 && (
-            <div className="rounded-2xl bg-white shadow-sm overflow-hidden md:col-span-1">
-              <button
-                onClick={() => setFarmersOpen(o => !o)}
-                className="flex w-full items-center justify-between px-5 py-4 text-left"
-              >
-                <span className="text-xs font-medium uppercase tracking-widest text-amber-700">
-                  {t('farmers')} ({validFarmers.length})
-                </span>
-                <svg
-                  className={`h-4 w-4 text-amber-700 transition-transform duration-200 ${farmersOpen ? 'rotate-180' : ''}`}
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {farmersOpen && (
-                <ul className="border-t border-amber-50 px-5 pb-4 pt-2 space-y-1">
-                  {validFarmers.map((farmer: any, i: number) => (
-                    <li key={i}>
-                      <a
-                        href={`/farmer/${farmer.address}`}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 active:bg-amber-100"
-                      >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800">
-                          {(farmer?.fullname || farmer.address || '?')[0].toUpperCase()}
-                        </span>
-                        {farmer?.fullname || farmer.address}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
-              )}
-            </div>
-          )}
-
           {/* Cup profile — 2 cols on md */}
           {(isEditing || hasCupData) && (
-            <div className="rounded-2xl bg-white p-5 shadow-sm md:col-span-2">
+            <div className="rounded-2xl bg-white p-5 shadow-sm sm:col-span-2 md:col-span-2">
               <SectionHeader label={t('cup-profile')} />
               <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-                {(['acidity','aftertaste','aroma','body','flavor','sweetness','note'] as const).map((key) => {
+                {(['acidity', 'aftertaste', 'aroma', 'body', 'flavor', 'sweetness', 'note'] as const).map((key) => {
                   const val = isEditing ? gf(`Profile.${key}`) : nonEmpty((batch.Profile as any)?.[key]);
                   if (!isEditing && !val) return null;
                   return (
@@ -399,7 +380,7 @@ const NewBatchId = () => {
           <div className="rounded-2xl bg-white p-5 shadow-sm md:col-span-1">
             <SectionHeader label={t('production')} />
             <div className="grid grid-cols-2 gap-3">
-              {(['process','drying_type','drying_hours','weight','date','facility'] as const).map((key) => {
+              {(['process', 'drying_type', 'drying_hours', 'weight', 'date', 'facility'] as const).map((key) => {
                 const raw = (batch.wetMill as any)?.[key];
                 const val = isEditing ? gf(`wetMill.${key}`) : nonEmpty(raw);
                 const display = (!isEditing && key === 'weight' && val) ? `${val} qq` : val;
@@ -421,20 +402,20 @@ const NewBatchId = () => {
             <SectionHeader label={t('dry-mill')} />
             <div className="grid grid-cols-2 gap-3">
               {([
-                { key: 'prep_type',       label: 'prep-type'       },
+                { key: 'prep_type', label: 'prep-type' },
                 { key: 'threshing_yield', label: 'threshing-yield' },
-                { key: 'damage_percent',  label: 'damage-percent'  },
-                { key: 'weight',          label: 'weight'          },
-                { key: 'buyer',           label: 'buyer'           },
-                { key: 'facility',        label: 'facility'        },
+                { key: 'damage_percent', label: 'damage-percent' },
+                { key: 'weight', label: 'weight' },
+                { key: 'buyer', label: 'buyer' },
+                { key: 'facility', label: 'facility' },
               ] as const).map(({ key, label }) => {
                 const raw = (batch.dryMill as any)?.[key];
                 if (!isEditing) {
                   if (!nonEmpty(raw)) return null;
                   const display =
                     key === 'threshing_yield' ? safeFloat(raw) :
-                    key === 'damage_percent'  ? `${safeFloat(raw)} %` :
-                    key === 'weight'          ? `${raw} qq` : String(raw);
+                      key === 'damage_percent' ? `${safeFloat(raw)} %` :
+                        key === 'weight' ? `${raw} qq` : String(raw);
                   return <StatCell key={key} value={display} label={t(label)} />;
                 }
                 return (
@@ -458,8 +439,8 @@ const NewBatchId = () => {
                   { key: 'roast_type', label: 'roast-type' },
                   { key: 'roast_date', label: 'roast-date' },
                   { key: 'grind_type', label: 'grind-type' },
-                  { key: 'packaging',  label: 'packaging'  },
-                  { key: 'bag_size',   label: 'bag-size'   },
+                  { key: 'packaging', label: 'packaging' },
+                  { key: 'bag_size', label: 'bag-size' },
                 ] as const).map(({ key, label }) => {
                   const raw = (batch.Roasting as any)?.[key];
                   if (!isEditing) {
@@ -480,9 +461,9 @@ const NewBatchId = () => {
             </div>
           )}
 
-          {/* External links — full width */}
+          {/* External links — 2 cols, farmers beside it */}
           {(isEditing || hasLinks) && (
-            <div className="rounded-2xl bg-white p-5 shadow-sm md:col-span-3">
+            <div className="rounded-2xl bg-white p-5 shadow-sm sm:col-span-2 md:col-span-2">
               <p className="mb-3 text-xs font-medium uppercase tracking-widest text-amber-700">
                 {t('services')}
               </p>
@@ -490,7 +471,7 @@ const NewBatchId = () => {
                 <div className="grid gap-4 md:grid-cols-3">
                   {[
                     { field: 'urlCatacion', label: t('cupping_profile') },
-                    { field: 'urlTrilla',   label: t('threshing-process') },
+                    { field: 'urlTrilla', label: t('threshing-process') },
                   ].map(({ field, label }) => (
                     <div key={field}>
                       <label className="mb-1 block text-xs text-gray-500">{label}</label>
@@ -537,9 +518,46 @@ const NewBatchId = () => {
             </div>
           )}
 
+          {/* Farmers list — beside services */}
+          {validFarmers.length > 0 && (
+            <div className="rounded-2xl bg-white shadow-sm overflow-hidden md:col-span-1">
+              <button
+                onClick={() => setFarmersOpen(o => !o)}
+                className="flex w-full items-center justify-between px-5 py-4 text-left"
+              >
+                <span className="text-xs font-medium uppercase tracking-widest text-amber-700">
+                  {t('farmers')} ({validFarmers.length})
+                </span>
+                <svg
+                  className={`h-4 w-4 text-amber-700 transition-transform duration-200 ${farmersOpen ? 'rotate-180' : ''}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {farmersOpen && (
+                <ul className="border-t border-amber-50 px-5 pb-4 pt-2 space-y-1">
+                  {validFarmers.map((farmer: any, i: number) => (
+                    <li key={i}>
+                      <a
+                        href={`/farmer/${farmer.address}`}
+                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 active:bg-amber-100"
+                      >
+                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800">
+                          {(farmer?.fullname || farmer.address || '?')[0].toUpperCase()}
+                        </span>
+                        {farmer?.fullname || farmer.address}
+                      </a>
+                    </li>
+                  ))}
+                </ul>
+              )}
+            </div>
+          )}
+
           {/* Admin: qq per farmer — full width */}
           {isEditable && validFarmers.length > 0 && (
-            <div className="rounded-2xl bg-white p-5 shadow-sm md:col-span-3">
+            <div className="rounded-2xl bg-white p-5 shadow-sm sm:col-span-2 md:col-span-3">
               <SectionHeader label="Asignar QQ por productor" />
               <div className="grid gap-3 md:grid-cols-2 lg:grid-cols-3">
                 {validFarmers.map((farmer: any) => (
