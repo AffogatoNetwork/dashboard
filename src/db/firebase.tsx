@@ -753,6 +753,19 @@ export const canEdit = async (mail: string, company: string) => {
   return querySnapshot.docs;
 };
 
+export const updateBatchData = async (ipfsHash: string, data: Record<string, any>) => {
+  const batchDoc = doc(db, 'batches', ipfsHash);
+  await updateDoc(batchDoc, data);
+};
+
+export const updateBatchFarmerWeights = async (
+  ipfsHash: string,
+  farmerWeights: Record<string, number>,
+) => {
+  const batchDoc = doc(db, 'batches', ipfsHash);
+  await updateDoc(batchDoc, { farmerWeights });
+};
+
 export const getBatch = async (ipfsHash: string) => {
   const docRef = doc(db, 'batches', ipfsHash);
   const docData = await getDoc(docRef);
