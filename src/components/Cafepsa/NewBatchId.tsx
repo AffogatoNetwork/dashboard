@@ -9,7 +9,8 @@ import { LinkIcon } from '../icons/link';
 // ── Certification logos ───────────────────────────────────────────────────────
 const CERT_ICONS: Record<string, string> = {
   'Fairtrade': require('../../assets/certificaciones/2_Fair Trade.png'),
-  'Orgánico': require('../../assets/certificaciones/10_EU Organic.png'),
+  'USDA Organic': require('../../assets/certificaciones/1_USDA Organic.png'),
+  'EU Orgánico': require('../../assets/certificaciones/10_EU Organic.png'),
   'Rainforest Alliance': require('../../assets/certificaciones/3_Rainforest Alliance.png'),
   'Con Manos de Mujer': require('../../assets/certificaciones/5_ConManosdeMujer.png'),
   'ROC': require('../../assets/certificaciones/16_ROC.jpeg'),
@@ -311,11 +312,10 @@ const NewBatchId = () => {
                           : [...certs, cert];
                         sf('wetMill.certifications', next.join(', '));
                       }}
-                      className={`flex flex-col items-center gap-1 rounded-xl border-2 p-2 transition-colors ${
-                        selected
+                      className={`flex flex-col items-center gap-1 rounded-xl border-2 p-2 transition-colors ${selected
                           ? 'border-amber-500 bg-amber-50'
                           : 'border-transparent bg-gray-50 opacity-50'
-                      }`}
+                        }`}
                     >
                       <img src={CERT_ICONS[cert]} alt={cert} className="h-12 w-12 object-contain" />
                       <span className="text-xs text-gray-600 text-center max-w-[60px] leading-tight">{cert}</span>
@@ -461,7 +461,52 @@ const NewBatchId = () => {
             </div>
           )}
 
-          {/* External links — 2 cols, farmers beside it */}
+          {/* Farmers list — beside services */}
+          {validFarmers.length > 0 && (
+            <div className="rounded-2xl bg-white shadow-sm overflow-hidden md:col-span-1">
+              <button
+                onClick={() => setFarmersOpen(o => !o)}
+                className="flex w-full items-center justify-between px-5 py-4 text-left"
+              >
+                <span className="text-xs font-medium uppercase tracking-widest text-amber-700">
+                  {t('farmers')} ({validFarmers.length})
+                </span>
+                <svg
+                  className={`h-4 w-4 text-amber-700 transition-transform duration-200 ${farmersOpen ? 'rotate-180' : ''}`}
+                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+                >
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+                </svg>
+              </button>
+              {farmersOpen && (
+                <ul className="border-t border-amber-50 px-5 pb-4 pt-2 space-y-1">
+                  {validFarmers.map((farmer: any, i: number) => {
+                    const qq = batch.farmerWeights?.[farmer.address];
+                    return (
+                      <li key={i}>
+                        <a
+                          href={`/farmer/${farmer.address}`}
+                          className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 active:bg-amber-100"
+                        >
+                          <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800">
+                            {(farmer?.fullname || farmer.address || '?')[0].toUpperCase()}
+                          </span>
+                          <span className="flex-1 truncate">{farmer?.fullname || farmer.address}</span>
+                          {qq !== undefined && (
+                            <span className="shrink-0 rounded-full bg-amber-100 px-2 py-0.5 text-xs font-semibold text-amber-800">
+                              {qq} qq
+                            </span>
+                          )}
+                        </a>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+            </div>
+          )}
+
+          {/* External links — beside farmers */}
           {(isEditing || hasLinks) && (
             <div className="rounded-2xl bg-white p-5 shadow-sm sm:col-span-2 md:col-span-2">
               <p className="mb-3 text-xs font-medium uppercase tracking-widest text-amber-700">
@@ -514,43 +559,6 @@ const NewBatchId = () => {
                     </a>
                   )}
                 </div>
-              )}
-            </div>
-          )}
-
-          {/* Farmers list — beside services */}
-          {validFarmers.length > 0 && (
-            <div className="rounded-2xl bg-white shadow-sm overflow-hidden md:col-span-1">
-              <button
-                onClick={() => setFarmersOpen(o => !o)}
-                className="flex w-full items-center justify-between px-5 py-4 text-left"
-              >
-                <span className="text-xs font-medium uppercase tracking-widest text-amber-700">
-                  {t('farmers')} ({validFarmers.length})
-                </span>
-                <svg
-                  className={`h-4 w-4 text-amber-700 transition-transform duration-200 ${farmersOpen ? 'rotate-180' : ''}`}
-                  fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
-                >
-                  <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
-                </svg>
-              </button>
-              {farmersOpen && (
-                <ul className="border-t border-amber-50 px-5 pb-4 pt-2 space-y-1">
-                  {validFarmers.map((farmer: any, i: number) => (
-                    <li key={i}>
-                      <a
-                        href={`/farmer/${farmer.address}`}
-                        className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 active:bg-amber-100"
-                      >
-                        <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800">
-                          {(farmer?.fullname || farmer.address || '?')[0].toUpperCase()}
-                        </span>
-                        {farmer?.fullname || farmer.address}
-                      </a>
-                    </li>
-                  ))}
-                </ul>
               )}
             </div>
           )}
