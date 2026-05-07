@@ -53,6 +53,7 @@ const NewBatchId = () => {
   const [loading, setLoading] = useState(true);
   const [batch, setBatch] = useState<any>(null);
   const [farmers, setFarmers] = useState<any[]>([]);
+  const [farmersOpen, setFarmersOpen] = useState(false);
 
   useEffect(() => {
     if (!batchId) return;
@@ -67,10 +68,16 @@ const NewBatchId = () => {
         }
         setBatch(result);
 
-        const farmerAddresses: any[] = result.Farmer || [];
+        const raw = result.Farmer || result.Farmers;
+        const farmerAddresses: string[] = Array.isArray(raw) ? raw : raw ? [raw] : [];
         if (farmerAddresses.length > 0) {
-          Promise.all(farmerAddresses.map((addr: any) => getFarmer(addr)))
-            .then((f) => { setFarmers(f.filter(Boolean)); setLoading(false); })
+          Promise.all(
+            farmerAddresses.map(async (addr: string) => {
+              const f = await getFarmer(addr);
+              return f ? { ...f, address: addr } : { address: addr };
+            })
+          )
+            .then((f) => { setFarmers(f); setLoading(false); })
             .catch(() => setLoading(false));
         } else {
           setLoading(false);
@@ -153,27 +160,40 @@ const NewBatchId = () => {
           </div>
         )}
 
-        {/* Farmers */}
-        {farmers.length > 0 && (
-          <div className="rounded-2xl bg-white p-5 shadow-sm">
-            <p className="mb-3 text-xs font-medium uppercase tracking-widest text-amber-700">
-              {t('farmers')}
-            </p>
-            <ul className="space-y-2">
-              {farmers.filter((farmer: any) => farmer?.address || farmer?.fullname).map((farmer: any, i: number) => (
-                <li key={i}>
-                  <a
-                    href={`/farmer/${farmer?.address}`}
-                    className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 active:bg-amber-100"
-                  >
-                    <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800">
-                      {(farmer?.fullname || '?')[0].toUpperCase()}
-                    </span>
-                    {farmer?.fullname || farmer?.address}
-                  </a>
-                </li>
-              ))}
-            </ul>
+        {/* Farmers accordion */}
+        {farmers.filter((f: any) => f?.address).length > 0 && (
+          <div className="rounded-2xl bg-white shadow-sm overflow-hidden">
+            <button
+              onClick={() => setFarmersOpen(o => !o)}
+              className="flex w-full items-center justify-between px-5 py-4 text-left"
+            >
+              <span className="text-xs font-medium uppercase tracking-widest text-amber-700">
+                {t('farmers')} ({farmers.filter((f: any) => f?.address).length})
+              </span>
+              <svg
+                className={`h-4 w-4 text-amber-700 transition-transform duration-200 ${farmersOpen ? 'rotate-180' : ''}`}
+                fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}
+              >
+                <path strokeLinecap="round" strokeLinejoin="round" d="M19 9l-7 7-7-7" />
+              </svg>
+            </button>
+            {farmersOpen && (
+              <ul className="border-t border-amber-50 px-5 pb-4 pt-2 space-y-1">
+                {farmers.filter((farmer: any) => farmer?.address).map((farmer: any, i: number) => (
+                  <li key={i}>
+                    <a
+                      href={`/farmer/${farmer.address}`}
+                      className="flex items-center gap-3 rounded-lg px-3 py-2 text-sm font-medium text-gray-800 hover:bg-amber-50 active:bg-amber-100"
+                    >
+                      <span className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-amber-100 text-xs font-bold text-amber-800">
+                        {(farmer?.fullname || farmer.address || '?')[0].toUpperCase()}
+                      </span>
+                      {farmer?.fullname || farmer.address}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            )}
           </div>
         )}
 

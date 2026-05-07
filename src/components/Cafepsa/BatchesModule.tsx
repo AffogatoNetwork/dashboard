@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { MaterialReactTable, MRT_ColumnDef, MaterialReactTableProps } from "material-react-table";
-import { getAllBatches } from "../../db/firebase";
+import { getAllBatches, getFarmer } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import QRCode from "react-qr-code";
 import { LinkIcon } from "../icons/link";
@@ -60,6 +60,8 @@ export const BatchesModule = () => {
     wetMill: {};
     Profile: {};
     Roasting: {};
+    Farmer: string[];
+    farmerNames: { address: string; name: string }[];
   };
 
   useEffect(() => {
@@ -95,41 +97,52 @@ export const BatchesModule = () => {
         companyName = 'CAFEPSA';
       }
 
-      await getAllBatches(companyName).then((result) => {
-        for (let i = 0; i < result.length; i += 1) {
-          const farmerData = result[i].data();
-          const {
-            Name = '',
-            parentId,
-            ipfsHash,
-            dryMill = {},
-            wetMill = {},
-            Profile = {},
-            Roasting = {},
-          } = farmerData;
+      const result = await getAllBatches(companyName);
+      for (let i = 0; i < result.length; i += 1) {
+        const farmerData = result[i].data();
+        const {
+          Name = '',
+          parentId,
+          ipfsHash,
+          dryMill = {},
+          wetMill = {},
+          Profile = {},
+          Roasting = {},
+          Farmer = [],
+        } = farmerData;
 
-          let qrCode = window.location.origin
-            .concat('/newbatch/')
-            .concat(ipfsHash);
-          let blockChainUrl =
-            'https://affogato.mypinata.cloud/ipfs/' + ipfsHash;
-          setBlockchainUrl(blockChainUrl);
-          farmerList.push({
-            qrCode,
-            Name,
-            parentId,
-            ipfsHash,
-            dryMill,
-            wetMill,
-            Profile,
-            Roasting,
-          });
-        }
+        const qrCode = window.location.origin.concat('/newbatch/').concat(ipfsHash);
+        const blockChainUrl = 'https://affogato.mypinata.cloud/ipfs/' + ipfsHash;
+        setBlockchainUrl(blockChainUrl);
+        farmerList.push({
+          qrCode,
+          Name,
+          parentId,
+          ipfsHash,
+          dryMill,
+          wetMill,
+          Profile,
+          Roasting,
+          Farmer,
+          farmerNames: [],
+        });
+      }
 
-        setFarmers(farmerList);
-        const itemsCount = farmerList.length;
-        setFarmersCount(itemsCount);
+      // Resolve all unique farmer addresses to names
+      const allAddresses = Array.from(new Set(farmerList.flatMap((b) => b.Farmer)));
+      const nameMap: Record<string, string> = {};
+      await Promise.all(
+        allAddresses.map(async (addr) => {
+          const f = await getFarmer(addr);
+          nameMap[addr] = f?.fullname || addr;
+        })
+      );
+      farmerList.forEach((b) => {
+        b.farmerNames = b.Farmer.map((addr) => ({ address: addr, name: nameMap[addr] || addr }));
       });
+
+      setFarmers(farmerList);
+      setFarmersCount(farmerList.length);
     };
 
     load();
