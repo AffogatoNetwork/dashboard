@@ -156,9 +156,13 @@ export const FarmerProfileModule = () => {
   const handleSavePersonal = async () => {
     setLoading(true);
     await updateFarmerPersonalInfo(farmerData.address, editPersonalData);
-    if (farms) await updateFarmByAddress(farmerData.address, { village: editPersonalData.village });
+    if (farms) await updateFarmByAddress(farmerData.address, {
+      village: editPersonalData.village,
+      village2: editPersonalData.village2,
+      region: editPersonalData.region,
+    });
     setFarmerData({ ...farmerData, ...editPersonalData });
-    if (farms) setFarms({ ...farms, village: editPersonalData.village });
+    if (farms) setFarms({ ...farms, village: editPersonalData.village, village2: editPersonalData.village2, region: editPersonalData.region });
     setIsEditingPersonal(false);
     setLoading(false);
   };

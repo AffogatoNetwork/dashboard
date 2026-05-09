@@ -345,13 +345,14 @@ export const updateFarmerPnud = async (farmerAddress: string, pnudValue: boolean
   }
 };
 
-export const updateFarmerPersonalInfo = async (farmerAddress: string, data: { gender: string; region: string; village2: string; country: string }) => {
+export const updateFarmerPersonalInfo = async (farmerAddress: string, data: { gender: string; region: string; village2: string; village: string; country: string }) => {
   try {
     const farmDoc = doc(db, 'farmers', farmerAddress);
     await updateDoc(farmDoc, {
       gender: data.gender,
       region: data.region || '',
       village2: data.village2,
+      village: data.village,
       country: data.country,
       updateAt: Date.now(),
     });
