@@ -171,7 +171,7 @@ export const BatchesModule = () => {
                 htmlFor="farmerlist"
                 className="btn btn-ghost h-full"
                 onClick={() => {
-                  setData(renderedCellValue);
+                  setData(reactNodeToString(renderedCellValue).trim());
                 }}
               >
                 <QRCode

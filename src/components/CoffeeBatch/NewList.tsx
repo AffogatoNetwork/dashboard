@@ -76,8 +76,8 @@ export const CoffeBatchNewList = () => {
     if (companyName === 'PROEXO') {
       window.open(
         'https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/' +
-          cleaned2.trim() +
-          '.json?alt=media&token=10ee7b3b-e0cd-4a52-8689-9b867c3f9f91',
+        cleaned2.trim() +
+        '.json?alt=media&token=10ee7b3b-e0cd-4a52-8689-9b867c3f9f91',
         '_blank',
         'noopener,noreferrer',
       );
@@ -205,7 +205,7 @@ export const CoffeBatchNewList = () => {
                 htmlFor="farmerlist"
                 className="btn-ghost btn h-full"
                 onClick={() => {
-                  setData(renderedCellValue);
+                  setData(reactNodeToString(renderedCellValue).trim());
                 }}
               >
                 <QRCode
