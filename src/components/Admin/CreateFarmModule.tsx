@@ -48,6 +48,9 @@ export const CreateFarmModule = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const [regionError, setRegionError] = useState('');
+  const [createdFarmId, setCreatedFarmId] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [createError, setCreateError] = useState('');
 
   useEffect(() => {
     const load = async () => {
@@ -102,6 +105,7 @@ export const CreateFarmModule = () => {
   }, []);
 
   const createFarm = () => {
+    setCreateError('');
     saveFarm({
       farmerAddress: farmAddress,
       company: currentCoop,
@@ -120,8 +124,7 @@ export const CreateFarmModule = () => {
       shadow: shadow,
       familyMembers: '',
       ethnicGroup: '',
-    }).then((result) => {
-      // Reset forms
+    }).then((docId) => {
       setFarmName('');
       setFarmAddress('');
       setLatitude('');
@@ -132,11 +135,11 @@ export const CreateFarmModule = () => {
       setArea('');
       setShadow('');
       setSelectedCertifications([]);
-      setCurrentCoop('');
       setRegionError('');
-      // Show success message
-      alert('Farm created successfully!');
-      navigate('/farms', { replace: true });
+      setCreatedFarmId(docId);
+      setShowSuccessModal(true);
+    }).catch((err) => {
+      setCreateError(err?.message || 'Failed to create farm. Please try again.');
     });
   };
 
@@ -228,6 +231,31 @@ export const CreateFarmModule = () => {
 
   return (
     <>
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="rounded-lg bg-white p-8 shadow-xl max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-2">{t('farm-created') || 'Farm Created'}</h2>
+            <p className="text-gray-600 mb-4">{t('farm-id') || 'Farm ID'}:</p>
+            <p className="font-mono text-sm bg-gray-100 rounded px-3 py-2 break-all mb-6 select-all">
+              {createdFarmId}
+            </p>
+            <button
+              className="btn btn-primary w-full"
+              onClick={() => {
+                setShowSuccessModal(false);
+                navigate('/farms', { replace: true });
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+      {createError && (
+        <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">
+          {createError}
+        </div>
+      )}
       <div className="mb-6 rounded-b-lg bg-white p-4 px-4 md:p-8 ">
         <div className="grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-2">
           <div className="grid grid-cols-1 gap-4 gap-y-2 text-sm md:grid-cols-5 ">

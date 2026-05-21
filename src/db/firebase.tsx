@@ -488,10 +488,13 @@ export const editBatch = async (formData: any) => {
   }
 };
 
-export const saveFarm = async (farm: FarmType) => {
+export const saveFarm = async (farm: FarmType): Promise<string> => {
   const baseId = farm.farmerAddress.replace(/[^a-zA-Z0-9-_]/g, '').slice(0, 20);
   const nameSlug = farm.name.replace(/\s/g, '').toLocaleLowerCase();
   const docId = baseId.concat(nameSlug);
+  if (!docId) {
+    throw new Error('Invalid farm ID: farmerAddress and name cannot both be empty.');
+  }
   const farmDoc = doc(db, 'farms', docId);
   const farmData = {
     farmerAddress: farm.farmerAddress,
@@ -513,7 +516,7 @@ export const saveFarm = async (farm: FarmType) => {
     ethnicGroup: farm.ethnicGroup,
   };
   await setDoc(farmDoc, farmData);
-  return true;
+  return docId;
 };
 
 export const saveFarms = async (farms: Array<FarmType>) => {
