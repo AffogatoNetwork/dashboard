@@ -6,6 +6,7 @@ import { useTranslation } from 'react-i18next';
 import {
   getAllFarmers,
   getCertifications,
+  getFarmerFarms,
   getVarieties,
   saveFarm,
 } from '../../db/firebase';
@@ -51,6 +52,10 @@ export const CreateFarmModule = () => {
   const [createdFarmId, setCreatedFarmId] = useState('');
   const [showSuccessModal, setShowSuccessModal] = useState(false);
   const [createError, setCreateError] = useState('');
+  const [farmerFullname, setFarmerFullname] = useState('');
+  const [existingFarms, setExistingFarms] = useState<any[]>([]);
+  const [showConflictModal, setShowConflictModal] = useState(false);
+  const [pendingCreate, setPendingCreate] = useState(false);
 
   useEffect(() => {
     const load = async () => {
@@ -104,12 +109,14 @@ export const CreateFarmModule = () => {
     load();
   }, []);
 
-  const createFarm = () => {
+  const doSaveFarm = (nameToUse: string) => {
     setCreateError('');
+    setShowConflictModal(false);
     saveFarm({
       farmerAddress: farmAddress,
+      fullname: farmerFullname,
       company: currentCoop,
-      name: farmName,
+      name: nameToUse,
       height: height,
       area: area,
       certifications: selectedCertifications.join(', '),
@@ -127,6 +134,9 @@ export const CreateFarmModule = () => {
     }).then((docId) => {
       setFarmName('');
       setFarmAddress('');
+      setFarmerFullname('');
+      setExistingFarms([]);
+      setPendingCreate(false);
       setLatitude('');
       setLongitude('');
       setTypeofProduction('');
@@ -143,6 +153,14 @@ export const CreateFarmModule = () => {
     });
   };
 
+  const createFarm = () => {
+    if (existingFarms.length > 0 && !pendingCreate) {
+      setShowConflictModal(true);
+      return;
+    }
+    doSaveFarm(farmName);
+  };
+
   const handleFarmNameChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const value = event.target.value;
     setFarmName(value);
@@ -151,6 +169,13 @@ export const CreateFarmModule = () => {
   const handleFarmerChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
     const key = event.target.value;
     setFarmAddress(key);
+    setPendingCreate(false);
+    setExistingFarms([]);
+    const farmer = farmers.find((f) => f.address === key);
+    setFarmerFullname(farmer?.fullname ?? '');
+    getFarmerFarms(key).then((farms) => {
+      setExistingFarms(farms ?? []);
+    });
   };
 
   const handleRegionChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -248,6 +273,42 @@ export const CreateFarmModule = () => {
             >
               OK
             </button>
+          </div>
+        </div>
+      )}
+      {showConflictModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="rounded-lg bg-white p-8 shadow-xl max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-2">Finca existente</h2>
+            <p className="text-gray-600 mb-4">
+              Este productor ya tiene {existingFarms.length > 1 ? 'estas fincas' : 'esta finca'}:
+            </p>
+            <ul className="mb-6 flex flex-col gap-2">
+              {existingFarms.map((farm) => (
+                <li key={farm.name}>
+                  <button
+                    className="btn btn-outline btn-sm w-full"
+                    onClick={() => doSaveFarm(farm.name)}
+                  >
+                    Actualizar &quot;{farm.name}&quot;
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <div className="flex flex-col gap-2">
+              <button
+                className="btn btn-primary w-full"
+                onClick={() => { setPendingCreate(true); setShowConflictModal(false); doSaveFarm(farmName); }}
+              >
+                Crear nueva finca
+              </button>
+              <button
+                className="btn btn-ghost btn-sm w-full"
+                onClick={() => setShowConflictModal(false)}
+              >
+                Cancelar
+              </button>
+            </div>
           </div>
         </div>
       )}

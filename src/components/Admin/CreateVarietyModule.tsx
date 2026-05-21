@@ -12,6 +12,9 @@ export const CreateVarietyModule = () => {
     const [currentCoop, setCurrentCoop] = useState("");
     const { t } = useTranslation();
     const [loading, setLoading] = useState(false);
+    const [createdVariety, setCreatedVariety] = useState('');
+    const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [createError, setCreateError] = useState('');
 
 
 
@@ -55,16 +58,23 @@ export const CreateVarietyModule = () => {
 
 
     const createVariety = async () => {
+        if (!variety.trim()) {
+            setVarietyError('Ingresa el nombre de la variedad');
+            return;
+        }
+        setVarietyError('');
+        setCreateError('');
         setLoading(true);
         try {
-            await saveVarietyData(variety, currentCoop).then(() => {
-                setLoading(false);
-                return true;
-            });
-
-        } catch (error) {
+            await saveVarietyData(variety, currentCoop);
+            setCreatedVariety(variety);
+            setVariety('');
+            setShowSuccessModal(true);
+        } catch (error: any) {
+            setCreateError(error?.message || 'Error al guardar la variedad. Intenta de nuevo.');
+        } finally {
+            setLoading(false);
         }
-
     };
 
     const handleVarietyChange = (event: any) => {
@@ -80,6 +90,28 @@ export const CreateVarietyModule = () => {
 
 
     return (<>
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="rounded-lg bg-white p-8 shadow-xl max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-2">Variedad Creada</h2>
+            <p className="text-gray-600 mb-4">Variedad:</p>
+            <p className="font-mono text-sm bg-gray-100 rounded px-3 py-2 break-all mb-6 select-all">
+              {createdVariety}
+            </p>
+            <button
+              className="btn btn-primary w-full"
+              onClick={() => setShowSuccessModal(false)}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+      {createError && (
+        <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">
+          {createError}
+        </div>
+      )}
         <div className='bg-white p-4 px-4 md;p-8 mb-6 rounded-b-lg'>
             <div className='grid grid-cols-2 gap-5 sm:grid-cols-2 lg:grid-cols-2 justify-items-center'>
                 <div className="md:col-span-1">

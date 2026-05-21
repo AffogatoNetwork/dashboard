@@ -69,6 +69,7 @@ export type CompanyType = {
 export type FarmType = {
   farmerAddress : string;
   farmerId?: string;
+  fullname?: string;
   company: string;
   name: string;
   height: string;

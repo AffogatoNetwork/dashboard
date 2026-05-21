@@ -155,7 +155,7 @@ export const FarmsNewList = () => {
   const columData = useMemo<MRT_ColumnDef<FarmType>[]>(
     () => [
       {
-        accessorFn: (farm: any) => `${farm.name} ${farm.village}`,
+        accessorFn: (farm: any) => `${farm.name} ${farm.village} ${farm.fullname ?? ''}`,
         header: t('farm-name'),
         size: 25,
         Cell(props) {

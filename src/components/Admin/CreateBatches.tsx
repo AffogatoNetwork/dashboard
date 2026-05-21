@@ -17,6 +17,9 @@ export const CreateBatchesModule = () => {
   const [currentStep, setCurrentStep] = useState(0);
   const [isFormValid, setIsFormValid] = useState(false);
   const navigate = useNavigate();
+  const [createdBatchId, setCreatedBatchId] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
+  const [createError, setCreateError] = useState('');
 
   const [formData, setFormData] = useState<FormData>({
     Farmer: {},
@@ -456,13 +459,18 @@ export const CreateBatchesModule = () => {
         },
       };
 
-      createBatch(firebaseData).then((result) => {
-        if (result) {
-          resetForm();
-        }
-        alert('Lote Creado');
-        navigate('/batches-module', { replace: true });
-      });
+      setCreateError('');
+      createBatch(firebaseData)
+        .then((result) => {
+          if (result) {
+            resetForm();
+            setCreatedBatchId(firebaseData.Name);
+            setShowSuccessModal(true);
+          }
+        })
+        .catch((err) => {
+          setCreateError(err?.message || 'Error al crear el lote. Intenta de nuevo.');
+        });
     }
   };
 
@@ -532,6 +540,31 @@ export const CreateBatchesModule = () => {
 
   return (
     <>
+      {showSuccessModal && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+          <div className="rounded-lg bg-white p-8 shadow-xl max-w-sm w-full text-center">
+            <h2 className="text-xl font-bold mb-2">Lote Creado</h2>
+            <p className="text-gray-600 mb-4">ID del Lote:</p>
+            <p className="font-mono text-sm bg-gray-100 rounded px-3 py-2 break-all mb-6 select-all">
+              {createdBatchId}
+            </p>
+            <button
+              className="btn btn-primary w-full"
+              onClick={() => {
+                setShowSuccessModal(false);
+                navigate('/batches-module', { replace: true });
+              }}
+            >
+              OK
+            </button>
+          </div>
+        </div>
+      )}
+      {createError && (
+        <div className="mb-4 rounded bg-red-100 p-3 text-red-700 text-sm">
+          {createError}
+        </div>
+      )}
       <div className="my-6 justify-center rounded-b-lg bg-white p-4 px-4 md:p-8 ">
         <div className="my-4 text-center">
           Paso {currentStep + 1} de {Object.keys(formData).length}

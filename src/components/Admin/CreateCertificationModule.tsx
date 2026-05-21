@@ -21,6 +21,8 @@ export const CreateCertificationModule = () => {
   const [imagePreview, setImagePreview] = useState<string | null>(null);
   const [certList, setCertList] = useState<Array<{ name: string; imageUrl?: string }>>([]);
   const [error, setError] = useState('');
+  const [createdCertName, setCreatedCertName] = useState('');
+  const [showSuccessModal, setShowSuccessModal] = useState(false);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const company = getCompany();
 
@@ -55,11 +57,13 @@ export const CreateCertificationModule = () => {
         imageUrl = await uploadCertificationImage(name.trim(), imageFile);
       }
       await saveCertificationData(name.trim(), company, imageUrl);
+      setCreatedCertName(name.trim());
       setName('');
       setImageFile(null);
       setImagePreview(null);
       if (fileInputRef.current) fileInputRef.current.value = '';
       await loadCerts();
+      setShowSuccessModal(true);
     } catch (e) {
       setError('Error al guardar');
     } finally {
@@ -70,6 +74,24 @@ export const CreateCertificationModule = () => {
   if (loading) return <Loading label={t('loading').concat('...')} className="loading-wrapper" />;
 
   return (
+    <>
+    {showSuccessModal && (
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black bg-opacity-50">
+        <div className="rounded-lg bg-white p-8 shadow-xl max-w-sm w-full text-center">
+          <h2 className="text-xl font-bold mb-2">Certificado Creado</h2>
+          <p className="text-gray-600 mb-4">Nombre:</p>
+          <p className="font-mono text-sm bg-gray-100 rounded px-3 py-2 break-all mb-6 select-all">
+            {createdCertName}
+          </p>
+          <button
+            className="btn btn-primary w-full"
+            onClick={() => setShowSuccessModal(false)}
+          >
+            OK
+          </button>
+        </div>
+      </div>
+    )}
     <div className="bg-white p-6 rounded-xl shadow max-w-3xl mx-auto">
       <h2 className="text-lg font-bold text-amber-700 uppercase tracking-widest mb-6">
         Certificaciones
@@ -134,5 +156,6 @@ export const CreateCertificationModule = () => {
         </div>
       </div>
     </div>
+    </>
   );
 };

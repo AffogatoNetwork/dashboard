@@ -498,6 +498,7 @@ export const saveFarm = async (farm: FarmType): Promise<string> => {
   const farmDoc = doc(db, 'farms', docId);
   const farmData = {
     farmerAddress: farm.farmerAddress,
+    fullname: farm.fullname ?? '',
     company: farm.company,
     name: farm.name,
     height: farm.height,
