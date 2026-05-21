@@ -1,6 +1,6 @@
 import React, { useEffect, useMemo, useState } from "react";
 import { MaterialReactTable, MRT_ColumnDef } from "material-react-table";
-import { getFarms } from "../../db/firebase";
+import { getAllFarmers, getFarms } from "../../db/firebase";
 import Box from "@mui/material/Box";
 import { useTranslation } from "react-i18next";
 import ReactHTMLTableToExcel from "react-html-table-to-xlsx";
@@ -45,6 +45,7 @@ export const FarmsNewList = () => {
 
   type FarmType = {
     farmerAddress: string;
+    fullname?: string;
     company: string;
     name: string;
     height: string;
@@ -98,12 +99,19 @@ export const FarmsNewList = () => {
         companyName = 'PROEXO';
       }
 
+      const farmerDocs = await getAllFarmers(companyName);
+      const farmerNameMap: Record<string, string> = {};
+      farmerDocs.forEach((doc: any) => {
+        const d = doc.data();
+        if (d.address && d.fullname) farmerNameMap[d.address] = d.fullname;
+      });
+
       await getFarms(companyName).then((result) => {
         for (let i = 0; i < result.length; i += 1) {
           const farmData = result[i].data();
-          const l = farmData.location;
           const {
             farmerAddress,
+            fullname,
             company,
             name = '',
             height = '1200',
@@ -124,6 +132,7 @@ export const FarmsNewList = () => {
 
           farmList.push({
             farmerAddress,
+            fullname: fullname || farmerNameMap[farmerAddress] || '',
             company,
             name,
             height,
