@@ -489,32 +489,31 @@ export const editBatch = async (formData: any) => {
 };
 
 export const saveFarm = async (farm: FarmType) => {
-  try {
-    const docId = farm.farmerAddress.concat(farm.name.toLocaleLowerCase());
-    const farmDoc = doc(db, 'farms', docId);
-    const farmData = {
-      farmerAddress: farm.farmerAddress,
-      company: farm.company,
-      name: farm.name,
-      height: farm.height,
-      area: farm.area,
-      certifications: farm.certifications,
-      latitude: farm.latitude,
-      longitude: farm.longitude,
-      bio: farm.bio,
-      country: farm.country,
-      region: farm.region,
-      village: farm.village,
-      village2: farm.village2,
-      varieties: farm.varieties,
-      shadow: farm.shadow,
-      familyMembers: farm.familyMembers,
-      ethnicGroup: farm.ethnicGroup,
-    };
-    await setDoc(farmDoc, farmData).then(() => {
-      return true;
-    });
-  } catch (error) { }
+  const baseId = farm.farmerAddress.replace(/[^a-zA-Z0-9-_]/g, '').slice(0, 20);
+  const nameSlug = farm.name.replace(/\s/g, '').toLocaleLowerCase();
+  const docId = baseId.concat(nameSlug);
+  const farmDoc = doc(db, 'farms', docId);
+  const farmData = {
+    farmerAddress: farm.farmerAddress,
+    company: farm.company,
+    name: farm.name,
+    height: farm.height,
+    area: farm.area,
+    certifications: farm.certifications,
+    latitude: farm.latitude,
+    longitude: farm.longitude,
+    bio: farm.bio,
+    country: farm.country,
+    region: farm.region,
+    village: farm.village,
+    village2: farm.village2,
+    varieties: farm.varieties,
+    shadow: farm.shadow,
+    familyMembers: farm.familyMembers,
+    ethnicGroup: farm.ethnicGroup,
+  };
+  await setDoc(farmDoc, farmData);
+  return true;
 };
 
 export const saveFarms = async (farms: Array<FarmType>) => {
