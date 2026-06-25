@@ -18,7 +18,8 @@
       "Bash(npx tsc:*)",
       "Bash(node scripts/export_to_excel.mjs)",
       "Bash(npm start:*)",
-      "Bash(node -e ' *)"
+      "Bash(node -e ' *)",
+      "Bash(npm --version)"
     ]
   }
 }

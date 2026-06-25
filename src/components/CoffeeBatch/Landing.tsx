@@ -5,51 +5,21 @@ import { CopracnilLanding } from "../DynamicLanding/CopracnilLanding";
 import { ComsaLanding } from "../DynamicLanding/ComsaLanding";
 import { ProexoLanding } from "../DynamicLanding/ProexoLanding";
 import { CafepsaLanding } from "../DynamicLanding/CafepsaLanding";
+import { getCoopByHost } from "../../utils/utils";
 
 const Landing = () => {
-    const location = window.location.host;
+    const coop = getCoopByHost(window.location.host);
 
-    if (location.match("commovel") !== null) {
-        return (<>
-            <div className="rounded">
-                <CommovelLanding></CommovelLanding>
-            </div>
-        </>
-        );
-    }
-    if (location.match("copracnil") !== null) {
-        return (<>
-            <CopracnilLanding></CopracnilLanding>
-        </>
-        );
-    }
-    if (location.match("comsa") !== null) {
-        return (<>
-            <ComsaLanding></ComsaLanding>
-        </>
-        );
-    }
-    if (location.match("proexo") !== null) {
-        return (<>
-            <ProexoLanding></ProexoLanding>
-        </>
-        );
-    }
-    if (location.match("cafepsa") !== null) {
-        return (<>
-            <CafepsaLanding/>
-        </>
-        );
-    }
+    if (coop === null) return <DefaultLanding />;
 
-
-
-    return (
-        <>
-            <DefaultLanding />
-        </>
-    );
-
+    switch (coop.name) {
+        case 'COMMOVEL':  return <div className="rounded"><CommovelLanding /></div>;
+        case 'COPRACNIL': return <CopracnilLanding />;
+        case 'COMSA':     return <ComsaLanding />;
+        case 'PROEXO':    return <ProexoLanding />;
+        case 'CAFEPSA':   return <CafepsaLanding />;
+        default:          return <DefaultLanding />;
+    }
 };
 
 export default Landing;

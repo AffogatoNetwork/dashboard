@@ -1,6 +1,6 @@
 import { toast } from "react-toastify";
 import { ethers } from "ethers";
-import { CooperativeList } from "./constants";
+import { CooperativeList, CooperativeType } from "./constants";
 
 export const getDefaultProvider = () => {
   const url = "https://rpc.ankr.com/gnosis";
@@ -87,4 +87,14 @@ export const getCompanyAddressesByHost = (location: string) => {
     }
   }
   return addresses;
+};
+
+export const getCoopByHost = (host: string): CooperativeType | null => {
+  const lowerHost = host.toLowerCase();
+  for (let i = 1; i < CooperativeList.length; i += 1) {
+    if (lowerHost.includes(CooperativeList[i].name.toLowerCase())) {
+      return CooperativeList[i];
+    }
+  }
+  return null;
 };

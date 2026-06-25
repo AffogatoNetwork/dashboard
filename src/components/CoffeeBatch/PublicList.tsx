@@ -7,6 +7,7 @@ import "../../styles/app.scss";
 import LangChooser from "../common/LangChooser";
 import { List } from "./index";
 import CoopLogo from "../common/CoopLogo";
+import { getCoopByHost } from "../../utils/utils";
 
 export const PublicList = () => {
   const { t } = useTranslation();
@@ -22,20 +23,17 @@ export const PublicList = () => {
   };
 
   const checkPassword = (): boolean => {
-    let isValid = false;
-    const location = window.location.host;
-    if (location.match("comsa") !== null) {
-      isValid = password === process.env.REACT_APP_PASS_COMSA;
-    } else if (location.match("commovel") !== null) {
-      isValid = password === process.env.REACT_APP_PASS_COMMOVEL;
-    } else if (location.match("copracnil") !== null) {
-      isValid = password === process.env.REACT_APP_PASS_COPRANIL;
-    } else if (location.match("proexo") !== null) {
-      isValid = password === process.env.REACT_APP_PASS_PROEXO;
-    } else {
-      isValid = password === process.env.REACT_APP_PASS_AFFOGATO;
-    }
-    return isValid;
+    const coopName = getCoopByHost(window.location.host)?.name ?? null;
+    const passMap: Record<string, string | undefined> = {
+      COMSA:     process.env.REACT_APP_PASS_COMSA,
+      COMMOVEL:  process.env.REACT_APP_PASS_COMMOVEL,
+      COPRACNIL: process.env.REACT_APP_PASS_COPRANIL,
+      PROEXO:    process.env.REACT_APP_PASS_PROEXO,
+    };
+    const expected = coopName
+      ? (passMap[coopName] ?? process.env.REACT_APP_PASS_AFFOGATO)
+      : process.env.REACT_APP_PASS_AFFOGATO;
+    return password === expected;
   };
 
   const handleOnClick = () => {

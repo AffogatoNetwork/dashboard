@@ -6,6 +6,7 @@ import { FarmIcon } from "../icons/farm";
 import { useTranslation } from "react-i18next";
 import { Facebook } from "../icons/Facebook";
 import { WebSite } from "../icons/WebSite";
+import { Link } from "react-router-dom";
 
 
 export const CopracnilLanding = () => {
@@ -14,10 +15,16 @@ export const CopracnilLanding = () => {
     return (<>
         <div className="bg-white card rounded-lg -mr-6 -my-6">
             <div className="bg-white">
-                <div id="header" className="hero min-h-screen rounded-t-2xl"
-                    style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2-3.jpeg?alt=media&token=7ec33154-a84f-4b52-9a70-131900ee96fe")` }}>
-                    <div className=" rounded-t-2xl"></div>
-                    <div className="hero-content text-center text-neutral-content">
+                <div id="header" className="hero min-h-screen rounded-t-2xl relative overflow-hidden">
+                    <img 
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2-3.jpeg?alt=media&token=7ec33154-a84f-4b52-9a70-131900ee96fe" 
+                        alt="Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                        fetchPriority="high"
+                        decoding="async"
+                    />
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl z-10"></div>
+                    <div className="hero-content text-center text-neutral-content z-20">
                         <div className=" ">                           
                         <div className="mt-8"></div>
                          <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white text-shadow: 0 0 10px blue; stroke-text">
@@ -33,11 +40,9 @@ export const CopracnilLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-8 ">
-                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
-                                    <a href="/farmers">
-                                        Ir a la Plataforma
-                                    </a>
-                                </button>
+                                <Link to="/farmers" className="btn btn-lg bg-orange-400 hover:bg-primary text-white flex items-center justify-center">
+                                    Ir a la Plataforma
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -237,39 +242,39 @@ export const CopracnilLanding = () => {
                     <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F1-2.jpeg?alt=media&token=9096163c-c4a6-4075-a6ea-2ca37713ef86"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                        
                         <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F1.jpeg?alt=media&token=ad7484f0-43fb-4438-a067-8658e7573e92"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F2.jpeg?alt=media&token=ef95faf4-00ba-4bf4-95ba-42a85f754296"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F3.jpeg?alt=media&token=d9e4748a-a120-47fd-95ca-1726bd784e0c"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F4.jpeg?alt=media&token=d88b0442-82ec-452e-8dfa-053135ca4779"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                             <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F5.jpeg?alt=media&token=c81247f4-8974-46a1-ad19-b1299c15d066"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                               <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F7.jpeg?alt=media&token=21f1ec4f-1f41-481c-8e62-09a34e17d90b"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                             <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Copranil%2F8.jpeg?alt=media&token=53e8d5ab-4582-4d5c-976c-d20bf120245d"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                     </div>
                 </div>
 
@@ -285,6 +290,7 @@ export const CopracnilLanding = () => {
                                 <div className="px-5 py-2">
                                     <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="heifer" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
                                 </div>
@@ -297,6 +303,7 @@ export const CopracnilLanding = () => {
                                 <div className="px-5 py-2">
                                     <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FLogo%20BID%20Lab%20-%20Color%20(SPA).png?alt=media&token=e1c9671a-f1f1-4104-b663-502faa89c893"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
                                 </div>
@@ -312,6 +319,7 @@ export const CopracnilLanding = () => {
                                 <a href="https://affogato.co" rel="noopener noreferrer" target="_blank" className="self-center">
 
                                     <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                                        loading="lazy" decoding="async"
                                     />
                                 </a>
                             </div>

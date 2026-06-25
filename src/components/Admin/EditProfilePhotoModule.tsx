@@ -3,6 +3,7 @@ import Form from "react-bootstrap/Form";
 
 import User from "../../assets/user.png";
 import { getAllFarmers, updateFarmerImage } from '../../db/firebase';
+import { getCoopByHost } from '../../utils/utils';
 
 
 export const EditProfilePhotoModule = () => {
@@ -17,25 +18,7 @@ export const EditProfilePhotoModule = () => {
     useEffect(() => {
 
         const load = async () => {
-            const location = window.location.host;
-            let currentCoop = "";
-            if (location.match("COMMOVEL") !== null) {
-                currentCoop = "COMMOVEL"
-            }
-            if (location.match("copracnil") !== null) {
-                currentCoop = "COPRACNIL"
-            }
-            if (location.match("comsa") !== null) {
-                currentCoop = "COMSA"
-            }
-            if (location.match("proexo") !== null) {
-                currentCoop = "PROEXO"
-            }
-            if (location.match("cafepsa") !== null) {
-                currentCoop = "CAFEPSA"
-            } else {
-                currentCoop = "PROEXO"
-            }
+            const currentCoop = getCoopByHost(window.location.host)?.name ?? 'PROEXO';
             setCurrentCoop(currentCoop);
             getAllFarmers(currentCoop).then((result) => {
                 for (let i = 0; i < result.length; i += 1) {

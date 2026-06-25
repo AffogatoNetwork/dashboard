@@ -6,6 +6,7 @@ import { CoffeeBatchType } from '../common/types';
 import { ipfsUrl } from '../../utils/constants';
 import { getFarmer } from '../../db/firebase';
 import NewMap from '../common/NewMap';
+import { getCoopByHost } from '../../utils/utils';
 const NFTImage = '../../assets/affogato.png';
 
 const CoffeeCard = () => {
@@ -20,23 +21,10 @@ const CoffeeCard = () => {
   const [NFT, setNFT] = useState('');
   useEffect(() => {
     const determineNFT = () => {
-      const location = window.location.host;
-
-      if (location.match('commovel') !== null) {
-        setNFT('Commovel');
-      }
-      if (location.match('copracnil') !== null) {
-        setNFT('Copracnil');
-      }
-      if (location.match('comsa') !== null) {
-        setNFT('Comsa');
-      }
-      if (location.match('proexo') !== null) {
-        setNFT('Proexo');
-
-        if (location.match('cafepsa') !== null) {
-          setNFT('Cafepsa');
-        }
+      const coop = getCoopByHost(window.location.host);
+      if (coop) {
+        // Convert 'COMMOVEL' → 'Commovel' to match JSX conditional strings
+        setNFT(coop.name.charAt(0) + coop.name.slice(1).toLowerCase());
       } else {
         setNFT('Comsa');
       }

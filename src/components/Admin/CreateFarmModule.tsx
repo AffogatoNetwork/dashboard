@@ -10,6 +10,7 @@ import {
   getVarieties,
   saveFarm,
 } from '../../db/firebase';
+import { getCoopByHost } from '../../utils/utils';
 
 export const CreateFarmModule = () => {
   const [currentRegion, setCurrentRegion] = useState<RegionType>(RegionList[0]);
@@ -59,21 +60,7 @@ export const CreateFarmModule = () => {
 
   useEffect(() => {
     const load = async () => {
-      const location = window.location.host;
-      let currentCoop = '';
-      if (location.match('COMMOVEL') !== null) {
-        currentCoop = 'COMMOVEL';
-      } else if (location.match('copracnil') !== null) {
-        currentCoop = 'COPRACNIL';
-      } else if (location.match('comsa') !== null) {
-        currentCoop = 'COMSA';
-      } else if (location.match('proexo') !== null) {
-        currentCoop = 'PROEXO';
-      } else if (location.match('cafepsa') !== null) {
-        currentCoop = 'CAFEPSA';
-      } else {
-        currentCoop = 'PROEXO';
-      }
+      const currentCoop = getCoopByHost(window.location.host)?.name ?? 'PROEXO';
       setCurrentCoop(currentCoop);
       getAllFarmers(currentCoop).then((result) => {
         for (let i = 0; i < result.length; i += 1) {

@@ -9,6 +9,7 @@ import { Facebook } from "../icons/Facebook";
 import { Instagram } from "../icons/Instagram";
 import { Youtube } from "../icons/Youtube";
 import { Twitter } from "../icons/Twitter";
+import { Link } from "react-router-dom";
 
 export const ComsaLanding = () => {
     const { t } = useTranslation();
@@ -17,10 +18,16 @@ export const ComsaLanding = () => {
 
         <div className="bg-white card rounded-lg -mr-6 -my-6">
             <div className="bg-white">
-                <div id="header" className="hero min-h-screen rounded-t-2xl"
-                    style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf")` }}>
-                  <div className=" rounded-t-2xl"></div>
-                    <div className="hero-content text-center text-neutral-content">
+                <div id="header" className="hero min-h-screen rounded-t-2xl relative overflow-hidden">
+                    <img 
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F1.jpeg?alt=media&token=01904488-a6bd-4c1e-9dec-10b3b9abd6bf" 
+                        alt="Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                        fetchPriority="high"
+                        decoding="async"
+                    />
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl z-10"></div>
+                    <div className="hero-content text-center text-neutral-content z-20">
                         <div className=" ">                           
                         <div className="mt-8"></div>
                          <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white text-shadow: 0 0 10px blue; stroke-text">
@@ -34,11 +41,9 @@ export const ComsaLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
-                            <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
-                                    <a href="/farmers">
-                                        Ir a la Plataforma
-                                    </a>
-                                </button>
+                                <Link to="/farmers" className="btn btn-lg bg-orange-400 hover:bg-primary text-white flex items-center justify-center">
+                                    Ir a la Plataforma
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -263,37 +268,36 @@ export const ComsaLanding = () => {
                     <div className="grid max-w-screen-lg gap-8 row-gap-5 mb-8 sm:grid-cols-2 lg:grid-cols-4 sm:mx-auto">
 
                         <img
-
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F2.jpeg?alt=media&token=69704de8-9e96-487d-9035-89146bcc26e0" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F2.jpeg?alt=media&token=69704de8-9e96-487d-9035-89146bcc26e0" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F3.jpeg?alt=media&token=87c75678-4122-400a-b72d-0346a9fbaa34" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F3.jpeg?alt=media&token=87c75678-4122-400a-b72d-0346a9fbaa34" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F4.jpeg?alt=media&token=aed26485-1202-4332-827c-7ea077c3012c" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2F4.jpeg?alt=media&token=aed26485-1202-4332-827c-7ea077c3012c" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FCIS.JPG?alt=media&token=29c9662e-9cbc-4780-a625-ac6aed3cb7a7" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FCIS.JPG?alt=media&token=29c9662e-9cbc-4780-a625-ac6aed3cb7a7" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FCOMSA_9256.JPG?alt=media&token=bceccaec-f3a3-4056-a377-90ae8258b1b6" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FCOMSA_9256.JPG?alt=media&token=bceccaec-f3a3-4056-a377-90ae8258b1b6" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FCelenia%20Banegas_0751.JPG?alt=media&token=61574f14-6797-4b66-8af9-94c9cf249fa9" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FCelenia%20Banegas_0751.JPG?alt=media&token=61574f14-6797-4b66-8af9-94c9cf249fa9" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FMiriam%20Perez.jpg?alt=media&token=041932a2-faa8-4163-8c73-b3131cbf0e17" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FMiriam%20Perez.jpg?alt=media&token=041932a2-faa8-4163-8c73-b3131cbf0e17" alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
-                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FNatural%20COMSA1.jpg?alt=media&token=fbfdb3f9-40a6-400a-a0bc-49f46f3ba4c7" alt="" />
+                            src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Comsa%2FNatural%20COMSA1.jpg?alt=media&token=fbfdb3f9-40a6-400a-a0bc-49f46f3ba4c7" alt="" loading="lazy" decoding="async" />
                     </div>
                 </div>
 
@@ -311,6 +315,7 @@ export const ComsaLanding = () => {
                                     <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="heifer" className="w-15 h-10"
                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
 
@@ -322,6 +327,7 @@ export const ComsaLanding = () => {
                                 <div className="px-5 py-2">
                                     <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FLogo%20BID%20Lab%20-%20Color%20(SPA).png?alt=media&token=e1c9671a-f1f1-4104-b663-502faa89c893"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
                                 </div>
@@ -339,6 +345,7 @@ export const ComsaLanding = () => {
 
                                     <img alt="affogato" className="w-15 h-10"
                                         src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                                        loading="lazy" decoding="async"
                                     />
                                 </a>
                             </div>

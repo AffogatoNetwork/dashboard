@@ -6,6 +6,7 @@ import {FarmIcon} from "../icons/farm";
 import {useTranslation} from "react-i18next";
 import {WebSite} from "../icons/WebSite";
 import {Facebook} from "../icons/Facebook";
+import {Link} from "react-router-dom";
 
 
 export const CommovelLanding = () => {
@@ -14,10 +15,16 @@ export const CommovelLanding = () => {
     return (<>
         <div>
             <div className="bg-white">
-                <div id="header" className="hero min-h-screen rounded-t-2xl"
-                     style={{backgroundImage: `url("https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg")`}}>
-                     <div className=" rounded-t-2xl"></div>
-                    <div className="hero-content text-center text-neutral-content">
+                <div id="header" className="hero min-h-screen rounded-t-2xl relative overflow-hidden">
+                    <img 
+                        src="https://montanaverdehn.com/wp-content/uploads/2022/02/commovel-finca-main-slider-v1-2.jpg" 
+                        alt="Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                        fetchPriority="high"
+                        decoding="async"
+                    />
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl z-10"></div>
+                    <div className="hero-content text-center text-neutral-content z-20">
                         <div className=" ">                           
                         <div className="mt-8"></div>
                          <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white text-shadow: 0 0 10px blue; stroke-text">
@@ -30,11 +37,9 @@ export const CommovelLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-8 ">
-                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
-                                    <a href="/farmers">
-                                        Ir a la Plataforma
-                                    </a>
-                                </button>
+                                <Link to="/farmers" className="btn btn-lg bg-orange-400 hover:bg-primary text-white flex items-center justify-center">
+                                    Ir a la Plataforma
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -232,22 +237,22 @@ export const CommovelLanding = () => {
                         <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F1.jpeg?alt=media&token=c35a5e80-0288-4d3b-a6b1-d857093d66a5"
-                            alt=""/>
+                            alt="" loading="lazy" decoding="async"/>
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F2.jpeg?alt=media&token=715f446b-7b08-466d-b0c8-35b400c9ce1b"
-                            alt=""/>
+                            alt="" loading="lazy" decoding="async"/>
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F3.jpeg?alt=media&token=74bb19fb-0eeb-42db-a271-c8cf832f376e"
-                            alt=""/>
+                            alt="" loading="lazy" decoding="async"/>
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Commovel%2F4.jpeg?alt=media&token=b74b40fe-80df-4611-b116-9cb851a5bacf"
-                            alt=""/>
+                            alt="" loading="lazy" decoding="async"/>
                     </div>
                 </div>
 
@@ -264,6 +269,7 @@ export const CommovelLanding = () => {
                                 <div className="px-5 py-2">
                                     <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="heifer" className="w-15 h-10"  src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
 
@@ -275,6 +281,7 @@ export const CommovelLanding = () => {
                                 <div className="px-5 py-2">
                                     <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="bid lab" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FLogo%20BID%20Lab%20-%20Color%20(SPA).png?alt=media&token=e1c9671a-f1f1-4104-b663-502faa89c893"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
                                 </div>
@@ -290,6 +297,7 @@ export const CommovelLanding = () => {
                                 <a href="https://affogato.co" rel="noopener noreferrer" target="_blank" className="self-center">
 
                                     <img alt="affogato" className="w-15 h-10" src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                                        loading="lazy" decoding="async"
                                     />
                                 </a>
                             </div>

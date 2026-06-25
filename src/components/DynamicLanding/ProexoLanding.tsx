@@ -8,6 +8,7 @@ import { WebSite } from "../icons/WebSite";
 import { Facebook } from "../icons/Facebook";
 import { Instagram } from "../icons/Instagram";
 import { Youtube } from "../icons/Youtube";
+import { Link } from "react-router-dom";
 
 export const ProexoLanding = () => {
     const { t } = useTranslation();
@@ -15,10 +16,16 @@ export const ProexoLanding = () => {
     return (<>
         <div className="bg-white card rounded-lg -mr-6 -my-6">
             <div className="bg-white">
-                <div id="header" className="hero min-h-screen rounded-t-2xl"
-                    style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FPROEXO.jpg?alt=media&token=ec371948-d535-4994-aa54-7e6a7fb2dda3")` }}>
-                  <div className=" rounded-t-2xl"></div>
-                    <div className="hero-content text-center text-neutral-content">
+                <div id="header" className="hero min-h-screen rounded-t-2xl relative overflow-hidden">
+                    <img 
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Banners%2FPROEXO.jpg?alt=media&token=ec371948-d535-4994-aa54-7e6a7fb2dda3" 
+                        alt="Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                        fetchPriority="high"
+                        decoding="async"
+                    />
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl z-10"></div>
+                    <div className="hero-content text-center text-neutral-content z-20">
                         <div className=" ">                           
                         <div className="mt-8"></div>
                          <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white text-shadow: 0 0 10px blue; stroke-text">
@@ -33,11 +40,9 @@ export const ProexoLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-8 ">
-                                <button className="btn btn-lg bg-orange-400 hover:bg-primary text-white">
-                                    <a href="/farmers">
-                                        Ir a la Plataforma
-                                    </a>
-                                </button>
+                                <Link to="/farmers" className="btn btn-lg bg-orange-400 hover:bg-primary text-white flex items-center justify-center">
+                                    Ir a la Plataforma
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -249,22 +254,22 @@ export const ProexoLanding = () => {
                         <img
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F1.jpeg?alt=media&token=6dbdbc05-a684-4834-9c2e-fd5aaccefdd6"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F2.jpeg?alt=media&token=5366f295-e214-4466-b998-a15b98ac2a0e"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F3.jpeg?alt=media&token=f3eccac9-6178-41a5-af1a-a5244d254420"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                         <img
 
                             className="object-cover w-full h-56 rounded shadow-lg"
                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/Proexo%2F4.jpeg?alt=media&token=376da7da-4bbe-4d43-945e-d8d1574cc222"
-                            alt="" />
+                            alt="" loading="lazy" decoding="async" />
                     </div>
                 </div>
 
@@ -281,6 +286,7 @@ export const ProexoLanding = () => {
                                     <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="heifer" className="w-15 h-10"
                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
 
@@ -294,6 +300,7 @@ export const ProexoLanding = () => {
                                     <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="bid lab" className="w-15 h-10"
                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FLogo%20BID%20Lab%20-%20Color%20(SPA).png?alt=media&token=e1c9671a-f1f1-4104-b663-502faa89c893"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
                                 </div>
@@ -311,6 +318,7 @@ export const ProexoLanding = () => {
 
                                     <img alt="affogato" className="w-15 h-10"
                                         src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                                        loading="lazy" decoding="async"
                                     />
                                 </a>
                             </div>

@@ -6,6 +6,7 @@ import FarmerSelect from '../common/FarmerSelect';
 import { CooperativeImage, CooperativeList } from '../../utils/constants';
 import { createBatch } from '../../db/firebase';
 import { useNavigate } from 'react-router';
+import { getCoopByHost } from '../../utils/utils';
 
 export const CreateBatchesModule = () => {
   const [currentCoop, setCurrentCoop] = useState('');
@@ -158,18 +159,6 @@ export const CreateBatchesModule = () => {
     Farmer: ['0'],
   };
 
-  const getFirstAddressByCooperativeName = (name: string): string | null => {
-    const cooperative = CooperativeList.find((coop) => coop.name === name);
-    return cooperative && cooperative.addresses.length > 0
-      ? cooperative.addresses[0]
-      : null;
-  };
-
-  const getImageByCooperativeName = (name: string): string | null => {
-    const cooperative = CooperativeImage.find((coop) => coop.name === name);
-    return cooperative ? cooperative.image : null;
-  };
-
   const resetForm = () => {
     setFormData({
       Farmer: {},
@@ -243,26 +232,11 @@ export const CreateBatchesModule = () => {
 
   useEffect(() => {
     const load = async () => {
-      const location = window.location.host;
-      let currentCoop = '';
-      if (location.match('COMMOVEL')) {
-        currentCoop = 'COMMOVEL';
-      } else if (location.match('copracnil')) {
-        currentCoop = 'COPRACNIL';
-      } else if (location.match('comsa')) {
-        currentCoop = 'COMSA';
-      } else if (location.match('proexo')) {
-        currentCoop = 'PROEXO';
-      } else if (location.match('cafepsa')) {
-        currentCoop = 'CAFEPSA';
-      } else {
-        currentCoop = 'PROEXO';
-      }
-      setCurrentCoop(currentCoop);
-      const firstAddress = getFirstAddressByCooperativeName(currentCoop);
-      const image = getImageByCooperativeName(currentCoop);
-      setCoopImage(image);
-      setCoopAddress(firstAddress);
+      const coop = getCoopByHost(window.location.host) ?? CooperativeList[4];
+      setCurrentCoop(coop.name);
+      setCoopAddress(coop.addresses[0] ?? null);
+      const img = CooperativeImage.find((c) => c.name === coop.name);
+      setCoopImage(img?.image ?? null);
     };
     load();
 

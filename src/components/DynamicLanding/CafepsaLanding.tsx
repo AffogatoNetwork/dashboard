@@ -17,10 +17,16 @@ export const CafepsaLanding = () => {
     return (<>
         <div className="bg-white card rounded-lg -mr-6 -my-6">
             <div className="bg-white">
-                <div id="header" className="hero min-h-screen rounded-t-2xl"
-                    style={{ backgroundImage: `url("https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F1.jpg?alt=media&token=1e15d575-f2af-44a1-b853-08ba8bf2d185")` }}>
-                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl"></div>
-                    <div className="hero-content text-center text-neutral-content">
+                <div id="header" className="hero min-h-screen rounded-t-2xl relative overflow-hidden">
+                    <img 
+                        src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/CAFEPSA%2F1.jpg?alt=media&token=1e15d575-f2af-44a1-b853-08ba8bf2d185" 
+                        alt="Background" 
+                        className="absolute inset-0 w-full h-full object-cover"
+                        fetchPriority="high"
+                        decoding="async"
+                    />
+                    <div className="hero-overlay bg-opacity-30 bg-black rounded-t-2xl z-10"></div>
+                    <div className="hero-content text-center text-neutral-content z-20">
                         <div className="">
                             <h1 className=" mb-4 text-6xl font-black md:text-6xl xl:text-7xl text-white stroke-text"> Plataforma
                                 de Trazabilidad
@@ -33,12 +39,12 @@ export const CafepsaLanding = () => {
                                 Nuestro café trazado con la seguridad de la tecnología de blockchain
                             </p>
                             <div className="flex items-center justify-center mb-[87px]">
-                                <button 
-                                    className="btn btn-lg bg-orange-400 hover:bg-primary text-white"
-                                    onClick={() => navigate('/farmers-module')}
+                                <Link 
+                                    to="/farmers-module"
+                                    className="btn btn-lg bg-orange-400 hover:bg-primary text-white flex items-center justify-center"
                                 >
                                     Ir a la Plataforma
-                                </button>
+                                </Link>
                             </div>
                         </div>
                     </div>
@@ -54,7 +60,7 @@ export const CafepsaLanding = () => {
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FProductor.JPG?alt=media&token=431f093c-df0e-48e6-a874-b11c9d093b0e" />
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FProductor.JPG?alt=media&token=431f093c-df0e-48e6-a874-b11c9d093b0e" loading="lazy" decoding="async" />
                                             <p className="m-2 text-2xl font-bold text-center">
                                                 Perfil de Productor
                                             </p>
@@ -66,7 +72,7 @@ export const CafepsaLanding = () => {
                                 <Link to="/farms-module">
                                         <div className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FFinca.jpg?alt=media&token=5fb92056-5313-48fc-86a2-4772890de246" />
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FFinca.jpg?alt=media&token=5fb92056-5313-48fc-86a2-4772890de246" loading="lazy" decoding="async" />
                                             <p className="m-2 text-2xl font-bold text-center">
                                                 Módulo Fincas de Café
                                             </p>
@@ -82,7 +88,7 @@ export const CafepsaLanding = () => {
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2F%20Certificacion.JPG?alt=media&token=32fec183-fb46-4d60-8263-37252259dd2f" />
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2F%20Certificacion.JPG?alt=media&token=32fec183-fb46-4d60-8263-37252259dd2f" loading="lazy" decoding="async" />
                                             <p className="m-2 text-2xl font-bold text-center">
                                                 Sellos de Certificación
                                             </p>
@@ -96,7 +102,7 @@ export const CafepsaLanding = () => {
                                         <div
                                             className="relative bg-white overflow-hidden transition duration-200 transform rounded shadow-lg hover:-translate-y-2 hover:shadow-2xl">
                                             <img className="object-cover w-full h-56 md:h-64 xl:h-80"
-                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FLotes.jpg?alt=media&token=820176a5-4b98-46c5-b1df-1ceec74015b3" />
+                                                src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/cafepsa%2FLotes.jpg?alt=media&token=820176a5-4b98-46c5-b1df-1ceec74015b3" loading="lazy" decoding="async" />
                                             <p className="m-2 text-2xl font-bold text-center">
                                                 Beneficiados Lotes de Café
 
@@ -358,6 +364,7 @@ export const CafepsaLanding = () => {
                                     <a href="https://heifer.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="heifer" className="w-15 h-10"
                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FHEIFER.png?alt=media&token=69941e33-4321-4d62-8025-662b2fd99554"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
 
@@ -371,6 +378,7 @@ export const CafepsaLanding = () => {
                                     <a href="https://bidlab.org" rel="noopener noreferrer" target="_blank">
                                         <img alt="bid lab" className="w-15 h-10"
                                             src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/assets%2FLogo%20BID%20Lab%20-%20Color%20(SPA).png?alt=media&token=e1c9671a-f1f1-4104-b663-502faa89c893"
+                                            loading="lazy" decoding="async"
                                         />
                                     </a>
                                 </div>
@@ -388,6 +396,7 @@ export const CafepsaLanding = () => {
 
                                     <img alt="affogato" className="w-15 h-10"
                                         src="https://firebasestorage.googleapis.com/v0/b/affogato-fde9c.appspot.com/o/logos%2FAffogato.png?alt=media&token=de3b790e-d8fc-4662-b081-a4d7964a87b1"
+                                        loading="lazy" decoding="async"
                                     />
                                 </a>
                             </div>

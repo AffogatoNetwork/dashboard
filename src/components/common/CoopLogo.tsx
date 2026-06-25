@@ -6,29 +6,25 @@ import Commovel from "../../assets/commovel.png";
 import Copranil from "../../assets/copracnil.png";
 import Proexo from "../../assets/proexo.png";
 import Cafepsa from "../../assets/cafepsa.png";
+import { getCoopByHost } from "../../utils/utils";
 
 type props = {
   className: string;
 };
 
-const CoopLogo = ({ className }: props) => {
-  const location = window.location.host;
-  if (location.match("comsa") !== null) {
-    return <Image className={className} src={Comsa} />;
-  }
-  if (location.match("commovel") !== null) {
-    return <Image className={className} src={Commovel} />;
-  }
-  if (location.match("copracnil") !== null) {
-    return <Image className={className} src={Copranil} />;
-  }
-  if (location.match("proexo") !== null) {
-    return <Image className={className} src={Proexo} />;
-  }
-  if (location.match("cafepsa") !== null) {
-    return <Image className={className} src={Cafepsa} />;
-  }
+const logoMap: Record<string, string> = {
+  COMSA: Comsa,
+  COMMOVEL: Commovel,
+  COPRACNIL: Copranil,
+  PROEXO: Proexo,
+  CAFEPSA: Cafepsa,
+};
 
+const CoopLogo = ({ className }: props) => {
+  const coop = getCoopByHost(window.location.host);
+  if (coop && logoMap[coop.name]) {
+    return <Image className={className} src={logoMap[coop.name]} />;
+  }
   return <Image className="logo-affogato" src={Logo} />;
 };
 

@@ -22,6 +22,7 @@ import {
   RegionList,
   RegionType,
 } from '../utils/constants';
+import { getCoopByHost } from '../utils/utils';
 
 const Signup = () => {
   const { t } = useTranslation();
@@ -90,22 +91,14 @@ const Signup = () => {
   };
 
   const setCooperative = () => {
-    const location = window.location.host;
-    if (location.match('localhost') !== null) {
-      setCurrentCoop(CooperativeList[1]);
+    const host = window.location.host;
+    if (host.includes('localhost')) {
+      setCurrentCoop(CooperativeList[1]); // COMMOVEL for local dev
+      return;
     }
-    if (location.match('copracnil') !== null) {
-      setCurrentCoop(CooperativeList[2]);
-    }
-    if (location.match('comsa') !== null) {
-      setCurrentCoop(CooperativeList[3]);
-    }
-    if (location.match('proexo') !== null) {
-      setCurrentCoop(CooperativeList[4]);
-    }
-    if (location.match('cafepsa') !== null) {
-      setCurrentCoop(CooperativeList[5]);
-    }
+    const matched = getCoopByHost(host);
+    if (matched) setCurrentCoop(matched);
+    // null → leave at CooperativeList[0] (placeholder); form validation handles it
   };
 
   useEffect(() => {

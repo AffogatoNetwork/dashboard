@@ -3,6 +3,7 @@ import FormInput from '../common/FormInput';
 import { useTranslation } from "react-i18next";
 import { getVarieties, saveVarietyData } from '../../db/firebase';
 import Loading from "../Loading";
+import { getCoopByHost } from '../../utils/utils';
 
 export const CreateVarietyModule = () => {
     const [variety, setVariety] = useState<any>([]);
@@ -22,25 +23,7 @@ export const CreateVarietyModule = () => {
     useEffect(() => {
 
         const load = async () => {
-            const location = window.location.host;
-            let currentCoop = "";
-            if (location.match("COMMOVEL") !== null) {
-                currentCoop = "COMMOVEL"
-            }
-            if (location.match("copracnil") !== null) {
-                currentCoop = "COPRACNIL"
-            }
-            if (location.match("comsa") !== null) {
-                currentCoop = "COMSA"
-            }
-            if (location.match("proexo") !== null) {
-                currentCoop = "PROEXO"
-            }
-            if (location.match("cafepsa") !== null) {
-                currentCoop = "CAFEPSA"
-            } else {
-                currentCoop = "PROEXO"
-            }
+            const currentCoop = getCoopByHost(window.location.host)?.name ?? 'PROEXO';
             setCurrentCoop(currentCoop);
             getVarieties().then((data: any) => {
                 for (let i = 0; i < data.length; i++) {
