@@ -1,3 +1,4 @@
+import * as Sentry from '@sentry/react';
 import { initializeApp } from 'firebase/app';
 import {
   collection,
@@ -38,6 +39,17 @@ const app = initializeApp(firebaseConfig);
 const db = getFirestore(app);
 const storage = getStorage();
 
+const logFirebaseError = (operationName: string, error: any, extraTags?: Record<string, any>) => {
+  console.error(`[Firebase Error] ${operationName} failed:`, error);
+  Sentry.captureException(error, {
+    level: 'error',
+    tags: {
+      firebase_operation: operationName,
+      ...extraTags,
+    },
+  });
+};
+
 export const saveFarmer = async (farmer: FarmerType, image: any) => {
   try {
     if (image !== null) {
@@ -46,7 +58,9 @@ export const saveFarmer = async (farmer: FarmerType, image: any) => {
     }
     const farmerDoc = doc(db, 'farmers', farmer.address);
     await setDoc(farmerDoc, farmer);
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('saveFarmer', error, { address: farmer?.address });
+  }
 };
 
 export const saveVarietyData = async (varietyData: any, id: string) => {
@@ -58,6 +72,7 @@ export const saveVarietyData = async (varietyData: any, id: string) => {
       active: true,
     });
   } catch (error) {
+    logFirebaseError('saveVarietyData', error, { variety: varietyData });
   }
 };
 
@@ -81,6 +96,7 @@ export const saveCertificationData = async (
       ...(imageUrl ? { imageUrl } : {}),
     });
   } catch (error) {
+    logFirebaseError('saveCertificationData', error, { certification: certificationData });
   }
 };
 
@@ -146,7 +162,9 @@ export const updateFarmerImage = async (address: string, image: any) => {
       uploadBytes(storageRef, image).then((snapshot) => {
       });
     }
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('updateFarmerImage', error, { address });
+  }
 };
 
 export const updateFarms = async (Farmdata: any) => {
@@ -156,7 +174,9 @@ export const updateFarms = async (Farmdata: any) => {
     );
     const farmDoc = doc(db, 'farms', docId);
     await setDoc(farmDoc, Farmdata);
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('updateFarms', error, { farmerAddress: Farmdata?.farmerAddress });
+  }
 };
 
 export const getAllFarmers = async (company: string) => {
@@ -188,7 +208,9 @@ export const saveCompany = async (company: CompanyType) => {
   try {
     const companyDoc = doc(db, 'companies', company.address);
     await setDoc(companyDoc, company);
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('saveCompany', error, { companyAddress: company?.address });
+  }
 };
 
 export const getCompany = async (address: string) => {
@@ -291,6 +313,7 @@ export const editFarm = async (data: any) => {
 
     await updateDoc(farmDoc, farmData);
   } catch (error) {
+    logFirebaseError('editFarm', error);
   }
 };
 
@@ -306,6 +329,7 @@ export const updateFarmByAddress = async (farmerAddress: string, updatedData: Re
       await updateDoc(docRef, updatedData);
     }
   } catch (error) {
+    logFirebaseError('updateFarmByAddress', error, { farmerAddress });
   }
 };
 
@@ -334,6 +358,7 @@ export const editFarmers = async (data: any) => {
 
     await updateDoc(farmDoc, farmData);
   } catch (error) {
+    logFirebaseError('editFarmers', error, { address: data?.address });
   }
 };
 
@@ -342,6 +367,7 @@ export const updateFarmerPnud = async (farmerAddress: string, pnudValue: boolean
     const farmDoc = doc(db, 'farmers', farmerAddress);
     await updateDoc(farmDoc, { pnud: pnudValue, updateAt: Date.now() });
   } catch (error) {
+    logFirebaseError('updateFarmerPnud', error, { farmerAddress });
   }
 };
 
@@ -357,6 +383,7 @@ export const updateFarmerPersonalInfo = async (farmerAddress: string, data: { ge
       updateAt: Date.now(),
     });
   } catch (error) {
+    logFirebaseError('updateFarmerPersonalInfo', error, { farmerAddress });
   }
 };
 
@@ -380,7 +407,9 @@ export const editCertifications = async (data: any) => {
     };
     await updateDoc(farmDoc, farmData);
     window.location.reload();
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('editCertifications', error);
+  }
 };
 
 export const editMultipleCertifications = async (farmers: any[], certToToggle: string, value: number) => {
@@ -405,6 +434,7 @@ export const editMultipleCertifications = async (farmers: any[], certToToggle: s
     await Promise.all(promises);
     window.location.reload();
   } catch (error) {
+    logFirebaseError('editMultipleCertifications', error);
   }
 };
 
@@ -485,6 +515,7 @@ export const editBatch = async (formData: any) => {
     // Update the batch data in Firestore
     await updateDoc(batchDoc, updatedData);
   } catch (error) {
+    logFirebaseError('editBatch', error, { ipfsHash: formData?.ipfsHash });
   }
 };
 
@@ -566,7 +597,9 @@ export const saveFarms = async (farms: Array<FarmType>) => {
         currentLast = farms.length;
       }
     }
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('saveFarms', error);
+  }
 };
 
 export const getFarms = async (company: string) => {
@@ -608,7 +641,9 @@ export const saveBatch = async (batch: any) => {
       ethnicGroup: batch.ethnicGroup,
     };
     await setDoc(farmDoc, farmData);
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('saveBatch', error, { farmerAddress: batch?.farmerAddress });
+  }
 };
 
 export const createBatch = async (formData: any) => {
@@ -702,6 +737,7 @@ export const createBatch = async (formData: any) => {
 
     return true;
   } catch (error) {
+    logFirebaseError('createBatch', error, { name: formData?.Name });
   }
 };
 
@@ -722,7 +758,9 @@ export const saveFarmerData = async (farmerData: any, id: string) => {
       village2: farmerData.village2,
     };
     await setDoc(farmDoc, farmData);
-  } catch (error) { }
+  } catch (error) {
+    logFirebaseError('saveFarmerData', error, { batchId: id });
+  }
 };
 
 export const authData = () => {
@@ -809,6 +847,7 @@ export const saveBannerImage = async (company: string, image: File) => {
     await uploadBytes(storageRef, image);
     return await getDownloadURL(storageRef);
   } catch (error) {
+    logFirebaseError('saveBannerImage', error, { company });
     return null;
   }
 };
@@ -818,6 +857,7 @@ export const getBannerUrl = async (company: string) => {
     const storageRef = ref(storage, `banners/${company}`);
     return await getDownloadURL(storageRef);
   } catch (error) {
+    logFirebaseError('getBannerUrl', error, { company });
     return null;
   }
 };
@@ -830,7 +870,7 @@ export const checkFirebaseConnection = async () => {
     await getDoc(docRef);
     return true;
   } catch (error) {
-    console.warn('Firebase connection check failed:', error);
+    logFirebaseError('checkFirebaseConnection', error);
     return false;
   }
 };

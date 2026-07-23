@@ -5,6 +5,7 @@ import Loading from '../Loading';
 import NotFound from '../common/NotFound';
 import { getFarmer, getFarmerFarms, getImageUrl } from '../../db/firebase';
 import NewMap from '../common/NewMap';
+import { setTraceabilityId } from '../../config/sentry';
 
 export const Profile = () => {
   const { t } = useTranslation();
@@ -18,6 +19,7 @@ export const Profile = () => {
   useEffect(() => {
     const load = async () => {
       if (!farmerId) return;
+      setTraceabilityId(farmerId, { type: 'farmer', farmerId });
 
       setLoading(true);
       try {

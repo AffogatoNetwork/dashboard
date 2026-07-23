@@ -10,6 +10,8 @@ import {
 } from '../../db/firebase';
 import NotFound from '../common/NotFound';
 
+import { setTraceabilityId } from '../../config/sentry';
+
 const CoffeeBatchId = () => {
   const { t } = useTranslation();
   const { batchId } = useParams();
@@ -19,6 +21,7 @@ const CoffeeBatchId = () => {
   useEffect(() => {
     const load = () => {
       if (batchId) {
+        setTraceabilityId(batchId, { type: 'batch', batchId });
         getBatch(batchId).then((result) => {
           if (result?.image.includes('https://firebasestorage') === true) {
           } else {

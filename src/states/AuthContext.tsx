@@ -1,3 +1,4 @@
+import * as Sentry from "@sentry/react";
 import React, { useContext, useEffect, useMemo, useReducer, useState } from "react";
 import { Magic } from "magic-sdk";
 import { ethers } from "ethers";
@@ -52,6 +53,9 @@ export default function AuthProvider({ children }: props) {
             isSigningIn: true,
           };
         case "SIGN_IN":
+          if (action.userAddress) {
+            Sentry.setUser({ id: action.userAddress });
+          }
           return {
             ...prevState,
             isLoading: false,
@@ -61,6 +65,10 @@ export default function AuthProvider({ children }: props) {
             userAddress: action.userAddress,
           };
         case "SIGN_IN_ERROR":
+          Sentry.captureMessage("User Sign-In Error: Authentication failed or unauthorized minter", {
+            level: "warning",
+            tags: { error_type: "SIGN_IN_ERROR" },
+          });
           return {
             ...prevState,
             isLoading: false,
@@ -71,6 +79,7 @@ export default function AuthProvider({ children }: props) {
             userAddress: "",
           };
         case "SIGN_OUT":
+          Sentry.setUser(null);
           return {
             ...prevState,
             accountCreated: false,
@@ -94,6 +103,10 @@ export default function AuthProvider({ children }: props) {
             accountCreatedError: false,
           };
         case "CREATING_ACCOUNT_ERROR":
+          Sentry.captureMessage("Account Creation Error: Failed to complete user signup", {
+            level: "error",
+            tags: { error_type: "CREATING_ACCOUNT_ERROR" },
+          });
           return {
             ...prevState,
             creatingAccount: false,
@@ -218,37 +231,45 @@ export default function AuthProvider({ children }: props) {
     () => ({
       signIn: async (data: ContextDataType) => {
         dispatch({ type: "SIGNING_IN" });
-        if (data.emailLogin) {
-          await magicSDK.auth.loginWithMagicLink({
-            email: data.credential,
-            showUI: true,
-          });
-        } else {
-          await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
-        }
-        if (await magicSDK.user.isLoggedIn()) {
-          verifyAccount();
-        } else {
+        try {
+          if (data.emailLogin) {
+            await magicSDK.auth.loginWithMagicLink({
+              email: data.credential,
+              showUI: true,
+            });
+          } else {
+            await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
+          }
+          if (await magicSDK.user.isLoggedIn()) {
+            verifyAccount();
+          } else {
+            dispatch({ type: "SIGN_IN_ERROR" });
+          }
+        } catch (error) {
+          Sentry.captureException(error, { tags: { auth_action: "signIn" } });
           dispatch({ type: "SIGN_IN_ERROR" });
         }
       },
       createAccount: async (data: ContextDataType) => {
         dispatch({ type: "CREATING_ACCOUNT" });
-
-        if (data.emailLogin) {
-          await magicSDK.auth.loginWithMagicLink({
-            email: data.credential,
-            showUI: true,
-          });
-        } else {
-          await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
-        }
-        if (await magicSDK.user.isLoggedIn()) {
-          afterSignupAction(data);
-        } else {
+        try {
+          if (data.emailLogin) {
+            await magicSDK.auth.loginWithMagicLink({
+              email: data.credential,
+              showUI: true,
+            });
+          } else {
+            await magicSDK.auth.loginWithSMS({ phoneNumber: data.credential });
+          }
+          if (await magicSDK.user.isLoggedIn()) {
+            afterSignupAction(data);
+          } else {
+            dispatch({ type: "CREATING_ACCOUNT_ERROR" });
+          }
+        } catch (error) {
+          Sentry.captureException(error, { tags: { auth_action: "createAccount" } });
           dispatch({ type: "CREATING_ACCOUNT_ERROR" });
         }
-
       },
       signOut: async () => {
         await magicSDK.user.logout();

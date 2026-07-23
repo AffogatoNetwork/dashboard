@@ -1,3 +1,4 @@
+import './config/sentry';
 import React from "react";
 
 import App from './App';
