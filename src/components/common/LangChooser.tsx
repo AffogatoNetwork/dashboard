@@ -39,25 +39,29 @@ const LangChooser = () => {
   const LangBar = () => (
     <div className="fixed bottom-4 right-4 z-50 flex items-center bg-white/80 backdrop-blur-md shadow-xl rounded-full p-1 border border-white/40 gap-1">
       <button 
-        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${currentLang === 'es' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`} 
+        aria-label="Change language to Español"
+        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${currentLang === 'es' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`}
         onClick={() => changeLanguage("es")}
       >
         <ES title="Español" className="w-6 rounded-sm shadow-sm" />
       </button>
       <button 
-        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${currentLang === 'en' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`} 
+        aria-label="Change language to English"
+        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${currentLang === 'en' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`}
         onClick={() => changeLanguage("en")}
       >
         <US title="English" className="w-6 rounded-sm shadow-sm" />
       </button>
       <button 
-        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${currentLang === 'de' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`} 
+        aria-label="Change language to Deutsch"
+        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${currentLang === 'de' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`}
         onClick={() => changeLanguage("de")}
       >
         <DE title="Deutsch" className="w-6 rounded-sm shadow-sm" />
       </button>
       <button 
-        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors ${currentLang === 'fr' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`} 
+        aria-label="Change language to Français"
+        className={`w-10 h-10 flex items-center justify-center rounded-full transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${currentLang === 'fr' ? 'bg-amber-100' : 'hover:bg-gray-100/50'}`}
         onClick={() => changeLanguage("fr")}
       >
         <FR title="Français" className="w-6 rounded-sm shadow-sm" />
