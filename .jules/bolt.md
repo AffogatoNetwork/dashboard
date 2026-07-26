@@ -1,0 +1,3 @@
+## 2024-05-17 - [ApolloClient Initialization in React]
+**Learning:** Initializing `ApolloClient` inside a React component (e.g., `App`) causes it to be re-initialized on every render, which destroys the GraphQL cache and triggers unnecessary re-fetches, severely impacting application performance and efficiency.
+**Action:** Always instantiate `ApolloClient` globally (outside of the React component tree) to ensure the cache is preserved across renders and GraphQL caching works as intended.

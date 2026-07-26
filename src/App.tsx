@@ -15,17 +15,16 @@ import '../src/styles/app.scss';
 
 import DynamicHeader from './components/DynamicHeader/DynamicHeader';
 
-const clientOracle = () =>
-  new ApolloClient({
-    link: new HttpLink({
-      uri: 'https://api.thegraph.com/subgraphs/name/jdestephen/affogato-sg',
-    }),
-    cache: new InMemoryCache(),
-  });
+// Initialize ApolloClient outside the component to prevent re-initialization and cache destruction on every render.
+const apolloClient = new ApolloClient({
+  link: new HttpLink({
+    uri: 'https://api.thegraph.com/subgraphs/name/jdestephen/affogato-sg',
+  }),
+  cache: new InMemoryCache(),
+});
 
 const App = () => {
   const contracts = useContracts();
-  const apolloClient = clientOracle();
 
   return (
     <>
