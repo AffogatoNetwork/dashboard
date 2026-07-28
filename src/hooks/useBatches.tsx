@@ -19,7 +19,6 @@ export const useBatches = () => {
   const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
 
   const load = async () => {
-    // const batchList = new Array<FarmerType>();
     const batchList: any = [];
     const user = localStorage.getItem('address');
     if (user !== '') {
