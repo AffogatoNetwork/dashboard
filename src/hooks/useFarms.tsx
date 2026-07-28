@@ -26,14 +26,12 @@ export const useFarms = () => {
 
 
     const [loading, setLoading] = useState(true);
-    // const [farms, setFarms] = useState<Array<FarmerType>>([]);
     const [farms, setFarms] = useState<any>([]);
     const [farmsCount, setFarmsCount] = useState(0);
     const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
     const [BlockchainUrl, setBlockchainUrl] = useState<string>('');
 
     const load = async () => {
-        // const farmerList = new Array<FarmerType>();
         const farmerList: any = [];
         const user = localStorage.getItem("address")
         if (user !== "") {
