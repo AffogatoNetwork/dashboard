@@ -1,0 +1,3 @@
+## 2026-07-28 - Apollo Client Re-initialization Destroys Cache
+**Learning:** Initializing `ApolloClient` inside the React component tree (e.g., inside the `App` component body as `const client = clientOracle()`) destroys the `InMemoryCache` on every re-render. This completely negates the performance benefits of caching GraphQL queries and causes constant, unnecessary network re-fetches across the application.
+**Action:** Always instantiate `ApolloClient` outside of React components at the module scope so that the client and its cache persist across renders.
