@@ -20,12 +20,7 @@ export const FarmsModule = () => {
 
   const { t, i18n } = useTranslation();
   const mrtLocale = ({ es: MRT_Localization_ES, en: MRT_Localization_EN, de: MRT_Localization_DE, fr: MRT_Localization_FR } as Record<string, any>)[i18n.language] ?? MRT_Localization_ES;
-  /*   const [loading, setLoading] = useState(true);
-      const [farmers, setFarmers] = useState<Array<FarmerType>>([]);
-      const [farmersCount, setFarmersCount] = useState(0); */
-  // const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
   const [Data, setData] = useState<any>([]);
-  // const [BlockchainUrl, setBlockchainUrl] = useState<string>('');
 
   const [currentLat, setCurrentLat] = useState('0');
   const [currentLng, setCurrentLng] = useState('0');
@@ -62,10 +57,6 @@ export const FarmsModule = () => {
       window.open(urlStr, '_blank', 'noopener,noreferrer');
     });
   };
-
-  // useEffect(() => {
-
-  // }, []);
 
   const [tableData, setTableData] = useState<any[]>(() => farms);
 
