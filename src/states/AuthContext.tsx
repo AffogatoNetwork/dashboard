@@ -32,15 +32,17 @@ const AuthContext = React.createContext<AuthType>({
   authState: null,
 });
 
+// Move Magic and emailjs instantiation outside of component to prevent re-instantiation on every render
+const magicSDK = new Magic(process.env.REACT_APP_MAGIC_API_KEY || "", {
+  network: {
+    rpcUrl: "https://rpc.gnosischain.com/",
+    chainId: 10,
+  },
+});
+emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "");
+
 export default function AuthProvider({ children }: props) {
   const contracts = useContracts();
-  const magicSDK = new Magic(process.env.REACT_APP_MAGIC_API_KEY || "", {
-    network: {
-      rpcUrl: "https://rpc.gnosischain.com/",
-      chainId: 10,
-    },
-  });
-  emailjs.init(process.env.REACT_APP_EMAILJS_PUBLIC_KEY || "");
 
   const [firebaseData, setFirebaseData] = useState<any>([]);
 

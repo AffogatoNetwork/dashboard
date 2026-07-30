@@ -189,10 +189,10 @@ export default function Home() {
     <div className={`min-h-screen bg-base-100 transition-all duration-300 relative border-r border-gray-100 ${isExpanded ? 'w-64' : 'w-20'}`}>
       <button 
         onClick={() => setIsExpanded(!isExpanded)} 
-        className="absolute -right-3 top-6 bg-white border border-gray-200 rounded-full p-1 text-gray-500 hover:text-amber-700 hover:shadow-md transition-all z-50 hidden sm:block"
-        aria-label={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
+        className="absolute -right-3 top-6 bg-white border border-gray-200 rounded-full p-1 text-gray-500 hover:text-amber-700 hover:shadow-md transition-all z-50 hidden sm:block focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500"
+        aria-label={isExpanded ? t('collapse-sidebar') || 'Collapse sidebar' : t('expand-sidebar') || 'Expand sidebar'}
         aria-expanded={isExpanded}
-        title={isExpanded ? "Collapse sidebar" : "Expand sidebar"}
+        title={isExpanded ? 'Collapse sidebar' : 'Expand sidebar'}
       >
         {isExpanded ? <AiOutlineMenuFold size={20} /> : <AiOutlineMenuUnfold size={20} />}
       </button>

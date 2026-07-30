@@ -1,0 +1,3 @@
+## 2024-10-09 - Missing Accessible Labels and Keyboard Focus on Icon-Only Buttons
+**Learning:** Found a recurring pattern in the codebase where icon-only buttons (like the sidebar collapse button or language switchers) lack both `aria-label`s for screen readers and visible focus states for keyboard navigation (`focus-visible`). This indicates a potential accessibility gap in the design system components used across the app, especially for interactive elements without text.
+**Action:** When reviewing or updating UI components, explicitly check for and add `aria-label` (and `aria-expanded` for toggles) along with `focus-visible:ring-2` to ensure they are accessible to both screen readers and keyboard users.

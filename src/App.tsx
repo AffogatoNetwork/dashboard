@@ -15,6 +15,9 @@ import '../src/styles/app.scss';
 
 import DynamicHeader from './components/DynamicHeader/DynamicHeader';
 
+// ⚡ Bolt Performance Optimization:
+// Initialize ApolloClient outside the component tree to prevent re-initialization
+// on every render, which destroys the InMemoryCache and causes unnecessary re-fetches.
 const apolloClient = new ApolloClient({
   link: new HttpLink({
     uri: 'https://api.thegraph.com/subgraphs/name/jdestephen/affogato-sg',

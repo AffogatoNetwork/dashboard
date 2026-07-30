@@ -66,7 +66,12 @@ const Login = () => {
         // This gives you a Google Access Token. You can use it to access the Google API.
         const credential = GoogleAuthProvider.credentialFromResult(result);
         const user = result.user;
-        localStorage.setItem('user', JSON.stringify(user));
+        const safeUser = {
+          email: user.email,
+          displayName: user.displayName,
+          photoURL: user.photoURL,
+        };
+        localStorage.setItem('user', JSON.stringify(safeUser));
         localStorage.setItem('email', JSON.stringify(user.email));
         navigate('/farmers-module');
       })

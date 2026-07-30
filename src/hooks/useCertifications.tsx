@@ -9,7 +9,6 @@ export const useCertifications = () => {
   const [ownerAddress, setOwnerAddress] = useState<string | null>(null);
 
   const load = async () => {
-    // const certificationList = new Array<FarmerType>();
     const certificationList: any = [];
     const user = localStorage.getItem('address');
     if (user !== '') {
