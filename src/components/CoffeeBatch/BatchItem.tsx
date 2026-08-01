@@ -9,7 +9,9 @@ type props = {
     showQrModal: (url: string) => void;
 };
 
-const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
+// ⚡ Bolt: wrap with React.memo to prevent unnecessary re-renders when list data or pagination updates,
+// but this specific item hasn't changed.
+const BatchItem = React.memo(({index, coffeeBatch, pagination, showQrModal}: props) => {
     const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
     const batchUrl = window.location.origin.concat("/batch/").concat(coffeeBatch.ipfsHash);
 
@@ -70,6 +72,6 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
             </td>
         </tr>
     );
-};
+});
 
 export default BatchItem;
