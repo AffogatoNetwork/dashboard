@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import QRCode from "react-qr-code";
 import {CoffeeBatchType, PaginationType} from "../common/types";
 
@@ -72,4 +72,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     );
 };
 
-export default BatchItem;
+// ⚡ Bolt Performance Optimization:
+// Wrap BatchItem with React.memo to prevent unnecessary re-renders of all list items
+// when the parent component updates (e.g., when search inputs or filters change).
+export default memo(BatchItem);
