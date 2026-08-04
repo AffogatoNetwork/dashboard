@@ -12,7 +12,6 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
   currentCoop,
   onSelect,
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCertifications, setSelectedCertifications] = useState<
     string[]
   >([]);
@@ -32,10 +31,6 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
     fetchCertifications();
   }, [currentCoop]);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
   const handleSelect = (event: React.ChangeEvent<{}>, newValue: string[]) => {
     setSelectedCertifications(newValue);
     onSelect(newValue); // Pass selected certifications to the parent component
@@ -43,16 +38,21 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
 
   const handleRemove = (certification: string) => {
     const updatedSelected = selectedCertifications.filter(
-      (item) => item !== certification
+      (item) => item !== certification,
     );
     setSelectedCertifications(updatedSelected);
     onSelect(updatedSelected); // Update selected certifications array
   };
 
+  // ⚡ Bolt Performance Optimization:
+  // Removed manual searchTerm state and array filtering.
+  // Using filterSelectedOptions prevents unnecessary React re-renders on keystrokes
+  // while utilizing MUI Autocomplete's efficient built-in filtering.
   return (
     <div>
       <Autocomplete
         multiple
+        filterSelectedOptions
         options={certificationList}
         value={selectedCertifications} // Set selected certifications
         onChange={handleSelect}
@@ -61,7 +61,6 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
             {...params}
             label="Select Certifications"
             variant="outlined"
-            onChange={handleSearchChange}
           />
         )}
         getOptionLabel={(option) => option} // Display the option as the string itself

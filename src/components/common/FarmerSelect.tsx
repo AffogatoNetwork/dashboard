@@ -11,7 +11,6 @@ const FarmerSelect: React.FC<FarmerSelectProps> = ({
   currentCoop,
   onSelect,
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedFarmers, setSelectedFarmers] = useState<
     { address: string; fullname: string }[]
   >([]);
@@ -36,10 +35,6 @@ const FarmerSelect: React.FC<FarmerSelectProps> = ({
     fetchFarmers();
   }, [currentCoop]);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
   const handleSelect = (event: React.ChangeEvent<{}>, newValue: any[]) => {
     const newSelectedFarmers = newValue.map((farmer) => farmer.address);
     const updatedFarmers = newValue.map((farmer) => ({
@@ -53,23 +48,22 @@ const FarmerSelect: React.FC<FarmerSelectProps> = ({
 
   const handleRemove = (fullname: string) => {
     const updatedSelected = selectedFarmers.filter(
-      (farmer) => farmer.fullname !== fullname
+      (farmer) => farmer.fullname !== fullname,
     );
     setSelectedFarmers(updatedSelected);
     onSelect(updatedSelected.map((farmer) => farmer.address)); // Update selected addresses array
   };
 
-  const filteredFarmers = farmerList.filter(
-    (farmer) =>
-      farmer.fullname.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !selectedFarmers.some((selected) => selected.address === farmer.address) // Remove already selected
-  );
-
+  // ⚡ Bolt Performance Optimization:
+  // Removed manual searchTerm state and array filtering.
+  // Using filterSelectedOptions prevents unnecessary React re-renders on keystrokes
+  // while utilizing MUI Autocomplete's efficient built-in filtering.
   return (
     <div>
       <Autocomplete
         multiple
-        options={filteredFarmers}
+        filterSelectedOptions
+        options={farmerList}
         getOptionLabel={(option) => option.fullname}
         value={selectedFarmers} // Set selected farmers
         onChange={(event, newValue) => handleSelect(event, newValue)}
@@ -81,7 +75,6 @@ const FarmerSelect: React.FC<FarmerSelectProps> = ({
             {...params}
             label="Selecionar Productores"
             variant="outlined"
-            onChange={handleSearchChange}
           />
         )}
       />

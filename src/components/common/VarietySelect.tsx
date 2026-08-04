@@ -7,7 +7,6 @@ interface VarietySelectProps {
 }
 
 const VarietySelect: React.FC<VarietySelectProps> = ({ onSelect }) => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedVarieties, setSelectedVarieties] = useState<
     { id: string; name: string }[]
   >([]);
@@ -28,16 +27,11 @@ const VarietySelect: React.FC<VarietySelectProps> = ({ onSelect }) => {
         }
 
         setVarietyList(varieties);
-      } catch (error) {
-      }
+      } catch (error) {}
     };
 
     fetchVarieties();
   }, []);
-
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
 
   const handleSelect = (event: React.ChangeEvent<{}>, newValue: any[]) => {
     const newSelectedVarieties = newValue.map((variety) => variety.id);
@@ -52,23 +46,22 @@ const VarietySelect: React.FC<VarietySelectProps> = ({ onSelect }) => {
 
   const handleRemove = (name: string) => {
     const updatedSelected = selectedVarieties.filter(
-      (variety) => variety.name !== name
+      (variety) => variety.name !== name,
     );
     setSelectedVarieties(updatedSelected);
     onSelect(updatedSelected.map((variety) => variety.id)); // Update selected ids array
   };
 
-  const filteredVarieties = varietyList.filter(
-    (variety) =>
-      variety.name.toLowerCase().includes(searchTerm.toLowerCase()) &&
-      !selectedVarieties.some((selected) => selected.id === variety.id) // Remove already selected
-  );
-
+  // ⚡ Bolt Performance Optimization:
+  // Removed manual searchTerm state and array filtering.
+  // Using filterSelectedOptions prevents unnecessary React re-renders on keystrokes
+  // while utilizing MUI Autocomplete's efficient built-in filtering.
   return (
     <div>
       <Autocomplete
         multiple
-        options={filteredVarieties}
+        filterSelectedOptions
+        options={varietyList}
         getOptionLabel={(option) => option.name}
         value={selectedVarieties} // Set selected varieties
         onChange={(event, newValue) => handleSelect(event, newValue)}
@@ -78,7 +71,6 @@ const VarietySelect: React.FC<VarietySelectProps> = ({ onSelect }) => {
             {...params}
             label="Selecionar Variedades"
             variant="outlined"
-            onChange={handleSearchChange}
           />
         )}
       />
