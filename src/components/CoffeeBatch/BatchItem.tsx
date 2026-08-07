@@ -1,4 +1,4 @@
-import React from "react";
+import React, { memo } from "react";
 import QRCode from "react-qr-code";
 import {CoffeeBatchType, PaginationType} from "../common/types";
 
@@ -9,8 +9,12 @@ type props = {
     showQrModal: (url: string) => void;
 };
 
-const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
+// ⚡ Bolt: Use React.memo to prevent unnecessary re-renders of list items.
+// We lazily render the heavy <QRCode> component only when the row is visible,
+// but keep the row in the DOM so HTML-to-Excel export tools can still read the text data.
+const BatchItem = memo(({index, coffeeBatch, pagination, showQrModal}: props) => {
     const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
+    const isVisible = pagination.current === itemPage;
     const batchUrl = window.location.origin.concat("/batch/").concat(coffeeBatch.ipfsHash);
 
     const openInNewTab = (url: string | URL | undefined) => {
@@ -20,7 +24,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     return (
         <tr
             key={coffeeBatch.id}
-            className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}
+            className={`${isVisible ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}
         >
             <td className="p-3 text-base font-light">
                 <div className="qrcode">
@@ -29,7 +33,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
                                showQrModal(batchUrl);
                            }}
                     >
-                        <QRCode value={batchUrl} size={90} />
+                        {isVisible ? <QRCode value={batchUrl} size={90} /> : <div style={{ width: 90, height: 90 }} />}
                     </label>
                 </div>
             </td>
@@ -70,6 +74,6 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
             </td>
         </tr>
     );
-};
+});
 
 export default BatchItem;
