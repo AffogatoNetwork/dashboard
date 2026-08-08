@@ -11,6 +11,7 @@ type props = {
 
 const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     const itemPage = Math.ceil((index + 1) / pagination.itemsPerPage);
+    const isVisible = pagination.current === itemPage;
     const batchUrl = window.location.origin.concat("/batch/").concat(coffeeBatch.ipfsHash);
 
     const openInNewTab = (url: string | URL | undefined) => {
@@ -20,7 +21,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     return (
         <tr
             key={coffeeBatch.id}
-            className={`${pagination.current === itemPage ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}
+            className={`${isVisible ? "show" : "hide"} flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0 border-grey-light border-2`}
         >
             <td className="p-3 text-base font-light">
                 <div className="qrcode">
@@ -29,7 +30,7 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
                                showQrModal(batchUrl);
                            }}
                     >
-                        <QRCode value={batchUrl} size={90} />
+                        {isVisible && <QRCode value={batchUrl} size={90} />}
                     </label>
                 </div>
             </td>
@@ -72,4 +73,22 @@ const BatchItem = ({index, coffeeBatch, pagination, showQrModal}: props) => {
     );
 };
 
-export default BatchItem;
+// ⚡ Bolt Performance Optimization:
+// Use React.memo with a custom comparison to prevent re-rendering hidden rows.
+// By conditionally rendering the heavy <QRCode> only when visible, we drastically
+// improve rendering performance for large lists while keeping the hidden DOM
+// rows present for the ReactHTMLTableToExcel export tool.
+export default React.memo(BatchItem, (prevProps, nextProps) => {
+    if (prevProps.coffeeBatch !== nextProps.coffeeBatch) return false;
+    if (prevProps.index !== nextProps.index) return false;
+    if (prevProps.showQrModal !== nextProps.showQrModal) return false;
+
+    const prevItemPage = Math.ceil((prevProps.index + 1) / prevProps.pagination.itemsPerPage);
+    const prevIsVisible = prevProps.pagination.current === prevItemPage;
+
+    const nextItemPage = Math.ceil((nextProps.index + 1) / nextProps.pagination.itemsPerPage);
+    const nextIsVisible = nextProps.pagination.current === nextItemPage;
+
+    // Only re-render if the item's visibility status has changed
+    return prevIsVisible === nextIsVisible;
+});
