@@ -279,8 +279,16 @@ export default function Home() {
                 {group.items.map((item, index2) => (
                   <div
                     key={index2}
+                    role="button"
+                    tabIndex={item.disabled ? -1 : 0}
                     onClick={() => handleNavigate(`${item.href}`)}
-                    className={`${item.href === window.location.pathname && `${primary} text-amber-900 border-l-4 border-amber-900 bg-amber-50`} ${item.disabled && 'cursor-not-allowed text-gray-500 opacity-50'} inline-flex items-center w-full h-12 mt-1 px-4 hover:bg-amber-50 hover:text-amber-900 font-medium cursor-pointer rounded-lg transition-colors ${!isExpanded && !isMobile ? 'justify-center border-l-0 px-0' : ''}`}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        handleNavigate(`${item.href}`);
+                      }
+                    }}
+                    className={`${item.href === window.location.pathname && `${primary} text-amber-900 border-l-4 border-amber-900 bg-amber-50`} ${item.disabled && 'cursor-not-allowed text-gray-500 opacity-50'} inline-flex items-center w-full h-12 mt-1 px-4 hover:bg-amber-50 hover:text-amber-900 font-medium cursor-pointer rounded-lg transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${!isExpanded && !isMobile ? 'justify-center border-l-0 px-0' : ''}`}
                     title={t(item.title) as string}
                   >
                     <div className="flex-shrink-0 flex items-center justify-center w-6">
@@ -296,9 +304,16 @@ export default function Home() {
               </div>
             ))}
             <div
-              tabIndex={1}
+              role="button"
+              tabIndex={0}
               onClick={() => handleNavigate(`/create`)}
-              className={`${ownerAddress && window.location.pathname == '/create' && `${primary} text-white hover:bg-white hover:text-amber-900 visible`} ${!ownerAddress && 'hidden'} inline-flex items-center w-full h-12 mt-2 px-4 font-medium rounded-lg cursor-pointer ${!isExpanded && !isMobile ? 'justify-center px-0' : ''}`}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  handleNavigate(`/create`);
+                }
+              }}
+              className={`${ownerAddress && window.location.pathname == '/create' && `${primary} text-white hover:bg-white hover:text-amber-900 visible`} ${!ownerAddress && 'hidden'} inline-flex items-center w-full h-12 mt-2 px-4 font-medium rounded-lg cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${!isExpanded && !isMobile ? 'justify-center px-0' : ''}`}
               title={t('add-batches') as string}
             >
               <div className="flex-shrink-0 flex items-center justify-center w-6">
@@ -314,8 +329,16 @@ export default function Home() {
             <div className="mt-auto mb-4">
               {userData.name ? (
                 <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => logout()}
-                  className={`inline-flex items-center justify-center w-full h-12 mt-2 hover:bg-red-50 hover:text-red-700 bg-gray-50 text-gray-600 font-medium rounded-lg cursor-pointer transition-colors ${!isExpanded && !isMobile ? 'px-0' : ''}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      logout();
+                    }
+                  }}
+                  className={`inline-flex items-center justify-center w-full h-12 mt-2 hover:bg-red-50 hover:text-red-700 bg-gray-50 text-gray-600 font-medium rounded-lg cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-red-500 ${!isExpanded && !isMobile ? 'px-0' : ''}`}
                   title={t('logout') as string}
                 >
                   <div className="flex-shrink-0 flex items-center justify-center w-6">
@@ -329,8 +352,16 @@ export default function Home() {
                 </div>
               ) : (
                 <div
+                  role="button"
+                  tabIndex={0}
                   onClick={() => handleNavigate('/login', { replace: true })}
-                  className={`inline-flex items-center justify-center w-full h-12 mt-2 hover:bg-amber-50 hover:text-amber-900 bg-gray-50 text-gray-600 font-medium rounded-lg cursor-pointer transition-colors ${!isExpanded && !isMobile ? 'px-0' : ''}`}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleNavigate('/login', { replace: true });
+                    }
+                  }}
+                  className={`inline-flex items-center justify-center w-full h-12 mt-2 hover:bg-amber-50 hover:text-amber-900 bg-gray-50 text-gray-600 font-medium rounded-lg cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 ${!isExpanded && !isMobile ? 'px-0' : ''}`}
                   title={t('login.access') as string}
                 >
                   <div className="flex-shrink-0 flex items-center justify-center w-6">
