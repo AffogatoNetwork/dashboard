@@ -1,5 +1,5 @@
-import React from "react";
-import Form from "react-bootstrap/Form";
+import React, { useId } from 'react';
+import Form from 'react-bootstrap/Form';
 
 type props = {
   label: string;
@@ -17,20 +17,33 @@ const FormInput = ({
   placeholder,
   handleOnChange,
   handleOnKeyDown,
-  className = "",
-  errorMsg = "",
-}: props) => (
-  <div className="form-input border-0 bg-transparent">
-    <Form.Label>{label}</Form.Label>
-    <Form.Control
-      value={value}
-      placeholder={placeholder}
-      onChange={handleOnChange}
-      onKeyDown={handleOnKeyDown}
-      className={className}
-    />
-    {errorMsg !== "" && <span className="error-message">{errorMsg}</span>}
-  </div>
-);
+  className = '',
+  errorMsg = '',
+}: props) => {
+  const inputId = useId();
+  const errorId = `${inputId}-error`;
+  const isInvalid = errorMsg !== '';
+
+  return (
+    <div className="form-input border-0 bg-transparent">
+      <Form.Label htmlFor={inputId}>{label}</Form.Label>
+      <Form.Control
+        id={inputId}
+        value={value}
+        placeholder={placeholder}
+        onChange={handleOnChange}
+        onKeyDown={handleOnKeyDown}
+        className={className}
+        aria-invalid={isInvalid ? 'true' : 'false'}
+        aria-describedby={isInvalid ? errorId : undefined}
+      />
+      {isInvalid && (
+        <span id={errorId} className="error-message" role="alert">
+          {errorMsg}
+        </span>
+      )}
+    </div>
+  );
+};
 
 export default FormInput;
