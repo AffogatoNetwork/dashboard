@@ -856,8 +856,10 @@ export const getBannerUrl = async (company: string) => {
   try {
     const storageRef = ref(storage, `banners/${company}`);
     return await getDownloadURL(storageRef);
-  } catch (error) {
-    logFirebaseError('getBannerUrl', error, { company });
+  } catch (error: any) {
+    if (error?.code !== 'storage/object-not-found') {
+      logFirebaseError('getBannerUrl', error, { company });
+    }
     return null;
   }
 };

@@ -7,22 +7,21 @@ import { getFarmer, getFarmerFarms, getImageUrl, getBannerUrl, canEdit, updateFa
 import { Select, MenuItem, Checkbox, ListItemText, OutlinedInput } from '@mui/material';
 import NewMap from '../common/NewMap';
 import proexoLogo from '../../assets/proexo.png';
-import QRCode from 'react-qr-code';
 
 // Fallback local images for certs not yet added to Firestore
 const CERT_FALLBACKS: Record<string, string> = {
-  'Fairtrade':            require('../../assets/certificaciones/2_Fair Trade.png'),
-  'Orgánico':             require('../../assets/certificaciones/1_USDA Organic.png'),
-  'EU Orgánico':          require('../../assets/certificaciones/10_EU Organic.png'),
-  'Rainforest Alliance':  require('../../assets/certificaciones/3_Rainforest Alliance.png'),
-  'Con Manos de Mujer':   require('../../assets/certificaciones/5_ConManosdeMujer.png'),
-  'ROC':                  require('../../assets/certificaciones/16_ROC.jpeg'),
+  'Fairtrade': require('../../assets/certificaciones/2_Fair Trade.png'),
+  'Orgánico': require('../../assets/certificaciones/1_USDA Organic.png'),
+  'EU Orgánico': require('../../assets/certificaciones/10_EU Organic.png'),
+  'Rainforest Alliance': require('../../assets/certificaciones/3_Rainforest Alliance.png'),
+  'Con Manos de Mujer': require('../../assets/certificaciones/5_ConManosdeMujer.png'),
+  'ROC': require('../../assets/certificaciones/16_ROC.jpeg'),
   'Pequeños Productores': require('../../assets/certificaciones/7_Pequeños_Productores.png'),
-  'Bird Friendly':        require('../../assets/certificaciones/15_Bird Friendly.png'),
-  'C.A.F.E. Practices':  require('../../assets/certificaciones/12_C.A.F.E. Practices.png'),
-  'JAS':                  require('../../assets/certificaciones/13_JAS.png'),
-  'Fair for Life':        require('../../assets/certificaciones/14_Fair_Life.png'),
-  'DO Marcala':           require('../../assets/certificaciones/4_DO Marcala.png'),
+  'Bird Friendly': require('../../assets/certificaciones/15_Bird Friendly.png'),
+  'C.A.F.E. Practices': require('../../assets/certificaciones/12_C.A.F.E. Practices.png'),
+  'JAS': require('../../assets/certificaciones/13_JAS.png'),
+  'Fair for Life': require('../../assets/certificaciones/14_Fair_Life.png'),
+  'DO Marcala': require('../../assets/certificaciones/4_DO Marcala.png'),
 };
 
 const InfoItem = ({ label, value }: { label: string; value?: string }) => (
@@ -87,7 +86,7 @@ export const FarmerProfileModule = () => {
               });
               setCertMap(dynamic);
             }
-          } catch (e) {}
+          } catch (e) { }
         }
 
         const url = await getImageUrl(newfarmerId);
@@ -303,13 +302,13 @@ export const FarmerProfileModule = () => {
                   {isAdmin && (
                     <label className="cursor-pointer label inline-flex items-center gap-2 bg-blue-50 px-3 py-0.5 rounded-full border border-blue-200 ml-1">
                       <span className="label-text text-xs font-semibold text-blue-800">Socio PNUD</span>
-                      <input 
-                        type="checkbox" 
-                        className="toggle toggle-info toggle-xs" 
-                        checked={farmerData.pnud || false} 
+                      <input
+                        type="checkbox"
+                        className="toggle toggle-info toggle-xs"
+                        checked={farmerData.pnud || false}
                         onChange={async (e) => {
                           const val = e.target.checked;
-                          setFarmerData({...farmerData, pnud: val});
+                          setFarmerData({ ...farmerData, pnud: val });
                           await updateFarmerPnud(farmerData.address, val);
                         }}
                       />
@@ -430,11 +429,11 @@ export const FarmerProfileModule = () => {
                       <div className="form-control">
                         <label className="label cursor-pointer justify-start gap-4 inline-flex mt-6">
                           <span className="label-text text-amber-700 font-bold uppercase text-xs">{t('shadow', 'Sombra')}</span>
-                          <input 
-                            type="checkbox" 
-                            className="toggle toggle-primary toggle-sm" 
-                            checked={!!editFarmData.shadow} 
-                            onChange={e => setEditFarmData({ ...editFarmData, shadow: e.target.checked })} 
+                          <input
+                            type="checkbox"
+                            className="toggle toggle-primary toggle-sm"
+                            checked={!!editFarmData.shadow}
+                            onChange={e => setEditFarmData({ ...editFarmData, shadow: e.target.checked })}
                           />
                         </label>
                       </div>
