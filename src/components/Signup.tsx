@@ -725,8 +725,20 @@ const Signup = () => {
               <div className="flex avatar w-24 bg-red-500  mx-auto">
                 <img
                   src={selectedImage !== '' ? selectedImage : User}
-                  className="rounded-xl"
+                  className="rounded-xl cursor-pointer focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:outline-none"
                   onClick={handleClick}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleClick(e);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  alt={
+                    t('signup.profile-picture-upload') ||
+                    'Upload profile picture'
+                  }
                 />
                 <Form.Control
                   type="file"
@@ -926,24 +938,30 @@ const Signup = () => {
             {!state.accountCreated ? (
               <div className="">
                 <div className="bg-base-100 pt-4 rounded-t-xl m-12 lg:mx-64">
-                  <div className="flex tabs justify-center">
-                    <a
-                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
-                      id="signup-tabs"
+                  <div className="flex tabs justify-center" role="tablist">
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={activeTab === 'farmer'}
+                      className={`${activeTab === 'farmer' ? `tab btn-wide tab-lg tab-lifted tab-active` : `tab btn-wide tab-lg`} focus-visible:ring-2 focus-visible:outline-none`}
+                      id="signup-tab-farmer"
                       onClick={() => setActiveTab('farmer')}
                     >
                       <>{t('farmer')}</>
-                    </a>
-                    <a
-                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
-                      id="signup-tabs"
+                    </button>
+                    <button
+                      type="button"
+                      role="tab"
+                      aria-selected={activeTab === 'cooperative'}
+                      className={`${activeTab === 'cooperative' ? `tab btn-wide tab-lg tab-lifted tab-active` : `tab btn-wide tab-lg`} focus-visible:ring-2 focus-visible:outline-none`}
+                      id="signup-tab-cooperative"
                       onClick={() => setActiveTab('cooperative')}
                     >
                       <>{t('company')}</>
-                    </a>
+                    </button>
                   </div>
 
-                  {activeTab == 'farmer' && <div>{RenderFarmerForm()}</div>}
+                  {activeTab === 'farmer' && <div>{RenderFarmerForm()}</div>}
 
                   {activeTab == 'cooperative' && <div>{RenderForm()}</div>}
                 </div>
