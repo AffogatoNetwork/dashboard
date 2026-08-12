@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useCallback } from "react";
 import { ethers } from "ethers";
 import { Contract } from "ethers";
 import { gql } from "@apollo/client";
@@ -346,9 +346,9 @@ export const List = () => {
     setPagination(newPagination);
   };
 
-  const showQrModal = (url: string) => {
+  const showQrModal = useCallback((url: string) => {
     setQrCodeUrl(url);
-  };
+  }, []);
 
   const handleOnDownloadClick = () => {
     saveSvgAsPng.saveSvgAsPng(

@@ -12,7 +12,6 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
   currentCoop,
   onSelect,
 }) => {
-  const [searchTerm, setSearchTerm] = useState('');
   const [selectedCertifications, setSelectedCertifications] = useState<
     string[]
   >([]);
@@ -32,27 +31,17 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
     fetchCertifications();
   }, [currentCoop]);
 
-  const handleSearchChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    setSearchTerm(event.target.value);
-  };
-
   const handleSelect = (event: React.ChangeEvent<{}>, newValue: string[]) => {
+    // ⚡ Bolt: Maintain referential equality for selected items in Autocomplete
     setSelectedCertifications(newValue);
     onSelect(newValue); // Pass selected certifications to the parent component
-  };
-
-  const handleRemove = (certification: string) => {
-    const updatedSelected = selectedCertifications.filter(
-      (item) => item !== certification
-    );
-    setSelectedCertifications(updatedSelected);
-    onSelect(updatedSelected); // Update selected certifications array
   };
 
   return (
     <div>
       <Autocomplete
         multiple
+        filterSelectedOptions
         options={certificationList}
         value={selectedCertifications} // Set selected certifications
         onChange={handleSelect}
@@ -61,17 +50,9 @@ const CertificationSelect: React.FC<CertificationSelectProps> = ({
             {...params}
             label="Select Certifications"
             variant="outlined"
-            onChange={handleSearchChange}
           />
         )}
         getOptionLabel={(option) => option} // Display the option as the string itself
-        renderOption={(props, option) => (
-          <li {...props}>
-            {option}
-            <button onClick={() => handleRemove(option)}>Remove</button>{' '}
-            {/* Optionally, you can add a remove button */}
-          </li>
-        )}
       />
     </div>
   );

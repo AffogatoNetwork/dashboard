@@ -112,9 +112,12 @@ const Login = () => {
                   <>{t('login.title')}</>
                 </h3>
               </div>
-              <div
+              <form
                 className="space-y-5 form-control"
-                onSubmit={() => magicLogin()}
+                onSubmit={(e) => {
+                  e.preventDefault();
+                  magicLogin();
+                }}
               >
                 <div className="space-y-2">
                   <label
@@ -156,13 +159,12 @@ const Login = () => {
                   <button
                     type="submit"
                     className="w-full flex justify-center bg-amber-900 hover:bg-black text-gray-100 p-3 tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
-                    onClick={() => magicLogin()}
                   >
                     <>{t('login.access')}</>
                   </button>
 
                   <button
-                    type="submit"
+                    type="button"
                     className="mt-5 w-full flex justify-center items-center bg-[#EA2F07] hover:bg-black text-gray-100 p-3 tracking-wide font-semibold shadow-lg cursor-pointer transition ease-in duration-500"
                     onClick={() => handleLoginWithGoogle()}
                   >
@@ -180,7 +182,7 @@ const Login = () => {
                   </p>
                   <br />
                 </div>
-              </div>
+              </form>
               <div className="pt-5 text-center text-gray-400 text-xs">
                 <h4>{t('login.warning')}</h4>
               </div>
