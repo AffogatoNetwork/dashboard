@@ -725,8 +725,17 @@ const Signup = () => {
               <div className="flex avatar w-24 bg-red-500  mx-auto">
                 <img
                   src={selectedImage !== '' ? selectedImage : User}
-                  className="rounded-xl"
+                  className="rounded-xl cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500"
                   onClick={handleClick}
+                  onKeyDown={(e) => {
+                    if (e.key === 'Enter' || e.key === ' ') {
+                      e.preventDefault();
+                      handleClick(e);
+                    }
+                  }}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={(t('upload-image') as string) || 'Upload image'}
                 />
                 <Form.Control
                   type="file"
@@ -926,18 +935,36 @@ const Signup = () => {
             {!state.accountCreated ? (
               <div className="">
                 <div className="bg-base-100 pt-4 rounded-t-xl m-12 lg:mx-64">
-                  <div className="flex tabs justify-center">
+                  <div className="flex tabs justify-center" role="tablist">
                     <a
-                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
-                      id="signup-tabs"
+                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500`}
+                      id="signup-tabs-farmer"
                       onClick={() => setActiveTab('farmer')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveTab('farmer');
+                        }
+                      }}
+                      role="tab"
+                      aria-selected={activeTab === 'farmer'}
+                      tabIndex={0}
                     >
                       <>{t('farmer')}</>
                     </a>
                     <a
-                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
-                      id="signup-tabs"
+                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-500`}
+                      id="signup-tabs-company"
                       onClick={() => setActiveTab('cooperative')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveTab('cooperative');
+                        }
+                      }}
+                      role="tab"
+                      aria-selected={activeTab === 'cooperative'}
+                      tabIndex={0}
                     >
                       <>{t('company')}</>
                     </a>
