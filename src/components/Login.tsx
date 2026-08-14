@@ -175,8 +175,16 @@ const Login = () => {
                   </button>
 
                   <p
-                    className="pt-6 text-sm link link-info text-gray-500"
+                    role="button"
+                    tabIndex={0}
+                    className="pt-6 text-sm link link-info text-gray-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-amber-500 rounded px-1"
                     onClick={() => navigate('/signup', { replace: true })}
+                    onKeyDown={(e) => {
+                      if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        navigate('/signup', { replace: true });
+                      }
+                    }}
                   >
                     <>{t('login.create-account')}</>
                   </p>
