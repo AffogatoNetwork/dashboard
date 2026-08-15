@@ -928,16 +928,32 @@ const Signup = () => {
                 <div className="bg-base-100 pt-4 rounded-t-xl m-12 lg:mx-64">
                   <div className="flex tabs justify-center">
                     <a
-                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
+                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-amber-500`}
                       id="signup-tabs"
+                      role="tab"
+                      tabIndex={0}
                       onClick={() => setActiveTab('farmer')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveTab('farmer');
+                        }
+                      }}
                     >
                       <>{t('farmer')}</>
                     </a>
                     <a
-                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
+                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg focus-visible:ring-2 focus-visible:outline-none focus-visible:ring-amber-500`}
                       id="signup-tabs"
+                      role="tab"
+                      tabIndex={0}
                       onClick={() => setActiveTab('cooperative')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveTab('cooperative');
+                        }
+                      }}
                     >
                       <>{t('company')}</>
                     </a>
