@@ -926,18 +926,34 @@ const Signup = () => {
             {!state.accountCreated ? (
               <div className="">
                 <div className="bg-base-100 pt-4 rounded-t-xl m-12 lg:mx-64">
-                  <div className="flex tabs justify-center">
+                  <div className="flex tabs justify-center" role="tablist">
                     <a
-                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg `}
-                      id="signup-tabs"
+                      className={`${activeTab == 'farmer' && `tab btn-wide tab-lg  tab-lifted tab-active`} tab btn-wide tab-lg focus-visible:ring-2 focus-visible:outline-none cursor-pointer`}
+                      role="tab"
+                      tabIndex={0}
+                      aria-selected={activeTab === 'farmer'}
                       onClick={() => setActiveTab('farmer')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveTab('farmer');
+                        }
+                      }}
                     >
                       <>{t('farmer')}</>
                     </a>
                     <a
-                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg `}
-                      id="signup-tabs"
+                      className={`${activeTab == 'cooperative' && `tab btn-wide tab-lg tab-lifted tab-active`} tab btn-wide tab-lg focus-visible:ring-2 focus-visible:outline-none cursor-pointer`}
+                      role="tab"
+                      tabIndex={0}
+                      aria-selected={activeTab === 'cooperative'}
                       onClick={() => setActiveTab('cooperative')}
+                      onKeyDown={(e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                          e.preventDefault();
+                          setActiveTab('cooperative');
+                        }
+                      }}
                     >
                       <>{t('company')}</>
                     </a>
