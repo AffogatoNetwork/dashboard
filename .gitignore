@@ -32,3 +32,8 @@ yarn-error.log*
 .env.test.local
 .env.production.local
 .firebase
+downloads_backup_verified/*
+downloads/*
+scripts/*
+.DS_Store
+.DS_Store?
