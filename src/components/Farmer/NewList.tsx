@@ -114,8 +114,7 @@ export const NewList = () => {
           let qrCode = window.location.origin
             .concat('/farmer/')
             .concat(address);
-          let blockChainUrl = 'https://affogato.mypinata.cloud/ipfs/' + farm;
-          setBlockchainUrl(blockChainUrl);
+          let blockChainUrl = `/farmer/${address}`;
           farmerList.push({
             farmerId,
             address,
@@ -148,7 +147,7 @@ export const NewList = () => {
         enableSorting: false,
         enableColumnFilter: false,
         // @ts-ignore
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ row }) => (
           <>
             <Box
               sx={{
@@ -161,11 +160,12 @@ export const NewList = () => {
                 htmlFor="farmerlist"
                 className="btn btn-ghost h-full"
                 onClick={() => {
-                  setData(renderedCellValue);
+                  setData(row.original.qrCode);
+                  setBlockchainUrl(`/farmer/${row.original.address}`);
                 }}
               >
                 <QRCode
-                  value={reactNodeToString(renderedCellValue)}
+                  value={row.original.qrCode}
                   size={90}
                 />
               </label>
@@ -240,7 +240,7 @@ export const NewList = () => {
         enableSorting: false,
         enableColumnFilter: false,
         // @ts-ignore
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ row }) => (
           <>
             <Box
               sx={{
@@ -251,7 +251,7 @@ export const NewList = () => {
             >
               <button
                 onClick={() => {
-                  openInNewTab(reactNodeToString(renderedCellValue));
+                  openInNewTab(`/farmer/${row.original.address}`);
                 }}
                 className="bg-black hover:bg-slate-600 text-white font-bold py-2 px-4 rounded inline-flex  items-center"
               >

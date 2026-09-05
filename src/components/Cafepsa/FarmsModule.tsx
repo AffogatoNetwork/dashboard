@@ -50,12 +50,7 @@ export const FarmsModule = () => {
   const openInNewTab = () => {
     const origin = window.location.origin.toString() + '/farmer/';
     const url = Data.replaceAll(origin, '').trim();
-
-    getCafepsaJsonUrl(url).then((result) => {
-      setlInks(result);
-      const urlStr = result?.toString();
-      window.open(urlStr, '_blank', 'noopener,noreferrer');
-    });
+    window.open(`/farmer/${url}`, '_blank', 'noopener,noreferrer');
   };
 
 

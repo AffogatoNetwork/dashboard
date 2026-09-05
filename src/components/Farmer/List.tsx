@@ -271,7 +271,7 @@ export const List = () => {
       .concat('/farmer/')
       .concat(farmer.address);
 
-    const ipfsUrl = 'https://affogato.mypinata.cloud/ipfs/' + farmer.farm;
+    const blockchainUrl = `/farmer/${farmer.address}`;
 
     return (
       <tr
@@ -284,7 +284,7 @@ export const List = () => {
               htmlFor="farmerlist"
               className="btn btn-ghost h-full"
               onClick={() => {
-                setData(farmerUrl, ipfsUrl);
+                setData(farmerUrl, blockchainUrl);
               }}
             >
               <QRCode value={farmerUrl} size={90} />
@@ -310,11 +310,11 @@ export const List = () => {
         <td className="p-3 text-base font-light">
           <a
             className="link link-info"
-            href={'https://affogato.mypinata.cloud/ipfs/' + farmer.farm}
+            href={`/farmer/${farmer.address}`}
             target="_blank"
             rel="noreferrer"
           >
-            Ver en blockchain
+            <>{t('tables.view-blockchain')}</>
           </a>
         </td>
       </tr>

@@ -144,7 +144,7 @@ export const CertificationsModule = () => {
           let qrCode = window.location.origin
             .concat('/farmer/')
             .concat(address);
-          let blockChainUrl = 'https://affogato.mypinata.cloud/ipfs/' + farm;
+          let blockChainUrl = `/farmer/${address}`;
           setBlockchainUrl(blockChainUrl);
           farmerList.push({
             farmerId,

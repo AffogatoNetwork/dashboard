@@ -87,7 +87,7 @@ export const useFarms = () => {
             let qrCode = window.location.origin
                 .concat("/farmer/")
                 .concat(farmerData.farmerAddress);
-            let blockChainUrl = "https://affogato.mypinata.cloud/ipfs/" + farmerData.ipfshash;
+            let blockChainUrl = `/farmer/${farmerData.farmerAddress}`;
             setBlockchainUrl(farmerData.farmerAddress);
 
             farmerList.push({
