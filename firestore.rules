@@ -6,10 +6,23 @@ service cloud.firestore {
       return request.auth != null;
     }
 
-    function isSuperAdmin() {
+    // Master admins: Only Antonio and Robert can truly delete documents
+    function canDelete() {
       return isSignedIn() 
+        && 'email' in request.auth.token 
+        && request.auth.token.email in [
+          "antonioalx66@gmail.com",
+          "antonio@affogato.co",
+          "robert@affogato.co"
+        ];
+    }
+
+    function isSuperAdmin() {
+      return canDelete() || (
+        isSignedIn() 
         && 'roles' in request.auth.token 
-        && request.auth.token.roles.hasAny(["ADMIN", "OWNER", "SUPERADMIN"]);
+        && request.auth.token.roles.hasAny(["ADMIN", "OWNER", "SUPERADMIN"])
+      );
     }
 
     function isEmailInCoop(coopId) {
@@ -36,26 +49,26 @@ service cloud.firestore {
     }
 
     // Permissions collection:
-    // Anyone (authenticated and unauthenticated users) can read
-    // Only SuperAdmins can create, update, or delete permissions
+    // Anyone can read
+    // Only Antonio & Robert can modify permissions
     match /permissions/{permId} {
       allow read: if true;
-      allow write: if isSuperAdmin();
+      allow write: if canDelete();
     }
 
-    // Business collections (batches, farmers, farms, companies, etc.)
-    // Public read for QR traceability and public pages
-    // Create & update restricted to SuperAdmins or users in permissions collection
-    // Delete restricted strictly to SuperAdmins
+    // Business collections (farms, farmers, varieties, batches, certifications, companies, etc.)
+    // Public read for everyone (unauthenticated and authenticated)
+    // Create & update: SuperAdmins and authorized cooperatives (including PROEXO)
+    // Delete: strictly restricted to Antonio & Robert only
     match /{collection}/{docId} {
       allow read: if true;
       allow create, update: if collection != 'permissions' && canWrite();
-      allow delete: if isSuperAdmin();
+      allow delete: if canDelete();
 
       match /{subDoc=**} {
         allow read: if true;
         allow create, update: if collection != 'permissions' && canWrite();
-        allow delete: if isSuperAdmin();
+        allow delete: if canDelete();
       }
     }
   }

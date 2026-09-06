@@ -112,7 +112,9 @@ export const BatchesModule = () => {
         } = farmerData;
 
         const qrCode = window.location.origin.concat('/newbatch/').concat(ipfsHash);
-        const blockChainUrl = 'https://affogato.mypinata.cloud/ipfs/' + ipfsHash;
+        const blockChainUrl = (Farmer && Farmer.length > 0)
+          ? `${window.location.origin}/farmer/${Farmer[0]}`
+          : `${window.location.origin}/newbatch/${ipfsHash}`;
         setBlockchainUrl(blockChainUrl);
         farmerList.push({
           qrCode,
@@ -158,7 +160,7 @@ export const BatchesModule = () => {
         enableSorting: false,
         enableColumnFilter: false,
         // @ts-ignore
-        Cell: ({ renderedCellValue }) => (
+        Cell: ({ row, renderedCellValue }) => (
           <>
             <Box
               sx={{
@@ -172,6 +174,12 @@ export const BatchesModule = () => {
                 className="btn btn-ghost h-full"
                 onClick={() => {
                   setData(reactNodeToString(renderedCellValue).trim());
+                  const farmerAddr = row?.original?.Farmer?.[0];
+                  if (farmerAddr) {
+                    setBlockchainUrl(`${window.location.origin}/farmer/${farmerAddr}`);
+                  } else if (row?.original?.ipfsHash) {
+                    setBlockchainUrl(`${window.location.origin}/newbatch/${row.original.ipfsHash}`);
+                  }
                 }}
               >
                 <QRCode

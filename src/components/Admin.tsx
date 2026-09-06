@@ -43,8 +43,8 @@ export const AdminModule = () => {
         companyName = 'PROEXO';
       }
 
-      setCompany(company);
-      await canEdit(email, company).then((result) => {
+      setCompany(companyName);
+      await canEdit(email, companyName).then((result) => {
         for (let i = 0; i < result.length; i += 1) {
           const data = result[i].data();
           const userExist = data.user;
@@ -134,7 +134,9 @@ export const AdminModule = () => {
             <div className="card shadow-xl bg-white">
               <div className="w-full p-5 rounded-lg">
                 <div className="text-center text-xl font-bold">
-                  <h1> Modulo de Administracion </h1>
+                  <div className="flex items-center justify-center gap-2">
+                    <h1> Modulo de Administracion </h1>
+                  </div>
                   <div className="flex justify-center mt-2">
                     <FirebaseStatus />
                   </div>
@@ -205,17 +207,15 @@ export const AdminModule = () => {
                           <>{t('farm')}</>
                         </a>
 
-                        {company !== 'PROEXO' && (
-                          <a
-                            className={`${activeTab == 'farmer' &&
-                              `tab-lifted tab tab-active btn-wide tab-lg`
-                              } tab btn-wide tab-lg `}
-                            id="signup-tabs"
-                            onClick={() => setActiveTab('farmer')}
-                          >
-                            <>{t('certifications')}</>
-                          </a>
-                        )}
+                        <a
+                          className={`${activeTab == 'certifications' &&
+                            `tab-lifted tab tab-active btn-wide tab-lg`
+                            } tab btn-wide tab-lg `}
+                          id="signup-tabs"
+                          onClick={() => setActiveTab('certifications')}
+                        >
+                          <>{t('certifications')}</>
+                        </a>
 
                         <a
                           className={`${activeTab == 'createFarmer' &&

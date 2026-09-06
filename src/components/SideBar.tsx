@@ -138,6 +138,8 @@ export default function Home() {
     }
   };
 
+  const [currentCompany, setCurrentCompany] = useState('');
+
   const getCooperative = (companyName: string) => {
     if (companyName === 'CAFEPSA') {
       data = [
@@ -177,6 +179,32 @@ export default function Home() {
           ],
         },
       ];
+    } else if (companyName === 'PROEXO') {
+      data = [
+        {
+          name: '',
+          items: [
+            {
+              title: 'home',
+              icon: HomeIcon,
+              href: routes.home,
+              disabled: '',
+            },
+            {
+              title: 'farmers',
+              icon: ProfileIcon,
+              href: routes.productores,
+              disabled: '',
+            },
+            {
+              title: 'farms',
+              icon: LandscapeIcon,
+              href: routes.fincas,
+              disabled: '',
+            },
+          ],
+        },
+      ];
     }
   };
 
@@ -204,6 +232,7 @@ export default function Home() {
       companyName = 'CAFEPSA';
     }
 
+    setCurrentCompany(companyName);
     getCooperative(companyName);
   }, []);
 
