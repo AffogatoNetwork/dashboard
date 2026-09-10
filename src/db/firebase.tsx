@@ -23,6 +23,7 @@ import {
 } from 'firebase/storage';
 import { CompanyType, FarmerType, FarmType } from '../components/common/types';
 import { getAuth } from 'firebase/auth';
+import { CooperativeImage } from '../utils/constants';
 
 // TODO: Replace the following with your app's Firebase project configuration
 const firebaseConfig = {
@@ -276,6 +277,70 @@ export const getCafepsaImageUrl = async (id: string) => {
   }
 
   return 'https://www.gravatar.com/avatar/00000000000000000000000000000000?d=mp&f=y';
+};
+
+export const getBatchImageUrl = async (batchData: any, batchId?: string): Promise<string> => {
+  // 1. If image is already a direct Firebase Storage URL
+  if (
+    batchData?.image &&
+    typeof batchData.image === 'string' &&
+    batchData.image.includes('firebasestorage.googleapis.com')
+  ) {
+    return batchData.image;
+  }
+
+  // 2. Extract potential IDs/filenames, stripping any pinata/ipfs/http URLs
+  const candidateIds: string[] = [];
+  const addCandidate = (val: any) => {
+    if (!val || typeof val !== 'string') return;
+    const trimmed = val.trim();
+    if (!trimmed) return;
+
+    if (trimmed.includes('/ipfs/')) {
+      const parts = trimmed.split('/ipfs/');
+      const hashPart = parts[parts.length - 1].split('?')[0].split('#')[0];
+      if (hashPart) candidateIds.push(hashPart);
+    } else if (trimmed.startsWith('ipfs://')) {
+      candidateIds.push(trimmed.replace('ipfs://', '').split('/')[0]);
+    } else if (!trimmed.startsWith('http://') && !trimmed.startsWith('https://')) {
+      candidateIds.push(trimmed);
+    }
+  };
+
+  addCandidate(batchData?.image);
+  addCandidate(batchId);
+  addCandidate(batchData?.ipfsHash);
+  addCandidate(batchData?.Name);
+
+  // 3. Search only in Firebase Storage (avoid Pinata)
+  const folders = ['', 'batches/', 'assets/NFT/', 'assets/', 'cafepsa/', 'Proexo/', 'Comsa/', 'Copranil/', 'Commovel/'];
+  const extensions = ['', '.jpeg', '.jpg', '.png', '.webp', '.gif', '.JPG', '.PNG', '.JPEG'];
+
+  for (const rawId of candidateIds) {
+    for (const folder of folders) {
+      for (const ext of extensions) {
+        try {
+          const fileRef = ref(storage, `${folder}${rawId}${ext}`);
+          const meta = await getMetadata(fileRef);
+          if (meta.contentType?.startsWith('image/')) {
+            const downloadUrl = await getDownloadURL(fileRef);
+            return downloadUrl;
+          }
+        } catch (err: any) {
+          // Continue searching Firebase storage
+        }
+      }
+    }
+  }
+
+  // 4. Fallback to cooperative Firebase Storage image if registered
+  const comp = (batchData?.company || batchData?.parentId || 'PROEXO').toUpperCase();
+  const coopImg = CooperativeImage.find((c) => c.name.toUpperCase() === comp);
+  if (coopImg?.image) {
+    return coopImg.image;
+  }
+
+  return '';
 };
 
 export const getCafepsaJsonUrl = async (id: string) => {

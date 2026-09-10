@@ -2,7 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router';
 import { useTranslation } from 'react-i18next';
 import Loading from '../Loading';
-import { getBatch, getFarmer, canEdit, updateBatchFarmerWeights, updateBatchData } from '../../db/firebase';
+import { getBatch, getFarmer, canEdit, updateBatchFarmerWeights, updateBatchData, getBatchImageUrl } from '../../db/firebase';
+import { CooperativeImage } from '../../utils/constants';
 import NotFound from '../common/NotFound';
 import { LinkIcon } from '../icons/link';
 
@@ -77,9 +78,8 @@ const NewBatchId = () => {
       .then(async (result) => {
         if (!result) { setLoading(false); return; }
 
-        if (result.image && !result.image.includes('https://firebasestorage')) {
-          result.image = 'https://affogato.mypinata.cloud/ipfs/' + result.image;
-        }
+        const imageUrl = await getBatchImageUrl(result, batchId);
+        result.image = imageUrl;
         setBatch(result);
 
         if (result.farmerWeights) {
@@ -283,11 +283,24 @@ const NewBatchId = () => {
               </div>
 
               <div className="relative shrink-0 self-center">
-                <img
-                  src={batch.image || 'https://gateway.pinata.cloud/ipfs/' + (batch.ipfsHash || '')}
-                  alt={batch.Name || t('batch')}
-                  className="relative z-10 h-48 w-32 object-contain sm:h-56 sm:w-40"
-                />
+                {batch.image ? (
+                  <img
+                    src={batch.image}
+                    alt={batch.Name || t('batch')}
+                    className="relative z-10 h-48 w-32 object-contain sm:h-56 sm:w-40"
+                    onError={(e) => {
+                      const comp = (batch?.company || batch?.parentId || 'PROEXO').toUpperCase();
+                      const coopImg = CooperativeImage.find((c) => c.name.toUpperCase() === comp);
+                      if (coopImg?.image && e.currentTarget.src !== coopImg.image) {
+                        e.currentTarget.src = coopImg.image;
+                      }
+                    }}
+                  />
+                ) : (
+                  <div className="relative z-10 flex h-48 w-32 items-center justify-center rounded-lg bg-stone-200 text-xs font-semibold text-stone-500 sm:h-56 sm:w-40">
+                    {batch.Name || t('batch')}
+                  </div>
+                )}
                 <div className="absolute top-2 bottom-2 left-2 right-2 z-0 border-2 border-yellow-600/30 opacity-80" />
               </div>
             </div>
