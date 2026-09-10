@@ -283,5 +283,21 @@
     "file-invalid-type": "* Le fichier {{name}} a un type invalide, seuls les fichiers .xlsx et .xls sont acceptés.",
     "file-too-big": "* Le fichier {{name}} ({{size}} Mo) dépasse la taille maximale autorisée (1 Mo).",
     "file-load-failed": "* Le fichier {{name}} n'a pas pu être chargé."
+  },
+  "certifications-filter": {
+    "all": "Tous les producteurs",
+    "certified": "Avec certifications",
+    "uncertified": "Sans certifications",
+    "search-placeholder": "Rechercher par producteur, ferme, communauté...",
+    "coop-standards": "Normes de la coopérative",
+    "matrix-view": "Matrice",
+    "compact-view": "Vue compacte",
+    "filter-by": "Filtrer :",
+    "showing": "Affichage de {{count}} sur {{total}}",
+    "all-standards": "Toutes",
+    "activate": "Activer (true)",
+    "deactivate": "Désactiver (false)",
+    "selected-producers": "Producteurs sélectionnés",
+    "cancel": "Annuler"
   }
 }

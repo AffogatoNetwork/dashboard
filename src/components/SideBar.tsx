@@ -202,6 +202,18 @@ export default function Home() {
               href: routes.fincas,
               disabled: '',
             },
+            {
+              title: 'coffe-batches-benefied',
+              icon: AgricultureIcon,
+              href: routes.cafepsaBatches,
+              disabled: '',
+            },
+            {
+              title: 'certifications',
+              icon: VerifiedIcon,
+              href: routes.cafepsaCertification,
+              disabled: '',
+            },
           ],
         },
       ];
@@ -229,7 +241,7 @@ export default function Home() {
       companyName = 'CAFEPSA';
     }
     if (url.match('localhost') !== null) {
-      companyName = 'CAFEPSA';
+      companyName = 'PROEXO';
     }
 
     setCurrentCompany(companyName);

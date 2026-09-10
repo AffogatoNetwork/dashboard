@@ -283,5 +283,21 @@
     "file-invalid-type": "* Datei {{name}} hat einen ungültigen Typ, nur .xlsx und .xls Dateien werden akzeptiert.",
     "file-too-big": "* Datei {{name}} ({{size}} MB) überschreitet die maximale Größe (1 MB).",
     "file-load-failed": "* Datei {{name}} konnte nicht geladen werden."
+  },
+  "certifications-filter": {
+    "all": "Alle Erzeuger",
+    "certified": "Mit Zertifizierungen",
+    "uncertified": "Ohne Zertifizierungen",
+    "search-placeholder": "Suche nach Erzeuger, Farm, Gemeinde...",
+    "coop-standards": "Genossenschaftsstandards",
+    "matrix-view": "Matrix",
+    "compact-view": "Kompakte Ansicht",
+    "filter-by": "Filtern:",
+    "showing": "Zeige {{count}} von {{total}}",
+    "all-standards": "Alle",
+    "activate": "Aktivieren (true)",
+    "deactivate": "Deaktivieren (false)",
+    "selected-producers": "Ausgewählte Erzeuger",
+    "cancel": "Abbrechen"
   }
 }

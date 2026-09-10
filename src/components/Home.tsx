@@ -119,21 +119,17 @@ const Home = () => {
         <Route
           path="/batches-module"
           element={
-            <RequiredAuth>
-              <Dashboard>
-                <BatchesModule />
-              </Dashboard>
-            </RequiredAuth>
+            <Dashboard>
+              <BatchesModule />
+            </Dashboard>
           }
         />
         <Route
           path="/certification-module"
           element={
-            <RequiredAuth>
-              <Dashboard>
-                <CertificationsModule />
-              </Dashboard>
-            </RequiredAuth>
+            <Dashboard>
+              <CertificationsModule />
+            </Dashboard>
           }
         />
 

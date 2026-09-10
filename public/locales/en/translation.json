@@ -283,5 +283,21 @@
     "file-invalid-type": "* File {{name}} has an invalid type, only .xlsx and .xls files are accepted.",
     "file-too-big": "* File {{name}} ({{size}} MB) exceeds the maximum allowed size (1 MB).",
     "file-load-failed": "* File {{name}} could not be loaded."
+  },
+  "certifications-filter": {
+    "all": "All producers",
+    "certified": "With certifications",
+    "uncertified": "Without certifications",
+    "search-placeholder": "Search by producer, farm, community...",
+    "coop-standards": "Cooperative Standards",
+    "matrix-view": "Matrix",
+    "compact-view": "Compact View",
+    "filter-by": "Filter:",
+    "showing": "Showing {{count}} of {{total}}",
+    "all-standards": "All",
+    "activate": "Activate (true)",
+    "deactivate": "Deactivate (false)",
+    "selected-producers": "Selected producers",
+    "cancel": "Cancel"
   }
 }

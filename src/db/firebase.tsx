@@ -438,6 +438,202 @@ export const editMultipleCertifications = async (farmers: any[], certToToggle: s
   }
 };
 
+export const updateFarmerCertifications = async (
+  farmerAddress: string,
+  certifications: string[],
+  validityMap?: Record<string, { status: string; validUntil?: string; note?: string }>
+) => {
+  const user = UserData();
+  const certStr = certifications.join(', ');
+  
+  const lowerCerts = certifications.map((c) => c.toLowerCase());
+  const isUsda = lowerCerts.some((c) => c.includes('usda') || c.includes('orgánico') || c.includes('organico')) ? 1 : 0;
+  const isFairtrade = lowerCerts.some((c) => c.includes('fair') || c.includes('comercio justo')) ? 1 : 0;
+  const isManos = lowerCerts.some((c) => c.includes('manos')) ? 1 : 0;
+  const isSpp = lowerCerts.some((c) => c.includes('spp') || c.includes('pequeños') || c.includes('pequenos')) ? 1 : 0;
+  const isRoc = lowerCerts.some((c) => c.includes('roc')) ? 1 : 0;
+
+  try {
+    const farmerDoc = doc(db, 'farmers', farmerAddress);
+    await updateDoc(farmerDoc, {
+      certifications: certStr,
+      certList: certifications,
+      certValidity: validityMap || {},
+      usda: isUsda,
+      fairtrade: isFairtrade,
+      manosdemujer: isManos,
+      spp: isSpp,
+      roc: isRoc,
+      updateAt: Date.now(),
+      updatedBy: user?.email || '',
+    });
+
+    const q = query(
+      collection(db, 'farms'),
+      where('farmerAddress', '==', farmerAddress)
+    );
+    const farmSnap = await getDocs(q);
+    const farmUpdates = farmSnap.docs.map((d) =>
+      updateDoc(d.ref, {
+        certifications: certStr,
+        certValidity: validityMap || {},
+        updateAt: Date.now(),
+        updatedBy: user?.email || '',
+      })
+    );
+    await Promise.all(farmUpdates);
+  } catch (error) {
+    logFirebaseError('updateFarmerCertifications', error, { farmerAddress });
+    throw error;
+  }
+};
+
+export const bulkUpdateFarmersCertifications = async (
+  farmerAddresses: string[],
+  action: 'add' | 'remove',
+  certName: string,
+  validityStatus: string = 'valid'
+) => {
+  try {
+    const promises = farmerAddresses.map(async (address) => {
+      const farmerDoc = doc(db, 'farmers', address);
+      const farmerSnap = await getDoc(farmerDoc);
+      let currentCerts: string[] = [];
+      let currentValidity: Record<string, any> = {};
+
+      if (farmerSnap.exists()) {
+        const data = farmerSnap.data();
+        if (data.certList && Array.isArray(data.certList)) {
+          currentCerts = [...data.certList];
+        } else if (data.certifications && typeof data.certifications === 'string') {
+          currentCerts = data.certifications.split(',').map((s: string) => s.trim()).filter(Boolean);
+        }
+        if (data.certValidity && typeof data.certValidity === 'object') {
+          currentValidity = { ...data.certValidity };
+        }
+      }
+
+      if (action === 'add') {
+        if (!currentCerts.includes(certName)) {
+          currentCerts.push(certName);
+        }
+        currentValidity[certName] = { status: validityStatus, updatedAt: Date.now() };
+      } else if (action === 'remove') {
+        currentCerts = currentCerts.filter((c) => c !== certName);
+        delete currentValidity[certName];
+      }
+
+      await updateFarmerCertifications(address, currentCerts, currentValidity);
+    });
+
+    await Promise.all(promises);
+  } catch (error) {
+    logFirebaseError('bulkUpdateFarmersCertifications', error, { certName, action });
+    throw error;
+  }
+};
+
+export const toggleFarmerCertification = async (
+  farmerAddress: string,
+  certName: string,
+  newValue: boolean
+): Promise<string[]> => {
+  const user = UserData();
+  try {
+    const farmerDoc = doc(db, 'farmers', farmerAddress);
+    const farmerSnap = await getDoc(farmerDoc);
+
+    const directFarmDoc = doc(db, 'farms', farmerAddress);
+    const farmSnap = await getDoc(directFarmDoc);
+
+    const certSet = new Set<string>();
+
+    const parseCerts = (raw: any) => {
+      if (!raw) return;
+      if (Array.isArray(raw)) {
+        raw.forEach((c) => typeof c === 'string' && c.trim() && certSet.add(c.trim()));
+      } else if (typeof raw === 'string') {
+        raw.split(',').forEach((c) => c.trim() && certSet.add(c.trim()));
+      } else if (typeof raw === 'object') {
+        Object.keys(raw).forEach((k) => raw[k] && certSet.add(k.trim()));
+      }
+    };
+
+    if (farmerSnap.exists()) {
+      const data = farmerSnap.data();
+      parseCerts(data.certList);
+      parseCerts(data.certifications);
+    }
+    if (farmSnap.exists()) {
+      const data = farmSnap.data();
+      parseCerts(data.certifications);
+    }
+
+    if (newValue) {
+      certSet.add(certName.trim());
+    } else {
+      const target = certName.trim().toLowerCase();
+      Array.from(certSet).forEach((c) => {
+        if (c.toLowerCase() === target) certSet.delete(c);
+      });
+    }
+
+    const updatedCerts = Array.from(certSet);
+    const certStr = updatedCerts.join(', ');
+
+    const lowerCerts = updatedCerts.map((c) => c.toLowerCase());
+    const isUsda = lowerCerts.some((c) => c.includes('usda') || c.includes('orgánico') || c.includes('organico')) ? 1 : 0;
+    const isFairtrade = lowerCerts.some((c) => c.includes('fair') || c.includes('comercio justo')) ? 1 : 0;
+    const isManos = lowerCerts.some((c) => c.includes('manos')) ? 1 : 0;
+    const isSpp = lowerCerts.some((c) => c.includes('spp') || c.includes('pequeños') || c.includes('pequenos')) ? 1 : 0;
+    const isRoc = lowerCerts.some((c) => c.includes('roc')) ? 1 : 0;
+
+    if (farmerSnap.exists()) {
+      await updateDoc(farmerDoc, {
+        certifications: certStr,
+        certList: updatedCerts,
+        usda: isUsda,
+        fairtrade: isFairtrade,
+        manosdemujer: isManos,
+        spp: isSpp,
+        roc: isRoc,
+        updateAt: Date.now(),
+        updatedBy: user?.email || '',
+      });
+    }
+
+    if (farmSnap.exists()) {
+      await updateDoc(directFarmDoc, {
+        certifications: certStr,
+        updateAt: Date.now(),
+        updatedBy: user?.email || '',
+      });
+    }
+
+    const q = query(
+      collection(db, 'farms'),
+      where('farmerAddress', '==', farmerAddress)
+    );
+    const querySnap = await getDocs(q);
+    const updates = querySnap.docs.map((d) => {
+      if (d.id !== farmerAddress) {
+        return updateDoc(d.ref, {
+          certifications: certStr,
+          updateAt: Date.now(),
+          updatedBy: user?.email || '',
+        });
+      }
+      return Promise.resolve();
+    });
+    await Promise.all(updates);
+
+    return updatedCerts;
+  } catch (error) {
+    logFirebaseError('toggleFarmerCertification', error, { farmerAddress, certName, newValue });
+    throw error;
+  }
+};
+
 export const editBatch = async (formData: any) => {
   const user = UserData();
 

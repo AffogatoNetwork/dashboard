@@ -283,5 +283,21 @@
     "file-invalid-type": "* El tipo del archivo {{name}} no es válido, solo se aceptan archivos .xlsx y .xls.",
     "file-too-big": "* El tamaño del archivo {{name}} ({{size}} MB) excede el máximo permitido (1 MB).",
     "file-load-failed": "* El archivo {{name}} no se pudo cargar."
+  },
+  "certifications-filter": {
+    "all": "Todos los productores",
+    "certified": "Con certificaciones",
+    "uncertified": "Sin certificaciones",
+    "search-placeholder": "Buscar por productor, finca, comunidad...",
+    "coop-standards": "Normas de la Cooperativa",
+    "matrix-view": "Matriz",
+    "compact-view": "Vista Compacta",
+    "filter-by": "Filtrar:",
+    "showing": "Mostrando {{count}} de {{total}}",
+    "all-standards": "Todas",
+    "activate": "Activar (true)",
+    "deactivate": "Desactivar (false)",
+    "selected-producers": "Productores seleccionados",
+    "cancel": "Cancelar"
   }
 }
